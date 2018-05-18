@@ -10,6 +10,7 @@ description: >
 baseurl: ""
 url: "https://wpewebkit.org"
 twitter_username: WebKitWPE
+exclude: ['README.md', 'generate-site', 'releases', 'webkit-release', 'generate-security-advisory', 'reference', 'cvedata']
 
 # Build settings
 markdown: kramdown
