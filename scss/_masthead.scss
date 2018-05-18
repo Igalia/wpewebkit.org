@@ -1,5 +1,4 @@
 .masthead {
-  min-height: 10rem;
   position: relative;
   display: table;
   width: 100%;
@@ -16,7 +15,6 @@
     padding: 0;
   }
   @media (min-width: 992px) {
-    height: 50vh;
     h1 {
       font-size: 5.5rem;
     }
