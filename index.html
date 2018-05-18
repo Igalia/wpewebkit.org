@@ -1,0 +1,76 @@
+---
+layout: default
+---
+
+<!-- Header -->
+<header class="masthead d-flex">
+  <div class="container text-center my-auto">
+    <h1 class="mb-1">{{ site.title }}</h1>
+    <h3 class="mb-5">
+      <em>{{ site.subtitle }}</em>
+    </h3>
+    <p class="lead mb-5"><strong>WPE</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
+    {% for post in site.categories.stable limit:1 %}
+    <a class="btn btn-primary btn-xl" style="margin: 1rem;" href="{{ post.download }}">Download WPE {{ post.version }}<br>Latest Stable</a>
+    {% endfor %}
+    {% for post in site.categories.unstable limit:1 %}
+    <a class="btn btn-secondary btn-xl" style="margin: 1rem;" href="{{ post.download }}">Download WPE {{ post.version }}<br>Latest Unstable</a>
+    {% endfor %}
+  </div>
+</header>
+
+<!-- Resources -->
+<section class="content-section bg-primary text-white text-center" id="resources">
+  <div class="container">
+    <div class="content-section-heading">
+      <h2 class="mb-5">Resources</h2>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <span class="service-icon rounded-circle mx-auto mb-3">
+          <i class="icon-note"></i>
+        </span>
+        <h4>
+          <strong>Release Announcements</strong>
+        </h4>
+        {% for post in site.tags.release limit:3 %}
+        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.url | prepend: site.baseurl }}"><strong>{{ post.title }}</strong></a></p>
+        {% endfor %}
+        <a href="releases.html" class="btn btn-sm btn-light m-3">More&hellip;</a>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <span class="service-icon rounded-circle mx-auto mb-3">
+          <i class="icon-cloud-download"></i>
+        </span>
+        <h4>
+          <strong>Downloads</strong>
+        </h4>
+        {% for post in site.tags.release limit:3 %}
+        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.download }}"><strong>WPE {{ post.version }} {{ post.category | capitalize }}</strong></a></p>
+        {% endfor %}
+        <a href="/releases/" class="btn btn-sm btn-light m-3">More&hellip;</a>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+        <span class="service-icon rounded-circle mx-auto mb-3">
+          <i class="icon-lock"></i>
+        </span>
+        <h4>
+          <strong>Security Advisories</strong>
+        </h4>
+        {% for post in site.tags.security limit:3 %}
+        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.url | prepend: site.baseurl }}"><strong>{{ post.title }}</strong></a></p>
+        {% endfor %}
+        <a href="security.html" class="btn btn-sm btn-light m-3">More&hellip;</a>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <span class="service-icon rounded-circle mx-auto mb-3">
+          <i class="icon-docs"></i>
+        </span>
+        <h4>
+          <strong>Documentation</strong>
+        </h4>
+        <p class="text-faded mb-0"><a href="https://trac.webkit.org/wiki/WPE"><strong>Building and running instructions</strong></a></p>
+      </div>
+    </div>
+  </div>
+</section>

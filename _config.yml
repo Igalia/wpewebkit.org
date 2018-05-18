@@ -1,0 +1,15 @@
+# Site settings
+title: WPE
+subtitle: A WebKit port optimized for low-end devices
+email: webkit-wpe@webkit.org
+description: >
+  WPE allows embedders to create simple and performant systems
+  based on Web platform technologies.
+  It is designed with hardware acceleration in mind,
+  leveraging common 3D graphics APIs for best performance.
+baseurl: ""
+url: "https://wpewebkit.org"
+twitter_username: WebKitWPE
+
+# Build settings
+markdown: kramdown
