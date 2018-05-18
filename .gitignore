@@ -1,5 +1,7 @@
 releases
 _site/
+node_modules/
+package-lock.json
 
 # Security advisories temp files
 cvedata/mail.txt
