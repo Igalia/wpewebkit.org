@@ -9,7 +9,7 @@ description: >
   leveraging common 3D graphics APIs for best performance.
 baseurl: ""
 url: "https://wpewebkit.org"
-twitter_username: WebKitWPE
+twitter_username: WPEWebKit
 exclude: ['README.md', 'generate-site', 'releases', 'webkit-release', 'generate-security-advisory', 'reference', 'cvedata']
 
 # Build settings
