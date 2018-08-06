@@ -26,9 +26,9 @@ library.
 
 ##### Checksums
 
-```
+<pre>
 wpebackend-0.2.0.tar.xz (8.6KB)
    md5sum: d04e44a32709dbb763ce1fcfc28bc6d8
    sha1sum: 4089cac12877ee1e09372953a281a46b8c8951e9
    sha256sum: ce33ff29b04175cb6fe6e6597a4b5e8ec9da0b8b5ae0745848902ac935d65823
-```
+</pre>
