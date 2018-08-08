@@ -57,7 +57,7 @@ layout: default
         <h4>
           <strong>Security Advisories</strong>
         </h4>
-        {% for post in site.tags.security limit:3 %}
+        {% for post in site.tags.WSA limit:3 %}
         <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.url | prepend: site.baseurl }}"><strong>{{ post.title }}</strong></a></p>
         {% endfor %}
         <a href="{{ "/security/" | prepend: site.baseurl }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
