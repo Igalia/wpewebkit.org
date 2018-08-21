@@ -39,9 +39,9 @@ download: https://wpewebkit.org/releases/wpebackend-fdo-1.0.0.tar.xz
 
 ##### Checksums
 
-```
+<pre>
 wpebackend-fdo-1.0.0.tar.xz (24.2KB)
    md5sum: 5318728afb3bf7417293af67ce427963
    sha1sum: 7ee22bc1d585616f4ad2047d8be54ec396486211
    sha256sum: 7a747f87a1ae46d30144369050e3ce348b58986d04e1a139ba75c198fa636729
-```
+</pre>
