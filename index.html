@@ -9,12 +9,12 @@ layout: default
     <h3 class="mb-5">
       <em>{{ site.subtitle }}</em>
     </h3>
-    <p class="lead mb-5"><strong>WPE</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
+    <p class="lead mb-5"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
     {% for post in site.categories.stable limit:1 %}
-    <a class="btn btn-primary btn-xl" style="margin: 1rem;" href="{{ post.download }}">Download WPE {{ post.version }}<br>Latest Stable</a>
+    <a class="btn btn-primary btn-xl" style="margin: 1rem;" href="{{ post.download }}">Download WPE WebKit {{ post.version }}<br>Latest Stable</a>
     {% endfor %}
     {% for post in site.categories.unstable limit:1 %}
-    <a class="btn btn-secondary btn-xl" style="margin: 1rem;" href="{{ post.download }}">Download WPE {{ post.version }}<br>Latest Unstable</a>
+    <a class="btn btn-secondary btn-xl" style="margin: 1rem;" href="{{ post.download }}">Download WPE WebKit {{ post.version }}<br>Latest Unstable</a>
     {% endfor %}
   </div>
 </header>
@@ -46,7 +46,7 @@ layout: default
           <strong>Downloads</strong>
         </h4>
         {% for post in site.tags.release limit:3 %}
-        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.download }}"><strong>WPE {{ post.version }} {{ post.category | capitalize }}</strong></a></p>
+        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.download }}"><strong>WPE WebKit {{ post.version }} {{ post.category | capitalize }}</strong></a></p>
         {% endfor %}
         <a href="{{ "/releases/" | prepend: site.baseurl }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
       </div>

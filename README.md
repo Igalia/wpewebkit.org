@@ -1,6 +1,6 @@
 # wpewebkit.org
 
-WPE website done in [Jekyll](http://jekyllrb.com/)
+WPE WebKit website done in [Jekyll](http://jekyllrb.com/)
 using the template [Start Bootstrap - Stylish Portfolio](https://startbootstrap.com/template-overviews/stylish-portfolio/).
 
 In order to test it you need to install Jeykyll
