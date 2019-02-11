@@ -13,7 +13,7 @@ This is a bugfix release in the stable 1.0 series.
 
 - Allow `wpe_fdo_initialize_for_egl_display()` to be called multiple times;
   it will emit a warning when trying to switch to a different EGL display,
-  which is unsupported [#26](https://github.com/Igalia/WPEBackend-fdo/pull/26).
+  which is unsupported ([#26](https://github.com/Igalia/WPEBackend-fdo/pull/26)).
 
 ##### Checksums
 
