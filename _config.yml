@@ -1,7 +1,7 @@
 # Site settings
 title: WPE WebKit
 subtitle: A WebKit port optimized for embedded devices
-email: webkit-wpe@webkit.org
+email: webkit-wpe@lists.webkit.org
 description: >
   WPE WebKit allows embedders to create simple and performant systems
   based on Web platform technologies.
