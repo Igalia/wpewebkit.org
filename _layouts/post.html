@@ -5,7 +5,7 @@ layout: page
 <section class="content-section bg-primary text-white small-section">
   <div class="container text-center">
     <div class="content-section-heading">
-      <h3 class="text-secondary mb-0">{{ page.date | date_to_long_string }}</h3>
+      {% if page.date %}<h3 class="text-secondary mb-0">{{ page.date | date_to_long_string }}</h3>{% endif %}
       <h2>{{ page.title }}</h2>
       {% if page.download %}<a class="btn btn-xl btn-secondary mt-3" href="{{ page.download }}">Download</a>{% endif %}
     </div>

@@ -302,6 +302,24 @@ h6 {
   }
 }
 
+table {
+  margin: 1em auto;
+  border: 1px solid #eaeaea;
+  background: #fafafa;
+}
+
+table td, table th {
+  padding: 0.2em 0.75em;
+}
+
+table thead, table th {
+  background: #eaeaea;
+}
+
+table tr:nth-child(even) {
+  background: #efefef;
+}
+
 footer.footer {
   padding-top: 5rem;
   padding-bottom: 5rem;
