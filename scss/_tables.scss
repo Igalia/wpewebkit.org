@@ -1,0 +1,18 @@
+table {
+  margin: 1em auto;
+	border: 1px solid #eaeaea;
+	background: #fafafa;
+
+	td, th {
+		padding: 0.2em 0.75em;
+	}
+
+	thead, th {
+		background: #eaeaea;
+	}
+
+	tr:nth-child(even) {
+		background: #efefef;
+	}
+}
+
