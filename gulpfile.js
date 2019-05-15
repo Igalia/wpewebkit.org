@@ -1,11 +1,11 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
-var header = require('gulp-header');
-var cleanCSS = require('gulp-clean-css');
-var rename = require("gulp-rename");
-var uglify = require('gulp-uglify');
-var pkg = require('./package.json');
+const { dest, series, parallel, src, task, watch } = require('gulp');
+const sass = require('gulp-sass');
+const browserSync = require('browser-sync').create();
+const header = require('gulp-header');
+const cleanCSS = require('gulp-clean-css');
+const rename = require("gulp-rename");
+const uglify = require('gulp-uglify');
+const pkg = require('./package.json');
 
 // Set the banner content
 var banner = ['/*!\n',
@@ -17,64 +17,66 @@ var banner = ['/*!\n',
 ].join('');
 
 // Copy third party libraries from /node_modules into /vendor
-gulp.task('vendor', function() {
-
+function vendor(done) {
   // Bootstrap
-  gulp.src([
+  src([
       './node_modules/bootstrap/dist/**/*',
       '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
       '!./node_modules/bootstrap/dist/css/bootstrap-reboot*'
     ])
-    .pipe(gulp.dest('./vendor/bootstrap'))
+    .pipe(dest('./vendor/bootstrap'));
 
   // Font Awesome
-  gulp.src([
+  src([
       './node_modules/font-awesome/**/*',
       '!./node_modules/font-awesome/{less,less/*}',
       '!./node_modules/font-awesome/{scss,scss/*}',
       '!./node_modules/font-awesome/.*',
       '!./node_modules/font-awesome/*.{txt,json,md}'
     ])
-    .pipe(gulp.dest('./vendor/font-awesome'))
+    .pipe(dest('./vendor/font-awesome'));
 
   // jQuery
-  gulp.src([
+  src([
       './node_modules/jquery/dist/*',
       '!./node_modules/jquery/dist/core.js'
     ])
-    .pipe(gulp.dest('./vendor/jquery'))
+    .pipe(dest('./vendor/jquery'));
 
   // jQuery Easing
-  gulp.src([
+  src([
       './node_modules/jquery.easing/*.js'
     ])
-    .pipe(gulp.dest('./vendor/jquery-easing'))
+    .pipe(dest('./vendor/jquery-easing'));
 
   // Simple Line Icons
-  gulp.src([
+  src([
       './node_modules/simple-line-icons/fonts/**',
     ])
-    .pipe(gulp.dest('./vendor/simple-line-icons/fonts'))
+    .pipe(dest('./vendor/simple-line-icons/fonts'));
 
-  gulp.src([
+  src([
       './node_modules/simple-line-icons/css/**',
     ])
-    .pipe(gulp.dest('./vendor/simple-line-icons/css'))
+    .pipe(dest('./vendor/simple-line-icons/css'));
 
-});
+	done();
+}
+task('vendor', vendor);
 
 // Compile SCSS
-gulp.task('css:compile', function() {
-  return gulp.src('./scss/**/*.scss')
+function compileCss() {
+  return src('./scss/**/*.scss')
     .pipe(sass.sync({
       outputStyle: 'expanded'
     }).on('error', sass.logError))
-    .pipe(gulp.dest('./css'))
-});
+    .pipe(dest('./css'))
+}
+task('css:compile', compileCss);
 
 // Minify CSS
-gulp.task('css:minify', ['css:compile'], function() {
-  return gulp.src([
+function minifyCss() {
+  return src([
       './css/*.css',
       '!./css/*.min.css'
     ])
@@ -82,16 +84,17 @@ gulp.task('css:minify', ['css:compile'], function() {
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest('./css'))
+    .pipe(dest('./css'))
     .pipe(browserSync.stream());
-});
+}
+task('css:minify', minifyCss);
 
 // CSS
-gulp.task('css', ['css:compile', 'css:minify']);
+task('css', series(compileCss, minifyCss));
 
 // Minify JavaScript
-gulp.task('js:minify', function() {
-  return gulp.src([
+function minifyJs() {
+  return src([
       './js/*.js',
       '!./js/*.min.js'
     ])
@@ -99,28 +102,31 @@ gulp.task('js:minify', function() {
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest('./js'))
+    .pipe(dest('./js'))
     .pipe(browserSync.stream());
-});
+}
+task('js:minify', minifyJs);
 
 // JS
-gulp.task('js', ['js:minify']);
+task('js', minifyJs);
 
 // Default task
-gulp.task('default', ['css', 'js', 'vendor']);
+task('default', parallel(minifyCss, minifyJs, vendor));
 
 // Configure the browserSync task
-gulp.task('browserSync', function() {
+function startBrowserSync() {
   browserSync.init({
     server: {
       baseDir: "./"
     }
   });
-});
+}
+task('browserSync', startBrowserSync);
 
 // Dev task
-gulp.task('dev', ['css', 'js', 'browserSync'], function() {
-  gulp.watch('./scss/*.scss', ['css']);
-  gulp.watch('./js/*.js', ['js']);
-  gulp.watch('./*.html', browserSync.reload);
-});
+function devWatch() {
+  watch('./scss/*.scss', ['css']);
+  watch('./js/*.js', ['js']);
+  watch('./*.html', browserSync.reload);
+}
+task('dev', series(parallel(minifyJs, minifyCss), startBrowserSync, devWatch));
