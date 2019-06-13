@@ -48,13 +48,13 @@ version number stays the same:
 ## Compatible Components
 
 The following table summarizes which *stable* releases of libwpe, WPE WebKit,
-and WPEBackend-fdo are compatible and tested with each other.
+WPEBackend-fdo, and Cog are compatible and tested with each other.
 
-| **WPE WebKit** | **libwpe** | **WPEBackend-fdo** |
-|:--------------:|:----------:|:------------------:|
-| 2.24.x         | 1.2.x      | 1.2.x              |
-| 2.22.x         | 1.0.x      | 1.0.x              |
-| 2.20.x         | \< 1.0.0   | \< 1.0.0           |
+| **WPE WebKit** | **libwpe** | **WPEBackend-fdo** | **Cog** |
+|:--------------:|:----------:|:------------------:|:-------:|
+| 2.24.x         | 1.2.x      | 1.2.x              | 0.3.x   |
+| 2.22.x         | 1.0.x      | 1.0.x              | 0.2.x   |
+| 2.20.x         | \< 1.0.0   | \< 1.0.0           | ≤ 0.1.x |
 
 Distributors and packagers are strongly advised to use the versions above.
 Note that libwpe used to be called wpebackend before version 1.0.x — it was
