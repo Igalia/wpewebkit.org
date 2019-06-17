@@ -7,7 +7,7 @@ permalink: /release/wpebackend-fdo-1.3.1.html
 download: https://wpewebkit.org/releases/wpebackend-fdo-1.3.1.tar.xz
 ---
 
-This is the first development release leading towards the 1.4 series.
+This is a development release leading towards the 1.4 series.
 
 ### What's new in the WPEBackend-fdo 1.3.1 release?
 
