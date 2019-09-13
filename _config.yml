@@ -12,5 +12,19 @@ url: "https://wpewebkit.org"
 twitter_username: WPEWebKit
 exclude: ['README.md', 'generate-site', 'releases', 'webkit-release', 'generate-security-advisory', 'reference', 'cvedata']
 
+packages:
+  - slug: wpewebkit
+    name: "WPE WebKit"
+  - slug: libwpe
+    name: "libwpe"
+  - slug: wpebackend-fdo
+    name: "WPEBackend-fdo"
+
+release_kinds:
+  - tag: stable
+    color: primary
+  - tag: unstable
+    color: secondary
+
 # Build settings
 markdown: kramdown

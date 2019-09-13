@@ -2,7 +2,8 @@
 layout: post
 title: "WPEBackend-fdo 1.2.0 released!"
 date: 2019-03-26
-tags: release
+tags: [release, stable]
+version: 1.2.0
 permalink: /release/wpebackend-fdo-1.2.0.html
 download: https://wpewebkit.org/releases/wpebackend-fdo-1.2.0.tar.xz
 ---
