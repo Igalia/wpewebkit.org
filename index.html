@@ -3,30 +3,60 @@ layout: default
 ---
 
 <!-- Header -->
-<header class="masthead d-flex">
+<header class="masthead d-flex p-5">
   <div class="container text-center my-auto">
     <h1 class="mb-1">{{ site.title }}</h1>
-    <h3 class="mb-5">
-      <em>{{ site.subtitle }}</em>
+    <h3 class="mb-4">
+      {{ site.subtitle }}
     </h3>
-    <p class="lead mb-5"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
-    {% for post in site.categories.stable limit:1 %}
-    <a class="btn btn-primary btn-xl" style="margin: 1rem;" href="{{ post.download }}">Download WPE WebKit {{ post.version }}<br>Latest Stable</a>
-    {% endfor %}
-    {% for post in site.categories.unstable limit:1 %}
-    <a class="btn btn-secondary btn-xl" style="margin: 1rem;" href="{{ post.download }}">Download WPE WebKit {{ post.version }}<br>Latest Unstable</a>
-    {% endfor %}
-  </div>
+    <p class="lead mb-0"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
 </header>
 
+<!-- Downloads -->
+<section class="content-section text-center bg-dark p-5">
+	<div class="container">
+		<h4 class="text-light mb-3">Downloads</h3>
+		<div class="row mb-2">
+			{% for pkg in site.packages %}
+			<div class="col-lg-4 col-md-6 mb-2 mb-lg-0">
+				<div class="card">
+					<div class="card-header">{{ pkg.name }}</div>
+					<ul class="list-group list-group-flush">
+						{% for kind in site.release_kinds %}
+						{% assign post = site.tags.release
+						 | where_exp:"item", "item.slug contains pkg.slug and item.tags contains kind.tag"
+						 | first %}
+						{% if post %}
+							<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+									href="{{ '/releases/' | append: pkg.slug | append: '-' | append: post.version |  append: '.tar.xz' | absolute_url }}">
+								{{ kind.tag | capitalize }} <span class="sr-only">version:</span>
+								<span class="badge badge-{{ kind.color }}" href="{{ post.url }}">{{ post.version }}</span>
+							</a>
+						{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		<p class="m-3 mt-4">
+			<a class="btn btn-light btn-sm" style="font-weight: normal"
+				href="{{ '/releases/' | absolute_url }}">
+				<i class="icon-cloud-download align-text-bottom"></i>&nbsp;&nbsp;&nbsp;All Downloads&hellip;</a>
+		</p>
+	  </div>
+  </div>
+</section>
+
 <!-- Resources -->
-<section class="content-section bg-primary text-white text-center" id="resources">
+<section class="content-section bg-primary text-white text-center p-6" id="resources">
   <div class="container">
     <div class="content-section-heading">
       <h2 class="mb-5">Resources</h2>
     </div>
     <div class="row">
-      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+      <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
         <span class="service-icon rounded-circle mx-auto mb-3">
           <i class="icon-note"></i>
         </span>
@@ -38,19 +68,7 @@ layout: default
         {% endfor %}
         <a href="{{ "/release/" | prepend: site.baseurl }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
       </div>
-      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-        <span class="service-icon rounded-circle mx-auto mb-3">
-          <i class="icon-cloud-download"></i>
-        </span>
-        <h4>
-          <strong>Downloads</strong>
-        </h4>
-        {% for post in site.tags.release limit:3 %}
-        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.download }}"><strong>WPE WebKit {{ post.version }} {{ post.category | capitalize }}</strong></a></p>
-        {% endfor %}
-        <a href="{{ "/releases/" | prepend: site.baseurl }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+      <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
         <span class="service-icon rounded-circle mx-auto mb-3">
           <i class="icon-lock"></i>
         </span>
@@ -62,7 +80,7 @@ layout: default
         {% endfor %}
         <a href="{{ "/security/" | prepend: site.baseurl }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
       </div>
-      <div class="col-lg-3 col-md-6">
+      <div class="col-lg-4 col-md-6">
         <span class="service-icon rounded-circle mx-auto mb-3">
           <i class="icon-docs"></i>
         </span>

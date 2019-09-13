@@ -2,7 +2,8 @@
 layout: post
 title: "WPEBackend 0.2.0 released!"
 date: 2018-07-09
-tags: release
+tags: [release, stable]
+version: 0.2.0
 permalink: /release/wpebackend-0.2.0.html
 download: https://wpewebkit.org/releases/wpebackend-0.2.0.tar.xz
 ---
