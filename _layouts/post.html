@@ -7,11 +7,11 @@ layout: page
     <div class="content-section-heading">
       {% if page.date %}<h3 class="text-secondary mb-0">{{ page.date | date_to_long_string }}</h3>{% endif %}
       <h2>{{ page.title }}</h2>
-	  {% if page.download -%}
+	  {% if page.downloa %}
 	  <a class="btn btn-xl btn-secondary mt-3" href="{{ page.download }}">Download</a>
-	  {%- elsif page.package and page.version -%}
+	  {% elsif page.package and page.version %}
 	  <a class="btn btn-xl btn-secondary mt-3" href="{{ site.release_dir | append:'/' | append: page.package | append: '-' | append: page.version | append: '.tar.xz' | absolute_url }}">Download</a>
-	  {%- endif %}
+	  {% endif %}
     </div>
   </div>
 </section>
