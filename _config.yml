@@ -19,6 +19,10 @@ packages:
     name: "libwpe"
   - slug: wpebackend-fdo
     name: "WPEBackend-fdo"
+  - slug: cog
+    name: "Cog"
+
+release_dir: /releases
 
 release_kinds:
   - tag: stable
