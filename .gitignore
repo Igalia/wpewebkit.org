@@ -1,8 +1,11 @@
-releases
-_site/
-node_modules/
-package-lock.json
+/.bundle/
+/.jekyll-cache/
+/vendor/bundle/
+/releases
+/_site/
+/node_modules/
+/package-lock.json
 
 # Security advisories temp files
-cvedata/mail.txt
-cvedata/allitems.csv.gz
+/cvedata/mail.txt
+/cvedata/allitems.csv.gz

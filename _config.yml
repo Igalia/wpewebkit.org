@@ -12,6 +12,14 @@ url: "https://wpewebkit.org"
 twitter_username: WPEWebKit
 exclude: ['README.md', 'generate-site', 'releases', 'webkit-release', 'generate-security-advisory', 'reference', 'cvedata']
 
+# Build settings
+markdown: kramdown
+
+# Deployment
+deploy:
+  - rsync -azi ./ www-data@webkitgtk.org:/var/www/wpewebkit/_site/
+
+# Site data.
 packages:
   - slug: wpewebkit
     name: "WPE WebKit"
@@ -30,5 +38,3 @@ release_kinds:
   - tag: unstable
     color: secondary
 
-# Build settings
-markdown: kramdown
