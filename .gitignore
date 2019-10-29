@@ -5,6 +5,7 @@
 /_site/
 /node_modules/
 /package-lock.json
+Gemfile.lock
 
 # Security advisories temp files
 /cvedata/mail.txt
