@@ -38,6 +38,14 @@ to some directory in your path:
 and then you can simply execute "jekyll build" (if you have ~/.bin in PATH)
 
 
+## Updating wpewebkit.org site
+
+The easiest way to upload the content to the server its executing this two commands:
+
+    bundler exec jekyll build
+    rsync -azi _site/  www-data@wpewebkit.org:/var/www/wpewebkit/_site/
+
+
 ## Updating content
 
 In order to write a new release or security advisory piece in the website
