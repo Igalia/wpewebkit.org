@@ -52,11 +52,17 @@ WPEBackend-fdo, and Cog are compatible and tested with each other.
 
 | **WPE WebKit** | **libwpe** | **WPEBackend-fdo** | **Cog** |
 |:--------------:|:----------:|:------------------:|:-------:|
+| 2.28.x         | 1.6.x      | 1.6.x              | 0.6.x   |
 | 2.26.x         | 1.4.x      | 1.4.x              | 0.4.x   |
 | 2.24.x         | 1.2.x      | 1.2.x              | 0.3.x   |
 | 2.22.x         | 1.0.x      | 1.0.x              | 0.2.x   |
 | 2.20.x         | \< 1.0.0   | \< 1.0.0           | ≤ 0.1.x |
 
 Distributors and packagers are strongly advised to use the versions above.
-Note that libwpe used to be called wpebackend before version 1.0.x — it was
-renamed to avoid confusion.
+
+**Notes:**
+
+- libwpe used to be called wpebackend before version 1.0.x — it was renamed to
+  avoid confusion.
+- Cog adopted the same versioning scheme as the rest of the components
+  starting with the 0.6 series.
