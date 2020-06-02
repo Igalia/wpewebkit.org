@@ -102,10 +102,10 @@ title: WebKit Port for Embedded
       </h1>
       <p class="lead mb-0"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
 
-      <a href="{{ '/about/architecture.html' | absolute_url }}" class="btn btn-primary">Learn about WPE Architecture</a>
+      <a href="{{ '/about/architecture.html' | url }}" class="btn btn-primary">Learn about WPE Architecture</a>
     </div>
     <div class="masthead-img" style="padding: 10%;background-color: white"> 
-      <img style="width: 100%;" src="/assets/architecture-2.jpg">
+      <img style="width: 100%;" src="{{ '/assets/architecture-2.jpg' | url }}">
     </div>
 </header>
 
@@ -135,13 +135,13 @@ title: WebKit Port for Embedded
  
     <ul>
       <li>
-      New to embedded and just looking to explore? <a href="{{ '/about/exploring.html' | absolute_url }}">Get started exploring embedded WebKit</a></li>
+      New to embedded and just looking to explore? <a href="{{ '/about/exploring.html' | url }}">Get started exploring embedded WebKit</a></li>
 
       <li>
-      Wondering if WPE is the right fit for your embedded project? <a href="{{ '/about/a-good-choice.html' | absolute_url }}">Learn more about where WPE is being used today...</a></li>
+      Wondering if WPE is the right fit for your embedded project? <a href="{{ '/about/a-good-choice.html' | url }}">Learn more about where WPE is being used today...</a></li>
 
       <li>
-      Ready to build something? <a href="{{ '/about/a-good-choice.html' | absolute_url }}">Get started with builds and receipes...</a></li>
+      Ready to build something? <a href="{{ '/about/a-good-choice.html' | url }}">Get started with builds and receipes...</a></li>
 
     </ul>
 
@@ -158,7 +158,7 @@ title: WebKit Port for Embedded
                 <li class="listitem">{{ release.data.title }}</li>
               {%- endfor -%}
               </ul>
-              <a href="{{ '/release/' | absolute_url }}">More&hellip;</a>
+              <a href="{{ '/release/' | url }}">More&hellip;</a>
           </div>
         </div>
         <div class="w-col w-col-6">
@@ -169,7 +169,7 @@ title: WebKit Port for Embedded
                 <li class="listitem">{{ wsa.date }}</li>
               {%- endfor -%}
               </ul>
-              <a href="{{ '/security/' | absolute_url }}">More&hellip;</a>
+              <a href="{{ '/security/' | url }}">More&hellip;</a>
           </div>
         </div>
       </div>

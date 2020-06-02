@@ -23,6 +23,7 @@ module.exports = function(eleventyConfig) {
 
 
   return {
-    passthroughFileCopy: true
+    passthroughFileCopy: true,
+    pathPrefix: "/wpewebkit.org/"
   }
 }
