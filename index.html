@@ -1,8 +1,79 @@
----
-layout: page.html
-title: WebKit Port for Embedded
----
-<style>
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>WebKit Port for Embedded</title>
+  <meta name="description" content="">
+  <link rel="canonical" href="/">
+  <link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/stylish-portfolio.css">
+
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="#"><img width="200" src="/assets/svg/web_Logo_Header_Color_300x110px.svg"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Contribute
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <style>
   .masthead {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -102,7 +173,7 @@ title: WebKit Port for Embedded
       </h1>
       <p class="lead mb-0"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
 
-      <a href="{{ '/about/architecture.html' | absolute_url }}" class="btn btn-primary">Learn about WPE Architecture</a>
+      <a href="/about/architecture.html" class="btn btn-primary">Learn about WPE Architecture</a>
     </div>
     <div class="masthead-img" style="padding: 10%;background-color: white"> 
       <img style="width: 100%;" src="/assets/architecture-2.jpg">
@@ -135,13 +206,13 @@ title: WebKit Port for Embedded
  
     <ul>
       <li>
-      New to embedded and just looking to explore? <a href="{{ '/about/exploring.html' | absolute_url }}">Get started exploring embedded WebKit</a></li>
+      New to embedded and just looking to explore? <a href="/about/exploring.html">Get started exploring embedded WebKit</a></li>
 
       <li>
-      Wondering if WPE is the right fit for your embedded project? <a href="{{ '/about/a-good-choice.html' | absolute_url }}">Learn more about where WPE is being used today...</a></li>
+      Wondering if WPE is the right fit for your embedded project? <a href="/about/a-good-choice.html">Learn more about where WPE is being used today...</a></li>
 
       <li>
-      Ready to build something? <a href="{{ '/about/a-good-choice.html' | absolute_url }}">Get started with builds and receipes...</a></li>
+      Ready to build something? <a href="/about/a-good-choice.html">Get started with builds and receipes...</a></li>
 
     </ul>
 
@@ -153,23 +224,15 @@ title: WebKit Port for Embedded
         <div class="w-col w-col-6">
           <div class="card">
             <h2 class="heading-4">Release Notes</h2>
-            <ul role="list" class="w-list-unstyled">
-              {%- for release in collections.recentReleaseNotes -%}
-                <li class="listitem">{{ release.data.title }}</li>
-              {%- endfor -%}
-              </ul>
-              <a href="{{ '/release/' | absolute_url }}">More&hellip;</a>
+            <ul role="list" class="w-list-unstyled"><li class="listitem">WPE WebKit 2.19.93 released!</li><li class="listitem">WPE WebKit 2.21.1 released!</li><li class="listitem">WPE WebKit 2.20.0 released!</li><li class="listitem">WPE WebKit 2.21.2 released!</li><li class="listitem">WPE WebKit 2.20.1 released!</li></ul>
+              <a href="/release/">More&hellip;</a>
           </div>
         </div>
         <div class="w-col w-col-6">
           <div class="card">
             <h2 class="heading-5">Security Advisories</h2>
-            <ul role="list" class="w-list-unstyled">
-              {%- for wsa in collections.recentWSA -%}
-                <li class="listitem">{{ wsa.date }}</li>
-              {%- endfor -%}
-              </ul>
-              <a href="{{ '/security/' | absolute_url }}">More&hellip;</a>
+            <ul role="list" class="w-list-unstyled"><li class="listitem">Wed Jun 13 2018 00:00:00 GMT-0400 (EDT)</li><li class="listitem">Tue Aug 07 2018 00:00:00 GMT-0400 (EDT)</li><li class="listitem">Tue Oct 02 2018 00:00:00 GMT-0400 (EDT)</li><li class="listitem">Wed Nov 21 2018 00:00:00 GMT-0500 (EST)</li><li class="listitem">Thu Dec 13 2018 00:00:00 GMT-0500 (EST)</li></ul>
+              <a href="/security/">More&hellip;</a>
           </div>
         </div>
       </div>
@@ -189,12 +252,23 @@ title: WebKit Port for Embedded
   <div class="container">
     <h4 class="text-light mb-3">Looking for specific downloads?</h3>
     <div class="row mb-2">
-      {% include download-card.html %}
+      <div class="col-lg-3 col-md-6 mb-2 mb-lg-0">
+	<div class="card">
+		<div class="card-header"></div>
+		<ul class="list-group list-group-flush">
+			<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+						href="someting">
+					 <span class="sr-only">version:</span>
+					<span class="badge badge-" href=""></span>
+			</a>
+		</ul>
+	</div>
+</div>
     </div>
 
     <p class="m-3 mt-4">
       <a class="btn btn-light btn-sm" style="font-weight: normal"
-        href="{{ '/releases/' | absolute_url }}">
+        href="/releases/">
         <i class="icon-cloud-download align-text-bottom"></i>&nbsp;&nbsp;&nbsp;All Downloads&hellip;</a>
     </p>
     </div>
@@ -215,10 +289,8 @@ title: WebKit Port for Embedded
         <h4>
           <strong>Release Announcements</strong>
         </h4>
-        {% for post in site.tags.release limit:3 %}
-        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.url | absolute_url }}"><strong>{{ post.title }}</strong></a></p>
-        {% endfor %}
-        <a href="{{ '/release/' | absolute_url }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
+        
+        <a href="/release/" class="btn btn-sm btn-light m-3">More&hellip;</a>
       </div>
       <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
         <span class="service-icon rounded-circle mx-auto mb-3">
@@ -227,10 +299,8 @@ title: WebKit Port for Embedded
         <h4>
           <strong>Security Advisories</strong>
         </h4>
-        {% for post in site.tags.WSA limit:3 %}
-        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.url | absolute_url }}"><strong>{{ post.title }}</strong></a></p>
-        {% endfor %}
-        <a href="{{ '/security/' | absolute_url }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
+        
+        <a href="/security/" class="btn btn-sm btn-light m-3">More&hellip;</a>
       </div>
       <div class="col-lg-4 col-md-6">
         <span class="service-icon rounded-circle mx-auto mb-3">
@@ -239,7 +309,7 @@ title: WebKit Port for Embedded
         <h4>
           <strong>Documentation</strong>
         </h4>
-    <p class="text-faded mb-0"><a href="{{ '/release/schedule/' | absolute_url }}"><strong>Release Schedule</strong></a></p>
+    <p class="text-faded mb-0"><a href="/release/schedule/"><strong>Release Schedule</strong></a></p>
         <p class="text-faded mb-0"><a href="https://webkit.org/wpe/"><strong>WPE page at webkit.org</strong></a></p>
         <p class="text-faded mb-0"><a href="https://trac.webkit.org/wiki/WPE"><strong>Building and running instructions</strong></a></p>
       </div>
@@ -247,3 +317,45 @@ title: WebKit Port for Embedded
   </div>
 </section>
 -->
+
+    <!-- Contact -->
+<section class="content-section bg-dark text-white text-center" id="contact">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <h2>Contact</h2>
+      </div>
+    </div>
+    <ul class="list-inline mb-5 lead">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="https://twitter.com/">
+          <i class="icon-social-twitter mr-1"></i> @WPEWebKit
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white" href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">
+          <i class="icon-envelope mr-1"></i> webkit-wpe@lists.webkit.org
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white ml-3" href="https://webchat.freenode.net/?channels=#webkit">
+          <i class="icon-people mr-1"></i> #webkit on freenode
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="#"><img width="200" src="/assets/svg/web_Logo_Header_Color_300x110px.svg"></a>
+  <div class="container text-center">
+    <p class="text-muted small mb-0">Copyright &copy; 2018-2019 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+  </div>
+</footer>
+
+  <script src="/vendor/jquery/jquery.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>
