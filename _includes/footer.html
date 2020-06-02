@@ -1,5 +1,5 @@
 <!-- Contact -->
-<section class="content-section bg-dark text-white text-center pb-5 pt-6" id="contact">
+<section class="content-section bg-dark text-white text-center" id="contact">
   <div class="container text-center">
     <div class="row">
       <div class="col-lg-10 mx-auto">
@@ -9,12 +9,12 @@
     <ul class="list-inline mb-5 lead">
       <li class="list-inline-item">
         <a class="social-link rounded-circle text-white mr-3" href="https://twitter.com/{{ site.twitter_username }}">
-          <i class="icon-social-twitter mr-1"></i> @{{ site.twitter_username }}
+          <i class="icon-social-twitter mr-1"></i> @WPEWebKit
         </a>
       </li>
       <li class="list-inline-item">
         <a class="social-link rounded-circle text-white" href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">
-          <i class="icon-envelope mr-1"></i> {{ site.email }}
+          <i class="icon-envelope mr-1"></i> webkit-wpe@lists.webkit.org
         </a>
       </li>
       <li class="list-inline-item">
@@ -27,8 +27,12 @@
 </section>
 
 <!-- Footer -->
-<footer class="footer text-center">
+<footer class="footer">
+  <a class="navbar-brand" href="#"><img width="200" src="/assets/svg/web_Logo_Header_Color_300x110px.svg"></a>
   <div class="container text-center">
     <p class="text-muted small mb-0">Copyright &copy; 2018-2019 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
   </div>
 </footer>
+
+  <script src="{{ '/vendor/jquery/jquery.js' | absolute_url }}"></script>
+  <script src="{{ '/vendor/bootstrap/js/bootstrap.js' | absolute_url }}"></script>
