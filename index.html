@@ -5,7 +5,6 @@ title: WebKit Port for Embedded
 <style>
   .masthead {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     margin: 1rem 10% 3rem;
     font-size: 0.4rem;
   }
@@ -16,6 +15,7 @@ title: WebKit Port for Embedded
 
   .masthead-img {
     background-color: gray;
+    padding: 10% 0;
     width: 100%;
     height: 100%;
   }
@@ -78,6 +78,10 @@ title: WebKit Port for Embedded
   .learn-more li { margin: 1rem; }
 
   @media (min-width: 992px) {
+    .masthead {
+      grid-template-columns: 1fr 1fr;
+   
+    }
     .masthead h1 {
       font-size: 1.5rem;
     }
@@ -109,7 +113,7 @@ title: WebKit Port for Embedded
     </div>
 </header>
 
-<section style="background: url(https://www.igalia.com/assets/i/headers/header-industries-tv.jpg); background-size: contain; background-repeat: no-repeat; background-position-y: center" class="content-section d-flex p-5 bg-secondary text-white">
+<section id="webkit-powers-embedded" class="blade content-section d-flex p-5 bg-secondary text-white">
   <div class="container text-center my-auto" style="padding: 2rem; background-color: rgba(0, 0, 0, 0.5);">
     
     <h3 class="mb-4">
@@ -155,7 +159,7 @@ title: WebKit Port for Embedded
             <h2 class="heading-4">Release Notes</h2>
             <ul role="list" class="w-list-unstyled">
               {%- for release in collections.recentReleaseNotes -%}
-                <li class="listitem">{{ release.data.title }}</li>
+                <li class="listitem"><a href="{{ release.data.url | url}}">{{ release.data.title }}</a></li>
               {%- endfor -%}
               </ul>
               <a href="{{ '/release/' | url }}">More&hellip;</a>
@@ -166,7 +170,7 @@ title: WebKit Port for Embedded
             <h2 class="heading-5">Security Advisories</h2>
             <ul role="list" class="w-list-unstyled">
               {%- for wsa in collections.recentWSA -%}
-                <li class="listitem">{{ wsa.date }}</li>
+                <li class="listitem"><a href="{{ release.data.url | url}}">{{ wsa.date }}</a></li>
               {%- endfor -%}
               </ul>
               <a href="{{ '/security/' | url }}">More&hellip;</a>

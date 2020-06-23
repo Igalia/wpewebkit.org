@@ -2,6 +2,7 @@
 layout: post
 title: "The Architecture of WPE"
 tags: [about]
+data: { dateless: "true" }
 permalink: /about/architecture.html
 ---
 

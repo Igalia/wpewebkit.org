@@ -2,9 +2,11 @@
 layout: post
 title: "WPE Builds"
 tags: [about]
-permalink: /about/builds.html
+data: { dateless: "true" }
+permalink: /about/is-wpe-a-good-choice.html
 ---
 
-# WPE Builds
+# Is WPE a good choice for my project?
+
 
 Stuff cribbed from the many places this exists into something understandable and pretty

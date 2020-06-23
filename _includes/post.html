@@ -1,11 +1,12 @@
 ---
-layout: default
+layout: page
 ---
-
 <section class="content-section bg-primary text-white small-section">
   <div class="container text-center">
     <div class="content-section-heading">
-      {% if page.date %}<h3 class="text-secondary mb-0">{{ page.date | dateString }}</h3>{% endif %}
+      {% if data.dateless != 'true' %}
+        <h3 class="text-secondary mb-0">{{ page.date | dateString }}</h3>
+      {% endif %}
       <h2>{{ title }}</h2>
 	  {% if page.downloa %}
 	  <a class="btn btn-xl btn-secondary mt-3" href="{{ page.download }}">Download</a>
