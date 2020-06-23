@@ -281,6 +281,14 @@ h6 {
     -webkit-clip-path: inset(2rem);
     clip-path: inset(2rem);
   }
+
+  #webkit-powers-embedded {
+    padding: 2rem;
+    background: url(https://www.igalia.com/assets/i/headers/header-industries-tv.jpg); 
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position-y: center
+  }
 }
 
 table {
@@ -400,4 +408,12 @@ footer.footer {
 footer .container { 
   display: flex;
   align-self: center; 
+}
+
+li ul {
+  margin-top: 0;
+}
+
+#webkit-powers-embedded {
+    padding: 0 !important;
 }

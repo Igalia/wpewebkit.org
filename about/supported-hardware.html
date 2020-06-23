@@ -10,9 +10,9 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>WPE WebKit 2.27.4 released</title>
+  <title>Supported Hardware</title>
   <meta name="description" content="">
-  <link rel="canonical" href="/wpewebkit.org/release/wpewebkit-2.27.4.html">
+  <link rel="canonical" href="/wpewebkit.org/about/supported-hardware.html">
   <link rel="alternate" type="application/rss+xml" title="" href="/wpewebkit.org/feed.xml">
 
   <!-- Bootstrap Core CSS -->
@@ -76,9 +76,7 @@
   <div class="container text-center">
     <div class="content-section-heading">
       
-        <h3 class="text-secondary mb-0">Tue Jan 21 2020</h3>
-      
-      <h2>WPE WebKit 2.27.4 released</h2>
+      <h2>Supported Hardware</h2>
 	  
     </div>
   </div>
@@ -89,29 +87,44 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p>This is a development release leading towards the 2.28 series.</p>
-<h3>What's new in WPE WebKit 2.27.4?</h3>
+        <p>WPE is currently running on a wide range of known supported hardware.</p>
 <ul>
-<li>Add API for input methods.</li>
-<li>Add API to serialize/deserialize a <code>JSCValue</code> to/from a JSON string.</li>
-<li>Add <code>WebKitOptionMenu</code> API.</li>
-<li>Add support for strict secure cookies.</li>
-<li>Add support for saving data from remote inspector.</li>
-<li>Support client-side video rendering using DMA-BUF to share frames across processes.</li>
-<li>Fix rendering of conic gradients in high resolution displays.</li>
-<li>Fix special combination characters not respecting the keystroke order when high CPU load.</li>
-<li>Honor the IndexedDB directory set in <code>WebsiteDataManager</code>.</li>
-<li>Fix rendering of text when there's an initial advance in the text run.</li>
-<li>Fix web process crash when displaying a KaTeX formula.</li>
-<li>Fix several crashes and rendering issues.</li>
+<li>Raspberry Pi 3
+<ul>
+<li>Cog FDO + WPEBackend-fdo + Mesa (vc4). Compositor: Weston, Cage (wlroots).</li>
+<li>Cog + WPEBackend-rdk (USE_BACKEND_BCM_RPI) + rpi-userland. Compositor: n/a.</li>
 </ul>
-<h4>Checksums</h4>
-<pre>
-wpewebkit-2.27.4.tar.xz (19.1 MiB)
-   md5sum: 05f044cf0a04432baaed9273b5ce90b6
-   sha1sum: 34cdd412b05185335bafd67b380e446855487b81
-   sha256sum: 70a4e00e7e4c754faf264ca69c6cd67ca399dae1d15cc8443a0a3aa71791838a
-</pre>
+</li>
+<li>Raspberry Pi 4</li>
+<li><a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-6-processors/i-mx-6quadplus-processor-quad-core-high-performance-advanced-3d-graphics-hd-video-advanced-multimedia-arm-cortex-a9-core:i.MX6QP">i.MX6 QuadPlus</a>,
+4x ARMv7 Cortex-A9 up to 1.2 GHz per core, Vivante GC2000 3D GPU, Vivante 2D(8-layer Composition) GPU GC-320, 1080p60 H264 decoding</li>
+<li><a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-6-processors/i-mx-6quad-processors-high-performance-3d-graphics-hd-video-arm-cortex-a9-core:i.MX6Q">i.MX6 Quad</a>,
+4x ARMv7 Cortex-A9 up to 1.2 GHz per core, Vivante GC2000 3D GPU, Vivante GC355 2D GPU, 1080p30 H264 decoding</li>
+<li><a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors/i-mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M">i.MX8M</a>, 4x ARMv8 Cortex-A53, 4K H264 decoding</li>
+<li><a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-mature-processors/applications-processors-multimedia-high-performance-low-power-connectivity-arm-cortex-a8-core:i.MX516">i.MX51</a>,
+ARMv7 600 MHz Cortex-A8 CPU, 720p H264 decoding</li>
+<li><a href="http://rockchip.wikidot.com/rk3399">RockChip RK3399</a>,
+Dual-core ARM Cortex-A72 MPCore processor and Quad-core ARM Cortex-A53 MP Core processor, Mali-T860MP4 GPU</li>
+<li>Beaglebone</li>
+<li>nvidia Jetson ???</li>
+<li>Arris: 2 cores ARMv7, 2GB RAM (apparently divided in GPU/CPU like in Raspberry), BR2_PACKAGE_LINUX_FIRMWARE_BRCM_BCM43XXX=y, BR2_PACKAGE_BCM_REFSW_PLATFORM_72604=y</li>
+<li>Qualcomm 8017, 64-bit ARM. 512 MB of RAM. Qualcomm Adreno 306 GPU, 1080p @ 30fps.
+<ul>
+<li>Custom launcher + WPEBackend-bose (custom, uses Android buffer sharing) + Adreno proprietary driver (no Wayland support).</li>
+</ul>
+</li>
+<li>Freescale i.MX6 Quad, 32-bit ARMv7 Cortex-A9, 1,2GHz. 1 GiB of RAM. Vivante GC2000, Ilitek LCD panel, 1024x600 @ 70Hz.
+<ul>
+<li>Custom launcher + Cog FDO + WPEBackend-fdo + Vivante proprietary driver. Compositor: Weston 3.0.0.</li>
+</ul>
+</li>
+<li>x86_64, Intel GPUs.
+<ul>
+<li>Cog FDO + WPEBackend-fdo + Mesa (i965, iris). Compositor: Weston, Sway (wlroots), GNOME Shell.</li>
+<li>Cog DRM + WPEBackend-fdo + Mesa (i965). Compositor: n/a.</li>
+</ul>
+</li>
+</ul>
 
 
         <p class="text-right"><a class="btn btn-primary" href="/"><i class="icon-home mr-1"></i> Home</a></p>
