@@ -87,7 +87,7 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p>It would have been reasonable to  might have imagined that the number of browsers must be less than the number of households.
+        <p>It would have been reasonable to  might have imagined that the number of browsers must be less than the number of households.<br>
 Embedded browsers are in everything these days - cars, signs, gaming systems, televisions and appliances - they're even in space.  The Web Platform is a frequently chosen foundational technology for many reasons, including:</p>
 <ul>
 <li>Because they are built on standards, they have great longevity</li>
@@ -96,17 +96,17 @@ Embedded browsers are in everything these days - cars, signs, gaming systems, te
 <li>The number of people with the basic skills to build things with web technologies is massive.</li>
 </ul>
 <p>However, the fact that over the past few years <em>billions</em> of new devices have come online, and the implications of this is still under discussed.  We believe developers need to be able explore and understand this space, and that lessons here are potentially helpful to the larger web ecosystem as well. However, this can be challenging because embedded browsers are a little different...</p>
-<h2>Why embedded browsers are different</h2>
+<h2 id="why-embedded-browsers-are-different">Why embedded browsers are different</h2>
 <p>For many of us, a browser is an application like the one you're probably using now.  You click an icon on your graphical operating system, navigate somewhere with a URL bar, search and so on.  You have bookmarks and tabs that you can drag around, and lots of other features.</p>
 <p>But, for most embedded systems this isn't the case at all.  For most embedded systems there isn't a common desktop OS - in fact, you create the OS.  Part of the reason for this is that by and large they are not general purpose computing devices, they have slightly different security concerns and they also run on often radically different sorts of hardware than your desktop, laptop or many mobile devices.</p>
 <p>So, what really <em>is</em> an embedded browser?</p>
-<h3>Browsers, engines and projects</h3>
+<h3 id="browsers%2C-engines-and-projects">Browsers, engines and projects</h3>
 <p>The application that you are running to read this is, in all likihood, a proper &quot;browser&quot;.  This browser is built on one of 3 open source projects: WebKit, Chromium or Gecko.  These projects define something of an abstract browser - that is, they provide concrete implementations and an architecture through which something else (for example, a browser) can bind to the top layer in order to drive us from URL to URL, and to the bottom layer to fulfill things like actually painting on the screen, rendering graphics, receiving input from devices like keyboards, mice and pointing devices and connect to things like the speech subsystem.</p>
-<p>In terms of WebKit browsers, a &quot;port&quot; is something that provides things at those top and bottom layers.  The WebKit project has a few &quot;official&quot; ports that are
+<p>In terms of WebKit browsers, a &quot;port&quot; is something that provides things at those top and bottom layers.  The WebKit project has a few &quot;official&quot; ports that are<br>
 available from <a href="https://webkit.org/downloads/">webkit.org/downloads/</a>.  WPE is the official port for embedded systems, and it adds another layer to the architecture allowing for more easily swappable _<em>backends</em> (the graphics layers, windowing and so on) and various easier bindings for programmatic top level control in Linux based systems.  Cog is another project that makes it easier to launch and drive WPE views.</p>
 <p>In other words, WPE is designed to be <em>built</em> and optimized for your embedded device in order to deliver the best performance.</p>
 <p>What all of this means is that there isn't really a single &quot;WPE&quot; that is as easy to provide as many browsers that you're probably familiar with that is entirely representative of what your experience will be like.</p>
-<h3>Easy ways to explore WPE</h3>
+<h3 id="easy-ways-to-explore-wpe">Easy ways to explore WPE</h3>
 <p>All of this said, we believe that enabling developers to explore the space is important for a whole lot of reasons.  Therefore, we've tried to make it easy for developers who aren't comfortable building entire embedded systems to get their hands on <em>something</em> where they can begin exploring and learning useful things.</p>
 <ul>
 <li>

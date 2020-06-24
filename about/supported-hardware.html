@@ -87,44 +87,202 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p>WPE is currently running on a wide range of known supported hardware.</p>
-<ul>
-<li>Raspberry Pi 3
-<ul>
-<li>Cog FDO + WPEBackend-fdo + Mesa (vc4). Compositor: Weston, Cage (wlroots).</li>
-<li>Cog + WPEBackend-rdk (USE_BACKEND_BCM_RPI) + rpi-userland. Compositor: n/a.</li>
-</ul>
-</li>
-<li>Raspberry Pi 4</li>
-<li><a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-6-processors/i-mx-6quadplus-processor-quad-core-high-performance-advanced-3d-graphics-hd-video-advanced-multimedia-arm-cortex-a9-core:i.MX6QP">i.MX6 QuadPlus</a>,
-4x ARMv7 Cortex-A9 up to 1.2 GHz per core, Vivante GC2000 3D GPU, Vivante 2D(8-layer Composition) GPU GC-320, 1080p60 H264 decoding</li>
-<li><a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-6-processors/i-mx-6quad-processors-high-performance-3d-graphics-hd-video-arm-cortex-a9-core:i.MX6Q">i.MX6 Quad</a>,
-4x ARMv7 Cortex-A9 up to 1.2 GHz per core, Vivante GC2000 3D GPU, Vivante GC355 2D GPU, 1080p30 H264 decoding</li>
-<li><a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-8-processors/i-mx-8m-family-armcortex-a53-cortex-m4-audio-voice-video:i.MX8M">i.MX8M</a>, 4x ARMv8 Cortex-A53, 4K H264 decoding</li>
-<li><a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-mature-processors/applications-processors-multimedia-high-performance-low-power-connectivity-arm-cortex-a8-core:i.MX516">i.MX51</a>,
-ARMv7 600 MHz Cortex-A8 CPU, 720p H264 decoding</li>
-<li><a href="http://rockchip.wikidot.com/rk3399">RockChip RK3399</a>,
-Dual-core ARM Cortex-A72 MPCore processor and Quad-core ARM Cortex-A53 MP Core processor, Mali-T860MP4 GPU</li>
-<li>Beaglebone</li>
-<li>nvidia Jetson ???</li>
-<li>Arris: 2 cores ARMv7, 2GB RAM (apparently divided in GPU/CPU like in Raspberry), BR2_PACKAGE_LINUX_FIRMWARE_BRCM_BCM43XXX=y, BR2_PACKAGE_BCM_REFSW_PLATFORM_72604=y</li>
-<li>Qualcomm 8017, 64-bit ARM. 512 MB of RAM. Qualcomm Adreno 306 GPU, 1080p @ 30fps.
-<ul>
-<li>Custom launcher + WPEBackend-bose (custom, uses Android buffer sharing) + Adreno proprietary driver (no Wayland support).</li>
-</ul>
-</li>
-<li>Freescale i.MX6 Quad, 32-bit ARMv7 Cortex-A9, 1,2GHz. 1 GiB of RAM. Vivante GC2000, Ilitek LCD panel, 1024x600 @ 70Hz.
-<ul>
-<li>Custom launcher + Cog FDO + WPEBackend-fdo + Vivante proprietary driver. Compositor: Weston 3.0.0.</li>
-</ul>
-</li>
-<li>x86_64, Intel GPUs.
-<ul>
-<li>Cog FDO + WPEBackend-fdo + Mesa (i965, iris). Compositor: Weston, Sway (wlroots), GNOME Shell.</li>
-<li>Cog DRM + WPEBackend-fdo + Mesa (i965). Compositor: n/a.</li>
-</ul>
-</li>
-</ul>
+        <p>WPE is currently running on a wide range of hardware.</p>
+<p>This page list configurations which are known to work sorted by manufacturer:</p>
+<nav class="table-of-contents"><ol><li><a href="#nxp">NXP</a></li><li><a href="#broadcom">Broadcom</a></li><li><a href="#qualcomm">Qualcomm</a></li><li><a href="#nvidia">Nvidia</a></li><li><a href="#rockchip">RockChip</a></li><li><a href="#pc-style-hardware">PC-style Hardware</a></li><li><a href="#other">Other</a></li></ol></nav><p>Note that this list is not exhaustive, reports of unlisted configurations<br>
+are welcome.</p>
+<h3 id="nxp">NXP</h3>
+<table>
+<thead>
+<tr>
+<th>Series</th>
+<th>GPU</th>
+<th>Driver</th>
+<th>WPE Backend</th>
+<th>Cog Shells</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i.MX 51</td>
+<td>Imageon Z460</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>i.MX 6</td>
+<td>Vivante GC2000</td>
+<td>Proprietary</td>
+<td>fdo</td>
+<td>fdo</td>
+</tr>
+<tr>
+<td>i.MX 8M</td>
+<td>Vivante GC7000</td>
+<td>Proprietary</td>
+<td>fdo</td>
+<td>fdo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="broadcom">Broadcom</h3>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>GPU</th>
+<th>Driver</th>
+<th>WPE Backend</th>
+<th>Cog Shells</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arris VIP5202W</td>
+<td>VideoCore IV</td>
+<td>Proprietary</td>
+<td>rdk, <code>USE_BACKEND_BCM_NEXUS</code> or <code>USE_BACKEND_BCM_NEXUS_WAYLAND</code></td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Raspberry Pi 3</td>
+<td>VideoCore IV</td>
+<td>Proprietary</td>
+<td>rdk, <code>USE_BACKEND_BCM_RPI</code></td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Raspberry Pi 3</td>
+<td>VideoCore IV</td>
+<td>Mesa vc4</td>
+<td>fdo</td>
+<td>fdo, drm</td>
+</tr>
+<tr>
+<td>Raspberry Pi 4</td>
+<td>VideoCore V</td>
+<td>Mesa v3d</td>
+<td>fdo</td>
+<td>fdo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="qualcomm">Qualcomm</h3>
+<table>
+<thead>
+<tr>
+<th>SoC</th>
+<th>GPU</th>
+<th>Driver</th>
+<th>WPE Backend</th>
+<th>Cog Shells</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8017</td>
+<td>Adreno 306</td>
+<td>Proprietary</td>
+<td>Custom</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nvidia">Nvidia</h3>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>GPU</th>
+<th>Driver</th>
+<th>WPE Backend</th>
+<th>Cog Shells</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jetson TK1</td>
+<td>Tegra K1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="rockchip">RockChip</h3>
+<table>
+<thead>
+<tr>
+<th>SoC</th>
+<th>GPU</th>
+<th>Driver</th>
+<th>WPE Backend</th>
+<th>Cog Shells</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RK3399</td>
+<td>Mali T860MP4</td>
+<td>Proprietary</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pc-style-hardware">PC-style Hardware</h3>
+<table>
+<thead>
+<tr>
+<th>GPU</th>
+<th>Driver</th>
+<th>WPE Backend</th>
+<th>Cog Shells</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AMD</td>
+<td>Mesa amdgpu</td>
+<td>fdo</td>
+<td>fdo</td>
+</tr>
+<tr>
+<td>Intel</td>
+<td>Mesa i965</td>
+<td>fdo</td>
+<td>fdo, drm</td>
+</tr>
+<tr>
+<td>Intel</td>
+<td>Mesa iris</td>
+<td>fdo</td>
+<td>fdo, drm</td>
+</tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>GPU</th>
+<th>Driver</th>
+<th>WPE Backend</th>
+<th>Cog Shells</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beaglebone</td>
+<td>PowerVR SGX530</td>
+<td>Proprietary</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 
         <p class="text-right"><a class="btn btn-primary" href="/"><i class="icon-home mr-1"></i> Home</a></p>

@@ -76,7 +76,7 @@
   <div class="container text-center">
     <div class="content-section-heading">
       
-        <h3 class="text-secondary mb-0">Wed Dec 12 2018</h3>
+        <h3 class="text-secondary mb-0">Thu Dec 13 2018</h3>
       
       <h2>libwpe 1.1.0 released!</h2>
 	  
@@ -89,9 +89,9 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p>This is a development release of <code>libwpe</code>, which introduces the following
+        <p>This is a development release of <code>libwpe</code>, which introduces the following<br>
 changes and features:</p>
-<h3>What's new in the libwpe 1.1.0 release?</h3>
+<h3 id="what's-new-in-the-libwpe-1.1.0-release%3F">What's new in the libwpe 1.1.0 release?</h3>
 <ul>
 <li>
 <p>Support building <code>libwpe</code> on Windows (<a href="https://github.com/WebPlatformForEmbedded/libwpe/issues/32">#32</a>, <a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/31">#31</a>, <a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/33">#33</a>).</p>
@@ -100,30 +100,30 @@ changes and features:</p>
 <p>New API for observing and setting the view backend state (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/36">#36</a>).</p>
 </li>
 <li>
-<p>Added a new <code>wpe_renderer_backend_egl_get_platform()</code> function which can
-be used to obtain a value which can be passed to <code>eglGetPlatformDisplay()</code>
+<p>Added a new <code>wpe_renderer_backend_egl_get_platform()</code> function which can<br>
+be used to obtain a value which can be passed to <code>eglGetPlatformDisplay()</code><br>
 and <code>eglGetPlatformDisplayEXT()</code> (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/39">#39</a>, <a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/40">#40</a>).</p>
 </li>
 <li>
-<p>Marked old function names containing the “backend” word as deprecated.
-The symbols are still available, but it is encouraged to use the new
-versions, e.g. prefer <code>wpe_get_major_version()</code> instead of
+<p>Marked old function names containing the “backend” word as deprecated.<br>
+The symbols are still available, but it is encouraged to use the new<br>
+versions, e.g. prefer <code>wpe_get_major_version()</code> instead of<br>
 <code>wpe_backend_get_major_version()</code> (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/38">#38</a>).</p>
 </li>
 <li>
-<p>Marked function table struct parameters passed to some API functions
+<p>Marked function table struct parameters passed to some API functions<br>
 as <code>const</code> (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/29">#29</a>).</p>
 </li>
 <li>
-<p>Fixed headers so including <code>&lt;wpe-egl.h&gt;</code> results in <code>&lt;wpe.h&gt;</code> being included
+<p>Fixed headers so including <code>&lt;wpe-egl.h&gt;</code> results in <code>&lt;wpe.h&gt;</code> being included<br>
 automatically in the correct order (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/34">#34</a>).</p>
 </li>
 <li>
-<p>Make instantiation of backends more robust by checking the validity of
+<p>Make instantiation of backends more robust by checking the validity of<br>
 interface pointers obtained from the backend (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/30">#30</a>).</p>
 </li>
 </ul>
-<h5>Checksums</h5>
+<h5 id="checksums">Checksums</h5>
 <pre>
 libwpe-1.1.0.tar.xz (46.4KB)
    md5sum: b34c3920cb749ebc74fe45a793cf57af

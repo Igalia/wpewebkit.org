@@ -1,16 +1,16 @@
 <h1>Note: This branch is reworking everything</h1>
 <p>Treat everything in this branch of the project as entirely unreal.  It is merely an experiment for discussion.</p>
-<h1>wpewebkit.org</h1>
-<p>wepwebkit.org is a statically generated site for WPE, the official WebKit Port for Embedded.  The website aims to be simple to maintain and with little complexity and dependencies.  It is built with <a href="https://www.11ty.dev/">11ty</a> and Liquid templates - and that's pretty much it.</p>
+<h1><a href="http://wpewebkit.org">wpewebkit.org</a></h1>
+<p><a href="http://wepwebkit.org">wepwebkit.org</a> is a statically generated site for WPE, the official WebKit Port for Embedded.  The website aims to be simple to maintain and with little complexity and dependencies.  It is built with <a href="https://www.11ty.dev/">11ty</a> and Liquid templates - and that's pretty much it.</p>
 <p>The actual site is hosted by <a href="https://igalia.com">Igalia</a> who are the primary maintainers of the project.</p>
-<h2>Development</h2>
+<h2 id="development">Development</h2>
 <p>In order to setup, you just just have to check it out, switch to the checked out directory and then <code>npm install</code>.</p>
-<h2>Building wpewebkit.org site locally</h2>
+<h2 id="building-wpewebkit.org-site-locally">Building <a href="http://wpewebkit.org">wpewebkit.org</a> site locally</h2>
 <p>In order to test it all you need to do is</p>
 <pre><code>npx eleventy --serve
 </code></pre>
 <p>This will build the project, start a server, and your terminal will provide you useful links to actually get to it.</p>
-<h3>Structure</h3>
+<h3 id="structure">Structure</h3>
 <ul>
 <li>
 <p><code>_site</code> is the output folder, where the generated and served content lives.  It is committed and github pages used to provide a sharable dev URL in case you want to discuss proposed changes easily or test for something without exposing things behind your own firewall.</p>
@@ -35,13 +35,13 @@
 </li>
 </ul>
 <p>In the root directory you will also find some top level files - <code>index.html</code>which is the template for the main page, <code>release.md</code> which is the template for creating the release pages, a <code>package.json</code> which is, well, what you'd expect and <code>.eleventy.js</code> which does some very understandable work in creating a date filter for outputting dates (because of how some of the old content exists), and creates some 'recent' collections for simple templating of things like release notes and security advisories.</p>
-<h2>Updating wpewebkit.org site</h2>
+<h2 id="updating-wpewebkit.org-site">Updating <a href="http://wpewebkit.org">wpewebkit.org</a> site</h2>
 <p>The easiest way to upload the content to the server its executing this two commands:</p>
 <pre><code>bundler exec jekyll build
 rsync -azi _site/  www-data@wpewebkit.org:/var/www/wpewebkit/_site/
 </code></pre>
-<h2>Updating content</h2>
-<p>In order to write a new release or security advisory piece in the website
-you just have to create a new file inside <code>_posts</code> folder using
+<h2 id="updating-content">Updating content</h2>
+<p>In order to write a new release or security advisory piece in the website<br>
+you just have to create a new file inside <code>_posts</code> folder using<br>
 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> syntax.</p>
 <p>Should you need anything else, you will find <a href="https://www.11ty.dev/docs/">11ty's documentation</a> pretty helpful.</p>
