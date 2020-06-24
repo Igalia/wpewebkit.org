@@ -106,7 +106,7 @@ title: WebKit Port for Embedded
       </h1>
       <p class="lead mb-0"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
 
-      <a href="{{ '/about/architecture.html' | url }}" class="btn btn-primary">Learn about WPE Architecture</a>
+      <!-- a href="{{ '/about/architecture.html' | url }}" class="btn btn-primary">Learn about WPE Architecture</a -->
     </div>
     <div class="masthead-img" style="padding: 10%;background-color: white"> 
       <img style="width: 100%;" src="{{ '/assets/architecture-2.jpg' | url }}">
@@ -159,6 +159,7 @@ title: WebKit Port for Embedded
             <h2 class="heading-4">Release Notes</h2>
             <ul role="list" class="w-list-unstyled">
               {%- for release in collections.recentReleaseNotes -%}
+               {{release}} 
                 <li class="listitem"><a href="{{ release.data.url | url}}">{{ release.data.title }}</a></li>
               {%- endfor -%}
               </ul>
