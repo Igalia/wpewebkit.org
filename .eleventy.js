@@ -1,3 +1,7 @@
+const MarkdownIt = require("markdown-it");
+const MarkdownItAnchor = require("markdown-it-anchor");
+const MarkdownItTOC = require("markdown-it-toc-done-right");
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css')
   eleventyConfig.addPassthroughCopy('vendor')
@@ -21,6 +25,16 @@ module.exports = function(eleventyConfig) {
     });
   })
 
+  eleventyConfig.setLibrary("md", MarkdownIt({
+	  linkify: true,
+	  breaks: true,
+	  html: true,
+	}).use(MarkdownItAnchor, {
+	  level: 2,
+	}).use(MarkdownItTOC, {
+	  level: [2, 3],
+	})
+  );
 
   return {
     passthroughFileCopy: true,
