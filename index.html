@@ -159,8 +159,7 @@ title: WebKit Port for Embedded
             <h2 class="heading-4">Release Notes</h2>
             <ul role="list" class="w-list-unstyled">
               {%- for release in collections.recentReleaseNotes -%}
-               {{release}} 
-                <li class="listitem"><a href="{{ release.data.url | url}}">{{ release.data.title }}</a></li>
+                <li class="listitem"><a href="{{ release.url | url }}">{{ release.data.title }}</a></li>
               {%- endfor -%}
               </ul>
               <a href="{{ '/release/' | url }}">More&hellip;</a>
@@ -171,7 +170,8 @@ title: WebKit Port for Embedded
             <h2 class="heading-5">Security Advisories</h2>
             <ul role="list" class="w-list-unstyled">
               {%- for wsa in collections.recentWSA -%}
-                <li class="listitem"><a href="{{ release.data.url | url}}">{{ wsa.date }}</a></li>
+                <li class="listitem"><a href="{{ wsa.url | url }}">{{
+						wsa.data.title | remove_first: "WebKitGTK+ and WPE WebKit Security Advisory " }} - {{ wsa.date | date: "%d %b %Y" }}</a></li>
               {%- endfor -%}
               </ul>
               <a href="{{ '/security/' | url }}">More&hellip;</a>
