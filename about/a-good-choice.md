@@ -3,7 +3,7 @@ layout: post
 title: "WPE Builds"
 tags: [about]
 data: { dateless: "true" }
-permalink: /about/is-wpe-a-good-choice.html
+permalink: /about/a-good-choice.html
 ---
 
 # Is WPE a good choice for my project?
