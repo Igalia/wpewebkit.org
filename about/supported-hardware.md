@@ -36,9 +36,9 @@ are welcome.
 
 ### Qualcomm
 
-| SoC  | GPU | Driver | WPE Backend | Cog Shells |
-|------|-----|--------|-------------|------------|
-| 8017 | Adreno 306 | Proprietary | Custom  | n/a |
+| SoC     | GPU | Driver | WPE Backend | Cog Shells |
+|---------|-----|--------|-------------|------------|
+| APQ8017 | Adreno 306 | Proprietary | Custom  | n/a |
 
 
 ### Nvidia
