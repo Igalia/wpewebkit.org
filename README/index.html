@@ -1,5 +1,3 @@
-<h1>Note: This branch is reworking everything</h1>
-<p>Treat everything in this branch of the project as entirely unreal.  It is merely an experiment for discussion.</p>
 <h1><a href="http://wpewebkit.org">wpewebkit.org</a></h1>
 <p><a href="http://wepwebkit.org">wepwebkit.org</a> is a statically generated site for WPE.  The website aims to be simple to maintain and with little complexity and dependencies.  It is built with <a href="https://www.11ty.dev/">11ty</a> and Liquid templates - and that's pretty much it.</p>
 <p>The actual site is hosted by <a href="https://igalia.com">Igalia</a> who are the primary maintainers of the project.</p>
@@ -32,6 +30,9 @@
 </li>
 <li>
 <p><code>vendor</code> this contains thirdparty stuff that we will use directly in the site - it is copied wholesale into its relevant spot in the output directory (<code>_site</code>).  <em>There is currently too much in there</em> - our page uses stylish portfolio, which uses bootstrap, which uses jQuery and font-awesome and simple-line-icons. These in turn contain things for bundling, pre-processing with several different preprocessors, etc.  We will probably simplify this further, that's a lot of downloads, code and round-trips for such a simple site.</p>
+</li>
+<li>
+<p><code>about</code> contains page posts that are about various aspects of wpe</p>
 </li>
 </ul>
 <p>In the root directory you will also find some top level files - <code>index.html</code>which is the template for the main page, <code>release.md</code> which is the template for creating the release pages, a <code>package.json</code> which is, well, what you'd expect and <code>.eleventy.js</code> which does some very understandable work in creating a date filter for outputting dates (because of how some of the old content exists), and creates some 'recent' collections for simple templating of things like release notes and security advisories.</p>
