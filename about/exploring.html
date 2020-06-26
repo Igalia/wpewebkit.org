@@ -52,6 +52,9 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/wpewebkit.org/about/exploring.html">Explore WPE / Embedded</a>
           <a class="dropdown-item" href="/wpewebkit.org/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/about/a-good-choice.html">Why Choose WPE</a>
+          
+          
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/wpewebkit.org/about/builds.html">Build it</a>
         </div>
@@ -81,15 +84,14 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p>It would have been reasonable to  might have imagined that the number of browsers must be less than the number of households.<br>
-Embedded browsers are in everything these days - cars, signs, gaming systems, televisions and appliances - they're even in space.  The Web Platform is a frequently chosen foundational technology for many reasons, including:</p>
+        <p>Long ago, it might have been reasonable to have imagine that maximum number of browsers that could be deployed in the world would be based on the maximum number of desktop computers.  However, embedded browsers are in everything these days - cars, signs, tablets, gaming systems, televisions and appliances - they're even in space.  The Web Platform is a frequently chosen foundational technology for <em>many reasons</em>, including:</p>
 <ul>
 <li>Because they are built on standards, they have great longevity</li>
 <li>Because these standards are open, embedded systems can incorporate them without licensing fees or other worries.</li>
 <li>Open standards with great longevity allows lots more things to benefit from the same investments</li>
 <li>The number of people with the basic skills to build things with web technologies is massive.</li>
 </ul>
-<p>However, the fact that over the past few years <em>billions</em> of new devices have come online, and the implications of this is still under discussed.  We believe developers need to be able explore and understand this space, and that lessons here are potentially helpful to the larger web ecosystem as well. However, this can be challenging because embedded browsers are a little different...</p>
+<p>The fact that over the past few years <em>billions</em> of new devices have come online, and the implications of this is still under discussed.  We believe developers need to be able explore and understand this space, and that lessons here are potentially helpful to the larger web ecosystem as well. However, this can be challenging because embedded browsers are a little different...</p>
 <h2 id="why-embedded-browsers-are-different">Why embedded browsers are different</h2>
 <p>For many of us, a browser is an application like the one you're probably using now.  You click an icon on your graphical operating system, navigate somewhere with a URL bar, search and so on.  You have bookmarks and tabs that you can drag around, and lots of other features.</p>
 <p>But, for most embedded systems this isn't the case at all.  For most embedded systems there isn't a common desktop OS - in fact, you create the OS.  Part of the reason for this is that by and large they are not general purpose computing devices, they have slightly different security concerns and they also run on often radically different sorts of hardware than your desktop, laptop or many mobile devices.</p>
@@ -104,10 +106,10 @@ available from <a href="https://webkit.org/downloads/">webkit.org/downloads/</a>
 <p>All of this said, we believe that enabling developers to explore the space is important for a whole lot of reasons.  Therefore, we've tried to make it easy for developers who aren't comfortable building entire embedded systems to get their hands on <em>something</em> where they can begin exploring and learning useful things.</p>
 <ul>
 <li>
-<p><a href="https://blogs.igalia.com/zdobersek/2020/03/02/flatpak-repository-for-wpe/">Flatpak</a>: If you have support for flatpak on your current hardware/desktop OS, and your graphics drivers are supported, there is an easy to install flatpack for WPE.  This can be a very easy way to let you explore 'generally' if you have questions about sorts of things can be supported by WPE, or just want to experiment and learn more about what some of the differences with a full browser are.</p>
+<p><span class="btn btn-primary text-light"><a href="https://blogs.igalia.com/zdobersek/2020/03/02/flatpak-repository-for-wpe/">Install with Flatpak</a></span>: If you have support for flatpak on your current hardware/desktop OS, and your graphics drivers are supported, there is an easy to install flatpack for WPE.  This can be a very easy way to let you explore 'generally' if you have questions about sorts of things can be supported by WPE, or just want to experiment and learn more about what some of the differences with a full browser are.</p>
 </li>
 <li>
-<p><a href="https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip">Rasperry PI OS with WPE</a>: Probably the most straight-foward way to learn a lot without a lot of experience in embedded is to try out our image that runs on Raspberry Pi OS.  Just download and flash the image onto an SD card, plug it in and go. Lots of developers have a Rasperry Pi sitting around somewhere and if you don't, you can one without a huge investment.  A Raspberry PI 3b, as of the time of this writing costs under $45, and can be connected to any display or keyboard.  The Raspberry Pi OS is a more or less full featured desktop OS, so it's easy to configure things like a WiFi connection, install a local server, setup SSH and so on.  The browser we've packed up with this distribution is <em>not</em> especially optimized for the hardware, so you can get a pretty good feel of what running on really limited 32-bit hardware <em>can</em> be like - and which sorts of performance relaated things we just owe to particular optimizations.</p>
+<p><span class="btn btn-primary text-light"><a href="https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip">Rasperry PI OS with WPE image</a></span>: Probably the most straight-foward way to learn a lot without a lot of experience in embedded is to try out our image that runs on Raspberry Pi OS.  Just download and flash the image onto an SD card, plug it in and go. Lots of developers have a Rasperry Pi sitting around somewhere and if you don't, you can one without a huge investment.  A Raspberry PI 3b, as of the time of this writing costs under $45, and can be connected to any display or keyboard.  The Raspberry Pi OS is a more or less full featured desktop OS, so it's easy to configure things like a WiFi connection, install a local server, setup SSH and so on.  The browser we've packed up with this distribution is <em>not</em> especially optimized for the hardware, so you can get a pretty good feel of what running on really limited 32-bit hardware <em>can</em> be like - and which sorts of performance relaated things we just owe to particular optimizations.</p>
 </li>
 </ul>
 
@@ -151,7 +153,7 @@ available from <a href="https://webkit.org/downloads/">webkit.org/downloads/</a>
 <footer class="footer">
   <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/assets/svg/blue_Web_Logo.svg"></a>
   <div class="container text-center">
-    <p class="text-muted small mb-0">Copyright &copy; 2018-2019 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+    <p class="text-muted small mb-0">Copyright &copy; 2018-2020 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
   </div>
 </footer>
 

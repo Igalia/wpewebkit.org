@@ -191,6 +191,11 @@ h6 {
   background: #343a40;
 }
 
+.card {
+  min-width: 21rem;
+  max-width: 100%;
+}
+
 .service-icon {
   background-color: #fff;
   color: #1D809F;
@@ -251,6 +256,12 @@ h6 {
   font-size: 1.2rem;
 }
 
+@media (min-width: 1300px) {
+  .card {
+    min-width: 21rem !important;
+  }
+
+}
 @media (min-width: 992px) {
   .portfolio-item {
     max-width: none;
@@ -289,6 +300,7 @@ h6 {
     background-repeat: no-repeat; 
     background-position-y: center
   }
+
 }
 
 table {
@@ -416,4 +428,12 @@ li ul {
 
 #webkit-powers-embedded {
     padding: 0 !important;
+}
+
+#about-code-section .badge {
+  margin-left: 1rem;
+}
+
+.text-light a {
+  color: white;
 }
