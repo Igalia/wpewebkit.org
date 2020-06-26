@@ -16,8 +16,6 @@ Having issues with Cog?  <a href="https://github.com/Igalia/cog">Report a Cog is
 ## Source
 There is, of course, <a href="https://github.com/WebPlatformForEmbedded/WPEWebKit">WPE WebKit source</a> itself, but there are several supporting repositories as well...
 
-* <a href="https://web">Cog</a>: A small single “window” launcher for the WebKit WPE port, with no user interface, suitable to be used as a Web application container. 
-
 * <a href="https://github.com/Igalia/cog">Cog</a>: A small single “window” launcher for the WebKit WPE port, with no user interface, suitable to be used as a Web application container. 
 
 * <a href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a>: A FreeDesktop.org backend for WPE.

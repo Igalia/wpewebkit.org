@@ -24,10 +24,10 @@ pagination:
   <div class="container text-center">
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
-        {%- for post in posts %}
+        {%- for post in posts reversed -%}
 	        <h3 class="release-heading"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>{{ post.date | dateString }}
 	        <p></p>	
-		{%- endfor %}
+		{%- endfor -%}
 		</div>
 	</div> 
 </section>

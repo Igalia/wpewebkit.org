@@ -13,14 +13,14 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("recentReleaseNotes", (collectionApi) => {
     let i =0;
-    return collectionApi.getFilteredByTag("release").filter((item) => {
+    return collectionApi.getFilteredByTag("release").reverse().filter((item) => {
       return i++ < 5;
     });
   })
 
   eleventyConfig.addCollection("recentWSA", (collectionApi) => {
     let i =0;
-    return collectionApi.getFilteredByTag("WSA").filter((item) => {
+    return collectionApi.getFilteredByTag("WSA").reverse().filter((item) => {
       return i++ < 5;
     });
   })

@@ -1,13 +1,12 @@
 ---
 layout: post
-title: "Why WPE?"
+title: "Why Choose WPE?"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/a-good-choice.html
 ---
 
-WPE WebKit is widely adopted in many industries, from Digital Signage, Professional Audio, Home Appliances, Set-Top-Boxes, Automotive to Inflight Infotainment. Countless devices deployed all around the globe are already using WPE WebKit as their web runtime platform and use is growing rapidly.
-
+WPE WebKit is widely adopted in many industries, from digital signage, professional audio, video and broadcasting, home appliances, set-top-boxes, and automotive to inflight infotainment. Countless devices deployed all around the globe are already using WPE WebKit as their web runtime platform and use is growing rapidly.
 
 If you need a fast and lightweight web runtime for embedded devices that supports most of the web standards, has hardware acceleration wherever it is advantageous, and has a strong focus on multimedia applications, WPE WebKit is a great choice.
 

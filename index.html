@@ -1,6 +1,6 @@
 ---
 layout: page.html
-title: WebKit Port for Embedded
+title: WPE
 ---
 <style>
   .masthead {
@@ -104,7 +104,7 @@ title: WebKit Port for Embedded
       <h1 class="mb-4">
         WebKit port optimized for embedded devices
       </h1>
-      <p class="lead mb-0"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
+      <p class="lead mb-0"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is a <strong>WebKit</strong> port designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
 
       <!-- a href="{{ '/about/architecture.html' | url }}" class="btn btn-primary">Learn about WPE Architecture</a -->
     </div>
@@ -117,7 +117,7 @@ title: WebKit Port for Embedded
   <div class="container text-center my-auto" style="padding: 2rem; background-color: rgba(0, 0, 0, 0.5);">
     
     <h3 class="mb-4">
-      WebKit powers <em>billions</em> of embedded devices.
+      WPE powers <em>hundreds of millions</em> of embedded devices.
     </h3> 
 
     <p class="lead mb-0">Embedded "browsers" are more than 
@@ -181,74 +181,3 @@ title: WebKit Port for Embedded
     </div>
   </div>
 
-
-<!-- section class="content-section d-flex p-5 bg-tertiary text-white">
-  <div class="container  my-auto" style="padding: 2rem; background-color: rgba(0, 0, 0, 0.5);;">
-    <img style="width: 30%; 
-     margin-right: 2rem; margin: 10% 3rem 10% 1rem; float:left;" src="https://www.igalia.com/assets/i/logo.png"> 
-    <p class="lead mb-0" style="">WPE is the official WebKit port for embedded.  Maintained by Igalia, we are significant parters on the WebKit open source project and very interested in helping to advance the Web Commons for everyone.</p>
-</section -->
-
-<!-- Downloads --
-<section class="content-section text-center bg-dark p-5">
-  <div class="container">
-    <h4 class="text-light mb-3">Looking for specific downloads?</h3>
-    <div class="row mb-2">
-      {% include download-card.html %}
-    </div>
-
-    <p class="m-3 mt-4">
-      <a class="btn btn-light btn-sm" style="font-weight: normal"
-        href="{{ '/releases/' | absolute_url }}">
-        <i class="icon-cloud-download align-text-bottom"></i>&nbsp;&nbsp;&nbsp;All Downloads&hellip;</a>
-    </p>
-    </div>
-  </div>
-</section> -->
-
-<!-- Resources 
-<section class="content-section bg-primary text-white text-center p-6" id="resources">
-  <div class="container">
-    <div class="content-section-heading">
-      <h2 class="mb-5">Resources</h2>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-        <span class="service-icon rounded-circle mx-auto mb-3">
-          <i class="icon-note"></i>
-        </span>
-        <h4>
-          <strong>Release Announcements</strong>
-        </h4>
-        {% for post in site.tags.release limit:3 %}
-        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.url | absolute_url }}"><strong>{{ post.title }}</strong></a></p>
-        {% endfor %}
-        <a href="{{ '/release/' | absolute_url }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
-        <span class="service-icon rounded-circle mx-auto mb-3">
-          <i class="icon-lock"></i>
-        </span>
-        <h4>
-          <strong>Security Advisories</strong>
-        </h4>
-        {% for post in site.tags.WSA limit:3 %}
-        <p class="text-faded mb-2">{{ post.date | date_to_string }}: <a href="{{ post.url | absolute_url }}"><strong>{{ post.title }}</strong></a></p>
-        {% endfor %}
-        <a href="{{ '/security/' | absolute_url }}" class="btn btn-sm btn-light m-3">More&hellip;</a>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <span class="service-icon rounded-circle mx-auto mb-3">
-          <i class="icon-docs"></i>
-        </span>
-        <h4>
-          <strong>Documentation</strong>
-        </h4>
-    <p class="text-faded mb-0"><a href="{{ '/release/schedule/' | absolute_url }}"><strong>Release Schedule</strong></a></p>
-        <p class="text-faded mb-0"><a href="https://webkit.org/wpe/"><strong>WPE page at webkit.org</strong></a></p>
-        <p class="text-faded mb-0"><a href="https://trac.webkit.org/wiki/WPE"><strong>Building and running instructions</strong></a></p>
-      </div>
-    </div>
-  </div>
-</section>
--->

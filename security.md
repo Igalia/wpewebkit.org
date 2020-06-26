@@ -24,18 +24,10 @@ pagination:
   <div class="container text-center">
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
-        {%- for post in posts %}
+        {%- for post in posts reversed %}
 	        <h3 class="release-heading"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>{{ post.date | dateString }}
 	        <p></p>	
 		{%- endfor %}
 		</div>
 	</div> 
 </section>
-<!-- nav aria-labelledby="my-pagination">
-  <h2 id="my-pagination">This is my Pagination</h2>
-  <ol>
-	{%- for pageEntry in pagination.pages %}
-	    <li>item</li>
-	{%- endfor %}
-  </ol>
-</nav -->
