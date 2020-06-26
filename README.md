@@ -1,6 +1,3 @@
-# Note: This branch is reworking everything
-Treat everything in this branch of the project as entirely unreal.  It is merely an experiment for discussion.
-
 # wpewebkit.org 
 wepwebkit.org is a statically generated site for WPE.  The website aims to be simple to maintain and with little complexity and dependencies.  It is built with [11ty](https://www.11ty.dev/) and Liquid templates - and that's pretty much it.
 
@@ -34,6 +31,8 @@ This will build the project, start a server, and your terminal will provide you 
 * `release` contains the markdown and directory structure for the release schedule page.
 
 * `vendor` this contains thirdparty stuff that we will use directly in the site - it is copied wholesale into its relevant spot in the output directory (`_site`).  _There is currently too much in there_ - our page uses stylish portfolio, which uses bootstrap, which uses jQuery and font-awesome and simple-line-icons. These in turn contain things for bundling, pre-processing with several different preprocessors, etc.  We will probably simplify this further, that's a lot of downloads, code and round-trips for such a simple site.
+
+* `about` contains page posts that are about various aspects of wpe 
 
 In the root directory you will also find some top level files - `index.html`which is the template for the main page, `release.md` which is the template for creating the release pages, a `package.json` which is, well, what you'd expect and `.eleventy.js` which does some very understandable work in creating a date filter for outputting dates (because of how some of the old content exists), and creates some 'recent' collections for simple templating of things like release notes and security advisories.
 
