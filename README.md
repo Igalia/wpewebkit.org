@@ -2,7 +2,7 @@
 Treat everything in this branch of the project as entirely unreal.  It is merely an experiment for discussion.
 
 # wpewebkit.org 
-wepwebkit.org is a statically generated site for WPE, the official WebKit Port for Embedded.  The website aims to be simple to maintain and with little complexity and dependencies.  It is built with [11ty](https://www.11ty.dev/) and Liquid templates - and that's pretty much it.
+wepwebkit.org is a statically generated site for WPE.  The website aims to be simple to maintain and with little complexity and dependencies.  It is built with [11ty](https://www.11ty.dev/) and Liquid templates - and that's pretty much it.
 
 The actual site is hosted by [Igalia](https://igalia.com) who are the primary maintainers of the project.
 
