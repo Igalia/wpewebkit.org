@@ -7,7 +7,7 @@ permalink: /about/architecture.html
 ---
 
 ### WPE
-WPE is the official WebKit port for embedded.  In webkit tems a port is...
+WPE is the official WebKit port for embedded.  In WebKit terms a port is...
 
 WPE is uniquely designed for embedded systems in that...
-somthing something backends
+something something backends
