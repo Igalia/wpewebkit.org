@@ -21,8 +21,10 @@ are welcome.
 | Series  | GPU            | Driver      | WPE Backend | Cog Shells |
 |---------|----------------|-------------|-------------|------------|
 | i&period;MX 51 | Imageon Z460   |             |     | |
-| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) & etnaviv (reverse-engineered) | fdo | fdo |
-| i&period;MX 8M | Vivante GC7000 | Vivante (Proprietary) & etnaviv (reverse-engineered) | fdo | fdo |
+| i&period;MX 6  | Vivante GC2000 | etnaviv (reverse-engineered) | fdo | fdo, drm |
+| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | fdo | fdo |
+| i&period;MX 8M | Vivante GC7000 | etnaviv (reverse-engineered) | fdo | fdo, drm |
+| i&period;MX 8M | Vivante GC7000 | Vivante (Proprietary) | fdo | fdo |
 
 ### Broadcom
 
@@ -52,7 +54,8 @@ are welcome.
 
 | SoC    | GPU          | Driver | WPE Backend | Cog Shells |
 |--------|--------------|--------|-------------|------------|
-| RK3399 | Mali T860MP4 | Mali (Proprietary) & panfrost (reverse-engineered) | | |
+| RK3399 | Mali T860MP4 | panfrost (reverse-engineered) | | |
+| RK3399 | Mali T860MP4 | Mali (Proprietary) | | |
 
 
 ### PC-style Hardware
