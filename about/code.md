@@ -6,8 +6,8 @@ data: { dateless: "true" }
 permalink: /about/code.html
 ---
 
-WPE is open source, free software.  Your help and scrunity are valuable.
-You can learn a great deal about how you can contribute upstream to WebKit through <a href="https://webkit.org/contributing-code/">the official WebKit Contibution Guide</a>.
+WPE is open source, free software.  Your help and scrutiny are valuable.
+You can learn a great deal about how you can contribute upstream to WebKit through <a href="https://webkit.org/contributing-code/">the official WebKit Contribution Guide</a>.
 
 ## Issues?
 * Found an issue with WPE?  <a href="http://bugs.webkit.org">Report a WebKit Issue</a>.

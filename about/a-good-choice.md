@@ -23,5 +23,5 @@ Focused on graphics performance with multi-threading optimizations to improve CS
 
 * It provides a strong focus on multimedia applications and performance with WebRTC, MSE (MP4, WebM, VP9, Opus) and EME (ClearKey and other third-party DRM frameworks) supported and constantly improving.
 
-* Unlicensed parts of Youtube TV and similar platforms are now enabled.
+* Unlicensed parts of YouTube TV and similar platforms are now enabled.
 

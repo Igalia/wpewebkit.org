@@ -43,7 +43,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             // Get all the comments.
-            const comments = await github.issues.listComments({
+            const comments = await github.paginate(github.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
@@ -57,7 +57,7 @@ jobs:
 
             // Otherwise, create the comment.
             await github.issues.createComment({
-              owner: context.repo.ownerm
+              owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
               body: 'Site preview: https://igalia.github.io/wpewebkit.org/${{ github.head_ref }}',
