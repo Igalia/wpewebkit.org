@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - dev
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -26,7 +29,11 @@ jobs:
       - name: Install Node modules
         run: npm install
       - name: Eleventy
-        run: ./node_modules/.bin/eleventy
+        run: |
+          ./node_modules/.bin/eleventy \
+            --output='_site/${{ github.head_ref }}' \
+            --pathprefix='/wpewebkit.org/${{ github.head_ref }}'
+          LC_TIME=C date > '_site/${{ github.head_ref }}/.stamp'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
