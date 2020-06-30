@@ -35,7 +35,10 @@ jobs:
           cat > ~/.ssh/key <<EOF
           ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
           EOF
-          chmod 0600 ~/.ssh/key
-          rsync -e "ssh -p ${{ secrets.DEPLOY_REMOTE_PORT }} -o StrictHostKeyChecking=no -i '$HOME/.ssh/key'" \
+          cat > ~/.ssh/known_hosts <<EOF
+          ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+          EOF
+          chmod 0600 ~/.ssh/{key,known_hosts}
+          rsync -e "ssh -p ${{ secrets.DEPLOY_REMOTE_PORT }} -i '$HOME/.ssh/key'" \
             -azz --info=stats2 _site/ \
             '${{ secrets.DEPLOY_REMOTE_USER }}@${{ secrets.DEPLOY_REMOTE_HOST }}:${{ secrets.DEPLOY_REMOTE_PATH }}'
