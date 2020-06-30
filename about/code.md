@@ -23,7 +23,7 @@ There is, of course, <a href="https://webkit.org/getting-the-code/">WPE WebKit s
 
 * <a href="https://github.com/WebPlatformForEmbedded/libwpe">libwpe</a>: General-purpose library for WPE.
 
-With each new release of WPE, we make source tarballs available as well...
+With each new release of WPE, we make source tarballs available.
 
 <style>.card { margin-bottom: 2rem; } #about-code-section { margin-bottom: 2rem; }  #about-code-section ul { list-style-type: none; }</style>
 <section id="about-code-section" class="content-section text-center bg-dark p-5">
