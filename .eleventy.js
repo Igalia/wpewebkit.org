@@ -26,8 +26,9 @@ module.exports = function(eleventyConfig) {
   })
 
   eleventyConfig.setLibrary("md", MarkdownIt({
-	  linkify: true,
-	  breaks: true,
+	  typographer: true,
+	  linkify: false,
+	  breaks: false,
 	  html: true,
 	}).use(MarkdownItAnchor, {
 	  level: 2,
