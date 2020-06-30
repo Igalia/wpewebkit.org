@@ -14,7 +14,8 @@ You can learn a great deal about how you can contribute upstream to WebKit throu
 Having issues with Cog?  <a href="https://github.com/Igalia/cog">Report a Cog issue.</a>
 
 ## Source
-There is, of course, <a href="https://webkit.org/getting-the-code/">WPE WebKit source</a> itself, but there are several supporting repositories as well...
+
+There is, of course, <a href="https://webkit.org/getting-the-code/">WPE WebKit source</a> itself, but there are several supporting repositories as well:
 
 * <a href="https://github.com/Igalia/cog">Cog</a>: A small single “window” launcher for the WebKit WPE port, with no user interface, suitable to be used as a Web application container. 
 
