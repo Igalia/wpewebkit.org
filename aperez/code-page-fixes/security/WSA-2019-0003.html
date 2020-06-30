@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2019-0003</title>
+  <meta name="description" content="">
+  <link rel="canonical" href="/wpewebkit.org/aperez/code-page-fixes/security/WSA-2019-0003.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="/wpewebkit.org/aperez/code-page-fixes/feed.xml">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperez/code-page-fixes/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperez/code-page-fixes/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperez/code-page-fixes/css/stylish-portfolio.css">
+
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/wpewebkit.org/aperez/code-page-fixes/"><img width="200" src="/wpewebkit.org/aperez/code-page-fixes/assets/svg/blue_Web_Logo.svg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/aperez/code-page-fixes/">Home</a>
+      </li>
+      <!-- li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/wpewebkit.org/aperez/code-page-fixes/about/exploring.html">Explore WPE / Embedded</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperez/code-page-fixes/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperez/code-page-fixes/about/a-good-choice.html">Why Choose WPE</a>
+          
+          
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/wpewebkit.org/aperez/code-page-fixes/about/builds.html">Build it</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/aperez/code-page-fixes/about/code.html">Code</a>
+      </li>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <section class="content-section bg-primary text-white small-section">
+  <div class="container text-center">
+    <div class="content-section-heading">
+      
+        <h3 class="text-secondary mb-0">Mon May 20 2019</h3>
+      
+      <h2>WebKitGTK and WPE WebKit Security Advisory WSA-2019-0003</h2>
+	  
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light small-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto lead text-left">
+
+        <ul>
+<li>
+<p>Date Reported: <strong>May 20, 2019</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2019-0003</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2019-6237">CVE-2019-6237</a>, <a href="#CVE-2019-8571">CVE-2019-8571</a>,<br>
+<a href="#CVE-2019-8583">CVE-2019-8583</a>, <a href="#CVE-2019-8584">CVE-2019-8584</a>,<br>
+<a href="#CVE-2019-8586">CVE-2019-8586</a>, <a href="#CVE-2019-8587">CVE-2019-8587</a>,<br>
+<a href="#CVE-2019-8594">CVE-2019-8594</a>, <a href="#CVE-2019-8595">CVE-2019-8595</a>,<br>
+<a href="#CVE-2019-8596">CVE-2019-8596</a>, <a href="#CVE-2019-8597">CVE-2019-8597</a>,<br>
+<a href="#CVE-2019-8601">CVE-2019-8601</a>, <a href="#CVE-2019-8607">CVE-2019-8607</a>,<br>
+<a href="#CVE-2019-8608">CVE-2019-8608</a>, <a href="#CVE-2019-8609">CVE-2019-8609</a>,<br>
+<a href="#CVE-2019-8610">CVE-2019-8610</a>, <a href="#CVE-2019-8615">CVE-2019-8615</a>,<br>
+<a href="#CVE-2019-8611">CVE-2019-8611</a>, <a href="#CVE-2019-8619">CVE-2019-8619</a>,<br>
+<a href="#CVE-2019-8622">CVE-2019-8622</a>, <a href="#CVE-2019-8623">CVE-2019-8623</a>.</p>
+</li>
+</ul>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+<ul>
+<li>
+<p><a name="CVE-2019-6237" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6237">CVE-2019-6237</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to G. Geshev working with Trend Micro Zero Day Initiative,<br>
+Liu Long of Qihoo 360 Vulcan Team.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8571" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8571">CVE-2019-8571</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.0.</li>
+<li>Credit to 01 working with Trend Micro's Zero Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8583" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8583">CVE-2019-8583</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.0.</li>
+<li>Credit to sakura of Tencent Xuanwu Lab, jessica (@babyjess1ca_) of<br>
+Tencent Keen Lab, and dwfault working at ADLab of Venustech.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8584" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8584">CVE-2019-8584</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to G. Geshev of MWR Labs working with Trend Micro Zero Day<br>
+Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8586" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8586">CVE-2019-8586</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.0.</li>
+<li>Credit to an anonymous researcher.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8587" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8587">CVE-2019-8587</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to G. Geshev working with Trend Micro Zero Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8594" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8594">CVE-2019-8594</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.0.</li>
+<li>Credit to Suyoung Lee and Sooel Son of KAIST Web Security &amp; Privacy<br>
+Lab and HyungSeok Han and Sang Kil Cha of KAIST SoftSec Lab.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8595" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8595">CVE-2019-8595</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.2.</li>
+<li>Credit to G. Geshev from MWR Labs working with Trend Micro Zero Day<br>
+Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8596" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8596">CVE-2019-8596</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to Wen Xu of SSLab at Georgia Tech.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8597" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8597">CVE-2019-8597</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to 01 working with Trend Micro Zero Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8601" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8601">CVE-2019-8601</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to Fluoroacetate working with Trend Micro's Zero Day<br>
+Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8607" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8607">CVE-2019-8607</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.2.</li>
+<li>Credit to Junho Jang and Hanul Choi of LINE Security Team.</li>
+<li>Processing maliciously crafted web content may result in the<br>
+disclosure of process memory. An out-of-bounds read was addressed<br>
+with improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8608" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8608">CVE-2019-8608</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to G. Geshev working with Trend Micro Zero Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8609" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8609">CVE-2019-8609</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.0.</li>
+<li>Credit to Wen Xu of SSLab, Georgia Tech.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8610" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8610">CVE-2019-8610</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to Anonymous working with Trend Micro Zero Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8615" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8615">CVE-2019-8615</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.2.</li>
+<li>Credit to G. Geshev from MWR Labs working with Trend Micro's Zero<br>
+Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8611" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8611">CVE-2019-8611</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.0.</li>
+<li>Credit to Samuel Groß of Google Project Zero.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8619" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8619">CVE-2019-8619</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.1.</li>
+<li>Credit to Wen Xu of SSLab at Georgia Tech and Hanqing Zhao of<br>
+Chaitin Security Research Lab.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8622" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8622">CVE-2019-8622</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.0.</li>
+<li>Credit to Samuel Groß of Google Project Zero.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2019-8623" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8623">CVE-2019-8623</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.24.0.</li>
+<li>Credit to Samuel Groß of Google Project Zero.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary<br>
+code execution. Multiple memory corruption issues were addressed<br>
+with improved memory handling.</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE<br>
+WebKit. It is the best way to ensure that you are running safe versions<br>
+of WebKit. Please check our websites for information about the latest<br>
+stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:<br>
+<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
+
+
+        <p class="text-right"><a class="btn btn-primary" href="/"><i class="icon-home mr-1"></i> Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Contact -->
+<section class="content-section bg-dark text-white text-center" id="contact">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <h2>Contact</h2>
+      </div>
+    </div>
+    <ul class="list-inline mb-5 lead">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="https://twitter.com/WPEWebKit">
+          <i class="icon-social-twitter mr-1"></i> @WPEWebKit
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white" href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">
+          <i class="icon-envelope mr-1"></i> webkit-wpe@lists.webkit.org
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white ml-3" href="https://webchat.freenode.net/?channels=#webkit">
+          <i class="icon-people mr-1"></i> #webkit on freenode
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/aperez/code-page-fixes/assets/svg/blue_Web_Logo.svg"></a>
+  <div class="container text-center">
+    <p class="text-muted small mb-0">Copyright &copy; 2018-2020 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+  </div>
+</footer>
+
+  <script src="/wpewebkit.org/aperez/code-page-fixes/vendor/jquery/jquery.js"></script>
+  <script src="/wpewebkit.org/aperez/code-page-fixes/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>
