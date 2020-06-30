@@ -29,12 +29,13 @@ jobs:
         run: |
           ./node_modules/.bin/eleventy --output='_site/' --pathprefix='/'
       - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.1.1
-        with:
-          ARGS: -azz --info=stats2
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
-          REMOTE_USER: ${{ secrets.DEPLOY_REMOTE_USER }}
-          REMOTE_HOST: ${{ secrets.DEPLOY_REMOTE_HOST }}
-          REMOTE_PORT: ${{ secrets.DEPLOY_REMOTE_PORT }}
-          TARGET: ${{ secrets.DEPLOY_REMOTE_PATH }}
-          SOURCE: _site/
+        run: |
+          mkdir -p ~/.ssh
+          chmod 0700 ~/.ssh
+          cat > ~/.ssh/key <<EOF
+          ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          EOF
+          chmod 0600 ~/.ssh/key
+          rsync -e "ssh -p ${{ secrets.DEPLOY_REMOTE_PORT }} -o StrictHostKeyChecking=no -i '$HOME/.ssh/key'" \
+            -azz --info=stats2 _site/ \
+            '${{ secrets.DEPLOY_REMOTE_USER }}@${{ secrets.DEPLOY_REMOTE_HOST }}:${{ secrets.DEPLOY_REMOTE_PATH }}'
