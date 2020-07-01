@@ -86,33 +86,33 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p>This release changes the API version to 0.2, and introduces the following<br>
+        <p>This release changes the API version to 0.2, and introduces the following
 changes and features:</p>
-<h3 id="what's-new-in-the-libwpe-1.0.0-release%3F">What's new in the libwpe 1.0.0 release?</h3>
+<h3 id="what%E2%80%99s-new-in-the-libwpe-1.0.0-release%3F">What’s new in the libwpe 1.0.0 release?</h3>
 <ul>
 <li>
-<p>The library is now called <code>libwpe</code> to avoid confusion. The <code>WPEBackend</code> name<br>
-used previously seemed to indicate that the library implemented a WPE<br>
-backend. The new <code>libwpe</code> name better reflects that it contains code needed<br>
+<p>The library is now called <code>libwpe</code> to avoid confusion. The <code>WPEBackend</code> name
+used previously seemed to indicate that the library implemented a WPE
+backend. The new <code>libwpe</code> name better reflects that it contains code needed
 by the WPE WebKit port (<a href="https://github.com/WebPlatformForEmbedded/libwpe/issues/27">#27</a>).</p>
 </li>
 <li>
-<p>The <code>libwpe</code> library now uses the <a href="https://autotools.io/libtool/version.html">libtool<br>
-versioning</a> convention<br>
+<p>The <code>libwpe</code> library now uses the <a href="https://autotools.io/libtool/version.html">libtool
+versioning</a> convention
 (<a href="https://github.com/WebPlatformForEmbedded/libwpe/issues/21">#21</a>).</p>
 </li>
 <li>
-<p>Handle conversion of keysyms to Unicode inside <code>libwpe</code>. This allowed to<br>
-remove the <code>unicode</code> member from keyboard event structs, and removing<br>
-<code>wpe_input_key_mapper</code>/<code>wpe_input_key_mapper_interface</code><br>
+<p>Handle conversion of keysyms to Unicode inside <code>libwpe</code>. This allowed to
+remove the <code>unicode</code> member from keyboard event structs, and removing
+<code>wpe_input_key_mapper</code>/<code>wpe_input_key_mapper_interface</code>
 (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/23">#23</a>).</p>
 </li>
 <li>
-<p>New field in event structs to specify keyboard modifiers<br>
+<p>New field in event structs to specify keyboard modifiers
 (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/22">#22</a>).</p>
 </li>
 <li>
-<p>New API for keymap and composition handling based on <code>libxkbcommon</code><br>
+<p>New API for keymap and composition handling based on <code>libxkbcommon</code>
 (<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/24">#24</a>).</p>
 </li>
 </ul>
