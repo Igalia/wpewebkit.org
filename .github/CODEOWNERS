@@ -1,0 +1,9 @@
+# Reference:
+#   https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+# Default reviewers
+*  @bkardell
+
+# The following rules override the defaults
+/.eleventy.js        @aperezdc @bkardell
+/.github/workflows/  @aperezdc
