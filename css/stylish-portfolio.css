@@ -301,6 +301,10 @@ h6 {
     background-position-y: center
   }
 
+
+  .footer.footer {
+    grid-template-columns: 300px auto;
+  }
 }
 
 table {
@@ -414,7 +418,6 @@ a:hover, a:focus, a:active {
 footer.footer { 
   padding: 1rem;
   display: grid;
-  grid-template-columns: 300px auto;
 }
 
 footer .container { 
