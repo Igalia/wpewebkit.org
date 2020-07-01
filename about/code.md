@@ -7,21 +7,20 @@ permalink: /about/code.html
 ---
 
 WPE is open source, free software.  Your help and scrutiny are valuable.
-You can learn a great deal about how you can contribute upstream to WebKit through <a href="https://webkit.org/contributing-code/">the official WebKit Contribution Guide</a>.
+You can learn a great deal about how you can contribute upstream to WebKit through [the official WebKit Contribution Guide](https://webkit.org/contributing-code/).
 
 ## Issues?
-* Found an issue with WPE?  <a href="http://bugs.webkit.org">Report a WebKit Issue</a>.
-Having issues with Cog?  <a href="https://github.com/Igalia/cog">Report a Cog issue.</a>
+
+* Found an issue with WPE? [Report a WebKit issue](http://bugs.webkit.org).
+* Having issues with Cog? [Report a Cog issue](https://github.com/Igalia/cog).
 
 ## Source
 
-There is, of course, <a href="https://webkit.org/getting-the-code/">WPE WebKit source</a> itself, but there are several supporting repositories as well:
+There is, of course, the [WPE WebKit source](https://webkit.org/getting-the-code/) itself, but there are several supporting repositories as well:
 
-* <a href="https://github.com/Igalia/cog">Cog</a>: A small single “window” launcher for the WebKit WPE port, with no user interface, suitable to be used as a Web application container. 
-
-* <a href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a>: A FreeDesktop.org backend for WPE.
-
-* <a href="https://github.com/WebPlatformForEmbedded/libwpe">libwpe</a>: General-purpose library for WPE.
+* [Cog](https://github.com/Igalia/cog): A small single “window” launcher for the WebKit WPE port, with no user interface, suitable to be used as a Web application container.
+* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A FreeDesktop&period;org backend for WPE.
+* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe): General-purpose library for WPE.
 
 With each new release of WPE, we make source tarballs available.
 

@@ -42,23 +42,20 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // Get all the comments.
-            const comments = await github.paginate(github.issues.listComments, {
+            // Site preview link already added.
+            const { data: pr } = await github.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
+              pull_number: context.issue.number,
             });
 
-            // If we commented already, skip.
-            for (const comment of comments) {
-              if (comment.user.login == 'github-actions' && comment.body.startsWith('Site preview:'))
-                return;
-            }
+            const marker = '\n\n----\n\nSite preview: ';
+            if (pr.body.indexOf(marker) != -1)
+              return;
 
-            // Otherwise, create the comment.
-            await github.issues.createComment({
+            await github.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: 'Site preview: https://igalia.github.io/wpewebkit.org/${{ github.head_ref }}',
+              pull_number: pr.number,
+              body: pr.body + marker + 'https://igalia.github.io/wpewebkit.org/${{ github.head_ref }}/',
             });
