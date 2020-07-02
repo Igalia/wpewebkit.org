@@ -14,6 +14,18 @@ You can learn a great deal about how you can contribute upstream to WebKit throu
 * Found an issue with WPE? [Report a WebKit issue](http://bugs.webkit.org).
 * Having issues with Cog? [Report a Cog issue](https://github.com/Igalia/cog).
 
+## Contact
+
+For questions and hanging out you can find us here:
+
+* [#wpe:matrix.org](https://matrix.to/#/#wpe:matrix.org) room on
+  [Matrix](https://matrix.org).
+* [#wpe](https://webchat.freenode.net/?channels=wpe) channel on
+  [Freenode](https://freenode.net).
+* [webkit-wpe](https://lists.webkit.org/mailman/listinfo/webkit-wpe) mailing
+  list.
+* [@WPEWebKit](https://twitter.com/WPEWebKit) on Twitter.
+
 ## Source
 
 There is, of course, the [WPE WebKit source](https://webkit.org/getting-the-code/) itself, but there are several supporting repositories as well:
