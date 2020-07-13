@@ -2,6 +2,14 @@ const MarkdownIt = require("markdown-it");
 const MarkdownItAnchor = require("markdown-it-anchor");
 const MarkdownItTOC = require("markdown-it-toc-done-right");
 
+class DefaultDict {
+	constructor(defaultValue) {
+		return new Proxy({}, {
+			get: (target, name) => name in target ? target[name] : defaultValue
+		});
+	}
+}
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css')
   eleventyConfig.addPassthroughCopy('vendor')
@@ -17,6 +25,43 @@ module.exports = function(eleventyConfig) {
       return i++ < 5;
     });
   })
+
+	eleventyConfig.addCollection("latestReleases", (collectionApi) => {
+		const makeFilter = function () {
+			let seenPackages = new DefaultDict(false);
+			return (item) => {
+				const package = item.data.package;
+
+				if (seenPackages[package])
+					return false;
+
+				seenPackages[package] = true;
+				return true;
+			};
+		};
+
+		const gatherLatest = function (result, kind) {
+			for (let item of collectionApi.getFilteredByTags("release", kind).reverse().filter(makeFilter())) {
+				const package = item.data.package;
+				if (package === undefined)
+					continue;
+				if (result[package] === undefined)
+					result[package] = {};
+				result[package][kind] = {
+					version: item.data.version,
+					date: item.date,
+					package: package,
+					kind: kind,
+					url: item.url,
+				};
+			}
+		};
+
+		let result = {};
+		gatherLatest(result, "stable");
+		gatherLatest(result, "unstable");
+		return result;
+	});
 
   eleventyConfig.addCollection("recentWSA", (collectionApi) => {
     let i =0;
