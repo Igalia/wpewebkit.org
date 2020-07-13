@@ -36,75 +36,53 @@ There is, of course, the [WPE WebKit source](https://webkit.org/getting-the-code
 
 With each new release of WPE, we make source tarballs available.
 
-<style>.card { margin-bottom: 2rem; } #about-code-section { margin-bottom: 2rem; }  #about-code-section ul { list-style-type: none; }</style>
-<section id="about-code-section" class="content-section text-center bg-dark p-5">
-	<div class="container">
-		<h4 class="text-light mb-3">Source Tarballs</h4>
-		<div>
-			<div>
-				<div class="card">
-					<div class="card-header">WPE WebKit</div>
-					<ul class="list-group list-group-flush">
-							<li><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://wpewebkit.org/releases/wpewebkit-2.28.2.tar.xz">
-								Stable <span class="sr-only">version:</span>
-								<span class="badge badge-primary" href="/release/wpewebkit-2.28.2.html">2.28.2</span>
-							</a></li>
-							<li><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://wpewebkit.org/releases/wpewebkit-2.27.91.tar.xz">
-								Unstable <span class="sr-only">version:</span>
-								<span class="badge badge-secondary" href="/release/wpewebkit-2.27.91.html">2.27.91</span>
-							</a></li>				
-					</ul>
-				</div>
-			</div>		
-			<div>
-				<div class="card">
-					<div class="card-header">libwpe</div>
-					<ul class="list-group list-group-flush">
-							<li><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://wpewebkit.org/releases/libwpe-1.6.0.tar.xz">
-								Stable <span class="sr-only">version:</span>
-								<span class="badge badge-primary" href="/release/libwpe-1.6.0.html">1.6.0</span>
-							</a></li>		
-							<li><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://wpewebkit.org/releases/libwpe-1.5.90.tar.xz">
-								Unstable <span class="sr-only">version:</span>
-								<span class="badge badge-secondary" href="/release/libwpe-1.5.90.html">1.5.90</span>
-							</a></li>		
-					</ul>
-				</div>
-			</div>
-			<div>
-				<div class="card">
-					<div class="card-header">WPEBackend-fdo</div>
-					<ul class="list-group list-group-flush">	
-							<li><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://wpewebkit.org/releases/wpebackend-fdo-1.6.1.tar.xz">
-								Stable <span class="sr-only">version:</span>
-								<span class="badge badge-primary" href="/release/wpebackend-fdo-1.6.1.html">1.6.1</span>
-							</a></li>
-						<li><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://wpewebkit.org/releases/wpebackend-fdo-1.5.90.tar.xz">
-								Unstable <span class="sr-only">version:</span>
-								<span class="badge badge-secondary" href="/release/wpebackend-fdo-1.5.90.html">1.5.90</span>
-							</a></li>			
-					</ul>
-				</div>
-			</div>
-			<div>
-				<div class="card">
-					<div class="card-header">Cog</div>
-					<ul class="list-group list-group-flush">		
-							<li><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://wpewebkit.org/releases/cog-0.6.0.tar.xz">
-								Stable <span class="sr-only">version:</span>
-								<span class="badge badge-primary" href="/release/cog-0.6.0.html">0.6.0</span>
-							</a></li>
-							<li><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://wpewebkit.org/releases/cog-0.7.1.tar.xz">
-								Unstable <span class="sr-only">version:</span>
-								<span class="badge badge-secondary" href="/release/cog-0.7.1.html">0.7.1</span>
-							</a></li>		
-					</ul>
-				</div>
-			</div>
-		</div>
-		<p class="m-3 mt-4">
-			<a class="btn btn-light btn-sm" style="font-weight: normal" href="https://wpewebkit.org/releases/">
-				<i class="icon-cloud-download align-text-bottom"></i>&nbsp;&nbsp;&nbsp;All Downloads…</a>
-		</p>
-	  </div>
-</section>
+<h3 class="sr-only">Releases</h3>
+
+<div class="container">
+  <div class="card-deck">
+    <div class="card">
+      <h4 class="card-header text-center" style="font-weight: 300">Stable</h4>
+      <div class="list-group list-group-flush">
+        {%- for item in collections.latestReleases -%}
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          {{ item[0] }}<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary"
+             title="Download {{ item[0] }} {{ item[1].stable.version }}"
+             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].stable.version | append: '.tar.xz' | url }}"><span class="sr-only">Download v</span>{{ item[1].stable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary"
+             title="Release notes for {{ item[0] }} {{ item[1].stable.version }}"
+             href="{{ item[1].stable.url | url }}"><span class="sr-only">Release notes for v{{ item[1].stable.version }}</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+   <div class="card">
+      <h4 class="card-header text-center" style="font-weight: 300">Unstable</h4>
+      <div class="list-group list-group-flush">
+        {%- for item in collections.latestReleases -%}
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          {{ item[0] }}<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary"
+             title="Download {{ item[0] }} {{ item[1].unstable.version }}"
+             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].unstable.version | append: '.tar.xz' | url }}"><span class="sr-only">Download v</span>{{ item[1].unstable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary"
+             title="Release notes for {{ item[0] }} {{ item[1].unstable.version }}"
+             href="{{ item[1].unstable.url | url }}"><span class="sr-only">Release notes for v{{ item[1].unstable.version }}</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <p class="m-3 mt-4 text-center">
+    <a class="btn btn-light btn-sm" style="font-weight: normal" href="https://wpewebkit.org/releases/">
+      <i class="icon-cloud-download align-text-bottom" style="margin-right: 0.3em"></i>All Downloads…</a>
+  </p>
+</div>
