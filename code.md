@@ -3,7 +3,7 @@ layout: post
 title: "Code"
 tags: [about]
 data: { dateless: "true" }
-permalink: /about/code.html
+permalink: /code/
 ---
 
 WPE is open source, free software.  Your help and scrutiny are valuable.
