@@ -24,7 +24,7 @@ pagination:
   <div class="container text-center">
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
-        {%- for post in posts reversed -%}
+        {%- for post in collections.release reversed -%}
 	        <h3 class="release-heading"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>{{ post.date | dateString }}
 	        <p></p>	
 		{%- endfor -%}
