@@ -38,11 +38,7 @@ In the root directory you will also find some top level files - `index.html`whic
 
 ## Updating wpewebkit.org site
 
-The easiest way to upload the content to the server its executing this two commands:
-
-    bundler exec jekyll build
-    rsync -azi _site/  www-data@wpewebkit.org:/var/www/wpewebkit/_site/
-
+* The website is automatically updated from this repository. So simply commit to master or send a pull-request.
 
 ## Updating content
 
