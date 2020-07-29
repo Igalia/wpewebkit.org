@@ -37,10 +37,9 @@
 </ul>
 <p>In the root directory you will also find some top level files - <code>index.html</code>which is the template for the main page, <code>release.md</code> which is the template for creating the release pages, a <code>package.json</code> which is, well, what you’d expect and <code>.eleventy.js</code> which does some very understandable work in creating a date filter for outputting dates (because of how some of the old content exists), and creates some ‘recent’ collections for simple templating of things like release notes and security advisories.</p>
 <h2 id="updating-wpewebkit.org-site">Updating wpewebkit.org site</h2>
-<p>The easiest way to upload the content to the server its executing this two commands:</p>
-<pre><code>bundler exec jekyll build
-rsync -azi _site/  www-data@wpewebkit.org:/var/www/wpewebkit/_site/
-</code></pre>
+<ul>
+<li>The website is automatically updated from this repository. So simply commit to master or send a pull-request.</li>
+</ul>
 <h2 id="updating-content">Updating content</h2>
 <p>In order to write a new release or security advisory piece in the website
 you just have to create a new file inside <code>_posts</code> folder using

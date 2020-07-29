@@ -10,9 +10,9 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Release Schedule</title>
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2020-0007</title>
   <meta name="description" content="">
-  <link rel="canonical" href="/wpewebkit.org/aperez/fix-all-releases-page/release/schedule/">
+  <link rel="canonical" href="/wpewebkit.org/aperez/fix-all-releases-page/security/WSA-2020-0007.html">
   <link rel="alternate" type="application/rss+xml" title="" href="/wpewebkit.org/aperez/fix-all-releases-page/feed.xml">
 
   <!-- Bootstrap Core CSS -->
@@ -75,7 +75,7 @@
       
         <h3 class="text-secondary mb-0">Wed Jul 29 2020</h3>
       
-      <h2>Release Schedule</h2>
+      <h2>WebKitGTK and WPE WebKit Security Advisory WSA-2020-0007</h2>
 	  
     </div>
   </div>
@@ -86,114 +86,95 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p>WPE WebKit follows a 6-month development cycle:</p>
-<ul>
-<li>There are two feature releases are done every year, typically in March
-and September.</li>
-<li>Within feature releases there may be any number of bug fix releases.</li>
-<li>Development releases are the base for the feature releases that follow
-them. They do not follow a fixed schedule in the release cycle.</li>
+        <ul>
+<li>
+<p>Date Reported: <strong>July 29, 2020</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2020-0007</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2020-9862">CVE-2020-9862</a>, <a href="#CVE-2020-9893">CVE-2020-9893</a>,
+<a href="#CVE-2020-9894">CVE-2020-9894</a>, <a href="#CVE-2020-9895">CVE-2020-9895</a>,
+<a href="#CVE-2020-9915">CVE-2020-9915</a>, <a href="#CVE-2020-9925">CVE-2020-9925</a>.</p>
+</li>
 </ul>
-<p>WPE WebKit and <a href="https://webkitgtk.org">WebKitGTK</a> share a fair amount of code.
-Therefore, both projects produce their feature releases simultaneously,
-and share the same release branches. For bug fix releases, the release
-teams for both projects try to sync their version numbers as well as they
-can.</p>
-<h2 id="versioning-scheme">Versioning Scheme</h2>
-<p>Version numbers follow the <code>major.minor.patch</code> numbering scheme. Changes to
-the <code>major</code> version signify considerable architectural or API changes; the
-<code>minor</code> version number changes throughout the development cycle. Even numbers
-indicate stable releases and odd ones development releases. Lastly, the
-<code>patch</code> number is incremented for each release, and for stable release
-candidates it is bumped to <code>90</code>.</p>
-<table>
-<thead>
-<tr>
-<th><strong>Kind</strong></th>
-<th style="text-align:center"><strong>Minor</strong></th>
-<th style="text-align:center"><strong>Patch</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Stable</td>
-<td style="text-align:center">even</td>
-<td style="text-align:center">any</td>
-</tr>
-<tr>
-<td>Development</td>
-<td style="text-align:center">odd</td>
-<td style="text-align:center">&lt; 90</td>
-</tr>
-<tr>
-<td>Release Candidate</td>
-<td style="text-align:center">odd</td>
-<td style="text-align:center">≥ 90</td>
-</tr>
-</tbody>
-</table>
-<p>For stable releases the following is always true, as long as the <code>major</code>
-version number stays the same:</p>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
 <ul>
-<li>New <code>patch</code> releases are guaranteed to be backward-compatible <em>both</em>
-at the API and ABI level.</li>
-<li>New <code>minor</code> releases may contain new features and backward-compatible
-changes in the public API. In general the ABI will remain compatible as
-well, because we actively avoid breaking it unless strictly needed.</li>
-</ul>
-<h2 id="compatible-components">Compatible Components</h2>
-<p>The following table summarizes which <em>stable</em> releases of libwpe, WPE WebKit,
-WPEBackend-fdo, and Cog are compatible and tested with each other.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"><strong>WPE WebKit</strong></th>
-<th style="text-align:center"><strong>libwpe</strong></th>
-<th style="text-align:center"><strong>WPEBackend-fdo</strong></th>
-<th style="text-align:center"><strong>Cog</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">2.28.x</td>
-<td style="text-align:center">1.6.x</td>
-<td style="text-align:center">1.6.x</td>
-<td style="text-align:center">0.6.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.26.x</td>
-<td style="text-align:center">1.4.x</td>
-<td style="text-align:center">1.4.x</td>
-<td style="text-align:center">0.4.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.24.x</td>
-<td style="text-align:center">1.2.x</td>
-<td style="text-align:center">1.2.x</td>
-<td style="text-align:center">0.3.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.22.x</td>
-<td style="text-align:center">1.0.x</td>
-<td style="text-align:center">1.0.x</td>
-<td style="text-align:center">0.2.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.20.x</td>
-<td style="text-align:center">&lt; 1.0.0</td>
-<td style="text-align:center">&lt; 1.0.0</td>
-<td style="text-align:center">≤ 0.1.x</td>
-</tr>
-</tbody>
-</table>
-<p>Distributors and packagers are strongly advised to use the versions above.</p>
-<p><strong>Notes:</strong></p>
+<li>
+<p><a name="CVE-2020-9862" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9862">CVE-2020-9862</a></p>
 <ul>
-<li>libwpe used to be called wpebackend before version 1.0.x — it was renamed to
-avoid confusion.</li>
-<li>Cog adopted the same versioning scheme as the rest of the components
-starting with the 0.6 series.</li>
+<li>Versions affected: WebKitGTK before 2.28.4 and WPE WebKit before
+2.28.4.</li>
+<li>Credit to Ophir Lojkine (@lovasoa).</li>
+<li>Impact: Copying a URL from Web Inspector may lead to command
+injection. Description: A command injection issue existed in Web
+Inspector. This issue was addressed with improved escaping.</li>
 </ul>
+</li>
+<li>
+<p><a name="CVE-2020-9893" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9893">CVE-2020-9893</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.28.4 and WPE WebKit before
+2.28.4.</li>
+<li>Credit to 0011 working with Trend Micro Zero Day Initiative.</li>
+<li>Impact: A remote attacker may be able to cause unexpected
+application termination or arbitrary code execution. Description: An
+use-after-free issue was addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9894" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9894">CVE-2020-9894</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.28.4 and WPE WebKit before
+2.28.4.</li>
+<li>Credit to 0011 working with Trend Micro Zero Day Initiative.</li>
+<li>Impact: A remote attacker may be able to cause unexpected
+application termination or arbitrary code execution. Description: An
+out-of-bounds read was addressed with improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9895" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9895">CVE-2020-9895</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.28.4 and WPE WebKit before
+2.28.4.</li>
+<li>Credit to Wen Xu of SSLab, Georgia Tech.</li>
+<li>Impact: A remote attacker may be able to cause unexpected
+application termination or arbitrary code execution. Description: An
+use-after-free issue was addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9915" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9915">CVE-2020-9915</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.28.4 and WPE WebKit before
+2.28.4.</li>
+<li>Credit to Ayoub AIT ELMOKHTAR of Noon.</li>
+<li>Impact: Processing maliciously crafted web content may prevent
+Content Security Policy from being enforced. Description: An access
+issue existed in Content Security Policy.  This issue was addressed
+with improved access restrictions.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9925" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9925">CVE-2020-9925</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.28.4 and WPE WebKit before
+2.28.4.</li>
+<li>Credit to an anonymous researcher.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+universal cross site scripting. Description: A logic issue was
+addressed with improved state management.</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
 
 
         <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/aperez/fix-all-releases-page/"><i class="icon-home mr-1"></i> Home</a></p>
