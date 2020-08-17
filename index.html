@@ -3,6 +3,58 @@ layout: page.html
 title: WPE
 description: WebKit port optimized for embedded devices
 ---
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let [prev, next] = document.querySelectorAll('#demos .btn');
+      let vids = [...document.querySelectorAll('#demos .item > *')];
+      let scroller = document.querySelector("#demos .scroller");
+      let i=0;
+
+
+      // what is the currently active one?
+      prev.onclick = () => {
+        i = (i === 0) ? vids.length-1 : i-1;
+        let vid = vids[i];
+        scroller.scrollTo({
+          top: 0, 
+          left: i*scroller.offsetWidth, 
+          behavior: "smooth"
+        });
+      }
+
+      next.onclick = () => {
+        i = (i === vids.length-1) ? 0 : i+1;
+        let vid = vids[i];
+        scroller.scrollTo({
+          top: 0, 
+          left: i*scroller.offsetWidth, 
+          behavior: "smooth"
+        });
+      }
+
+      demos.classList.add('initialized');
+    })
+
+    class LazyYTElementLite extends HTMLElement {
+      connectedCallback() {
+        let hash = this.getAttribute('hash')
+        this.attachShadow({mode: "open"})
+        this.shadowRoot.innerHTML = `
+        <iframe
+  width="560"
+  height="315"
+  src="https://www.youtube-nocookie.com/embed/${hash}"
+  srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/${hash}?autoplay=1><img src=https://img.youtube.com/vi/${hash}/hqdefault.jpg alt='Video: ${this.getAttribute('title')}'><span>▶</span></a>"
+  frameborder="0"
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  title="${this.getAttribute('title')}"
+></iframe>`
+      }
+    }
+
+    customElements.define('lazy-youtube', LazyYTElementLite);
+  </script>
 <style>
   .masthead {
     display: grid;
@@ -87,8 +139,51 @@ description: WebKit port optimized for embedded devices
   height: 15rem;
 }
 
+#demos {
+  position: relative;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+
+.scroller {
+  scroll-snap-type: x mandatory;
+}
+
+.scroller .item {
+  min-width: 100%;
+  min-height: 200px;
+  scroll-snap-align: center;
+}
+
+#demos .btn {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+}
+
+
 
 @media (min-width: 992px) {
+  #demos .scroller {
+   overflow-x: hidden;
+   display: flex;
+  }
+
+  #demos .btn.next {
+   right: 15px;
+   visibility: hidden;
+  }
+
+  #demos .btn.prev {
+     left: 15px;
+     visibility: hidden;
+  }
+
+  #demos.initialized .btn {
+     visibility: visible;
+  }
+
   .masthead {
     grid-template-columns: 1fr 1fr;
  
@@ -137,6 +232,37 @@ description: WebKit port optimized for embedded devices
 
 </section>
 
+<section id="demos" class="blade content-section d-flex p-5 bg-light">
+  <div class="container text-center my-auto">
+    
+    <h3 class="mb-4">
+      Demos
+    </h3> 
+
+    <div class="scroller">
+       <div class="item">
+          <lazy-youtube hash="bg6yCx7VdPY" title="WPE WebGL performance demos"></lazy-youtube>
+       </div>
+
+       <div class="item">
+          <lazy-youtube hash="Nz2Y8HGdZDE" title="WPE SVG Transformations and Hardware Acceleration"></lazy-youtube>
+       </div>
+
+       <div class="item">
+          <lazy-youtube hash="_X_23cb8l6o" title="WPE 2d canvas and video performance on low end-hardware"></lazy-youtube>
+       </div>
+
+       <div class="item">
+          <lazy-youtube hash="QNZJYOuVGiE" title="Web-augmented video overlays with WPEWebKit and GStreamer"></lazy-youtube>
+       </div>
+
+       <div class="item">
+          <lazy-youtube hash="0L8Fv7sswSk" title="WPE CSS Transforms and Performance"></lazy-youtube>
+       </div>
+    </div>
+    <span class="btn prev">&lt;</span>
+    <span class="btn next">&gt;</span>
+</section>
 
 
 <section class="content-section d-flex p-5 learn-more">
@@ -191,4 +317,6 @@ description: WebKit port optimized for embedded devices
       </div>
     </div>
   </div>
+
+  
 
