@@ -4,6 +4,7 @@ title: "WPEBackend-fdo 1.7.90 released"
 tags: [release, unstable]
 package: wpebackend-fdo
 version: 1.7.90
+date: 20200904T19:00+0300
 permalink: /release/wpebackend-fdo-1.7.90.html
 ---
 
