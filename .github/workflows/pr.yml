@@ -27,6 +27,9 @@ jobs:
         run: npm install
       - name: Eleventy
         run: |
+          cp -f _data/site.json /tmp/site.json
+          jq '.base_url = "https://igalia.github.io"' \
+            /tmp/site.json > _data/site.json
           ./node_modules/.bin/eleventy \
             --output='_site/${{ github.head_ref }}' \
             --pathprefix='/wpewebkit.org/${{ github.head_ref }}'
