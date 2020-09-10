@@ -1,17 +1,11 @@
 ---
 title: Releases
-layout: default
+layout: page
 pagination:
   data: collections.release
   size: 50
   alias: posts
 ---
-<!-- Header -->
-<header class="masthead d-flex p-5">
-  <div class="container text-center my-auto">
-    <img style="width: 50%; margin-bottom: 3rem;" src="{{ '/assets/svg/web_Logo_Header_Color_300x110px.svg' | url }}">
-    <p class="lead mb-0"><strong>WPE WebKit</strong> allows <strong>embedders</strong> to create simple and performant systems based on <strong>Web</strong> platform technologies. It is designed with hardware acceleration in mind, leveraging common 3D graphics APIs for best <strong>performance</strong>.</p>
-</header>
 <section class="content-section bg-primary text-white small-section">
   <div class="container text-center">
     <div class="content-section-heading">
@@ -31,11 +25,3 @@ pagination:
 		</div>
 	</div> 
 </section>
-<!-- nav aria-labelledby="my-pagination">
-  <h2 id="my-pagination">This is my Pagination</h2>
-  <ol>
-	{%- for pageEntry in pagination.pages %}
-	    <li>item</li>
-	{%- endfor %}
-  </ol>
-</nav -->
