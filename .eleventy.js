@@ -18,6 +18,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("dateString", (value) => {
     return new Date(value).toDateString();
   });
+  eleventyConfig.addFilter("isodate", (value) => {
+    return new Date(value).toISOString();
+  });
 
   eleventyConfig.addCollection("recentReleaseNotes", (collectionApi) => {
     let i =0;
