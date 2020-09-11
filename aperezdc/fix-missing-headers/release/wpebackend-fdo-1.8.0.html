@@ -10,9 +10,9 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>WPE WebKit 2.22.2 released!</title>
+  <title>WPEBackend-fdo 1.8.0 released</title>
   <meta name="description" content="">
-  <link rel="canonical" href="/wpewebkit.org/aperezdc/fix-missing-headers/release/wpe-2.22.2.html">
+  <link rel="canonical" href="/wpewebkit.org/aperezdc/fix-missing-headers/release/wpebackend-fdo-1.8.0.html">
   <link rel="alternate" type="application/rss+xml" title="" href="/wpewebkit.org/aperezdc/fix-missing-headers/feed.xml">
 
   <!-- Bootstrap Core CSS -->
@@ -72,11 +72,11 @@
   <div class="container text-center">
     <div class="content-section-heading">
       
-        <h3 class="text-secondary mb-0">Wed Nov 21 2018</h3>
+        <h3 class="text-secondary mb-0">Fri Sep 11 2020</h3>
       
-      <h2>WPE WebKit 2.22.2 released!</h2>
+      <h2>WPEBackend-fdo 1.8.0 released</h2>
 	  
-	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases/wpewebkit-2.22.2.tar.xz">Download</a>
+	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpebackend-fdo-1.8.0.tar.xz">Download</a>
 	  
     </div>
   </div>
@@ -87,21 +87,20 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p>This is a bug fix release in the stable 2.22 series.</p>
-<h3 id="what%E2%80%99s-new-in-the-wpe-webkit-2.22.2-release%3F">What’s new in the WPE WebKit 2.22.2 release?</h3>
+        <p>This is the first stable release in the 1.8 series.</p>
+<h3 id="highlights-of-the-wpebackend-fdo-1.8.0-release">Highlights of the WPEBackend-fdo 1.8.0 release</h3>
 <ul>
-<li>Fix a crash when using Cairo versions between 1.15 and 1.16.0</li>
-<li>Fix the build with <code>-DLOG_DISABLED=0</code>.</li>
-<li>Fix several crashes and rendering issues.</li>
+<li>Added new API for the audio rendering protocol, which allows embedders to receive audio samples instead of letting WPE WebKit handle their playback.</li>
+<li>Added support to export frames using <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_stream.txt">EGLStream</a>s, which can be used e.g. with Nvidia GPUs.</li>
+<li>New build configuration system based on <a href="https://mesonbuild.com">Meson</a>. The existing CMake-based system is still maintained, and both produce the same outputs.</li>
+<li>Expose symbols for the version retrieval functions.</li>
 </ul>
-<p>Thanks to all the contributors who made possible this release, they
-are far too many to list!</p>
-<h5 id="checksums">Checksums</h5>
+<h4 id="checksums">Checksums</h4>
 <pre>
-wpewebkit-2.22.2.tar.xz (15.2MB)
-   md5sum: 69c29ce376208b62b0cc43b750e27afb
-   sha1sum: 6ff4a3092ffff5e7600d00040984f988a76c6dc3
-   sha256sum: 56dced284e9fe71a7c56abc881b240251863472aed41c3e32ee3b071c21e56a9
+wpebackend-fdo-1.8.0.tar.xz (41.5 KiB)
+   md5sum: 6df96f80ff34c02d56f32a7a153a62c0
+   sha1sum: 48dd8d5d525e0c89b8b7068fe51c439921804240
+   sha256sum: 9652a99c75fe1c6eab0585b6395f4e104b2427e4d1f42969f1f77df29920d253
 </pre>
 
 
