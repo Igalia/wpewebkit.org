@@ -64,6 +64,15 @@
     {%- endif %}
   {%- endif %}
 
+  {%- comment %}
+  <!-- Twitter cards can deduce content from the OpenGraph metadata above,
+       but still need at least a "twitter:card" entry in order to work, see
+       https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started
+    -->
+  {%- endcomment %}
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="{{ '/vendor/bootstrap/css/bootstrap.min.css' | url }}">
 
