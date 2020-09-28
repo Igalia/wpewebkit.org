@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2020-0004</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/demos/security/WSA-2020-0004.html">
+  <title>WPE WebKit 2.30.1 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/demos/release/wpewebkit-2.30.1.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/demos/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/demos/security/WSA-2020-0004.html">
-  <meta property="og:title" content="WebKitGTK and WPE WebKit Security Advisory WSA-2020-0004">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/demos/release/wpewebkit-2.30.1.html">
+  <meta property="og:title" content="WPE WebKit 2.30.1 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/demos/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/demos/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,8 +21,9 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-04-16T00:00:00.000Z">
-  <meta property="article:tag" content="WSA">
+  <meta property="article:published_time" content="2020-09-21T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -83,9 +84,11 @@
   <div class="container text-center">
     <div class="content-section-heading">
       
-        <h3 class="text-secondary mb-0">Thu Apr 16 2020</h3>
+        <h3 class="text-secondary mb-0">Mon Sep 21 2020</h3>
       
-      <h2>WebKitGTK and WPE WebKit Security Advisory WSA-2020-0004</h2>
+      <h2>WPE WebKit 2.30.1 released</h2>
+	  
+	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpewebkit-2.30.1.tar.xz">Download</a>
 	  
     </div>
   </div>
@@ -96,37 +99,18 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <ul>
-<li>
-<p>Date Reported: <strong>April 16, 2020</strong></p>
-</li>
-<li>
-<p>Advisory ID: <strong>WSA-2020-0004</strong></p>
-</li>
-<li>
-<p>CVE identifiers: <a href="#CVE-2020-11793">CVE-2020-11793</a>.</p>
-</li>
-</ul>
-<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+        <p>This is the first bug fix release in the stable 2.30 series.</p>
+<h3 id="what%E2%80%99s-new-in-wpe-webkit-2.30.1%3F">What’s new in WPE WebKit 2.30.1?</h3>
 <ul>
-<li><a name="CVE-2020-11793" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11793">CVE-2020-11793</a>
-<ul>
-<li>Versions affected: WebKitGTK before 2.28.1 and WPE WebKit before
-2.28.1.</li>
-<li>Credit to Cim Stordal of Cognite.</li>
-<li>Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution or application crash (denial of service).
-Description: A memory corruption issue (use-after-free) was
-addressed with improved memory handling.</li>
+<li>Fix downloads started by an ephemeral web context.</li>
 </ul>
-</li>
-</ul>
-<p>We recommend updating to the latest stable versions of WebKitGTK and WPE
-WebKit. It is the best way to ensure that you are running safe versions
-of WebKit. Please check our websites for information about the latest
-stable releases.</p>
-<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
-<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
+<h4 id="checksums">Checksums</h4>
+<pre>
+wpewebkit-2.30.1.tar.xz (20.1 MiB)
+   md5sum: 251228a6e2917eff90a3eb6e9a7e920d
+   sha1sum: 7f5bdc79d4694ab5644b7fed9bd7311c2cbc988f
+   sha256sum: 78c0135d935b980fc64fbddf1fbaf441920edda4eeb4c16857ee8dc985650c25
+</pre>
 
 
         <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/demos/"><i class="icon-home mr-1"></i> Home</a></p>
