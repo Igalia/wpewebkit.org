@@ -11,8 +11,9 @@ In order to setup, you just just have to check it out, switch to the checked out
 
 In order to test it all you need to do is 
 
-    npx eleventy --serve
-
+```sh
+npm install && npm run serve
+```
 
 This will build the project, start a server, and your terminal will provide you useful links to actually get to it.
 
