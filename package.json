@@ -4,7 +4,7 @@
   "description": "",
   "main": "eleventy",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "eleventy --serve --quiet --pathprefix=/",
     "deploy-dev": "gh-pages -d _site"
   },
   "repository": {
