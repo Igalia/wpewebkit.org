@@ -158,14 +158,9 @@ description: WebKit port optimized for embedded devices
   scroll-snap-align: center;
 }
 
-#demos .btn {
-  position: absolute;
-  top: 1px;
-  height: 100%;
-  display: grid;
-  align-content: center;
-  z-index: 1;
-}
+
+
+#demos .btn { display: none; }
 
 
 
@@ -175,6 +170,16 @@ description: WebKit port optimized for embedded devices
    display: flex;
   }
 
+  #demos .btn {
+    position: absolute;
+    top: 1px;
+    height: 100%;
+    display: grid;
+    align-content: center;
+    z-index: 1;
+  }
+
+
   #demos .btn.next {
    right: 15px;
    visibility: hidden;
@@ -183,6 +188,13 @@ description: WebKit port optimized for embedded devices
   #demos .btn.prev {
      left: 15px;
      visibility: hidden;
+  }
+
+  #demos .btn > span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    align-content: center;
   }
 
   #demos.initialized .btn {
@@ -265,8 +277,8 @@ description: WebKit port optimized for embedded devices
           <lazy-youtube hash="0L8Fv7sswSk" title="WPE CSS Transforms and Performance"></lazy-youtube>
        </div>
     </div>
-    <span class="btn prev">&lt;</span>
-    <span class="btn next">&gt;</span>
+    <span class="btn prev"><span>◀</span></span>
+    <span class="btn next"><span>▶</span></span>
 </section>
 
 
