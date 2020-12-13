@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Try WPE with Flatpak</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/arch-doc/about/flatpak.html">
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2020-0008</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/arch-doc/security/WSA-2020-0008.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/arch-doc/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/arch-doc/about/flatpak.html">
-  <meta property="og:title" content="Try WPE with Flatpak">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/arch-doc/security/WSA-2020-0008.html">
+  <meta property="og:title" content="WebKitGTK and WPE WebKit Security Advisory WSA-2020-0008">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/arch-doc/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/arch-doc/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,8 +21,8 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-12-13T12:41:01.137Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2020-11-23T00:00:00.000Z">
+  <meta property="article:tag" content="WSA">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -84,7 +84,9 @@
   <div class="container text-center">
     <div class="content-section-heading">
       
-      <h2>Try WPE with Flatpak</h2>
+        <h3 class="text-secondary mb-0">Mon Nov 23 2020</h3>
+      
+      <h2>WebKitGTK and WPE WebKit Security Advisory WSA-2020-0008</h2>
 	  
     </div>
   </div>
@@ -95,62 +97,84 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
 
-        <p><a href="https://flatpak.org">Flatpak</a> is generally advertised as the next-generation
-technology for building and distributing applications on Linux. The WPE
-maintainers leverage Flatpak to allow users to try two different WPE flavors.</p>
-<h2 id="stable-wpe-releases">Stable WPE releases</h2>
-<p>Stable releases are packaged and available through Flatpak. Users and WPE
-application developers can easily try the <a href="https://github.com/igalia/cog">Cog WPE
-browser</a> and even build new applications relying
-on the WPE Sdk provided through Flatpak.</p>
-<p>Besides a <a href="https://flatpak.org/setup/">working Flatpak setup</a> you need to
-register the Igalia Flatpak repository in your Linux environment:</p>
-<pre><code class="language-shell">$ flatpak --user remote-add wpe-releases --from \
-  https://software.igalia.com/flatpak-refs/wpe-releases.flatpakrepo
-</code></pre>
-<p>This repository contains binary builds of WPE for the <code>x86_64</code> architecture and
-provides packages for Cog as well.</p>
-<p>The current Cog/WPE stack still imposes the Wayland-only limitation, with
-Mesa-based graphics stacks most likely to work well. In future release, we plan
-to add support for new platforms, graphics stacks and methods of integration.</p>
-<h3 id="cog">Cog</h3>
-<p>To install and run Cog, use the following commands:</p>
-<pre><code>$ flatpak --user install org.wpe.Cog
-$ flatpak run org.wpe.Cog -P fdo &lt;URL&gt;
-</code></pre>
-<h3 id="sdk-for-application-developers">Sdk for application developers</h3>
-<p>Application developers can package their WPE application with Flatpak and basing
-the application upon the WPE Sdk runtime. The following <code>flatpak-builder</code>
-manifest snippet can be used to target the WPE Sdk:</p>
-<pre><code class="language-yaml">runtime: org.wpe.Platform
-runtime-version: stable
-sdk: org.wpe.Sdk
-</code></pre>
-<p>More information is available on the <a href="https://docs.flatpak.org/en/latest/first-build.html#add-a-manifest">Flatpak
-website</a>
-regarding applications packaging.</p>
-<h2 id="nightly-wpe-builds">Nightly WPE builds</h2>
-<p>To complement the <a href="/wpewebkit.org/arch-doc/release/schedule">six months release cycle</a>,
-users interested in testing the latest development version of WPE can download
-it directly from the <a href="https://build.webkit.org/waterfall?category=WPE">build
-bots</a> using a Python script.</p>
-<p>This is a convenient and easy way to test the bleeding edge version of WPE,
-exposing features that will be shipped in the next stable release.</p>
-<p>To download and test nightly WPE builds, download the
-<code>webkit-flatpak-run-nightly</code> script and run it like this:</p>
-<pre><code class="language-shell">$ wget https://raw.githubusercontent.com/WebKit/webkit/master/Tools/Scripts/webkit-flatpak-run-nightly
-$ chmod +x webkit-flatpak-run-nightly
-$ ./webkit-flatpak-run-nightly --wpe MiniBrowser &lt;browser options or URL&gt;
-</code></pre>
-<p>This script locally installs the WebKit Flatpak-based developer SDK in
-<code>~/.cache/wk-nightly</code> and then downloads a zip archive of the build artefacts
-from the buildbot server. The downloaded zip file is unpacked in <code>/tmp</code> and kept
-around in case you want to run this again without re-downloading the build
-archive:</p>
-<pre><code class="language-shell">$ ./webkit-flatpak-run-nightly --wpe -p /tmp/wpewebkit-release-bXXXXX \
-  MiniBrowser &lt;browser options or URL&gt;
-</code></pre>
-<p>Nightly builds are currently provided only for machines using the <code>x86_64</code> architecture.</p>
+        <ul>
+<li>
+<p>Date Reported: <strong>November 23, 2020</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2020-0008</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2020-13584">CVE-2020-13584</a>, <a href="#CVE-2020-9948">CVE-2020-9948</a>,
+<a href="#CVE-2020-9951">CVE-2020-9951</a>, <a href="#CVE-2020-9952">CVE-2020-9952</a>,
+<a href="#CVE-2020-9983">CVE-2020-9983</a>.</p>
+</li>
+</ul>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+<ul>
+<li>
+<p><a name="CVE-2020-13584" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13584">CVE-2020-13584</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.30.3 and WPE WebKit before
+2.30.3.</li>
+<li>Credit to Marcin ‘Icewall’ Noga of Cisco Talos.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An use after free issue was
+addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9948" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9948">CVE-2020-9948</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.30.0 and WPE WebKit before
+2.30.0.</li>
+<li>Credit to Brendan Draper (@6r3nd4n) working with Trend Micro Zero
+Day Initiative.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A type confusion issue was
+addressed with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9951" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9951">CVE-2020-9951</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.30.0 and WPE WebKit before
+2.30.0.</li>
+<li>Credit to Marcin ‘Icewall’ Noga of Cisco Talos.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An use after free issue was
+addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9952" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9952">CVE-2020-9952</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.28.3 and WPE WebKit before
+2.28.3.</li>
+<li>Credit to Ryan Pickren (ryanpickren.com).</li>
+<li>Impact: Processing maliciously crafted web content may lead to a
+cross site scripting attack. Description: An input validation issue
+was addressed with improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9983" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9983">CVE-2020-9983</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.30.3 and WPE WebKit before
+2.30.3.</li>
+<li>Credit to zhunki.</li>
+<li>Impact: Processing maliciously crafted web content may lead to code
+execution. Description: An out-of-bounds write issue was addressed
+with improved bounds checking.</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
 
 
         <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/arch-doc/"><i class="icon-home mr-1"></i> Home</a></p>
