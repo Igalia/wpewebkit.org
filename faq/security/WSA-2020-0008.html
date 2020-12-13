@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2020-0008</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/faq/security/WSA-2020-0008.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/faq/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/faq/security/WSA-2020-0008.html">
+  <meta property="og:title" content="WebKitGTK and WPE WebKit Security Advisory WSA-2020-0008">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/faq/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/faq/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-11-23T00:00:00.000Z">
+  <meta property="article:tag" content="WSA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/faq/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/faq/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/faq/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/faq/css/stylish-portfolio.css">
+
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/wpewebkit.org/faq/"><img width="200" src="/wpewebkit.org/faq/assets/svg/blue_Web_Logo.svg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/faq/">Home</a>
+      </li>
+      <!-- li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/exploring.html">Explore WPE / Embedded</a>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/a-good-choice.html">Why Choose WPE</a>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/faq.html">FAQ</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/builds.html">Build it</a>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/release/schedule">Release Schedule</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/faq/code">Code</a>
+      </li>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <section class="content-section bg-primary text-white small-section">
+  <div class="container text-center">
+    <div class="content-section-heading">
+      
+        <h3 class="text-secondary mb-0">Mon Nov 23 2020</h3>
+      
+      <h2>WebKitGTK and WPE WebKit Security Advisory WSA-2020-0008</h2>
+	  
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light small-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto lead text-left">
+
+        <ul>
+<li>
+<p>Date Reported: <strong>November 23, 2020</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2020-0008</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2020-13584">CVE-2020-13584</a>, <a href="#CVE-2020-9948">CVE-2020-9948</a>,
+<a href="#CVE-2020-9951">CVE-2020-9951</a>, <a href="#CVE-2020-9952">CVE-2020-9952</a>,
+<a href="#CVE-2020-9983">CVE-2020-9983</a>.</p>
+</li>
+</ul>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+<ul>
+<li>
+<p><a name="CVE-2020-13584" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13584">CVE-2020-13584</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.30.3 and WPE WebKit before
+2.30.3.</li>
+<li>Credit to Marcin ‘Icewall’ Noga of Cisco Talos.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An use after free issue was
+addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9948" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9948">CVE-2020-9948</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.30.0 and WPE WebKit before
+2.30.0.</li>
+<li>Credit to Brendan Draper (@6r3nd4n) working with Trend Micro Zero
+Day Initiative.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A type confusion issue was
+addressed with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9951" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9951">CVE-2020-9951</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.30.0 and WPE WebKit before
+2.30.0.</li>
+<li>Credit to Marcin ‘Icewall’ Noga of Cisco Talos.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An use after free issue was
+addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9952" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9952">CVE-2020-9952</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.28.3 and WPE WebKit before
+2.28.3.</li>
+<li>Credit to Ryan Pickren (ryanpickren.com).</li>
+<li>Impact: Processing maliciously crafted web content may lead to a
+cross site scripting attack. Description: An input validation issue
+was addressed with improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2020-9983" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9983">CVE-2020-9983</a></p>
+<ul>
+<li>Versions affected: WebKitGTK before 2.30.3 and WPE WebKit before
+2.30.3.</li>
+<li>Credit to zhunki.</li>
+<li>Impact: Processing maliciously crafted web content may lead to code
+execution. Description: An out-of-bounds write issue was addressed
+with improved bounds checking.</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
+
+
+        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/faq/"><i class="icon-home mr-1"></i> Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/faq/assets/svg/blue_Web_Logo.svg"></a>
+  <div class="container text-center">
+    <p class="text-muted small mb-0">Copyright &copy; 2018-2020 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+  </div>
+</footer>
+
+  <script src="/wpewebkit.org/faq/vendor/jquery/jquery.js"></script>
+  <script src="/wpewebkit.org/faq/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>libwpe 1.0.0 released!</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/faq/release/libwpe-1.0.0.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/faq/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/faq/release/libwpe-1.0.0.html">
+  <meta property="og:title" content="libwpe 1.0.0 released!">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/faq/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/faq/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-08-21T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/faq/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/faq/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/faq/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/faq/css/stylish-portfolio.css">
+
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/wpewebkit.org/faq/"><img width="200" src="/wpewebkit.org/faq/assets/svg/blue_Web_Logo.svg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/faq/">Home</a>
+      </li>
+      <!-- li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/exploring.html">Explore WPE / Embedded</a>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/a-good-choice.html">Why Choose WPE</a>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/faq.html">FAQ</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/about/builds.html">Build it</a>
+          <a class="dropdown-item" href="/wpewebkit.org/faq/release/schedule">Release Schedule</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/faq/code">Code</a>
+      </li>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <section class="content-section bg-primary text-white small-section">
+  <div class="container text-center">
+    <div class="content-section-heading">
+      
+        <h3 class="text-secondary mb-0">Tue Aug 21 2018</h3>
+      
+      <h2>libwpe 1.0.0 released!</h2>
+	  
+	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases/libwpe-1.0.0.tar.xz">Download</a>
+	  
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light small-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto lead text-left">
+
+        <p>This release changes the API version to 0.2, and introduces the following
+changes and features:</p>
+<h3 id="what%E2%80%99s-new-in-the-libwpe-1.0.0-release%3F">What’s new in the libwpe 1.0.0 release?</h3>
+<ul>
+<li>
+<p>The library is now called <code>libwpe</code> to avoid confusion. The <code>WPEBackend</code> name
+used previously seemed to indicate that the library implemented a WPE
+backend. The new <code>libwpe</code> name better reflects that it contains code needed
+by the WPE WebKit port (<a href="https://github.com/WebPlatformForEmbedded/libwpe/issues/27">#27</a>).</p>
+</li>
+<li>
+<p>The <code>libwpe</code> library now uses the <a href="https://autotools.io/libtool/version.html">libtool
+versioning</a> convention
+(<a href="https://github.com/WebPlatformForEmbedded/libwpe/issues/21">#21</a>).</p>
+</li>
+<li>
+<p>Handle conversion of keysyms to Unicode inside <code>libwpe</code>. This allowed to
+remove the <code>unicode</code> member from keyboard event structs, and removing
+<code>wpe_input_key_mapper</code>/<code>wpe_input_key_mapper_interface</code>
+(<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/23">#23</a>).</p>
+</li>
+<li>
+<p>New field in event structs to specify keyboard modifiers
+(<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/22">#22</a>).</p>
+</li>
+<li>
+<p>New API for keymap and composition handling based on <code>libxkbcommon</code>
+(<a href="https://github.com/WebPlatformForEmbedded/libwpe/pull/24">#24</a>).</p>
+</li>
+</ul>
+<h5 id="checksums">Checksums</h5>
+<pre>
+libwpe-1.0.0.tar.xz (45.4KB)
+   md5sum: b5ea32bd644811d5c6433cf1439763f7
+   sha1sum: 6e51591c00a9a6128e19920807e6874794c723fd
+   sha256sum: aff11612123f9ab85a8b9a4bcdfb3a7503eba0a0d2d96f2cdecd30e911091719
+</pre>
+
+
+        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/faq/"><i class="icon-home mr-1"></i> Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/faq/assets/svg/blue_Web_Logo.svg"></a>
+  <div class="container text-center">
+    <p class="text-muted small mb-0">Copyright &copy; 2018-2020 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+  </div>
+</footer>
+
+  <script src="/wpewebkit.org/faq/vendor/jquery/jquery.js"></script>
+  <script src="/wpewebkit.org/faq/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>
