@@ -29,6 +29,14 @@ module.exports = function(eleventyConfig) {
     });
   })
 
+  eleventyConfig.addCollection("recentStableReleaseNotes", (collectionApi) => {
+    return collectionApi.getFilteredByTags("release", "stable").reverse();
+  })
+
+  eleventyConfig.addCollection("recentUnstableReleaseNotes", (collectionApi) => {
+    return collectionApi.getFilteredByTags("release", "unstable").reverse();
+  })
+
 	eleventyConfig.addCollection("latestReleases", (collectionApi) => {
 		const makeFilter = function () {
 			let seenPackages = new DefaultDict(false);
