@@ -4,6 +4,7 @@ title: "WPEBackend-fdo 1.3.1 released!"
 date: 2019-06-13
 tags: [release, unstable]
 version: 1.3.1
+package: wpebackend-fdo
 permalink: /release/wpebackend-fdo-1.3.1.html
 download: https://wpewebkit.org/releases/wpebackend-fdo-1.3.1.tar.xz
 ---
