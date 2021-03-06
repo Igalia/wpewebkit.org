@@ -24,9 +24,9 @@ The [RDK WPE page](https://wiki.rdkcentral.com/display/RDK/WPE) provides more
 information about WPE in the RDK platform.
 
 In 2017 engineers from Igalia submitted a new flavor of WPE, suitable for upstream
-hosting under the webkit.org umbrella. This version of WPE its released every 6
-months from the code hosted on the [upstream repository](https://webkit.org).
-This flavor of WPE is maintained upstream and provides regular security updates.
+hosting under the webkit.org umbrella. This version of WPE its [released every 6
+months](/release/schedule) from the code hosted on the [upstream repository](https://webkit.org).
+This flavor of WPE is maintained upstream and provides regular [security updates](/security).
 
 ## What Web features does WPE support?
 
@@ -44,18 +44,18 @@ check for specific features themselves by testing WPE through the Cog browser.
 As of end of 2020 the facts are:
 
 1. [WPEWebKit upstream has support for WebRTC](https://blogs.gnome.org/tsaunier/2018/07/31/webkitgtk-and-wpe-gains-webrtc-support-back/), by relying on LibWebRTC.
-2. LibWebRTC is bundled as third-party library in WebKit's upstream repository
-3. The LibWebRTC backend doesn't support hardware-accelerated encoders and decoders
+2. LibWebRTC is bundled as third-party library in WebKit's upstream repository.
+3. The LibWebRTC backend doesn't support hardware-accelerated encoders and decoders.
 4. LibWebRTC bundles BoringSSL which is a fork of OpenSSL started while OpenSSL
    was still under the dual OpenSSL and SSLeay licences.
 
 Taking in account these facts, the WPEWebKit maintainers have decided to leave
-WebRTC support disabled in the default build configuration of the tarballs
-because:
+WebRTC support disabled in the default build configuration of the official
+release tarballs because:
 
-- Bundling LibWebRTC in tarballs significantly increases the archive size
-- The dependency on BoringSSL prevents LibWebRTC usage in non GPL applications
-  and redistribution in binary form
+- Bundling LibWebRTC in tarballs significantly increases the archive size.
+- The dependency on BoringSSL prevents LibWebRTC usage in non-GPL applications
+  and redistribution in binary form.
 - The lack of hardware-accelerated support in LibWebRTC would incur a bad
   performance impact on the embedded platforms that WPE targets.
   
@@ -93,7 +93,7 @@ Although it can run on Linux-based desktop environments, Cog is not a full-blown
 Web Browser to be compared with Google Chrome or Safari. Cog's primary
 environment is on embedded platforms, it can run within a Wayland compositor
 such as Weston. Additionally if the platform supports KMS/DRM, Cog can run as a
-full-screen standalone browser, this use-case is very common on Kiosk products
+full-screen standalone browser, this use-case is very common on kiosk products
 for instance.
 
 If you are a developer aiming to enable WPE on a certain embedded platform, Cog
@@ -118,20 +118,18 @@ use-case).
 
 ## Are open dialogs/popups menus supported?
 
-JavaScript popups and dialogs rendering is the duty of the WPE application. The
-reference WPE Browser, Cog, has limited support for these features (as of 2020,
-cog supports option menus).
+The application embedding WPE is responsible for rendering popups and dialogs.
+The reference WPE Browser, Cog, has limited support for these features (as of 2021,
+it supports option menus).
 
 ## What is the wayland-protocols build dependency about in Cog?
 
-Depending on which platform rendering plugin is enabled at build-time, the Cog
-browser might depend on the wayland-protocols project in order to generate some
-source files it needs in order to act as a Wayland client to the Compositor
-(server) implementing those protocols.
+Depending on which platform rendering plugin is enabled at build time, the Cog
+browser might depend on the [wayland-protocols](https://github.com/wayland-project/wayland-protocols) project to generate source files needed in order to act as a Wayland client to the compositor (server) implementing those protocols.
 
 So for instance, if you enable the [FDO platform
 plugin](https://github.com/Igalia/cog/blob/master/CMakeLists.txt#L57) and want
-to use it at runtime to have Cog running in a Wayland compositor, then the
+to use it at runtime to have Cog running as a Wayland application, then the
 plugin will try to consume some Wayland protocols from the server, such as
 `xdg-shell`, `fullscreen-shell-unstable-v1`, `presentation-time` and
 `linux-dmabuf-unstable-v1`. Those protocols can't be used without first
@@ -141,5 +139,5 @@ all part of the Wayland design.
 ## Why does the browser/launcher (e.g. Cog) crash at startup?
 
 If you are building an embedded system image yourself, make sure there is at
-least one font installed that can be used as fallback and that Fontconfig knows
-about it.
+least one font installed that can be used as fallback by Fontconfig. You can
+use the `fc-list` program to print the list of known fonts.
