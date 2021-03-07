@@ -13,6 +13,7 @@ description: WebKit port optimized for embedded devices
 
       // what is the currently active one?
       prev.onclick = () => {
+        stopVideos();
         i = (i === 0) ? vids.length-1 : i-1;
         let vid = vids[i];
         scroller.scrollTo({
@@ -23,6 +24,7 @@ description: WebKit port optimized for embedded devices
       }
 
       next.onclick = () => {
+        stopVideos();
         i = (i === vids.length-1) ? 0 : i+1;
         let vid = vids[i];
         scroller.scrollTo({
@@ -32,30 +34,47 @@ description: WebKit port optimized for embedded devices
         });
       }
 
+      function stopVideos() {
+        vids.forEach((vid) => {
+          if (vid._player) {
+            vid._player.pauseVideo()
+          }
+        })
+      }
+
       demos.classList.add('initialized');
     })
 
     class LazyYTElementLite extends HTMLElement {
+
       connectedCallback() {
         let hash = this.getAttribute('hash')
-        this.attachShadow({mode: "open"})
-        this.shadowRoot.innerHTML = `
-        <div><iframe style="max-width: 100%"
-  width="560"
-  height="315"
-  src="https://www.youtube-nocookie.com/embed/${hash}"
-  srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/${hash}?autoplay=1><img src=https://img.youtube.com/vi/${hash}/hqdefault.jpg alt='Video: ${this.getAttribute('title')}'><span>▶</span></a>"
-  frameborder="0"
-  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-  title="${this.getAttribute('title')}"
-></iframe>
+        let element = this;
+        element.innerHTML = `
+        <div><a href=https://www.youtube-nocookie.com/embed/${hash}?autoplay=1><img src=https://img.youtube.com/vi/${hash}/hqdefault.jpg alt='Video: ${this.getAttribute('title')}'><span>▶</span></a>
         <div>${this.getAttribute('title')}</div>
-      </div>`
+      </div>` /*
+        */
+        element.addEventListener('click', (evt) => {
+          element._player = new YT.Player(element.firstElementChild, {
+              height: '315',
+              width: '560',
+              videoId: hash,
+              playerVars: { 'autoplay': 1 }
+            });
+            evt.preventDefault()
+        })
       }
     }
 
-    customElements.define('lazy-youtube', LazyYTElementLite);
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    function onYouTubeIframeAPIReady() {
+      customElements.define('lazy-youtube', LazyYTElementLite);
+    }
   </script>
 <style>
   .masthead {
@@ -158,11 +177,47 @@ description: WebKit port optimized for embedded devices
   scroll-snap-align: center;
 }
 
+lazy-youtube a {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
 
+lazy-youtube a:hover {
+  text-decoration: none;
+}
+
+lazy-youtube a:hover span {
+  background-color: white;
+}
+
+lazy-youtube a > * {
+  grid-row: 1;
+  grid-column: 1;
+  display: block;
+}
+lazy-youtube a > span {
+  z-index: 2;
+  width: 68px;
+  color: transparent;
+  height: 48px;
+  cursor: pointer;
+  transform: translate3d(-50%, -50%, 0);
+  margin-top: 68px;
+  margin-left: 68px;
+  z-index: 1;
+  background-color: transparent;
+  /* YT's actual play button svg */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 68 48"><path fill="%23f00" fill-opacity="0.8" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"></path><path d="M 45,24 27,14 27,34" fill="%23fff"></path></svg>');
+  filter: grayscale(100%);
+  transition: filter .1s cubic-bezier(0, 0, 0.2, 1);
+  border: none;
+}
 
 #demos .btn { display: none; }
-
-
 
 @media (min-width: 992px) {
   #demos .scroller {
@@ -227,8 +282,8 @@ description: WebKit port optimized for embedded devices
     </div>
     <div class="masthead-img" style="padding: 10%;background-color: white"> 
       <img style="width: 400px; max-width: 100%;" src="{{ '/assets/wpe-architecture-diagram.png' | url }}"
-		srcset="{{ '/assets/wpe-architecture-diagram@2x.png' | url }} 2x"
-		alt="Block diagram of the WPE architeture">
+    srcset="{{ '/assets/wpe-architecture-diagram@2x.png' | url }} 2x"
+    alt="Block diagram of the WPE architeture">
     </div>
 </header>
 
@@ -239,12 +294,12 @@ description: WebKit port optimized for embedded devices
       WPE powers <em>hundreds of millions</em> of embedded devices.
     </h3> 
 
-	<p class="lead mb-0">Embedded "browsers" are more than just a way that
-		people can browse the Web as we commonly think about them:  They power
-		increasingly many of the user interfaces that you encounter every day.
-		From cable boxes to automobile and airplane infotainment systems, to
-		kiosks, digital signage, smart appliances and video game
-		consoles&mdash;embedded browsers are everywhere.</p>
+  <p class="lead mb-0">Embedded "browsers" are more than just a way that
+    people can browse the Web as we commonly think about them:  They power
+    increasingly many of the user interfaces that you encounter every day.
+    From cable boxes to automobile and airplane infotainment systems, to
+    kiosks, digital signage, smart appliances and video game
+    consoles&mdash;embedded browsers are everywhere.</p>
  
 
 </section>
@@ -325,7 +380,7 @@ description: WebKit port optimized for embedded devices
             <ul role="list" class="w-list-unstyled">
               {%- for wsa in collections.recentWSA -%}
                 <li class="listitem"><a href="{{ wsa.url | url }}">{{
-						wsa.data.title | remove_first: "WebKitGTK+ and WPE WebKit Security Advisory " }} - {{ wsa.date | date: "%d %b %Y" }}</a></li>
+            wsa.data.title | remove_first: "WebKitGTK+ and WPE WebKit Security Advisory " }} - {{ wsa.date | date: "%d %b %Y" }}</a></li>
               {%- endfor -%}
               </ul>
               <a href="{{ '/security/' | url }}">More&hellip;</a>
@@ -336,4 +391,3 @@ description: WebKit port optimized for embedded devices
   </div>
 
   
-
