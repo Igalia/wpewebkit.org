@@ -1,15 +1,11 @@
 ---
 title: Releases
 layout: page
-pagination:
-  data: collections.release
-  size: 50
-  alias: posts
 ---
 <section class="content-section bg-primary text-white small-section">
   <div class="container text-center">
     <div class="content-section-heading">
-      <h2>Release Announcements</h2>
+      <h2>Releases</h2>
     </div>
   </div>
 </section>
@@ -18,28 +14,116 @@ pagination:
   <div class="container text-center">
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left">
-        <h2>Stable</h2>
-        {%- for post in collections.recentStableReleaseNotes -%}
-	        <h3 class="release-heading"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>{{ post.date | dateString }} 
-	        | <strong>{{ post.data.package }}</strong>
-	        | {{ post.data.version }}
-	        | {{ post.data.tags }}
-				{%- endfor -%}
-        <h2>Unstable</h2>
-        {%- for post in collections.recentUnstableReleaseNotes -%}
-	        <h3 class="release-heading"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>{{ post.date | dateString }} 
-	        | <strong>{{ post.data.package }}</strong>
-	        | {{ post.data.version }}
-	        | {{ post.data.tags }}
-				{%- endfor -%}
-        <h3>Latest Releases</h3>
-        {%- for release in collections.latestReleases -%}
-          <h4>{{ release[0] }}</h4>
-          {%- for type in release[1] -%}
-        		<p>{{ type[1].version }} {{ type[0] }}</p>
-					{%- endfor -%}
-				{%- endfor -%}
+        {%- for pkg in collections.pkgCatalog -%}
+          <article>
+						<h2>{{ pkg[0] }}</h2>
+						{%- assign package = pkg[1] -%}
+						<header>
+							<p>
+							<strong>Latest stable</strong>
+							<a href="{{ package.latestStable.url }}">{{ package.latestStable.version }}</a>
+							</p>
+							<p>
+							<strong>Latest release</strong>
+							<a href="{{ package.latestVersion.url }}">{{ package.latestVersion.version }}</a>
+							</p>
+						</header>
+						<h3>Recent releases</h3>
+						<ol>
+						{%- for entry in package.recent -%}
+							<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
+						{%- endfor -%}
+						</ol>
+						<details>
+						<summary>Older releases…</summary>
+						<ol>
+						{%- for entry in package.list -%}
+							<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
+						{%- endfor -%}
+						</ol>
+						</details>
+          </article>
+        {%- endfor -%}
 		  </div>
 		</div>
 	</div> 
 </section>
+
+<style type="text/css">
+.row > div {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.row article {
+	margin-bottom: 2em;
+	padding: 0.5em;
+	min-width: 45%;
+}
+.row article h2 {
+	padding: 0.25em;
+	margin: 0;
+	color: white;
+	background: #1593ED;
+}
+.row article header {
+	display: flex;
+	margin-bottom: 0.5em;
+	border-bottom: 1px solid;
+}
+.row article header p {
+	width: 50%;
+	margin: 0;
+	background-color: rgba(0,0,0,0.1);
+}
+.row article header p:first-child {
+	background-color: hsla(120deg,70%,70%,0.5);
+}
+.row article header p:first-child a {
+	font-weight: 700;
+}
+.row article header p > * {
+	display: block;
+	text-align: center;
+}
+.row article h3 {
+	font-size: 1.1em;
+	font-weight: normal;
+	font-style: italic;
+}
+.row article ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.row article ol li {
+	display: grid;
+	grid-template-columns: minmax(3em,max-content) auto;
+	gap: 0.25em;
+	margin: 0.25em 0;
+}
+.row article ol li a[href] {
+	font-weight: normal;
+	border: 1px solid rgba(0,0,0,0.25);
+	background-color: rgba(0,0,0,0.1);
+	padding: 0 0.25em;
+}
+.row article ol li.stable a[href] {
+	background-color: hsla(120deg,70%,70%,0.5);
+}
+.row article ol li time {
+	opacity: 0.67;
+	font-size: 85%;
+	margin-top: 0.25em;
+}
+.row article details {
+	margin-top: 0.33em;
+}
+.row article details summary {
+	font-style: italic;
+	font-weight: 400;
+}
+.row article details summary::marker {
+
+}
+</style>
