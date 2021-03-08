@@ -21,6 +21,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("isodate", (value) => {
     return new Date(value).toISOString();
   });
+  eleventyConfig.addFilter("arrayLength", (value) => {
+    return value.length;
+  });
 
   eleventyConfig.addCollection("recentReleaseNotes", (collectionApi) => {
     let i =0;

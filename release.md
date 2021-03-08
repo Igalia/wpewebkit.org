@@ -35,7 +35,7 @@ layout: page
 						{%- endfor -%}
 						</ol>
 						<details>
-						<summary>Older releases…</summary>
+						<summary>Older releases ({{ package.list | arrayLength }})</summary>
 						<ol>
 						{%- for entry in package.list -%}
 							<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
@@ -50,6 +50,11 @@ layout: page
 </section>
 
 <style type="text/css">
+.row {
+	--stableBg: hsla(100deg,80%,90%,0.25);
+	--unstableBg: rgba(0,0,0,0.05);
+}
+
 .row > div {
 	display: flex;
 	flex-wrap: wrap;
@@ -60,31 +65,35 @@ layout: page
 	padding: 0.5em;
 	min-width: 45%;
 }
+.row :focus {
+	outline: 5px solid gray;
+}
 .row article h2 {
 	padding: 0.25em;
 	margin: 0;
+	border: 1px solid #000;
 	color: white;
 	background: #1593ED;
 }
 .row article header {
 	display: flex;
 	margin-bottom: 0.5em;
-	border-bottom: 1px solid;
+	border: 1px solid;
+	border-top: none;
 }
 .row article header p {
 	width: 50%;
 	margin: 0;
-	background-color: rgba(0,0,0,0.1);
+	background-color: var(--unstableBg);
 }
 .row article header p:first-child {
-	background-color: hsla(120deg,70%,70%,0.5);
-}
-.row article header p:first-child a {
-	font-weight: 700;
+	background-color: var(--stableBg);
+	border-right: 1px solid #000;
 }
 .row article header p > * {
 	display: block;
 	text-align: center;
+	font-weight: 700;
 }
 .row article h3 {
 	font-size: 1.1em;
@@ -98,32 +107,36 @@ layout: page
 }
 .row article ol li {
 	display: grid;
-	grid-template-columns: minmax(3em,max-content) auto;
+	grid-template-columns: minmax(6.5ch,max-content) auto;
 	gap: 0.25em;
 	margin: 0.25em 0;
 }
 .row article ol li a[href] {
+	border: 1px solid rgba(0,0,0,0);
 	font-weight: normal;
-	border: 1px solid rgba(0,0,0,0.25);
-	background-color: rgba(0,0,0,0.1);
 	padding: 0 0.25em;
+	color: #155d74;
+}
+.row article ol li a[href]:hover,
+.row article ol li a[href]:focus {
+	color: #053d44;
 }
 .row article ol li.stable a[href] {
-	background-color: hsla(120deg,70%,70%,0.5);
+	border-color: rgba(0,0,0,0.25);
+	border-radius: 0.25em;
+	background-color: var(--stableBg);
 }
 .row article ol li time {
-	opacity: 0.67;
+	opacity: 0.75;
+	font-weight: 400;
 	font-size: 85%;
 	margin-top: 0.25em;
 }
 .row article details {
-	margin-top: 0.33em;
+	margin-top: 0.5em;
 }
 .row article details summary {
 	font-style: italic;
 	font-weight: 400;
-}
-.row article details summary::marker {
-
 }
 </style>
