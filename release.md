@@ -63,8 +63,14 @@ layout: page
 .row article {
 	margin-bottom: 2em;
 	padding: 0.5em;
-	min-width: 45%;
+	width: 95%;
 }
+@media (min-width: 50em) {
+	.row article {
+		width: 45%;
+	}
+}
+
 .row :focus {
 	outline: 5px solid gray;
 }
@@ -96,6 +102,7 @@ layout: page
 	font-weight: 700;
 }
 .row article h3 {
+	padding-left: 0.42em;
 	font-size: 1.1em;
 	font-weight: normal;
 	font-style: italic;
@@ -103,6 +110,7 @@ layout: page
 .row article ol {
 	margin: 0;
 	padding: 0;
+	margin-left: 0.25em;
 	list-style: none;
 }
 .row article ol li {
@@ -134,6 +142,7 @@ layout: page
 }
 .row article details {
 	margin-top: 0.5em;
+	margin-left: 0.67em;
 }
 .row article details summary {
 	font-style: italic;
