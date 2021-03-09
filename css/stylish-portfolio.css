@@ -304,6 +304,24 @@ h6 {
 
   .footer.footer {
     grid-template-columns: 300px auto;
+    grid-template-rows: repeat(2,auto);
+  }
+  .footer.footer a.navbar-brand {
+  	grid-row: 1 / -1;
+  }
+  .footer.footer nav.social {
+    grid-column: 2;
+    align-self: end;
+  }
+  .footer.footer nav.social ul {
+    margin: 0;
+    padding: 0;
+  }
+  .footer.footer li {
+    display: inline;
+  }
+  .footer.footer li a {
+    display: inline;
   }
 }
 
