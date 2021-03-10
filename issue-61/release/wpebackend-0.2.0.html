@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPEBackend 0.2.0 released!</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/issue-61/release/wpebackend-0.2.0.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/issue-61/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/issue-61/release/wpebackend-0.2.0.html">
+  <meta property="og:title" content="WPEBackend 0.2.0 released!">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/issue-61/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/issue-61/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-07-09T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/issue-61/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/issue-61/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/issue-61/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/issue-61/css/stylish-portfolio.css">
+
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/wpewebkit.org/issue-61/"><img width="200" src="/wpewebkit.org/issue-61/assets/svg/blue_Web_Logo.svg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/issue-61/">Home</a>
+      </li>
+      <!-- li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/wpewebkit.org/issue-61/about/exploring.html">Explore WPE / Embedded</a>
+          <a class="dropdown-item" href="/wpewebkit.org/issue-61/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/issue-61/about/a-good-choice.html">Why Choose WPE</a>
+          <a class="dropdown-item" href="/wpewebkit.org/issue-61/about/architecture.html">WPE Design</a>
+          <a class="dropdown-item" href="/wpewebkit.org/issue-61/about/faq.html">FAQ</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/wpewebkit.org/issue-61/about/builds.html">Build it</a>
+          <a class="dropdown-item" href="/wpewebkit.org/issue-61/release/schedule">Release Schedule</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/issue-61/code">Code</a>
+      </li>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <section class="content-section bg-primary text-white small-section">
+  <div class="container text-center">
+    <div class="content-section-heading">
+      
+        <h3 class="text-secondary mb-0">Mon Jul 09 2018</h3>
+      
+      <h2>WPEBackend 0.2.0 released!</h2>
+	  
+	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases/wpebackend-0.2.0.tar.xz">Download</a>
+	  
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light small-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto lead text-left">
+
+        <p>This is a backwards-compatible, stable release of the WPE backend loader
+library.</p>
+<h3 id="what%E2%80%99s-new-in-the-wpbackend-0.2.0-release%3F">What’s new in the WPBackend 0.2.0 release?</h3>
+<ul>
+<li>
+<p>New API to set and query the backend implementation library being used
+(<a href="https://github.com/WebPlatformForEmbedded/WPEBackend/pull/19">#19</a>).</p>
+</li>
+<li>
+<p>New API to query the version library, both with macros at build time,
+and functions at runtime
+(<a href="https://github.com/WebPlatformForEmbedded/WPEBackend/pull/18">#18</a>).</p>
+</li>
+<li>
+<p>Trying to use a backend implementation library which does not provide
+a <code>load_object</code> callback will produce a meaningful error instead of
+silently failing.</p>
+</li>
+</ul>
+<h5 id="checksums">Checksums</h5>
+<pre>
+wpebackend-0.2.0.tar.xz (8.6KB)
+   md5sum: d04e44a32709dbb763ce1fcfc28bc6d8
+   sha1sum: 4089cac12877ee1e09372953a281a46b8c8951e9
+   sha256sum: ce33ff29b04175cb6fe6e6597a4b5e8ec9da0b8b5ae0745848902ac935d65823
+</pre>
+
+
+        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/issue-61/"><i class="icon-home mr-1"></i> Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/issue-61/assets/svg/blue_Web_Logo.svg"></a>
+  <nav class="social">
+    Connect on 
+    <a href="https://twitter.com/WPEWebKit">Twitter</a> • 
+    <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">mailing list: webkit-wpe</a> • 
+    <a href="https://webchat.freenode.net/?channels=wpe">Freenode: #wpe</a> • 
+    <a href="https://matrix.to/#/#wpe:matrix.org">Matrix: #wpe:matrix.org</a>
+  </nav>
+  <p class="text-muted small mb-0">Copyright &copy; 2018-2021 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+</footer>
+
+  <script src="/wpewebkit.org/issue-61/vendor/jquery/jquery.js"></script>
+  <script src="/wpewebkit.org/issue-61/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>
