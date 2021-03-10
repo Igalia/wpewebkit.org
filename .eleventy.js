@@ -25,6 +25,8 @@ module.exports = function(eleventyConfig) {
     return value.length;
   });
 
+  eleventyConfig.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
+
   eleventyConfig.addCollection("recentReleaseNotes", (collectionApi) => {
     let i =0;
     return collectionApi.getFilteredByTag("release").reverse().filter((item) => {
