@@ -20,12 +20,12 @@ layout: page
 						{%- assign package = pkg[1] -%}
 						<header>
 							<p>
-							<strong>Latest stable</strong>
+							<strong>Stable</strong>
 							<a href="{{ package.latestStable.url }}">{{ package.latestStable.version }}</a>
 							</p>
 							<p>
-							<strong>Latest release</strong>
-							<a href="{{ package.latestVersion.url }}">{{ package.latestVersion.version }}</a>
+							<strong>Development</strong>
+							<a href="{{ package.latestDev.url }}">{{ package.latestDev.version }}</a>
 							</p>
 						</header>
 						<h3>Recent releases</h3>

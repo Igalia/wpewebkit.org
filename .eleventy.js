@@ -39,7 +39,7 @@ module.exports = function(eleventyConfig) {
       if (!thisPkg) return;
       if (!pkgCatalog[thisPkg]) pkgCatalog[thisPkg] = {
         latestStable: new Object,
-        latestVersion: new Object,
+        latestDev: new Object,
         recent: new Array,
         list: new Array,  // rename "list"?
       };
@@ -58,15 +58,13 @@ module.exports = function(eleventyConfig) {
       thisPkg.list.sort((a,b) => {
         return b.date - a.date;
       });
-       thisPkg.latestVersion = {...thisPkg.list[0]};
-       if (thisPkg.latestVersion.type == "stable") {
-         thisPkg.latestStable = {...thisPkg.latestVersion};
-       } else {
-      //https://stackoverflow.com/a/35398031 (finding by object in array)
-         let stableVer = thisPkg.list.findIndex(x => x.type === "stable");
-        thisPkg.latestStable = {...thisPkg.list[stableVer]};
-       }
-       thisPkg.recent = thisPkg.list.splice(0,5);
+
+      let stableVer = thisPkg.list.findIndex(x => x.type === "stable");
+      let developVer = thisPkg.list.findIndex(x => x.type === "unstable");
+      thisPkg.latestStable = {...thisPkg.list[stableVer]};
+      thisPkg.latestDev = {...thisPkg.list[developVer]};
+    //https://stackoverflow.com/a/35398031 (finding by object in array)
+      thisPkg.recent = thisPkg.list.splice(0,5);
     };
     return pkgCatalog;
   });
