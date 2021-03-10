@@ -28,6 +28,19 @@ hosting under the webkit.org umbrella. This version of WPE its [released every 6
 months](/release/schedule) from the code hosted on the [upstream repository](https://webkit.org).
 This flavor of WPE is maintained upstream and provides regular [security updates](/security).
 
+## Is WPE supported on any specific hardware System-on-Chip?
+
+WPE has been [ported to a wide range of hardware
+platforms](https://wpewebkit.org/about/supported-hardware.html). The team aims
+to expand the list even further, don't hesitate to contact us if you can't find
+your favorite SoC in the list.
+
+## Is WPE ported to non-Linux operating systems?
+
+WPE currently only works on Linux-based operating systems. We are currently
+working on supporting Android though. If you require WPE to run on any other OS,
+don't hesitate to contact us.
+
 ## What Web features does WPE support?
 
 The WebKit project provides a [features status page](https://webkit.org/status/)
