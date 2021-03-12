@@ -8,14 +8,7 @@ permalink: /about/architecture.html
 
 ### WPE
 
-The [WebKit](https://webkit.org) project is designed to provide programming
-interfaces to Web Browser developers. Depending on the platform and operating
-system the Browser application should run on, the developers should choose the
-right WebKit port suiting their needs. For instance, macOS application
-developers should rely on the WebKit mac ports. Linux desktop developers should
-build their application upon the [GTK port](https://webkitgtk.org).
-
-WPE is the official WebKit port for embedded platforms. WPE is uniquely designed
+WPE is the official [WebKit](https://webkit.org) port for embedded platforms. WPE is uniquely designed
 for embedded systems in that it doesn't depend on any user-interface toolkit
 such as the traditional Cocoa, GTK, etc toolkits.
 
@@ -27,7 +20,7 @@ such as the traditional Cocoa, GTK, etc toolkits.
 
 #### Web page rendering
 
-WPE is considered as an hybrid port, it defers the final web page delivery for
+WPE is considered a hybrid port because it defers the final web page delivery for
 display to a rendering backend. A traditional port would provide a widget for a
 given toolkit, but WPE opted for a different and more flexible approach.
 
@@ -47,12 +40,12 @@ specific embedded platforms that might have a graphics driver with special API
 requirements.
 
 WPE provides a rendering backend aiming to target the most common platforms and
-leveraging the existing graphics stack available in the
+leverage the existing graphics stack available in the
 [Freedesktop](https://freedesktop.org) umbrella eco-system.
 [WPEBackend-FDO](https://github.com/Igalia/WPEBackend-FDO) is the reference
-implementation of the base rendering backend design. WPEBackend-FDO provides API
+implementation of the base rendering backend design. WPEBackend-FDO provides an API
 for WPE applications that aims to ease the handling of rendering either
-on-screen using EGL or off-screen using SHM.
+on-screen using EGL, or off-screen using SHM.
 
 #### Input events handling
 
@@ -66,6 +59,6 @@ This design again adds flexibility to the overall WPE architecture, enabling
 applications to support new input devices without having to go through a UI
 toolkit first.
 
-Taking the example of the [Cog WPE browser](https://github.com/Igalia/cog), the
+In the example of the [Cog WPE browser](https://github.com/Igalia/cog), the
 application relies on Wayland protocols for user input to communicate events
-coming from the Wayland compositor up to WPE.
+coming from the Wayland compositor to WPE.
