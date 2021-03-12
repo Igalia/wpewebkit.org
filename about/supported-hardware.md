@@ -6,14 +6,11 @@ data: { dateless: "true" }
 permalink: /about/supported-hardware.html 
 --- 
 
-WPE is currently running on a wide range of hardware.
-
-This page list configurations which are known to work sorted by manufacturer:
+WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:
 
 [[toc]]
 
-Note that this list is not exhaustive, reports of unlisted configurations
-are welcome.
+Note that this list is not exhaustive. Reports of unlisted configurations are welcome.
 
 
 ### NXP
@@ -38,7 +35,7 @@ are welcome.
 
 ### Qualcomm
 
-| SoC     | GPU | Driver | WPE Backend | Cog Shells |
+| Device  | GPU | Driver | WPE Backend | Cog Shells |
 |---------|-----|--------|-------------|------------|
 | APQ8017 | Adreno 306 | Proprietary | Custom  | n/a |
 
@@ -52,7 +49,7 @@ are welcome.
 
 ### RockChip
 
-| SoC    | GPU          | Driver | WPE Backend | Cog Shells |
+| Device | GPU          | Driver | WPE Backend | Cog Shells |
 |--------|--------------|--------|-------------|------------|
 | RK3399 | Mali T860MP4 | panfrost (reverse-engineered) | | |
 | RK3399 | Mali T860MP4 | Mali (Proprietary) | | |
@@ -60,15 +57,40 @@ are welcome.
 
 ### PC-style Hardware
 
-| GPU | Driver | WPE Backend | Cog Shells |
-|-----|--------|-------------|------------|
-| AMD | Mesa amdgpu | fdo | fdo |
-| Intel | Mesa i965 | fdo | fdo, drm   |
-| Intel | Mesa iris | fdo | fdo, drm   |
+| Device | GPU | Driver | WPE Backend | Cog Shells |
+|--------|-----|--------|-------------|------------|
+| Any | AMD | Mesa amdgpu | fdo | fdo |
+| Any | Intel | Mesa i965 | fdo | fdo, drm   |
+| Any | Intel | Mesa iris | fdo | fdo, drm   |
 
 
 ### Other
 
 | Device | GPU | Driver | WPE Backend | Cog Shells |
 |--------|-----|--------|-------------|------------|
-| Beaglebone | PowerVR SGX530 | Proprietary | |
+| Beaglebone | PowerVR SGX530 | Proprietary | | |
+
+
+<style type="text/css">
+h3 {
+	background: #1593ED;
+	color: white;
+	margin: 1.5em 0 0;
+	padding: 0.25em 0.5em;
+}
+
+.row table {
+	width: 100%;
+	margin: 0;
+}
+.row table:last-of-type {
+	margin-bottom: 3em;
+}
+.row th, .row td:nth-child(-n + 3) {
+	white-space: nowrap;
+}
+.row th, .row td {
+	line-height: 1.25;
+	padding: 0.5em 0.75em;
+}
+</style>
