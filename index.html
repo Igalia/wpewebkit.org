@@ -177,6 +177,11 @@ description: WebKit port optimized for embedded devices
   scroll-snap-align: center;
 }
 
+lazy-youtube iframe,
+lazy-youtube img {
+  max-width: 100%;
+}
+
 lazy-youtube a {
   display: grid;
   justify-items: center;
@@ -190,9 +195,11 @@ lazy-youtube a:hover {
   text-decoration: none;
 }
 
+/*
 lazy-youtube a:hover span {
   background-color: white;
 }
+*/
 
 lazy-youtube a > * {
   grid-row: 1;
