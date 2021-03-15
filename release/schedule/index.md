@@ -7,14 +7,14 @@ WPE WebKit follows a 6-month development cycle:
 
 - There are two feature releases are done every year, typically in March
   and September.
-- Within feature releases there may be any number of bug fix releases.
+- Within feature releases, there may be any number of bug-fix releases.
 - Development releases are the base for the feature releases that follow
   them. They do not follow a fixed schedule in the release cycle.
 
 
 WPE WebKit and [WebKitGTK](https://webkitgtk.org) share a fair amount of code.
 Therefore, both projects produce their feature releases simultaneously,
-and share the same release branches. For bug fix releases, the release
+and share the same release branches. For bug-fix releases, the release
 teams for both projects try to sync their version numbers as well as they
 can.
 
@@ -39,16 +39,16 @@ For stable releases the following is always true, as long as the `major`
 version number stays the same:
 
 - New `patch` releases are guaranteed to be backward-compatible *both*
-  at the API and ABI level.
+  at the <abbr title="Application Program Interface">API</abbr> and <abbr title="Application Binary Interface">ABI</abbr> level.
 - New `minor` releases may contain new features and backward-compatible
-  changes in the public API. In general the ABI will remain compatible as
+  changes in the public API. In general, the ABI will remain compatible as
   well, because we actively avoid breaking it unless strictly needed.
 
 
 ## Compatible Components
 
 The following table summarizes which *stable* releases of libwpe, WPE WebKit,
-WPEBackend-fdo, and Cog are compatible and tested with each other.
+WPEBackend-fdo, and Cog are compatible and tested with each other (updated March 2021).  Distributors and packagers are strongly advised to use the versions listed.
 
 | **WPE WebKit** | **libwpe**   | **WPEBackend-fdo** | **Cog**      |
 |:--------------:|:------------:|:------------------:|:------------:|
@@ -59,7 +59,6 @@ WPEBackend-fdo, and Cog are compatible and tested with each other.
 | 2.22.x         | 1.0.x        | 1.0.x              | 0.2.x        |
 | 2.20.x         | \< 1.0.0     | \< 1.0.0           | ≤ 0.1.x      |
 
-Distributors and packagers are strongly advised to use the versions above.
 
 **Notes:**
 

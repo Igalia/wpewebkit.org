@@ -28,7 +28,7 @@ For questions and hanging out you can find us here:
 
 ## Source
 
-There is, of course, the [WPE WebKit source](https://webkit.org/getting-the-code/) itself, but there are several supporting repositories as well:
+In addition to the [WPE WebKit source](https://webkit.org/getting-the-code/) itself, there are several supporting repositories as well:
 
 * [Cog](https://github.com/Igalia/cog): A small single “window” launcher for the WebKit WPE port, with no user interface, suitable to be used as a Web application container.
 * [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A FreeDesktop&period;org backend for WPE.

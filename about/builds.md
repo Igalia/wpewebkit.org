@@ -6,6 +6,6 @@ data: { dateless: "true" }
 permalink: /about/builds.html
 ---
 
-While there are several [simple ways for developers to experiment and explore with WPE]({{'/about/exploring.html' | url}}) generally, for real, shipping projects or good performance testing embedded systems are typically custom builds.  To make this easier, there is also [meta-webkit](https://github.com/Igalia/meta-webkit) which provides build recipes  WebKit based runtimes and browsers for use with OpenEmbedded and/or Yocto.
+While there are several [simple ways for developers to experiment with and explore WPE]({{'/about/exploring.html' | url}}), none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds.  To make this easier, there is also [meta-webkit](https://github.com/Igalia/meta-webkit), which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
 
 We also have some [performance tips](https://github.com/Igalia/meta-webkit/wiki/PerformanceTips) that might be helpful.
