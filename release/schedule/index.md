@@ -52,6 +52,7 @@ WPEBackend-fdo, and Cog are compatible and tested with each other (updated March
 
 | **WPE WebKit** | **libwpe**   | **WPEBackend-fdo** | **Cog**      |
 |:--------------:|:------------:|:------------------:|:------------:|
+| 2.32.x         | 1.10.x, 1.8.x, 1.6.x | 1.10.x, 1.8.x | 0.8.x, 0.10.x |
 | 2.30.x         | 1.8.x, 1.6.x | 1.8.x              | 0.8.x, 0.6.x |
 | 2.28.x         | 1.6.x        | 1.6.x              | 0.8.x, 0.6.x |
 | 2.26.x         | 1.4.x        | 1.4.x              | 0.4.x        |
