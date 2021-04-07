@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>WPE WebKit 2.26.3 released</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/release/wpewebkit-2.26.3.html">
+  <title>WPEBackend-fdo 1.9.90 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/release/wpebackend-fdo-1.9.90.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/release/wpewebkit-2.26.3.html">
-  <meta property="og:title" content="WPE WebKit 2.26.3 released">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/release/wpebackend-fdo-1.9.90.html">
+  <meta property="og:title" content="WPEBackend-fdo 1.9.90 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,9 +21,9 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-01-23T00:00:00.000Z">
+  <meta property="article:published_time" content="2021-04-01T00:00:00.000Z">
   <meta property="article:tag" content="release">
-  <meta property="article:tag" content="stable">
+  <meta property="article:tag" content="unstable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -88,19 +88,19 @@
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/release/wpewebkit-2.26.3.html">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/microdata/release/wpebackend-fdo-1.9.90.html">
 
 <section class="content-section bg-primary text-white small-section">
   <div class="container text-center">
     <div class="content-section-heading">
       
         <h3 class="text-secondary mb-0"
-            itemprop="dateCreated">Thu Jan 23 2020</h3>
-        <meta itemprop="datePublished" content="Thu Jan 23 2020">
+            itemprop="dateCreated">Thu Apr 01 2021</h3>
+        <meta itemprop="datePublished" content="Thu Apr 01 2021">
       
-      <h2 itemprop="headline">WPE WebKit 2.26.3 released</h2>
+      <h2 itemprop="headline">WPEBackend-fdo 1.9.90 released</h2>
 	  
-	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpewebkit-2.26.3.tar.xz">Download</a>
+	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpebackend-fdo-1.9.90.tar.xz">Download</a>
 	  
     </div>
   </div>
@@ -111,23 +111,25 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
 
-        <p>This is a bug fix release in the stable 2.26 series.</p>
-<h3 id="what%E2%80%99s-new-in-wpe-webkit-2.26.3%3F">What’s new in WPE WebKit 2.26.3?</h3>
+        <p>This is a development release leading towards the 1.10 series.</p>
+<h3 id="what%E2%80%99s-new-in-wpebackend-fdo-1.9.90%3F">What’s new in WPEBackend-fdo 1.9.90?</h3>
 <ul>
-<li>Fix issues while trying to play a video on NextCloud.</li>
-<li>Make sure the GL video sink uses a valid WebKit shared GL context.</li>
-<li>Fix vertical alignment of text containing Arabic diacritics.</li>
-<li>Fix build with ICU 65.1.</li>
-<li>Fix page loading errors with websites using HSTS.</li>
-<li>Fix web process crash when displaying a KaTeX formula.</li>
-<li>Fix several crashes and rendering issues.</li>
+<li>Added API to obtain the <code>wl_resource</code> for SHM exported buffers.</li>
+<li>Fixed headers to include <code>&lt;wpe/wpe.h&gt;</code> from the top-level API headers, as
+their consumers expect the public libwpe API to be defined as well.</li>
+<li>Fixed UI process getting stuck when navigating across different security
+origins. This also fixed a small memory leak.</li>
+<li>Fixed invalid usage of Wayland client connections in the nested compositor
+which caused sporadic crashes in certain conditions.</li>
+<li>Fixed a file descriptor leak on view backend initialization.</li>
+<li>Fixed a small memory leak when releasing exportable view backends.</li>
 </ul>
 <h4 id="checksums">Checksums</h4>
 <pre>
-wpewebkit-2.26.3.tar.xz (17.4 MiB)
-   md5sum: 735beb5c1f825d5feda2e355aca6bec0
-   sha1sum: aeda665b3a137ac748ff1d08ce9e4c751f7caf97
-   sha256sum: 2da9fe9c3a8bdfecc4281d848a4eacdd7be8ac5e0fc397020094d68cf32c10b3
+wpebackend-fdo-1.9.90.tar.xz (37.1 KiB)
+   md5sum: da5f85b41a4a40d38f6ac9f1f0d062bc
+   sha1sum: 62103b07c6f2eb3dab3ff2e4259538c870c9e7db
+   sha256sum: 9d8330f54debb6273b432040dfde2b03e6eed8411dceda0093193a06276aba44
 </pre>
 
 
