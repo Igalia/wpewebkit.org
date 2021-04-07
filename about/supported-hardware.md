@@ -21,7 +21,7 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 | i&period;MX 53 | Imageon Z460   |             |     | |
 | i&period;MX 6  | Vivante GC2000 | etnaviv (reverse-engineered) | fdo | fdo, drm |
 | i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | fdo | fdo |
-| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | rdk, `USE_BACKEND_VIV_IMX6_EGL` | n/a |
+| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | rdk, `VIV_IMX6_EGL` | n/a |
 | i&period;MX 8M | Vivante GC7000 | etnaviv (reverse-engineered) | fdo | fdo, drm |
 | i&period;MX 8M | Vivante GC7000 | Vivante (Proprietary) | fdo | fdo |
 
@@ -29,8 +29,8 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 
 | Device         | GPU | Driver | WPE Backend | Cog Shells |
 |----------------|-----|--------|-------------|------------|
-| Arris VIP5202W | VideoCore IV | Proprietary | rdk, `USE_BACKEND_BCM_NEXUS` or `USE_BACKEND_BCM_NEXUS_WAYLAND` | n/a |
-| Raspberry Pi 3 | VideoCore IV | Proprietary | rdk, `USE_BACKEND_BCM_RPI` | n/a |
+| Arris VIP5202W | VideoCore IV | Proprietary | rdk, `BCM_NEXUS` or `USE_BACKEND_BCM_NEXUS_WAYLAND` | n/a |
+| Raspberry Pi 3 | VideoCore IV | Proprietary | rdk, `BCM_RPI` | n/a |
 | Raspberry Pi 3 | VideoCore IV | Mesa vc4    | fdo | fdo, drm |
 | Raspberry Pi 4 | VideoCore V  | Mesa v3d    | fdo | fdo |
 
