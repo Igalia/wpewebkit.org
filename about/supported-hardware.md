@@ -21,6 +21,7 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 | i&period;MX 53 | Imageon Z460   |             |     | |
 | i&period;MX 6  | Vivante GC2000 | etnaviv (reverse-engineered) | fdo | fdo, drm |
 | i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | fdo | fdo |
+| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | rdk, `USE_BACKEND_VIV_IMX6_EGL` | n/a |
 | i&period;MX 8M | Vivante GC7000 | etnaviv (reverse-engineered) | fdo | fdo, drm |
 | i&period;MX 8M | Vivante GC7000 | Vivante (Proprietary) | fdo | fdo |
 
