@@ -89,10 +89,46 @@ If you are a developer aiming to enable WPE on a certain embedded platform, Cog 
 
 As we say in Galicia, "it depends".
 
-[WPE's architecture](/about/architecture.html) was designed in order to decouple rendering out of the Web engine and delegate this task to rendering backends and to the application running the Web engine. So if your application requires a Wayland compositor, such as Weston, then you need to make sure you use a Wayland-EGL compatible rendering backend, such as WPEBackend-FDO for instance. Using this backend's API in your application will allow for smooth rendering in any Wayland compositor.
+[WPE's architecture](/about/architecture.html) was designed in order to
+decouple rendering out of the Web engine and delegate this task to rendering
+backends and to the application running the Web engine—it does not strictly
+*require* usage of Wayland.
 
-[Cog](https://github.com/igalia/Cog) is one such WPE-based application relying on WPEBackend-FDO. If you don't need a Wayland compositor and just want to render a web-page full-screen, as in most Kiosk and STB use-cases, then you can render to KMS/DRM. Cog also supports this use-case.
+Typically when talking about Wayland we tend to conflate many things:
 
+* Wayland *itself* is an <abbr title="Inter-Process Communication">IPC</abbr>
+  **protocol** which happens to be designed to move buffers containing pixel
+  data and input events from one process to another.
+
+* The Wayland *package* typically contains the **reference implementation**
+  of the protocol, `libwayland`. Other implementations are theoretically
+  possible.
+
+* By extension we may refer to **a compositor**, which is a program that
+  implements the server–side of the Wayland
+  protocol—possibly with the aid of `libwayland`.
+
+If you use [WPEBackend-fdo][fdo-backend], it internally uses the Wayland
+*protocol* (via `libwayland`) to pass rendered frames from the `WPEWebProcess`
+program to the application that embeds the web view—that we call “the UI
+process”. In this scenario, a *compositor* may be required or not depending on
+how the UI process displays the web content.
+
+For example, [Cog][cog-github] can act as a Wayland *client* using its <abbr
+title="FreeDesktop.Org">FDO</abbr> platform plug-in, and in that case a
+Wayland *compositor* is required. On the other hand, using Cog's <abbr
+title="Direct Rendering Manager">DRM</abbr> platform plug-in it will display
+rendered web content directly on screen (without a running Wayland
+*compositor*). Note that in both cases WPEBackend-fdo is used as backend,
+which means that the Wayland *protocol* is still in use.
+
+Some WPE backends Wayland may not require Wayland at all. Such is the case
+of [WPEBackend-rdk][rdk-backend] in some configurations
+(`USE_BACKEND_BCM_RPI`, `USE_BACKEND_BCM_NEXUS`, etc.)
+
+[cog-github]: https://github.com/Igalia/cog
+[fdo-backend]: https://github.com/Igalia/WPEBackend-fdo
+[rdk-backend]: https://github.com/WebPlatformForEmbedded/WPEBackend-rdk
 
 ## Are open dialogs/popups menus supported?
 
