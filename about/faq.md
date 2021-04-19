@@ -145,3 +145,15 @@ So for instance, if you enable the [FDO platform plugin](https://github.com/Igal
 ## Why does the browser/launcher (e.g. Cog) crash at startup?
 
 If you are building an embedded system image yourself, make sure there is at least one font installed that can be used as fallback by [Fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/). You can use the `fc-list` program to print the list of known fonts.
+
+
+## Why the browser/launcher (e.g. Cog) does not load local files?
+
+If you are building an embedded system image yourself, make sure to install
+the [shared MIME database][shared-mime-db] is installed—in most distributions
+this is part of a package named `shared-mime-info`. WebKit uses it to
+determine which kind of data within file before loading it. Note that this is
+not needed if you plan to loading remote resources because HTTP servers
+provide the needed information in the `Content-Type` HTTP header.
+
+[shared-mime-db]: https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/
