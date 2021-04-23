@@ -147,6 +147,15 @@ So for instance, if you enable the [FDO platform plugin](https://github.com/Igal
 If you are building an embedded system image yourself, make sure there is at least one font installed that can be used as fallback by [Fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/). You can use the `fc-list` program to print the list of known fonts.
 
 
+## Why does the browser/launcher (e.g. Cog) crash when trying to play audio?
+
+If you are building an embedded system image yourself, make sure that the
+GStreamer elements `autoaudiosink` and `alsasink` are installed. Even if your
+system uses some other audio output by default (PulseAudio, PipeWire, etc.)
+ALSA is always tried as the last fallback if all the other available sinks
+fail.
+
+
 ## Why the browser/launcher (e.g. Cog) does not load local files?
 
 If you are building an embedded system image yourself, make sure to install
