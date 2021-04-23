@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2021-04-19T18:08:50.344Z">
+  <meta property="article:published_time" content="2021-04-23T18:53:47.657Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -104,7 +104,7 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
 
-        <nav class="table-of-contents"><ol><li><a href="#what-is-the-difference-between-webplatformforembedded%E2%80%99s-wpe-and-wpewebkit%3F">What is the difference between WebPlatformForEmbedded’s WPE and WPEWebKit?</a></li><li><a href="#is-wpe-supported-on-any-specific-hardware-system-on-chip%3F">Is WPE supported on any specific hardware System-on-Chip?</a></li><li><a href="#is-wpe-ported-to-non-linux-operating-systems%3F">Is WPE ported to non-Linux operating systems?</a></li><li><a href="#what-web-features-does-wpe-support%3F">What Web features does WPE support?</a></li><li><a href="#what%E2%80%99s-the-status-regarding-webrtc%3F">What’s the status regarding WebRTC?</a></li><li><a href="#what%E2%80%99s-up-with-eme%3F-how-can-i-support-this-feature-in-my-wpe-based-product%3F">What’s up with EME? How can I support this feature in my WPE-based product?</a></li><li><a href="#what-is-(and-isn%E2%80%99t)-cog%3F">What is (and isn’t) Cog?</a></li><li><a href="#is-wayland-required-to-run-wpe%3F">Is Wayland required to run WPE?</a></li><li><a href="#are-open-dialogs%2Fpopups-menus-supported%3F">Are open dialogs/popups menus supported?</a></li><li><a href="#what-is-the-wayland-protocols-build-dependency-about-in-cog%3F">What is the wayland-protocols build dependency about in Cog?</a></li><li><a href="#why-does-the-browser%2Flauncher-(e.g.-cog)-crash-at-startup%3F">Why does the browser/launcher (e.g. Cog) crash at startup?</a></li></ol></nav><h2 id="what-is-the-difference-between-webplatformforembedded%E2%80%99s-wpe-and-wpewebkit%3F">What is the difference between WebPlatformForEmbedded’s WPE and WPEWebKit?</h2>
+        <nav class="table-of-contents"><ol><li><a href="#what-is-the-difference-between-webplatformforembedded%E2%80%99s-wpe-and-wpewebkit%3F">What is the difference between WebPlatformForEmbedded’s WPE and WPEWebKit?</a></li><li><a href="#is-wpe-supported-on-any-specific-hardware-system-on-chip%3F">Is WPE supported on any specific hardware System-on-Chip?</a></li><li><a href="#is-wpe-ported-to-non-linux-operating-systems%3F">Is WPE ported to non-Linux operating systems?</a></li><li><a href="#what-web-features-does-wpe-support%3F">What Web features does WPE support?</a></li><li><a href="#what%E2%80%99s-the-status-regarding-webrtc%3F">What’s the status regarding WebRTC?</a></li><li><a href="#what%E2%80%99s-up-with-eme%3F-how-can-i-support-this-feature-in-my-wpe-based-product%3F">What’s up with EME? How can I support this feature in my WPE-based product?</a></li><li><a href="#what-is-(and-isn%E2%80%99t)-cog%3F">What is (and isn’t) Cog?</a></li><li><a href="#is-wayland-required-to-run-wpe%3F">Is Wayland required to run WPE?</a></li><li><a href="#are-open-dialogs%2Fpopups-menus-supported%3F">Are open dialogs/popups menus supported?</a></li><li><a href="#what-is-the-wayland-protocols-build-dependency-about-in-cog%3F">What is the wayland-protocols build dependency about in Cog?</a></li><li><a href="#why-does-the-browser%2Flauncher-(e.g.-cog)-crash-at-startup%3F">Why does the browser/launcher (e.g. Cog) crash at startup?</a></li><li><a href="#why-the-browser%2Flauncher-(e.g.-cog)-does-not-load-local-files%3F">Why the browser/launcher (e.g. Cog) does not load local files?</a></li></ol></nav><h2 id="what-is-the-difference-between-webplatformforembedded%E2%80%99s-wpe-and-wpewebkit%3F">What is the difference between WebPlatformForEmbedded’s WPE and WPEWebKit?</h2>
 <p>Historically, the <a href="https://github.com/WebPlatformForEmbedded/WPEWebKit">WebPlatformForEmbedded flavor of WPE</a> came first. It included several adaptations for the Reference Design Kit (RDK) platform, as well as different fixes for its supported devices. Quoting the <a href="https://rdkcentral.com/">RDK</a> website:</p>
 <blockquote>
 <p>RDK is a fully modular, portable, and customizable open source software
@@ -184,8 +184,10 @@ protocol—possibly with the aid of <code>libwayland</code>.</p>
 <p>If you use <a href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a>, it internally uses the Wayland
 <em>protocol</em> (via <code>libwayland</code>) to pass rendered frames from the <code>WPEWebProcess</code>
 program to the application that embeds the web view—that we call “the UI
-process”. In this scenario, a <em>compositor</em> may be required or not depending on
-how the UI process displays the web content.</p>
+process”. As this is an implementation detail of the backend, the fact that
+Wayland is used as IPC protocol does not need to be known by the application.
+A <em>compositor</em> may be required or not depending on how the UI process displays
+the web content.</p>
 <p>For example, <a href="https://github.com/Igalia/cog">Cog</a> can act as a Wayland <em>client</em> using its <abbr
 title="FreeDesktop.Org">FDO</abbr> platform plug-in, and in that case a
 Wayland <em>compositor</em> is required. On the other hand, using Cog’s <abbr
@@ -193,7 +195,7 @@ title="Direct Rendering Manager">DRM</abbr> platform plug-in it will display
 rendered web content directly on screen (without a running Wayland
 <em>compositor</em>). Note that in both cases WPEBackend-fdo is used as backend,
 which means that the Wayland <em>protocol</em> is still in use.</p>
-<p>Some WPE backends Wayland may not require Wayland at all. Such is the case
+<p>Some WPE backends may not require Wayland at all. Such is the case
 of <a href="https://github.com/WebPlatformForEmbedded/WPEBackend-rdk">WPEBackend-rdk</a> in some configurations
 (<code>USE_BACKEND_BCM_RPI</code>, <code>USE_BACKEND_BCM_NEXUS</code>, etc.)</p>
 <h2 id="are-open-dialogs%2Fpopups-menus-supported%3F">Are open dialogs/popups menus supported?</h2>
@@ -203,6 +205,13 @@ of <a href="https://github.com/WebPlatformForEmbedded/WPEBackend-rdk">WPEBackend
 <p>So for instance, if you enable the <a href="https://github.com/Igalia/cog/blob/master/CMakeLists.txt#L57">FDO platform plugin</a> and want to use it at runtime to have Cog running as a Wayland application, then the plugin will try to consume some Wayland protocols from the server, such as <code>xdg-shell</code>, <code>fullscreen-shell-unstable-v1</code>, <code>presentation-time</code> and <code>linux-dmabuf-unstable-v1</code>. Those protocols can’t be used without first generating source files derived from each protocol XML spec definition. This is all part of the Wayland design.</p>
 <h2 id="why-does-the-browser%2Flauncher-(e.g.-cog)-crash-at-startup%3F">Why does the browser/launcher (e.g. Cog) crash at startup?</h2>
 <p>If you are building an embedded system image yourself, make sure there is at least one font installed that can be used as fallback by <a href="https://www.freedesktop.org/wiki/Software/fontconfig/">Fontconfig</a>. You can use the <code>fc-list</code> program to print the list of known fonts.</p>
+<h2 id="why-the-browser%2Flauncher-(e.g.-cog)-does-not-load-local-files%3F">Why the browser/launcher (e.g. Cog) does not load local files?</h2>
+<p>If you are building an embedded system image yourself, make sure to install
+the <a href="https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/">shared MIME database</a> is installed—in most distributions
+this is part of a package named <code>shared-mime-info</code>. WebKit uses it to
+determine which kind of data within file before loading it. Note that this is
+not needed if you plan to loading remote resources because HTTP servers
+provide the needed information in the <code>Content-Type</code> HTTP header.</p>
 
 
         <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/aperezdc/faq-improve/"><i class="icon-home mr-1"></i> Home</a></p>
