@@ -111,8 +111,10 @@ Typically when talking about Wayland we tend to conflate many things:
 If you use [WPEBackend-fdo][fdo-backend], it internally uses the Wayland
 *protocol* (via `libwayland`) to pass rendered frames from the `WPEWebProcess`
 program to the application that embeds the web view—that we call “the UI
-process”. In this scenario, a *compositor* may be required or not depending on
-how the UI process displays the web content.
+process”. As this is an implementation detail of the backend, the fact that
+Wayland is used as IPC protocol does not need to be known by the application.
+A *compositor* may be required or not depending on how the UI process displays
+the web content.
 
 For example, [Cog][cog-github] can act as a Wayland *client* using its <abbr
 title="FreeDesktop.Org">FDO</abbr> platform plug-in, and in that case a
@@ -122,7 +124,7 @@ rendered web content directly on screen (without a running Wayland
 *compositor*). Note that in both cases WPEBackend-fdo is used as backend,
 which means that the Wayland *protocol* is still in use.
 
-Some WPE backends Wayland may not require Wayland at all. Such is the case
+Some WPE backends may not require Wayland at all. Such is the case
 of [WPEBackend-rdk][rdk-backend] in some configurations
 (`USE_BACKEND_BCM_RPI`, `USE_BACKEND_BCM_NEXUS`, etc.)
 
