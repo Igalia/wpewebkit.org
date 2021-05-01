@@ -35,6 +35,7 @@ In other words, WPE is designed to be _built_ and optimized for your embedded de
 ### Easy ways to explore WPE
 All of this said, we believe that enabling developers to explore the space is important for a whole lot of reasons.  Therefore, we've tried to make it easy for developers who aren't comfortable building entire embedded systems to get their hands on _something_ where they can begin exploring and learning useful things.
 
+* <span class="btn btn-primary text-light">Install it from your distribution</span>: WPE WebKit is available in some Linux distributions including [Debian](https://packages.debian.org/search?searchon=sourcenames&keywords=wpewebkit), [Ubuntu](https://packages.ubuntu.com/search?keywords=wpewebkit&searchon=sourcenames&suite=all&section=all) and [Arch Linux](https://archlinux.org/packages/extra/x86_64/wpewebkit/). These packages are not just a quick and simple way to test WPE but they also come with all the development files and documentation necessary to build and test software that uses this web engine.
 
 * <span class="btn btn-primary text-light">[Install with Flatpak]({{'/about/flatpak.html' | url}})</span>: If you have support for Flatpak on your current hardware and operating system, and your graphics drivers are supported, there are various options to try WPE through Flatpak.  This can be a very easy way to let you explore WPE, check the features and specifications supported by WPE, or just want to experiment and learn more about what some of the differences with a full browser are.
 
