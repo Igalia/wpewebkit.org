@@ -53,7 +53,7 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 
 | Device | GPU          | Driver | WPE Backend | Cog Shells |
 |--------|--------------|--------|-------------|------------|
-| RK3399 | Mali T860MP4 | panfrost (reverse-engineered) | | |
+| RK3399 | Mali T860MP4 | panfrost (reverse-engineered) | fdo | fdo |
 | RK3399 | Mali T860MP4 | Mali (Proprietary) | | |
 
 
