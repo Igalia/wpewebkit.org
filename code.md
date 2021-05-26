@@ -20,8 +20,8 @@ For questions and hanging out you can find us here:
 
 * [#wpe:matrix.org](https://matrix.to/#/#wpe:matrix.org) room on
   [Matrix](https://matrix.org).
-* [#wpe](https://webchat.freenode.net/?channels=wpe) channel on
-  [Freenode](https://freenode.net).
+* [#wpe](https://webchat.oftc.net/?channels=wpe) channel on
+  [OFTC](https://www.oftc.net)
 * [webkit-wpe](https://lists.webkit.org/mailman/listinfo/webkit-wpe) mailing
   list.
 * [@WPEWebKit](https://twitter.com/WPEWebKit) on Twitter.
