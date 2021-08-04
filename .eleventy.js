@@ -10,10 +10,13 @@ class DefaultDict {
   }
 }
 
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css')
   eleventyConfig.addPassthroughCopy('vendor')
   eleventyConfig.addPassthroughCopy('assets')
+  eleventyConfig.addPlugin(pluginRss);
   
   eleventyConfig.addFilter("dateString", (value) => {
     return new Date(value).toDateString();
@@ -26,6 +29,13 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
+
+  eleventyConfig.addCollection("recentPosts", (collectionApi) => {
+    let i =0;
+    return collectionApi.getFilteredByGlob("_posts/*.md").reverse().filter((item) => {
+      return i++ < 10;
+    });
+  })
 
   eleventyConfig.addCollection("recentReleaseNotes", (collectionApi) => {
     let i =0;

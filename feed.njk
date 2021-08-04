@@ -1,0 +1,31 @@
+---json
+{
+  "eleventyExcludeFromCollections": true,
+  "permalink": "/feed.xml",
+  "metadata": {
+    "title": "WPEwebkit.org",
+    "description": "Release announcements and security advisories from WPEwebkit.org.",
+    "url": "https://wpewebkit.org/",
+    "feedUrl": "https://wpewebkit.org/feed.xml"
+  }
+}
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ metadata.title }}</title>
+  <description>{{ metadata.description }}</description>
+  <link href="{{ metadata.feedUrl }}" rel="self"/>
+  <link href="{{ metadata.url }}"/>
+  <updated>{{ collections.recentPosts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ metadata.url }}</id>
+  {%- for post in collections.recentPosts %}
+  {% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ absolutePostUrl }}"/>
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <id>{{ absolutePostUrl }}</id>
+    <content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>
