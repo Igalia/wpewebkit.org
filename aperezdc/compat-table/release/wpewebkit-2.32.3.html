@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Supported Hardware</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/about/supported-hardware.html">
+  <title>WPE WebKit 2.32.3 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/release/wpewebkit-2.32.3.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/about/supported-hardware.html">
-  <meta property="og:title" content="Supported Hardware">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/release/wpewebkit-2.32.3.html">
+  <meta property="og:title" content="WPE WebKit 2.32.3 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,8 +21,9 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2021-10-06T21:24:15.866Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2021-07-23T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -87,13 +88,19 @@
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/about/supported-hardware.html">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/compat-table/release/wpewebkit-2.32.3.html">
 
 <section class="content-section bg-primary text-white small-section">
   <div class="container text-center">
     <div class="content-section-heading">
       
-      <h2 itemprop="headline">Supported Hardware</h2>
+        <h3 class="text-secondary mb-0"
+            itemprop="dateCreated">Fri Jul 23 2021</h3>
+        <meta itemprop="datePublished" content="Fri Jul 23 2021">
+      
+      <h2 itemprop="headline">WPE WebKit 2.32.3 released</h2>
+	  
+	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpewebkit-2.32.3.tar.xz">Download</a>
 	  
     </div>
   </div>
@@ -104,262 +111,22 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
 
-        <p>WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:</p>
-<nav class="table-of-contents"><ol><li><a href="#nxp">NXP</a></li><li><a href="#broadcom">Broadcom</a></li><li><a href="#qualcomm">Qualcomm</a></li><li><a href="#nvidia">Nvidia</a></li><li><a href="#rockchip">RockChip</a></li><li><a href="#pc-style-hardware">PC-style Hardware</a></li><li><a href="#other">Other</a></li></ol></nav><p>Note that this list is not exhaustive. Reports of unlisted configurations are welcome.</p>
-<h3 id="nxp">NXP</h3>
-<table>
-<thead>
-<tr>
-<th>Series</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>i.MX 51</td>
-<td>Imageon Z460</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>i.MX 53</td>
-<td>Imageon Z460</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>etnaviv (reverse-engineered)</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>Vivante (Proprietary)</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>Vivante (Proprietary)</td>
-<td>rdk, <code>VIV_IMX6_EGL</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>i.MX 8M</td>
-<td>Vivante GC7000</td>
-<td>etnaviv (reverse-engineered)</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>i.MX 8M</td>
-<td>Vivante GC7000</td>
-<td>Vivante (Proprietary)</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-</tbody>
-</table>
-<h3 id="broadcom">Broadcom</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Arris VIP5202W</td>
-<td>VideoCore IV</td>
-<td>Proprietary</td>
-<td>rdk, <code>BCM_NEXUS</code> or <code>USE_BACKEND_BCM_NEXUS_WAYLAND</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Raspberry Pi 3</td>
-<td>VideoCore IV</td>
-<td>Proprietary</td>
-<td>rdk, <code>BCM_RPI</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Raspberry Pi 3</td>
-<td>VideoCore IV</td>
-<td>Mesa vc4</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>Raspberry Pi 4</td>
-<td>VideoCore V</td>
-<td>Mesa v3d</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-</tbody>
-</table>
-<h3 id="qualcomm">Qualcomm</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>APQ8017</td>
-<td>Adreno 306</td>
-<td>Proprietary</td>
-<td>Custom</td>
-<td>n/a</td>
-</tr>
-</tbody>
-</table>
-<h3 id="nvidia">Nvidia</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Jetson TK1</td>
-<td>Tegra K1</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="rockchip">RockChip</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RK3399</td>
-<td>Mali T860MP4</td>
-<td>panfrost (reverse-engineered)</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-<tr>
-<td>RK3399</td>
-<td>Mali T860MP4</td>
-<td>Mali (Proprietary)</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="pc-style-hardware">PC-style Hardware</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Any</td>
-<td>AMD</td>
-<td>Mesa amdgpu</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-<tr>
-<td>Any</td>
-<td>Intel</td>
-<td>Mesa i965</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>Any</td>
-<td>Intel</td>
-<td>Mesa iris</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-</tbody>
-</table>
-<h3 id="other">Other</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Beaglebone</td>
-<td>PowerVR SGX530</td>
-<td>Proprietary</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<style type="text/css">
-h3 {
-	background: #1593ED;
-	color: white;
-	margin: 1.5em 0 0;
-	padding: 0.25em 0.5em;
-}
+        <p>This is a bug fix release in the stable 2.32 series.</p>
+<h3 id="what%E2%80%99s-new-in-wpe-webkit-2.32.3%3F">What’s new in WPE WebKit 2.32.3?</h3>
+<ul>
+<li>Properly set the cookies settings after a network process crash.</li>
+<li>Fix accessibility tree after a cross site navigation with PSON enabled.</li>
+<li>Ensure <code>WebKitScriptWorld::window-object-cleared</code> signal is always emitted.</li>
+<li>Fix several crashes and rendering issues.</li>
+</ul>
+<h4 id="checksums">Checksums</h4>
+<pre>
+wpewebkit-2.32.3.tar.xz (20.9 MiB)
+   md5sum: 1e34412c50fe8d1ff084738477ecad7e
+   sha1sum: 157344d8febfc89d6731404c30857f122f220d6e
+   sha256sum: 859bd1bbe51026aecfb2b6f5c8c024d88fb69ac6fcdc74c788c9fbe9499d740d
+</pre>
 
-.row table {
-	width: 100%;
-	margin: 0;
-}
-.row table:last-of-type {
-	margin-bottom: 3em;
-}
-.row th, .row td:nth-child(-n + 3) {
-	white-space: nowrap;
-}
-.row th, .row td {
-	line-height: 1.25;
-	padding: 0.5em 0.75em;
-}
-</style>
 
         <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/aperezdc/compat-table/"><i class="icon-home mr-1"></i> Home</a></p>
       </div>
