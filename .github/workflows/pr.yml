@@ -30,7 +30,7 @@ jobs:
           cp -f _data/site.json /tmp/site.json
           jq '.base_url = "https://igalia.github.io"' \
             /tmp/site.json > _data/site.json
-          ./node_modules/.bin/eleventy \
+          npx eleventy \
             --output='_site/${{ github.head_ref }}' \
             --pathprefix='/wpewebkit.org/${{ github.head_ref }}'
           LC_TIME=C date > '_site/${{ github.head_ref }}/.stamp'
