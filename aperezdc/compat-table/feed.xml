@@ -4,8 +4,32 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2021-09-30T00:00:00Z</updated>
+  <updated>2021-10-18T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPEBackend-fdo 1.12.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table/release/wpebackend-fdo-1.12.0.html"/>
+    <updated>2021-10-18T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table/release/wpebackend-fdo-1.12.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 1.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-1.12.0-release&quot;&gt;Highlights of the 1.12.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added API to obtain the &lt;code&gt;wl_resource&lt;/code&gt; for SHM exported buffers.&lt;/li&gt;
+&lt;li&gt;Added unstable DMA-BUF pool API for buffer management.&lt;/li&gt;
+&lt;li&gt;Fixed UI process getting stuck when navigating across different security origins.&lt;/li&gt;
+&lt;li&gt;Fixed invalid usage of Wayland client connections in the nested compositor which caused crashes in some situations.&lt;/li&gt;
+&lt;li&gt;Made it easier to override where Meson looks for &lt;code&gt;wayland-scanner&lt;/code&gt; during cross-compilation, using a native machine file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpebackend-fdo-1.12.0.tar.xz (42.1 KiB)
+   md5sum: c43b34a4b4933bcd80068ae5776ee346
+   sha1sum: e2576d564bd6d9a86737a4cd31dd5827ebc00fdf
+   sha256sum: 6239c9c15523410798d66315de6b491712ab30009ba180f3e0dd076d9b0074ac
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>libwpe 1.12.0 released</title>
@@ -497,33 +521,6 @@ wpewebkit-2.32.2.tar.xz (20.9 MiB)
    md5sum: a6624736150045a54037457416820b19
    sha1sum: 7b41a49f97b4cb458b6896623a02f4861cbcf728
    sha256sum: 2f0ebef0395a5a9e37a8609093f86140f74504f9954f97799b95f5dfbe186739
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.33.2 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table/release/wpewebkit-2.33.2.html"/>
-    <updated>2021-06-12T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table/release/wpewebkit-2.33.2.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 2.34 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.33.2%3F&quot;&gt;What’s new in WPE WebKit 2.33.2?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;HTTP/2 support when building with &lt;code&gt;libsoup3&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Add API to disable CORS on a web view for particular domains.&lt;/li&gt;
-&lt;li&gt;Remove dependency on the GStreamer &lt;code&gt;glvideoflip&lt;/code&gt; and &lt;code&gt;videoflip&lt;/code&gt; elements.&lt;/li&gt;
-&lt;li&gt;Support building with the uClibc C standard library.&lt;/li&gt;
-&lt;li&gt;Ensure &lt;code&gt;WebKitScriptWorld::window-object-cleared&lt;/code&gt; signal is always emitted.&lt;/li&gt;
-&lt;li&gt;Fix rendering of VP9 videos with transparency.&lt;/li&gt;
-&lt;li&gt;Fix handling of elements with &lt;code&gt;position:sticky&lt;/code&gt; in RTL layers with scroll overflow.&lt;/li&gt;
-&lt;li&gt;Fix handling of 2D axis input events.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.33.2.tar.xz (22.3 MiB)
-   md5sum: b971872001118137e5846aa2600e4345
-   sha1sum: 2a720938173f6e7354dd17fad50ea18a9256dd20
-   sha256sum: 0214db68d694872e1636f1aa74b7c9e727657a03301e05967437650b15fa7ba7
 &lt;/pre&gt;
 </content>
   </entry>
