@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>Exploring Embedded Browsers</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/hwcompat/about/exploring.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/aperezdc/hwcompat/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/hwcompat/about/exploring.html">
+  <meta property="og:title" content="Exploring Embedded Browsers">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/hwcompat/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/hwcompat/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2021-10-27T09:14:28.020Z">
+  <meta property="article:tag" content="about">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/hwcompat/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/hwcompat/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/hwcompat/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/hwcompat/css/stylish-portfolio.css">
+
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/wpewebkit.org/aperezdc/hwcompat/"><img width="200" src="/wpewebkit.org/aperezdc/hwcompat/assets/svg/blue_Web_Logo.svg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/aperezdc/hwcompat/">Home</a>
+      </li>
+      <!-- li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/hwcompat/about/exploring.html">Explore WPE / Embedded</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/hwcompat/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/hwcompat/about/a-good-choice.html">Why Choose WPE</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/hwcompat/about/architecture.html">WPE Design</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/hwcompat/about/faq.html">FAQ</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/hwcompat/about/builds.html">Build it</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/hwcompat/release/schedule">Release Schedule</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/aperezdc/hwcompat/code">Code</a>
+      </li>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <div itemscope itemtype="http://schema.org/TechArticle">
+
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/hwcompat/about/exploring.html">
+
+<section class="content-section bg-primary text-white small-section">
+  <div class="container text-center">
+    <div class="content-section-heading">
+      
+      <h2 itemprop="headline">Exploring Embedded Browsers</h2>
+	  
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light small-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
+
+        <p>Long ago, it might have been reasonable to have imagine that maximum number of browsers that could be deployed in the world would be based on the maximum number of desktop computers.  However, embedded browsers are in everything these days: cars, signs, tablets, gaming systems, televisions and appliances.  They’re even in space!  The Web Platform is a frequently chosen foundational technology for <em>many reasons</em>, including:</p>
+<ul>
+<li>Because Web Platform technologies are built on standards, they have great longevity</li>
+<li>Because these standards are open, embedded systems can incorporate them without licensing fees or other worries.</li>
+<li>Open standards with great longevity allows lots more things to benefit from the same investments</li>
+<li>The number of people with the basic skills to build things with web technologies is massive</li>
+</ul>
+<p>The fact that over the past few years, <em>billions</em> of new devices have come online, and the implications of this are still under-discussed.  We believe developers need to be able explore and understand this space, and that lessons learned here are potentially helpful to the larger web ecosystem as well. However, this can be challenging, because embedded browsers are a little different…</p>
+<h2 id="why-embedded-browsers-are-different">Why embedded browsers are different</h2>
+<p>For many of us, a browser is an application like the one you’re probably using now.  You click an icon on your graphical operating system, navigate somewhere with a URL bar, search, and so on.  You have bookmarks and tabs that you can drag around, and lots of other features.</p>
+<p>For most embedded systems, this isn’t the case at all.  For most embedded systems there isn’t a common desktop OS — in fact, <em>you</em> create the OS.  Part of the reason for this is that, by and large, they are not general-purpose computing devices.  They have slightly different security concerns, and they also run on often radically different sorts of hardware than your desktop, laptop or many mobile devices.</p>
+<p>So, what really <em>is</em> an embedded browser?</p>
+<h3 id="browsers%2C-engines-and-projects">Browsers, engines and projects</h3>
+<p>The application you are running to read this is, in all likelihood, a proper “browser”.  This browser is built on one of three open source projects: WebKit, Chromium or Gecko.  Each of these projects defines an <em>engine</em> — that is, they provide an architecture through which something else (e.g., a browser) can bind to the top layer of the engine in order to drive us from URL to URL, and use the engine’s bottom layer to do things like actually put content on the screen, render graphics, receive input from devices like keyboards, mice and pointing devices, and connect to things like the text-to-speech subsystem.</p>
+<p>In terms of WebKit browsers, a “port” is something that provides things at those top and bottom layers.  The WebKit project has a few “official” ports that are
+available from <a href="https://webkit.org/downloads/">webkit.org/downloads/</a>.  WPE is the official port for embedded systems, and it adds another layer to the architecture allowing for more easily swappable <em>backends</em> (the graphics layers, windowing and so on) and simpler bindings for programmatic top-level control in Linux based systems.  Cog is another project that makes it easier to launch and drive WPE views.</p>
+<p>In other words, WPE is designed to be <em>built</em> and optimized for your embedded device in order to deliver the best performance.  What all of this means is that there isn’t really a single “WPE” that’s as easy to provide as many browsers that you’re probably familiar with.</p>
+<h3 id="easy-ways-to-explore-wpe">Easy ways to explore WPE</h3>
+<p>All of this said, we believe that enabling developers to explore the space is important for a whole lot of reasons.  Therefore, we’ve tried to make it easy for developers who aren’t comfortable building entire embedded systems to get their hands on <em>something</em> where they can begin exploring and learning useful things.</p>
+<ul>
+<li>
+<p><span class="btn btn-primary text-light">Install it from your distribution</span>: WPE WebKit is available in some Linux distributions including <a href="https://packages.debian.org/search?searchon=sourcenames&amp;keywords=wpewebkit">Debian</a>, <a href="https://packages.ubuntu.com/search?keywords=wpewebkit&amp;searchon=sourcenames&amp;suite=all&amp;section=all">Ubuntu</a> and <a href="https://archlinux.org/packages/extra/x86_64/wpewebkit/">Arch Linux</a>. These packages are not just a quick and simple way to test WPE but they also come with all the development files and documentation necessary to build and test software that uses this web engine.</p>
+</li>
+<li>
+<p><span class="btn btn-primary text-light"><a href="/wpewebkit.org/aperezdc/hwcompat/about/flatpak.html">Install with Flatpak</a></span>: If you have support for Flatpak on your current hardware and operating system, and your graphics drivers are supported, there are various options to try WPE through Flatpak.  This can be a very easy way to let you explore WPE, check the features and specifications supported by WPE, or just want to experiment and learn more about what some of the differences with a full browser are.</p>
+</li>
+<li>
+<p><span class="btn btn-primary text-light"><a href="https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip">Raspberry Pi OS with WPE image</a></span>: Probably the most straight-forward way to learn a lot without a lot of experience in embedded systems is to try out our image that runs on Raspberry Pi OS.  Just download and flash the image onto an SD card, plug it in and go.  Lots of developers have a Raspberry Pi sitting around somewhere, and if you don’t, you can own one without a huge investment.  A Raspberry Pi 3b, as of the time of this writing, costs under $45, and can be connected to any display or keyboard.  The Raspberry Pi OS is a more or less full featured desktop OS, so it’s easy to configure things like a WiFi connection, install a local server, setup SSH and so on.  The browser we’ve packed up with this distribution is <em>not</em> especially optimized for the hardware, so you can get a pretty good feel of what running on really limited 32-bit hardware <em>can</em> be like — and which sorts of performance related things we just owe to particular optimizations.</p>
+</li>
+</ul>
+
+
+        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/aperezdc/hwcompat/"><i class="icon-home mr-1"></i> Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+    <!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/aperezdc/hwcompat/assets/svg/blue_Web_Logo.svg"></a>
+  <nav class="social">
+    Connect on 
+    <a href="https://twitter.com/WPEWebKit">Twitter</a> • 
+    <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">mailing list: webkit-wpe</a> • 
+    <a href="https://webchat.oftc.net/?channels=wpe">OFTC: #wpe</a> • 
+    <a href="https://matrix.to/#/#wpe:matrix.org">Matrix: #wpe:matrix.org</a>
+  </nav>
+  <p class="text-muted small mb-0">Copyright &copy; 2018-2021 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+</footer>
+
+  <script src="/wpewebkit.org/aperezdc/hwcompat/vendor/jquery/jquery.js"></script>
+  <script src="/wpewebkit.org/aperezdc/hwcompat/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>
