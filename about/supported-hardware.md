@@ -17,8 +17,8 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 
 | Series  | GPU            | Driver      | WPE Backend | Cog Shells |
 |---------|----------------|-------------|-------------|------------|
-| i&period;MX 51 | Imageon Z460   |             |     | |
-| i&period;MX 53 | Imageon Z460   |             |     | |
+| i&period;MX 51 | Imageon Z460   | freedreno (reverse-engineered) | fdo | fdo, drm |
+| i&period;MX 53 | Imageon Z460   | freedreno (reverse-engineered) | fdo | fdo, drm |
 | i&period;MX 6  | Vivante GC2000 | etnaviv (reverse-engineered) | fdo | fdo, drm |
 | i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | fdo | fdo |
 | i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | rdk, `VIV_IMX6_EGL` | n/a |
