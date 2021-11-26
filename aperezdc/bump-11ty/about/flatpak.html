@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2021-10-18T22:30:39.968Z">
+  <meta property="article:published_time" content="2021-11-26T12:48:36.121Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -107,7 +107,7 @@
         <p><a href="https://flatpak.org">Flatpak</a> is generally advertised as the next-generation
 technology for building and distributing applications on Linux. The WPE
 maintainers leverage Flatpak to allow users to try two different WPE flavors.</p>
-<h2 id="stable-wpe-releases">Stable WPE releases</h2>
+<h2 id="stable-wpe-releases" tabindex="-1">Stable WPE releases</h2>
 <p>Stable releases are packaged and available through Flatpak. Users and WPE
 application developers can easily try the <a href="https://github.com/igalia/cog">Cog WPE
 browser</a> and even build new applications relying
@@ -122,12 +122,12 @@ provides packages for Cog as well.</p>
 <p>The current Cog/WPE stack still imposes the Wayland-only limitation, with
 Mesa-based graphics stacks most likely to work well. In future release, we plan
 to add support for new platforms, graphics stacks and methods of integration.</p>
-<h3 id="cog">Cog</h3>
+<h3 id="cog" tabindex="-1">Cog</h3>
 <p>To install and run Cog, use the following commands:</p>
 <pre><code>$ flatpak --user install org.wpe.Cog
 $ flatpak run org.wpe.Cog -P fdo &lt;URL&gt;
 </code></pre>
-<h3 id="sdk-for-application-developers">Sdk for application developers</h3>
+<h3 id="sdk-for-application-developers" tabindex="-1">Sdk for application developers</h3>
 <p>Application developers can package their WPE application with Flatpak and basing
 the application upon the WPE Sdk runtime. The following <code>flatpak-builder</code>
 manifest snippet can be used to target the WPE Sdk:</p>
@@ -138,7 +138,7 @@ sdk: org.wpe.Sdk
 <p>More information is available on the <a href="https://docs.flatpak.org/en/latest/first-build.html#add-a-manifest">Flatpak
 website</a>
 regarding applications packaging.</p>
-<h2 id="nightly-wpe-builds">Nightly WPE builds</h2>
+<h2 id="nightly-wpe-builds" tabindex="-1">Nightly WPE builds</h2>
 <p>To complement the <a href="/wpewebkit.org/aperezdc/bump-11ty/release/schedule">six months release cycle</a>,
 users interested in testing the latest development version of WPE can download
 it directly from the <a href="https://build.webkit.org/waterfall?category=WPE">build
