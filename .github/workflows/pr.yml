@@ -12,7 +12,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cache Node modules
@@ -30,7 +30,7 @@ jobs:
           cp -f _data/site.json /tmp/site.json
           jq '.base_url = "https://igalia.github.io"' \
             /tmp/site.json > _data/site.json
-          ./node_modules/.bin/eleventy \
+          npx eleventy \
             --output='_site/${{ github.head_ref }}' \
             --pathprefix='/wpewebkit.org/${{ github.head_ref }}'
           LC_TIME=C date > '_site/${{ github.head_ref }}/.stamp'

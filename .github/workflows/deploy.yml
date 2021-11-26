@@ -12,7 +12,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cache Node modules
@@ -27,7 +27,7 @@ jobs:
         run: npm install
       - name: Eleventy
         run: |
-          ./node_modules/.bin/eleventy --output='_site/' --pathprefix='/'
+          npx eleventy --output='_site/' --pathprefix='/'
       - name: Deploy
         run: |
           mkdir -p ~/.ssh
