@@ -4,8 +4,32 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2021-11-27T00:00:00Z</updated>
+  <updated>2021-12-09T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>Cog 0.13.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/sourcesans/release/cog-0.13.2.html"/>
+    <updated>2021-12-09T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/sourcesans/release/cog-0.13.2.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 0.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.13.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.13.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;launcher: Add new &lt;code&gt;--platform-params&lt;/code&gt;/&lt;code&gt;-O&lt;/code&gt; command line option, which
+allows passing parameters to platforms plug-ins during initialization.&lt;/li&gt;
+&lt;li&gt;drm: Add support for output rotation by means of a new OpenGL ES based
+renderer, which can be enabled with &lt;code&gt;cog -O renderer=gles,rotation=1&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;drm: Rotate input device coordinates as needed to match output rotation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.13.2.tar.xz (116.5 KiB)
+   md5sum: 57026de891085ed2efbd7d0a92b5f3e7
+   sha1sum: 7a69602b4ae2cd7bea03e2ebfdc33c7bcde181a3
+   sha256sum: 93dcc2a012ae8d261131c91e090c7a3ff5e530e7757a33c50bb2a6cc1523a0dd
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.35.1 released</title>
@@ -328,30 +352,6 @@ wpewebkit-2.34.0.tar.xz (22.5 MiB)
    md5sum: de57b0a8bcf72337d4b66a1f8d9a3333
    sha1sum: 921493a35865c78b3a6896d34ae3bd5d6e4184dc
    sha256sum: 64c962197854c7a8a4129eebf11b745abf94bbfee5ddf4202354e46e1ca5571d
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPEBackend-fdo 1.12.0 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/sourcesans/release/wpebackend-fdo-1.12.0.html"/>
-    <updated>2021-10-18T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/sourcesans/release/wpebackend-fdo-1.12.0.html</id>
-    <content type="html">&lt;p&gt;This is the first stable release in the 1.12 series.&lt;/p&gt;
-&lt;h3 id=&quot;highlights-of-the-1.12.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the 1.12.0 release&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Added API to obtain the &lt;code&gt;wl_resource&lt;/code&gt; for SHM exported buffers.&lt;/li&gt;
-&lt;li&gt;Added unstable DMA-BUF pool API for buffer management.&lt;/li&gt;
-&lt;li&gt;Fixed UI process getting stuck when navigating across different security origins.&lt;/li&gt;
-&lt;li&gt;Fixed invalid usage of Wayland client connections in the nested compositor which caused crashes in some situations.&lt;/li&gt;
-&lt;li&gt;Made it easier to override where Meson looks for &lt;code&gt;wayland-scanner&lt;/code&gt; during cross-compilation, using a native machine file.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpebackend-fdo-1.12.0.tar.xz (42.1 KiB)
-   md5sum: c43b34a4b4933bcd80068ae5776ee346
-   sha1sum: e2576d564bd6d9a86737a4cd31dd5827ebc00fdf
-   sha256sum: 6239c9c15523410798d66315de6b491712ab30009ba180f3e0dd076d9b0074ac
 &lt;/pre&gt;
 </content>
   </entry>
