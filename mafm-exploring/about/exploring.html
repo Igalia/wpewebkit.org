@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-02-09T16:42:08.362Z">
+  <meta property="article:published_time" content="2022-02-16T22:36:05.831Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -114,9 +114,9 @@
 </ul>
 <p>The fact that over the past few years, <em>billions</em> of new devices have come online, and the implications of this are still under-discussed.  We believe developers need to be able explore and understand this space, and that lessons learned here are potentially helpful to the larger web ecosystem as well. However, this can be challenging, because embedded browsers are a little different…</p>
 <h2 id="why-embedded-browsers-are-different" tabindex="-1">Why embedded browsers are different</h2>
-<p>For many of us, a browser is an application like the one you’re probably using now.  You click an icon on your graphical operating system, navigate somewhere with a URL bar, search, and so on.  You have bookmarks and tabs that you can drag around, and lots of other features.</p>
+<p>For many of us, a browser is an application like the one you’re probably using now.  You click an icon on your graphical operating system (OS), navigate somewhere with a URL bar, search, and so on.  You have bookmarks and tabs that you can drag around, and lots of other features.</p>
 <p>In contrast, an embedded browser is contained within another application or is built for a specific purpose and runs in an embedded system, and the application controlling the embedded browser does not provide all the typical features of browsers running in desktops.</p>
-<p>Furthermore, for most embedded systems there isn’t a common desktop OS for the browser to run on — in fact, the OS is built specifically for that type of device, and the embedded browser is built along with it.  Part of the reason for this is that, by and large, they are not general-purpose computing devices.  They have slightly different security concerns, and they also run on often radically different sorts of hardware than desktop, laptop or many mobile devices.</p>
+<p>Furthermore, for most embedded systems there isn’t a common desktop <abbr title="Operating System">OS</abbr> for the browser to run on — in fact, the <abbr title="Operating System">OS</abbr> is built specifically for that type of device, and the embedded browser is built along with it.  Part of the reason for this is that, by and large, they are not general-purpose computing devices.  They have slightly different security concerns, and they also run on often radically different sorts of hardware than desktop, laptop or many mobile devices.</p>
 <p>So, what really <em>is</em> an embedded browser?</p>
 <h3 id="browsers%2C-engines-and-ports" tabindex="-1">Browsers, engines and ports</h3>
 <p>A “proper” <em>browser</em> is, in all likelihood, the application in which you are reading this.  This browser is built on one of three open source projects: WebKit, Chromium or Gecko.  Each of these projects defines an <em>engine</em> — that is, they provide an architecture through which something else (e.g., a browser) can bind to the top layer of the engine in order to drive us from URL to URL, and use the engine’s bottom layer to do things like actually put content on the screen, render graphics, receive input from devices like keyboards, mice and pointing devices, and connect to things like the text-to-speech subsystem.</p>
