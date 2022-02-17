@@ -4,8 +4,70 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-02-09T00:00:00Z</updated>
+  <updated>2022-02-17T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.34.6 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/wpewebkit-2.34.6.html"/>
+    <updated>2022-02-17T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/wpewebkit-2.34.6.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.6%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.6?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix accessibility not working when the Bubblewrap sandbox is enabled.&lt;/li&gt;
+&lt;li&gt;Fix the build in a number of situations where the main OpenGL library is
+not called &lt;code&gt;libGL&lt;/code&gt; or &lt;code&gt;libgl&lt;/code&gt;, as is the case on systems that use
+&lt;code&gt;libglvnd&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.34.6.tar.xz (22.5 MiB)
+   md5sum: c9705270b342474cca28cf51632ccbbe
+   sha1sum: 44ae95de1b5ebf0a2b0ea3630b3677153c597402
+   sha256sum: 301e895c8ed08ce7dccef3192b972f2ccfc2020463244c64069a636f2b05265f
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0003</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2022-0003.html"/>
+    <updated>2022-02-17T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2022-0003.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 17, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0003&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2022-0003.html#CVE-2022-22620&quot;&gt;CVE-2022-22620&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2022-22620&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22620&quot;&gt;CVE-2022-22620&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.6.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A use after free
+issue was addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.34.5 released</title>
@@ -460,59 +522,6 @@ cog-0.13.2.tar.xz (116.5 KiB)
    md5sum: 57026de891085ed2efbd7d0a92b5f3e7
    sha1sum: 7a69602b4ae2cd7bea03e2ebfdc33c7bcde181a3
    sha256sum: 93dcc2a012ae8d261131c91e090c7a3ff5e530e7757a33c50bb2a6cc1523a0dd
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.35.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/wpewebkit-2.35.1.html"/>
-    <updated>2021-11-27T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/wpewebkit-2.35.1.html</id>
-    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.36 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.35.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.35.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Make user interactive threads (event handler, scrolling, etc.) real time
-on Linux.&lt;/li&gt;
-&lt;li&gt;Add new API to set HTTP response information to custom URI schemes.&lt;/li&gt;
-&lt;li&gt;Add support for the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Media_Session_API&quot;&gt;MediaSession API&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Add initial support, disabled by default at build time, for the JPEG-XL
-image format.&lt;/li&gt;
-&lt;li&gt;Make the WPE Qt API use only public WPE library symbols, which makes
-it possible to build it separately from the rest of WebKit.&lt;/li&gt;
-&lt;li&gt;Fix &lt;code&gt;jsc_value_object_define_property_accessor()&lt;/code&gt; to work with objects
-not having a wrapped instance.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.35.1.tar.xz (23.0 MiB)
-   md5sum: af4425cc560f3e2aae0294e4060aa2b6
-   sha1sum: eaa8e7bdcb7e15c89c0b7f3bd977cb9e0586307c
-   sha256sum: 9de134d99e4311dde83ad117cdb611dc533b49b0fa0113a2ec2c55fc10b76f29
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.13.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/cog-0.13.1.html"/>
-    <updated>2021-11-26T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/cog-0.13.1.html</id>
-    <content type="html">&lt;p&gt;This is the first development release leading towards the 0.14 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.13.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.13.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;launcher: Support setting memory limits using command line options.&lt;/li&gt;
-&lt;li&gt;core: Remove &lt;code&gt;CogLauncher&lt;/code&gt; from the library, as it is in practice an
-implementation detail of the &lt;code&gt;cog&lt;/code&gt; launcher.&lt;/li&gt;
-&lt;li&gt;cmake: Fix calculation of default installation path for platform plug-ins.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.13.1.tar.xz (110.6 KiB)
-   md5sum: 5c849e71de7ceb055ffa44df81b105f1
-   sha1sum: 4556d5b8f1eac6aac907b20cfe92e39223bb8510
-   sha256sum: a32732d91bf6297fa974aa9bf6d2dab10f7b2a00f2cc3076b2b786d39fa8e129
 &lt;/pre&gt;
 </content>
   </entry>
