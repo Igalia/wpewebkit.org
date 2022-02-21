@@ -443,8 +443,12 @@ footer .container {
   align-self: center; 
 }
 
-li ul {
-  margin-top: 0;
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 }
 
 #webkit-powers-embedded {
