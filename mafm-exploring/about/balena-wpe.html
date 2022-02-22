@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-02-22T23:04:24.115Z">
+  <meta property="article:published_time" content="2022-02-22T23:09:41.051Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -140,7 +140,10 @@ configuration and write the image, but other methods can be
 used.</p>
 </blockquote>
 <h2 id="run-balena-wpe-block-(container-service)" tabindex="-1">Run Balena-WPE <em>block</em> (container service)</h2>
-<p>Using <code>balena-cli</code> tools, this can be done with:</p>
+<p>This can be done following the “Running your first Container” section
+in the Getting Started guide, but using the URL for the source of the
+<code>balena-wpe</code> block instead.</p>
+<p>Using <code>balena-cli</code> tools, the basic steps are:</p>
 <pre><code class="language-shell">$ git clone https://github.com/Igalia/balena-wpe.git
 
 $ cd balena-wpe
@@ -157,7 +160,7 @@ connected to your device.  By default it loads
 changed with the environment variable <code>WPE_URL</code>.</p>
 <p>Additionally, this <em>block</em> ships with
 <a href="https://github.com/mozz100/tohora/">tohora</a>, which is a simple
-interface to change the URL being shown, in port 8080:
+interface to change dynamically the URL being shown, in port 8080:
 <code>http://devicename.local:8080/</code>.</p>
 <h2 id="demos" tabindex="-1">Demos</h2>
 <h3 id="css-transformation-and-animations-in-webkit-poster-circle-example" tabindex="-1">CSS transformation and animations in <a href="https://webkit.org/blog-files/3d-transforms/poster-circle.html">WebKit poster circle example</a></h3>
@@ -170,12 +173,36 @@ interface to change the URL being shown, in port 8080:
 <p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_aquarium.gif" alt="Image: Rendering WebGL Aquarium demo"></p>
 <h3 id="rendering-webgl-abstract-shapes" tabindex="-1">Rendering WebGL <a href="https://mrdoob.neocities.org/023/">Abstract Shapes</a></h3>
 <p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_abstractshapes.gif" alt="Image: Rendering WebGL Abstract Shapes demo"></p>
-<p>|:----|:—:|
-| CSS transformation and animations in <a href="https://webkit.org/blog-files/3d-transforms/poster-circle.html">WebKit poster circle example</a> | <img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/postercircle.gif" alt="Image: WebKit poster circle demo"> |
-| Playing an embedded video from <a href="https://wpewebkit.org/">wpewebkit.org</a> | <img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/wpewebkitorg.gif" alt="Image: Embedded video demo"> |
-| Playing <a href="https://bouncyballs.org/">BouncyBalls</a> | <img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/bouncyballs.gif" alt="Image: Playing BouncyBalls demo"> |
-| Rendering WebGL <a href="https://webglsamples.org/aquarium/aquarium.html">Aquarium</a> demo | <img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_aquarium.gif" alt="Image: Rendering WebGL Aquarium demo"> |
-| Rendering WebGL <a href="https://mrdoob.neocities.org/023/">Abstract Shapes</a> | <img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_abstractshapes.gif" alt="Image: Rendering WebGL Abstract Shapes demo"> |</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:center">Animation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CSS transformation and animations in <a href="https://webkit.org/blog-files/3d-transforms/poster-circle.html">WebKit poster circle example</a></td>
+<td style="text-align:center"><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/postercircle.gif" alt="Image: WebKit poster circle demo"></td>
+</tr>
+<tr>
+<td style="text-align:left">Playing an embedded video from <a href="https://wpewebkit.org/">wpewebkit.org</a></td>
+<td style="text-align:center"><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/wpewebkitorg.gif" alt="Image: Embedded video demo"></td>
+</tr>
+<tr>
+<td style="text-align:left">Playing <a href="https://bouncyballs.org/">BouncyBalls</a></td>
+<td style="text-align:center"><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/bouncyballs.gif" alt="Image: Playing BouncyBalls demo"></td>
+</tr>
+<tr>
+<td style="text-align:left">Rendering WebGL <a href="https://webglsamples.org/aquarium/aquarium.html">Aquarium</a> demo</td>
+<td style="text-align:center"><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_aquarium.gif" alt="Image: Rendering WebGL Aquarium demo"></td>
+</tr>
+<tr>
+<td style="text-align:left">Rendering WebGL <a href="https://mrdoob.neocities.org/023/">Abstract Shapes</a></td>
+<td style="text-align:center"><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_abstractshapes.gif" alt="Image: Rendering WebGL Abstract Shapes demo"></td>
+</tr>
+</tbody>
+</table>
 <table>
   <tr>
     <td>
