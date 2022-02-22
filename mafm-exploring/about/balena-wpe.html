@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-02-22T22:38:49.712Z">
+  <meta property="article:published_time" content="2022-02-22T22:44:02.541Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -107,35 +107,35 @@
         <p><a href="https://balena.io">Balena</a> is a company in the area of IoT, with a
 complete open-source stack of tools, images and services for deploying
 IoT services based on Docker containers.  With Balena Cloud one can
-manage and deploy in a <em>fleet</em> of devices and manage them remotely.</p>
+manage and deploy services in a <em>fleet</em> of devices and manage them
+remotely.</p>
 <p>As WPE maintainers, we created a so-called <em>block</em> (somewhat akin to a
 <em>service</em>) to allow users to deploy WPE-based services in devices
 supported by Balena.</p>
 <h2 id="install-balena-os" tabindex="-1">Install Balena OS</h2>
 <p>The first thing to do is to download an OS image based on Yocto Linux
 for the device that you are interested in.</p>
-<p>In general the best idea is to read the <a href="https://www.balena.io/os/docs/raspberrypi3/getting-started/">Getting Started
-guide</a>,
-selecting the device in the droplist below the header.</p>
-<p>Quick summary of steps:</p>
+<p>Check the <a href="https://www.balena.io/os/docs/raspberrypi3/getting-started/">Getting Started
+guide</a>
+and select the device in the droplist below the header for your
+particular case.</p>
+<p>As a quick overview, these are the steps that you should perform:</p>
 <ol>
 <li>
 <p>Go to <a href="https://www.balena.io/os/">https://www.balena.io/os/</a></p>
 </li>
 <li>
-<p>Select the appropriate device, and either Production or Development
-flavour of the image</p>
+<p>Select the appropriate device, and either the Production or
+Development flavour of the image, and download it</p>
 </li>
 <li>
-<p>Write the image to a micro-SD card or similar methods appropriate
-for your use-case.</p>
-<ul>
-<li>In the Getting Started guide it recommends to use <code>balena-cli</code>
-tools, as it’s easier to do the initial configuration and write
-the image, but other methods can be used.</li>
-</ul>
+<p>Write the image to a micro-SD card or similar method appropriate
+for your use-case</p>
 </li>
 </ol>
+<p><em>Note</em>: In the Getting Started guide it recommends to use <code>balena-cli</code>
+tools, as it’s easier to do the initial configuration and
+write the image, but other methods can be used.</p>
 <h2 id="run-balena-wpe-block-(container-service)" tabindex="-1">Run Balena-WPE <em>block</em> (container service)</h2>
 <p>Using <code>balena-cli</code> tools, this can be done with:</p>
 <pre><code class="language-shell">$ git clone https://github.com/Igalia/balena-wpe.git
