@@ -52,4 +52,6 @@ All of this said, we believe that enabling developers to explore the space is im
   * Stable: [Raspberry Pi OS image, 32-bit, with WPE](https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip), works with RPi models 3B, 3B+ and 4
   * Nightly build: [Raspberry Pi OS image, 32-bit, with WPE](https://wk-contrib.igalia.com/debian/images/nightly/wpe-raspbian.img.zip), works with RPi models 3B, 3B+ and 4
 
+* [Install with Balena]({{'/about/balena-wpe.html' | url}}): If there is support in [Balena](https://www.balena.io/) for your current hardware then it can be another easy way to let you explore WPE, and use the extra possibilities provided in the Balena ecosystem.
+
 If you find any problem with the packages or images, or want to know more about optimizing WPE for your hardware or use cases, please [contact us]({{'/code' | url}}).
