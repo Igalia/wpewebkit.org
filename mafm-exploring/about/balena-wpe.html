@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Supported Hardware</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-exploring/about/supported-hardware.html">
+  <title>Try WPE with Balena</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-exploring/about/balena-wpe.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/mafm-exploring/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-exploring/about/supported-hardware.html">
-  <meta property="og:title" content="Supported Hardware">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-exploring/about/balena-wpe.html">
+  <meta property="og:title" content="Try WPE with Balena">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/mafm-exploring/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/mafm-exploring/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -87,13 +87,13 @@
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/mafm-exploring/about/supported-hardware.html">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/mafm-exploring/about/balena-wpe.html">
 
 <section class="content-section bg-primary text-white small-section">
   <div class="container text-center">
     <div class="content-section-heading">
       
-      <h2 itemprop="headline">Supported Hardware</h2>
+      <h2 itemprop="headline">Try WPE with Balena</h2>
 	  
     </div>
   </div>
@@ -104,262 +104,78 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
 
-        <p>WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:</p>
-<nav class="table-of-contents"><ol><li><a href="#nxp">NXP</a></li><li><a href="#broadcom">Broadcom</a></li><li><a href="#qualcomm">Qualcomm</a></li><li><a href="#nvidia">Nvidia</a></li><li><a href="#rockchip">RockChip</a></li><li><a href="#pc-style-hardware">PC-style Hardware</a></li><li><a href="#other">Other</a></li></ol></nav><p>Note that this list is not exhaustive. Reports of unlisted configurations are welcome.</p>
-<h3 id="nxp" tabindex="-1">NXP</h3>
-<table>
-<thead>
-<tr>
-<th>Series</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>i.MX 51</td>
-<td>Imageon Z460</td>
-<td>freedreno (reverse-engineered)</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>i.MX 53</td>
-<td>Imageon Z460</td>
-<td>freedreno (reverse-engineered)</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>etnaviv (reverse-engineered)</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>Vivante (Proprietary)</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>Vivante (Proprietary)</td>
-<td>rdk, <code>VIV_IMX6_EGL</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>i.MX 8M</td>
-<td>Vivante GC7000</td>
-<td>etnaviv (reverse-engineered)</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>i.MX 8M</td>
-<td>Vivante GC7000</td>
-<td>Vivante (Proprietary)</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-</tbody>
-</table>
-<h3 id="broadcom" tabindex="-1">Broadcom</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Arris VIP5202W</td>
-<td>VideoCore IV</td>
-<td>Proprietary</td>
-<td>rdk, <code>BCM_NEXUS</code> or <code>USE_BACKEND_BCM_NEXUS_WAYLAND</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Raspberry Pi 3</td>
-<td>VideoCore IV</td>
-<td>Proprietary</td>
-<td>rdk, <code>BCM_RPI</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Raspberry Pi 3</td>
-<td>VideoCore IV</td>
-<td>Mesa vc4</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>Raspberry Pi 4</td>
-<td>VideoCore V</td>
-<td>Mesa v3d</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-</tbody>
-</table>
-<h3 id="qualcomm" tabindex="-1">Qualcomm</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>APQ8017</td>
-<td>Adreno 306</td>
-<td>Proprietary</td>
-<td>Custom</td>
-<td>n/a</td>
-</tr>
-</tbody>
-</table>
-<h3 id="nvidia" tabindex="-1">Nvidia</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Jetson TK1</td>
-<td>Tegra K1</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="rockchip" tabindex="-1">RockChip</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RK3399</td>
-<td>Mali T860MP4</td>
-<td>panfrost (reverse-engineered)</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-<tr>
-<td>RK3399</td>
-<td>Mali T860MP4</td>
-<td>Mali (Proprietary)</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="pc-style-hardware" tabindex="-1">PC-style Hardware</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Any</td>
-<td>AMD</td>
-<td>Mesa amdgpu</td>
-<td>fdo</td>
-<td>fdo</td>
-</tr>
-<tr>
-<td>Any</td>
-<td>Intel</td>
-<td>Mesa i965</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-<tr>
-<td>Any</td>
-<td>Intel</td>
-<td>Mesa iris</td>
-<td>fdo</td>
-<td>fdo, drm</td>
-</tr>
-</tbody>
-</table>
-<h3 id="other" tabindex="-1">Other</h3>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>WPE Backend</th>
-<th>Cog Shells</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Beaglebone</td>
-<td>PowerVR SGX530</td>
-<td>Proprietary</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<style type="text/css">
-h3 {
-	background: #1593ED;
-	color: white;
-	margin: 1.5em 0 0;
-	padding: 0.25em 0.5em;
-}
+        <p><a href="https://balena.io">Balena</a> is a company in the area of IoT, with a
+complete open-source stack of tools, images and services for deploying
+IoT services based on Docker containers.  With Balena Cloud one can
+manage and deploy in a <em>fleet</em> of devices and manage them remotely.</p>
+<p>As WPE maintainers, we created a so-called <em>block</em> (somewhat akin to a
+<em>service</em>) to allow users to deploy WPE-based services in devices
+supported by Balena.</p>
+<h2 id="balena-os" tabindex="-1">Balena OS</h2>
+<p>The first thing to do is to download an OS image based on Yocto Linux
+for the device that you are interested in.</p>
+<p>In general the best idea is to read the <a href="https://www.balena.io/os/docs/raspberrypi3/getting-started/">Getting Started
+guide</a>,
+selecting the device in the droplist below the header.</p>
+<p>Quick summary of steps:</p>
+<ol>
+<li>
+<p>Go to <a href="https://www.balena.io/os/">https://www.balena.io/os/</a></p>
+</li>
+<li>
+<p>Select the appropriate device, and either Production or Development
+flavour of the image</p>
+</li>
+<li>
+<p>Write the image to a micro-SD card or similar methods appropriate
+for your use-case.</p>
+<ul>
+<li>In the Getting Started guide it recommends to use <code>balena-cli</code>
+tools, as it’s easier to do the initial configuration and write
+the image, but other methods can be used.</li>
+</ul>
+</li>
+</ol>
+<h2 id="run-balena-wpe-block-(container-service)" tabindex="-1">Run Balena-WPE <em>block</em> (container service)</h2>
+<p>Using <code>balena-cli</code> tools, this can be done with:</p>
+<pre><code class="language-shell">$ git clone https://github.com/Igalia/balena-wpe.git
 
-.row table {
-	width: 100%;
-	margin: 0;
-}
-.row table:last-of-type {
-	margin-bottom: 3em;
-}
-.row th, .row td:nth-child(-n + 3) {
-	white-space: nowrap;
-}
-.row th, .row td {
-	line-height: 1.25;
-	padding: 0.5em 0.75em;
-}
-</style>
+$ cd balena-wpe
+
+$ balena push devicename.local
+</code></pre>
+<p>This will need to pull the base images into the device, so the first
+time it will be slower, subsequent operations will be faster.</p>
+<p>After the service starts, it should show a website in the screen, by
+default it loads https://wpewebkit.org but this can be changed with
+the environment variable <code>WPE_URL</code>.</p>
+<p>Additionally, this <em>block</em> ships with
+<a href="https://github.com/mozz100/tohora/">tohora</a>, which is a simple
+interface to change the URL being shown, in port 8080:
+<code>http://devicename.local:8080/</code>.</p>
+<h2 id="demos" tabindex="-1">Demos</h2>
+<h3 id="css-transformation-and-animations-in" tabindex="-1">CSS transformation and animations in</h3>
+<pre><code>[WebKit poster circle example](https://webkit.org/blog-files/3d-transforms/poster-circle.html)
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/postercircle.gif" alt="WebKit poster circle demo"></p>
+<h3 id="playing-an-embedded-video-from" tabindex="-1">Playing an embedded video from</h3>
+<pre><code>[wpewebkit.org](https://wpewebkit.org/)
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/wpewebkitorg.gif" alt="Embedded video demo"></p>
+<h3 id="playing-bouncyballs" tabindex="-1">Playing <a href="https://bouncyballs.org/">BouncyBalls</a></h3>
+<p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/bouncyballs.gif" alt="Playing BouncyBalls demo"></p>
+<h3 id="rendering-webgl" tabindex="-1">Rendering WebGL</h3>
+<pre><code>[Aquarium](https://webglsamples.org/aquarium/aquarium.html) demo
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_aquarium.gif" alt="Rendering WebGL Aquarium demo"></p>
+<h3 id="rendering-webgl-1" tabindex="-1">Rendering WebGL</h3>
+<pre><code>[Abstract Shapes](https://mrdoob.neocities.org/023/)
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_abstractshapes.gif" alt="Rendering WebGL Abstract Shapes demo"></p>
+<h2 id="further-info" tabindex="-1">Further info</h2>
+<p>Check this collection of blog posts for more info, tips, new releases,
+etc: <a href="https://http503.gvatas.in/category/services/balena/">https://http503.gvatas.in/category/services/balena/</a></p>
+
 
         <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/mafm-exploring/"><i class="icon-home mr-1"></i> Home</a></p>
       </div>
