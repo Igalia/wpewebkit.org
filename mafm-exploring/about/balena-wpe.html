@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-02-22T22:45:08.243Z">
+  <meta property="article:published_time" content="2022-02-22T22:48:00.640Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -144,11 +144,14 @@ $ cd balena-wpe
 
 $ balena push devicename.local
 </code></pre>
-<p>This will need to pull the base images into the device, so the first
-time it will be slower, subsequent operations will be faster.</p>
-<p>After the service starts, it should show a website in the screen, by
-default it loads https://wpewebkit.org but this can be changed with
-the environment variable <code>WPE_URL</code>.</p>
+<p>The first time it will be slow because it needs to pull the base
+images into the device, but subsequent operations will be faster.</p>
+<p>During all of these operations, the log messages are shown in the
+console where these commands were issued.</p>
+<p>After the service starts, it should show a website in the screen
+connected to your device.  By default it loads
+<a href="https://wpewebkit.org">https://wpewebkit.org</a>, but this can be
+changed with the environment variable <code>WPE_URL</code>.</p>
 <p>Additionally, this <em>block</em> ships with
 <a href="https://github.com/mozz100/tohora/">tohora</a>, which is a simple
 interface to change the URL being shown, in port 8080:
