@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-02-23T11:29:14.273Z">
+  <meta property="article:published_time" content="2022-02-23T14:59:17.318Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -117,28 +117,29 @@ supported by Balena.</p>
 guide</a>
 and select the device in the droplist below the header for your
 particular case.</p>
-<p>As a quick overview, these are the steps that you should perform to
-join the public <em>fleet</em> (to make your device run the service directly
-with less configuration steps, for quick evaluation):</p>
+<p>Joining the public <em>fleet</em> for WPE with your hardware devices is a
+convenient way to test WPE for a quick evaluation, because it takes
+few steps to get the service running on several devices.</p>
+<p>As a quick overview, these are the steps that you should perform:</p>
 <ol>
 <li>
 <p>Go to <a href="https://hub.balena.io/wpe_webkit/balenawpe">https://hub.balena.io/wpe_webkit/balenawpe</a></p>
 </li>
 <li>
-<p>Select the appropriate device (there are fewer supported in this
-public <em>fleet</em> that the general support of BalenaOS) and fill in
-basic configuration parameters, such as network</p>
+<p>Select the appropriate device (there are fewer devices supported in
+this public <em>fleet</em> than the general support of BalenaOS) and fill
+in basic configuration parameters, such as wireless network</p>
 </li>
 <li>
-<p>Download the image to <em>flash</em> to the device</p>
+<p>Download the image to <em>flash</em></p>
 </li>
 <li>
 <p>Write the image to a micro-SD card or similar method appropriate
 for your use-case</p>
 </li>
 <li>
-<p>After finishing with booting and configuration, the device should
-be part of the public fleet and running <code>balena-wpe</code></p>
+<p>After finishing with booting and configuration, the device(s)
+should be part of the public fleet and running <code>balena-wpe</code></p>
 </li>
 </ol>
 <p>See <a href="#service-running-and-urls">Service running and URLs</a> for testing.</p>
@@ -156,7 +157,7 @@ particular case.</p>
 <p>Go to <a href="https://www.balena.io/os/">https://www.balena.io/os/</a></p>
 </li>
 <li>
-<p>Select the appropriate device, and either the Production or
+<p>Select the appropriate type of device, and either the Production or
 Development flavour of the image, and download it</p>
 </li>
 <li>
@@ -171,9 +172,9 @@ configuration and write the image, but other methods can be
 used.</p>
 </blockquote>
 <h3 id="run-balena-wpe-block-(container-service)" tabindex="-1">Run Balena-WPE <em>block</em> (container service)</h3>
-<p>This can be done following the “Running your first Container” section
-in the Getting Started guide, but using the URL for the source of the
-<code>balena-wpe</code> block instead.</p>
+<p>This can be done following the <a href="https://www.balena.io/os/docs/raspberrypi3/getting-started/#Running-your-first-Container">Running your first Container</a>
+section in the Getting Started guide, but using the URL for the source
+of the <code>balena-wpe</code> block instead.</p>
 <p>Using <code>balena-cli</code> tools, the basic steps are:</p>
 <pre><code class="language-shell">$ git clone https://github.com/Igalia/balena-wpe.git
 
@@ -181,8 +182,8 @@ $ cd balena-wpe
 
 $ balena push devicename.local
 </code></pre>
-<p>The first time it will be slow because it needs to pull the base
-images into the device, but subsequent operations will be faster.</p>
+<p>The first time it will be slow because the base images need to be
+pulled into the device, but subsequent operations will be faster.</p>
 <p>During all of these operations, the log messages are shown in the
 console where these commands were issued.</p>
 <p>See <a href="#service-running-and-urls">Service running and URLs</a> for testing.</p>
