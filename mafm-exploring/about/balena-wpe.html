@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-02-22T23:11:57.425Z">
+  <meta property="article:published_time" content="2022-02-23T11:14:56.651Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -112,7 +112,43 @@ remotely.</p>
 <p>As WPE maintainers, we created a so-called <em>block</em> (somewhat akin to a
 <em>service</em>) to allow users to deploy WPE-based services in devices
 supported by Balena.</p>
-<h2 id="install-balena-os" tabindex="-1">Install Balena OS</h2>
+<h2 id="add-your-device-to-the-public-fleet" tabindex="-1">Add your device to the public <em>fleet</em></h2>
+<p>The first thing to do is to download an OS image based on Yocto Linux
+for the device that you are interested in.</p>
+<p>Check the <a href="https://www.balena.io/os/docs/raspberrypi3/getting-started/">Getting Started
+guide</a>
+and select the device in the droplist below the header for your
+particular case.</p>
+<p>As a quick overview, these are the steps that you should perform:</p>
+<ol>
+<li>
+<p>Go to <a href="https://hub.balena.io/wpe_webkit/balenawpe">https://hub.balena.io/wpe_webkit/balenawpe</a></p>
+</li>
+<li>
+<p>Select the appropriate device and basic configuration parameters,
+such as network</p>
+</li>
+<li>
+<p>Download the image to <em>flash</em> to the device</p>
+</li>
+<li>
+<p>Write the image to a micro-SD card or similar method appropriate
+for your use-case</p>
+</li>
+<li>
+<p>After finishing with booting and configuration, the device should
+be part of the public fleet and running <code>balena-wpe</code></p>
+</li>
+</ol>
+<p>See <a href="#service-running-and-urls">Service running and URLs</a> for testing.</p>
+<blockquote>
+<p><em>Note</em>: In the Getting Started guide it recommends to use
+<code>balena-cli</code> tools, as it’s easier to do the initial
+configuration and write the image, but other methods can be
+used.</p>
+</blockquote>
+<h2 id="manual-installation" tabindex="-1">Manual installation</h2>
+<h3 id="install-balena-os" tabindex="-1">Install Balena OS</h3>
 <p>The first thing to do is to download an OS image based on Yocto Linux
 for the device that you are interested in.</p>
 <p>Check the <a href="https://www.balena.io/os/docs/raspberrypi3/getting-started/">Getting Started
@@ -139,7 +175,7 @@ for your use-case</p>
 configuration and write the image, but other methods can be
 used.</p>
 </blockquote>
-<h2 id="run-balena-wpe-block-(container-service)" tabindex="-1">Run Balena-WPE <em>block</em> (container service)</h2>
+<h3 id="run-balena-wpe-block-(container-service)" tabindex="-1">Run Balena-WPE <em>block</em> (container service)</h3>
 <p>This can be done following the “Running your first Container” section
 in the Getting Started guide, but using the URL for the source of the
 <code>balena-wpe</code> block instead.</p>
@@ -154,6 +190,8 @@ $ balena push devicename.local
 images into the device, but subsequent operations will be faster.</p>
 <p>During all of these operations, the log messages are shown in the
 console where these commands were issued.</p>
+<p>See <a href="#service-running-and-urls">Service running and URLs</a> for testing.</p>
+<h2 id="service-running-and-urls" tabindex="-1">Service running and URLs</h2>
 <p>After the service starts, it should show a website in the screen
 connected to your device.  By default it loads
 <a href="https://wpewebkit.org">https://wpewebkit.org</a>, but this can be
@@ -162,6 +200,7 @@ changed with the environment variable <code>WPE_URL</code>.</p>
 <a href="https://github.com/mozz100/tohora/">tohora</a>, which is a simple
 interface to change dynamically the URL being shown, in port 8080:
 <code>http://devicename.local:8080/</code>.</p>
+<p>{::comment}</p>
 <h2 id="demos" tabindex="-1">Demos</h2>
 <h3 id="css-transformation-and-animations-in-webkit-poster-circle-example" tabindex="-1">CSS transformation and animations in <a href="https://webkit.org/blog-files/3d-transforms/poster-circle.html">WebKit poster circle example</a></h3>
 <p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/postercircle.gif" alt="Image: WebKit poster circle demo"></p>
@@ -172,7 +211,8 @@ interface to change dynamically the URL being shown, in port 8080:
 <h3 id="rendering-webgl-aquarium-demo" tabindex="-1">Rendering WebGL <a href="https://webglsamples.org/aquarium/aquarium.html">Aquarium</a> demo</h3>
 <p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_aquarium.gif" alt="Image: Rendering WebGL Aquarium demo"></p>
 <h3 id="rendering-webgl-abstract-shapes" tabindex="-1">Rendering WebGL <a href="https://mrdoob.neocities.org/023/">Abstract Shapes</a></h3>
-<p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_abstractshapes.gif" alt="Image: Rendering WebGL Abstract Shapes demo"></p>
+<p><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_abstractshapes.gif" alt="Image: Rendering WebGL Abstract Shapes demo">
+{:/comment}</p>
 <h2 id="demos-w%2F-markdown-tables" tabindex="-1">Demos w/ Markdown Tables</h2>
 <table>
 <thead>
@@ -203,49 +243,6 @@ interface to change dynamically the URL being shown, in port 8080:
 <td style="text-align:center"><img src="https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_abstractshapes.gif" alt="Image: Rendering WebGL Abstract Shapes demo"></td>
 </tr>
 </tbody>
-</table>
-<h2 id="demos-w%2F-ye-olde-html-tables" tabindex="-1">Demos w/ Ye Olde HTML Tables</h2>
-<table>
-  <tr>
-    <td>
-      CSS transformation and animations in [WebKit poster circle example](https://webkit.org/blog-files/3d-transforms/poster-circle.html)
-    </td>
-    <td>
-      ![Image: WebKit poster circle demo](https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/postercircle.gif)
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Playing an embedded video from [wpewebkit.org](https://wpewebkit.org/)
-    </td>
-    <td>
-      ![Image: Embedded video demo](https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/wpewebkitorg.gif)
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Playing [BouncyBalls](https://bouncyballs.org/)
-    </td>
-    <td>
-      ![Image: Playing BouncyBalls demo](https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/bouncyballs.gif)
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Rendering WebGL [Aquarium](https://webglsamples.org/aquarium/aquarium.html) demo
-    </td>
-    <td>
-      ![Image: Rendering WebGL Aquarium demo](https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_aquarium.gif)
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Rendering WebGL [Abstract Shapes](https://mrdoob.neocities.org/023/)
-    </td>
-    <td>
-      ![Image: Rendering WebGL Abstract Shapes demo](https://raw.githubusercontent.com/igalia/balena-wpe/master/static/resources/webgl_abstractshapes.gif)
-    </td>
-  </tr>
 </table>
 <h2 id="further-info" tabindex="-1">Further info</h2>
 <p>Check this collection of blog posts for more info, tips, new releases,
