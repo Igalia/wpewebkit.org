@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-02-23T14:59:17.318Z">
+  <meta property="article:published_time" content="2022-02-23T15:02:16.612Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -185,17 +185,18 @@ $ balena push devicename.local
 <p>The first time it will be slow because the base images need to be
 pulled into the device, but subsequent operations will be faster.</p>
 <p>During all of these operations, the log messages are shown in the
-console where these commands were issued.</p>
+console where these commands were issued, to see the progress or
+possible problems.</p>
 <p>See <a href="#service-running-and-urls">Service running and URLs</a> for testing.</p>
 <h2 id="service-running-and-urls" tabindex="-1">Service running and URLs</h2>
 <p>After the service starts, it should show a website in the screen
 connected to your device.  By default it loads
 <a href="https://wpewebkit.org">https://wpewebkit.org</a>, but this can be
-changed with the environment variable <code>WPE_URL</code>.</p>
+changed with the environment variable <code>WPE_URL</code> in the container.</p>
 <p>Additionally, this <em>block</em> ships with
 <a href="https://github.com/mozz100/tohora/">tohora</a>, which is a simple
-interface to change dynamically the URL being shown, in port 8080:
-<code>http://devicename.local:8080/</code>.</p>
+interface to change dynamically the URL being shown.  It can be
+accessed in port 8080: <code>http://devicename.local:8080/</code>.</p>
 <!-- {::comment}
 ## Demos
 
