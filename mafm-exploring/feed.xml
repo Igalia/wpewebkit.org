@@ -4,8 +4,64 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-02-17T00:00:00Z</updated>
+  <updated>2022-02-25T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.35.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/wpewebkit-2.35.90.html"/>
+    <updated>2022-02-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/wpewebkit-2.35.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.35.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.35.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix scrolling with the mouse wheel on sites using overscroll-behavior.&lt;/li&gt;
+&lt;li&gt;Suspend web processes after some time in the process cache.&lt;/li&gt;
+&lt;li&gt;Ensure EGL displays are terminated before web process exits.&lt;/li&gt;
+&lt;li&gt;Deinitialize GStreamer before the web process exits.&lt;/li&gt;
+&lt;li&gt;Make fonts under &lt;code&gt;XDG_DATA_DIRS&lt;/code&gt; available in the web process sanbox.&lt;/li&gt;
+&lt;li&gt;Canonicalize paths passed to the Bubblewrap launcher.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;WebKitSettings:enable-developer-extras&lt;/code&gt; option is no longer enabled by default.&lt;/li&gt;
+&lt;li&gt;Allow tweaking media source buffering with the &lt;code&gt;MSE_MAX_BUFFER_SIZE&lt;/code&gt;, and configure
+regular playback on-disk buffering with &lt;code&gt;WPE_SHELL_DISABLE_MEDIA_DISK_CACHE&lt;/code&gt; and
+&lt;code&gt;WPE_SHELL_MEDIA_DISK_CACHE_PATH&lt;/code&gt; environment variables.&lt;/li&gt;
+&lt;li&gt;Add new accessibility implementation using ATSPI D-Bus interfaces instead of ATK.&lt;/li&gt;
+&lt;li&gt;Add support for &lt;code&gt;requestVideoFrameCallback()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix a crash at startup when the Bubblewrap sandbox is enabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.35.90.tar.xz (25.8 MiB)
+   md5sum: 6a3b5462dd1f7fdd18f5f776259ff04b
+   sha1sum: 719bca6dee53e18f336cfb24058445253bc6bedc
+   sha256sum: 5bcd55923b7c425ea8f04c6733a33706410f1508b912d6b676e681459b703d76
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.12.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/cog-0.12.1.html"/>
+    <updated>2022-02-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/cog-0.12.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 0.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;wl: Fixed handling of supported Wayland protocol versions, preventing a
+crash with certain compositors which advertise support for newer versions
+than actually supported by the client.&lt;/li&gt;
+&lt;li&gt;Fixed the location used by CMake to install platform plug-ins.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.12.1.tar.xz (109.4 KiB)
+   md5sum: 25a80a5a8a52b8873933a128151b8928
+   sha1sum: 3b9f67bc23cd9e3db2221366d6cde4ca0b06b811
+   sha256sum: 23caaafa2ef5c2f6a97d467fcce908ea71087ad03b72deb9280225c0dd561c91
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.34.6 released</title>
@@ -364,164 +420,6 @@ wpewebkit-2.34.3.tar.xz (22.5 MiB)
    md5sum: f8eb92825bf6477fb04ca017926c2458
    sha1sum: a72f507dfd6d4d579b2e6c939d7c171c2cfb1d92
    sha256sum: c35de4bfce35c81cbd6c1da27879b4ea33e20bd51d750ce296a4d100d45f40fc
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2021-0007</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html"/>
-    <updated>2021-12-20T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html</id>
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Date Reported: &lt;strong&gt;December 20, 2021&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2021-0007&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30809&quot;&gt;CVE-2021-30809&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30818&quot;&gt;CVE-2021-30818&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30823&quot;&gt;CVE-2021-30823&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30836&quot;&gt;CVE-2021-30836&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30884&quot;&gt;CVE-2021-30884&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30887&quot;&gt;CVE-2021-30887&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30888&quot;&gt;CVE-2021-30888&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30889&quot;&gt;CVE-2021-30889&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30890&quot;&gt;CVE-2021-30890&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-exploring/security/WSA-2021-0007.html#CVE-2021-30897&quot;&gt;CVE-2021-30897&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30809&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30809&quot;&gt;CVE-2021-30809&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.32.4.&lt;/li&gt;
-&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A use after free issue was
-addressed with improved memory management.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30818&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30818&quot;&gt;CVE-2021-30818&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.0.&lt;/li&gt;
-&lt;li&gt;Credit to Amar Menezes (@amarekano) of Zon8Research.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A type confusion issue was
-addressed with improved state handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30823&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30823&quot;&gt;CVE-2021-30823&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.0.&lt;/li&gt;
-&lt;li&gt;Credit to David Gullasch of Recurity Labs.&lt;/li&gt;
-&lt;li&gt;Impact: An attacker in a privileged network position may be able to
-bypass HSTS. Description: A logic issue was addressed with improved
-restrictions.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30836&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30836&quot;&gt;CVE-2021-30836&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.32.4.&lt;/li&gt;
-&lt;li&gt;Credit to Peter Nguyen Vu Hoang of STAR Labs.&lt;/li&gt;
-&lt;li&gt;Impact: Processing a maliciously crafted audio file may disclose
-restricted memory. Description: An out-of-bounds read was addressed
-with improved input validation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30884&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30884&quot;&gt;CVE-2021-30884&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.0.&lt;/li&gt;
-&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: Visiting a maliciously crafted website may reveal a user’s
-browsing history. Description: The issue was resolved with
-additional restrictions on CSS compositing.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30887&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30887&quot;&gt;CVE-2021-30887&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.3.&lt;/li&gt;
-&lt;li&gt;Credit to Narendra Bhati (@imnarendrabhati) of Suma Soft Pvt. Ltd.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-unexpectedly unenforced Content Security Policy. Description: A
-logic issue was addressed with improved restrictions.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30888&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30888&quot;&gt;CVE-2021-30888&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.0.&lt;/li&gt;
-&lt;li&gt;Credit to Prakash (@1lastBr3ath).&lt;/li&gt;
-&lt;li&gt;Impact: A malicious website using Content Security Policy reports
-may be able to leak information via redirect behavior. Description:
-An information leakage issue was addressed.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30889&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30889&quot;&gt;CVE-2021-30889&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.0.&lt;/li&gt;
-&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
-lab.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution, Description: A buffer overflow issue was
-addressed with improved memory handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30890&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30890&quot;&gt;CVE-2021-30890&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.3.&lt;/li&gt;
-&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-universal cross site scripting. Description: A logic issue was
-addressed with improved state management.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2021-30897&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30897&quot;&gt;CVE-2021-30897&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.0.&lt;/li&gt;
-&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: A malicious website may exfiltrate data cross-origin.
-Description: An issue existed in the specification for the resource
-timing API. The specification was updated and the updated
-specification was implemented.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
-WebKit. It is the best way to ensure that you are running safe versions
-of WebKit. Please check our websites for information about the latest
-stable releases.&lt;/p&gt;
-&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
-&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.13.2 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/cog-0.13.2.html"/>
-    <updated>2021-12-09T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/mafm-exploring/release/cog-0.13.2.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 0.14 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.13.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.13.2?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;launcher: Add new &lt;code&gt;--platform-params&lt;/code&gt;/&lt;code&gt;-O&lt;/code&gt; command line option, which
-allows passing parameters to platforms plug-ins during initialization.&lt;/li&gt;
-&lt;li&gt;drm: Add support for output rotation by means of a new OpenGL ES based
-renderer, which can be enabled with &lt;code&gt;cog -O renderer=gles,rotation=1&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;drm: Rotate input device coordinates as needed to match output rotation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.13.2.tar.xz (116.5 KiB)
-   md5sum: 57026de891085ed2efbd7d0a92b5f3e7
-   sha1sum: 7a69602b4ae2cd7bea03e2ebfdc33c7bcde181a3
-   sha256sum: 93dcc2a012ae8d261131c91e090c7a3ff5e530e7757a33c50bb2a6cc1523a0dd
 &lt;/pre&gt;
 </content>
   </entry>
