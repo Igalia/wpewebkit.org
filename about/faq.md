@@ -41,7 +41,7 @@ The WPE project currently does not have an official list of the Web features it 
 
 ## What's the status regarding WebRTC? 
 
-As of end of 2020 the facts are:
+As of March 2022 the facts are:
 
 1. [WPEWebKit upstream has support for WebRTC](https://blogs.gnome.org/tsaunier/2018/07/31/webkitgtk-and-wpe-gains-webrtc-support-back/), by relying on [LibWebRTC](https://webrtc.googlesource.com/src/).
 2. LibWebRTC is bundled as third-party library in WebKit's upstream repository.
@@ -56,8 +56,8 @@ Taking these facts into account, the WPEWebKit maintainers have decided to leave
   and redistribution in binary form.
 - The lack of hardware-accelerated support in LibWebRTC would incur a bad
   performance impact on the embedded platforms that WPE targets.
-  
-In order to solve these issues, an alternative WebRTC backend based on [GstWebRTC](http://blog.nirbheek.in/2018/02/gstreamer-webrtc.html) will be merged in WPE upstream, most likely in 2021. This new backend will seamlessly integrate with hardware-accelerated encoders and decoders on most embedded platforms. GstWebRTC depends on [OpenSSL](https://www.openssl.org/), which is released under an Apache-style license, so it doesn't have limitations regarding redistribution in binary form.
+
+In order to solve these issues, an alternative WebRTC backend based on [GstWebRTC](http://blog.nirbheek.in/2018/02/gstreamer-webrtc.html) will be merged in WPE upstream, most likely during 2022; bug [#235885](https://bugs.webkit.org/show_bug.cgi?id=235885) is being used to track progress. This new backend will seamlessly integrate with hardware-accelerated encoders and decoders on most embedded platforms. GstWebRTC depends on [OpenSSL](https://www.openssl.org/), which is released under an Apache-style license, so it doesn't have limitations regarding redistribution in binary form.
 
 
 ## What's up with EME? How can I support this feature in my WPE-based product?
