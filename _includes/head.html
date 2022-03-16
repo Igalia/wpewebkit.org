@@ -25,7 +25,7 @@
     {%- endif -%}
   {%- endif %}
 
-  <title>{{% title | escape }}</title>
+  <title>{{ title | escape }}</title>
   {%- if page_description %}
   <meta name="description" content="{{ page_description | escape }}">
   {%- endif %}

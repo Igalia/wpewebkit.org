@@ -18,6 +18,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('assets')
   eleventyConfig.addPlugin(pluginRss);
   
+  eleventyConfig.setLiquidOptions({
+    dynamicPartials: false,
+    strictFilters: false, // renamed from `strict_filters` in Eleventy 1.0
+  });
+
   eleventyConfig.addFilter("dateString", (value) => {
     return new Date(value).toDateString();
   });
