@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2022-02-25T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.35.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.35.90.html"/>
+    <updated>2022-02-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.35.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.35.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.35.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix scrolling with the mouse wheel on sites using overscroll-behavior.&lt;/li&gt;
+&lt;li&gt;Suspend web processes after some time in the process cache.&lt;/li&gt;
+&lt;li&gt;Ensure EGL displays are terminated before web process exits.&lt;/li&gt;
+&lt;li&gt;Deinitialize GStreamer before the web process exits.&lt;/li&gt;
+&lt;li&gt;Make fonts under &lt;code&gt;XDG_DATA_DIRS&lt;/code&gt; available in the web process sanbox.&lt;/li&gt;
+&lt;li&gt;Canonicalize paths passed to the Bubblewrap launcher.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;WebKitSettings:enable-developer-extras&lt;/code&gt; option is no longer enabled by default.&lt;/li&gt;
+&lt;li&gt;Allow tweaking media source buffering with the &lt;code&gt;MSE_MAX_BUFFER_SIZE&lt;/code&gt;, and configure
+regular playback on-disk buffering with &lt;code&gt;WPE_SHELL_DISABLE_MEDIA_DISK_CACHE&lt;/code&gt; and
+&lt;code&gt;WPE_SHELL_MEDIA_DISK_CACHE_PATH&lt;/code&gt; environment variables.&lt;/li&gt;
+&lt;li&gt;Add new accessibility implementation using ATSPI D-Bus interfaces instead of ATK.&lt;/li&gt;
+&lt;li&gt;Add support for &lt;code&gt;requestVideoFrameCallback()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix a crash at startup when the Bubblewrap sandbox is enabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.35.90.tar.xz (25.8 MiB)
+   md5sum: 6a3b5462dd1f7fdd18f5f776259ff04b
+   sha1sum: 719bca6dee53e18f336cfb24058445253bc6bedc
+   sha256sum: 5bcd55923b7c425ea8f04c6733a33706410f1508b912d6b676e681459b703d76
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.12.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/cog-0.12.1.html"/>
+    <updated>2022-02-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/cog-0.12.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 0.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;wl: Fixed handling of supported Wayland protocol versions, preventing a
+crash with certain compositors which advertise support for newer versions
+than actually supported by the client.&lt;/li&gt;
+&lt;li&gt;Fixed the location used by CMake to install platform plug-ins.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.12.1.tar.xz (109.4 KiB)
+   md5sum: 25a80a5a8a52b8873933a128151b8928
+   sha1sum: 3b9f67bc23cd9e3db2221366d6cde4ca0b06b811
+   sha256sum: 23caaafa2ef5c2f6a97d467fcce908ea71087ad03b72deb9280225c0dd561c91
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.34.6 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.34.6.html"/>
+    <updated>2022-02-17T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.34.6.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.6%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.6?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix accessibility not working when the Bubblewrap sandbox is enabled.&lt;/li&gt;
+&lt;li&gt;Fix the build in a number of situations where the main OpenGL library is
+not called &lt;code&gt;libGL&lt;/code&gt; or &lt;code&gt;libgl&lt;/code&gt;, as is the case on systems that use
+&lt;code&gt;libglvnd&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.34.6.tar.xz (22.5 MiB)
+   md5sum: c9705270b342474cca28cf51632ccbbe
+   sha1sum: 44ae95de1b5ebf0a2b0ea3630b3677153c597402
+   sha256sum: 301e895c8ed08ce7dccef3192b972f2ccfc2020463244c64069a636f2b05265f
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0003</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0003.html"/>
+    <updated>2022-02-17T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0003.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 17, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0003&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0003.html#CVE-2022-22620&quot;&gt;CVE-2022-22620&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2022-22620&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22620&quot;&gt;CVE-2022-22620&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.6.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A use after free
+issue was addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.34.5 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.34.5.html"/>
+    <updated>2022-02-09T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.34.5.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.5?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve VP8 codec selection when using GStreamer 1.20.&lt;/li&gt;
+&lt;li&gt;Fix connecting to the accessibility bus when using the Bubblewrap sandbox.&lt;/li&gt;
+&lt;li&gt;Fix the build with recent toolchains based on GCC 12 and on older ones as included e.g. in Ubuntu 18.04.&lt;/li&gt;
+&lt;li&gt;Fix the build with ICU 60, version 61 is no longer required.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.34.5.tar.xz (22.5 MiB)
+   md5sum: 27a8b9714868dd890d4a54f4ae4cf2b1
+   sha1sum: 63259a958a380cc8c75a4f51dada630f4fe5dc1e
+   sha256sum: 0ef187cdcb83dbe9e7b2870f43543b68766ea3535fe8b056866e8e1d3ef02bc1
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0002</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0002.html"/>
+    <updated>2022-02-09T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0002.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 09, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0002&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0002.html#CVE-2022-22589&quot;&gt;CVE-2022-22589&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0002.html#CVE-2022-22590&quot;&gt;CVE-2022-22590&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0002.html#CVE-2022-22592&quot;&gt;CVE-2022-22592&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22589&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22589&quot;&gt;CVE-2022-22589&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.5.&lt;/li&gt;
+&lt;li&gt;Credit to Heige of KnownSec 404 Team (knownsec.com) and Bo Qu of
+Palo Alto Networks (paloaltonetworks.com).&lt;/li&gt;
+&lt;li&gt;Impact: Processing a maliciously crafted mail message may lead to
+running arbitrary javascript. Description: A validation issue was
+addressed with improved input sanitization.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22590&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22590&quot;&gt;CVE-2022-22590&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.5.&lt;/li&gt;
+&lt;li&gt;Credit to Toan Pham from Team Orca of Sea Security
+(security.sea.com).&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22592&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22592&quot;&gt;CVE-2022-22592&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.5.&lt;/li&gt;
+&lt;li&gt;Credit to Prakash (@1lastBr3ath).&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may prevent
+Content Security Policy from being enforced. Description: A logic
+issue was addressed with improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.34.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.34.4.html"/>
+    <updated>2022-01-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.34.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.34.4.tar.xz (22.5 MiB)
+   md5sum: b0f7dcb18acfa94cfb42fea0fe10fb0d
+   sha1sum: de58481b43a6dba054097f619ee486f7889d7a56
+   sha256sum: 3653ba42dbe22a4e6751b3f7cab8d2ebb2db5b7654c5d135a2f9bedf94778cee
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0001</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html"/>
+    <updated>2022-01-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;January 21, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0001&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-30934&quot;&gt;CVE-2021-30934&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-30936&quot;&gt;CVE-2021-30936&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-30951&quot;&gt;CVE-2021-30951&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-30952&quot;&gt;CVE-2021-30952&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-30953&quot;&gt;CVE-2021-30953&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-30954&quot;&gt;CVE-2021-30954&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-30984&quot;&gt;CVE-2021-30984&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2022-22594&quot;&gt;CVE-2022-22594&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-45481&quot;&gt;CVE-2021-45481&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-45482&quot;&gt;CVE-2021-45482&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/security/WSA-2022-0001.html#CVE-2021-45483&quot;&gt;CVE-2021-45483&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-30934&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30934&quot;&gt;CVE-2021-30934&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to Dani Biro.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A buffer overflow issue was
+addressed with improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-30936&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30936&quot;&gt;CVE-2021-30936&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-30951&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30951&quot;&gt;CVE-2021-30951&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to Pangu.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-30952&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30952&quot;&gt;CVE-2021-30952&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to WeBin.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An integer overflow was
+addressed with improved input validation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-30953&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30953&quot;&gt;CVE-2021-30953&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to VRIJ.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An out-of-bounds read was
+addressed with improved bounds checking.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-30954&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30954&quot;&gt;CVE-2021-30954&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to Kunlun Lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A type confusion issue was
+addressed with improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-30984&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30984&quot;&gt;CVE-2021-30984&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to Kunlun Lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A race condition was
+addressed with improved state handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22594&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22594&quot;&gt;CVE-2022-22594&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to Martin Bajanik of fingerprintjs.com.&lt;/li&gt;
+&lt;li&gt;Impact: A website may be able to track sensitive user information.
+Description: A cross-origin issue in the IndexDB API was addressed
+with improved input validation. Notes: There is a public PoC
+demonstrating this issue at safarileaks.com so it may have been
+actively exploited.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-45481&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45481&quot;&gt;CVE-2021-45481&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.0.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Processing maliciously crafted web content may cause an application
+crash due to an incorrect memory allocation in
+WebCore::ImageBufferCairoImageSurfaceBackend::create.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-45482&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45482&quot;&gt;CVE-2021-45482&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.32.4.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Processing maliciously crafted web content may cause a memory
+corruption issue (use-after-free) in
+WebCore::ContainerNode::firstChild.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2021-45483&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45483&quot;&gt;CVE-2021-45483&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.34.0.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Processing maliciously crafted web content may cause a memory
+corruption issue (heap-use-after-free) in WebCore::Frame::page.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.13.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/cog-0.13.3.html"/>
+    <updated>2022-01-12T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/cog-0.13.3.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 0.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.13.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.13.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;core: Fix platform plug-ins not being found due to &lt;code&gt;COG_MODULEDIR&lt;/code&gt; being
+incorrectly defined as a relative path at build configuration time.&lt;/li&gt;
+&lt;li&gt;gtk4: Fix handling of mouse events when teh device scale factor changes.&lt;/li&gt;
+&lt;li&gt;gtk4: Improve compatibility with more graphics drivers by marking shaders
+as compatible with all GLSL versions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.13.3.tar.xz (117.3 KiB)
+   md5sum: f3f59b4c8e0336baf27be602ddc6f842
+   sha1sum: b045d5ac0098fee33ac53f88488aac804150c7aa
+   sha256sum: d411142cd44781629e26b1fa8a8e5b8de45ca43014fdbdebdfa39a8b2c1eda4b
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.34.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.34.3.html"/>
+    <updated>2021-12-20T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/compat-table-2.36/release/wpewebkit-2.34.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Make audio tools (like mixers) display the actual name of the application
+producing sound, instead of a generic one.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.34.3.tar.xz (22.5 MiB)
+   md5sum: f8eb92825bf6477fb04ca017926c2458
+   sha1sum: a72f507dfd6d4d579b2e6c939d7c171c2cfb1d92
+   sha256sum: c35de4bfce35c81cbd6c1da27879b4ea33e20bd51d750ce296a4d100d45f40fc
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
