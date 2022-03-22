@@ -39,4 +39,10 @@ layout: page
     </div>
   </div>
 </section>
+
+<!-- For blog posts -->
+{% if author %}
+{% include _authors/{{ author }}.html %}
+{% endif %}
+
 </div>
