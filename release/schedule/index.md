@@ -49,13 +49,14 @@ version number stays the same:
 
 The following table summarizes which *stable* releases of libwpe, WPE WebKit,
 WPEBackend-fdo, and Cog are compatible and tested with each other (updated
-October 2021). Distributors and packagers are strongly advised to use the
+March 2022). Distributors and packagers are strongly advised to use the
 versions listed below.
 
 | **WPE WebKit** | **libwpe**   | **WPEBackend-fdo** | **Cog**      |
 |:--------------:|:------------:|:------------------:|:------------:|
-| 2.34.x         | 1.12.x, 1.10.x, 1.8.x | 1.12.x, 1.10.x | 0.8.x, 0.10.x, 0.12.x |
-| 2.32.x         | 1.10.x, 1.8.x, 1.6.x | 1.10.x, 1.8.x | 0.8.x, 0.10.x |
+| 2.36.x         | 1.12.x, 1.10.x | 1.12.x, 1.10.x | 0.14.x, 0.12.x, 0.10.x | 
+| 2.34.x         | 1.12.x, 1.10.x, 1.8.x | 1.12.x, 1.10.x | 0.12.x, 0.10.x, 0.8.x |
+| 2.32.x         | 1.10.x, 1.8.x, 1.6.x | 1.10.x, 1.8.x | 0.10.x, 0.8.x |
 | 2.30.x         | 1.8.x, 1.6.x | 1.10.x, 1.8.x      | 0.8.x, 0.6.x |
 | 2.28.x         | 1.6.x        | 1.6.x              | 0.8.x, 0.6.x |
 | 2.26.x         | 1.4.x        | 1.4.x              | 0.4.x        |
