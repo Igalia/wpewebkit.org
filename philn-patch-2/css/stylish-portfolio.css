@@ -304,6 +304,24 @@ h6 {
 
   .footer.footer {
     grid-template-columns: 300px auto;
+    grid-template-rows: repeat(2,auto);
+  }
+  .footer.footer a.navbar-brand {
+  	grid-row: 1 / -1;
+  }
+  .footer.footer nav.social {
+    grid-column: 2;
+    align-self: end;
+  }
+  .footer.footer nav.social ul {
+    margin: 0;
+    padding: 0;
+  }
+  .footer.footer li {
+    display: inline;
+  }
+  .footer.footer li a {
+    display: inline;
   }
 }
 
@@ -425,8 +443,12 @@ footer .container {
   align-self: center; 
 }
 
-li ul {
-  margin-top: 0;
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 }
 
 #webkit-powers-embedded {
@@ -439,4 +461,8 @@ li ul {
 
 .text-light a {
   color: white;
+}
+
+blockquote {
+    background-color: rgba(230, 230, 230, 0.7);
 }
