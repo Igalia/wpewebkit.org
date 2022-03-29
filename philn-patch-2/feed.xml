@@ -4,8 +4,29 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-03-26T00:00:00Z</updated>
+  <updated>2022-03-30T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>Cog 0.12.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/philn-patch-2/release/cog-0.12.4.html"/>
+    <updated>2022-03-30T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/philn-patch-2/release/cog-0.12.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;wl: Fix software rendering support.&lt;/li&gt;
+&lt;li&gt;x11: Fix underlinking when passing the &lt;code&gt;--as-needed&lt;/code&gt; flag to the linker.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.12.4.tar.xz (109.8 KiB)
+   md5sum: cdb8acdc3acc9b5082e7db9c279155c3
+   sha1sum: 600b30efadf55bf94ea5062a0a1b2ea0b74053e5
+   sha256sum: 9983c621c8e14fca3792ff566cb6b86d6a1f17446eb4c083af4a5a749112982f
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.36.0 released</title>
@@ -275,26 +296,6 @@ of WebKit. Please check our websites for information about the latest
 stable releases.&lt;/p&gt;
 &lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
 &lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.34.4 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/philn-patch-2/release/wpewebkit-2.34.4.html"/>
-    <updated>2022-01-21T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/philn-patch-2/release/wpewebkit-2.34.4.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.4?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.34.4.tar.xz (22.5 MiB)
-   md5sum: b0f7dcb18acfa94cfb42fea0fe10fb0d
-   sha1sum: de58481b43a6dba054097f619ee486f7889d7a56
-   sha256sum: 3653ba42dbe22a4e6751b3f7cab8d2ebb2db5b7654c5d135a2f9bedf94778cee
-&lt;/pre&gt;
 </content>
   </entry>
 </feed>
