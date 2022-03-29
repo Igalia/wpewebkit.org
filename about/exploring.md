@@ -45,6 +45,7 @@ All of this said, we believe that enabling developers to explore the space is im
   * [Ubuntu](https://packages.ubuntu.com/search?keywords=wpewebkit&searchon=sourcenames&suite=all&section=all)
   * [Raspbian](https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/)
   * [Arch Linux](https://archlinux.org/packages/extra/x86_64/wpewebkit/)
+  * [Fedora](https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/)
 
 * [Install with Flatpak]({{'/about/flatpak.html' | url}}): If you have support for Flatpak on your current hardware and operating system, and your graphics drivers are supported, there are various options to try WPE through Flatpak.  This can be a very easy way to let you explore WPE, check the features and specifications supported by WPE, or just want to experiment and learn more about what some of the differences with a full browser are.
 
