@@ -45,15 +45,15 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // Site preview link already added.
             const { data: pr } = await github.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
             });
 
+            // Site preview link already added.
             const marker = '\n\n----\n\nSite preview: ';
-            if (pr.body.indexOf(marker) != -1)
+            if (pr.body && pr.body.indexOf(marker) != -1)
               return;
 
             await github.pulls.update({
