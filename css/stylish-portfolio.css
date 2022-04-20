@@ -472,16 +472,15 @@ blockquote {
 }
 
 .author-line {
-    margin-top: -2em;
+    margin-top: -2rem;
     border: 2px solid lightgray;
     width: 100%;
 }
 
 .circle-mask {
-    width: auto;
-    height: 125px;
-    border-radius: 50px;
-    overflow: hidden;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
-    margin-right: 2em;
+    width: 8rem;
+    height: auto;
+    float: left;
+    margin-right: 2rem;
+    border-radius: 50%;
 }
