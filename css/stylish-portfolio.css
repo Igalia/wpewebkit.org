@@ -2,6 +2,10 @@
   margin-right: 4rem;
 }
 
+strong {
+  font-weight: 800;
+}
+
 body,
 html {
   width: 100%;
@@ -307,7 +311,7 @@ h6 {
     grid-template-rows: repeat(2,auto);
   }
   .footer.footer a.navbar-brand {
-  	grid-row: 1 / -1;
+      grid-row: 1 / -1;
   }
   .footer.footer nav.social {
     grid-column: 2;
@@ -447,8 +451,8 @@ ol ol,
 ul ul,
 ol ul,
 ul ol {
-	margin-top: 1rem;
-	margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 #webkit-powers-embedded {
@@ -465,4 +469,19 @@ ul ol {
 
 blockquote {
     background-color: rgba(230, 230, 230, 0.7);
+}
+
+.author-line {
+    margin-top: -2em;
+    border: 2px solid lightgray;
+    width: 100%;
+}
+
+.circle-mask {
+    width: auto;
+    height: 125px;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+    margin-right: 2em;
 }

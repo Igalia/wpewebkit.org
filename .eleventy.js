@@ -1,6 +1,7 @@
 const MarkdownIt = require("markdown-it");
 const MarkdownItAnchor = require("markdown-it-anchor");
 const MarkdownItTOC = require("markdown-it-toc-done-right");
+const { DateTime } = require("luxon");
 
 class DefaultDict {
   constructor(defaultValue) {
@@ -23,6 +24,9 @@ module.exports = function(eleventyConfig) {
     strictFilters: false, // renamed from `strict_filters` in Eleventy 1.0
   });
 
+  eleventyConfig.addFilter("postDate", (dateObj) => {
+    return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+  });
   eleventyConfig.addFilter("dateString", (value) => {
     return new Date(value).toDateString();
   });
@@ -39,6 +43,13 @@ module.exports = function(eleventyConfig) {
     let i =0;
     return collectionApi.getFilteredByGlob("_posts/*.md").reverse().filter((item) => {
       return i++ < 10;
+    });
+  })
+
+  eleventyConfig.addCollection("recentBlogPosts", (collectionApi) => {
+    let i =0;
+    return collectionApi.getFilteredByTag("blogpost").reverse().filter((item) => {
+      return i++ < 5;
     });
   })
 
