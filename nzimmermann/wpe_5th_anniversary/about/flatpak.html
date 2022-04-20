@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>Try WPE with Flatpak</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/flatpak.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/nzimmermann/wpe_5th_anniversary/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/flatpak.html">
+  <meta property="og:title" content="Try WPE with Flatpak">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/nzimmermann/wpe_5th_anniversary/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/nzimmermann/wpe_5th_anniversary/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-04-20T20:57:52.138Z">
+  <meta property="article:tag" content="about">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/css/stylish-portfolio.css">
+
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/"><img width="200" src="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/assets/svg/blue_Web_Logo.svg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/">Home</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/blog">Blog</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/exploring.html">Explore WPE / Embedded</a>
+          <a class="dropdown-item" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/a-good-choice.html">Why Choose WPE</a>
+          <a class="dropdown-item" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/architecture.html">WPE Design</a>
+          <a class="dropdown-item" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/faq.html">FAQ</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/builds.html">Build it</a>
+          <a class="dropdown-item" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/schedule">Release Schedule</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/code">Code</a>
+      </li>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <div itemscope itemtype="http://schema.org/TechArticle">
+
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/nzimmermann/wpe_5th_anniversary/about/flatpak.html">
+
+<section class="content-section bg-primary text-white small-section">
+  <div class="container text-center">
+    <div class="content-section-heading">
+      
+      <h2 itemprop="headline">Try WPE with Flatpak</h2>
+	  
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light small-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
+
+        <p><a href="https://flatpak.org">Flatpak</a> is generally advertised as the next-generation
+technology for building and distributing applications on Linux. The WPE
+maintainers leverage Flatpak to allow users to try two different WPE flavors.</p>
+<h2 id="stable-wpe-releases" tabindex="-1">Stable WPE releases</h2>
+<p>Stable releases are packaged and available through Flatpak. Users and WPE
+application developers can easily try the <a href="https://github.com/igalia/cog">Cog WPE
+browser</a> and even build new applications relying
+on the WPE Sdk provided through Flatpak.</p>
+<p>Besides a <a href="https://flatpak.org/setup/">working Flatpak setup</a> you need to
+register the Igalia Flatpak repository in your Linux environment:</p>
+<pre><code class="language-shell">$ flatpak --user remote-add wpe-releases --from \
+  https://software.igalia.com/flatpak-refs/wpe-releases.flatpakrepo
+</code></pre>
+<p>This repository contains binary builds of WPE for the <code>x86_64</code> architecture and
+provides packages for Cog as well.</p>
+<p>The current Cog/WPE stack still imposes the Wayland-only limitation, with
+Mesa-based graphics stacks most likely to work well. In future release, we plan
+to add support for new platforms, graphics stacks and methods of integration.</p>
+<h3 id="cog" tabindex="-1">Cog</h3>
+<p>To install and run Cog, use the following commands:</p>
+<pre><code>$ flatpak --user install org.wpe.Cog
+$ flatpak run org.wpe.Cog -P fdo &lt;URL&gt;
+</code></pre>
+<h3 id="sdk-for-application-developers" tabindex="-1">Sdk for application developers</h3>
+<p>Application developers can package their WPE application with Flatpak and basing
+the application upon the WPE Sdk runtime. The following <code>flatpak-builder</code>
+manifest snippet can be used to target the WPE Sdk:</p>
+<pre><code class="language-yaml">runtime: org.wpe.Platform
+runtime-version: stable
+sdk: org.wpe.Sdk
+</code></pre>
+<p>More information is available on the <a href="https://docs.flatpak.org/en/latest/first-build.html#add-a-manifest">Flatpak
+website</a>
+regarding applications packaging.</p>
+<h2 id="nightly-wpe-builds" tabindex="-1">Nightly WPE builds</h2>
+<p>To complement the <a href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/schedule">six months release cycle</a>,
+users interested in testing the latest development version of WPE can download
+it directly from the <a href="https://build.webkit.org/waterfall?category=WPE">build
+bots</a> using a Python script.</p>
+<p>This is a convenient and easy way to test the bleeding edge version of WPE,
+exposing features that will be shipped in the next stable release.</p>
+<p>To download and test nightly WPE builds, download the
+<code>webkit-flatpak-run-nightly</code> script and run it like this:</p>
+<pre><code class="language-shell">$ wget https://raw.githubusercontent.com/WebKit/webkit/master/Tools/Scripts/webkit-flatpak-run-nightly
+$ chmod +x webkit-flatpak-run-nightly
+$ ./webkit-flatpak-run-nightly --wpe MiniBrowser &lt;browser options or URL&gt;
+</code></pre>
+<p>This script locally installs the WebKit Flatpak-based developer SDK in
+<code>~/.cache/wk-nightly</code> and then downloads a zip archive of the build artefacts
+from the buildbot server. The downloaded zip file is unpacked in <code>/tmp</code> and kept
+around in case you want to run this again without re-downloading the build
+archive:</p>
+<pre><code class="language-shell">$ ./webkit-flatpak-run-nightly --wpe -p /tmp/wpewebkit-release-bXXXXX \
+  MiniBrowser &lt;browser options or URL&gt;
+</code></pre>
+<p>Nightly builds are currently provided only for machines using the <code>x86_64</code> architecture.</p>
+
+
+        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/"><i class="icon-home mr-1"></i> Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- For blog posts -->
+
+
+</div>
+
+
+    <!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/assets/svg/blue_Web_Logo.svg"></a>
+  <nav class="social">
+    Connect on 
+    <a href="https://twitter.com/WPEWebKit">Twitter</a> • 
+    <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">mailing list: webkit-wpe</a> • 
+    <a href="https://webchat.oftc.net/?channels=wpe">OFTC: #wpe</a> • 
+    <a href="https://matrix.to/#/#wpe:matrix.org">Matrix: #wpe:matrix.org</a>
+  </nav>
+  <p class="text-muted small mb-0">Copyright &copy; 2018-2022 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+</footer>
+
+  <script src="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/vendor/jquery/jquery.js"></script>
+  <script src="/wpewebkit.org/nzimmermann/wpe_5th_anniversary/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>

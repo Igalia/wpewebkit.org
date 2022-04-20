@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2022-04-21T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>Happy birthday WPE!</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/blog/01-happy-birthday-wpe.html"/>
+    <updated>2022-04-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/blog/01-happy-birthday-wpe.html</id>
+    <content type="html">&lt;p&gt;Welcome to the new &lt;em&gt;Blog&lt;/em&gt; section on &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;wpewebkit.org&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Today is a special day for &lt;strong&gt;Igalia&lt;/strong&gt;, especially for those colleagues that work on WebKit:
+Five years ago, on the &lt;strong&gt;21st of April 2017&lt;/strong&gt;, the WPE port was announced by our colleague
+&lt;a href=&quot;https://www.igalia.com/team/zdobersek&quot;&gt;Žan Doberšek&lt;/a&gt; on the &lt;a href=&quot;https://lists.webkit.org/pipermail/webkit-dev/2017-April/028923.html&quot;&gt;WebKit mailing list&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let’s take some time to celebrate and recap how WPE evolved from the early prototyping days to the product empowering &lt;strong&gt;hundreds of millions of devices&lt;/strong&gt;
+worldwide today.&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img style=&quot;width: 75%;&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/assets/svg/wpe-birthday-cake-5-years.svg&quot; alt=&quot;Celebrating WPEs 5th birthday with a cake&quot; /&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;wpe-is-%E2%80%A6-what-exactly%3F&quot; tabindex=&quot;-1&quot;&gt;WPE is … what exactly?&lt;/h2&gt;
+&lt;p&gt;To get everyone on the same page, let’s start by reiterating what WPE is: &lt;strong&gt;a WebKit port optimized for embedded devices&lt;/strong&gt;.
+It allows you to embed a full-fledged &lt;strong&gt;Web browser engine&lt;/strong&gt; that supports a large set of modern Web technologies into your product.
+WPE itself is &lt;em&gt;not&lt;/em&gt; a Web browser such as Safari, Chrome or Firefox but contains the underlying building blocks to load, parse and
+render websites. To learn more about the distinction between a Web browser and a Web browser engine read &lt;a href=&quot;https://wpewebkit.org/about/exploring.html&quot;&gt;our explainer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You might ask yourself, what does &lt;em&gt;“optimized for embedded devices”&lt;/em&gt; mean in practice? Unlike most other WebKit ports, WPE does not
+rely on a specific user-interface toolkit, such as &lt;a href=&quot;https://qt.io/&quot;&gt;Qt&lt;/a&gt;, &lt;a href=&quot;https://gtk.org/&quot;&gt;GTK&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Cocoa_(API)&quot;&gt;Cocoa&lt;/a&gt;,
+etc., nor does it offer any integration with these kinds of toolkits. WPE WebKit is light-weight, integrates well with a
+&lt;a href=&quot;https://wpewebkit.org/about/supported-hardware.html&quot;&gt;variety of hardware configurations&lt;/a&gt;, and only requires a minimum set of APIs on your side:
+&lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/EGL_(API)&quot;&gt;EGL&lt;/a&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/OpenGL_ES&quot;&gt;OpenGL ES 2&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;the-early-days-2014---2017&quot; tabindex=&quot;-1&quot;&gt;The early days 2014 - 2017&lt;/h2&gt;
+&lt;p&gt;The idea for a new WebKit port was born in 2014, as part of a collaboration between &lt;a href=&quot;https://www.metrological.com/&quot;&gt;Metrological&lt;/a&gt;
+and &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. The goal of this collaboration was to have a WebKit port running efficiently on their set-top boxes,
+utilizing a modern &lt;strong&gt;&lt;a href=&quot;https://wayland.freedesktop.org/&quot;&gt;Wayland&lt;/a&gt;&lt;/strong&gt; based Linux graphics architecture. Back then, &lt;strong&gt;QtWebKit&lt;/strong&gt; was popular
+among embedders; however, it was unmaintained and its future was unclear since &lt;a href=&quot;https://www.qt.io/blog/2014/01/23/qt-webengine-technology-preview-available&quot;&gt;Qt wanted to transition&lt;/a&gt;
+from using &lt;a href=&quot;https://www.webkit.org/&quot;&gt;WebKit&lt;/a&gt; to &lt;a href=&quot;https://www.chromium.org/blink&quot;&gt;Blink&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In September 2014 a group of Igalians forked the &lt;em&gt;WebKitGtk&lt;/em&gt; port, removed all GTK toolkit dependencies, and prototyped what was necessary
+to achieve the goal: rendering websites without involving any of the traditional toolkits and instead utilizing a Wayland-based rendering approach.&lt;/p&gt;
+&lt;p&gt;During development it became apparent that this WebKit port is generally useful for all our customers and the community as a whole.
+Therefore Igalia decided to aim for an even more flexible design, where &lt;em&gt;Wayland&lt;/em&gt; is only one of the possible backends.
+Our fellow Igalian &lt;a href=&quot;https://www.igalia.com/team/magomez&quot;&gt;Miguel Gomez&lt;/a&gt; reported in his &lt;a href=&quot;https://blogs.igalia.com/magomez/2016/12/19/wpe-web-platform-for-embedded&quot;&gt;late 2016 blog post&lt;/a&gt;
+about this change, and the renaming of the port: &lt;strong&gt;WPE&lt;/strong&gt; appears for the first time in public.&lt;/p&gt;
+&lt;p&gt;The project’s removal of the Wayland dependency and the subsequent reorganization lead to the &lt;a href=&quot;https://wpewebkit.org/about/architecture.html&quot;&gt;architecture we have today&lt;/a&gt;,
+consisting of not only the WPE port itself but a whole ecosystem of projects such as &lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe&quot;&gt;libwpe&lt;/a&gt;,
+&lt;a href=&quot;https://github.com/Igalia/WPEBackend-FDO&quot;&gt;WPEBackend-fdo&lt;/a&gt;, &lt;a href=&quot;https://github.com/WebPlatformForEmbedded/WPEBackend-rdk&quot;&gt;WPEBackend-rdk&lt;/a&gt;, etc.,
+that together form the &lt;strong&gt;WPE&lt;/strong&gt; project.&lt;/p&gt;
+&lt;h2 id=&quot;2017---today&quot; tabindex=&quot;-1&quot;&gt;2017 - today&lt;/h2&gt;
+&lt;p&gt;After months of focused engineering efforts, the downstream work was finished and Igalia was ready to announce &lt;strong&gt;WPE&lt;/strong&gt; to the
+&lt;a href=&quot;https://lists.webkit.org/pipermail/webkit-dev/2017-April/028923.html&quot;&gt;public&lt;/a&gt; on the &lt;strong&gt;17th of April 2017&lt;/strong&gt;, with the promise that Igalia
+will maintain the port alongside the existing &lt;strong&gt;WebKitGtk&lt;/strong&gt; port. That is not a cheap bill: maintaining an upstream port is a recurring
+multi-million dollar investment. Just in order to keep the port itself healthy, as updates are made all around it, requires infrastructure,
+bots and a team of fully dedicated engineers to deal with maintenance, testing, triaging, tickets, etc. To implement new Web standards, fix
+related bugs or design and contribute features requires an even more considerable amount of resources.&lt;/p&gt;
+&lt;p&gt;Since then, Igalia ramped up the WPE investments and steadily advanced the port while helping customers to integrate WPE into their
+environments. Today WPE is healthy, runs on many platforms, and offers the most flexible browser architecture at present. Also, thanks in great
+part to this work, Igalia was responsible for nearly &lt;strong&gt;16.5%&lt;/strong&gt; of all commits in WebKit itself last year, helping make the larger project
+and ecosystem around it healthier too.&lt;/p&gt;
+&lt;p&gt;However, none of this would be possible without the commitment of many &lt;a href=&quot;https://www.igalia.com/team&quot;&gt;Igalians&lt;/a&gt; pushing the project forward every day for the past &lt;strong&gt;8 years&lt;/strong&gt;.
+A new &lt;strong&gt;People Behind WPE&lt;/strong&gt; series will be launched soon: over the following months, the Igalians involved with WPE will introduce themselves, their area of
+expertise, and talk about a specific WPE related technical topic. You’ll get to know the people behind the product and a first-class technical overview
+of individual parts of the WPE architecture! We plan to release a new article every 3-4 weeks, so be sure to visit &lt;a href=&quot;https://wpewebkit.org/blog&quot;&gt;wpewebkit.org/blog&lt;/a&gt;
+again soon and enjoy the upcoming &lt;strong&gt;People Behind WPE&lt;/strong&gt; series.&lt;/p&gt;
+&lt;p&gt;Feel free to spread the word and make noise about WPE. Stay healthy, stay tuned!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.34.7 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/wpewebkit-2.34.7.html"/>
+    <updated>2022-04-08T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/wpewebkit-2.34.7.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.7%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.7?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.34.7.tar.xz (22.6 MiB)
+   md5sum: bfde1baded709a15da76fcc8e692174b
+   sha1sum: a88d1f1fdedef18a95b00a283d2b4a0c59dc25dc
+   sha256sum: 092659bf43e5bc6f2a5a7b8e612a39da5da56a04f41eacc716638f53a27c3412
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0004</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/security/WSA-2022-0004.html"/>
+    <updated>2022-04-08T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/security/WSA-2022-0004.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;April 08, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0004&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/security/WSA-2022-0004.html#CVE-2022-22624&quot;&gt;CVE-2022-22624&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/security/WSA-2022-0004.html#CVE-2022-22628&quot;&gt;CVE-2022-22628&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/security/WSA-2022-0004.html#CVE-2022-22629&quot;&gt;CVE-2022-22629&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/security/WSA-2022-0004.html#CVE-2022-22637&quot;&gt;CVE-2022-22637&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22624&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22624&quot;&gt;CVE-2022-22624&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.36.0 and WPE WebKit before
+2.34.7.&lt;/li&gt;
+&lt;li&gt;Credit to Kirin (@Pwnrin) of Tencent Security Xuanwu Lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22628&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22628&quot;&gt;CVE-2022-22628&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.36.0 and WPE WebKit before
+2.34.7.&lt;/li&gt;
+&lt;li&gt;Credit to Kirin (@Pwnrin) of Tencent Security Xuanwu Lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22629&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22629&quot;&gt;CVE-2022-22629&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.36.0 and WPE WebKit before
+2.34.7.&lt;/li&gt;
+&lt;li&gt;Credit to Jeonghoon Shin at Theori working with Trend Micro Zero Day
+Initiative.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A buffer overflow issue was
+addressed with improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22637&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22637&quot;&gt;CVE-2022-22637&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.34.4 and WPE WebKit before
+2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to Tom McKee of Google.&lt;/li&gt;
+&lt;li&gt;Impact: A malicious website may cause unexpected cross-origin
+behavior. Description: A logic issue was addressed with improved
+state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.12.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/cog-0.12.4.html"/>
+    <updated>2022-03-30T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/cog-0.12.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;wl: Fix software rendering support.&lt;/li&gt;
+&lt;li&gt;x11: Fix underlinking when passing the &lt;code&gt;--as-needed&lt;/code&gt; flag to the linker.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.12.4.tar.xz (109.8 KiB)
+   md5sum: cdb8acdc3acc9b5082e7db9c279155c3
+   sha1sum: 600b30efadf55bf94ea5062a0a1b2ea0b74053e5
+   sha256sum: 9983c621c8e14fca3792ff566cb6b86d6a1f17446eb4c083af4a5a749112982f
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.36.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/wpewebkit-2.36.0.html"/>
+    <updated>2022-03-26T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/wpewebkit-2.36.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.36.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.36.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New accessibility implementation using ATSPI D-Bus interfaces instead of ATK.&lt;/li&gt;
+&lt;li&gt;Support for &lt;a href=&quot;https://web.dev/requestvideoframecallback-rvfc/&quot;&gt;requestVideoFrameCallback()&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Support for the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Media_Session_API&quot;&gt;MediaSession API&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;WebKitURISchemeResponse&lt;/code&gt; API to set HTTP response information to custom URI schemes.&lt;/li&gt;
+&lt;li&gt;Make user interactive threads (event handler, scrolling, …) real time on Linux.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;WebKitSettings:enable-developer-extras&lt;/code&gt; option is no longer enabled by default.&lt;/li&gt;
+&lt;li&gt;The WPE Qt API can now be built separately, out from the WebKit source tree.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.0.tar.xz (24.5 MiB)
+   md5sum: b7b951cd7f6eb4a8585338505ce71234
+   sha1sum: 904629a9ce3a4ab67d47315b008dc3152d504205
+   sha256sum: 096aa9f87d9bfbfc80f558388a86721cdcc508b42ddef10bd270aec9aee96d5a
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.12.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/cog-0.12.3.html"/>
+    <updated>2022-03-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/cog-0.12.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;wl: Fixed a crash related to usage of features not available in
+versions of interfaces negotiated with the Wayland compositor.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.12.3.tar.xz (109.7 KiB)
+   md5sum: 320d01d8546144fba2e14bed3522c8c7
+   sha1sum: 8e28b216bb2462325a1df1e8e03ac199487440b0
+   sha256sum: f464065057373c0430f6267205d1ab3367b54ac04d15b6b5531683b03212f45f
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.12.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/cog-0.12.2.html"/>
+    <updated>2022-03-23T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/cog-0.12.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed the location passed by CMake to the compiler with the platform
+plug-ins to ensure it is always an absolute path.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.12.2.tar.xz (109.6 KiB)
+   md5sum: ab6828b3733c3d39fc47835172fdaded
+   sha1sum: 42d3d6aa935896e464f281c84c478b5994ebb7b3
+   sha256sum: ccebdc1f216b698d1e780d3a71617bec1d2cd95ac5c9da59f563372463d97ed7
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.35.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/wpewebkit-2.35.90.html"/>
+    <updated>2022-02-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/wpewebkit-2.35.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.35.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.35.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix scrolling with the mouse wheel on sites using overscroll-behavior.&lt;/li&gt;
+&lt;li&gt;Suspend web processes after some time in the process cache.&lt;/li&gt;
+&lt;li&gt;Ensure EGL displays are terminated before web process exits.&lt;/li&gt;
+&lt;li&gt;Deinitialize GStreamer before the web process exits.&lt;/li&gt;
+&lt;li&gt;Make fonts under &lt;code&gt;XDG_DATA_DIRS&lt;/code&gt; available in the web process sanbox.&lt;/li&gt;
+&lt;li&gt;Canonicalize paths passed to the Bubblewrap launcher.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;WebKitSettings:enable-developer-extras&lt;/code&gt; option is no longer enabled by default.&lt;/li&gt;
+&lt;li&gt;Allow tweaking media source buffering with the &lt;code&gt;MSE_MAX_BUFFER_SIZE&lt;/code&gt;, and configure
+regular playback on-disk buffering with &lt;code&gt;WPE_SHELL_DISABLE_MEDIA_DISK_CACHE&lt;/code&gt; and
+&lt;code&gt;WPE_SHELL_MEDIA_DISK_CACHE_PATH&lt;/code&gt; environment variables.&lt;/li&gt;
+&lt;li&gt;Add new accessibility implementation using ATSPI D-Bus interfaces instead of ATK.&lt;/li&gt;
+&lt;li&gt;Add support for &lt;code&gt;requestVideoFrameCallback()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix a crash at startup when the Bubblewrap sandbox is enabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.35.90.tar.xz (25.8 MiB)
+   md5sum: 6a3b5462dd1f7fdd18f5f776259ff04b
+   sha1sum: 719bca6dee53e18f336cfb24058445253bc6bedc
+   sha256sum: 5bcd55923b7c425ea8f04c6733a33706410f1508b912d6b676e681459b703d76
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.12.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/cog-0.12.1.html"/>
+    <updated>2022-02-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/cog-0.12.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 0.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;wl: Fixed handling of supported Wayland protocol versions, preventing a
+crash with certain compositors which advertise support for newer versions
+than actually supported by the client.&lt;/li&gt;
+&lt;li&gt;Fixed the location used by CMake to install platform plug-ins.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.12.1.tar.xz (109.4 KiB)
+   md5sum: 25a80a5a8a52b8873933a128151b8928
+   sha1sum: 3b9f67bc23cd9e3db2221366d6cde4ca0b06b811
+   sha256sum: 23caaafa2ef5c2f6a97d467fcce908ea71087ad03b72deb9280225c0dd561c91
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.34.6 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/wpewebkit-2.34.6.html"/>
+    <updated>2022-02-17T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/nzimmermann/wpe_5th_anniversary/release/wpewebkit-2.34.6.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.6%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.6?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix accessibility not working when the Bubblewrap sandbox is enabled.&lt;/li&gt;
+&lt;li&gt;Fix the build in a number of situations where the main OpenGL library is
+not called &lt;code&gt;libGL&lt;/code&gt; or &lt;code&gt;libgl&lt;/code&gt;, as is the case on systems that use
+&lt;code&gt;libglvnd&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.34.6.tar.xz (22.5 MiB)
+   md5sum: c9705270b342474cca28cf51632ccbbe
+   sha1sum: 44ae95de1b5ebf0a2b0ea3630b3677153c597402
+   sha256sum: 301e895c8ed08ce7dccef3192b972f2ccfc2020463244c64069a636f2b05265f
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
