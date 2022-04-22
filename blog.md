@@ -20,3 +20,4 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
   </ol>
 </div>
 <br>
+<a href="{{ '/blog.xml' | url }}"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
