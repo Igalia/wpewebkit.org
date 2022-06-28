@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2022-05-30T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0005</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html"/>
+    <updated>2022-05-30T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;May 30, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0005&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html#CVE-2022-26700&quot;&gt;CVE-2022-26700&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html#CVE-2022-26709&quot;&gt;CVE-2022-26709&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html#CVE-2022-26717&quot;&gt;CVE-2022-26717&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html#CVE-2022-26716&quot;&gt;CVE-2022-26716&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html#CVE-2022-26719&quot;&gt;CVE-2022-26719&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html#CVE-2022-30293&quot;&gt;CVE-2022-30293&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0005.html#CVE-2022-30294&quot;&gt;CVE-2022-30294&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26700&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26700&quot;&gt;CVE-2022-26700&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to ryuzaki.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to code
+execution. Description: A memory corruption issue was addressed with
+improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26709&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26709&quot;&gt;CVE-2022-26709&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26717&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26717&quot;&gt;CVE-2022-26717&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to Jeonghoon Shin of Theori.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26716&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26716&quot;&gt;CVE-2022-26716&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to SorryMybad (@S0rryMybad) of Kunlun Lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A memory corruption issue was
+addressed with improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26719&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26719&quot;&gt;CVE-2022-26719&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to Dongzhuo Zhao working with ADLab of Venustech.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A memory corruption issue was
+addressed with improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-30293&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30293&quot;&gt;CVE-2022-30293&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.1.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution or to a denial of service (application
+crash). Description: A memory corruption issue that could cause a
+heap use after free or a heap buffer overflow in
+WebCore::TextureMapperLayer::setContentsLayer was addressed with
+improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-30294&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30294&quot;&gt;CVE-2022-30294&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.1.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution or to a denial of service (application
+crash). Description: A memory corruption issue that could cause a
+heap use after free or a heap buffer overflow in
+WebCore::TextureMapperLayer::setContentsLayer was addressed with
+improved state management. This is the same issue than
+CVE-2022-30293.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.36.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/wpewebkit-2.36.3.html"/>
+    <updated>2022-05-28T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/wpewebkit-2.36.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support capturing already encoded video streams, which takes advantage
+of encoding done in hardware by devices which support this feature.&lt;/li&gt;
+&lt;li&gt;Avoid using experimental GStreamer elements for video demuxing.&lt;/li&gt;
+&lt;li&gt;Avoid using the legacy GStreamer VA-API decoding plug-ins, which often
+cause rendering issues and are not much maintained. Their usage can be
+re-enabled setting &lt;code&gt;WEBKIT_GST_ENABLE_LEGACY_VAAPI=1&lt;/code&gt; in the environment.&lt;/li&gt;
+&lt;li&gt;Fix playback of YouTube streams which use dynamic ad insertion.&lt;/li&gt;
+&lt;li&gt;Fix display capture with Pipewire.&lt;/li&gt;
+&lt;li&gt;Fix the build without the X11 target when X11 headers are not present.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.3.tar.xz (24.6 MiB)
+   md5sum: 8bc53f86a3489da31fdbb581e1b87f7a
+   sha1sum: 44a3d99ae48481917ddc478c5f91e6a4faa21ff5
+   sha256sum: 66275debca7497daff3a7826734cd56262a807adb76c5dccdf257c89968c2fc8
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.36.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/wpewebkit-2.36.2.html"/>
+    <updated>2022-05-18T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/wpewebkit-2.36.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix some pages showing empty content boxes when using threaded rendering.&lt;/li&gt;
+&lt;li&gt;Fix the build with accessibility disabled.&lt;/li&gt;
+&lt;li&gt;Fix the build with newer Ruby versions.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.2.tar.xz (24.5 MiB)
+   md5sum: bcfb465ae085835ae96c68fddc85ca44
+   sha1sum: 1a5a6b7b5e94f4ea7e3462d6bdb5de7efa678f74
+   sha256sum: 959519562701e2005f2767a62e85977d6c3e65858709b376c89d8e33502febb9
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.13.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/libwpe-1.13.2.html"/>
+    <updated>2022-05-16T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/libwpe-1.13.2.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.13.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.13.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New API to configure the target refresh rate of view backends.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.13.2.tar.xz (59.4 KiB)
+   md5sum: 31b267649eb1a5f472b07a66adab86e1
+   sha1sum: 5de7bc3e4dd9f8d94df84395106547c0a0a904f9
+   sha256sum: efcd97dc0f95ff7a506483ba3df944669cdc602b3fc45c9fd676dee0f8f92cac
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.13.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/libwpe-1.13.1.html"/>
+    <updated>2022-05-12T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/libwpe-1.13.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.13.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.13.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New API to provide input events to be treated by WebKit as gamepad inputs.&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;WPE_ENABLE_XKB&lt;/code&gt; build option, enabled by default, which can be used
+to completely avoid usage of &lt;code&gt;libxkbcommon&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Allow libwpe to be built as a static library. The rest of the code
+linked with the static library must provide the &lt;code&gt;_wpe_loader_interface&lt;/code&gt;
+symbol, as &lt;code&gt;dlopen()&lt;/code&gt; will not be used.&lt;/li&gt;
+&lt;li&gt;Allow building libwpe within a larger CMake project.&lt;/li&gt;
+&lt;li&gt;Update the required Meson version to 0.55.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.13.1.tar.xz (59.3 KiB)
+   md5sum: 6870daa1c2b5d9963b6b0d715e0c0714
+   sha1sum: 2a3be69f2f49011cc593a498d4fe309e0bc8c3ff
+   sha256sum: c3f55c8b98f1dc8ea7456880744098f5054ff5deba92a10dc93728710fbe9857
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.36.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/wpewebkit-2.36.1.html"/>
+    <updated>2022-04-22T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/wpewebkit-2.36.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix the build with accessibility disabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.1.tar.xz (24.5 MiB)
+   md5sum: 7ba1c7fd0f67891ad137d11cac12f7a9
+   sha1sum: 0918a4daded01f42e65ec02a69f21cd6705311db
+   sha256sum: ec83d8b2f8c3479ce9950d69440f3b9876ab70200fe6f4e07686054a0cba5723
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Happy birthday WPE!</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/blog/01-happy-birthday-wpe.html"/>
+    <updated>2022-04-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/blog/01-happy-birthday-wpe.html</id>
+    <content type="html">&lt;p&gt;Welcome to the new &lt;em&gt;Blog&lt;/em&gt; section on &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;wpewebkit.org&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Today is a special day for &lt;strong&gt;Igalia&lt;/strong&gt;, especially for those colleagues that work on WebKit:
+Five years ago, on the &lt;strong&gt;21st of April 2017&lt;/strong&gt;, the WPE port was announced by our colleague
+&lt;a href=&quot;https://www.igalia.com/team/zdobersek&quot;&gt;Žan Doberšek&lt;/a&gt; on the &lt;a href=&quot;https://lists.webkit.org/pipermail/webkit-dev/2017-April/028923.html&quot;&gt;WebKit mailing list&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let’s take some time to celebrate and recap how WPE evolved from the early prototyping days to the product empowering &lt;strong&gt;hundreds of millions of devices&lt;/strong&gt;
+worldwide today.&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img style=&quot;width: 75%;&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/assets/svg/wpe-birthday-cake-5-years.svg&quot; alt=&quot;Celebrating WPEs 5th birthday with a cake&quot; /&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;wpe-is-%E2%80%A6-what-exactly%3F&quot; tabindex=&quot;-1&quot;&gt;WPE is … what exactly?&lt;/h2&gt;
+&lt;p&gt;To get everyone on the same page, let’s start by reiterating what WPE is: &lt;strong&gt;a WebKit port optimized for embedded devices&lt;/strong&gt;.
+It allows you to embed a full-fledged &lt;strong&gt;Web browser engine&lt;/strong&gt; that supports a large set of modern Web technologies into your product.
+WPE itself is &lt;em&gt;not&lt;/em&gt; a Web browser such as Safari, Chrome or Firefox but contains the underlying building blocks to load, parse and
+render websites. To learn more about the distinction between a Web browser and a Web browser engine read &lt;a href=&quot;https://wpewebkit.org/about/exploring.html&quot;&gt;our explainer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You might ask yourself, what does &lt;em&gt;“optimized for embedded devices”&lt;/em&gt; mean in practice? Unlike most other WebKit ports, WPE does not
+rely on a specific user-interface toolkit, such as &lt;a href=&quot;https://qt.io/&quot;&gt;Qt&lt;/a&gt;, &lt;a href=&quot;https://gtk.org/&quot;&gt;GTK&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Cocoa_(API)&quot;&gt;Cocoa&lt;/a&gt;,
+etc., nor does it offer any integration with these kinds of toolkits. WPE WebKit is light-weight, integrates well with a
+&lt;a href=&quot;https://wpewebkit.org/about/supported-hardware.html&quot;&gt;variety of hardware configurations&lt;/a&gt;, and only requires a minimum set of APIs on your side:
+&lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/EGL_(API)&quot;&gt;EGL&lt;/a&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/OpenGL_ES&quot;&gt;OpenGL ES 2&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;the-early-days-2014---2017&quot; tabindex=&quot;-1&quot;&gt;The early days 2014 - 2017&lt;/h2&gt;
+&lt;p&gt;The idea for a new WebKit port was born in 2014, as part of a collaboration between &lt;a href=&quot;https://www.metrological.com/&quot;&gt;Metrological&lt;/a&gt;
+and &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. The goal of this collaboration was to have a WebKit port running efficiently on their set-top boxes,
+utilizing a modern &lt;strong&gt;&lt;a href=&quot;https://wayland.freedesktop.org/&quot;&gt;Wayland&lt;/a&gt;&lt;/strong&gt; based Linux graphics architecture. Back then, &lt;strong&gt;QtWebKit&lt;/strong&gt; was popular
+among embedders; however, it was unmaintained and its future was unclear since &lt;a href=&quot;https://www.qt.io/blog/2014/01/23/qt-webengine-technology-preview-available&quot;&gt;Qt wanted to transition&lt;/a&gt;
+from using &lt;a href=&quot;https://www.webkit.org/&quot;&gt;WebKit&lt;/a&gt; to &lt;a href=&quot;https://www.chromium.org/blink&quot;&gt;Blink&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In September 2014 a group of Igalians forked the &lt;em&gt;WebKitGtk&lt;/em&gt; port, removed all GTK toolkit dependencies, and prototyped what was necessary
+to achieve the goal: rendering websites without involving any of the traditional toolkits and instead utilizing a Wayland-based rendering approach.&lt;/p&gt;
+&lt;p&gt;During development it became apparent that this WebKit port is generally useful for all our customers and the community as a whole.
+Therefore Igalia decided to aim for an even more flexible design, where &lt;em&gt;Wayland&lt;/em&gt; is only one of the possible backends.
+Our fellow Igalian &lt;a href=&quot;https://www.igalia.com/team/magomez&quot;&gt;Miguel Gomez&lt;/a&gt; reported in his &lt;a href=&quot;https://blogs.igalia.com/magomez/2016/12/19/wpe-web-platform-for-embedded&quot;&gt;late 2016 blog post&lt;/a&gt;
+about this change, and the renaming of the port: &lt;strong&gt;WPE&lt;/strong&gt; appears for the first time in public.&lt;/p&gt;
+&lt;p&gt;The project’s removal of the Wayland dependency and the subsequent reorganization lead to the &lt;a href=&quot;https://wpewebkit.org/about/architecture.html&quot;&gt;architecture we have today&lt;/a&gt;,
+consisting of not only the WPE port itself but a whole ecosystem of projects such as &lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe&quot;&gt;libwpe&lt;/a&gt;,
+&lt;a href=&quot;https://github.com/Igalia/WPEBackend-FDO&quot;&gt;WPEBackend-fdo&lt;/a&gt;, &lt;a href=&quot;https://github.com/WebPlatformForEmbedded/WPEBackend-rdk&quot;&gt;WPEBackend-rdk&lt;/a&gt;, etc.,
+that together form the &lt;strong&gt;WPE&lt;/strong&gt; project.&lt;/p&gt;
+&lt;h2 id=&quot;2017---today&quot; tabindex=&quot;-1&quot;&gt;2017 - today&lt;/h2&gt;
+&lt;p&gt;After months of focused engineering efforts, the downstream work was finished and Igalia was ready to announce &lt;strong&gt;WPE&lt;/strong&gt; to the
+&lt;a href=&quot;https://lists.webkit.org/pipermail/webkit-dev/2017-April/028923.html&quot;&gt;public&lt;/a&gt; on the &lt;strong&gt;17th of April 2017&lt;/strong&gt;, with the promise that Igalia
+will maintain the port alongside the existing &lt;strong&gt;WebKitGtk&lt;/strong&gt; port. That is not a cheap bill: maintaining an upstream port is a recurring
+multi-million dollar investment. Just in order to keep the port itself healthy, as updates are made all around it, requires infrastructure,
+bots and a team of fully dedicated engineers to deal with maintenance, testing, triaging, tickets, etc. To implement new Web standards, fix
+related bugs or design and contribute features requires an even more considerable amount of resources.&lt;/p&gt;
+&lt;p&gt;Since then, Igalia ramped up the WPE investments and steadily advanced the port while helping customers to integrate WPE into their
+environments. Today WPE is healthy, runs on many platforms, and offers the most flexible browser architecture at present. Also, thanks in great
+part to this work, Igalia was responsible for nearly &lt;strong&gt;16.5%&lt;/strong&gt; of all commits in WebKit itself last year, helping make the larger project
+and ecosystem around it healthier too.&lt;/p&gt;
+&lt;p&gt;However, none of this would be possible without the commitment of many &lt;a href=&quot;https://www.igalia.com/team&quot;&gt;Igalians&lt;/a&gt; pushing the project forward every day for the past &lt;strong&gt;8 years&lt;/strong&gt;.
+A new &lt;strong&gt;People Behind WPE&lt;/strong&gt; series will be launched soon: over the following months, the Igalians involved with WPE will introduce themselves, their area of
+expertise, and talk about a specific WPE related technical topic. You’ll get to know the people behind the product and a first-class technical overview
+of individual parts of the WPE architecture! We plan to release a new article every 3-4 weeks, so be sure to visit &lt;a href=&quot;https://wpewebkit.org/blog&quot;&gt;wpewebkit.org/blog&lt;/a&gt;
+again soon and enjoy the upcoming &lt;strong&gt;People Behind WPE&lt;/strong&gt; series.&lt;/p&gt;
+&lt;p&gt;Feel free to spread the word and make noise about WPE. Stay healthy, stay tuned!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.34.7 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/wpewebkit-2.34.7.html"/>
+    <updated>2022-04-08T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/wpewebkit-2.34.7.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.34 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.34.7%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.34.7?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.34.7.tar.xz (22.6 MiB)
+   md5sum: bfde1baded709a15da76fcc8e692174b
+   sha1sum: a88d1f1fdedef18a95b00a283d2b4a0c59dc25dc
+   sha256sum: 092659bf43e5bc6f2a5a7b8e612a39da5da56a04f41eacc716638f53a27c3412
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0004</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0004.html"/>
+    <updated>2022-04-08T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0004.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;April 08, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0004&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0004.html#CVE-2022-22624&quot;&gt;CVE-2022-22624&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0004.html#CVE-2022-22628&quot;&gt;CVE-2022-22628&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0004.html#CVE-2022-22629&quot;&gt;CVE-2022-22629&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/add-matomo/security/WSA-2022-0004.html#CVE-2022-22637&quot;&gt;CVE-2022-22637&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22624&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22624&quot;&gt;CVE-2022-22624&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.36.0 and WPE WebKit before
+2.34.7.&lt;/li&gt;
+&lt;li&gt;Credit to Kirin (@Pwnrin) of Tencent Security Xuanwu Lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22628&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22628&quot;&gt;CVE-2022-22628&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.36.0 and WPE WebKit before
+2.34.7.&lt;/li&gt;
+&lt;li&gt;Credit to Kirin (@Pwnrin) of Tencent Security Xuanwu Lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22629&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22629&quot;&gt;CVE-2022-22629&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.36.0 and WPE WebKit before
+2.34.7.&lt;/li&gt;
+&lt;li&gt;Credit to Jeonghoon Shin at Theori working with Trend Micro Zero Day
+Initiative.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A buffer overflow issue was
+addressed with improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22637&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22637&quot;&gt;CVE-2022-22637&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.34.4 and WPE WebKit before
+2.34.4.&lt;/li&gt;
+&lt;li&gt;Credit to Tom McKee of Google.&lt;/li&gt;
+&lt;li&gt;Impact: A malicious website may cause unexpected cross-origin
+behavior. Description: A logic issue was addressed with improved
+state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.12.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/cog-0.12.4.html"/>
+    <updated>2022-03-30T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/cog-0.12.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;wl: Fix software rendering support.&lt;/li&gt;
+&lt;li&gt;x11: Fix underlinking when passing the &lt;code&gt;--as-needed&lt;/code&gt; flag to the linker.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.12.4.tar.xz (109.8 KiB)
+   md5sum: cdb8acdc3acc9b5082e7db9c279155c3
+   sha1sum: 600b30efadf55bf94ea5062a0a1b2ea0b74053e5
+   sha256sum: 9983c621c8e14fca3792ff566cb6b86d6a1f17446eb4c083af4a5a749112982f
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
