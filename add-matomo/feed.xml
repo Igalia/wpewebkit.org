@@ -4,8 +4,41 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-05-30T00:00:00Z</updated>
+  <updated>2022-06-29T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>Cog 0.13.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/cog-0.13.90.html"/>
+    <updated>2022-06-29T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/cog-0.13.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 0.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.13.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.13.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;cmake: Enable libsoup3 usage by default, &lt;code&gt;USE_SOUP2=ON&lt;/code&gt; can still be specified to build against libsoup2.&lt;/li&gt;
+&lt;li&gt;cmake: Require version 3.12, which is the same minimum as needed by WebKit.&lt;/li&gt;
+&lt;li&gt;cmake: Link the same &lt;code&gt;wpebackend-fdo&lt;/code&gt; library in all components to avoid crashes due to multiple copies loaded with different behaviours.&lt;/li&gt;
+&lt;li&gt;cmake: Fix generated &lt;code&gt;.pc&lt;/code&gt; file when using an absolute directory for the &lt;code&gt;CMAKE_INSTALL_LIBDIR&lt;/code&gt; option instead of a relative one.&lt;/li&gt;
+&lt;li&gt;core: Add “Try again” button to default error pages.&lt;/li&gt;
+&lt;li&gt;gtk4: Fix rendering with drivers that support OpenGL 4.&lt;/li&gt;
+&lt;li&gt;wl: Avoid crashing due to missing callbacks by explicitly binding to supported versions of Wayland protocols.&lt;/li&gt;
+&lt;li&gt;wl: Fix the build with &lt;code&gt;COG_WESTON_DIRECT_DISPLAY&lt;/code&gt; enabled.&lt;/li&gt;
+&lt;li&gt;wl: Fix fullscreen surface dimensions when using SHM buffers.&lt;/li&gt;
+&lt;li&gt;wl: Add keybindings to refresh the current page (&lt;key&gt;Ctrl-R&lt;/key&gt;, &lt;key&gt;F5&lt;/key&gt;).&lt;/li&gt;
+&lt;li&gt;x11: Fix underlinking when the &lt;code&gt;--as-needed&lt;/code&gt; linker flag is in use.&lt;/li&gt;
+&lt;li&gt;x11: Fix rendering in non-composited (traditional) window managers.&lt;/li&gt;
+&lt;li&gt;drm, gtk4, x11: Factor out and reuse the GLES textured quad painting code.&lt;/li&gt;
+&lt;li&gt;drm, wl, x11: Add refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.13.90.tar.xz (119.7 KiB)
+   md5sum: 749f55793438c552185023a9bd744d6a
+   sha1sum: 82c885e8e942a97c7bb7d7c9b6e25ceba1b462c7
+   sha256sum: a7ed11a10c41a9c4ad9692730357e6d86f2544d308d96018d26f80b234e16080
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0005</title>
@@ -389,27 +422,6 @@ of WebKit. Please check our websites for information about the latest
 stable releases.&lt;/p&gt;
 &lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
 &lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.12.4 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/add-matomo/release/cog-0.12.4.html"/>
-    <updated>2022-03-30T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/add-matomo/release/cog-0.12.4.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.12 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.12.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.12.4?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;wl: Fix software rendering support.&lt;/li&gt;
-&lt;li&gt;x11: Fix underlinking when passing the &lt;code&gt;--as-needed&lt;/code&gt; flag to the linker.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.12.4.tar.xz (109.8 KiB)
-   md5sum: cdb8acdc3acc9b5082e7db9c279155c3
-   sha1sum: 600b30efadf55bf94ea5062a0a1b2ea0b74053e5
-   sha256sum: 9983c621c8e14fca3792ff566cb6b86d6a1f17446eb4c083af4a5a749112982f
-&lt;/pre&gt;
 </content>
   </entry>
 </feed>
