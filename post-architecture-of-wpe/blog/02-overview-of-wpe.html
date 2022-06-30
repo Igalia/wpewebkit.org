@@ -123,7 +123,7 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
 
-        <p>In <a href="https://wpewebkit.org/blog/01-happy-birthday-wpe.html">the
+        <p>In <a href="/blog/01-happy-birthday-wpe.html">the
 previous post in this series</a>, we explained that WPE is a WebKit
 port optimized for embedded devices. In this post, we’ll dive into a
 more technical overview of the different components of WPE, WebKit,
@@ -196,7 +196,7 @@ accepted by Apple as an official WebKit port, meaning that the port
 lives in-tree and takes immediate advantage of the many improvements
 that land on the WebKit repository on a daily basis.</p>
 <h2 id="how-does-wpe-integrate-with-webkit%3F" tabindex="-1">How does WPE integrate with WebKit?</h2>
-<p><img src="https://wpewebkit.org/assets/wpe-architecture-diagram.png" alt="A diagram of the WPE WebKit architecture"></p>
+<p><img src="/assets/wpe-architecture-diagram.png" alt="A diagram of the WPE WebKit architecture"></p>
 <p>The WPE port has several components. Some are in-tree (that is, are a
 part of WebKit itself), while others are out-of-tree. Let’s examine
 those components and how they relate to each other, from top to
@@ -206,7 +206,7 @@ bottom:</p>
 <li>The <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/">WebKit WPE API</a>: the entry point for browser developers to the WebKit engine, provides a comprehensive GObject/C API. The cog library uses this API extensively and we recommend relying on it, but for more specific needs and more fine-tuning of the engine, working directly with the WebKit API can be often necessary. The API is stable and easy to use, especially, and for those familiar with the GTK/GNOME platform.</li>
 <li>WPE’s WebCore implementation: This part, internal to WebKit, implements an abstraction of the graphics and input layers of WebKit. This implementation relies on the libwpe library to provide the functionality required in an abstract way. Thanks to the architecture of WPE, implementors don’t need to bother with the complexities of WebCore and WebKit internals.</li>
 <li>The <a href="https://github.com/WebPlatformForEmbedded/libwpe">libwpe</a> library. This is an out-of-tree library that provides the API required by the WPE port in a generic way to implement the graphical and input backends. Specific functionality for a concrete platform is not provided, but the library relies on the existence of a backend implementation, as is described next.</li>
-<li>Finally, a WPE backend implementation. This is where all the platform-specific code lives. Backends are loadable modules that can be chosen depending on the underlying hardware. These should provide access to graphics and input depending on the specific architecture, platform, and operating system requirements. As a reference, <a href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a> is a freedesktop.org-based backend, which uses Wayland and freekdesktop.org technologies, and is <a href="https://wpewebkit.org/about/supported-hardware.html">supported for several architectures</a>, including NXP and Broadcom chipsets, like the Raspberry PI, and also regular PC architectures, easing testing and development.</li>
+<li>Finally, a WPE backend implementation. This is where all the platform-specific code lives. Backends are loadable modules that can be chosen depending on the underlying hardware. These should provide access to graphics and input depending on the specific architecture, platform, and operating system requirements. As a reference, <a href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a> is a freedesktop.org-based backend, which uses Wayland and freekdesktop.org technologies, and is <a href="/about/supported-hardware.html">supported for several architectures</a>, including NXP and Broadcom chipsets, like the Raspberry PI, and also regular PC architectures, easing testing and development.</li>
 </ul>
 <p>An implementor interested in building a browser in a new architecture
 only needs to focus on the development of the last component – a WPE
@@ -214,20 +214,20 @@ backend. Having a backend, starting the development of a
 WebKit-powered browser is already much easier than it ever was!</p>
 <p>For a more detailed description of the architecture of WPE and WebKit,
 check this article on <a
-href="https://wpewebkit.org/about/architecture.html">the architecture
+href="/about/architecture.html">the architecture
 of WPE</a>.</p>
 <h2 id="ok%2C-sounds-interesting%2C-how-do-i-get-my-hands-dirty%3F" tabindex="-1">OK, sounds interesting, how do I get my hands dirty?</h2>
 <p>If you have made it this far, you should give WPE a try!</p>
 <p>We have listed several on the <a
-href="https://wpewebkit.org/about/exploring.html">exploring WPE</a>
+href="/about/exploring.html">exploring WPE</a>
 page. From there, you will see that depending on how interested you
 are in the project, your background, and what you’d like to do with
 it, there are different ways!</p>
 <p>It can be as easy as installing WPE directly from the most popular
 Linux distributions or downloading and flashing prebuilt images for
 the Raspberry Pi. There are easy and flexible options like <a
-href="https://wpewebkit.org/about/flatpak.html">flatpak</a>, <a
-href="https://wpewebkit.org/about/balena-wpe.html">balena</a> which
+href="/about/flatpak.html">flatpak</a>, <a
+href="/about/balena-wpe.html">balena</a> which
 you can dig into to learn more.  If you want to build WPE yourself,
 you can use <a
 href="https://github.com/Igalia/meta-webkit/wiki/WPE">yocto</a> and if
@@ -256,7 +256,7 @@ you’d like to contribute - that’s very welcome!</p>
       </div>
     </div>
   </div>
-</section>  
+</section>
 
 
 
