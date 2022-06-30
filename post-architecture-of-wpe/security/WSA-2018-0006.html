@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WebKitGTK+ and WPE WebKit Security Advisory WSA-2018-0006</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/post-architecture-of-wpe/security/WSA-2018-0006.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/post-architecture-of-wpe/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/post-architecture-of-wpe/security/WSA-2018-0006.html">
+  <meta property="og:title" content="WebKitGTK+ and WPE WebKit Security Advisory WSA-2018-0006">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/post-architecture-of-wpe/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/post-architecture-of-wpe/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-08-07T00:00:00.000Z">
+  <meta property="article:tag" content="WSA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/post-architecture-of-wpe/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/post-architecture-of-wpe/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/post-architecture-of-wpe/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="/wpewebkit.org/post-architecture-of-wpe/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/post-architecture-of-wpe/css/stylish-portfolio.css">
+  
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/wpewebkit.org/post-architecture-of-wpe/"><img width="200" src="/wpewebkit.org/post-architecture-of-wpe/assets/svg/blue_Web_Logo.svg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/post-architecture-of-wpe/">Home</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/wpewebkit.org/post-architecture-of-wpe/blog">Blog</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/wpewebkit.org/post-architecture-of-wpe/about/exploring.html">Explore WPE / Embedded</a>
+          <a class="dropdown-item" href="/wpewebkit.org/post-architecture-of-wpe/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/post-architecture-of-wpe/about/a-good-choice.html">Why Choose WPE</a>
+          <a class="dropdown-item" href="/wpewebkit.org/post-architecture-of-wpe/about/architecture.html">WPE Design</a>
+          <a class="dropdown-item" href="/wpewebkit.org/post-architecture-of-wpe/about/faq.html">FAQ</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/wpewebkit.org/post-architecture-of-wpe/about/builds.html">Build it</a>
+          <a class="dropdown-item" href="/wpewebkit.org/post-architecture-of-wpe/release/schedule">Release Schedule</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/post-architecture-of-wpe/code">Code</a>
+      </li>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <div itemscope itemtype="http://schema.org/TechArticle">
+
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/post-architecture-of-wpe/security/WSA-2018-0006.html">
+
+<section class="content-section bg-primary text-white small-section">
+  <div class="container text-center">
+    <div class="content-section-heading">
+      
+        <h3 class="text-secondary mb-0"
+            itemprop="dateCreated">Tue Aug 07 2018</h3>
+        <meta itemprop="datePublished" content="Tue Aug 07 2018">
+      
+      <h2 itemprop="headline">WebKitGTK+ and WPE WebKit Security Advisory WSA-2018-0006</h2>
+	  
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light small-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
+
+        <ul>
+<li>
+<p>Date Reported: <strong>August 07, 2018</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2018-0006</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2018-4246">CVE-2018-4246</a>, <a href="#CVE-2018-4261">CVE-2018-4261</a>,
+<a href="#CVE-2018-4262">CVE-2018-4262</a>, <a href="#CVE-2018-4263">CVE-2018-4263</a>,
+<a href="#CVE-2018-4264">CVE-2018-4264</a>, <a href="#CVE-2018-4265">CVE-2018-4265</a>,
+<a href="#CVE-2018-4266">CVE-2018-4266</a>, <a href="#CVE-2018-4267">CVE-2018-4267</a>,
+<a href="#CVE-2018-4270">CVE-2018-4270</a>, <a href="#CVE-2018-4271">CVE-2018-4271</a>,
+<a href="#CVE-2018-4272">CVE-2018-4272</a>, <a href="#CVE-2018-4273">CVE-2018-4273</a>,
+<a href="#CVE-2018-4278">CVE-2018-4278</a>, <a href="#CVE-2018-4284">CVE-2018-4284</a>,
+<a href="#CVE-2018-12911">CVE-2018-12911</a>.</p>
+</li>
+</ul>
+<p>Several vulnerabilities were discovered in WebKitGTK+ and WPE WebKit.</p>
+<ul>
+<li>
+<p><a name="CVE-2018-4246" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4246">CVE-2018-4246</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.1.</li>
+<li>Credit to OSS-Fuzz.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A type confusion issue was addressed with improved
+memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4261" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4261">CVE-2018-4261</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to Omair working with Trend Micro’s Zero Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A memory corruption issue was addressed with
+improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4262" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4262">CVE-2018-4262</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to Mateusz Krzywicki working with Trend Micro’s Zero Day
+Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A memory corruption issue was addressed with
+improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4263" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4263">CVE-2018-4263</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to Arayz working with Trend Micro’s Zero Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A memory corruption issue was addressed with
+improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4264" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4264">CVE-2018-4264</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to OSS-Fuzz, Yu Zhou and Jundong Xie of Ant-financial Light-
+Year Security Lab.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A memory corruption issue was addressed with
+improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4265" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4265">CVE-2018-4265</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to cc working with Trend Micro’s Zero Day Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A memory corruption issue was addressed with
+improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4266" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4266">CVE-2018-4266</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to OSS-Fuzz.</li>
+<li>A malicious website may be able to cause a denial of service. A race
+condition was addressed with additional validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4267" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4267">CVE-2018-4267</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to Arayz of Pangu team working with Trend Micro’s Zero Day
+Initiative.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A memory corruption issue was addressed with
+improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4270" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4270">CVE-2018-4270</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to OSS-Fuzz.</li>
+<li>Processing maliciously crafted web content may lead to an unexpected
+application crash. A memory corruption issue was addressed with
+improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4271" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4271">CVE-2018-4271</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.2.</li>
+<li>Credit to OSS-Fuzz.</li>
+<li>Processing maliciously crafted web content may lead to an unexpected
+application crash. A memory corruption issue was addressed with
+improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4272" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4272">CVE-2018-4272</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to OSS-Fuzz.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A memory corruption issue was addressed with
+improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4273" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4273">CVE-2018-4273</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to OSS-Fuzz.</li>
+<li>Processing maliciously crafted web content may lead to an unexpected
+application crash. A memory corruption issue was addressed with
+improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4278" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4278">CVE-2018-4278</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to Jun Kokatsu (@shhnjk).</li>
+<li>A malicious website may exfiltrate audio data cross-origin. Sound
+fetched through audio elements may be exfiltrated cross-origin. This
+issue was addressed with improved audio taint tracking.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-4284" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-4284">CVE-2018-4284</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to OSS-Fuzz.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A type confusion issue was addressed with improved
+memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2018-12911" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12911">CVE-2018-12911</a></p>
+<ul>
+<li>Versions affected: WebKitGTK+ before 2.20.4 and WPE WebKit before
+2.20.2.</li>
+<li>Credit to Yu Haiwan.</li>
+<li>Processing maliciously crafted web content may lead to arbitrary
+code execution. A buffer overflow issue was addressed with improved
+memory handling.</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK+ and
+WPE WebKit. It is the best way to ensure that you are running safe
+versions of WebKit. Please check our websites for information about the
+latest stable releases.</p>
+<p>Further information about WebKitGTK+ and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
+
+
+        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/post-architecture-of-wpe/"><i class="icon-home mr-1"></i> Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- For blog posts -->
+
+
+</div>
+
+
+    <!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/post-architecture-of-wpe/assets/svg/blue_Web_Logo.svg"></a>
+  <nav class="social">
+    Connect on 
+    <a href="https://twitter.com/WPEWebKit">Twitter</a> • 
+    <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">mailing list: webkit-wpe</a> • 
+    <a href="https://webchat.oftc.net/?channels=wpe">OFTC: #wpe</a> • 
+    <a href="https://matrix.to/#/#wpe:matrix.org">Matrix: #wpe:matrix.org</a>
+  </nav>
+  <p class="text-muted small mb-0">Copyright &copy; 2018-2022 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+</footer>
+
+  <script src="/wpewebkit.org/post-architecture-of-wpe/vendor/jquery/jquery.js"></script>
+  <script src="/wpewebkit.org/post-architecture-of-wpe/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>
