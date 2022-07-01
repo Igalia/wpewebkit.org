@@ -4,13 +4,13 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-06-30T00:00:00Z</updated>
+  <updated>2022-07-01T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
   
   <entry>
     <title>An overview of the WPE WebKit project</title>
     <link href="https://wpewebkit.org/wpewebkit.org/post-architecture-of-wpe/blog/02-overview-of-wpe.html"/>
-    <updated>2022-06-30T00:00:00Z</updated>
+    <updated>2022-07-01T00:00:00Z</updated>
     <id>https://wpewebkit.org/wpewebkit.org/post-architecture-of-wpe/blog/02-overview-of-wpe.html</id>
     <content type="html">&lt;p&gt;In &lt;a href=&quot;https://wpewebkit.org/blog/01-happy-birthday-wpe.html&quot;&gt;the
 previous post in this series&lt;/a&gt;, we explained that WPE is a WebKit
@@ -21,32 +21,33 @@ engine is or how WPE came to be, we recommend you to go back to the
 first post in the series and then come back here.&lt;/p&gt;
 &lt;h2 id=&quot;webkit-architecture-in-a-nutshell&quot; tabindex=&quot;-1&quot;&gt;WebKit architecture in a nutshell&lt;/h2&gt;
 &lt;p&gt;To understand what makes WPE special, we first need to have a basic
-understanding of the architecture of WebKit itself, and how it thinks
-about any given architecture/platform, and a user-facing web browser.&lt;/p&gt;
+understanding of the architecture of WebKit itself, and how it ties
+together a given architecture/platform and a user-facing web browser.&lt;/p&gt;
 &lt;p&gt;WebKit, the engine, is split into different components that
-encapsulate different parts of an engine. At the heart of it is
-WebCore. As the name suggests, this contains the core features of the
-engine (rendering, layout, platform access, HTML and DOM support, the
+encapsulate its different parts. At the heart of it is WebCore. As the
+name suggests, this contains the core features of the engine
+(rendering, layout, platform access, HTML and DOM support, the
 graphics layer, etc). However, some of these ultimately depend heavily
 on the OS and underlying software platform in order to function. For
 example: how do we actually do any I/O on different platforms? How do
 we render onscreen? What’s the underlying multimedia platform and how
 does it decode media and play it?&lt;/p&gt;
 &lt;p&gt;WebCore handles the multitude of potential answers to these questions
-by abstracting the implementations and allowing developers to fill the
-gaps for different platforms. For example, for rendering on Mac, Cocoa
-APIs implement the graphics APIs needed. On Linux, this can be done
-through different implementations via Wayland, Vulkan, etc. For
-networking I/O on Mac, the networking APIs in the Foundation framework
-are used. On Linux, libsoup fills that gap, and so on.&lt;/p&gt;
+by abstracting the implementation of each component and allowing port
+developers to fill the gaps for each supported platforms. For example,
+for rendering on Mac, Cocoa APIs implement the graphics APIs
+needed. On Linux, this can be done through different implementations
+via Wayland, Vulkan, etc. For networking I/O on Mac, the networking
+APIs in the Foundation framework are used. On Linux, libsoup fills
+that gap, and so on.&lt;/p&gt;
 &lt;p&gt;On the opposite side, for browser implementors to be able to write a
 browser using WebKit, an API is needed. WebKit, after all, is a
 library. WebKit ports, besides providing the platform support
 described above, also provide APIs that suit the target environments:
 The Apple ports provide Objective-C APIs (which are then used to write
-Safari and the iOS browsers, for instance), while the GTK+ and WPE
-ports provide GObject-based APIs for Linux (that are used in Epiphany,
-the GNOME browser, and other applications that rely on WebKit to
+Safari and the iOS browsers, for instance), while the GTK+ port
+provides a GObject-based APIs for Linux (that are used in Epiphany,
+the GNOME browser, and other GNOME applications that rely on WebKit to
 render HTML). All of these APIs are built on top of an internal,
 middle-man, C API that is meant to make it easy for each port to
 provide a high-level API for browser developers.&lt;/p&gt;
@@ -82,8 +83,8 @@ API, making it easy for developers already familiar with the latter to
 start working with WPE. The cog library also serves as a wrapper
 around WPE to make it easier still. Once WPE was mature enough, it was
 accepted by Apple as an official WebKit port, meaning that the port
-lives in-tree and takes immediate advantage of the many improvements
-that land on the WebKit repository on a daily basis.&lt;/p&gt;
+lives now in-tree and takes immediate advantage of the many
+improvements that land on the WebKit repository on a daily basis.&lt;/p&gt;
 &lt;h2 id=&quot;how-does-wpe-integrate-with-webkit%3F&quot; tabindex=&quot;-1&quot;&gt;How does WPE integrate with WebKit?&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;https://wpewebkit.org/assets/wpe-architecture-diagram.png&quot; alt=&quot;A diagram of the WPE WebKit architecture&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;The WPE port has several components. Some are in-tree (that is, are a
