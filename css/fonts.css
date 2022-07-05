@@ -3,11 +3,12 @@
 	font-family: 'Source Sans Pro';
 	font-style: normal;
 	font-variant: common-ligatures;
-	font-weight: normal;
+	font-weight: 400;
 	src:
 		local('Source Sans Variable'),
 		local('Source Sans 3 VF'),
 		local('Source Sans Pro'),
+		local('Source Sans Pro Regular'),
 	    local('SourceSansPro-Regular'),
 		local('Source Sans 3'),
 		local('SourceSans3-Regular'),
@@ -22,11 +23,11 @@
 	font-family: 'Source Sans Pro';
 	font-style: normal;
 	font-variant: common-ligatures;
-	font-weight: bold;
+	font-weight: 700;
 	src:
 		local('Source Sans Variable'),
 		local('Source Sans 3 VF'),
-		local('Source Sans Pro'),
+		local('Source Sans Pro Bold'),
 	    local('SourceSansPro-Bold'),
 		local('Source Sans 3'),
 		local('SourceSans3-Bold'),
@@ -41,11 +42,11 @@
 	font-family: 'Source Sans Pro';
 	font-style: normal;
 	font-variant: common-ligatures;
-	font-weight: lighter;
+	font-weight: 100;
 	src:
 		local('Source Sans Variable'),
 		local('Source Sans 3 VF'),
-		local('Source Sans Pro'),
+		local('Source Sans Pro Light'),
 	    local('SourceSansPro-Light'),
 		local('Source Sans 3'),
 		local('SourceSans3-Light'),
@@ -60,11 +61,11 @@
 	font-family: 'Source Sans Pro';
 	font-style: italic;
 	font-variant: common-ligatures;
-	font-weight: normal;
+	font-weight: 400;
 	src:
 		local('Source Sans Variable'),
 		local('Source Sans 3 VF'),
-		local('Source Sans Pro'),
+		local('Source Sans Pro Italic'),
 	    local('SourceSansPro-Italic'),
 		local('Source Sans 3'),
 		local('SourceSans3-Italic'),
@@ -79,11 +80,11 @@
 	font-family: 'Source Sans Pro';
 	font-style: italic;
 	font-variant: common-ligatures;
-	font-weight: bold;
+	font-weight: 700;
 	src:
 		local('Source Sans Variable'),
 		local('Source Sans 3 VF'),
-		local('Source Sans Pro'),
+		local('Source Sans Pro Bold Italic'),
 	    local('SourceSansPro-BoldItalic'),
 		local('Source Sans 3'),
 		local('SourceSans3-BoldItalic'),
@@ -98,11 +99,11 @@
 	font-family: 'Source Sans Pro';
 	font-style: italic;
 	font-variant: common-ligatures;
-	font-weight: lighter;
+	font-weight: 100;
 	src:
 		local('Source Sans Variable'),
 		local('Source Sans 3 VF'),
-		local('Source Sans Pro'),
+		local('Source Sans Pro Light Italic'),
 	    local('SourceSansPro-LightItalic'),
 		local('Source Sans 3'),
 		local('SourceSans3-LightItalic'),
