@@ -1,37 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand logo" href="{{ '/' | url }}"><img width="200" src="{{ '/assets/svg/blue_Web_Logo.svg' | url }}" alt=""></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
- 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ '/' | url }}">Home</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" href="{{ '/blog' | url }}">Blog</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Documentation
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ '/about/exploring.html' | url }}">Explore WPE / Embedded</a>
-          <a class="dropdown-item" href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a>
-          <a class="dropdown-item" href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE</a>
-          <a class="dropdown-item" href="{{ '/about/architecture.html' | url }}">WPE Design</a>
-          <a class="dropdown-item" href="{{ '/about/faq.html' | url }}">FAQ</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{ '/about/builds.html' | url }}">Build it</a>
-          <a class="dropdown-item" href="{{ '/release/schedule' | url }}">Release Schedule</a>
-        </div>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ '/code' | url }}">Code</a>
-      </li>
-      </li>
-    </ul>
-  </div>
+<nav class="global">
+<a class="igalia logo home" href="{{ '/' | url }}"><img src="{{ '/assets/svg/blue_Web_Logo.svg' | url }}" alt=""></a>
+<ul>
+<li class="currentPage">
+<a class="nav-link" href="{{ '/' | url }}">Home</a>
+</li>
+<li>
+<a class="nav-link" href="{{ '/learn' | url }}">Learn & Discover</a>
+</li>
+<li>
+<a class="nav-link" href="{{ '/community' | url }}">Community</a>
+</li>
+<li>
+<a class="nav-link" href="{{ '/developers' | url }}">Developers</a>
+</li>
+<li>
+<a class="nav-link" href="{{ '/code' | url }}">CODE</a>
+</li>
+</ul>
 </nav>
 

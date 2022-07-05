@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="131.09" height="63.194" viewBox="0 0 131.09 63.194">
+  <g id="logo-blue" transform="translate(-102.911 -23.935)">
+    <g id="blue_Web_Logo" transform="translate(-1747.8 -833.412)">
+      <g id="black_Web_Logo_Header_300x110px" transform="translate(1838.8 853.943)">
+        <g id="Group_9" data-name="Group 9" transform="translate(11.91 3.404)">
+          <g id="Group_4" data-name="Group 4" transform="translate(0)">
+            <ellipse id="Ellipse_7" data-name="Ellipse 7" cx="13.435" cy="6.647" rx="13.435" ry="6.647" transform="translate(27.582 16.475)" fill="#1593ed"/>
+            <g id="Group_1" data-name="Group 1" transform="translate(0.627)">
+              <path id="Path_1" data-name="Path 1" d="M220.231,199.871l-3.423-1.964a.493.493,0,0,0-.491.856l3.423,1.964a.493.493,0,1,0,.491-.856ZM144.494,197.9l-3.418,1.973a.493.493,0,0,0,.493.854l3.418-1.973a.493.493,0,0,0-.493-.854Zm68.892-1.955-3.423-1.964a.493.493,0,1,0-.491.856l3.423,1.964a.493.493,0,1,0,.491-.856Zm-62.057-1.991-3.417,1.973a.493.493,0,1,0,.493.854l3.417-1.974a.493.493,0,1,0-.493-.854Zm55.211-1.936-3.423-1.963a.493.493,0,1,0-.491.856l3.423,1.963a.493.493,0,0,0,.491-.856Zm-48.376-2.01-3.418,1.973a.493.493,0,0,0,.493.854l3.418-1.973a.493.493,0,0,0-.493-.854Zm41.531-1.917-3.423-1.964a.493.493,0,1,0-.491.856l3.423,1.964a.493.493,0,0,0,.491-.856ZM165,186.061l-3.417,1.973a.493.493,0,1,0,.493.854l3.417-1.974a.493.493,0,1,0-.493-.854Zm27.85-1.9-3.423-1.964a.493.493,0,1,0-.491.856l3.423,1.964a.493.493,0,0,0,.491-.856Zm-21.016-2.048-3.417,1.973a.493.493,0,0,0,.493.854l3.418-1.973a.493.493,0,0,0-.494-.854ZM186,180.236l-3.423-1.964a.493.493,0,1,0-.491.856l3.423,1.964a.493.493,0,0,0,.491-.856Zm-7.335-2.067-3.417,1.973a.493.493,0,1,0,.493.854l3.417-1.973a.493.493,0,0,0-.493-.854Z" transform="translate(-140.829 -178.103)" fill="#1593ed" fill-rule="evenodd"/>
+            </g>
+            <g id="Group_2" data-name="Group 2" transform="translate(0 24.027)">
+              <path id="Path_2" data-name="Path 2" d="M117.053,172.218V156.534L157.8,180.06l40.748-23.525v15.684L157.862,195.7Z" transform="translate(-117.053 -156.534)" fill="#1593ed" fill-rule="evenodd"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="blue_Web_Logo-2" data-name="blue_Web_Logo" transform="translate(-1747.8 -833.412)">
+      <g id="black_Web_Logo_Header_300x110px-2" data-name="black_Web_Logo_Header_300x110px" transform="translate(1838.8 853.943)">
+        <g id="Group_9-2" data-name="Group 9" transform="translate(11.91 3.404)">
+          <g id="Group_4-2" data-name="Group 4" transform="translate(0)">
+            <text id="WPE" transform="translate(95.09 39.097)" fill="#1593ed" font-size="20" font-family="IBMPlexMono-Medm, IBM Plex Mono"><tspan x="0" y="0">WPE</tspan></text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
