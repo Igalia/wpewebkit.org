@@ -1,206 +1,8 @@
 ---
-layout: page.html
+layout: home.html
 title: WPE
 description: WebKit port optimized for embedded devices
 ---
-<style>
-img[src*="placeholder"] {
-max-height: 4em;
-}
-
-body {
-	display: grid;
-	grid-template-columns: 1fr [main] minmax(40ch,120ch) 1fr;
-	grid-template-rows: [nav] min-content [main] 1fr [footer] min-content;
-	margin: 0;
-	padding: 5em 0 0;
-}
-:is(nav, footer).global, header.page {
-	grid-column: 1 / -1;
-}
-main {
-	grid-column: main;
-}
-img {
-	box-sizing: border-box;
-	max-width: 100%;
-}
-
-h1 {font-size: 2.33em; line-height: 1.13;}
-h2 {font-size: 2.33em; line-height: 1.26;}
-h3 {font-size: 1.33em;}
-
-p > big {
-	font-size: 1.67em;
-}
-
-.cta.btn {
-	display: inline-block;
-	background: #1593ED;
-	color: #FFF;
-	padding: 0.67em 1em;
-	border-radius: 10em;
-	font-weight: 500;
-	font-size: 1.2em;
-	text-decoration: none;
-	filter: none;
-}
-
-nav.global {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 5em;
-	background: hsla(0deg,0%,100%,0.67);
-	z-index: 12345;
-	backdrop-filter: blur(10px);
-}
-
-nav.global {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1em;
-}
-nav.global ul {
-	margin: 0;
-	list-style: none;
-}
-nav.global ul li {
-	display: inline-block;
-}
-nav.global ul li a {
-	display: block;
-	padding: 0.5em 1em;
-	text-decoration: none;
-}
-nav.global ul li.currentPage {
-	position: relative;
-}
-nav.global ul li.currentPage a {
-	color: inherit;
-	border-bottom: 1px dashed currentColor;
-	padding: 0;
-	margin: 1em;
-}
-nav.global ul li.currentPage a::after {
-	content: '';
-	position: absolute;
-	width: 0;
-	top: calc(100% - 1em);
-	left: 50%;
-	height: 50%;
-	border-left: 1px dashed currentColor;
-}
-a.igalia.logo.home img {
-	width: 200px;
-}
-
-header.page {
-	background: linear-gradient(155deg,#5A5A5A,#A4A8A7,#443468 80%);
-	color: #FFF;
-	padding: 3em 0 8em;
-}
-header.page div {
-	min-width: 40ch;
-	max-width: 120ch;
-	margin: 0 auto;
-}
-header.page div > * {
-	max-width: 50%;
-	filter: drop-shadow(0 0 1px #0008) drop-shadow(0 0 2px #0008);
-}
-header.page div h1 {
-	font-weight: 400;
-	padding-bottom: 0.75em;
-	background: url(/assets/img/graphic-title-white.svg) 0 100% / 4.2ch auto no-repeat;
-}
-header.page div p {
-	font-size: 1.33em;
-}
-
-main section > :is(:not(h1, h2, h3, h4, h5, h6, p, ul)) {
-	position: relative;
-	display: grid;
-	grid-template-columns: 45% 45%;
-	grid-template-rows: min-content min-content;
-	gap: 0 10%;
-	align-items: first baseline;
-	padding: 3em 0;
-}
-main section > :is(:not(h1, h2, h3, h4, h5, h6, p, ul))::after {
-	content: '●';
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	height: 0.67em;
-	border-bottom: 1px dashed currentColor;
-}
-main section div h3 {
-	grid-column: 1;
-	grid-row: 1;
-	align-self: end;
-}
-main section div p {
-	grid-column: 1;
-	grid-row: 2;
-	align-self: start;
-	margin-top: 0;
-}
-main section div > :last-child {
-	grid-column: 2;
-	grid-row: 1 / -1;
-}
-
-.gallery {
-	display: grid;
-	gap: 10%;
-	margin: 0;
-	padding: 1.5em 0;
-	list-style: none;
-}
-.gallery.c2 {
-	grid-template-columns: repeat(2,1fr);
-}
-.gallery.c5 {
-	grid-template-columns: repeat(5,1fr);
-	gap: 1em;
-}
-
-.full-bleed {
-	border-image-outset: 0 100vw;
-	border-image-slice: 0 fill;
-	border-image-width: 1;
-	border-image-repeat: stretch;
-}
-
-.explore-embedded .full-bleed {
-	border-image-source: linear-gradient(0deg,#EAFEFE,#EAFEFE);
-}
-
-.notable-customers {
-	background: black;
-	color: white;
-	border-image-source: linear-gradient(0deg,#000,#000);
-	padding: 4em 0;
-}
-.notable-customers .gallery img {
-	background: #FFF;
-	height: 10em;
-	width: 100%;
-	padding: 1em;
-	object-fit: contain;
-}
-
-footer.global {
-	display: grid;
-	grid-template-columns: repeat(3,33%);
-	background: #1593ED;
-	color: #FFF;
-	padding: 5em 3em 3em;
-}
-</style>
 
 <header class="page">
 <div>
@@ -219,11 +21,12 @@ A <strong>WebKit</strong> port designed with flexibility and hardware accelerati
 
 <section class="explore-embedded">
 
-<header class="full-bleed">
+<header class="full-bleed c2 text">
 <h2>Explore Embedded Browsers</h2> 
 <p><big>The Web Platform is a frequently chosen foundational technology for many reasons, including:</big></p>
 </header>
-<div>
+
+<div class="c2">
 <h3><a href="">Supported Hardware</a></h3>
 <p>WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:</p>
 <ul class="gallery c2">
@@ -234,19 +37,19 @@ A <strong>WebKit</strong> port designed with flexibility and hardware accelerati
 </ul>
 </div>
 
-<div>
+<div class="c2">
 <h3><a href="">Why Choose WPE?</a></h3>
-<p>WPE WebKit is widely adopted by many industries, such as digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
+<p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
 <img src="/assets/img/illustration-why-WPE@2x.png" alt="">
 </div>
 
-<div>
+<div class="c2">
 <h3><a href="">WPE Design</a></h3>
 <p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
 <img src="/assets/img/diagram-WPE-design.svg" alt="">
 </div>
 
-<div>
+<div class="c2 text">
 <h3><a href="">WPE’s Frequently Asked Questions</a></h3>
 <p><big>Learn more about WPE copy goes here for a couple of lines.</big></p>
 </div>
@@ -256,110 +59,69 @@ A <strong>WebKit</strong> port designed with flexibility and hardware accelerati
 
 <section class="notable-customers full-bleed">
 
-<header>
-<h2>Notable Customers</h2> 
-<div>
-<p><big>WPE WebKit is widely adopted by many industries, such as digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment.</big></p>
-<p>Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
+<h2>Customers</h2> 
+<div class="desc">
+<p><big>Whether you’re in the digital signage, professional audio, video & broadcasting, home appliance, set-top boxes, or automotive and in-flight infotainment industry, WPE WebKit is a solution that will work for you.</big></p>
 </div>
-</header>
-
-<ul class="gallery c5">
-<li><a href=""><img src="/assets/img/logo-metrological@2x.png" alt=""><b>Metrological</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-<li><a href=""><img src="/assets/img/logo-telefonica@2x.png" alt=""><b>Telefónica</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
+<a class="spotlight" href="#"><img src="/assets/img/logo-metrological@2x.png" alt=""></a>
+<div class="spotlight">
+<h3><a href="#">Metrological</a></h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+<p><a href="">Read all about it</a></p>
+</div>
+<!-- li><a href=""><img src="/assets/img/logo-telefonica@2x.png" alt=""><b>Telefónica</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
 <li><a href=""><img src="/assets/img/logo-ombori@2x.png" alt=""><b>Ombori</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
 <li><a href=""><img src="/assets/img/logo-garmin@2x.png" alt=""><b>Garmin</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
 <li><a href=""><img src="/assets/img/logo-multichoice@2x.png" alt=""><b>MultiChoice</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
 <li><a href=""><img src="/assets/img/logo-liberty@2x.png" alt=""><b>Liberty Global</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
 <li><a href=""><img src="/assets/img/logo-televic@2x.png" alt=""><b>Televic</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-<li><a href=""><img src="/assets/img/logo-NOS@2x.png" alt=""><b>NOS</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-</ul>
+<li><a href=""><img src="/assets/img/logo-NOS@2x.png" alt=""><b>NOS</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li -->
+
 
 </section>
 
 
 <section class="community">
 
-<h2><a href="">Community</a></h2>
+<header class="full-bleed">
+<h2>Community</h2>
+<img src="/assets/img/illustration-community.svg" alt="" class="decoration">
+</header>
 
-<h3><a href="">Recent Blog Articles</a></h3>
-<ul>
+<div>
+<h3><a href="">Recent Blog Posts</a></h3>
+<p><a href="">See all</a></p>
+<ul class="gallery c5 blog cards">
 <li>
-<h3><a href="">Post title</a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Post date</time>
-<span>Post source</span>
-<p>Opening 25 words or so of the blog post will go here to serve as a truncated preview…</p>
+<h3><a href="/blog/">A new design for WPEwebkit.org</a></h3>
+<time>Jul 33, 2022</time>
+<p>A quick preview of the post, likely pulled from the metadata of the post’s Markdown header.</p>
+</li>
 <li>
-<h3><a href="">Post title</a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Post date</time>
-<span>Post source</span>
-<p>Opening 25 words or so of the blog post will go here to serve as a truncated preview…</p>
+<h3><a href="/blog/02-overview-of-wpe.html">An overview of the WPE WebKit project</a></h3>
+<time>Jul 1, 2022</time>
+<p>To understand what makes WPE special, we first need to have a basic understanding of the architecture of WebKit itself, and how it ties together a given platform and a user-facing web browser.</p>
+</li>
 <li>
-<h3><a href="">Post title</a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Post date</time>
-<span>Post source</span>
-<p>Opening 25 words or so of the blog post will go here to serve as a truncated preview…</p>
-<li>
-<h3><a href="">Post title</a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Post date</time>
-<span>Post source</span>
-<p>Opening 25 words or so of the blog post will go here to serve as a truncated preview…</p>
-<li>
-<h3><a href="">Post title</a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Post date</time>
-<span>Post source</span>
-<p>Opening 25 words or so of the blog post will go here to serve as a truncated preview…</p>
+<h3><a href="/blog/01-happy-birthday-wpe.html">Happy birthday WPE!</a></h3>
+<time>Apr 21, 2022</time>
+<p>Today is a special day for Igalia, especially for those colleagues that work on WebKit: Five years ago today, the WPE port was announced by our colleague Žan Doberšek on the WebKit mailing list.</p>
 </li>
 </ul>
 
-<h3><a href="">Twitter</a></h3>
-<ul>
-<li>
-<h3><a href=""></a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Tweet date</time>
-<span><a href="">@twhandle</a></span>
-<p>Tweet copy will go here…</p>
-<li>
-<h3><a href=""></a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Tweet date</time>
-<span><a href="">@twhandle</a></span>
-<p>Tweet copy will go here…</p>
-<li>
-<h3><a href=""></a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Tweet date</time>
-<span><a href="">@twhandle</a></span>
-<p>Tweet copy will go here…</p>
-<li>
-<h3><a href=""></a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Tweet date</time>
-<span><a href="">@twhandle</a></span>
-<p>Tweet copy will go here…</p>
-<li>
-<h3><a href=""></a></h3>
-<img src="/assets/img/placeholder.png" alt="">
-<time>Tweet date</time>
-<span><a href="">@twhandle</a></span>
-<p>Tweet copy will go here…</p>
-</li>
-</ul>
-
+</div>
 
 </section>
 
 <section class="resources">
 
+<header class="full-bleed">
 <h2><a href="">Resources</a></h2>
+<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
+</header>
 
-<ul>
+<div>
+<ul class="gallery c5">
 <li>
 <h3><a href="">Guides and sample code</a></h3>
 <p>Get details on implementing web technologies with guides, reference, and sample code.</p>
@@ -381,6 +143,7 @@ A <strong>WebKit</strong> port designed with flexibility and hardware accelerati
 <p>The number of people with the basic skills to build things with web technologies is massive.</p>
 </li>
 </ul>
+</div>
 
 </section>
 
