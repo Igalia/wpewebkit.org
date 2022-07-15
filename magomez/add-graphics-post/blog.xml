@@ -95,7 +95,7 @@
 &lt;p&gt;So, whatever platform you want to run &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; on, you need to have a backend providing at least these capabilities.&lt;/p&gt;
 &lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
 &lt;p&gt;This was a brief overview of how &lt;a ref=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; rendering works, and also what are the major improvements we’re trying to achieve at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. We’re constantly putting in a lot of work to keep &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; the best web engine available for embedded devices.&lt;/p&gt;
-&lt;p&gt;If this post got you interested in collaborating with &lt;a ref=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://&quot;&gt;https://www.igalia.com/contact/&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
+&lt;p&gt;If this post got you interested in collaborating with &lt;a ref=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
 &lt;p&gt;We also have open positions at the WebKit team at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. If you’re motivated by this field and you’re interested in developing your career around it, you can apply &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;here&lt;/a&gt;!&lt;/p&gt;
 </content>
   </entry>
