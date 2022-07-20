@@ -5,12 +5,15 @@ max-height: 4em;
 html {
 	--mainColMax: 75rem;
 	--colorMain: #1593ED;
+	height: auto;
+	min-height: 100%;
 }
 
 body {
 	display: grid;
+	min-height: 100%;
 	grid-template-columns: 1fr [main] minmax(30rem,var(--mainColMax)) 1fr;
-	grid-template-rows: [nav] min-content [main] 1fr [footer] min-content;
+	grid-template-rows: [main] auto [footer] min-content;
 	margin: 0;
 	padding: 5rem 0 0;
 }
@@ -206,7 +209,6 @@ main section div > :last-child {
 	grid-column: 2;
 	grid-row: 1 / -1;
 	justify-self: center;
-	max-height: 23rem;
 }
 
 .explore-embedded div.text > * {
@@ -363,7 +365,7 @@ header .decoration {
 }
 
 footer.global {
-	padding: 6rem 0 4rem;
+	padding: 4rem 0;
 	border-top: 1px dashed #000;
 	background: #1593ED;
 	color: #FFF;
