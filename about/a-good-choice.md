@@ -16,7 +16,7 @@ Some advantages of WPE WebKit:
 
 * The minimal set of dependencies needed to run WPE WebKit ensures that its footprint is small and it consumes less memory, which allows applications built with WPE WebKit to run on low-end devices.
 
-* WPE enables rich and fast 2D and 3D HTML-based user interfaces, multimedia integration, 3D content, and many more of the latest Web technologies to run smoothly and efficiently on low-cost devices.
+* Enables rich and fast 2D and 3D HTML-based user interfaces, multimedia integration, 3D content, and many more of the latest Web technologies to run smoothly and efficiently on low-cost devices.
 
 * Displays multimedia content with high-quality CSS 3D animations, WebGL, and fluid high-quality HTML videos.
 
