@@ -1,0 +1,27 @@
+[
+	{
+		"title": "Home",
+		"url": ""
+	},
+	{
+		"title": "Learn & Discover",
+		"url": "learn"
+	},
+	{
+		"title": "Blog",
+		"url": "blog"
+	},
+	{
+		"title": "Developers",
+		"url": "developers"
+	},
+	{
+		"title": "CODE",
+		"url": "code"
+	},
+	{
+		"title": "Download",
+		"url": "download",
+		"class": "btn cta"
+	}
+]

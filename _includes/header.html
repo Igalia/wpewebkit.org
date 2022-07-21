@@ -1,22 +1,25 @@
 <nav class="global">
 <div>
 <a class="igalia logo home" href="{{ '/' | url }}"><img src="{{ '/assets/img/logo-blue.svg' | url }}" alt=""></a>
-<ul>
+<ul class="{{ page.url | topLevel }}">
+{%- for link in menu -%}
+{%- assign dir = page.url | topLevel -%}
+{%- if dir == "home" -%}
+{%- assign dir = "" -%}
+{%- endif -%}
+{%- if link.url == dir -%}
 <li class="currentPage">
-<a class="nav-link" href="{{ '/' | url }}">Home</a>
-</li>
+{%- else -%}
 <li>
-<a class="nav-link" href="{{ '/learn/' | url }}">Learn & Discover</a>
-</li>
-<li>
-<a class="nav-link" href="{{ '/developers' | url }}">Developers</a>
-</li>
-<li>
-<a class="nav-link" href="{{ '/code' | url }}">CODE</a>
-</li>
-<li>
-<a class="cta btn" href="">DOWNLOAD</a>
-</li>
+{%- endif -%}
+<a class="
+{%- if link.class -%}
+{{link.class}}
+{%- else -%}
+nav-link
+{%- endif -%}
+" href="/{{link.url}}">{{link.title}}</a></li>
+{%- endfor -%}
 </ul>
 </div>
 </nav>
