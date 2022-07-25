@@ -15,17 +15,14 @@ Maybe you're...
 ### New to WPE
 
 * Interested in seeing [WPE in action](#wpe-in-action)…
-* [Wondering if WPE is currently available for your device?](/about/supported-hardware.html)
 * A web developer who is looking to understand [the basics about what an embedded browser is?](what-is-embedded.html)
 
-### A device maker
+### An embedded developer
 
+* [Wondering if WPE is currently available for your device?](/about/supported-hardware.html)
 * Wondering [what makes WPE a good choice](/about/a-good-choice.html)
-* An experienced embedded developer ready to [build and tune WPE](/about/build-and-tune.html)
-
-### A coder
-
 * Interested in learning more about [the architecture of WPE](/about/architecture.html)
+* An experienced embedded developer ready to [build and tune WPE](/about/build-and-tune.html)
 * Interested in all of the various ways you can get [started actually using and exploring WPE](explore-wpe.html)
 * And also…
 
