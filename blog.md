@@ -30,19 +30,19 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 
 ### Recent Release Notes
 
-<div class="container" style="border-block: thin solid hsl(205,86%,70%);padding-block:1em;padding-inline:0.5em;">
-  <div class="card-deck" style="display:flex;">
+<div class="container">
+  <div class="card-deck">
     <div class="card">
       <h4 class="card-header text-center" style="margin-top: 0;">Stable</h4>
-      <ul class="list-group list-group-flush">
+      <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
-        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           {{ item[0] }}:
           <a class="badge badge-secondary"
              href="{{ item[1].stable.url | url }}">{{ item[1].stable.version }}</a>
-        </li>
+        </div>
         {%- endfor -%}
-      </ul>
+      </div>
     </div>
 
    <div class="card">
