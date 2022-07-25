@@ -18,6 +18,7 @@ Maybe you're...
 * A web developer who is looking to understand [the basics about what an embedded browser is?](what-is-embedded.html)
 * Interested in all of the various ways you can get [started actually using and exploring WPE](explore-wpe.html)
 * Interested in learning more about [the architecture of WPE](/about/architecture.html)
+* An experienced embedded developer ready to [build and tune WPE](/about/build-and-tune.html)
 
 ## See WPE In Action...
 <div class="container text-center my-auto" style="display:grid;grid-template-columns: 1fr 1fr;grid-gap: 2rem;text-align: center;">
@@ -65,17 +66,36 @@ Maybe you're...
 
 ---
 
-## Possibly interesting...
-<div style="display: grid; grid-template-columns: 10rem 10rem 10rem;margin: 0 10% 3rem;justify-content: space-around;">
-	<div class="related-card">
-		Handy Thing 1
-	</div>
-	<div class="related-card">
-		Handy Thing 2
-	</div>
-	<div class="related-card">
-		Handy Thing 3
-	</div>
-	<div></div>
-	
+<section class="resources">
+
+<header class="full-bleed">
+<h2><a href="">Resources</a></h2>
+<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
+</header>
+
+<div>
+<ul class="gallery c5">
+<li>
+<h3><a href="">Guides and sample code</a></h3>
+<p>Get details on implementing web technologies with guides, reference, and sample code.</p>
+</li>
+<li>
+<h3><a href="">Videos</a></h3>
+<p>Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari.</p>
+</li>
+<li>
+<h3><a href="">Forums</a></h3>
+<p>Open standards with great longevity allows lots more things to benefit from the same investments.</p>
+</li>
+<li>
+<h3><a href="">Downloads</a></h3>
+<p>The number of people with the basic skills to build things with web technologies is massive.</p>
+</li>
+<li>
+<h3><a href="">Source</a></h3>
+<p>The number of people with the basic skills to build things with web technologies is massive.</p>
+</li>
+</ul>
 </div>
+
+</section>
