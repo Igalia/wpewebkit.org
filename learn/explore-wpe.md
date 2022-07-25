@@ -31,3 +31,10 @@ We've also tried to make it easy for developers who aren't comfortable building 
 * [Install with Balena]({{'/about/balena-wpe.html' | url}}): If there is support in [Balena](https://www.balena.io/) for your current hardware then it can be another easy way to let you explore WPE, and use the extra possibilities provided in the Balena ecosystem.
 
 If you find any problem with the packages or images, or want to know more about optimizing WPE for your hardware or use cases, please [contact us]({{'/code' | url}}).
+
+## Resources
+
+* [Release Schedule](https://wpewebkit.org/release/schedule/)
+* Release Notes (see existing home page)
+* Security Advisories (see existing home page)
+* Performance tips

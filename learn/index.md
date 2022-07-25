@@ -26,38 +26,13 @@ Maybe you're...
 * Interested in all of the various ways you can get [started actually using and exploring WPE](explore-wpe.html)
 * And also…
 
-<section class="resources">
+## Resources
 
-<header>
-<h2><a href="">Resources</a></h2>
-<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
-</header>
-
-<div>
-<ul class="gallery c5">
-<li>
-<h3><a href="">Guides and sample code</a></h3>
-<p>Get details on implementing web technologies with guides, reference, and sample code.</p>
-</li>
-<li>
-<h3><a href="">Videos</a></h3>
-<p>Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari.</p>
-</li>
-<li>
-<h3><a href="">Forums</a></h3>
-<p>Open standards with great longevity allows lots more things to benefit from the same investments.</p>
-</li>
-<li>
-<h3><a href="">Downloads</a></h3>
-<p>The number of people with the basic skills to build things with web technologies is massive.</p>
-</li>
-<li>
-<h3><a href="">Source</a></h3>
-<p>The number of people with the basic skills to build things with web technologies is massive.</p>
-</li>
-</ul>
-</div>
-</section>
+* <a href="">Guides and sample code</a> Get details on implementing web technologies with guides, reference, and sample code.
+* <a href="">Videos</a> Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari. 
+* <a href="">Forums</a> Open standards with great longevity allows lots more things to benefit from the same investments. 
+* <a href="">Downloads</a> The number of people with the basic skills to build things with web technologies is massive. 
+* <a href="">Source</a> The number of people with the basic skills to build things with web technologies is massive. 
 
 
 ## See WPE In Action...
