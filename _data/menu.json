@@ -12,16 +12,8 @@
 		"url": "blog"
 	},
 	{
-		"title": "Developers",
-		"url": "developers"
-	},
-	{
-		"title": "CODE",
-		"url": "code"
-	},
-	{
-		"title": "Download",
-		"url": "download",
+		"title": "Get Started",
+		"url": "get-started",
 		"class": "btn cta"
 	}
 ]
