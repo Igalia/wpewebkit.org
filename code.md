@@ -9,39 +9,22 @@ permalink: /code/
 WPE is open source, free software.  Your help and scrutiny are valuable.
 You can learn a great deal about how you can contribute upstream to WebKit through [the official WebKit Contribution Guide](https://webkit.org/contributing-code/).
 
-## Issues?
-
-* Found an issue with WPE? [Report a WebKit issue](http://bugs.webkit.org).
-* Having issues with Cog? [Report a Cog issue](https://github.com/Igalia/cog).
-
-## Contact
-
-For questions and hanging out you can find us here:
-
-* [#wpe:matrix.org](https://matrix.to/#/#wpe:matrix.org) room on
-  [Matrix](https://matrix.org).
-* [#wpe](https://webchat.oftc.net/?channels=wpe) channel on
-  [OFTC](https://www.oftc.net)
-* [webkit-wpe](https://lists.webkit.org/mailman/listinfo/webkit-wpe) mailing
-  list.
-* [@WPEWebKit](https://twitter.com/WPEWebKit) on Twitter.
-
 ## Source
 
 In addition to the [WPE WebKit source](https://webkit.org/getting-the-code/) itself, there are several supporting repositories as well:
 
 * [Cog](https://github.com/Igalia/cog): A small single “window” launcher for the WebKit WPE port, with no user interface, suitable to be used as a Web application container.
-* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A FreeDesktop&period;org backend for WPE.
+* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A FreeDesktop.org backend for WPE.
 * [libwpe](https://github.com/WebPlatformForEmbedded/libwpe): General-purpose library for WPE.
 
 With each new release of WPE, we make source tarballs available.
 
 <h3 class="sr-only">Releases</h3>
 
-<div class="container">
-  <div class="card-deck">
+<div class="container" style="border-block: medium solid hsl(205,86%,70%);padding-block:1em;padding-inline:0.5em;">
+  <div class="card-deck" style="display:flex;">
     <div class="card">
-      <h4 class="card-header text-center" style="font-weight: 300">Stable</h4>
+      <h4 class="card-header text-center" style="margin-top: 0;">Stable</h4>
       <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -61,7 +44,7 @@ With each new release of WPE, we make source tarballs available.
     </div>
 
    <div class="card">
-      <h4 class="card-header text-center" style="font-weight: 300">Unstable</h4>
+      <h4 class="card-header text-center" style="margin-top: 0;">Unstable</h4>
       <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -79,10 +62,26 @@ With each new release of WPE, we make source tarballs available.
         {%- endfor -%}
       </div>
     </div>
+    <p class="m-3 mt-4 text-center">
+      <a class="btn btn-light btn-sm" style="font-weight: normal" href="https://wpewebkit.org/releases/">
+        <i class="icon-cloud-download align-text-bottom" style="margin-right: 0.3em"></i>All Downloads…</a>
+    </p>
   </div>
-
-  <p class="m-3 mt-4 text-center">
-    <a class="btn btn-light btn-sm" style="font-weight: normal" href="https://wpewebkit.org/releases/">
-      <i class="icon-cloud-download align-text-bottom" style="margin-right: 0.3em"></i>All Downloads…</a>
-  </p>
 </div>
+
+## Reporting bugs
+
+* Found an issue with WPE? [Report a WebKit issue](http://bugs.webkit.org).
+* Having issues with Cog? [Report a Cog issue](https://github.com/Igalia/cog).
+
+## Community
+
+For questions and hanging out you can find us here:
+
+* [#wpe:matrix.org](https://matrix.to/#/#wpe:matrix.org) room on
+  [Matrix](https://matrix.org).
+* [#wpe](https://webchat.oftc.net/?channels=wpe) channel on
+  [OFTC](https://www.oftc.net)
+* [webkit-wpe](https://lists.webkit.org/mailman/listinfo/webkit-wpe) mailing
+  list.
+* [@WPEWebKit](https://twitter.com/WPEWebKit) on Twitter.

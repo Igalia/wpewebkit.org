@@ -1,15 +1,19 @@
 ---
 layout: post
-title: "Exploring WPEwebkit"
+title: "Get Started with WPEwebkit"
 tags: [about]
 data: { dateless: "true" }
 permalink: /learn/explore-wpe.html
---- 
+---
 
+### Grab the code
 
-### Easy ways to explore WPEwebkit
+If you're an experienced embedded engineer, you'll most likely want to grab the [code](/code/) and build and tune WPE for your specific needs.
+ 
 
-All of this said, we believe that enabling developers to explore the space is important for a whole lot of reasons.  Therefore, we've tried to make it easy for developers who aren't comfortable building entire embedded systems to get their hands on _something_ where they can begin exploring and learning useful things.
+### Easy pre-builts
+
+We've also tried to make it easy for developers who aren't comfortable building entire embedded systems to get their hands on _something_ where they can begin exploring and learning useful things. Our easy prebuilts do just that - they won't be well optimized in the way a final product usually is, but they're nonetheless very useful.
 
 * __Install it from your GNU/Linux OS distribution__: These packages are not just a quick and simple way to test WPE but they also come with all the development files and documentation necessary to build and test software that uses this web engine.  WPE WebKit is available in several Linux distributions including:
   * [Debian](https://packages.debian.org/search?searchon=sourcenames&keywords=wpewebkit)
