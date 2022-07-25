@@ -12,16 +12,59 @@ We understand that WPE is interesting from many perspectives, and to people of p
 
 Maybe you're...
 
-* Wondering [what makes WPE a good choice](/about/a-good-choice.html)
-* Interested in seeing [WPE in action](#wpe-in-action%E2%80%A6)
+### New to WPE
+
+* Interested in seeing [WPE in action](#wpe-in-action)…
 * [Wondering if WPE is currently available for your device?](/about/supported-hardware.html)
 * A web developer who is looking to understand [the basics about what an embedded browser is?](what-is-embedded.html)
-* Interested in all of the various ways you can get [started actually using and exploring WPE](explore-wpe.html)
-* Interested in learning more about [the architecture of WPE](/about/architecture.html)
+
+### A device maker
+
+* Wondering [what makes WPE a good choice](/about/a-good-choice.html)
 * An experienced embedded developer ready to [build and tune WPE](/about/build-and-tune.html)
 
+### A coder
+
+* Interested in learning more about [the architecture of WPE](/about/architecture.html)
+* Interested in all of the various ways you can get [started actually using and exploring WPE](explore-wpe.html)
+* And also…
+
+<section class="resources">
+
+<header>
+<h2><a href="">Resources</a></h2>
+<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
+</header>
+
+<div>
+<ul class="gallery c5">
+<li>
+<h3><a href="">Guides and sample code</a></h3>
+<p>Get details on implementing web technologies with guides, reference, and sample code.</p>
+</li>
+<li>
+<h3><a href="">Videos</a></h3>
+<p>Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari.</p>
+</li>
+<li>
+<h3><a href="">Forums</a></h3>
+<p>Open standards with great longevity allows lots more things to benefit from the same investments.</p>
+</li>
+<li>
+<h3><a href="">Downloads</a></h3>
+<p>The number of people with the basic skills to build things with web technologies is massive.</p>
+</li>
+<li>
+<h3><a href="">Source</a></h3>
+<p>The number of people with the basic skills to build things with web technologies is massive.</p>
+</li>
+</ul>
+</div>
+</section>
+
+
 ## See WPE In Action...
-<div class="container text-center my-auto" style="display:grid;grid-template-columns: 1fr 1fr;grid-gap: 2rem;text-align: center;">
+<div class="container text-center my-auto" style="display:grid;grid-template-columns: 1fr 1fr 1fr;justify-items:center;grid-gap: 1rem 2rem;text-align: center;" id="wpe-in-action">
 	<div class="item">
   		<lazy-youtube hash="bg6yCx7VdPY" title="WPE WebGL performance demos">
 			<div>
@@ -65,37 +108,3 @@ Maybe you're...
 </div>
 
 ---
-
-<section class="resources">
-
-<header class="full-bleed">
-<h2><a href="">Resources</a></h2>
-<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
-</header>
-
-<div>
-<ul class="gallery c5">
-<li>
-<h3><a href="">Guides and sample code</a></h3>
-<p>Get details on implementing web technologies with guides, reference, and sample code.</p>
-</li>
-<li>
-<h3><a href="">Videos</a></h3>
-<p>Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari.</p>
-</li>
-<li>
-<h3><a href="">Forums</a></h3>
-<p>Open standards with great longevity allows lots more things to benefit from the same investments.</p>
-</li>
-<li>
-<h3><a href="">Downloads</a></h3>
-<p>The number of people with the basic skills to build things with web technologies is massive.</p>
-</li>
-<li>
-<h3><a href="">Source</a></h3>
-<p>The number of people with the basic skills to build things with web technologies is massive.</p>
-</li>
-</ul>
-</div>
-
-</section>
