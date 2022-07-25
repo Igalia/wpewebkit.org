@@ -33,7 +33,7 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 <div class="container">
   <div class="card-deck">
     <div class="card">
-      <h4 class="card-header text-center" style="margin-top: 0;">Stable</h4>
+      <h4 class="card-header text-center">Stable</h4>
       <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -46,7 +46,7 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
     </div>
 
    <div class="card">
-      <h4 class="card-header text-center" style="margin-top: 0;">Unstable</h4>
+      <h4 class="card-header text-center">Unstable</h4>
       <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -66,3 +66,11 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
     </p>
   </div>
 </div>
+
+## Resources
+
+* [What is an Embedded Browser?](/learn/what-is-embedded.html)
+* [Videos]()
+* [The Architecture of WPE](/about/architecture.html)
+* [FAQ](/about/faq.html)
+* Security Advisories (see existing home page)
