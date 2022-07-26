@@ -34,7 +34,7 @@ If you find any problem with the packages or images, or want to know more about 
 
 ## Resources
 
-* [Release Schedule](https://wpewebkit.org/release/schedule/)
-* Release Notes (see existing home page)
-* Security Advisories (see existing home page)
-* Performance tips
+* [Release Schedule]({{'release/schedule/'|url}})
+* [Release Notes]({{'/release/'|url}})
+* [Security Advisories]({{'/security/'|url}})
+* [Performance tips](https://github.com/Igalia/meta-webkit/wiki/PerformanceTips)
