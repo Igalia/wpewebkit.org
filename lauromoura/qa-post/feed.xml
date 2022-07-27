@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2022-07-28T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE QA and tooling</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/blog/04-wpe-qa-tooling.html"/>
+    <updated>2022-07-28T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/blog/04-wpe-qa-tooling.html</id>
+    <content type="html">&lt;p&gt;In the previous posts, my colleagues Claudio and Miguel wrote respectively about the &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html&quot;&gt;components&lt;/a&gt; and the &lt;a href=&quot;https://wpewebkit.org/blog/03-wpe-graphics-architecture.html&quot;&gt;graphics&lt;/a&gt; architecture of WPE. Today, you’ll see our efforts to improve the quality of both WPE and the experience of working and using it. If you haven’t read the previous entries in this blog post series about &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt;, we recommend you to start with the &lt;a href=&quot;https://wpewebkit.org/blog/01-happy-birthday-wpe.html&quot;&gt;first post in the series&lt;/a&gt; for an introduction, and then come back to this.&lt;/p&gt;
+&lt;h2 id=&quot;automated-testing&quot; tabindex=&quot;-1&quot;&gt;Automated testing&lt;/h2&gt;
+&lt;p&gt;Testing is an essential part of the WebKit project, primarily due to the large number of use cases covered by HTML/CSS/Javascript specifications and the need for the project to work correctly in a wide range of configurations.&lt;/p&gt;
+&lt;p&gt;As an official port of WebKit, WPE uses the former’s testing infrastructure, based on &lt;a href=&quot;https://buildbot.net/&quot;&gt;BuildBot&lt;/a&gt;. There are two primary servers, &lt;a href=&quot;https://ews-build.webkit.org/&quot;&gt;one working as an early warning system&lt;/a&gt;, testing the patches before they’re committed to the main repository, and &lt;a href=&quot;https://build.webkit.org/&quot;&gt;another&lt;/a&gt; for more extensive testing after accepting the incoming changes.&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img style=&quot;width: 75%&quot; alt=&quot;build.webkit.org screenshot&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/assets/build-webkit-org-screenshot.png&quot; /&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+&lt;p&gt;Currently, the WPE testing bots target debug and release configurations using the Flatpak SDK (more on it later in this article) on Linux x86_64 Debian systems. We have plans of adding bots running on raspberrypi boards in the future. Alongside nightly testing, we keep builder bots covering the &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitGTK/DependenciesPolicy&quot;&gt;Ubuntu LTS/Debian versions&lt;/a&gt; we support. After August 14th, 2022, the earliest supported versions will be Ubuntu 20.04 LTS and Debian 11 (Bullseye).&lt;/p&gt;
+&lt;h3 id=&quot;test-suites&quot; tabindex=&quot;-1&quot;&gt;Test suites&lt;/h3&gt;
+&lt;p&gt;Initially, the WPE &lt;a href=&quot;https://build.webkit.org/#/builders?tags=%2BWPE&amp;amp;tags=%2BBuild&quot;&gt;builder bots&lt;/a&gt; build WPE in both release and debug configurations and feed the built packages into the &lt;a href=&quot;https://build.webkit.org/#/builders?tags=%2BWPE&amp;amp;tags=%2BTests&quot;&gt;tester bots&lt;/a&gt;, which run some test suites according to their configuration, each suite focused in one aspect of the project:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Layout tests: The main suite tests whether WebKit correctly renders web pages and its implementation of web APIs. This suite comprises both WebKit’s test cases and the imported tests from &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Test&lt;/a&gt;. At the time of writing, it runs over 50k test cases.&lt;/li&gt;
+&lt;li&gt;API Tests: Tests the API provided by WebKit and its ports to developers that want to use it. For example, this step tests the WPE API used in Cog.&lt;/li&gt;
+&lt;li&gt;Javascriptcore tests: Covers the JavascriptCore engine, running  WebKit’s tests alongside &lt;a href=&quot;https://github.com/tc39/test262&quot;&gt;test262&lt;/a&gt;, the reference test suite for JS/ECMAScript implementations.&lt;/li&gt;
+&lt;li&gt;WebDriver: Tests from &lt;a href=&quot;https://www.selenium.dev/selenium/docs/api/py/index.html&quot;&gt;Selenium&lt;/a&gt; and &lt;a href=&quot;https://www.w3.org/TR/webdriver/&quot;&gt;W3C WebDriver&lt;/a&gt; APIs for browser automation.&lt;/li&gt;
+&lt;li&gt;Other small suites: Tests for WebKit’s tooling components.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Due to a large number of tests and the fast development of both WebKit and the specifications - it’s not uncommon to have dozens of daily commits touching dozens of tests - it’s hard to keep the testing bots green.&lt;/p&gt;
+&lt;p&gt;For example, while we try to make the tests work on all platforms, many old layout tests use the “expected.txt” scheme where the render tree is printed in a textual format, with the size in pixels for every node. While this works fine for many tests, many tests have minor differences between the expected result in the Mac platform and the WPE/GTK platform. One of the causes is font rendering particularities of each port.&lt;/p&gt;
+&lt;p&gt;Thankfully, this situation improved significantly since the beginning of the project. Among the efforts, many tests are now using a “reference” HTML file, which are HTML files that render to the same expected result as the test case, so both the test case and the reference will use the same font rendering scheme and can be compared pixel by pixel.&lt;/p&gt;
+&lt;h2 id=&quot;building-and-running-wpe&quot; tabindex=&quot;-1&quot;&gt;Building and running WPE&lt;/h2&gt;
+&lt;p&gt;This section focuses on the experience of building and running WPE in a regular Linux x86_64 system. In a future post, we’ll cover building for and running on embedded devices.&lt;/p&gt;
+&lt;h3 id=&quot;checking-out-the-code&quot; tabindex=&quot;-1&quot;&gt;Checking out the code&lt;/h3&gt;
+&lt;p&gt;Recently, &lt;a href=&quot;https://github.com/WebKit/WebKit&quot;&gt;WebKit moved to GitHub&lt;/a&gt;, so you can clone it directly from there:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ mkdir ~/dev
+$ git clone https://github.com/WebKit/WebKit.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note: Due to the size of the project history, you might want to use &lt;code&gt;--depth=1&lt;/code&gt; to clone a single revision, followed by &lt;code&gt;git pull --unshallow&lt;/code&gt; from inside the cloned repository to fetch the history if needed.&lt;/p&gt;
+&lt;p&gt;There’s more information in &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#checking-out-WebKit&quot;&gt;WebKit’s GitHub wiki&lt;/a&gt; about setting up the git checkout for contributing code back to WebKit. It’ll set up some git hooks to do some tasks required by the project, like formatting the commit message and automatically linking the pull request to the Bugzilla issue.&lt;/p&gt;
+&lt;p&gt;All commands in the following sections are run from inside the cloned repository.&lt;/p&gt;
+&lt;h3 id=&quot;updating-the-dependencies-(aka-the-webkit-flatpak-sdk)&quot; tabindex=&quot;-1&quot;&gt;Updating the dependencies (aka The WebKit Flatpak SDK)&lt;/h3&gt;
+&lt;p&gt;Like most complex software projects, WebKit has a reasonably extensive list of dependencies. Keeping a reference set of their versions frozen during development is desirable to make it easier to reproduce bugs and test results. In older times, WPE and WebKitGTK used &lt;a href=&quot;https://gnome.pages.gitlab.gnome.org/jhbuild/&quot;&gt;JHBuild&lt;/a&gt; to freeze a set of dependencies. While this worked for a long time, it did not cover all dependencies. Sometimes, there could be minor differences in the layout tests between the reference test bots and the developer machine due to some dependency resolved by the host system outside JHBuild.&lt;/p&gt;
+&lt;p&gt;To improve reproducibility, since 2020, WPE and WebKitGTK have been using an SDK based on Flatpak (kudos to my colleagues &lt;a href=&quot;https://blogs.gnome.org/tsaunier/&quot;&gt;Thibault Saunier&lt;/a&gt; and &lt;a href=&quot;https://base-art.net/&quot;&gt;Philippe Normand&lt;/a&gt;), with a much more extensive dependency coverage and isolation from the host system. Alongside the dependencies, it ships &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitFlatpakSDK/DebugWithRR&quot;&gt;some tools like rr&lt;/a&gt; and &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitEnablingFlatpakClangd&quot;&gt;supports tools like &lt;code&gt;clangd&lt;/code&gt;&lt;/a&gt;. Almost all bots enable this SDK, the exception being the LTS/Stable bots; as in the latter, we want to build with the already available packages in each distribution.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/update-webkit-flatpak
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The command will set up the local flatpak repository at &lt;code&gt;./WebKitBuild/UserFlatpak&lt;/code&gt; with the downloaded SDK and create some bundled &lt;code&gt;icecc&lt;/code&gt; toolchains, which enable distributed builds in local networks.&lt;/p&gt;
+&lt;h3 id=&quot;building&quot; tabindex=&quot;-1&quot;&gt;Building&lt;/h3&gt;
+&lt;p&gt;Once the SDK download finishes, you can use the helper script &lt;code&gt;./Tools/Scripts/build-webkit&lt;/code&gt;, which wraps the &lt;code&gt;cmake&lt;/code&gt; command with some pre-set options commonly used in normal development, like enabling developer-only features usually disabled in regular builds. Manually invoking cmake is possible, although usually only when you want more control over the build. To build WPE in release mode, use:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/build-webkit --release --wpe
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Optionally, you can pass it multiple arguments to be fed directly to make or cmake with the switches  &lt;code&gt;--makeargs=...&lt;/code&gt; and &lt;code&gt;--cmakeargs=...&lt;/code&gt;, respectively. For example, &lt;code&gt;--makeargs=&amp;quot;-j8&amp;quot;&lt;/code&gt; will limit make to 8 parallel jobs and &lt;code&gt;--cmakeargs=&amp;quot;-DENABLE_GAMEPAD=1&amp;quot;&lt;/code&gt; will enable gamepad support (requires &lt;code&gt;libmanette&lt;/code&gt;, bundled in the SDK).&lt;/p&gt;
+&lt;p&gt;The first build might take a while (up to almost 1h in a regular laptop). Fortunately, the SDK uses &lt;code&gt;ccache&lt;/code&gt; to avoid recompiling the same object files, so subsequent builds without significant changes usually are faster. For more info on speeding the build, check &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitGTK/SpeedUpBuild&quot;&gt;the wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;running-the-browser-(cog)&quot; tabindex=&quot;-1&quot;&gt;Running the browser (Cog)&lt;/h3&gt;
+&lt;p&gt;To run Cog, the reference WPE browser, you need a Wayland server, which is common in most Linux systems nowadays.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/run-minibrowser --wpe --release https://wpewebkit.org/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img style=&quot;width: 75%&quot; alt=&quot;Cog with GTK4 shell screenshot&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/assets/gtk-cog-screenshot.png&quot; /&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+&lt;h3 id=&quot;running-some-tests&quot; tabindex=&quot;-1&quot;&gt;Running some tests&lt;/h3&gt;
+&lt;p&gt;To run the API tests, which reside in &lt;code&gt;Tools/TestWebKitAPI/Tests/&lt;/code&gt;, you can use the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/run-wpe-tests --release --display-server=headless
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Other test suites:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Layout tests: &lt;code&gt;./Tools/Scripts/run-wpe-tests&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;JSC tests: &lt;code&gt;./Tools/Scripts/run-javascriptcore-tests&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WebDriver: &lt;code&gt;./Tools/Scripts/run-webdriver-tests&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As stated when we described the test suites, the main challenge in testing is keeping up with the fast pace of development, as it’s not uncommon to have some revisions updating hundreds of tests.&lt;/p&gt;
+&lt;h3 id=&quot;contributing-code-to-wpe&quot; tabindex=&quot;-1&quot;&gt;Contributing code to WPE&lt;/h3&gt;
+&lt;p&gt;After hacking locally, you can submit your changes following the workflow listed in the &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#contributing-code&quot;&gt;WebKit wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;testing-wpe-in-the-wild&quot; tabindex=&quot;-1&quot;&gt;Testing WPE in the wild&lt;/h2&gt;
+&lt;p&gt;If you don’t want to build your WPE build or image, there are some options to &lt;a href=&quot;https://wpewebkit.org/about/exploring.html&quot;&gt;get a taste of WPE&lt;/a&gt; listed on our website, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Prebuilt distribution packages&lt;/li&gt;
+&lt;li&gt;Flatpak image&lt;/li&gt;
+&lt;li&gt;Prebuilt RaspberryPI images&lt;/li&gt;
+&lt;li&gt;Balena blocks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.&lt;/p&gt;
+&lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;With this, we conclude this brief overview of &lt;a ref=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; automated testing and the main tools we use in our daily work with WPE. In future posts in this area we’ll go deeper in other subjects like testing on embedded boards and debugging practices.&lt;/p&gt;
+&lt;p&gt;If this post got you interested in collaborating with &lt;a ref=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
+&lt;p&gt;We also have open positions at the WebKit team at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. If you’re motivated by this field and you’re interested in developing your career around it, you can apply &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;here&lt;/a&gt;!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE Graphics architecture</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/blog/03-wpe-graphics-architecture.html"/>
+    <updated>2022-07-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/blog/03-wpe-graphics-architecture.html</id>
+    <content type="html">&lt;p&gt;Following &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html&quot;&gt;the previous post in the series about &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; where we talked about the &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; components, this post will explain briefly the &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; graphics architecture, and how the engine is able to render HTML content into the display. If you haven’t read the previous entries in this blog post series about &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt;, we recommend you to start with the &lt;a href=&quot;https://wpewebkit.org/blog/01-happy-birthday-wpe.html&quot;&gt;first post in the series&lt;/a&gt; for an introduction, and then come back to this.&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;dom-%2B-css-%3D-rendertree&quot; tabindex=&quot;-1&quot;&gt;DOM + CSS = RenderTree&lt;/h2&gt;
+&lt;p&gt;As the document is parsed, it will begin building the DOM tree and load-blocking CSS resources.  At some point, possibly before the entire DOM tree is built, it’s time to draw things on the screen. The first step to render the content of a page is to perform what’s called the &lt;em&gt;attachment&lt;/em&gt;, which is merging the DOM tree with the CSS rules, in order to create the RenderTree. This RenderTree is a collection of &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt;, structured into a tree, and each of these &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; represent the elements in the DOM tree that have visual output. &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; have the capability to render the associated DOM tree node into a surface by using the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h&quot;&gt;GraphicsContext&lt;/a&gt; class (in the case of &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt;, this &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h&quot;&gt;GraphicsContext&lt;/a&gt; uses &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;cairo&lt;/a&gt; to perform the rendering).&lt;/p&gt;
+&lt;p&gt;Once the RenderTree is created, the layout is performed, ensuring that each of the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; have their proper size and position set.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wpewebkit.org/assets/graphics-attachment.png&quot; alt=&quot;Going from source content to displayed content&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;It would be possible to render the content of the web page just traversing this RenderTree and painting each of the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt;, but there would be problems when rendering elements that overlap each other, because the order of the elements in the RenderTree doesn’t necessarily match the order in which they must be painted in order to get the appropriate result. For example, an element with a big &lt;code&gt;z-index&lt;/code&gt; value should be painted last, no matter its position in the RenderTree.&lt;/p&gt;
+&lt;p&gt;This is an example of how some HTML content is translated into the RenderTree (there are some &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; missing here that are not relevant for the explanation).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wpewebkit.org/assets/graphics-rendertree.png&quot; alt=&quot;RenderTree generated from example HTML&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;renderlayers&quot; tabindex=&quot;-1&quot;&gt;RenderLayers&lt;/h2&gt;
+&lt;p&gt;In order to ensure that the elements of the RenderTree are rendered in the appropriate order, the concept of &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; is added. A &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; represents a layer in the document containing some elements that have to be rendered at the same depth (even though this is not exactly the case, you can think of each &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; as a group of &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; that are at a certain &lt;code&gt;z-index&lt;/code&gt;). Each &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObject&lt;/a&gt; is associated to a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; either directly or indirectly via an ancestor &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObject&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; are grouped into a tree, which is called the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; tree, and &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; children are sorted into two lists: those that are below the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt;, and those that are above. With this we have a structure that has grouped all the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; that have to be rendered together: they will be on top of the content that has has been rendered by the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; below this one, and and below the content rendered by the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; over this one.&lt;/p&gt;
+&lt;p&gt;There are several conditions that can decide whether a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; is needed for some element, it doesn’t necessarily needs to be due to the usage of &lt;code&gt;z-index&lt;/code&gt;. It can be required due to transparency, CSS filters, overflow, transformations, and so on.&lt;/p&gt;
+&lt;p&gt;Continuing with the example, these are &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; that we would get for that HTML code:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wpewebkit.org/assets/graphics-renderlayertree.png&quot; alt=&quot;RenderLayer tree generated from example HTML&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We can see that there are four &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The root one, corresponding to the RenderView element. This is mandatory.&lt;/li&gt;
+&lt;li&gt;Another one corresponding to the first RenderBlock.&lt;/li&gt;
+&lt;li&gt;One corresponding to the RenderVideo element, because video elements always get their own &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;One corresponding to the transformed RenderBlock.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; have a paint method that is able to paint all the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; associated to the layer into a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h&quot;&gt;GraphicsContext&lt;/a&gt; (as mentioned, &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; uses &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;cairo&lt;/a&gt; for this). As in the previous case, it’s possible to paint the content of the page at this point just by traversing the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; tree and requesting the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; to paint their content, but in this case the result will be the correct one. Actually this is what &lt;a href=&quot;https://webkitgtk.org/&quot;&gt;WebKitGTK&lt;/a&gt; does when it’s run with accelerated compositing disabled.&lt;/p&gt;
+&lt;h2 id=&quot;layer-composition&quot; tabindex=&quot;-1&quot;&gt;Layer composition&lt;/h2&gt;
+&lt;p&gt;While with the previous step we are already able to render the page contents, this approach is not very efficient, especially when the page contains animations, elements with transparency, etc. This is because in order to paint a single pixel, all the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; need to be traversed, and those that are contributing to that pixel need to be repainted (totally or partially), even if the content of those &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; hasn’t changed. For example, think about an animation that’s moving an element. For each frame of that animation, the animated element needs to be repainted, but the area that was covered by the animated element in the last frame needs to be repainted as well. The same happens if there’s a translucent element on top of other content. If the translucent element changes, it needs to be repainted, but the content below the translucent element needs to be repainted as well because the blend needs to be performed again.&lt;/p&gt;
+&lt;p&gt;This would be much more efficient if the content that &lt;em&gt;doesn’t&lt;/em&gt; change was somehow separated from the content that’s changing, and we could render those two types of content separately. This is where the composition stage comes into action.&lt;/p&gt;
+&lt;p&gt;The idea here is that we’re going to paint the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; contents into intermediate buffers, and then compose those buffers one on top of the other to get the final result. This last step is what we call &lt;em&gt;composition&lt;/em&gt;. And it fixes the problems we mentioned with animations of transparency: animations don’t require repainting several &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt;. Actually moving an element just means painting one buffer with an offset during the composition. And for transparency, we just need to perform the new blending of the two buffers during the composition, but the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; of the content below the translucent element don’t need to be repainted.&lt;/p&gt;
+&lt;p&gt;Once we have the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; tree, we could just paint each &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; in its own buffer in order to perform the composition. But this would be a waste of memory, as not every &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; needs a buffer. We introduce here a new component, the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt; are a structure used to group those &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; that will render into the same buffer, and it will also contain all the information required to perform the composition of these buffers. A &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; may have a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt; associated to it if it requires its own buffer to render. Otherwise, it will render into an ancestor’s buffer (specifically, the first ancestor that has a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt;). As usual, &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt; are structured into a tree.&lt;/p&gt;
+&lt;p&gt;This is how the example code would be translated into &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wpewebkit.org/assets/graphics-graphicslayertree.png&quot; alt=&quot;GraphicsLayer tree generated from example HTML&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We can see that we have now three &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The root one, which is mandatory. It belongs to the RenderView element, but the first RenderBlock will render into this &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt;&#39;s buffer as well.&lt;/li&gt;
+&lt;li&gt;The one for the RenderVideo element, as videos are updated independently from the rest of the content.&lt;/li&gt;
+&lt;li&gt;The one for the transformed element, as the transformed elements are updated independently from the rest of the content.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Whith this structure, now we can render the intermediate buffers of the RenderView and the transformed RenderBlock, and we don’t need to update them any more. For each frame, those buffers will be composited together with the RenderVideo buffer. This RenderVideo will be updating its buffer whenever a new video frame arrives, but it won’t affect the content of the other &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So now we have successfully separated the content that is changing and needs to be updated from the content that remains constant and doesn’t need to be repainted anymore, just composited.&lt;/p&gt;
+&lt;h2 id=&quot;accelerated-compositing-and-threaded-accelerated-compositing&quot; tabindex=&quot;-1&quot;&gt;Accelerated compositing and threaded accelerated compositing&lt;/h2&gt;
+&lt;p&gt;There’s something else that be done in order to increase the rendering performance, and it’s using the GPU to perform the composition. The GPU is highly optimized to perform operations like the buffer composition that we need to do, as well as handle 3D transforms, blending, etc. We just need to upload the buffers into textures and let the GPU handle the required operations. &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; does this though the usage of the &lt;a href=&quot;https://www.khronos.org/egl&quot;&gt;EGL&lt;/a&gt; and &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; graphics APIs. In order to perform the composition, &lt;a href=&quot;https://www.khronos.org/egl&quot;&gt;EGL&lt;/a&gt; is used to create a &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; EGLContext. Using that context, the intermediate buffers are uploaded to textures, and then those textures are positioned and composited according to their appropriate positions. This leverages the GPU for the composition work, leaving the CPU free to perform other tasks.&lt;/p&gt;
+&lt;p&gt;This is why this step is called accelerated compositing.&lt;/p&gt;
+&lt;p&gt;But there’s more.&lt;/p&gt;
+&lt;p&gt;Until this point, all the steps that are needed to render the content of the page are performed in the main &lt;a href=&quot;https://en.wikipedia.org/wiki/Thread_(computing)&quot;&gt;thread&lt;/a&gt;. This means that while the main thread is rendering and compositing, it’s not able to perform other tasks, like run JS code.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; improves this by using a parallel thread whose only mission is to perform the composition. You can think of it as a thread that runs a loop that composites the incoming buffers using the GPU when there’s content to render. This is what we call &lt;em&gt;threaded accelerated compositing&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;This is specially useful when there’s a video or an animation running on the page:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If there’s a video running in the page, in the non-threaded case, for each video frame the main thread would need to get the frame and perform the composition with the rest of the page content. In the threaded case, the video element delivers the frames directly to the compositor thread, and requests a composition to be done, without the main thread being involved at all.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If there’s an animation, in the non-threaded case, for each frame of the animation the main thread would need to calculate the animation step and then perform the composition of the animated element with the rest of the page content. In the threaded case, the animation is passed to the compositor thread, and the animation steps are calculated on that thread, triggering a composition when needed. The main thread doesn’t need to to anything besides starting the animation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It would take another post to explain in detail how the threaded accelerated composition is implemented on &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt;, but if you’re curious about it, know that &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; uses an specialization of the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt; called &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/texmap/coordinated/CoordinatedGraphicsLayer.h&quot;&gt;CoordinatedGraphicsLayer&lt;/a&gt; in order to implement this. You can use that as an starting point.&lt;/p&gt;
+&lt;p&gt;So this is the whole process that’s performed in &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; in order to display the content of a page. We hope it’s useful!!&lt;/p&gt;
+&lt;h2 id=&quot;future&quot; tabindex=&quot;-1&quot;&gt;Future&lt;/h2&gt;
+&lt;p&gt;At &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt; we’re constantly evolving and improving &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt;, and have ongoing efforts to improve the graphics architecture as well. Besides small optimizations and refactors here and there, the most important goals that we have are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a GPU process.&lt;/strong&gt; Currently the &lt;a href=&quot;https://www.khronos.org/egl&quot;&gt;EGL&lt;/a&gt; and &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; operations are performed in the web process. As there can be several web processes running when several pages are open, this means the browser can be using a lot of EGLContexts in total, which is a waste of memory. Also, all these processes could potentially be affected by errors, leaks, etc., in the code that handles the GPU operations. The idea is to centralize all the GPU operations into a single process, the GPU one, so all the web processes will issue paint requests to the GPU process instead of painting their content themselves. This will reduce the memory usage and improve the software’s robustness.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Remove CPU rasterization and paint all the content with &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt;.&lt;/strong&gt; Using the CPU to paint the layer contents with &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;cairo&lt;/a&gt; is expensive, especially in platforms with slow CPUs, as embedded devices sometimes do. Our goal here is to completely remove the &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;cairo&lt;/a&gt; rasterization and use &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; calls to render the 2D primitives. This will greatly improve the rendering performance.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;a href=&quot;https://github.com/google/angle&quot;&gt;ANGLE&lt;/a&gt; to perform &lt;a href=&quot;https://www.khronos.org/webgl/&quot;&gt;WebGL&lt;/a&gt; operations.&lt;/strong&gt; &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; currently implements the &lt;a href=&quot;https://www.khronos.org/registry/webgl/specs/latest/1.0/&quot;&gt;WebGL 1.0 specification&lt;/a&gt; through direct calls to &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; methods. We are changing this in order to perform the operations using &lt;a href=&quot;https://github.com/google/angle&quot;&gt;ANGLE&lt;/a&gt;, which will allow &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; to support the &lt;a href=&quot;https://www.khronos.org/registry/webgl/specs/latest/2.0/&quot;&gt;WebGL 2.0 specification&lt;/a&gt; as well.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;but-what-about-the-backends%3F&quot; tabindex=&quot;-1&quot;&gt;But what about the backends?&lt;/h2&gt;
+&lt;p&gt;In &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html&quot;&gt;the previous post&lt;/a&gt; there was a mention of backends that are used to integrate with the underlying platform. How is this relevant to the graphics architecture?&lt;/p&gt;
+&lt;p&gt;Backends have several missions when it comes to communicate with the platform, but regarding graphics, they have two functions to achieve:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Provide a platform dependent surface that &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; will render to. This can be a normal buffer, a &lt;a href=&quot;https://wayland.freedesktop.org/&quot;&gt;Wayland&lt;/a&gt; buffer, a native window, or whatever, as long as the system &lt;a href=&quot;https://www.khronos.org/egl&quot;&gt;EGL&lt;/a&gt; implementation allows creating an EGLContext to render to it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Process &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; indications that a new frame has been rendered, performing whatever tasks are necessary to take that frame to the display. Also notify &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; when that frame was been displayed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The most common example of this is a &lt;a href=&quot;https://wayland.freedesktop.org/&quot;&gt;Wayland&lt;/a&gt; backend, which provides a &lt;a href=&quot;https://wayland.freedesktop.org/&quot;&gt;Wayland&lt;/a&gt; buffer to &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; for rendering. When &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; has finished rendering the content, it notifies the backend, which sends the buffer to the &lt;a href=&quot;https://wayland.freedesktop.org/&quot;&gt;Wayland&lt;/a&gt; compositor, and notifies back to &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; when the frame has been displayed.&lt;/p&gt;
+&lt;p&gt;So, whatever platform you want to run &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; on, you need to have a backend providing at least these capabilities.&lt;/p&gt;
+&lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;This was a brief overview of how &lt;a ref=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; rendering works, and also what are the major improvements we’re trying to achieve at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. We’re constantly putting in a lot of work to keep &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; the best web engine available for embedded devices.&lt;/p&gt;
+&lt;p&gt;If this post got you interested in collaborating with &lt;a ref=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
+&lt;p&gt;We also have open positions at the WebKit team at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. If you’re motivated by this field and you’re interested in developing your career around it, you can apply &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;here&lt;/a&gt;!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.36.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/wpewebkit-2.36.4.html"/>
+    <updated>2022-07-05T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/wpewebkit-2.36.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix the new ATSPI accessibility implementation to add the missing &lt;code&gt;Collection&lt;/code&gt; interface for the loaded document.&lt;/li&gt;
+&lt;li&gt;Fix the MediaSession implementation to make the MPRIS object names more sandbox friendly, which plays better with Flatpak and WebKit’s own Bubblewrap-based sandboxing.&lt;/li&gt;
+&lt;li&gt;Fix leaked Web Processes in some particular situations.&lt;/li&gt;
+&lt;li&gt;Fix the build with media capture support enabled.&lt;/li&gt;
+&lt;li&gt;Fix cross-compilation when targeting 64-bit ARM.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.4.tar.xz (24.6 MiB)
+   md5sum: ba8e5f5444fd50f53906a7376b25bb26
+   sha1sum: 91259642da6fe55446c3352eeeafdaa188fc14bd
+   sha256sum: 307a3bedf5d4299a861f773f631c39a44c3e6276c3af37f7cbefaed2c8d7c021
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0006</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0006.html"/>
+    <updated>2022-07-05T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0006.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;July 05, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0006&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0006.html#CVE-2022-22662&quot;&gt;CVE-2022-22662&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0006.html#CVE-2022-22677&quot;&gt;CVE-2022-22677&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0006.html#CVE-2022-26710&quot;&gt;CVE-2022-26710&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22662&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22662&quot;&gt;CVE-2022-22662&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.0.&lt;/li&gt;
+&lt;li&gt;Credit to Prakash (@1lastBr3ath) of Threat Nix.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may disclose
+sensitive user information. Description: A cookie management issue
+was addressed with improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-22677&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22677&quot;&gt;CVE-2022-22677&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.4.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: The video in a webRTC call may be interrupted if the audio
+capture gets interrupted. Description: A logic issue in the handling
+of concurrent media was addressed with improved state handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26710&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26710&quot;&gt;CVE-2022-26710&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.4.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>An overview of the WPE WebKit project</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/blog/02-overview-of-wpe.html"/>
+    <updated>2022-07-01T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/blog/02-overview-of-wpe.html</id>
+    <content type="html">&lt;p&gt;In &lt;a href=&quot;https://wpewebkit.org/blog/01-happy-birthday-wpe.html&quot;&gt;the
+previous post in this series&lt;/a&gt;, we explained that WPE is a WebKit
+port optimized for embedded devices. In this post, we’ll dive into a
+more technical overview of the different components of WPE, WebKit,
+and how they all fit together. If you’re still wondering what a web
+engine is or how WPE came to be, we recommend you to go back to the
+first post in the series and then come back here.&lt;/p&gt;
+&lt;h2 id=&quot;webkit-architecture-in-a-nutshell&quot; tabindex=&quot;-1&quot;&gt;WebKit architecture in a nutshell&lt;/h2&gt;
+&lt;p&gt;To understand what makes WPE special, we first need to have a basic
+understanding of the architecture of WebKit itself, and how it ties
+together a given architecture/platform and a user-facing web browser.&lt;/p&gt;
+&lt;p&gt;WebKit, the engine, is split into different components that
+encapsulate its different parts. At the heart of it is WebCore. As the
+name suggests, this contains the core features of the engine
+(rendering, layout, platform access, HTML and DOM support, the
+graphics layer, etc). However, some of these ultimately depend heavily
+on the OS and underlying software platform in order to function. For
+example: how do we actually do any I/O on different platforms? How do
+we render onscreen? What’s the underlying multimedia platform and how
+does it decode media and play it?&lt;/p&gt;
+&lt;p&gt;WebCore handles the multitude of potential answers to these questions
+by abstracting the implementation of each component and allowing port
+developers to fill the gaps for each supported platforms. For example,
+for rendering on Mac, Cocoa APIs implement the graphics APIs
+needed. On Linux, this can be done through different implementations
+via Wayland, Vulkan, etc. For networking I/O on Mac, the networking
+APIs in the Foundation framework are used. On Linux, libsoup fills
+that gap, and so on.&lt;/p&gt;
+&lt;p&gt;On the opposite side, for browser implementors to be able to write a
+browser using WebKit, an API is needed. WebKit, after all, is a
+library. WebKit ports, besides providing the platform support
+described above, also provide APIs that suit the target environments:
+The Apple ports provide Objective-C APIs (which are then used to write
+Safari and the iOS browsers, for instance), while the GTK+ port
+provides a GObject-based APIs for Linux (that are used in Epiphany,
+the GNOME browser, and other GNOME applications that rely on WebKit to
+render HTML). All of these APIs are built on top of an internal,
+middle-man, C API that is meant to make it easy for each port to
+provide a high-level API for browser developers.&lt;/p&gt;
+&lt;p&gt;With all this in place, it would seem that it shouldn’t be so
+difficult for any vendor trying to reuse WebKit in a new platform to
+support new hardware and implement a browser, right? All that you need
+to do is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implement backends that integrate with your hardware platform: for multimedia, IO, OS support, networking, graphics, etc.&lt;/li&gt;
+&lt;li&gt;Write an API that you can use to plug the engine into your browser.&lt;/li&gt;
+&lt;li&gt;Maintain the changes needed off-tree, that is, outside the source code tree of WebKit.&lt;/li&gt;
+&lt;li&gt;Keep your implementation up-to-date with the many changes that happen in the WebKit codebase on a daily basis, so that you can update WebKit regularly and take advantage of the many bug fixes, improvements, and new features that land on WebKit continuously.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Does that sound easy? No, it’s not easy at all! In fact,
+implementation of ports in this fashion is strongly discouraged and
+vendors who have tried this approach in the past have had to do a huge
+effort just to play catch-up with the fast-paced development of
+WebKit. This is where WPE comes to the rescue.&lt;/p&gt;
+&lt;h2 id=&quot;simplifying-browsers-development-in-the-diverse-embedded-world&quot; tabindex=&quot;-1&quot;&gt;Simplifying browsers development in the diverse embedded world&lt;/h2&gt;
+&lt;p&gt;To simplify the task of porting WebKit to different platforms, Igalia
+started working on a platform-agnostic, Linux-based, and full-featured
+port of WebKit. This port relies on existing and mature platform
+backends for everything that can be easily reused across platforms:
+multimedia, networking, and I/O, which are already present in-tree and
+are used by Linux ports, like the GTK one. For the areas that are most
+likely to require hardware-specific support (that is, graphics and
+input), WPE abstracts the implementation so that it can be more easily
+provided out of tree, allowing implementors to avoid having to deal
+with the WebKit internals more than what’s strictly needed.&lt;/p&gt;
+&lt;p&gt;Additionally, WPE provides a high-level API that can be used to
+implement actual browsers. This API is very similar to the WebKitGTK
+API, making it easy for developers already familiar with the latter to
+start working with WPE. The cog library also serves as a wrapper
+around WPE to make it easier still. Once WPE was mature enough, it was
+accepted by Apple as an official WebKit port, meaning that the port
+lives now in-tree and takes immediate advantage of the many
+improvements that land on the WebKit repository on a daily basis.&lt;/p&gt;
+&lt;h2 id=&quot;how-does-wpe-integrate-with-webkit%3F&quot; tabindex=&quot;-1&quot;&gt;How does WPE integrate with WebKit?&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wpewebkit.org/assets/wpe-architecture-diagram.png&quot; alt=&quot;A diagram of the WPE WebKit architecture&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The WPE port has several components. Some are in-tree (that is, are a
+part of WebKit itself), while others are out-of-tree. Let’s examine
+those components and how they relate to each other, from top to
+bottom:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href=&quot;https://github.com/Igalia/cog#cog&quot;&gt;cog library&lt;/a&gt;. While not an integral part of WPE, libcog is a shell library that simplifies the task of writing a WPE browser from the scratch, by providing common functionality and helper APIs. This component also includes the cog browser, a simple WPE browser built on top of libcog that can be used as a reference or a starting point for the development of a new browser for a specific use case.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/&quot;&gt;WebKit WPE API&lt;/a&gt;: the entry point for browser developers to the WebKit engine, provides a comprehensive GObject/C API. The cog library uses this API extensively and we recommend relying on it, but for more specific needs and more fine-tuning of the engine, working directly with the WebKit API can be often necessary. The API is stable and easy to use, especially, and for those familiar with the GTK/GNOME platform.&lt;/li&gt;
+&lt;li&gt;WPE’s WebCore implementation: This part, internal to WebKit, implements an abstraction of the graphics and input layers of WebKit. This implementation relies on the libwpe library to provide the functionality required in an abstract way. Thanks to the architecture of WPE, implementors don’t need to bother with the complexities of WebCore and WebKit internals.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe&quot;&gt;libwpe&lt;/a&gt; library. This is an out-of-tree library that provides the API required by the WPE port in a generic way to implement the graphical and input backends. Specific functionality for a concrete platform is not provided, but the library relies on the existence of a backend implementation, as is described next.&lt;/li&gt;
+&lt;li&gt;Finally, a WPE backend implementation. This is where all the platform-specific code lives. Backends are loadable modules that can be chosen depending on the underlying hardware. These should provide access to graphics and input depending on the specific architecture, platform, and operating system requirements. As a reference, &lt;a href=&quot;https://github.com/Igalia/WPEBackend-fdo&quot;&gt;WPEBackend-fdo&lt;/a&gt; is a freedesktop.org-based backend, which uses Wayland and freekdesktop.org technologies, and is &lt;a href=&quot;https://wpewebkit.org/about/supported-hardware.html&quot;&gt;supported for several architectures&lt;/a&gt;, including NXP and Broadcom chipsets, like the Raspberry PI, and also regular PC architectures, easing testing and development.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An implementor interested in building a browser in a new architecture
+only needs to focus on the development of the last component – a WPE
+backend. Having a backend, starting the development of a
+WebKit-powered browser is already much easier than it ever was!&lt;/p&gt;
+&lt;p&gt;For a more detailed description of the architecture of WPE and WebKit,
+check this article on &lt;a href=&quot;https://wpewebkit.org/about/architecture.html&quot;&gt;the architecture
+of WPE&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;ok%2C-sounds-interesting%2C-how-do-i-get-my-hands-dirty%3F&quot; tabindex=&quot;-1&quot;&gt;OK, sounds interesting, how do I get my hands dirty?&lt;/h2&gt;
+&lt;p&gt;If you have made it this far, you should give WPE a try!&lt;/p&gt;
+&lt;p&gt;We have listed several on the &lt;a href=&quot;https://wpewebkit.org/about/exploring.html&quot;&gt;exploring WPE&lt;/a&gt;
+page. From there, you will see that depending on how interested you
+are in the project, your background, and what you’d like to do with
+it, there are different ways!&lt;/p&gt;
+&lt;p&gt;It can be as easy as installing WPE directly from the most popular
+Linux distributions or downloading and flashing prebuilt images for
+the Raspberry Pi. There are easy and flexible options like &lt;a href=&quot;https://wpewebkit.org/about/flatpak.html&quot;&gt;flatpak&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/about/balena-wpe.html&quot;&gt;balena&lt;/a&gt; which
+you can dig into to learn more.  If you want to build WPE yourself,
+you can use &lt;a href=&quot;https://github.com/Igalia/meta-webkit/wiki/WPE&quot;&gt;yocto&lt;/a&gt; and if
+you’d like to contribute - that’s very welcome!&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.13.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/cog-0.13.90.html"/>
+    <updated>2022-06-29T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/cog-0.13.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 0.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.13.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.13.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;cmake: Enable libsoup3 usage by default, &lt;code&gt;USE_SOUP2=ON&lt;/code&gt; can still be specified to build against libsoup2.&lt;/li&gt;
+&lt;li&gt;cmake: Require version 3.12, which is the same minimum as needed by WebKit.&lt;/li&gt;
+&lt;li&gt;cmake: Link the same &lt;code&gt;wpebackend-fdo&lt;/code&gt; library in all components to avoid crashes due to multiple copies loaded with different behaviours.&lt;/li&gt;
+&lt;li&gt;cmake: Fix generated &lt;code&gt;.pc&lt;/code&gt; file when using an absolute directory for the &lt;code&gt;CMAKE_INSTALL_LIBDIR&lt;/code&gt; option instead of a relative one.&lt;/li&gt;
+&lt;li&gt;core: Add “Try again” button to default error pages.&lt;/li&gt;
+&lt;li&gt;gtk4: Fix rendering with drivers that support OpenGL 4.&lt;/li&gt;
+&lt;li&gt;wl: Avoid crashing due to missing callbacks by explicitly binding to supported versions of Wayland protocols.&lt;/li&gt;
+&lt;li&gt;wl: Fix the build with &lt;code&gt;COG_WESTON_DIRECT_DISPLAY&lt;/code&gt; enabled.&lt;/li&gt;
+&lt;li&gt;wl: Fix fullscreen surface dimensions when using SHM buffers.&lt;/li&gt;
+&lt;li&gt;wl: Add keybindings to refresh the current page (&lt;key&gt;Ctrl-R&lt;/key&gt;, &lt;key&gt;F5&lt;/key&gt;).&lt;/li&gt;
+&lt;li&gt;x11: Fix underlinking when the &lt;code&gt;--as-needed&lt;/code&gt; linker flag is in use.&lt;/li&gt;
+&lt;li&gt;x11: Fix rendering in non-composited (traditional) window managers.&lt;/li&gt;
+&lt;li&gt;drm, gtk4, x11: Factor out and reuse the GLES textured quad painting code.&lt;/li&gt;
+&lt;li&gt;drm, wl, x11: Add refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.13.90.tar.xz (119.7 KiB)
+   md5sum: 749f55793438c552185023a9bd744d6a
+   sha1sum: 82c885e8e942a97c7bb7d7c9b6e25ceba1b462c7
+   sha256sum: a7ed11a10c41a9c4ad9692730357e6d86f2544d308d96018d26f80b234e16080
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0005</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html"/>
+    <updated>2022-05-30T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;May 30, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0005&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html#CVE-2022-26700&quot;&gt;CVE-2022-26700&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html#CVE-2022-26709&quot;&gt;CVE-2022-26709&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html#CVE-2022-26717&quot;&gt;CVE-2022-26717&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html#CVE-2022-26716&quot;&gt;CVE-2022-26716&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html#CVE-2022-26719&quot;&gt;CVE-2022-26719&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html#CVE-2022-30293&quot;&gt;CVE-2022-30293&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/security/WSA-2022-0005.html#CVE-2022-30294&quot;&gt;CVE-2022-30294&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26700&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26700&quot;&gt;CVE-2022-26700&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to ryuzaki.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to code
+execution. Description: A memory corruption issue was addressed with
+improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26709&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26709&quot;&gt;CVE-2022-26709&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26717&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26717&quot;&gt;CVE-2022-26717&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to Jeonghoon Shin of Theori.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26716&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26716&quot;&gt;CVE-2022-26716&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to SorryMybad (@S0rryMybad) of Kunlun Lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A memory corruption issue was
+addressed with improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-26719&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26719&quot;&gt;CVE-2022-26719&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.3.&lt;/li&gt;
+&lt;li&gt;Credit to Dongzhuo Zhao working with ADLab of Venustech.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A memory corruption issue was
+addressed with improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-30293&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30293&quot;&gt;CVE-2022-30293&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.1.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution or to a denial of service (application
+crash). Description: A memory corruption issue that could cause a
+heap use after free or a heap buffer overflow in
+WebCore::TextureMapperLayer::setContentsLayer was addressed with
+improved state management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-30294&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30294&quot;&gt;CVE-2022-30294&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.1.&lt;/li&gt;
+&lt;li&gt;Credit to Chijin Zhou of ShuiMuYuLin Ltd and Tsinghua wingtecher
+lab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution or to a denial of service (application
+crash). Description: A memory corruption issue that could cause a
+heap use after free or a heap buffer overflow in
+WebCore::TextureMapperLayer::setContentsLayer was addressed with
+improved state management. This is the same issue than
+CVE-2022-30293.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.36.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/wpewebkit-2.36.3.html"/>
+    <updated>2022-05-28T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/wpewebkit-2.36.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support capturing already encoded video streams, which takes advantage
+of encoding done in hardware by devices which support this feature.&lt;/li&gt;
+&lt;li&gt;Avoid using experimental GStreamer elements for video demuxing.&lt;/li&gt;
+&lt;li&gt;Avoid using the legacy GStreamer VA-API decoding plug-ins, which often
+cause rendering issues and are not much maintained. Their usage can be
+re-enabled setting &lt;code&gt;WEBKIT_GST_ENABLE_LEGACY_VAAPI=1&lt;/code&gt; in the environment.&lt;/li&gt;
+&lt;li&gt;Fix playback of YouTube streams which use dynamic ad insertion.&lt;/li&gt;
+&lt;li&gt;Fix display capture with Pipewire.&lt;/li&gt;
+&lt;li&gt;Fix the build without the X11 target when X11 headers are not present.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.3.tar.xz (24.6 MiB)
+   md5sum: 8bc53f86a3489da31fdbb581e1b87f7a
+   sha1sum: 44a3d99ae48481917ddc478c5f91e6a4faa21ff5
+   sha256sum: 66275debca7497daff3a7826734cd56262a807adb76c5dccdf257c89968c2fc8
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.36.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/wpewebkit-2.36.2.html"/>
+    <updated>2022-05-18T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/wpewebkit-2.36.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix some pages showing empty content boxes when using threaded rendering.&lt;/li&gt;
+&lt;li&gt;Fix the build with accessibility disabled.&lt;/li&gt;
+&lt;li&gt;Fix the build with newer Ruby versions.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.2.tar.xz (24.5 MiB)
+   md5sum: bcfb465ae085835ae96c68fddc85ca44
+   sha1sum: 1a5a6b7b5e94f4ea7e3462d6bdb5de7efa678f74
+   sha256sum: 959519562701e2005f2767a62e85977d6c3e65858709b376c89d8e33502febb9
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.13.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/libwpe-1.13.2.html"/>
+    <updated>2022-05-16T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lauromoura/qa-post/release/libwpe-1.13.2.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.13.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.13.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New API to configure the target refresh rate of view backends.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.13.2.tar.xz (59.4 KiB)
+   md5sum: 31b267649eb1a5f472b07a66adab86e1
+   sha1sum: 5de7bc3e4dd9f8d94df84395106547c0a0a904f9
+   sha256sum: efcd97dc0f95ff7a506483ba3df944669cdc602b3fc45c9fd676dee0f8f92cac
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
