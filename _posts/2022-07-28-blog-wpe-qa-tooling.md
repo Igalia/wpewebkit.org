@@ -61,7 +61,7 @@ All commands in the following sections are run from inside the cloned repository
 
 Like most complex software projects, WebKit has a reasonably extensive list of dependencies. Keeping a reference set of their versions frozen during development is desirable to make it easier to reproduce bugs and test results. In older times, WPE and WebKitGTK used [JHBuild](https://gnome.pages.gitlab.gnome.org/jhbuild/) to freeze a set of dependencies. While this worked for a long time, it did not cover all dependencies. Sometimes, there could be minor differences in the layout tests between the reference test bots and the developer machine due to some dependency resolved by the host system outside JHBuild.
 
-To improve reproducibility, since 2020, WPE and WebKitGTK have been using an SDK based on Flatpak (kudos to my colleagues [Thibault Saunier](https://blogs.gnome.org/tsaunier/) and [Philippe Normand](https://base-art.net)), with a much more extensive dependency coverage and isolation from the host system. Alongside the dependencies, it ships some tools like [rr](https://rr-project.org/) and [supports tools like `clangd`](https://trac.webkit.org/wiki/WebKitEnablingFlatpakClangd). Almost all bots enable this SDK, the exception being the LTS/Stable bots; as in the latter, we want to build with the already available packages in each distribution.
+To improve reproducibility, since 2020, WPE and WebKitGTK have been using an SDK based on Flatpak (kudos to my colleagues [Thibault Saunier](https://blogs.gnome.org/tsaunier/) and [Philippe Normand](https://base-art.net)), with a much more extensive dependency coverage and isolation from the host system. Alongside the dependencies, it ships [some tools like rr](https://trac.webkit.org/wiki/WebKitFlatpakSDK/DebugWithRR) and [supports tools like `clangd`](https://trac.webkit.org/wiki/WebKitEnablingFlatpakClangd). Almost all bots enable this SDK, the exception being the LTS/Stable bots; as in the latter, we want to build with the already available packages in each distribution.
 
 ```
 $ ./Tools/Scripts/update-webkit-flatpak
@@ -96,7 +96,7 @@ $ ./Tools/Scripts/run-minibrowser --wpe --release https://wpewebkit.org/
 
 ### Running some tests
 
-To run the API tests, which reside in `Tools/TestWebKitAPI/Tests/`, you use:
+To run the API tests, which reside in `Tools/TestWebKitAPI/Tests/`, you can use the following command:
 
 ```
 $ ./Tools/Scripts/run-wpe-tests --release --display-server=headless
@@ -123,8 +123,12 @@ If you don't want to build your WPE build or image, there are some options to [g
 * Prebuilt RaspberryPI images
 * Balena blocks
 
-Some of these options, like the prebuilt images and the balena blocks, will be the subject of future blog posts in this series.
+Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.
 
 ## Final thoughts
 
-WIP
+With this, we conclude this brief overview of <a ref="https://wpewebkit.org/">WPE</a> automated testing and the main tools we use in our daily work with WPE. In future posts in this area we'll go deeper in other subjects like testing on embedded boards and debugging practices.
+
+If this post got you interested in collaborating with <a ref="https://wpewebkit.org/">WPE</a> development, or you are in need of a web engine to run on your embedded device, feel free to <a href="https://www.igalia.com/contact/">contact us</a>. We'll be pleased to help!
+
+We also have open positions at the WebKit team at <a href="https://www.igalia.com/">Igalia</a>. If you're motivated by this field and you're interested in developing your career around it, you can apply <a href="https://www.igalia.com/jobs/browsers_webkit_position">here</a>!
