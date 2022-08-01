@@ -47,6 +47,6 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 			</li>
     {%- endfor -%}
   </ol>
+<a class="btn" href="{{ '/blog.xml' | url }}"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
 </div>
 
-<a href="{{ '/blog.xml' | url }}"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
