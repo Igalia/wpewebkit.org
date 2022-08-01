@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Release Schedule</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/release/schedule/">
+  <title>libwpe 1.12.2 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/release/libwpe-1.12.2.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/release/schedule/">
-  <meta property="og:title" content="Release Schedule">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/release/libwpe-1.12.2.html">
+  <meta property="og:title" content="libwpe 1.12.2 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,7 +21,9 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-08-01T11:56:41.853Z">
+  <meta property="article:published_time" content="2022-07-31T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -101,17 +103,19 @@
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/release/schedule/">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/lauromoura/qa-post/release/libwpe-1.12.2.html">
 
 <section class="content-section bg-primary text-white small-section">
   <div class="container text-center">
     <div class="content-section-heading">
       
         <h3 class="text-secondary mb-0"
-            itemprop="dateCreated">Mon Aug 01 2022</h3>
-        <meta itemprop="datePublished" content="Mon Aug 01 2022">
+            itemprop="dateCreated">Sun Jul 31 2022</h3>
+        <meta itemprop="datePublished" content="Sun Jul 31 2022">
       
-      <h2 itemprop="headline">Release Schedule</h2>
+      <h2 itemprop="headline">libwpe 1.12.2 released</h2>
+	  
+	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//libwpe-1.12.2.tar.xz">Download</a>
 	  
     </div>
   </div>
@@ -122,139 +126,18 @@
     <div class="row">
       <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
 
-        <p>WPE WebKit follows a 6-month development cycle:</p>
+        <p>This is a bug fix release in the stable 1.12 series.</p>
+<h3 id="what%E2%80%99s-new-in-libwpe-1.12.2%3F" tabindex="-1">What’s new in libwpe 1.12.2?</h3>
 <ul>
-<li>There are two feature releases are done every year, typically in March
-and September.</li>
-<li>Within feature releases, there may be any number of bug-fix releases.</li>
-<li>Development releases are the base for the feature releases that follow
-them. They do not follow a fixed schedule in the release cycle.</li>
+<li>Fix the build when using CMake to configure it.</li>
 </ul>
-<p>WPE WebKit and <a href="https://webkitgtk.org">WebKitGTK</a> share a fair amount of code.
-Therefore, both projects produce their feature releases simultaneously,
-and share the same release branches. For bug-fix releases, the release
-teams for both projects try to sync their version numbers as well as they
-can.</p>
-<h2 id="versioning-scheme" tabindex="-1">Versioning Scheme</h2>
-<p>Version numbers follow the <code>major.minor.patch</code> numbering scheme. Changes to
-the <code>major</code> version signify considerable architectural or API changes; the
-<code>minor</code> version number changes throughout the development cycle. Even numbers
-indicate stable releases and odd ones development releases. Lastly, the
-<code>patch</code> number is incremented for each release, and for stable release
-candidates it is bumped to <code>90</code>.</p>
-<table>
-<thead>
-<tr>
-<th><strong>Kind</strong></th>
-<th style="text-align:center"><strong>Minor</strong></th>
-<th style="text-align:center"><strong>Patch</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Stable</td>
-<td style="text-align:center">even</td>
-<td style="text-align:center">any</td>
-</tr>
-<tr>
-<td>Development</td>
-<td style="text-align:center">odd</td>
-<td style="text-align:center">&lt; 90</td>
-</tr>
-<tr>
-<td>Release Candidate</td>
-<td style="text-align:center">odd</td>
-<td style="text-align:center">≥ 90</td>
-</tr>
-</tbody>
-</table>
-<p>For stable releases the following is always true, as long as the <code>major</code>
-version number stays the same:</p>
-<ul>
-<li>New <code>patch</code> releases are guaranteed to be backward-compatible <em>both</em>
-at the <abbr title="Application Program Interface">API</abbr> and <abbr title="Application Binary Interface">ABI</abbr> level.</li>
-<li>New <code>minor</code> releases may contain new features and backward-compatible
-changes in the public API. In general, the ABI will remain compatible as
-well, because we actively avoid breaking it unless strictly needed.</li>
-</ul>
-<h2 id="compatible-components" tabindex="-1">Compatible Components</h2>
-<p>The following table summarizes which <em>stable</em> releases of libwpe, WPE WebKit,
-WPEBackend-fdo, and Cog are compatible and tested with each other (updated
-March 2022). Distributors and packagers are strongly advised to use the
-versions listed below.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"><strong>WPE WebKit</strong></th>
-<th style="text-align:center"><strong>libwpe</strong></th>
-<th style="text-align:center"><strong>WPEBackend-fdo</strong></th>
-<th style="text-align:center"><strong>Cog</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">2.36.x</td>
-<td style="text-align:center">1.12.x, 1.10.x</td>
-<td style="text-align:center">1.12.x, 1.10.x</td>
-<td style="text-align:center">0.14.x, 0.12.x, 0.10.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.34.x</td>
-<td style="text-align:center">1.12.x, 1.10.x, 1.8.x</td>
-<td style="text-align:center">1.12.x, 1.10.x</td>
-<td style="text-align:center">0.12.x, 0.10.x, 0.8.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.32.x</td>
-<td style="text-align:center">1.10.x, 1.8.x, 1.6.x</td>
-<td style="text-align:center">1.10.x, 1.8.x</td>
-<td style="text-align:center">0.10.x, 0.8.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.30.x</td>
-<td style="text-align:center">1.8.x, 1.6.x</td>
-<td style="text-align:center">1.10.x, 1.8.x</td>
-<td style="text-align:center">0.8.x, 0.6.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.28.x</td>
-<td style="text-align:center">1.6.x</td>
-<td style="text-align:center">1.6.x</td>
-<td style="text-align:center">0.8.x, 0.6.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.26.x</td>
-<td style="text-align:center">1.4.x</td>
-<td style="text-align:center">1.4.x</td>
-<td style="text-align:center">0.4.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.24.x</td>
-<td style="text-align:center">1.2.x</td>
-<td style="text-align:center">1.2.x</td>
-<td style="text-align:center">0.3.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.22.x</td>
-<td style="text-align:center">1.0.x</td>
-<td style="text-align:center">1.0.x</td>
-<td style="text-align:center">0.2.x</td>
-</tr>
-<tr>
-<td style="text-align:center">2.20.x</td>
-<td style="text-align:center">&lt; 1.0.0</td>
-<td style="text-align:center">&lt; 1.0.0</td>
-<td style="text-align:center">≤ 0.1.x</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Notes:</strong></p>
-<ul>
-<li>libwpe used to be called wpebackend before version 1.0.x — it was renamed to
-avoid confusion.</li>
-<li>Cog adopted the same versioning scheme as the rest of the components
-starting with the 0.6 series.</li>
-</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+libwpe-1.12.2.tar.xz (54.1 KiB)
+   md5sum: 33021c136035c8adfcccb2694dd48341
+   sha1sum: 0c80d8605a49f43a642cd5f9905161a7bcc30136
+   sha256sum: 4ac4fd0a8b562b721bffd0f46ae9f06c2b5a3114407581978be875a9d651642a
+</pre>
 
 
         <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/lauromoura/qa-post/"><i class="icon-home mr-1"></i> Home</a></p>
