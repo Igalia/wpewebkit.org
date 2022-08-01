@@ -6,7 +6,7 @@ author: lmoura
 permalink: /blog/04-wpe-qa-tooling.html
 ---
 
-In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. If you haven't read the previous entries in this blog post series about <a href="https://wpewebkit.org/">WPE</a>, we recommend you to start with the <a href="/blog/01-happy-birthday-wpe.html">first post in the series</a> for an introduction, and then come back to this.
+In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="https://wpewebkit.org/">WPE</a> aren't necessarily required in order to read this one, we recommend you to starting with the <a href="/blog/01-happy-birthday-wpe.html">first post in the series</a>.
 
 ## Automated testing
 
