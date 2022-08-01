@@ -26,7 +26,7 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 	margin-block: 0 1em;
 	object-fit: cover;
 	object-position: top center;
-	mask: linear-gradient(0deg, #FFF0, #FFF8 0.5em, #FFFF 1.5em);
+	mask: linear-gradient(0deg, #FFF0, 0.5em, #FFFF 1.5em);
 }
 .card ol h4 {
 	
