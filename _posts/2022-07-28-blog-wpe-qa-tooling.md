@@ -6,7 +6,7 @@ author: lmoura
 permalink: /blog/04-wpe-qa-tooling.html
 ---
 
-In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="https://wpewebkit.org/">WPE</a> aren't necessarily required in order to read this one, we recommend you to starting with the <a href="/blog/01-happy-birthday-wpe.html">first post in the series</a>.
+In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="{{ '/blog/02-overview-of-wpe.html' | url }}">major components</a> of the project and, specifically, the <a href="{{ '/blog/03-wpe-graphics-architecture.html' | url }}">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="{{ '/' | url }}">WPE</a> aren't necessarily required in order to read this one, we recommend you to starting with the <a href="{{ '/blog/01-happy-birthday-wpe.html' | url }}">first post in the series</a>.
 
 ## Automated testing
 
@@ -32,15 +32,15 @@ Initially, the WPE [builder bots](https://build.webkit.org/#/builders?tags=%2BWP
 * WebDriver: Tests from [Selenium](https://www.selenium.dev/selenium/docs/api/py/index.html) and [W3C WebDriver](https://www.w3.org/TR/webdriver/) APIs for browser automation.
 * Other small suites: Tests for WebKit's tooling components.
 
-Due to a large number of tests and the fast development of both WebKit and the specifications - it's not uncommon to have dozens of daily commits touching dozens of tests - it's hard to keep the testing bots green.
+Due to a large number of tests and the fast development of both WebKit and the specifications&mdash;it's not uncommon to have dozens of daily commits touching dozens of tests&mdash;it's hard to keep the testing bots green.
 
-For example, while we try to make the tests work on all platforms, many old layout tests use the expected.txt scheme, where the render tree is printed in a textual format with the text sized in pixels for every node. While this works fine in most cases, many tests have minor differences between the expected result in the Mac platform and the WPE/GTK platform. One of the causes is the font rendering particularities of each port.
+For example, while we try to make the tests work on all platforms, many old layout tests use the `-expected.txt` scheme, where the render tree is printed in a textual format with the text sized in pixels for every node. While this works fine in most cases, many tests have minor differences between the expected result in the Mac platform and the WPE/GTK platform. One of the causes is the font rendering particularities of each port.
 
 Thankfully, this situation improved significantly since the beginning of the project. Among the efforts, many tests are now using a "reference" HTML file, which are HTML files that render to the same expected result as the test case, so both the test case and the reference will use the same font rendering scheme and can be compared pixel by pixel.
 
 ## Building and running WPE
 
-This section focuses on the experience of building and running WPE in a regular Linux x86_64 system. In a future post, we'll cover building for and running on embedded devices.
+This section focuses on the experience of building and running WPE in a regular Linux x86&ndash;64 system. In a future post, we'll cover building for and running on embedded devices.
 
 ### Checking out the code
 
@@ -116,21 +116,21 @@ After hacking locally, you can submit your changes following the workflow listed
 
 ## Testing WPE in the wild
 
-If you don't want to build your WPE build or image, there are some options to [get a taste of WPE](https://wpewebkit.org/about/exploring.html) listed on our website, including:
+If you don't want to build your WPE build or image, there are some options to [get a taste of WPE]({{ '/about/exploring.html' | url }}) listed on our website, including:
 
 * Prebuilt distribution packages
     * For [Debian](https://packages.debian.org/search?searchon=sourcenames&keywords=wpewebkit), [Ubuntu](https://packages.ubuntu.com/search?keywords=wpewebkit&searchon=sourcenames&suite=all&section=all), [Raspbian](https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/), [Arch Linux](https://archlinux.org/packages/extra/x86_64/wpewebkit/), and [Fedora](https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/)
-* [Flatpak image](https://wpewebkit.org/about/flatpak.html)
+* [Flatpak image]({{ '/about/flatpak.html' | url }})
 * Prebuilt Raspberry Pi (3B, 3B+ and 4) images
     * For [stable](https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip) and [nightly](https://wk-contrib.igalia.com/debian/images/nightly/wpe-raspbian.img.zip) releases
-* [Balena blocks](https://wpewebkit.org/about/balena-wpe.html)
+* [Balena blocks]({{ '/about/balena-wpe.html' | url }})
 
 Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.
 
 ## Final thoughts
 
-With this, we conclude this brief overview of <a ref="https://wpewebkit.org/">WPE</a> automated testing and the main tools we use in our daily work with WPE. In future posts in this area we'll go deeper in other subjects like testing on embedded boards and debugging practices.
+With this, we conclude this brief overview of WPE automated testing and the main tools we use in our daily work with WPE. In future posts in this area we'll go deeper in other subjects like testing on embedded boards and debugging practices.
 
-If this post got you interested in collaborating with <a ref="https://wpewebkit.org/">WPE</a> development, or you are in need of a web engine to run on your embedded device, feel free to <a href="https://www.igalia.com/contact/">contact us</a>. We'll be pleased to help!
+If this post got you interested in collaborating with WPE development, or you are in need of a web engine to run on your embedded device, feel free to <a href="https://www.igalia.com/contact/">contact us</a>. We'll be pleased to help!
 
 We also have open positions at the WebKit team at <a href="https://www.igalia.com/">Igalia</a>. If you're motivated by this field and you're interested in developing your career around it, you can apply <a href="https://www.igalia.com/jobs/browsers_webkit_position">here</a>!
