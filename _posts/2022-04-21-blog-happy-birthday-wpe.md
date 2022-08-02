@@ -8,7 +8,7 @@ preview: Welcome to the new Blog section on wpewebkit.org! Let's take some time 
 thumbnail: /assets/svg/wpe-birthday-cake-5-years.svg
 ---
 
-Welcome to the new *Blog* section on [wpewebkit.org](https://wpewebkit.org)!
+Welcome to the new *Blog* section on [wpewebkit.org]({{ '/' | url }})!
 
 Today is a special day for **Igalia**, especially for those colleagues that work on WebKit:
 Five years ago, on the **21st of April 2017**, the WPE port was announced by our colleague
@@ -26,12 +26,12 @@ worldwide today.
 To get everyone on the same page, let's start by reiterating what WPE is: **a WebKit port optimized for embedded devices**.
 It allows you to embed a full-fledged **Web browser engine** that supports a large set of modern Web technologies into your product.
 WPE itself is *not* a Web browser such as Safari, Chrome or Firefox but contains the underlying building blocks to load, parse and
-render websites. To learn more about the distinction between a Web browser and a Web browser engine read [our explainer](/about/exploring.html).
+render websites. To learn more about the distinction between a Web browser and a Web browser engine read [our explainer]({{ '/about/exploring.html' | url }}).
 
 You might ask yourself, what does *"optimized for embedded devices"* mean in practice? Unlike most other WebKit ports, WPE does not
 rely on a specific user-interface toolkit, such as [Qt](https://qt.io), [GTK](https://gtk.org), [Cocoa](https://en.wikipedia.org/wiki/Cocoa_(API)),
 etc., nor does it offer any integration with these kinds of toolkits. WPE WebKit is light-weight, integrates well with a
-[variety of hardware configurations](/about/supported-hardware.html), and only requires a minimum set of APIs on your side:
+[variety of hardware configurations]({{ '/about/supported-hardware.html' | url }}), and only requires a minimum set of APIs on your side:
 **[EGL](https://en.wikipedia.org/wiki/EGL_(API))** and **[OpenGL ES 2](https://en.wikipedia.org/wiki/OpenGL_ES)**.
 
 ## The early days 2014 - 2017
@@ -50,7 +50,7 @@ Therefore Igalia decided to aim for an even more flexible design, where *Wayland
 Our fellow Igalian [Miguel Gomez](https://www.igalia.com/team/magomez) reported in his [late 2016 blog post](https://blogs.igalia.com/magomez/2016/12/19/wpe-web-platform-for-embedded)
 about this change, and the renaming of the port: **WPE** appears for the first time in public.
 
-The project's removal of the Wayland dependency and the subsequent reorganization lead to the [architecture we have today](/about/architecture.html),
+The project's removal of the Wayland dependency and the subsequent reorganization lead to the [architecture we have today]({{ '/about/architecture.html' | url }}),
 consisting of not only the WPE port itself but a whole ecosystem of projects such as [libwpe](https://github.com/WebPlatformForEmbedded/libwpe),
 [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-FDO), [WPEBackend-rdk](https://github.com/WebPlatformForEmbedded/WPEBackend-rdk), etc.,
 that together form the **WPE** project.
@@ -72,7 +72,7 @@ and ecosystem around it healthier too.
 However, none of this would be possible without the commitment of many [Igalians](https://www.igalia.com/team) pushing the project forward every day for the past **8 years**.
 A new **People Behind WPE** series will be launched soon: over the following months, the Igalians involved with WPE will introduce themselves, their area of
 expertise, and talk about a specific WPE related technical topic. You'll get to know the people behind the product and a first-class technical overview
-of individual parts of the WPE architecture! We plan to release a new article every 3-4 weeks, so be sure to visit [wpewebkit.org/blog](https://wpewebkit.org/blog)
+of individual parts of the WPE architecture! We plan to release a new article every 3-4 weeks, so be sure to visit [wpewebkit.org/blog]({{ '/blog/' | url }})
 again soon and enjoy the upcoming **People Behind WPE** series.
 
 Feel free to spread the word and make noise about WPE. Stay healthy, stay tuned!
