@@ -4,6 +4,8 @@ title: "WPE QA and tooling"
 tags: [blogpost]
 author: lmoura
 permalink: /blog/04-wpe-qa-tooling.html
+preview: In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it.
+thumbnail: /assets/build-webkit-org-screenshot.png
 ---
 
 In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="{{ '/blog/02-overview-of-wpe.html' | url }}">major components</a> of the project and, specifically, the <a href="{{ '/blog/03-wpe-graphics-architecture.html' | url }}">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="{{ '/' | url }}">WPE</a> aren't necessarily required in order to read this one, we recommend you to starting with the <a href="{{ '/blog/01-happy-birthday-wpe.html' | url }}">first post in the series</a>.

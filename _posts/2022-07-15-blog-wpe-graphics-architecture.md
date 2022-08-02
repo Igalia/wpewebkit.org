@@ -4,6 +4,8 @@ title: "WPE Graphics architecture"
 tags: [blogpost]
 author: magomez
 permalink: /blog/03-wpe-graphics-architecture.html
+preview: Following <a href="/blog/02-overview-of-wpe.html">the previous post in the series about <a href="https://wpewebkit.org/">WPE</a> where we talked about the <a href="https://wpewebkit.org/">WPE</a> components, this post will explain briefly the <a href="https://wpewebkit.org/">WPE</a> graphics architecture, and how the engine is able to render HTML content into the display.
+thumbnail: /assets/graphics-attachment.png
 ---
 
 Following <a href="{{ '/blog/02-overview-of-wpe.html' | url }}">the previous post in the series</a> about <a href="{{ '/' | url }}">WPE</a> where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display. If you haven't read the previous entries in this blog post series about WPE, we recommend you to start with the <a href="{{ '/blog/01-happy-birthday-wpe.html' | url}}">first post in the series</a> for an introduction, and then come back to this.
