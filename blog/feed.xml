@@ -4,8 +4,44 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-07-31T00:00:00Z</updated>
+  <updated>2022-08-02T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.37.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/blog/release/wpewebkit-2.37.1.html"/>
+    <updated>2022-08-02T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/blog/release/wpewebkit-2.37.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.38 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.37.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.37.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add initial WebRTC implementation using GstWebRTC if GStreamer 1.20 is available, disabled by default via web view settings.&lt;/li&gt;
+&lt;li&gt;Add new API to set WebView’s &lt;code&gt;Content-Security-Policy&lt;/code&gt;, for web extensions support.&lt;/li&gt;
+&lt;li&gt;Add new API to run asynchronous JavaScript functions.&lt;/li&gt;
+&lt;li&gt;Expose typed arrays in the JavaScriptCore GLib API.&lt;/li&gt;
+&lt;li&gt;Add support for displaying PDF documents using PDF.js.&lt;/li&gt;
+&lt;li&gt;Show font name and font variant settings in the inspector.&lt;/li&gt;
+&lt;li&gt;MediaSession is enabled by default, allowing remote media control using MPRIS.&lt;/li&gt;
+&lt;li&gt;Modernized media controls UI.&lt;/li&gt;
+&lt;li&gt;Add support for Google Dynamic Ad Insertion (DAI).&lt;/li&gt;
+&lt;li&gt;Add support for capturing encoded video streams from capture devices (e.g. webcams.)&lt;/li&gt;
+&lt;li&gt;Make it possible to use the remote inspector from other browsers using the &lt;code&gt;WEBKIT_INSPECTOR_HTTP_SERVER&lt;/code&gt; environment variable.&lt;/li&gt;
+&lt;li&gt;Add support for IPv6 in the remote inspector.&lt;/li&gt;
+&lt;li&gt;Update form element style to match libadwaita.&lt;/li&gt;
+&lt;li&gt;Fix canvas animations and images with threaded rendering enabled.&lt;/li&gt;
+&lt;li&gt;Switch to use &lt;code&gt;gi-docgen&lt;/code&gt; for API documentation instead of &lt;code&gt;gtk-doc&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Remove the ATK accessibility implementation, which has been replaced by direct usage of the AT-SPI D-Bus interfaces.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.37.1.tar.xz (29.0 MiB)
+   md5sum: a44cf35f7b6f8e577f51c296e94aae2a
+   sha1sum: 4f31d83fd9d6f66cd04f745b633e541ecb93b51d
+   sha256sum: eb07b54190827ea860089fc711358658d952bcc62e36bc9bfa12dcfda9c21649
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>libwpe 1.12.2 released</title>
@@ -518,39 +554,6 @@ you can dig into to learn more.  If you want to build WPE yourself,
 you can use &lt;a href=&quot;https://github.com/Igalia/meta-webkit/wiki/WPE&quot;&gt;yocto&lt;/a&gt; and if
 you’d like to contribute - that’s very welcome!&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.13.90 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/blog/release/cog-0.13.90.html"/>
-    <updated>2022-06-29T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/blog/release/cog-0.13.90.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 0.14 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.13.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.13.90?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;cmake: Enable libsoup3 usage by default, &lt;code&gt;USE_SOUP2=ON&lt;/code&gt; can still be specified to build against libsoup2.&lt;/li&gt;
-&lt;li&gt;cmake: Require version 3.12, which is the same minimum as needed by WebKit.&lt;/li&gt;
-&lt;li&gt;cmake: Link the same &lt;code&gt;wpebackend-fdo&lt;/code&gt; library in all components to avoid crashes due to multiple copies loaded with different behaviours.&lt;/li&gt;
-&lt;li&gt;cmake: Fix generated &lt;code&gt;.pc&lt;/code&gt; file when using an absolute directory for the &lt;code&gt;CMAKE_INSTALL_LIBDIR&lt;/code&gt; option instead of a relative one.&lt;/li&gt;
-&lt;li&gt;core: Add “Try again” button to default error pages.&lt;/li&gt;
-&lt;li&gt;gtk4: Fix rendering with drivers that support OpenGL 4.&lt;/li&gt;
-&lt;li&gt;wl: Avoid crashing due to missing callbacks by explicitly binding to supported versions of Wayland protocols.&lt;/li&gt;
-&lt;li&gt;wl: Fix the build with &lt;code&gt;COG_WESTON_DIRECT_DISPLAY&lt;/code&gt; enabled.&lt;/li&gt;
-&lt;li&gt;wl: Fix fullscreen surface dimensions when using SHM buffers.&lt;/li&gt;
-&lt;li&gt;wl: Add keybindings to refresh the current page (&lt;key&gt;Ctrl-R&lt;/key&gt;, &lt;key&gt;F5&lt;/key&gt;).&lt;/li&gt;
-&lt;li&gt;x11: Fix underlinking when the &lt;code&gt;--as-needed&lt;/code&gt; linker flag is in use.&lt;/li&gt;
-&lt;li&gt;x11: Fix rendering in non-composited (traditional) window managers.&lt;/li&gt;
-&lt;li&gt;drm, gtk4, x11: Factor out and reuse the GLES textured quad painting code.&lt;/li&gt;
-&lt;li&gt;drm, wl, x11: Add refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.13.90.tar.xz (119.7 KiB)
-   md5sum: 749f55793438c552185023a9bd744d6a
-   sha1sum: 82c885e8e942a97c7bb7d7c9b6e25ceba1b462c7
-   sha256sum: a7ed11a10c41a9c4ad9692730357e6d86f2544d308d96018d26f80b234e16080
-&lt;/pre&gt;
 </content>
   </entry>
 </feed>
