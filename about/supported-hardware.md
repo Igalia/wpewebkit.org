@@ -1,19 +1,79 @@
 ---
-layout: post
+layout: page
 title: "Supported Hardware"
 tags: [about] 
 data: { dateless: "true" }
 permalink: /about/supported-hardware.html 
 --- 
+<style type="text/css">
+.tables {
+	padding-bottom: 8em;
+}
+
+.tables h2 {
+	font-size: 1.5em;
+	margin-block: 2em 0.125em;
+}
+.tables code {
+	color: #C00;
+}
+table, table thead, table th, table tbody tr:nth-child(n) {
+	background: transparent;
+	border: none;
+}
+table {
+	width: 115%;
+	table-layout: fixed;
+	border-collapse: separate;
+	border-spacing: 0;
+	font-size: 90%;
+	border-bottom: 2px solid black;
+	margin: 0;
+}
+table thead tr :nth-child(1) {
+	width: 18ch;
+}
+table thead tr :nth-child(2) {
+	width: 21ch;
+}
+table thead tr :nth-child(4) {
+	width: 40ch;
+}
+table thead tr :nth-child(5) {
+	width: 18ch;
+}
+table :is(thead, tbody) tr > * {
+	padding-left: 0;
+	vertical-align: top;
+}
+table thead tr > * {
+	font-size: smaller;
+	font-weight: 400;
+	text-transform: uppercase;
+	text-align: left;
+	border-top: 1px solid silver;
+	border-bottom: 2px solid black;
+}
+table thead tr > th:first-child {
+	font-weight: 700;
+}
+table tbody tr:nth-child(n + 2) > * {
+	border-top: 1px solid silver;
+}
+</style>
+<header class="page">
+
+# Supported Hardware
 
 WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:
 
-[[toc]]
+</header>
+
+<section class="tables">
 
 Note that this list is not exhaustive. Reports of unlisted configurations are welcome.
 
-
-### NXP
+## NXP
 
 | Series  | GPU            | Driver      | WPE Backend | Cog Shells |
 |---------|----------------|-------------|-------------|------------|
@@ -25,7 +85,7 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 | i&period;MX 8M | Vivante GC7000 | etnaviv (reverse-engineered) | fdo | fdo, drm |
 | i&period;MX 8M | Vivante GC7000 | Vivante (Proprietary) | fdo | fdo |
 
-### Broadcom
+## Broadcom
 
 | Device         | GPU | Driver | WPE Backend | Cog Shells |
 |----------------|-----|--------|-------------|------------|
@@ -35,21 +95,21 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 | Raspberry Pi 4 | VideoCore V  | Mesa v3d    | fdo | fdo |
 
 
-### Qualcomm
+## Qualcomm
 
 | Device  | GPU | Driver | WPE Backend | Cog Shells |
 |---------|-----|--------|-------------|------------|
 | APQ8017 | Adreno 306 | Proprietary | Custom  | n/a |
 
 
-### Nvidia
+## Nvidia
 
 | Device | GPU | Driver | WPE Backend | Cog Shells |
 |--------|-----|--------|-------------|------------|
 | Jetson TK1 | Tegra K1 | | |
 
 
-### RockChip
+## RockChip
 
 | Device | GPU          | Driver | WPE Backend | Cog Shells |
 |--------|--------------|--------|-------------|------------|
@@ -57,7 +117,7 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 | RK3399 | Mali T860MP4 | Mali (Proprietary) | | |
 
 
-### PC-style Hardware
+## PC-style Hardware
 
 | Device | GPU | Driver | WPE Backend | Cog Shells |
 |--------|-----|--------|-------------|------------|
@@ -66,33 +126,12 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 | Any | Intel | Mesa iris | fdo | fdo, drm   |
 
 
-### Other
+## Other
 
 | Device | GPU | Driver | WPE Backend | Cog Shells |
 |--------|-----|--------|-------------|------------|
 | Beaglebone | PowerVR SGX530 | Proprietary | | |
 
+</section>
 
-<style type="text/css">
-h3 {
-	background: #1593ED;
-	color: white;
-	margin: 1.5em 0 0;
-	padding: 0.25em 0.5em;
-}
-
-.row table {
-	width: 100%;
-	margin: 0;
-}
-.row table:last-of-type {
-	margin-bottom: 3em;
-}
-.row th, .row td:nth-child(-n + 3) {
-	white-space: nowrap;
-}
-.row th, .row td {
-	line-height: 1.25;
-	padding: 0.5em 0.75em;
-}
-</style>
+{% include resources.html %}

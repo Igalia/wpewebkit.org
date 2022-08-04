@@ -3,6 +3,101 @@ layout: home.html
 title: WPE
 description: WebKit port optimized for embedded devices
 ---
+<style>
+
+/* specific to home page */
+
+main {
+	padding-inline: 0;
+}
+main > section {
+	background: var(--dashV);
+}
+main > section > * {
+	position: relative;
+	margin-left: 5rem;
+	padding-left: 5px;
+}
+
+header.page {
+	background: linear-gradient(155deg,#5A5A5A,#A4A8A7,#443468 80%);
+	color: #FFF;
+}
+header.page div {
+	min-width: 30rem;
+	max-width: calc(var(--mainColMax) - 10rem);
+	margin: 0 auto;
+	padding: 6em 0 12em;
+}
+header.page div::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 1px;
+	margin-left: -5rem;
+	background: var(--dashV);
+}
+header.page div > * {
+	max-width: 60%;
+	filter: drop-shadow(0 0 1px #0008) drop-shadow(0 0 2px #0008);
+}
+header.page div h1 {
+	font-size: 3em;
+	font-weight: 400;
+	background: url(/assets/img/graphic-title-white.svg) 0 100% / 7rem auto no-repeat;
+}
+
+.explore-embedded {
+	padding-block-start: 0;
+}
+
+.notable-customers.c2 {
+	padding: 5rem;
+	background: #171717;
+	color: white;
+	border-image-source: linear-gradient(0deg,#171717,#171717);
+	align-items: center;
+}
+.notable-customers > * {
+	margin: 0;
+	padding: 0;
+}
+.notable-customers h2 {
+	margin-bottom: 1.5em;
+}
+.notable-customers > * + ::before {
+	content: none;
+}
+.notable-customers a.spotlight img {
+	height: auto;
+	aspect-ratio: 5/4;
+	padding-inline: 4em;
+}
+.notable-customers::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 1px;
+	background: var(--dashV);
+}
+.notable-customers h2 {
+	margin: 0 0 0.5em;
+	padding: 0.75em 0;
+	background: url(/assets/img/graphic-title-white.svg) 0 100% / 7rem auto no-repeat;
+}
+
+.notable-customers img {
+	background: #FFF;
+	height: 10em;
+	width: 100%;
+	padding: 1em;
+	object-fit: contain;
+}
+
+</style>
 
 <header class="page">
 <div>
@@ -19,9 +114,9 @@ A WebKit port designed with flexibility and hardware acceleration in mind, lever
 
 <main>
 
-<section class="explore-embedded">
+<section class="explore-embedded dotsep">
 
-<header class="full-bleed c2 text">
+<header class="full-bleed c2 text dotsep">
 <h2>Explore Embedded Browsers</h2> 
 <p><big>The Web Platform is a frequently chosen foundational technology for many reasons, including:</big></p>
 <div><!-- placeholder for grid, whee --></div>
@@ -37,7 +132,7 @@ Open standards with great longevity allows lots more things to benefit from the 
 <a class="cta btn" style="font-size: smaller;text-align: center;" href="/learn/what-is-embedded.html">Learn more about embedded browsers</a>
 </header>
 
-<div class="c2">
+<div class="c2 dotsep">
 <h3><a href="">Supported Hardware</a></h3>
 <p>WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:</p>
 <ul class="gallery c2">
@@ -48,13 +143,13 @@ Open standards with great longevity allows lots more things to benefit from the 
 </ul>
 </div>
 
-<div class="c2">
+<div class="c2 dotsep">
 <h3><a href="">Why Choose WPE?</a></h3>
 <p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
 <img src="/assets/img/illustration-why-WPE@2x.png" alt="">
 </div>
 
-<div class="c2">
+<div class="c2 dotsep">
 <h3><a href="">WPE Design</a></h3>
 <p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
 <img src="/assets/img/diagram-WPE-design.svg" alt="">
@@ -68,65 +163,23 @@ Open standards with great longevity allows lots more things to benefit from the 
 </section>
 
 
-<section class="notable-customers full-bleed">
+<section class="notable-customers c2 full-bleed dotsep">
 
-<h2>Customers</h2> 
-<div class="desc">
-<p><big>Whether you’re in the digital signage, professional audio, video & broadcasting, home appliance, set-top boxes, or automotive and in-flight infotainment industry, WPE WebKit is a solution that will work for you.</big></p>
-</div>
-<a class="spotlight" href="#"><img src="/assets/img/logo-metrological@2x.png" alt=""></a>
 <div class="spotlight">
-<h3><a href="#">Metrological</a></h3>
+<p>Customer Highlight</p> 
+<h2><a href="#">Metrological</a></h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
 <p><a href="">Read all about it</a></p>
 </div>
-<!-- li><a href=""><img src="/assets/img/logo-telefonica@2x.png" alt=""><b>Telefónica</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-<li><a href=""><img src="/assets/img/logo-ombori@2x.png" alt=""><b>Ombori</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-<li><a href=""><img src="/assets/img/logo-garmin@2x.png" alt=""><b>Garmin</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-<li><a href=""><img src="/assets/img/logo-multichoice@2x.png" alt=""><b>MultiChoice</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-<li><a href=""><img src="/assets/img/logo-liberty@2x.png" alt=""><b>Liberty Global</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-<li><a href=""><img src="/assets/img/logo-televic@2x.png" alt=""><b>Televic</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li>
-<li><a href=""><img src="/assets/img/logo-NOS@2x.png" alt=""><b>NOS</b></a><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></li -->
+<a class="spotlight" href="#"><img src="/assets/img/logo-metrological@2x.png" alt=""></a>
 
 
 </section>
 
 
-<section class="community">
+<section class="resources dotsep nodash">
 
-<header class="full-bleed">
-<h2>Community</h2>
-<img src="/assets/img/illustration-community.svg" alt="" class="decoration">
-</header>
-
-<div>
-<h3><a href="">Recent Blog Posts</a></h3>
-<p><a href="">See all</a></p>
-<ul class="gallery c5 blog cards">
-<li>
-<h3><a href="/blog/">A new design for WPEwebkit.org</a></h3>
-<time>Jul 33, 2022</time>
-<p>A quick preview of the post, likely pulled from the metadata of the post’s Markdown header.</p>
-</li>
-<li>
-<h3><a href="/blog/02-overview-of-wpe.html">An overview of the WPE WebKit project</a></h3>
-<time>Jul 1, 2022</time>
-<p>To understand what makes WPE special, we first need to have a basic understanding of the architecture of WebKit itself, and how it ties together a given platform and a user-facing web browser.</p>
-</li>
-<li>
-<h3><a href="/blog/01-happy-birthday-wpe.html">Happy birthday WPE!</a></h3>
-<time>Apr 21, 2022</time>
-<p>Today is a special day for Igalia, especially for those colleagues that work on WebKit: Five years ago today, the WPE port was announced by our colleague Žan Doberšek on the WebKit mailing list.</p>
-</li>
-</ul>
-
-</div>
-
-</section>
-
-<section class="resources">
-
-<header class="full-bleed">
+<header class="full-bleed dotsep">
 <h2><a href="">Resources</a></h2>
 <img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
 </header>

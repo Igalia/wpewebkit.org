@@ -6,36 +6,70 @@ data: { dateless: "true" }
 permalink: /learn/index.html
 --- 
 
-# Learn & Discover
+
+<nav class="sidebar">
+<ul>
+<li><a href="/about/supported-hardware.html">Supported Hardware</a></li>
+<li><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
+<li><a href="">WPE in Action</a></li>
+</ul>
+</nav>
+
+
+<header class="page">
+
+# Explore Embedded Browsers
 
 We understand that WPE is interesting from many perspectives, and to people of potentially vastly different backgrounds. Let's help you find what you're looking for.
 
-Maybe you're...
+## Maybe you're…
+
+</header>
+<section class="full-bleed c2">
+
+<div>
 
 ### New to WPE
 
-* Interested in seeing [WPE in action](#wpe-in-action)…
-* A web developer who is looking to understand [the basics about what an embedded browser is?](what-is-embedded.html)
+<ul class="arrows">
+<li>Interested in seeing <a href="#wpe-in-action">WPE in action</a></li>
+<li>A web developer who is looking to understand <a href="what-is-embedded.html">the basics about what an embedded browser is?</a></li>
+</ul>
+</div>
+<div>
 
 ### An embedded developer
 
-* [Wondering if WPE is currently available for your device?](/about/supported-hardware.html)
-* Wondering [what makes WPE a good choice](/about/a-good-choice.html)
-* Interested in learning more about [the architecture of WPE](/about/architecture.html)
-* An experienced embedded developer ready to [build and tune WPE](/about/build-and-tune.html)
-* Interested in all of the various ways you can get [started actually using and exploring WPE](explore-wpe.html)
-* And also…
+<ul class="arrows">
+<li>Wondering if WPE is <a href="/about/supported-hardware.html">currently available for your device?</a></li>
+<li>Wondering <a href="/about/a-good-choice.html">what makes WPE a good choice</a></li>
+<li>Interested in learning more about <a href="/about/architecture.html">the architecture of WPE</a></li>
+<li>An experienced embedded developer ready to <a href="/about/build-and-tune.html">build and tune WPE</a></li>
+<li>Interested in all of the various ways you can get <a href="explore-wpe.html">started actually using and exploring WPE</a></li>
+</ul>
 
-## Resources
+</div>
+</section>
 
-* <a href="">Guides and sample code</a> Get details on implementing web technologies with guides, reference, and sample code.
-* <a href="">Videos</a> Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari. 
-* <a href="">Forums</a> Open standards with great longevity allows lots more things to benefit from the same investments. 
-* <a href="">Downloads</a> The number of people with the basic skills to build things with web technologies is massive. 
-* <a href="">Source</a> The number of people with the basic skills to build things with web technologies is massive. 
+<div class="dotsep">
+<h3><a href="/about/supported-hardware.html">Supported Hardware</a></h3>
+<p>WPE is currently running on a wide range of hardware, including devices made by:</p>
+<ul class="gallery c4">
+<li><img src="/assets/img/logo-rockchip@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-nvidia@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-nxp@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-qualcomm@2x.png" alt=""></li>
+</ul>
+</div>
+
+<div class="dotsep">
+<h3><a href="/about/a-good-choice.html">Why Choose WPE?</a></h3>
+<p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
+<img src="/assets/img/illustration-why-WPE@2x.png" alt="">
+</div>
 
 
-## See WPE In Action...
+## See WPE In Action…
 <div class="container text-center my-auto" style="display:grid;grid-template-columns: 1fr 1fr 1fr;justify-items:center;grid-gap: 1rem 2rem;text-align: center;" id="wpe-in-action">
 	<div class="item">
   		<lazy-youtube hash="bg6yCx7VdPY" title="WPE WebGL performance demos">
@@ -79,4 +113,37 @@ Maybe you're...
 	</div>
 </div>
 
----
+<div class="resources">
+
+<header class="full-bleed dotsep">
+<h2><a href="">Resources</a></h2>
+<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
+</header>
+
+<div>
+<ul class="gallery c5">
+<li>
+<h3><a href="">Guides and sample code</a></h3>
+<p>Get details on implementing web technologies with guides, reference, and sample code.</p>
+</li>
+<li>
+<h3><a href="">Videos</a></h3>
+<p>Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari.</p>
+</li>
+<li>
+<h3><a href="">Forums</a></h3>
+<p>Open standards with great longevity allows lots more things to benefit from the same investments.</p>
+</li>
+<li>
+<h3><a href="">Downloads</a></h3>
+<p>The number of people with the basic skills to build things with web technologies is massive.</p>
+</li>
+<li>
+<h3><a href="">Source</a></h3>
+<p>The number of people with the basic skills to build things with web technologies is massive.</p>
+</li>
+</ul>
+</div>
+
+</div>
+
