@@ -1,12 +1,18 @@
 ---
-layout: post
+layout: page
 title: "What is an Embedded Browser?"
 tags: [about]
 data: { dateless: "true" }
 permalink: /learn/what-is-embedded.html
 --- 
 
+<header class="page">
+
+# {{ title }}
+
 Long ago, it might have been reasonable to imagine browsers only in the realm of desktop computers.  However, embedded browsers are in everything these days: cars, signs, tablets, gaming systems, televisions and appliances.  They're even in space!
+
+</header>
 
 The Web Platform is a frequently chosen foundational technology for _many reasons_, including:
 
