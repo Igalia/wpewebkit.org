@@ -34,7 +34,7 @@ permalink: /blog/
 # {{ title }}
 
 Don't miss any news related to WPE -- our blog aims to share information regarding WPE: explainers, how-to articles and general information regarding WPE, WebKit
-and the Web platform. Also check out [the official WebKit blog](https://webkit.org/blog/) regarding news on the engine itself.
+and the Web platform. Also check out [the official WebKit blog](https://webkit.org/blog/) regarding news on the engine itself. 
 
 </header>
 

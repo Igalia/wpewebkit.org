@@ -53,7 +53,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("recentBlogPosts", (collectionApi) => {
     let i =0;
     return collectionApi.getFilteredByTag("blogpost").reverse().filter((item) => {
-      return i++ < 5;
+      return i++ < 6;
     });
   })
 
