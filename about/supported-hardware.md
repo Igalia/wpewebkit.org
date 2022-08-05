@@ -47,12 +47,14 @@ table :is(thead, tbody) tr > * {
 	vertical-align: top;
 }
 table thead tr > * {
+	padding-block: 0.25em 1px;
+	border-top: 1px solid silver;
+	border-bottom: 2px solid black;
 	font-size: smaller;
 	font-weight: 400;
 	text-transform: uppercase;
 	text-align: left;
-	border-top: 1px solid silver;
-	border-bottom: 2px solid black;
+	color: #444;
 }
 table thead tr > th:first-child {
 	font-weight: 700;

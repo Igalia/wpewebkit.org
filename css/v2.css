@@ -92,7 +92,6 @@ nav.global {
 	background: hsla(0deg,0%,100%,0.9);
 	z-index: 12345;
 	backdrop-filter: blur(10px);
-	font: 1.05em monospace;
 }
 nav.global div {
 	display: flex;
