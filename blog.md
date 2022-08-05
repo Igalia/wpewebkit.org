@@ -1,15 +1,45 @@
 ---
-layout: post
+layout: page
 title: "Blog"
 tags: [blog]
 data: { dateless: "true" }
 permalink: /blog/
 ---
+<style>
+.card ol {
+	padding: 1.5em;
+}
+@media (min-width: 60em) {
+	.card ol {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 3em 5em;
+	}
+}
+.card ol img {
+	width: 100%;
+	height: 9em;
+	margin-block: 0 1em;
+	object-fit: cover;
+	object-position: top center;
+	mask: linear-gradient(0deg, #FFF0, 0.5em, #FFFF 1.5em);
+}
+.card ol p, .card ol time {
+	font-size: 90%;
+}
+</style>
+
+<header class="page">
+
+# {{ title }}
 
 Don't miss any news related to WPE -- our blog aims to share information regarding WPE: explainers, how-to articles and general information regarding WPE, WebKit
 and the Web platform. Also check out [the official WebKit blog](https://webkit.org/blog/) regarding news on the engine itself. 
 
-### Recent Articles
+</header>
+
+## Recent Articles
+<a class="btn" href="{{ '/blog.xml' | url }}"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
 
 <div class="card" style="margin-bottom: 1rem">
   <ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;">
@@ -24,11 +54,10 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
   </ol>
 </div>
 
-<a href="{{ '/blog.xml' | url }}">Feed</a>
 
 
 
-### Recent Release Notes
+## Recent Release Notes
 
 <div class="container">
   <div class="card-deck">
@@ -67,10 +96,4 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
   </div>
 </div>
 
-## Resources
-
-* [What is an Embedded Browser?](/learn/what-is-embedded.html)
-* [Videos]()
-* [The Architecture of WPE](/about/architecture.html)
-* [FAQ](/about/faq.html)
-* Security Advisories (see existing home page)
+{% include resources.html %}
