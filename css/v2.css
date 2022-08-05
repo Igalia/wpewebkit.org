@@ -201,9 +201,9 @@ main > *:last-child {
 	content: url(/assets/img/border-dot-black.svg);
 	position: absolute;
 	z-index: 1234;
-	left: -6px;
+	left: -5px;
 	bottom: 0;
-	height: 10px;
+	height: 11px;
 	width: 100%;
 	background: var(--dashH);
 }
@@ -284,7 +284,7 @@ main section div > :last-child {
 	border-image-source: linear-gradient(0deg,#EAFEFE,#EAFEFE);
 }
 
-:is(.community, .resources) header {
+:is(.community, .developers, .resources) header {
 	padding: 5em 0 2.5em;
 	position: relative;
 }
