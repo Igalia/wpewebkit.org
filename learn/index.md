@@ -44,7 +44,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 <li>Wondering if WPE is <a href="/about/supported-hardware.html">currently available for your device?</a></li>
 <li>Wondering <a href="/about/a-good-choice.html">what makes WPE a good choice</a></li>
 <li>Interested in learning more about <a href="/about/architecture.html">the architecture of WPE</a></li>
-<li>An experienced embedded developer ready to <a href="/about/build-and-tune.html">build and tune WPE</a></li>
+<li>An experienced embedded developer ready to <a href="">build and tune WPE</a></li>
 <li>Interested in all of the various ways you can get <a href="explore-wpe.html">started actually using and exploring WPE</a></li>
 </ul>
 
