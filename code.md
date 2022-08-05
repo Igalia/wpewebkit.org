@@ -1,13 +1,19 @@
 ---
-layout: post
+layout: page
 title: "Code"
 tags: [about]
 data: { dateless: "true" }
 permalink: /code/
 ---
 
-WPE is open source, free software.  Your help and scrutiny are valuable.
-You can learn a great deal about how you can contribute upstream to WebKit through [the official WebKit Contribution Guide](https://webkit.org/contributing-code/).
+<header class="page">
+
+# {{ title }}
+
+WPE is open source, free software.  Your help and scrutiny are valuable.  You can learn a great deal about how you can contribute upstream to WebKit through [the official WebKit Contribution Guide](https://webkit.org/contributing-code/).
+
+</header>
+
 
 ## Source
 
@@ -85,3 +91,6 @@ For questions and hanging out you can find us here:
 * [webkit-wpe](https://lists.webkit.org/mailman/listinfo/webkit-wpe) mailing
   list.
 * [@WPEWebKit](https://twitter.com/WPEWebKit) on Twitter.
+
+
+{% include resources.html %}
