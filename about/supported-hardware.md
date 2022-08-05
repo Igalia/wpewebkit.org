@@ -67,7 +67,7 @@ table tbody tr:nth-child(n + 2) > * {
 
 # Supported Hardware
 
-WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:
+WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer.
 
 </header>
 
