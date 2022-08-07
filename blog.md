@@ -36,7 +36,7 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 }
 </style>
 
-<div class="card">
+<div class="card" style="margin-bottom: 1rem">
   <ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;">
     {%- for blogPost in collections.recentBlogPosts -%}
       <li class="listitem">
