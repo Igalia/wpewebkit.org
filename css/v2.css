@@ -286,8 +286,6 @@ main > .resources .gallery {
 	border-image-width: 0;
 	border-image-repeat: stretch;
 	mix-blend-mode: multiply;
-}
-.full-bleed {
 	border-image-source: linear-gradient(0deg,#EAFEFE,#EAFEFE);
 }
 
