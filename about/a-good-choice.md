@@ -19,12 +19,19 @@ ul.gallery.c2 li {
 	border: 1px dashed var(--colorMain);
 	background: url(/assets/img/checkmark.png) 1em 1em / 2em 2em no-repeat;
 }
+.full-bleed {
+	margin-block: 5em;
+}
+.full-bleed img {
+	display: block;
+	margin: -5em auto;
+}
 </style>
 
 <nav class="sidebar">
 <ul>
-<li><a href="/about/supported-hardware.html">Supported Hardware</a></li>
-<li class="currentPage"><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
+<li><a href="{{ 'about/supported-hardware.html' | url }}">Supported Hardware</a></li>
+<li class="currentPage"><a href="{{ 'about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
 <li><a href="">WPE in Action</a></li>
 </ul>
 </nav>
@@ -38,7 +45,7 @@ WPE WebKit is widely adopted in many industries, including digital signage, prof
 </header>
 
 <section class="full-bleed">
-[illustration goes here, somehow]
+<img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
 </section>
 
 <section class="dotsep">
