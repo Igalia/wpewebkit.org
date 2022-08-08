@@ -4,9 +4,9 @@
 <ul class="{{ page.url | topLevel }}">
 {%- for link in menu -%}
 {%- assign dir = page.url | topLevel -%}
-{%- if dir == "home" -%}
-{%- assign dir = "." -%}
-{%- endif -%}
+{% if dir == 'home' %}
+{% assign dir = '.' %}
+{% endif %}
 {%- if link.url == dir -%}
 <li class="currentPage">
 {%- else -%}

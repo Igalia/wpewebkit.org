@@ -275,6 +275,9 @@ main section div > :last-child {
 	list-style: none;
 	align-items: center;
 }
+main > .resources .gallery {
+	align-items: start;
+}
 
 .full-bleed {
 	padding: 3em 0;
