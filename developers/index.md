@@ -31,20 +31,20 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 <div class="dotsep">
 
-## [WPE Builds]()
+## [WPE Builds]({{ '/about/builds.html' | url }})
 
 While there are several simple ways for developers to experiment with and explore WPE, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds. To make this easier, there is also meta-webkit, which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
 
 * Linux distros for debian, ubuntu, raspbian, arch linux
-* [Install WPE and minibrowser with flatpak](https://wpewebkit.org/about/flatpak.html)
+* [Install WPE and minibrowser with flatpak]({{ '/about/flatpak.html' | url }})
 * Raspberry Pi OS images
-* [Install with Balena](https://wpewebkit.org/about/balena-wpe.html)
+* [Install with Balena]({{ '/about/balena-wpe.html' | url }})
 
 </div>
 
 <div class="dotsep">
 
-## [Release Schedule]()
+## [Release Schedule]({{ '/release/schedule' | url }})
 
 WPE WebKit follows a **6-month development cycle**:
 
@@ -60,14 +60,14 @@ WPE WebKit and [WebKitGTK]() share a fair amount of code.  Therefore, both proje
 
 <div class="gallery c2 dotsep">
 <div>
-<h2><a href="{{ 'about/architecture.html' | url }}">WPE Design</a></h2>
+<h2><a href="{{ '/about/architecture.html' | url }}">WPE Design</a></h2>
 <p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
 </div>
-<img src="{{ 'assets/img/diagram-WPE-design.svg' | url }}" alt="">
+<img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
 </div>
 
 <div>
-<h2><a href="">WPE’s Frequently Asked Questions</a></h2>
+<h2><a href="{{ '' | url }}">WPE’s Frequently Asked Questions</a></h2>
 <p>We've been collecting answers to lots of common questions we've been asked. If you've got questions, you might just find a ready answer in the FAQ.</p>
 </div>
 
