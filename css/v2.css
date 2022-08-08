@@ -172,6 +172,11 @@ nav.sidebar a[href] {
 	text-underline-offset: 0.125em;
 	max-width: 15ch;
 }
+nav.sidebar .currentPage a[href] {
+	color: #FFF;
+	background: #000;
+	text-decoration: none;
+}
 
 
 header.page {

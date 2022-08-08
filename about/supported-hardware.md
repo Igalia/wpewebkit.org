@@ -63,6 +63,16 @@ table tbody tr:nth-child(n + 2) > * {
 	border-top: 1px solid silver;
 }
 </style>
+
+<nav class="sidebar">
+<ul>
+<li class="currentPage"><a href="/about/supported-hardware.html">Supported Hardware</a></li>
+<li><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
+<li><a href="">WPE in Action</a></li>
+</ul>
+</nav>
+
+
 <header class="page">
 
 # Supported Hardware

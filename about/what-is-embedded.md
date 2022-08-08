@@ -3,7 +3,7 @@ layout: page
 title: "What is an Embedded Browser?"
 tags: [about]
 data: { dateless: "true" }
-permalink: /learn/what-is-embedded.html
+permalink: /about/what-is-embedded.html
 --- 
 
 <header class="page">

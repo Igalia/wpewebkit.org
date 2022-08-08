@@ -3,7 +3,7 @@ layout: page
 title: "Learn & Discover"
 tags: [learn]
 data: { dateless: "true" }
-permalink: /learn/index.html
+permalink: /about/index.html
 --- 
 
 
