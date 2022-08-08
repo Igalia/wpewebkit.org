@@ -60,10 +60,10 @@ WPE WebKit and [WebKitGTK]() share a fair amount of code.  Therefore, both proje
 
 <div class="gallery c2 dotsep">
 <div>
-<h2><a href="/about/architecture.html">WPE Design</a></h2>
+<h2><a href="{{ 'about/architecture.html' | url }}">WPE Design</a></h2>
 <p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
 </div>
-<img src="/assets/img/diagram-WPE-design.svg" alt="">
+<img src="{{ 'assets/img/diagram-WPE-design.svg' | url }}" alt="">
 </div>
 
 <div>

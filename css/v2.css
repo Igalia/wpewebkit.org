@@ -247,12 +247,24 @@ main section div > :last-child {
 }
 
 
-.c2, .c4 {
+.c2, .c4, .c5 {
 	display: grid;
 	grid-template-columns: 40% 45%;
 	grid-template-rows: repeat(2,min-content);
 	gap: 0 15%;
 	align-items: first baseline;
+}
+.c2 {
+	grid-template-columns: repeat(2,1fr);
+}
+.c4 {
+	grid-template-columns: repeat(4,1fr);
+	grid-template-rows: min-content;
+	gap: 0 1em;
+}
+.c5 {
+	grid-template-columns: repeat(5,1fr);
+	gap: 2em;
 }
 
 .gallery {
@@ -262,18 +274,6 @@ main section div > :last-child {
 	padding: 1.5em 0;
 	list-style: none;
 	align-items: center;
-}
-.gallery.c2 {
-	grid-template-columns: repeat(2,1fr);
-}
-.gallery.c4 {
-	grid-template-columns: repeat(4,1fr);
-	grid-template-rows: min-content;
-	gap: 0 1em;
-}
-.gallery.c5 {
-	grid-template-columns: repeat(5,1fr);
-	gap: 2em;
 }
 
 .full-bleed {
