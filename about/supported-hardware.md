@@ -37,7 +37,7 @@ table thead tr :nth-child(2) {
 	width: 21ch;
 }
 table thead tr :nth-child(4) {
-	width: 40ch;
+	width: 40ch;s
 }
 table thead tr :nth-child(5) {
 	width: 18ch;
@@ -66,9 +66,9 @@ table tbody tr:nth-child(n + 2) > * {
 
 <nav class="sidebar">
 <ul>
-<li class="currentPage"><a href="/about/supported-hardware.html">Supported Hardware</a></li>
-<li><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
-<li><a href="">WPE in Action</a></li>
+<li class="currentPage"><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></li>
+<li><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
+<li><a href="{{ '' | url }}">WPE in Action</a></li>
 </ul>
 </nav>
 

@@ -31,9 +31,7 @@ such as the traditional Cocoa, GTK, etc toolkits.
 </header>
 
 <div class="masthead-img full-bleed" align="center">
-      <img src="{{ '/assets/wpe-architecture-diagram.png' | url }}"
-		srcset="{{ '/assets/wpe-architecture-diagram@2x.png' | url }} 2x"
-		alt="Block diagram of the WPE architeture">
+<img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
 </div>
 
 <section class="dotsep">

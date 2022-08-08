@@ -30,9 +30,9 @@ ul.gallery.c2 li {
 
 <nav class="sidebar">
 <ul>
-<li><a href="{{ 'about/supported-hardware.html' | url }}">Supported Hardware</a></li>
-<li class="currentPage"><a href="{{ 'about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
-<li><a href="">WPE in Action</a></li>
+<li><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></li>
+<li class="currentPage"><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
+<li><a href="{{ '' | url }}">WPE in Action</a></li>
 </ul>
 </nav>
 
@@ -40,12 +40,12 @@ ul.gallery.c2 li {
 
 # Why Choose WPE? 
 
-WPE WebKit is widely adopted in many industries, including digital signage, professional audio, video and braodcasting, home appliances, set-top boxes, and automative and in-flight infotainment systems.
+WPE WebKit is widely adopted in many industries, including digital signage, professional audio, video and broadcasting, home appliances, set-top boxes, and automative and in-flight infotainment systems.
 
 </header>
 
 <section class="full-bleed">
-<img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
+[illustration goes here]
 </section>
 
 <section class="dotsep">
