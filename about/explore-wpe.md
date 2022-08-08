@@ -3,7 +3,7 @@ layout: page
 title: "Get Started with WPEwebkit"
 tags: [about]
 data: { dateless: "true" }
-permalink: /learn/explore-wpe.html
+permalink: /about/explore-wpe.html
 ---
 <style>
 header.page {

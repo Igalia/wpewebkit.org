@@ -21,6 +21,14 @@ ul.gallery.c2 li {
 }
 </style>
 
+<nav class="sidebar">
+<ul>
+<li><a href="/about/supported-hardware.html">Supported Hardware</a></li>
+<li class="currentPage"><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
+<li><a href="">WPE in Action</a></li>
+</ul>
+</nav>
+
 <header class="page">
 
 # Why Choose WPE? 

@@ -5,7 +5,7 @@
 	},
 	{
 		"title": "Learn & Discover",
-		"url": "learn"
+		"url": "about"
 	},
 	{
 		"title": "Blog",
@@ -17,7 +17,7 @@
 	},
 	{
 		"title": "Get Started",
-		"url": "learn/explore-wpe.html",
+		"url": "about/explore-wpe.html",
 		"class": "btn cta"
 	}
 ]
