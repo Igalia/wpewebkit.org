@@ -90,8 +90,7 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
       </div>
     </div>
     <p class="m-3 mt-4 text-center">
-      <a class="btn btn-light btn-sm"
-       href="https://wpewebkit.org/release/">All Release Notes…</a>
+      <a class="btn btn-light btn-sm" href="{{ '/release/' | url }}">All Release Notes…</a>
     </p>
   </div>
 </div>
