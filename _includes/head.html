@@ -195,7 +195,8 @@ lazy-youtube a > span {
         })
       }
 
-      demos.classList.add('initialized');
+      let demos = document.getElementById('demos');
+      if (demos) demos.classList.add('initialized');
     })
 
     class LazyYTElementLite extends HTMLElement {
