@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-08-05T17:06:44.018Z">
+  <meta property="article:published_time" content="2022-08-09T22:53:00.543Z">
   <meta property="article:tag" content="blog">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -148,7 +148,8 @@ lazy-youtube a > span {
         })
       }
 
-      demos.classList.add('initialized');
+      let demos = document.getElementById('demos');
+      if (demos) demos.classList.add('initialized');
     })
 
     class LazyYTElementLite extends HTMLElement {
@@ -189,10 +190,13 @@ lazy-youtube a > span {
   <body id="page-top" class="subpage">
 
     <nav class="global">
-<div>
-<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
-<ul class="blog"><li><a class="nav-link" href="/">Home</a></li><li><a class="nav-link" href="/learn">Learn & Discover</a></li><li class="currentPage"><a class="nav-link" href="/blog">Blog</a></li><li><a class="nav-link" href="/developers">Developers</a></li><li><a class="btn cta" href="/learn/explore-wpe.html">Get Started</a></li></ul>
-</div>
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
+		<ul class="blog"><li><a class="nav-link"
+				href="/wpewebkit.org/redesign/about/">Learn & Discover</a></li><li><a class="nav-link"
+				href="/wpewebkit.org/redesign/blog/">Blog</a></li><li><a class="btn cta"
+				href="#">Get Started</a></li></ul>
+	</div>
 </nav>
 
 
@@ -227,28 +231,28 @@ and the Web platform. Also check out <a href="https://webkit.org/blog/">the offi
 </header>
 <h2 id="recent-articles" tabindex="-1">Recent Articles</h2>
 <p><a class="btn" href="/wpewebkit.org/redesign/blog.xml"><i class="icon-feed"></i>  Feed</a></p>
-<div class="card">
-<ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;"><li class="listitem">
-<img src="/assets/build-webkit-org-screenshot.png" alt="">
-<time>Jul 28, 2022</time>
-<h3><a href="/blog/04-wpe-qa-tooling.html">WPE QA and tooling</a></h3>
-<p>In the previous posts, my colleagues Claudio and Miguel wrote respectively about the major components of the project and, specifically, the graphics architecture of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it.</p>
-</li><li class="listitem">
-<img src="/assets/graphics-attachment.png" alt="">
-<time>Jul 15, 2022</time>
-<h3><a href="/blog/03-wpe-graphics-architecture.html">WPE Graphics architecture</a></h3>
-<p>Following the previous post in the series about WPE where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display.</p>
-</li><li class="listitem">
-<img src="/assets/wpe-architecture-diagram.png" alt="">
-<time>Jul 1, 2022</time>
-<h3><a href="/blog/02-overview-of-wpe.html">An overview of the WPE WebKit project</a></h3>
-<p>In the previous post in this series, we explained that WPE is a WebKit port optimized for embedded devices. In this post, we'll dive into a more technical overview of the different components of WPE, WebKit, and how they all fit together.</p>
-</li><li class="listitem">
-<img src="/assets/svg/wpe-birthday-cake-5-years.svg" alt="">
-<time>Apr 21, 2022</time>
-<h3><a href="/blog/01-happy-birthday-wpe.html">Happy birthday WPE!</a></h3>
-<p>Welcome to the new Blog section on wpewebkit.org! Let's take some time to celebrate and recap how WPE evolved from the early prototyping days to the product empowering hundreds of millions of devices worldwide today.</p>
-</li></ol>
+<div class="card" style="margin-bottom: 1rem">
+  <ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;"><li class="listitem">
+      <img src="/wpewebkit.org/redesign/assets/build-webkit-org-screenshot.png" alt="">
+      <time>Jul 28, 2022</time>
+      <h3><a href="/wpewebkit.org/redesign/blog/04-wpe-qa-tooling.html">WPE QA and tooling</a></h3>
+      <p>In the previous posts, my colleagues Claudio and Miguel wrote respectively about the major components of the project and, specifically, the graphics architecture of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it.</p>
+    </li><li class="listitem">
+      <img src="/wpewebkit.org/redesign/assets/graphics-attachment.png" alt="">
+      <time>Jul 15, 2022</time>
+      <h3><a href="/wpewebkit.org/redesign/blog/03-wpe-graphics-architecture.html">WPE Graphics architecture</a></h3>
+      <p>Following the previous post in the series about WPE where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display.</p>
+    </li><li class="listitem">
+      <img src="/wpewebkit.org/redesign/assets/wpe-architecture-diagram.png" alt="">
+      <time>Jul 1, 2022</time>
+      <h3><a href="/wpewebkit.org/redesign/blog/02-overview-of-wpe.html">An overview of the WPE WebKit project</a></h3>
+      <p>In the previous post in this series, we explained that WPE is a WebKit port optimized for embedded devices. In this post, we'll dive into a more technical overview of the different components of WPE, WebKit, and how they all fit together.</p>
+    </li><li class="listitem">
+      <img src="/wpewebkit.org/redesign/assets/svg/wpe-birthday-cake-5-years.svg" alt="">
+      <time>Apr 21, 2022</time>
+      <h3><a href="/wpewebkit.org/redesign/blog/01-happy-birthday-wpe.html">Happy birthday WPE!</a></h3>
+      <p>Welcome to the new Blog section on wpewebkit.org! Let's take some time to celebrate and recap how WPE evolved from the early prototyping days to the product empowering hundreds of millions of devices worldwide today.</p>
+    </li></ol>
 </div>
 <h2 id="recent-release-notes" tabindex="-1">Recent Release Notes</h2>
 <div class="container">
@@ -256,31 +260,31 @@ and the Web platform. Also check out <a href="https://webkit.org/blog/">the offi
     <div class="card">
       <h4 class="card-header text-center">Stable</h4>
       <div class="list-group list-group-flush"><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          wpebackend-fdo:
+          <a class="badge badge-secondary"
+             href="/wpewebkit.org/redesign/release/wpebackend-fdo-1.12.1.html">1.12.1</a>
+        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          wpewebkit:
+          <a class="badge badge-secondary"
+             href="/wpewebkit.org/redesign/release/wpewebkit-2.36.6.html">2.36.6</a>
+        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           libwpe:
           <a class="badge badge-secondary"
              href="/wpewebkit.org/redesign/release/libwpe-1.12.2.html">1.12.2</a>
         </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          wpewebkit:
-          <a class="badge badge-secondary"
-             href="/wpewebkit.org/redesign/release/wpewebkit-2.36.5.html">2.36.5</a>
-        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           cog:
           <a class="badge badge-secondary"
              href="/wpewebkit.org/redesign/release/cog-0.12.4.html">0.12.4</a>
-        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          wpebackend-fdo:
-          <a class="badge badge-secondary"
-             href="/wpewebkit.org/redesign/release/wpebackend-fdo-1.12.0.html">1.12.0</a>
         </div></div>
     </div>
    <div class="card">
       <h4 class="card-header text-center">Unstable</h4>
       <div class="list-group list-group-flush"><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          libwpe:
+          wpebackend-fdo:
           <span>
           <a class="badge badge-secondary"
-             title="Release notes for libwpe 1.13.2"
-             href="/wpewebkit.org/redesign/release/libwpe-1.13.2.html">1.13.2</a>
+             title="Release notes for wpebackend-fdo 1.13.1"
+             href="/wpewebkit.org/redesign/release/wpebackend-fdo-1.13.1.html">1.13.1</a>
           </span>
         </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           wpewebkit:
@@ -290,31 +294,30 @@ and the Web platform. Also check out <a href="https://webkit.org/blog/">the offi
              href="/wpewebkit.org/redesign/release/wpewebkit-2.37.1.html">2.37.1</a>
           </span>
         </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          libwpe:
+          <span>
+          <a class="badge badge-secondary"
+             title="Release notes for libwpe 1.13.2"
+             href="/wpewebkit.org/redesign/release/libwpe-1.13.2.html">1.13.2</a>
+          </span>
+        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           cog:
           <span>
           <a class="badge badge-secondary"
              title="Release notes for cog 0.13.90"
              href="/wpewebkit.org/redesign/release/cog-0.13.90.html">0.13.90</a>
           </span>
-        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          wpebackend-fdo:
-          <span>
-          <a class="badge badge-secondary"
-             title="Release notes for wpebackend-fdo 1.9.92"
-             href="/wpewebkit.org/redesign/release/wpebackend-fdo-1.9.92.html">1.9.92</a>
-          </span>
         </div></div>
     </div>
     <p class="m-3 mt-4 text-center">
-      <a class="btn btn-light btn-sm"
-       href="https://wpewebkit.org/release/">All Release Notes…</a>
+      <a class="btn btn-light btn-sm" href="/wpewebkit.org/redesign/release/">All Release Notes…</a>
     </p>
   </div>
 </div>
 <section class="resources">
 <header class="full-bleed dotsep">
 <h2><a href="">Resources</a></h2>
-<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
+<img src="/wpewebkit.org/redesign/assets/img/illustration-resources.svg" alt="" class="decoration">
 </header>
 <div>
 <ul class="gallery c5">
@@ -345,19 +348,19 @@ and the Web platform. Also check out <a href="https://webkit.org/blog/">the offi
     </main>
 
     <footer class="global">
-<div>
-<a href="/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg"></a>
-<ul>
-<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
-<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
-<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
-<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
-</ul>
-<ul>
-<li>Copyright &copy; 2018-2022 The WPE WebKit Team</li>
-<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
-</ul>
-</div>
+	<div>
+		<a href="/wpewebkit.org/redesign/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg"></a>
+		<ul>
+			<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2022 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
 </footer>
 
 

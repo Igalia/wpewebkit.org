@@ -27,7 +27,7 @@ main {
 }
 body:not(.home) main {
 	padding-inline: 10rem;
-	background: url(/assets/img/dash-v.svg) 0 0 / 1px 8px repeat-y;
+	background: url(../assets/img/dash-v.svg) 0 0 / 1px 8px repeat-y;
 }
 img {
 	box-sizing: border-box;
@@ -59,7 +59,7 @@ ul.arrows li {
 }
 ul.arrows li::before {
 	display: inline-block;
-	content: url(/assets/img/list-arrow.svg);
+	content: url(../assets/img/list-arrow.svg);
 	width: 1em;
 	margin-inline-end: 1em;
 	text-indent: 0;
@@ -172,6 +172,11 @@ nav.sidebar a[href] {
 	text-underline-offset: 0.125em;
 	max-width: 15ch;
 }
+nav.sidebar .currentPage a[href] {
+	color: #FFF;
+	background: #000;
+	text-decoration: none;
+}
 
 
 header.page {
@@ -180,7 +185,7 @@ header.page {
 header.page h1 {
 	font-size: 4.5em;
 	padding-bottom: 0.5em;
-	background: url(/assets/img/graphic-title-blue.svg) 0 100% / 7rem auto no-repeat;
+	background: url(../assets/img/graphic-title-blue.svg) 0 100% / 7rem auto no-repeat;
 }
 header.page p {
 	font-size: 1.6em;
@@ -197,7 +202,7 @@ main > *:last-child {
 	padding: 5em 0;
 }
 .dotsep::after {
-	content: url(/assets/img/border-dot-black.svg);
+	content: url(../assets/img/border-dot-black.svg);
 	position: absolute;
 	z-index: 1234;
 	left: -5px;
@@ -212,7 +217,7 @@ main > *:last-child {
 
 /*
 main section > * + *::before {
-	content: url(/assets/img/border-dot-black.svg);
+	content: url(../assets/img/border-dot-black.svg);
 	position: absolute;
 	grid-column: 1/-1;
 }
@@ -242,12 +247,24 @@ main section div > :last-child {
 }
 
 
-.c2, .c4 {
+.c2, .c4, .c5 {
 	display: grid;
 	grid-template-columns: 40% 45%;
 	grid-template-rows: repeat(2,min-content);
 	gap: 0 15%;
 	align-items: first baseline;
+}
+.c2 {
+	grid-template-columns: repeat(2,1fr);
+}
+.c4 {
+	grid-template-columns: repeat(4,1fr);
+	grid-template-rows: min-content;
+	gap: 0 1em;
+}
+.c5 {
+	grid-template-columns: repeat(5,1fr);
+	gap: 2em;
 }
 
 .gallery {
@@ -258,17 +275,8 @@ main section div > :last-child {
 	list-style: none;
 	align-items: center;
 }
-.gallery.c2 {
-	grid-template-columns: repeat(2,1fr);
-}
-.gallery.c4 {
-	grid-template-columns: repeat(4,1fr);
-	grid-template-rows: min-content;
-	gap: 0 1em;
-}
-.gallery.c5 {
-	grid-template-columns: repeat(5,1fr);
-	gap: 2em;
+main > .resources .gallery {
+	align-items: start;
 }
 
 .full-bleed {
@@ -278,8 +286,6 @@ main section div > :last-child {
 	border-image-width: 0;
 	border-image-repeat: stretch;
 	mix-blend-mode: multiply;
-}
-.full-bleed {
 	border-image-source: linear-gradient(0deg,#EAFEFE,#EAFEFE);
 }
 
@@ -336,7 +342,7 @@ header .decoration {
 
 footer.global {
 	padding: 4rem 0;
-	background: url(/assets/img/dash-h.svg) 0 0 / 8px 1px repeat-x;
+	background: url(../assets/img/dash-h.svg) 0 0 / 8px 1px repeat-x;
 	background-color: #1593ED;
 	color: #FFF;
 	font: 1.1em monospace;

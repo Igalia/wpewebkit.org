@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-08-05T17:06:43.870Z">
+  <meta property="article:published_time" content="2022-08-09T22:53:00.367Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -148,7 +148,8 @@ lazy-youtube a > span {
         })
       }
 
-      demos.classList.add('initialized');
+      let demos = document.getElementById('demos');
+      if (demos) demos.classList.add('initialized');
     })
 
     class LazyYTElementLite extends HTMLElement {
@@ -189,10 +190,13 @@ lazy-youtube a > span {
   <body id="page-top" class="subpage">
 
     <nav class="global">
-<div>
-<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
-<ul class="about"><li><a class="nav-link" href="/">Home</a></li><li><a class="nav-link" href="/learn">Learn & Discover</a></li><li><a class="nav-link" href="/blog">Blog</a></li><li><a class="nav-link" href="/developers">Developers</a></li><li><a class="btn cta" href="/learn/explore-wpe.html">Get Started</a></li></ul>
-</div>
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
+		<ul class="about"><li><a class="nav-link"
+				href="/wpewebkit.org/redesign/about/">Learn & Discover</a></li><li><a class="nav-link"
+				href="/wpewebkit.org/redesign/blog/">Blog</a></li><li><a class="btn cta"
+				href="#">Get Started</a></li></ul>
+	</div>
 </nav>
 
 
@@ -229,7 +233,7 @@ table thead tr :nth-child(2) {
 	width: 21ch;
 }
 table thead tr :nth-child(4) {
-	width: 40ch;
+	width: 40ch;s
 }
 table thead tr :nth-child(5) {
 	width: 18ch;
@@ -255,6 +259,13 @@ table tbody tr:nth-child(n + 2) > * {
 	border-top: 1px solid silver;
 }
 </style>
+<nav class="sidebar">
+<ul>
+<li class="currentPage"><a href="/wpewebkit.org/redesign/about/supported-hardware.html">Supported Hardware</a></li>
+<li><a href="/wpewebkit.org/redesign/about/a-good-choice.html">Why Choose WPE?</a></li>
+<li><a href=".">WPE in Action</a></li>
+</ul>
+</nav>
 <header class="page">
 <h1>Supported Hardware</h1>
 <p>WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer.</p>
@@ -496,7 +507,7 @@ table tbody tr:nth-child(n + 2) > * {
 <section class="resources">
 <header class="full-bleed dotsep">
 <h2><a href="">Resources</a></h2>
-<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
+<img src="/wpewebkit.org/redesign/assets/img/illustration-resources.svg" alt="" class="decoration">
 </header>
 <div>
 <ul class="gallery c5">
@@ -527,19 +538,19 @@ table tbody tr:nth-child(n + 2) > * {
     </main>
 
     <footer class="global">
-<div>
-<a href="/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg"></a>
-<ul>
-<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
-<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
-<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
-<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
-</ul>
-<ul>
-<li>Copyright &copy; 2018-2022 The WPE WebKit Team</li>
-<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
-</ul>
-</div>
+	<div>
+		<a href="/wpewebkit.org/redesign/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg"></a>
+		<ul>
+			<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2022 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
 </footer>
 
 

@@ -149,7 +149,8 @@ lazy-youtube a > span {
         })
       }
 
-      demos.classList.add('initialized');
+      let demos = document.getElementById('demos');
+      if (demos) demos.classList.add('initialized');
     })
 
     class LazyYTElementLite extends HTMLElement {
@@ -190,37 +191,44 @@ lazy-youtube a > span {
   <body id="page-top" class="subpage">
 
     <nav class="global">
-<div>
-<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
-<ul class="release"><li><a class="nav-link" href="/">Home</a></li><li><a class="nav-link" href="/learn">Learn & Discover</a></li><li><a class="nav-link" href="/blog">Blog</a></li><li><a class="nav-link" href="/developers">Developers</a></li><li><a class="btn cta" href="/learn/explore-wpe.html">Get Started</a></li></ul>
-</div>
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
+		<ul class="release"><li><a class="nav-link"
+				href="/wpewebkit.org/redesign/about/">Learn & Discover</a></li><li><a class="nav-link"
+				href="/wpewebkit.org/redesign/blog/">Blog</a></li><li><a class="btn cta"
+				href="#">Get Started</a></li></ul>
+	</div>
 </nav>
 
 
     <main>
-    <div itemscope itemtype="http://schema.org/TechArticle">
-
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
 <meta itemprop="creativeWorkStatus" content="Published">
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
 <meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/redesign/release/libwpe-1.11.1.html">
 
-<section class="content-section bg-primary text-white small-section">
-  <div class="container text-center">
-    <div class="content-section-heading">
-      
-        <h3 class="text-secondary mb-0"
-            itemprop="dateCreated">Thu Aug 05 2021</h3>
-        <meta itemprop="datePublished" content="Thu Aug 05 2021">
-      
-      <h2 itemprop="headline">libwpe 1.11.1 released</h2>
-	  
-	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//libwpe-1.11.1.tar.xz">Download</a>
-	  
-    </div>
-  </div>
-</section>
+<header class="page full-bleed">
+ <h1 itemprop="headline">libwpe 1.11.1 released</h1>
+ 
+   <meta itemprop="datePublished" content="Thu Aug 05 2021">
+   <time itemprop="dateCreated"> 5 August 2021</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//libwpe-1.11.1.tar.xz">Download</a>
+  
+</header>
 
 <section class="content-section bg-light small-section">
   <div class="container text-center">
@@ -249,27 +257,24 @@ libwpe-1.11.1.tar.xz (53.2 KiB)
   </div>
 </section>
 
-<!-- For blog posts -->
-
-
 </div>
 
     </main>
 
     <footer class="global">
-<div>
-<a href="/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg"></a>
-<ul>
-<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
-<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
-<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
-<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
-</ul>
-<ul>
-<li>Copyright &copy; 2018-2022 The WPE WebKit Team</li>
-<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
-</ul>
-</div>
+	<div>
+		<a href="/wpewebkit.org/redesign/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg"></a>
+		<ul>
+			<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2022 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
 </footer>
 
 
