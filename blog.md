@@ -39,33 +39,20 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 </header>
 
 ## Recent Articles
-<a class="btn" href="{{ '/blog.xml' | url }}"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
 
 <div class="card">
-<ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;"><li class="listitem">
-<img src="/assets/build-webkit-org-screenshot.png" alt="">
-<time>Jul 28, 2022</time>
-<h3><a href="/blog/04-wpe-qa-tooling.html">WPE QA and tooling</a></h3>
-<p>In the previous posts, my colleagues Claudio and Miguel wrote respectively about the major components of the project and, specifically, the graphics architecture of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it.</p>
-</li><li class="listitem">
-<img src="/assets/graphics-attachment.png" alt="">
-<time>Jul 15, 2022</time>
-<h3><a href="/blog/03-wpe-graphics-architecture.html">WPE Graphics architecture</a></h3>
-<p>Following the previous post in the series about WPE where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display.</p>
-</li><li class="listitem">
-<img src="/assets/wpe-architecture-diagram.png" alt="">
-<time>Jul 1, 2022</time>
-<h3><a href="/blog/02-overview-of-wpe.html">An overview of the WPE WebKit project</a></h3>
-<p>In the previous post in this series, we explained that WPE is a WebKit port optimized for embedded devices. In this post, we'll dive into a more technical overview of the different components of WPE, WebKit, and how they all fit together.</p>
-</li><li class="listitem">
-<img src="/assets/svg/wpe-birthday-cake-5-years.svg" alt="">
-<time>Apr 21, 2022</time>
-<h3><a href="/blog/01-happy-birthday-wpe.html">Happy birthday WPE!</a></h3>
-<p>Welcome to the new Blog section on wpewebkit.org! Let's take some time to celebrate and recap how WPE evolved from the early prototyping days to the product empowering hundreds of millions of devices worldwide today.</p>
-</li></ol>
+	<ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;">
+	{%- for blogPost in collections.recentBlogPosts -%}
+		<li class="listitem">
+			<img src="{{ blogPost.data.thumbnail | url }}" alt="">
+			<time>{{ blogPost.date | postDate }}</time>
+			<h3><a href="{{ blogPost.url | url }}">{{ blogPost.data.title }}</a></h3>
+			<p>{{ blogPost.data.preview | strip_html }}</p>
+		</li>
+	{%- endfor -%}
+	</ol>
+	<a class="btn" href="{{ '/blog.xml' | url }}"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
 </div>
-
-
 
 
 ## Recent Release Notes
@@ -101,8 +88,7 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
       </div>
     </div>
     <p class="m-3 mt-4 text-center">
-      <a class="btn btn-light btn-sm"
-       href="https://wpewebkit.org/release/">All Release Notes…</a>
+      <a class="btn btn-light btn-sm" href="{{ '/release/' | url }}">All Release Notes…</a>
     </p>
   </div>
 </div>
