@@ -44,12 +44,12 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 <div class="card" style="margin-bottom: 1rem">
   <ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;">
     {%- for blogPost in collections.recentBlogPosts -%}
-      <li class="listitem">
-      	<img src="{{ blogPost.data.thumbnail }}" alt="">
-				<time>{{ blogPost.date | postDate }}</time>
-				<h3><a href="{{ blogPost.url | url }}">{{ blogPost.data.title }}</a></h3>
-				<p>{{ blogPost.data.preview | strip_html }}</p>
-			</li>
+    <li class="listitem">
+      <img src="{{ blogPost.data.thumbnail | url }}" alt="">
+      <time>{{ blogPost.date | postDate }}</time>
+      <h3><a href="{{ blogPost.url | url }}">{{ blogPost.data.title }}</a></h3>
+      <p>{{ blogPost.data.preview | strip_html }}</p>
+    </li>
     {%- endfor -%}
   </ol>
 </div>
