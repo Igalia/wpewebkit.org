@@ -67,7 +67,7 @@ WPE WebKit and [WebKitGTK]() share a fair amount of code.  Therefore, both proje
 </div>
 
 <div>
-<h2><a href="{{ '' | url }}">WPE’s Frequently Asked Questions</a></h2>
+<h2><a href="{{ '/about/faq.html' | url }}">WPE’s Frequently Asked Questions</a></h2>
 <p>We've been collecting answers to lots of common questions we've been asked. If you've got questions, you might just find a ready answer in the FAQ.</p>
 </div>
 

@@ -6,22 +6,94 @@ pagination:
   size: 50
   alias: posts
 ---
-<section class="content-section bg-primary text-white small-section">
-  <div class="container text-center">
-    <div class="content-section-heading">
-      <h2>Security Advisories</h2> 
-    </div>
-  </div>
-</section>
+<style>
+main section ol {
+	display: grid;
+	grid-template-columns: repeat(4,1fr);
+	gap: 1.25em 1.5em;
+	padding: 0;
+	list-style: none;
+}
+main section ol a[href] {
+	display: block;
+	padding: 1em;
+	border: 1px solid;
+	border-radius: 0.5em;
+	text-decoration: none;
+	box-shadow: 0.25em 0.25em 0.5em #0004;
+}
+main section ol time {
+	display: block;
+	margin-block: 0.25em;
+	text-deocration: none;
+	color: initial;
+}
+main section ol h2 {
+	font-size: 1.33em;
+	margin: 0 0 0.25em;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
 
-<section class="content-section bg-light small-section">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-lg-10 mx-auto lead text-left">
-        {%- for post in posts reversed %}
-	        <h3 class="release-heading"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>{{ post.date | dateString }}
-	        <p></p>	
-		{%- endfor %}
-		</div>
-	</div> 
+main section ol > li:first-child {
+	grid-column: 1 / -1;
+	padding-block: 1.5em;
+	font-weight: 700;
+	font-size: 1.15em;
+}
+main section ol > li:first-child a[href] {
+	border-width: 2px;
+	box-shadow: 0.33em 0.33em 0.5em #0006;
+	background: hsl(205deg, 85.7%, 97%);
+}
+main section ol > li:nth-child(n + 2):nth-child(-n + 7) {
+	grid-column: span 2;
+}
+main section ol > li:nth-child(n + 8):nth-child(-n + 11) {
+	padding-top: 2em;
+}
+main section ol > li:nth-child(n + 8) {
+	font-size: smaller;
+}
+main section ol > li:nth-child(n + 8) a[href] {
+	border-color: silver;
+	box-shadow: 0.25em 0.25em 0.5em #0002;
+}
+main section ol > li:nth-child(n + 8) h2 {
+	font-weight: 400;
+}
+main section ol a[href]:is(:hover, :focus) {
+	background: hsl(205deg, 85.7%, 92%);
+}
+main section ol > li:first-child a[href]:is(:hover, :focus) {
+	background: hsl(205deg, 85.7%, 85%);
+}
+
+
+
+</style>
+
+<header class="page">
+
+# Security Advisories
+
+</header>
+
+<section>
+<ol reversed>
+{%- for post in posts reversed -%}
+<li {% if forloop.first %}class="first"{% endif %}>
+<a href="{{ post.url | url }}">
+<time>{{ post.date | date: "%Y-%m-%d" }}</time>
+<h2>{% if forloop.index < 8 %}
+{{ post.data.title }}
+{% else %}
+{{ post.data.title | remove: "WebKitGTK+ and WPE WebKit " | remove: "WebKitGTK and WPE WebKit " }}
+{% endif %}</h2>
+{% if forloop.first %}<p>The latest security advisory available.</p>{% endif %}
+</a>
+</li>
+{%- endfor -%}
+</ol>
 </section>

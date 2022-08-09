@@ -2,13 +2,11 @@
 title: Releases
 layout: page
 ---
-<section class="content-section bg-primary text-white small-section">
-  <div class="container text-center">
-    <div class="content-section-heading">
-      <h2>Releases</h2>
-    </div>
-  </div>
-</section>
+<header class="page">
+
+# Releases
+
+</header>
 
 <section class="content-section bg-light small-section">
   <div class="container text-center">
