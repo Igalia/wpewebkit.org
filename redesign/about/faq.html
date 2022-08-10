@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-08-10T17:16:56.649Z">
+  <meta property="article:published_time" content="2022-08-10T17:29:28.432Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -236,12 +236,9 @@ header.page time {
   
 </header>
 
-<section class="content-section bg-light small-section">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
+<div itemprop="articleBody">
 
-        <nav class="table-of-contents"><ol><li><a href="#what-is-the-difference-between-webplatformforembedded%E2%80%99s-wpe-and-wpewebkit%3F">What is the difference between WebPlatformForEmbedded’s WPE and WPEWebKit?</a></li><li><a href="#is-wpe-supported-on-any-specific-hardware-system-on-chip%3F">Is WPE supported on any specific hardware System-on-Chip?</a></li><li><a href="#is-wpe-ported-to-non-linux-operating-systems%3F">Is WPE ported to non-Linux operating systems?</a></li><li><a href="#what-web-features-does-wpe-support%3F">What Web features does WPE support?</a></li><li><a href="#what%E2%80%99s-the-status-regarding-webrtc%3F">What’s the status regarding WebRTC?</a></li><li><a href="#what%E2%80%99s-up-with-eme%3F-how-can-i-support-this-feature-in-my-wpe-based-product%3F">What’s up with EME? How can I support this feature in my WPE-based product?</a></li><li><a href="#what-is-(and-isn%E2%80%99t)-cog%3F">What is (and isn’t) Cog?</a></li><li><a href="#is-wayland-required-to-run-wpe%3F">Is Wayland required to run WPE?</a></li><li><a href="#are-open-dialogs%2Fpopups-menus-supported%3F">Are open dialogs/popups menus supported?</a></li><li><a href="#what-is-the-wayland-protocols-build-dependency-about-in-cog%3F">What is the wayland-protocols build dependency about in Cog?</a></li><li><a href="#why-does-the-browser%2Flauncher-(e.g.-cog)-crash-at-startup%3F">Why does the browser/launcher (e.g. Cog) crash at startup?</a></li><li><a href="#why-does-the-browser%2Flauncher-(e.g.-cog)-crash-when-trying-to-play-audio%3F">Why does the browser/launcher (e.g. Cog) crash when trying to play audio?</a></li><li><a href="#why-the-browser%2Flauncher-(e.g.-cog)-does-not-load-local-files%3F">Why the browser/launcher (e.g. Cog) does not load local files?</a></li></ol></nav><h2 id="what-is-the-difference-between-webplatformforembedded%E2%80%99s-wpe-and-wpewebkit%3F" tabindex="-1">What is the difference between WebPlatformForEmbedded’s WPE and WPEWebKit?</h2>
+<nav class="table-of-contents"><ol><li><a href="#what-is-the-difference-between-webplatformforembedded%E2%80%99s-wpe-and-wpewebkit%3F">What is the difference between WebPlatformForEmbedded’s WPE and WPEWebKit?</a></li><li><a href="#is-wpe-supported-on-any-specific-hardware-system-on-chip%3F">Is WPE supported on any specific hardware System-on-Chip?</a></li><li><a href="#is-wpe-ported-to-non-linux-operating-systems%3F">Is WPE ported to non-Linux operating systems?</a></li><li><a href="#what-web-features-does-wpe-support%3F">What Web features does WPE support?</a></li><li><a href="#what%E2%80%99s-the-status-regarding-webrtc%3F">What’s the status regarding WebRTC?</a></li><li><a href="#what%E2%80%99s-up-with-eme%3F-how-can-i-support-this-feature-in-my-wpe-based-product%3F">What’s up with EME? How can I support this feature in my WPE-based product?</a></li><li><a href="#what-is-(and-isn%E2%80%99t)-cog%3F">What is (and isn’t) Cog?</a></li><li><a href="#is-wayland-required-to-run-wpe%3F">Is Wayland required to run WPE?</a></li><li><a href="#are-open-dialogs%2Fpopups-menus-supported%3F">Are open dialogs/popups menus supported?</a></li><li><a href="#what-is-the-wayland-protocols-build-dependency-about-in-cog%3F">What is the wayland-protocols build dependency about in Cog?</a></li><li><a href="#why-does-the-browser%2Flauncher-(e.g.-cog)-crash-at-startup%3F">Why does the browser/launcher (e.g. Cog) crash at startup?</a></li><li><a href="#why-does-the-browser%2Flauncher-(e.g.-cog)-crash-when-trying-to-play-audio%3F">Why does the browser/launcher (e.g. Cog) crash when trying to play audio?</a></li><li><a href="#why-the-browser%2Flauncher-(e.g.-cog)-does-not-load-local-files%3F">Why the browser/launcher (e.g. Cog) does not load local files?</a></li></ol></nav><h2 id="what-is-the-difference-between-webplatformforembedded%E2%80%99s-wpe-and-wpewebkit%3F" tabindex="-1">What is the difference between WebPlatformForEmbedded’s WPE and WPEWebKit?</h2>
 <p>Historically, the <a href="https://github.com/WebPlatformForEmbedded/WPEWebKit">WebPlatformForEmbedded flavor of WPE</a> came first. It included several adaptations for the Reference Design Kit (RDK) platform, as well as different fixes for its supported devices. Quoting the <a href="https://rdkcentral.com/">RDK</a> website:</p>
 <blockquote>
 <p>RDK is a fully modular, portable, and customizable open source software
@@ -357,13 +354,11 @@ not needed if you plan to loading remote resources because HTTP servers
 provide the needed information in the <code>Content-Type</code> HTTP header.</p>
 
 
-        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/redesign/"><i class="icon-home mr-1"></i> Home</a></p>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 </div>
+
+<a class="btn btn-primary" href="/wpewebkit.org/redesign/"><i class="icon-home mr-1"></i> Home</a>
 
     </main>
 

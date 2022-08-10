@@ -239,12 +239,9 @@ header.page time {
   
 </header>
 
-<section class="content-section bg-light small-section">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
+<div itemprop="articleBody">
 
-        <p>Following <a href="/wpewebkit.org/redesign/blog/02-overview-of-wpe.html">the previous post in the series</a> about <a href="/wpewebkit.org/redesign/">WPE</a> where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display. If you haven’t read the previous entries in this blog post series about WPE, we recommend you to start with the <a href="/wpewebkit.org/redesign/blog/01-happy-birthday-wpe.html">first post in the series</a> for an introduction, and then come back to this.</p>
+<p>Following <a href="/wpewebkit.org/redesign/blog/02-overview-of-wpe.html">the previous post in the series</a> about <a href="/wpewebkit.org/redesign/">WPE</a> where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display. If you haven’t read the previous entries in this blog post series about WPE, we recommend you to start with the <a href="/wpewebkit.org/redesign/blog/01-happy-birthday-wpe.html">first post in the series</a> for an introduction, and then come back to this.</p>
 <h2 id="dom-%2B-css-%3D-rendertree" tabindex="-1">DOM + CSS = RenderTree</h2>
 <p>As the document is parsed, it will begin building the DOM tree and load-blocking CSS resources.  At some point, possibly before the entire DOM tree is built, it’s time to draw things on the screen. The first step to render the content of a page is to perform what’s called the <em>attachment</em>, which is merging the DOM tree with the CSS rules, in order to create the RenderTree. This RenderTree is a collection of <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a>, structured into a tree, and each of these <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> represent the elements in the DOM tree that have visual output. <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> have the capability to render the associated DOM tree node into a surface by using the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h">GraphicsContext</a> class (in the case of WPE, this <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h">GraphicsContext</a> uses <a href="https://www.cairographics.org/">Cairo</a> to perform the rendering).</p>
 <p>Once the RenderTree is created, the layout is performed, ensuring that each of the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> have their proper size and position set.</p>
@@ -339,13 +336,27 @@ header.page time {
 <p>We also have open positions at the WebKit team at <a href="https://www.igalia.com/">Igalia</a>. If you’re motivated by this field and you’re interested in developing your career around it, you can apply <a href="https://www.igalia.com/jobs/browsers_webkit_position">here</a>!</p>
 
 
-        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/redesign/"><i class="icon-home mr-1"></i> Home</a></p>
+
+<section class="content-section bg-light small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+        <hr class="author-line">
+        <div class="card">
+          <span>
+            This article was written by <a href="https://www.igalia.com/team/magomez">Miguel Gómez</a>. <br><br>Miguel has been contributing to WebKit and WPE for almost ten years now, focusing specially on the graphics part of the code.
+          </span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+
+
 </div>
+
+<a class="btn btn-primary" href="/wpewebkit.org/redesign/"><i class="icon-home mr-1"></i> Home</a>
 
     </main>
 

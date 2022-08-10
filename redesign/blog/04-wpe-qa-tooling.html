@@ -239,12 +239,9 @@ header.page time {
   
 </header>
 
-<section class="content-section bg-light small-section">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
+<div itemprop="articleBody">
 
-        <p>In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/wpewebkit.org/redesign/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/wpewebkit.org/redesign/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you’ll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="/wpewebkit.org/redesign/">WPE</a> aren’t necessarily required in order to read this one, we recommend you to starting with the <a href="/wpewebkit.org/redesign/blog/01-happy-birthday-wpe.html">first post in the series</a>.</p>
+<p>In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/wpewebkit.org/redesign/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/wpewebkit.org/redesign/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you’ll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="/wpewebkit.org/redesign/">WPE</a> aren’t necessarily required in order to read this one, we recommend you to starting with the <a href="/wpewebkit.org/redesign/blog/01-happy-birthday-wpe.html">first post in the series</a>.</p>
 <h2 id="automated-testing" tabindex="-1">Automated testing</h2>
 <p>Testing is an essential part of the WebKit project, primarily due to the large number of use cases covered by HTML/CSS/Javascript specifications and the need for the project to work correctly in a wide range of configurations.</p>
 <p>As an official port of WebKit, WPE uses the former’s testing infrastructure, based on <a href="https://buildbot.net/">BuildBot</a>. There are two primary servers, <a href="https://ews-build.webkit.org">one working as an early warning system</a> by testing the patches before they’re committed to the main repository, and <a href="https://build.webkit.org">another</a> for more extensive testing after accepting the incoming changes.</p>
@@ -331,13 +328,28 @@ $ git clone https://github.com/WebKit/WebKit.git
 <p>We also have open positions at the WebKit team at <a href="https://www.igalia.com/">Igalia</a>. If you’re motivated by this field and you’re interested in developing your career around it, you can apply <a href="https://www.igalia.com/jobs/browsers_webkit_position">here</a>!</p>
 
 
-        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/redesign/"><i class="icon-home mr-1"></i> Home</a></p>
+
+<section class="content-section bg-light small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+        <hr class="author-line">
+        <div class="card">
+          <span>
+            This article was written by <a href="https://www.igalia.com/team/lmoura">Lauro Moura</a>. <br><br>Lauro is webkit contributor from Igalia, working mainly on QA.
+          </span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+
+
+
 </div>
+
+<a class="btn btn-primary" href="/wpewebkit.org/redesign/"><i class="icon-home mr-1"></i> Home</a>
 
     </main>
 
