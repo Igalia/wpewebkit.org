@@ -37,8 +37,8 @@ module.exports = function(eleventyConfig) {
     return value.length;
   });
   eleventyConfig.addFilter('topLevel', (path) => {
-    if (path == "/") return "home";
-    return path.match(/^\/(.+?)\//)[1];
+    if (path == "/") return "/";
+    return path.match(/^(.+?)\//)[1];
   });
 
   eleventyConfig.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
