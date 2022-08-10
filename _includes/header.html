@@ -4,6 +4,7 @@
 		<ul class="{{ page.url | topLevel }}">
 		{%- for link in menu -%}
 			{%- assign pagedir = page.url | topLevel -%}
+			<!-- link․url: '{{ link.url }}'   pagedir: '{{ pagedir }}' -->
 			<li{% if link.url == pagedir %} class="currentPage"{% endif %}>
 			<a class="{{ link.class | default: 'nav-link' }}" href="{{ link.url | url | default: '#' }}">{{ link.title }}</a>
 			</li>
