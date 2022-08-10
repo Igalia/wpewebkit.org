@@ -1,23 +1,23 @@
 [
 	{
 		"title": "Home",
-		"url": "/"
+		"url": "{{ '' | url}}"
 	},
 	{
 		"title": "Learn & Discover",
-		"url": "/about/"
+		"url": "{{ 'about' | url}}"
 	},
 	{
 		"title": "Blog",
-		"url": "/blog/"
+		"url": "{{ 'blog' | url}}"
 	},
 	{
 		"title": "Developers",
-		"url": "/developers"
+		"url": "{{ 'developers' | url}}"
 	},
 	{
 		"title": "Get Started",
-		"url": "/about/explore-wpe.html",
+		"url": "{{ 'about/explore-wpe.html' | url}}",
 		"class": "btn cta"
 	}
 ]
