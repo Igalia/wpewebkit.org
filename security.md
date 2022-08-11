@@ -9,10 +9,15 @@ pagination:
 <style>
 main section ol {
 	display: grid;
-	grid-template-columns: repeat(4,1fr);
+	grid-template-columns: repeat(2,1fr);
 	gap: 1.25em 1.5em;
 	padding: 0;
 	list-style: none;
+}
+@media (min-width: 640px) {
+	main section ol {
+		grid-template-columns: repeat(4,1fr);
+	}
 }
 main section ol a[href] {
 	display: block;

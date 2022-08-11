@@ -12,23 +12,36 @@ html {
 }
 
 body {
-	display: grid;
 	min-height: 100%;
-	grid-template-columns: 1fr [main] minmax(30rem,var(--mainColMax)) 1fr;
-	grid-template-rows: [main] auto [footer] min-content;
 	margin: 0;
 	padding: 5rem 0 0;
 }
+
 :is(nav, footer).global, header.page {
 	grid-column: 1 / -1;
 }
 main {
 	grid-column: main;
 }
-body:not(.home) main {
-	padding-inline: 10rem;
-	background: url(../assets/img/dash-v.svg) 0 0 / 1px 8px repeat-y;
+main > * {
+	padding: 0 1rem;
 }
+
+@media (min-width: 640px) {
+	body {
+		display: grid;
+		grid-template-columns: 1fr [main] minmax(30rem,var(--mainColMax)) 1fr;
+		grid-template-rows: [main] auto [footer] min-content;
+	}
+	body:not(.home) main {
+		padding-inline: 10rem;
+		background: url(../assets/img/dash-v.svg) 0 0 / 1px 8px repeat-y;
+	}
+	body.subpage header.page {
+		width: 120%;
+	}
+}
+
 img {
 	box-sizing: border-box;
 	max-width: 100%;
@@ -77,9 +90,11 @@ ul.arrows li::before {
 	filter: none;
 }
 
-.global a.igalia.logo.home {
-	position: relative;
-	left: -31px;
+@media (min-width: 640px) {
+	.global a.igalia.logo.home {
+		position: relative;
+		left: -31px;
+	}
 }
 
 nav.global {
@@ -88,22 +103,19 @@ nav.global {
 	left: 0;
 	right: 0;
 	width: 100%;
-	height: 5rem;
 	background: hsla(0deg,0%,100%,0.9);
 	z-index: 12345;
 	backdrop-filter: blur(10px);
+	height: 5rem;	
 }
+
 nav.global div {
-	display: flex;
-	justify-content: space-between;
-	gap: 1em;
-	max-width: var(--mainColMax);
-	background: var(--dashH);
 	margin: 0 auto;
-	height: 100%;
+	padding: 0 1rem;
 }
+
 nav.global ul {
-	display: flex;
+	display: none;
 	margin: 0;
 	list-style: none;
 }
@@ -116,39 +128,62 @@ nav.global ul li a {
 	padding: 0.5em 1em;
 	text-decoration: none;
 }
-nav.global ul li.currentPage {
-	position: relative;
-}
 nav.global ul li.currentPage a {
 	color: inherit;
-	background: var(--dashH);
-	background-size: 0.5em 1px;
-	background-position: 50% 100%;
-	padding: 0;
-	padding-block: 0.25em;
-	margin: 1em;
 }
 
-nav.global ul li.currentPage a::after {
-	content: '';
-	position: absolute;
-	top: calc(50% + 0.875em);
-	bottom: 0;
-	left: 50%;
-	right: 0;
-	background:
-		var(--dashV),
-		linear-gradient(0deg, #FFFF 2px, transparent 2px)
-		;
-	background-size: 1px 0.5em, auto;
-}
-nav.global ul li.currentPage ~ li {
-	background: linear-gradient(0deg, #FFFF 2px, transparent 2px);
-}
 nav.global .cta.btn {
 	font-size: 1em;
 	padding: 0.33em 0.75em 0.25em;
 }
+
+
+@media (min-width: 640px) {
+	nav.global div {
+		display: flex;
+		justify-content: space-between;
+		gap: 1em;
+		max-width: var(--mainColMax);
+		margin: 0 auto;
+		padding: 0;
+		height: 100%;
+		background: var(--dashH);
+	}
+	nav.global ul {
+		display: flex;
+	}
+	nav.global ul li.currentPage {
+		position: relative;
+	}
+	nav.global ul li.currentPage a {
+		padding: 0;
+		padding-block: 0.25em;
+		margin: 1em;
+	}
+	nav.global ul li.currentPage a {
+		background: var(--dashH);
+		background-size: 0.5em 1px;
+		background-position: 50% 100%;
+	}
+	nav.global ul li.currentPage a::after {
+		content: '';
+		position: absolute;
+		top: calc(50% + 0.875em);
+		bottom: 0;
+		left: 50%;
+		right: 0;
+		background:
+			var(--dashV),
+			linear-gradient(0deg, #FFFF 2px, transparent 2px)
+			;
+		background-size: 1px 0.5em, auto;
+	}
+	nav.global ul li.currentPage ~ li {
+		background: linear-gradient(0deg, #FFFF 2px, transparent 2px);
+	}
+}
+
+
 
 nav.sidebar {
 	position: sticky;
@@ -181,14 +216,21 @@ nav.sidebar .currentPage a[href] {
 
 header.page {
 	position: relative;
+	padding: 0 1rem;
+	font-size: 0.75em;
 }
 header.page h1 {
-	font-size: 4.5em;
 	padding-bottom: 0.5em;
+	font-size: 4.5em;
 	background: url(../assets/img/graphic-title-blue.svg) 0 100% / 7rem auto no-repeat;
 }
 header.page p {
 	font-size: 1.6em;
+}
+@media (min-width: 640px) {
+	header.page {
+		padding: 0;
+	}
 }
 
 main > * {
@@ -247,8 +289,15 @@ main section div > :last-child {
 }
 
 
+@media (min-width: 640px) {
+	.c2, .c4, .c5,
+	.gallery
+	{
+		display: grid;
+	}
+}
+
 .c2, .c4, .c5 {
-	display: grid;
 	grid-template-columns: 40% 45%;
 	grid-template-rows: repeat(2,min-content);
 	gap: 0 15%;
@@ -268,7 +317,6 @@ main section div > :last-child {
 }
 
 .gallery {
-	display: grid;
 	gap: 10%;
 	margin: 0;
 	padding: 1.5em 0;
@@ -296,11 +344,17 @@ main > .resources .gallery {
 :is(.community, .resources) header h2 {
 	margin-bottom: 0;
 }
+
 header .decoration {
 	position: absolute;
 	bottom: -3px;
 	right: -5rem;
 	width: 10rem;
+}
+@media (max-width: 640px) {
+	header .decoration {
+		display: none;
+	}
 }
 
 .cards li {
@@ -341,18 +395,33 @@ header .decoration {
 
 
 footer.global {
-	padding: 4rem 0;
+	padding: 4rem 1rem;
 	background: url(../assets/img/dash-h.svg) 0 0 / 8px 1px repeat-x;
 	background-color: #1593ED;
 	color: #FFF;
 	font: 1.1em monospace;
 }
+
 footer.global div {
 	display: grid;
-	grid-template-columns: repeat(2,1fr) max-content;
-	max-width: var(--mainColMax);
-	margin: 0 auto;
+	grid-template-columns: 100px 1fr;
+	gap: 1em;
 }
+footer.global div > :last-child {
+	grid-column: span 2;
+}
+
+@media (min-width: 640px) {
+	footer.global div {
+		grid-template-columns: repeat(2,1fr) max-content;
+		max-width: var(--mainColMax);
+		margin: 0 auto;
+	}
+	footer.global ul {
+		background: var(--dashV);
+	}
+}
+
 footer.global a[href] {
 	color: #000;
 }
@@ -360,7 +429,6 @@ footer.global ul {
 	margin: 0;
 	padding: 1em;
 	list-style: none;
-	background: var(--dashV);
 }
 footer.global ul li {
 	margin-block: 0.33em;

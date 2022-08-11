@@ -15,8 +15,11 @@ main > section {
 }
 main > section > * {
 	position: relative;
-	margin-left: 5rem;
 	padding-left: 5px;
+	margin-left: 1rem;
+}
+main > section img {
+	max-width: 95%;
 }
 
 header.page {
@@ -24,10 +27,21 @@ header.page {
 	color: #FFF;
 }
 header.page div {
-	min-width: 30rem;
-	max-width: calc(var(--mainColMax) - 10rem);
-	margin: 0 auto;
-	padding: 6em 0 12em;
+	padding: 2em 0 3em;
+}
+@media (min-width: 640px) {
+	header.page div {
+		min-width: 30rem;
+		max-width: calc(var(--mainColMax) - 10rem);
+		margin: 0 auto;
+		padding: 6em 0 12em;
+	}
+	main > section > * {
+		margin-left: 5rem;
+	}
+	header.page div > * {
+		max-width: 60%;
+	}
 }
 header.page div::before {
 	content: '';
@@ -39,7 +53,6 @@ header.page div::before {
 	background: var(--dashV);
 }
 header.page div > * {
-	max-width: 60%;
 	filter: drop-shadow(0 0 1px #0008) drop-shadow(0 0 2px #0008);
 }
 header.page div h1 {
@@ -51,9 +64,16 @@ header.page div h1 {
 .explore-embedded, .resources, .developers {
 	padding-block-start: 0;
 }
+.explore-embedded .gallery {
+	display: grid;
+	grid-template-columns: 45% 45%;
+}
+.explore-embedded .gallery img {
+	max-width: 100%;
+}
 
 .notable-customers.c2 {
-	padding: 5rem;
+	padding: 4rem 1rem;
 	background: #171717;
 	color: white;
 	border-image-source: linear-gradient(0deg,#171717,#171717);
@@ -70,9 +90,12 @@ header.page div h1 {
 	content: none;
 }
 .notable-customers a.spotlight img {
+	display: inline-block;
 	height: auto;
 	aspect-ratio: 5/4;
-	padding-inline: 4em;
+	background: #FFF;
+	padding: 1em;
+	object-fit: contain;
 }
 .notable-customers::before {
 	content: '';
@@ -87,14 +110,6 @@ header.page div h1 {
 	margin: 0 0 0.5em;
 	padding: 0.75em 0;
 	background: url({{ '/assets/img/graphic-title-white.svg' | url }}) 0 100% / 7rem auto no-repeat;
-}
-
-.notable-customers img {
-	background: #FFF;
-	height: 10em;
-	width: 100%;
-	padding: 1em;
-	object-fit: contain;
 }
 
 </style>

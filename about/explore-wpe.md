@@ -5,11 +5,6 @@ tags: [about]
 data: { dateless: "true" }
 permalink: /about/explore-wpe.html
 ---
-<style>
-header.page {
-	width: 120%;
-}
-</style>
 
 <header class="page">
 
