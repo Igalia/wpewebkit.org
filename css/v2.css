@@ -419,14 +419,22 @@ footer.global div > :last-child {
 	grid-column: span 2;
 }
 
-@media (min-width: 45rem) {
+@media (min-width: 50rem) {
 	footer.global div {
-		grid-template-columns: repeat(2,1fr) max-content;
+		grid-template-columns: minmax(125px, auto) repeat(2,max-content);
 		max-width: var(--mainColMax);
 		margin: 0 auto;
 	}
 	footer.global ul {
 		background: var(--dashV);
+	}
+	footer.global div > :last-child {
+		grid-column: span 1;
+	}
+}
+@media (min-width: 65rem) {
+	footer.global div {
+		grid-template-columns: repeat(2,1fr) max-content;
 	}
 }
 
