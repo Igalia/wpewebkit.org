@@ -14,7 +14,7 @@ html {
 body {
 	min-height: 100%;
 	margin: 0;
-	padding: 5rem 0 0;
+	padding: 5.66rem 0 0;
 }
 
 :is(nav, footer).global, header.page {
@@ -184,33 +184,54 @@ nav.global .cta.btn {
 }
 
 
-
 nav.sidebar {
 	position: sticky;
-	top: 8em;
-	margin-left: -12rem;
-	height: 0;
-	z-index: 100;
+	z-index: 10000;
+	top: 5.66rem;
+	background: #FFFC;
+	backdrop-filter: blur(2rem);
 }
 nav.sidebar ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
+nav.sidebar ul {
+	display: flex;
+	justify-content: center;
+	gap: 0.33em;
+}
 nav.sidebar a[href] {
-	display: block;
 	padding: 0.5em;
 	margin-block: 0.5em;
-	border: 1px dashed;
-	background: #FFF;
+	border: 1px solid currentColor;
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.125em;
-	max-width: 15ch;
+	background: #EAFEFE;
 }
 nav.sidebar .currentPage a[href] {
 	color: #FFF;
 	background: #000;
 	text-decoration: none;
+}
+
+@media (min-width: 86rem) {
+	nav.sidebar {
+		position: sticky;
+		top: 8em;
+		margin-left: -11rem;
+		height: 0;
+		z-index: 100;
+	}
+	nav.sidebar ul {
+		display: block;
+	}
+	nav.sidebar a[href] {
+		display: block;
+		max-width: 15ch;
+		border-style: dashed;
+		background: #FFF;
+	}
 }
 
 
