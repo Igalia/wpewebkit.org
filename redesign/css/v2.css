@@ -27,14 +27,14 @@ main > * {
 	padding: 0 1rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 75rem) {
 	body {
 		display: grid;
 		grid-template-columns: 1fr [main] minmax(30rem,var(--mainColMax)) 1fr;
 		grid-template-rows: [main] auto [footer] min-content;
 	}
 	body:not(.home) main {
-		padding-inline: 10rem;
+		padding-inline: 5rem;
 		background: url(../assets/img/dash-v.svg) 0 0 / 1px 8px repeat-y;
 	}
 	body.subpage header.page {
@@ -90,7 +90,7 @@ ul.arrows li::before {
 	filter: none;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 75rem) {
 	.global a.igalia.logo.home {
 		position: relative;
 		left: -31px;
@@ -138,7 +138,7 @@ nav.global .cta.btn {
 }
 
 
-@media (min-width: 640px) {
+@media (min-width: 720px) {
 	nav.global div {
 		display: flex;
 		justify-content: space-between;
@@ -227,11 +227,6 @@ header.page h1 {
 header.page p {
 	font-size: 1.6em;
 }
-@media (min-width: 640px) {
-	header.page {
-		padding: 0;
-	}
-}
 
 main > * {
 	position: relative;
@@ -241,7 +236,7 @@ main > *:last-child {
 	padding-bottom: 3rem;
 }
 .dotsep {
-	padding: 5em 0;
+	padding-block: 2rem;
 }
 .dotsep::after {
 	content: url(../assets/img/border-dot-black.svg);
@@ -285,11 +280,16 @@ main section div > :last-child {
 	align-self: baseline;
 }
 .explore-embedded header {
-	padding-block: 4em;
+	padding-block: 4rem;
+}
+@media (max-width: 65rem) {
+	.explore-embedded header {
+		display: block;
+	}
 }
 
 
-@media (min-width: 640px) {
+@media (min-width: 45rem) {
 	.c2, .c4, .c5,
 	.gallery
 	{
@@ -319,16 +319,24 @@ main section div > :last-child {
 .gallery {
 	gap: 10%;
 	margin: 0;
-	padding: 1.5em 0;
+	padding-block: 1.5em;
 	list-style: none;
 	align-items: center;
 }
 main > .resources .gallery {
 	align-items: start;
+	padding-left: 0;
+}
+
+@media (max-width: 45rem) {
+	.c4 {
+		display: grid;
+		grid-template-columns: repeat(2,1fr);
+	}
 }
 
 .full-bleed {
-	padding: 3em 0;
+	padding-block: 2em 3em;
 	border-image-outset: 0 100vw;
 	border-image-slice: 0 fill;
 	border-image-width: 0;
@@ -351,7 +359,7 @@ header .decoration {
 	right: -5rem;
 	width: 10rem;
 }
-@media (max-width: 640px) {
+@media (max-width: 45rem) {
 	header .decoration {
 		display: none;
 	}
@@ -411,7 +419,7 @@ footer.global div > :last-child {
 	grid-column: span 2;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 45rem) {
 	footer.global div {
 		grid-template-columns: repeat(2,1fr) max-content;
 		max-width: var(--mainColMax);
