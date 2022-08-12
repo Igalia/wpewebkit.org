@@ -13,7 +13,7 @@ header.page p {
 	margin: 0;
 }
 main > div, .dotsep {
-	padding: 2em 0 3em;
+	padding-block: 2em 3em;
 }
 h2 {
 	font-size: 1.5em;
