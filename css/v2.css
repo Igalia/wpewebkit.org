@@ -283,13 +283,17 @@ main section > * + *::before {
 main section div h3 {
 	grid-column: 1;
 	grid-row: 1;
+}
+main section div:not(.text) h3 {
 	align-self: end;
 }
 main section div p {
 	grid-column: 1;
 	grid-row: 2;
-	align-self: start;
 	margin-top: 0;
+}
+main section div:not(.text) p {
+	align-self: start;
 }
 main section div > :last-child {
 	grid-column: 2;
