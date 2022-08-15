@@ -14,7 +14,7 @@ html {
 body {
 	min-height: 100%;
 	margin: 0;
-	padding: 5.66rem 0 0;
+	padding: 5rem 0 0;
 }
 
 :is(nav, footer).global, header.page {
