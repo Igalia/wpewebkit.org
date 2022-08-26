@@ -25,9 +25,24 @@ main > section img {
 header.page {
 	background: linear-gradient(155deg,#5A5A5A,#A4A8A7,#443468 80%);
 	color: #FFF;
+	position: relative;
+}
+header.page video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 50%;
+	aspect-ratio: 16/9;
+	z-index: 1;
 }
 header.page div {
+	position: relative;
+	z-index: 2;
 	padding: 2em 0 3em;
+	min-height: min-content;
 }
 @media (min-width: 45rem) {
 	header.page div {
@@ -132,6 +147,7 @@ header.page div h1 {
 </style>
 
 <header class="page">
+<video autoplay muted loop><source src="/assets/video/WPE-1.mp4" type="video/mp4"></video>
 <div>
 <h1>
 Create simple and performant systems based on <strong>Web platform technologies.</strong>
