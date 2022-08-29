@@ -37,9 +37,6 @@ main > * {
 		padding-inline: 5rem;
 		background: url(../assets/img/dash-v.svg) 0 0 / 1px 8px repeat-y;
 	}
-	body.subpage header.page {
-		width: 120%;
-	}
 }
 
 img {

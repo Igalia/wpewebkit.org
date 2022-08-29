@@ -11,11 +11,11 @@ main > *, .dotsep {
 }
 .masthead-img {
 	padding: 0;
-	margin-block: 2em;
+	margin-block: 4em 1em;
 }
 .masthead-img img {
-	width: 400px;
-	max-width: 100%;
+	max-width: 90%;
+	max-width: min(800px,100%);
 	margin-block: -2em;
 }
 </style>
