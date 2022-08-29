@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE WebKit 2.34.5 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/fix-keyfile-copy/release/wpewebkit-2.34.5.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/aperezdc/fix-keyfile-copy/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/fix-keyfile-copy/release/wpewebkit-2.34.5.html">
+  <meta property="og:title" content="WPE WebKit 2.34.5 released">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/fix-keyfile-copy/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/fix-keyfile-copy/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-02-09T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/vendor/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/css/stylish-portfolio.css">
+  
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/"><img width="200" src="/wpewebkit.org/aperezdc/fix-keyfile-copy/assets/svg/blue_Web_Logo.svg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/">Home</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/blog">Blog</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/about/exploring.html">Explore WPE / Embedded</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/about/supported-hardware.html">Supported Hardware</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/about/a-good-choice.html">Why Choose WPE</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/about/architecture.html">WPE Design</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/about/faq.html">FAQ</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/about/builds.html">Build it</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/release/schedule">Release Schedule</a>
+          <a class="dropdown-item" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/release/verify">Verifying Releases</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/code">Code</a>
+      </li>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+    <div itemscope itemtype="http://schema.org/TechArticle">
+
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/fix-keyfile-copy/release/wpewebkit-2.34.5.html">
+
+<section class="content-section bg-primary text-white small-section">
+  <div class="container text-center">
+    <div class="content-section-heading">
+      
+        <h3 class="text-secondary mb-0"
+            itemprop="dateCreated">Wed Feb 09 2022</h3>
+        <meta itemprop="datePublished" content="Wed Feb 09 2022">
+      
+      <h2 itemprop="headline">WPE WebKit 2.34.5 released</h2>
+	  
+	  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpewebkit-2.34.5.tar.xz">Download</a>
+	  
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light small-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto lead text-left" itemprop="articleBody">
+
+        <p>This is a bug fix release in the stable 2.34 series.</p>
+<h3 id="what%E2%80%99s-new-in-wpe-webkit-2.34.5%3F" tabindex="-1">What’s new in WPE WebKit 2.34.5?</h3>
+<ul>
+<li>Improve VP8 codec selection when using GStreamer 1.20.</li>
+<li>Fix connecting to the accessibility bus when using the Bubblewrap sandbox.</li>
+<li>Fix the build with recent toolchains based on GCC 12 and on older ones as included e.g. in Ubuntu 18.04.</li>
+<li>Fix the build with ICU 60, version 61 is no longer required.</li>
+<li>Fix several crashes and rendering issues.</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+wpewebkit-2.34.5.tar.xz (22.5 MiB)
+   md5sum: 27a8b9714868dd890d4a54f4ae4cf2b1
+   sha1sum: 63259a958a380cc8c75a4f51dada630f4fe5dc1e
+   sha256sum: 0ef187cdcb83dbe9e7b2870f43543b68766ea3535fe8b056866e8e1d3ef02bc1
+</pre>
+
+
+        <p class="text-right"><a class="btn btn-primary" href="/wpewebkit.org/aperezdc/fix-keyfile-copy/"><i class="icon-home mr-1"></i> Home</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- For blog posts -->
+
+
+</div>
+
+
+    <!-- Footer -->
+<footer class="footer">
+  <a class="navbar-brand" href="/"><img width="200" src="/wpewebkit.org/aperezdc/fix-keyfile-copy/assets/svg/blue_Web_Logo.svg"></a>
+  <nav class="social">
+    Connect on 
+    <a href="https://twitter.com/WPEWebKit">Twitter</a> • 
+    <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">mailing list: webkit-wpe</a> • 
+    <a href="https://webchat.oftc.net/?channels=wpe">OFTC: #wpe</a> • 
+    <a href="https://matrix.to/#/#wpe:matrix.org">Matrix: #wpe:matrix.org</a>
+  </nav>
+  <p class="text-muted small mb-0">Copyright &copy; 2018-2022 The WPE WebKit Team | Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</p>
+</footer>
+
+  <script src="/wpewebkit.org/aperezdc/fix-keyfile-copy/vendor/jquery/jquery.js"></script>
+  <script src="/wpewebkit.org/aperezdc/fix-keyfile-copy/vendor/bootstrap/js/bootstrap.js"></script>
+
+  </body>
+</html>
