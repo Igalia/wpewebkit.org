@@ -17,6 +17,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css')
   eleventyConfig.addPassthroughCopy('vendor')
   eleventyConfig.addPassthroughCopy('assets')
+  eleventyConfig.addPassthroughCopy('release/verify/*.key')
   eleventyConfig.addPlugin(pluginRss);
   
   eleventyConfig.setLiquidOptions({
