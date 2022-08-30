@@ -7,7 +7,7 @@ permalink: /about/a-good-choice.html
 ---
 <style>
 :not(header) > h2 {
-	background: url(/assets/img/graphic-title-blue.svg) 0 100% / 7rem auto no-repeat;
+	background: url({{ '/assets/img/graphic-title-blue.svg' | url }}) 0 100% / 7rem auto no-repeat;
 	padding-bottom: 1em;
 }
 ul.gallery.c2 {
@@ -17,7 +17,7 @@ ul.gallery.c2 {
 ul.gallery.c2 li {
 	padding: 3.5em 1.5em 1.5em;
 	border: 1px dashed var(--colorMain);
-	background: url(/assets/img/checkmark.png) 1em 1em / 2em 2em no-repeat;
+	background: url({{ '/assets/img/checkmark.png' | url}}) 1em 1em / 2em 2em no-repeat;
 }
 .banner {
 	margin-block: 5em;
