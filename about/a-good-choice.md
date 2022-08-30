@@ -19,10 +19,23 @@ ul.gallery.c2 li {
 	border: 1px dashed var(--colorMain);
 	background: url(/assets/img/checkmark.png) 1em 1em / 2em 2em no-repeat;
 }
-.full-bleed {
+.banner {
 	margin-block: 5em;
 }
-.full-bleed img {
+@media (min-width: 70em) {
+	.banner::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		margin-top: -7px;
+		left: -5rem;
+		width: 6rem;
+		height: 2px;
+		background: linear-gradient(90deg,#000A,#89A);
+		mask-image: repeating-linear-gradient(270deg, transparent, #89A 1px, #999 3px, transparent 4px, transparent 7px);
+	}
+}
+.banner img {
 	display: block;
 	margin: -5em auto;
 }
@@ -44,8 +57,8 @@ WPE WebKit is widely adopted in many industries, including digital signage, prof
 
 </header>
 
-<section class="full-bleed">
-[illustration goes here]
+<section class="full-bleed banner">
+<img src="{{ '/assets/img/WhyChooseWPE.png' | url }}" alt="">
 </section>
 
 <section class="dotsep">
