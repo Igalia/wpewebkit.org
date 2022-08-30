@@ -4,8 +4,182 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-08-11T00:00:00Z</updated>
+  <updated>2022-08-25T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.36.7 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/wpewebkit-2.36.7.html"/>
+    <updated>2022-08-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/wpewebkit-2.36.7.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.7%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.7?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.7.tar.xz (24.6 MiB)
+   md5sum: a9f8d521d8171292aab842d3e8ba227e
+   sha1sum: e9255b3592bbaac8b20af03cafa31cedfb0b4898
+   sha256sum: f3747d72ffc562ad0cfb6218fdf6d897c78c4bdbf5618e0fa26906fba52b95c9
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0008</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/security/WSA-2022-0008.html"/>
+    <updated>2022-08-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/security/WSA-2022-0008.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;August 25, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0008&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/security/WSA-2022-0008.html#CVE-2022-32893&quot;&gt;CVE-2022-32893&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2022-32893&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32893&quot;&gt;CVE-2022-32893&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.7.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.12.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/libwpe-1.12.3.html"/>
+    <updated>2022-08-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/libwpe-1.12.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.12 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.12.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.12.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix the build when using Clang’s libc++ or the Musl libc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.12.3.tar.xz (54.3 KiB)
+   md5sum: e538eb8e521d92f2bde3c4cd864abaa1
+   sha1sum: 9d94c411a502a10e68f69bd1fa273539cc6af2ca
+   sha256sum: b84fdbfbc849ce4fdf084bb28b58e5463b1b4b6cc8f200dc77b41f8545d5329d
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.14.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/cog-0.14.0.html"/>
+    <updated>2022-08-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/cog-0.14.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 0.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-0.14.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the 0.14.0 release&lt;/h3&gt;
+&lt;p&gt;Launcher (&lt;code&gt;cog&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Support setting memory limits using command line options.&lt;/li&gt;
+&lt;li&gt;Support passing initialization parameters to platform plug-ins using
+the &lt;code&gt;--platform-params&lt;/code&gt;/&lt;code&gt;-O&lt;/code&gt; command line option.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Core library (&lt;code&gt;libcogcore&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;CogLauncher&lt;/code&gt; class is no longer available, as it was an
+implementation detail of the launcher.&lt;/li&gt;
+&lt;li&gt;Built-in error pages now have a “Try again” button.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;DRM/KMS platform (&lt;code&gt;drm&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;New OpenGL ES renderer, which supports output rotation and improved
+compatibility with some graphics drivers.&lt;/li&gt;
+&lt;li&gt;Added refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;GTK4 platform (&lt;code&gt;gtk4&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improved compatibility with more graphics drivers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Wayland platform (&lt;code&gt;wl&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improved compatibility with different compositors.&lt;/li&gt;
+&lt;li&gt;Added keybindings to refresh the current page (&lt;key&gt;Ctrl-R&lt;/key&gt;, &lt;key&gt;F5&lt;/key&gt;).&lt;/li&gt;
+&lt;li&gt;Added refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;X11 platform (&lt;code&gt;x11&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed rendering with traditional, non-composited window managers.&lt;/li&gt;
+&lt;li&gt;Added refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.14.0.tar.xz (119.8 KiB)
+   md5sum: 2352aaba1a4ff31b1d1fb559c4941a01
+   sha1sum: 2da37ea6c25e45425aa80de4a129484ee226dd96
+   sha256sum: e23936f1ce350ea5ea6fa0709b63d34776b05709388aed9c6cf3fdc41299de9f
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.13.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/libwpe-1.13.90.html"/>
+    <updated>2022-08-23T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/libwpe-1.13.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.13.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.13.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Improved the gamepad API.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.13.90.tar.xz (60.8 KiB)
+   md5sum: d09ddc39ae33d09940f731c3cb1b5b51
+   sha1sum: f73400ee19480eebd439c9aaea90ae3e11f2e742
+   sha256sum: 97af9fbea3a70093e5f3979fa89594343e255942645c3b781d4f3517df5388a1
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.37.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/wpewebkit-2.37.90.html"/>
+    <updated>2022-08-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/wpewebkit-2.37.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.38 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.37.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.37.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Remove the &lt;code&gt;libnotify&lt;/code&gt; dependency.&lt;/li&gt;
+&lt;li&gt;Add support for generating crash reports using
+&lt;a href=&quot;https://chromium.googlesource.com/breakpad/breakpad&quot;&gt;Breakpad&lt;/a&gt;…&lt;/li&gt;
+&lt;li&gt;Add support for service worker notifications.&lt;/li&gt;
+&lt;li&gt;Add support for loading notification icons.&lt;/li&gt;
+&lt;li&gt;Add support for PAC proxy in the WebDriver implementation.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;USE_SYSTEM_MALLOC=ON&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.37.90.tar.xz (29.1 MiB)
+   md5sum: 0fff92b923b422b7309019db6ba62ca5
+   sha1sum: 326dc99a594132bdcd56d0a3133b853cfdc6b2cd
+   sha256sum: e944f68958ee0bfd5dbb342179c3d9178a7e388a59c4e1ea8e98b7337ecf12f7
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>libwpe 1.13.3 released</title>
@@ -94,264 +268,6 @@ wpewebkit-2.36.6.tar.xz (24.6 MiB)
    sha1sum: 29a777d9db75f2b415473cf72cd1e52bf3f993ee
    sha256sum: e98a4eae2464ffaf4e5b53be08b9ae6386db511015c8002918b824d29f05d58f
 &lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.37.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/wpewebkit-2.37.1.html"/>
-    <updated>2022-08-02T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/wpewebkit-2.37.1.html</id>
-    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.38 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.37.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.37.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Add initial WebRTC implementation using GstWebRTC if GStreamer 1.20 is available, disabled by default via web view settings.&lt;/li&gt;
-&lt;li&gt;Add new API to set WebView’s &lt;code&gt;Content-Security-Policy&lt;/code&gt;, for web extensions support.&lt;/li&gt;
-&lt;li&gt;Add new API to run asynchronous JavaScript functions.&lt;/li&gt;
-&lt;li&gt;Expose typed arrays in the JavaScriptCore GLib API.&lt;/li&gt;
-&lt;li&gt;Add support for displaying PDF documents using PDF.js.&lt;/li&gt;
-&lt;li&gt;Show font name and font variant settings in the inspector.&lt;/li&gt;
-&lt;li&gt;MediaSession is enabled by default, allowing remote media control using MPRIS.&lt;/li&gt;
-&lt;li&gt;Modernized media controls UI.&lt;/li&gt;
-&lt;li&gt;Add support for Google Dynamic Ad Insertion (DAI).&lt;/li&gt;
-&lt;li&gt;Add support for capturing encoded video streams from capture devices (e.g. webcams.)&lt;/li&gt;
-&lt;li&gt;Make it possible to use the remote inspector from other browsers using the &lt;code&gt;WEBKIT_INSPECTOR_HTTP_SERVER&lt;/code&gt; environment variable.&lt;/li&gt;
-&lt;li&gt;Add support for IPv6 in the remote inspector.&lt;/li&gt;
-&lt;li&gt;Update form element style to match libadwaita.&lt;/li&gt;
-&lt;li&gt;Fix canvas animations and images with threaded rendering enabled.&lt;/li&gt;
-&lt;li&gt;Switch to use &lt;code&gt;gi-docgen&lt;/code&gt; for API documentation instead of &lt;code&gt;gtk-doc&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Remove the ATK accessibility implementation, which has been replaced by direct usage of the AT-SPI D-Bus interfaces.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.37.1.tar.xz (29.0 MiB)
-   md5sum: a44cf35f7b6f8e577f51c296e94aae2a
-   sha1sum: 4f31d83fd9d6f66cd04f745b633e541ecb93b51d
-   sha256sum: eb07b54190827ea860089fc711358658d952bcc62e36bc9bfa12dcfda9c21649
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>libwpe 1.12.2 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/libwpe-1.12.2.html"/>
-    <updated>2022-07-31T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/libwpe-1.12.2.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.12 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.12.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.12.2?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix the build when using CMake to configure it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-libwpe-1.12.2.tar.xz (54.1 KiB)
-   md5sum: 33021c136035c8adfcccb2694dd48341
-   sha1sum: 0c80d8605a49f43a642cd5f9905161a7bcc30136
-   sha256sum: 4ac4fd0a8b562b721bffd0f46ae9f06c2b5a3114407581978be875a9d651642a
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>libwpe 1.12.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/libwpe-1.12.1.html"/>
-    <updated>2022-07-31T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/libwpe-1.12.1.html</id>
-    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 1.12 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.12.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.12.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix pasteboard to use the generic interface by default.&lt;/li&gt;
-&lt;li&gt;Fix memory allocation to always abort execution on failure.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-libwpe-1.12.1.tar.xz (54.2 KiB)
-   md5sum: 3c8f9a1eb1d547a9c234356f3992e2b4
-   sha1sum: 8d4b9a456dcf27ee5bfca46168dbc8066a0dd758
-   sha256sum: 80d7e1c6e550279978bc1e1277f4e3d2efe9ca5155e5bbd842134cd5343df933
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.36.5 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/wpewebkit-2.36.5.html"/>
-    <updated>2022-07-28T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/release/wpewebkit-2.36.5.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.5?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Add support for PAC proxy in the WebDriver implementation.&lt;/li&gt;
-&lt;li&gt;Fix video playback when loaded through custom URIs.&lt;/li&gt;
-&lt;li&gt;Fix LTO builds with GCC.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.36.5.tar.xz (24.6 MiB)
-   md5sum: 99b9b0c3c8757edf03ddf550bea448e2
-   sha1sum: d7deb766d1ff48b7f9d685fcd67ccc23e2962288
-   sha256sum: f2461d533cd3820ea1855e2c8b0b0624b39add1389dc3ac09c2f27891a7a8caa
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0007</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/security/WSA-2022-0007.html"/>
-    <updated>2022-07-28T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/security/WSA-2022-0007.html</id>
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Date Reported: &lt;strong&gt;July 28, 2022&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0007&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/security/WSA-2022-0007.html#CVE-2022-32792&quot;&gt;CVE-2022-32792&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/security/WSA-2022-0007.html#CVE-2022-32816&quot;&gt;CVE-2022-32816&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/security/WSA-2022-0007.html#CVE-2022-2294&quot;&gt;CVE-2022-2294&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-32792&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32792&quot;&gt;CVE-2022-32792&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.5.&lt;/li&gt;
-&lt;li&gt;Credit to Manfred Paul (@_manfp) working with Trend Micro Zero Day
-Initiative.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: An out-of-bounds write issue
-was addressed with improved input validation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-32816&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32816&quot;&gt;CVE-2022-32816&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.5.&lt;/li&gt;
-&lt;li&gt;Credit to Dohyun Lee (@l33d0hyun) of SSD Secure Disclosure Labs &amp;amp;
-DNSLab, Korea Univ.&lt;/li&gt;
-&lt;li&gt;Impact: Visiting a website that frames malicious content may lead to
-UI spoofing. Description: The issue was addressed with improved UI
-handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-2294&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2294&quot;&gt;CVE-2022-2294&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.5 if
-USE_LIBWEBRTC is enabled.&lt;/li&gt;
-&lt;li&gt;Credit to Jan Vojtesek of Avast Threat Intelligence team.&lt;/li&gt;
-&lt;li&gt;Heap buffer overflow in LibWebRTC allowed a remote attacker to
-potentially exploit heap corruption via a crafted HTML page. NOTE:
-The tarballs of WebKitGTK or WPE WebKit don’t ship LibWebRTC. Also
-the LibWebRTC support is disabled by default. You only are affected
-by this vulnerability if your build enabled the USE_LIBWEBRTC CMake
-option and used the repository as source instead of the tarballs.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
-WebKit. It is the best way to ensure that you are running safe versions
-of WebKit. Please check our websites for information about the latest
-stable releases.&lt;/p&gt;
-&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
-&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE QA and tooling</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/blog/04-wpe-qa-tooling.html"/>
-    <updated>2022-07-28T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/blog/04-wpe-qa-tooling.html</id>
-    <content type="html">&lt;p&gt;In the previous posts, my colleagues Claudio and Miguel wrote respectively about the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/blog/02-overview-of-wpe.html&quot;&gt;major components&lt;/a&gt; of the project and, specifically, the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/blog/03-wpe-graphics-architecture.html&quot;&gt;graphics architecture&lt;/a&gt; of WPE. Today, you’ll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/&quot;&gt;WPE&lt;/a&gt; aren’t necessarily required in order to read this one, we recommend you to starting with the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/blog/01-happy-birthday-wpe.html&quot;&gt;first post in the series&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;automated-testing&quot; tabindex=&quot;-1&quot;&gt;Automated testing&lt;/h2&gt;
-&lt;p&gt;Testing is an essential part of the WebKit project, primarily due to the large number of use cases covered by HTML/CSS/Javascript specifications and the need for the project to work correctly in a wide range of configurations.&lt;/p&gt;
-&lt;p&gt;As an official port of WebKit, WPE uses the former’s testing infrastructure, based on &lt;a href=&quot;https://buildbot.net/&quot;&gt;BuildBot&lt;/a&gt;. There are two primary servers, &lt;a href=&quot;https://ews-build.webkit.org/&quot;&gt;one working as an early warning system&lt;/a&gt; by testing the patches before they’re committed to the main repository, and &lt;a href=&quot;https://build.webkit.org/&quot;&gt;another&lt;/a&gt; for more extensive testing after accepting the incoming changes.&lt;/p&gt;
-&lt;div align=&quot;center&quot;&gt;
-&lt;img style=&quot;width: 75%&quot; alt=&quot;build.webkit.org screenshot&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/assets/build-webkit-org-screenshot.png&quot; /&gt;
-&lt;/div&gt;
-&lt;br /&gt;
-&lt;p&gt;Currently, the WPE testing bots target debug and release configurations using the &lt;a href=&quot;https://flatpak.org/&quot;&gt;Flatpak&lt;/a&gt; SDK (more on it later in this article) on 64bit Intel-based Linux Debian systems. We have plans of adding bots running on Raspberry Pi boards in the future. Alongside nightly testing, we keep builder bots covering the &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitGTK/DependenciesPolicy&quot;&gt;Ubuntu LTS/Debian versions&lt;/a&gt; we support. After August 14th, 2022, the earliest supported versions will be Ubuntu 20.04 LTS and Debian 11 (Bullseye).&lt;/p&gt;
-&lt;h3 id=&quot;test-suites&quot; tabindex=&quot;-1&quot;&gt;Test suites&lt;/h3&gt;
-&lt;p&gt;Initially, the WPE &lt;a href=&quot;https://build.webkit.org/#/builders?tags=%2BWPE&amp;amp;tags=%2BBuild&quot;&gt;builder bots&lt;/a&gt; build WPE in both release and debug configurations and feed the built packages into the &lt;a href=&quot;https://build.webkit.org/#/builders?tags=%2BWPE&amp;amp;tags=%2BTests&quot;&gt;tester bots&lt;/a&gt;, which run some test suites according to their configuration, each suite focused in one aspect of the project:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Layout tests: The main suite tests whether WebKit correctly renders web pages and its implementation of web APIs. This suite comprises both WebKit’s test cases and the imported tests from &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Test&lt;/a&gt;. At the time of writing, it runs over 50,000 test cases.&lt;/li&gt;
-&lt;li&gt;API Tests: This suite tests the API provided to developers by WebKit and its ports. For example, this step tests the WPE API used in &lt;a href=&quot;https://github.com/Igalia/cog&quot;&gt;Cog&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Javascriptcore tests: Covers the JavascriptCore engine, running  WebKit’s tests alongside &lt;a href=&quot;https://github.com/tc39/test262&quot;&gt;test262&lt;/a&gt;, the reference test suite for JS/ECMAScript implementations.&lt;/li&gt;
-&lt;li&gt;WebDriver: Tests from &lt;a href=&quot;https://www.selenium.dev/selenium/docs/api/py/index.html&quot;&gt;Selenium&lt;/a&gt; and &lt;a href=&quot;https://www.w3.org/TR/webdriver/&quot;&gt;W3C WebDriver&lt;/a&gt; APIs for browser automation.&lt;/li&gt;
-&lt;li&gt;Other small suites: Tests for WebKit’s tooling components.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Due to a large number of tests and the fast development of both WebKit and the specifications—it’s not uncommon to have dozens of daily commits touching dozens of tests—it’s hard to keep the testing bots green.&lt;/p&gt;
-&lt;p&gt;For example, while we try to make the tests work on all platforms, many old layout tests use the &lt;code&gt;-expected.txt&lt;/code&gt; scheme, where the render tree is printed in a textual format with the text sized in pixels for every node. While this works fine in most cases, many tests have minor differences between the expected result in the Mac platform and the WPE/GTK platform. One of the causes is the font rendering particularities of each port.&lt;/p&gt;
-&lt;p&gt;Thankfully, this situation improved significantly since the beginning of the project. Among the efforts, many tests are now using a “reference” HTML file, which are HTML files that render to the same expected result as the test case, so both the test case and the reference will use the same font rendering scheme and can be compared pixel by pixel.&lt;/p&gt;
-&lt;h2 id=&quot;building-and-running-wpe&quot; tabindex=&quot;-1&quot;&gt;Building and running WPE&lt;/h2&gt;
-&lt;p&gt;This section focuses on the experience of building and running WPE in a regular Linux x86–64 system. In a future post, we’ll cover building for and running on embedded devices.&lt;/p&gt;
-&lt;h3 id=&quot;checking-out-the-code&quot; tabindex=&quot;-1&quot;&gt;Checking out the code&lt;/h3&gt;
-&lt;p&gt;Recently, &lt;a href=&quot;https://github.com/WebKit/WebKit&quot;&gt;WebKit moved to GitHub&lt;/a&gt;, so you can clone it directly from there:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ mkdir ~/dev
-$ git clone https://github.com/WebKit/WebKit.git
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note: Due to the size of the project history, you might want to use &lt;code&gt;--depth=1&lt;/code&gt; to clone a single revision, followed by &lt;code&gt;git pull --unshallow&lt;/code&gt; from inside the cloned repository to fetch the history if needed.&lt;/p&gt;
-&lt;p&gt;There’s more information in &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#checking-out-WebKit&quot;&gt;WebKit’s GitHub wiki&lt;/a&gt; about setting up the git checkout for contributing code back to WebKit. It’ll set up some git hooks to do some tasks required by the project, like formatting the commit message and automatically linking the pull request to the Bugzilla issue.&lt;/p&gt;
-&lt;p&gt;All commands in the following sections are run from inside the cloned repository.&lt;/p&gt;
-&lt;h3 id=&quot;updating-the-dependencies-(aka-the-webkit-flatpak-sdk)&quot; tabindex=&quot;-1&quot;&gt;Updating the dependencies (aka The WebKit Flatpak SDK)&lt;/h3&gt;
-&lt;p&gt;Like most complex software projects, WebKit has a reasonably extensive list of dependencies. Keeping a reference set of their versions frozen during development is desirable to make it easier to reproduce bugs and test results. In older times, WPE and WebKitGTK used &lt;a href=&quot;https://gnome.pages.gitlab.gnome.org/jhbuild/&quot;&gt;JHBuild&lt;/a&gt; to freeze a set of dependencies. While this worked for a long time, it did not cover all dependencies. Sometimes, there could be minor differences in the layout tests between the reference test bots and the developer machine due to some dependency resolved by the host system outside JHBuild.&lt;/p&gt;
-&lt;p&gt;To improve reproducibility, since 2020, WPE and WebKitGTK have been using an SDK based on Flatpak (kudos to my colleagues &lt;a href=&quot;https://blogs.gnome.org/tsaunier/&quot;&gt;Thibault Saunier&lt;/a&gt; and &lt;a href=&quot;https://base-art.net/&quot;&gt;Philippe Normand&lt;/a&gt;), with a much more extensive dependency coverage and isolation from the host system. Alongside the dependencies, it ships &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitFlatpakSDK/DebugWithRR&quot;&gt;some tools like rr&lt;/a&gt; and &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitEnablingFlatpakClangd&quot;&gt;supports tools like &lt;code&gt;clangd&lt;/code&gt;&lt;/a&gt;. Almost all bots enable this SDK, the exception being the LTS/Stable bots; as in the latter, we want to build with the already available packages in each distribution.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/update-webkit-flatpak
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The command will set up the local flatpak repository at &lt;code&gt;./WebKitBuild/UserFlatpak&lt;/code&gt; with the downloaded SDK and create some bundled icecc toolchains. This enables distributed builds in local networks…&lt;/p&gt;
-&lt;h3 id=&quot;building&quot; tabindex=&quot;-1&quot;&gt;Building&lt;/h3&gt;
-&lt;p&gt;Once the SDK download finishes, you can use the helper script &lt;code&gt;./Tools/Scripts/build-webkit&lt;/code&gt;, which wraps the &lt;code&gt;cmake&lt;/code&gt; command with some pre-set options commonly used in normal development, like enabling developer-only features usually disabled in regular builds. Manually invoking cmake is possible, although usually only when you want more control over the build. To build WPE in release mode, use:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/build-webkit --release --wpe
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Optionally, you can pass it multiple arguments to be fed directly to make or cmake with the switches  &lt;code&gt;--makeargs=...&lt;/code&gt; and &lt;code&gt;--cmakeargs=...&lt;/code&gt;, respectively. For example, &lt;code&gt;--makeargs=&amp;quot;-j8&amp;quot;&lt;/code&gt; will limit make to 8 parallel jobs and &lt;code&gt;--cmakeargs=&amp;quot;-DENABLE_GAMEPAD=1&amp;quot;&lt;/code&gt; will enable gamepad support (requires &lt;code&gt;libmanette&lt;/code&gt;, bundled in the SDK).&lt;/p&gt;
-&lt;p&gt;The first build might take a while (up to almost one hour in a regular laptop). Fortunately, the SDK uses &lt;code&gt;ccache&lt;/code&gt; to avoid recompiling the same object files, so subsequent builds without significant changes usually are faster. For more info on speeding the build, check &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitGTK/SpeedUpBuild&quot;&gt;the wiki&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;running-the-browser-(cog)&quot; tabindex=&quot;-1&quot;&gt;Running the browser (Cog)&lt;/h3&gt;
-&lt;p&gt;To run Cog, the reference WPE browser, you need a Wayland server, which is common in most Linux systems nowadays.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/run-minibrowser --wpe --release https://wpewebkit.org/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;div align=&quot;center&quot;&gt;
-&lt;img style=&quot;width: 75%&quot; alt=&quot;Cog with GTK4 shell screenshot&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/assets/gtk-cog-screenshot.png&quot; /&gt;
-&lt;/div&gt;
-&lt;br /&gt;
-&lt;h3 id=&quot;running-some-tests&quot; tabindex=&quot;-1&quot;&gt;Running some tests&lt;/h3&gt;
-&lt;p&gt;To run the API tests, which reside in &lt;code&gt;Tools/TestWebKitAPI/Tests/&lt;/code&gt;, you can use the following command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/run-wpe-tests --release --display-server=headless
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Other test suites:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Layout tests: &lt;code&gt;./Tools/Scripts/run-wpe-tests&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;JSC tests: &lt;code&gt;./Tools/Scripts/run-javascriptcore-tests&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;WebDriver: &lt;code&gt;./Tools/Scripts/run-webdriver-tests&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;As stated when we described the test suites, the main challenge in testing is keeping up with the fast pace of development, as it’s not uncommon to have some revisions updating hundreds of tests.&lt;/p&gt;
-&lt;h3 id=&quot;contributing-code-to-wpe&quot; tabindex=&quot;-1&quot;&gt;Contributing code to WPE&lt;/h3&gt;
-&lt;p&gt;After hacking locally, you can submit your changes following the workflow listed in the &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#contributing-code&quot;&gt;WebKit wiki&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;testing-wpe-in-the-wild&quot; tabindex=&quot;-1&quot;&gt;Testing WPE in the wild&lt;/h2&gt;
-&lt;p&gt;If you don’t want to build your WPE build or image, there are some options to &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/about/exploring.html&quot;&gt;get a taste of WPE&lt;/a&gt; listed on our website, including:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Prebuilt distribution packages
-&lt;ul&gt;
-&lt;li&gt;For &lt;a href=&quot;https://packages.debian.org/search?searchon=sourcenames&amp;amp;keywords=wpewebkit&quot;&gt;Debian&lt;/a&gt;, &lt;a href=&quot;https://packages.ubuntu.com/search?keywords=wpewebkit&amp;amp;searchon=sourcenames&amp;amp;suite=all&amp;amp;section=all&quot;&gt;Ubuntu&lt;/a&gt;, &lt;a href=&quot;https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/&quot;&gt;Raspbian&lt;/a&gt;, &lt;a href=&quot;https://archlinux.org/packages/extra/x86_64/wpewebkit/&quot;&gt;Arch Linux&lt;/a&gt;, and &lt;a href=&quot;https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/&quot;&gt;Fedora&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/about/flatpak.html&quot;&gt;Flatpak image&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Prebuilt Raspberry Pi (3B, 3B+ and 4) images
-&lt;ul&gt;
-&lt;li&gt;For &lt;a href=&quot;https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip&quot;&gt;stable&lt;/a&gt; and &lt;a href=&quot;https://wk-contrib.igalia.com/debian/images/nightly/wpe-raspbian.img.zip&quot;&gt;nightly&lt;/a&gt; releases&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps/about/balena-wpe.html&quot;&gt;Balena blocks&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.&lt;/p&gt;
-&lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
-&lt;p&gt;With this, we conclude this brief overview of WPE automated testing and the main tools we use in our daily work with WPE. In future posts in this area we’ll go deeper in other subjects like testing on embedded boards and debugging practices.&lt;/p&gt;
-&lt;p&gt;If this post got you interested in collaborating with WPE development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
-&lt;p&gt;We also have open positions at the WebKit team at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. If you’re motivated by this field and you’re interested in developing your career around it, you can apply &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;here&lt;/a&gt;!&lt;/p&gt;
 </content>
   </entry>
 </feed>
