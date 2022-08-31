@@ -37,7 +37,7 @@ ul.gallery.c2 li {
 }
 .banner img {
 	display: block;
-	margin: 0 auto;
+	margin: -5rem auto;
 	margin-block: calc( min(65rem,100vw) * 0.31229 * -0.25 );
 }
 </style>
