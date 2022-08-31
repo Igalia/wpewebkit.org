@@ -19,25 +19,26 @@ ul.gallery.c2 li {
 	border: 1px dashed var(--colorMain);
 	background: url({{ '/assets/img/checkmark.png' | url}}) 1em 1em / 2em 2em no-repeat;
 }
-.banner {
-	margin-block: 5em;
+.full-bleed.banner {
+	margin-block: 5rem 4rem;
+	padding: 1px 0;
 }
-@media (min-width: 70em) {
+@media (min-width: 75rem) {
 	.banner::before {
 		content: '';
 		position: absolute;
 		top: 50%;
-		margin-top: -7px;
 		left: -5rem;
-		width: 6rem;
-		height: 2px;
-		background: linear-gradient(90deg,#000A,#89A);
+		width: 5rem;
+		height: 1px;
+		background: linear-gradient(90deg,#000,#0008);
 		mask-image: repeating-linear-gradient(270deg, transparent, #89A 1px, #999 3px, transparent 4px, transparent 7px);
 	}
 }
 .banner img {
 	display: block;
-	margin: -5em auto;
+	margin: 0 auto;
+	margin-block: calc( min(65rem,100vw) * 0.31229 * -0.25 );
 }
 </style>
 
