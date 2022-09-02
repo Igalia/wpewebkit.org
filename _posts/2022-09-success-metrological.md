@@ -5,7 +5,7 @@ date: 2022-09-13
 tags: [blogpost, success]
 permalink: /blog/2022-success-metrological.html
 preview: RDK (Reference Design Kit) is a fully modular, portable, and customizable open source software solution that standardizes core functions used in video, broadband and Internet-of-Things devices. In particular, RDK also provides the web browser for millions of cable set top boxes.
-thumbnail: /assets/img/logo-metrological.png
+thumbnail: /assets/img/logo-metrological@2x.png
 ---
 
 <div class="success-top">
