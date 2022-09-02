@@ -234,7 +234,6 @@ nav.sidebar .currentPage a[href] {
 
 header.page {
 	position: relative;
-	padding: 0 1rem;
 	font-size: 0.75em;
 }
 header.page h1 {
@@ -421,6 +420,21 @@ header .decoration {
 }
 .blog.cards li p {
 	order: -1;
+}
+
+.success-top {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem 4rem;
+	padding-block: 3rem 1rem;
+}
+.success-top img {
+	height: 7rem;
+}
+.success-top img[alt*="WPE"] {
+	height: 5rem;
 }
 
 
