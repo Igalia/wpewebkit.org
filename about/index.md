@@ -65,7 +65,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 <div class="dotsep">
 <h3><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></h3>
 <p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
-<img src="{{ '/assets/img/illustration-why-WPE@2x.png' | url }}" alt="">
+<img src="{{ '/assets/img/WhyChooseWPE-ExploreLand.png' | url }}" alt="">
 </div>
 
 
