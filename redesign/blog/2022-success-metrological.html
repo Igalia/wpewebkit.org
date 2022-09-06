@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>The Architecture of WPE</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/redesign/about/architecture.html">
+  <title>Success Story: Metrological</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/redesign/blog/2022-success-metrological.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/redesign/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/redesign/about/architecture.html">
-  <meta property="og:title" content="The Architecture of WPE">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/redesign/blog/2022-success-metrological.html">
+  <meta property="og:title" content="Success Story: Metrological">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/redesign/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/redesign/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,8 +21,9 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-09-06T14:41:28.274Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2022-09-13T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta property="article:tag" content="success">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -192,19 +193,19 @@ lazy-youtube a > span {
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
-		<ul class="/about"><!-- link․url: '/'   pagedir: '/about' -->
+		<ul class="/blog"><!-- link․url: '/'   pagedir: '/blog' -->
 			<li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/">Home</a>
-			</li><!-- link․url: '/about'   pagedir: '/about' -->
-			<li class="currentPage">
-			<a class="nav-link" href="/wpewebkit.org/redesign/about">Learn & Discover</a>
-			</li><!-- link․url: '/blog'   pagedir: '/about' -->
+			</li><!-- link․url: '/about'   pagedir: '/blog' -->
 			<li>
+			<a class="nav-link" href="/wpewebkit.org/redesign/about">Learn & Discover</a>
+			</li><!-- link․url: '/blog'   pagedir: '/blog' -->
+			<li class="currentPage">
 			<a class="nav-link" href="/wpewebkit.org/redesign/blog">Blog</a>
-			</li><!-- link․url: '/developers'   pagedir: '/about' -->
+			</li><!-- link․url: '/developers'   pagedir: '/blog' -->
 			<li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/developers">Developers</a>
-			</li><!-- link․url: '/about/explore-wpe.html'   pagedir: '/about' -->
+			</li><!-- link․url: '/about/explore-wpe.html'   pagedir: '/blog' -->
 			<li>
 			<a class="btn cta" href="/wpewebkit.org/redesign/about/explore-wpe.html">Get Started</a>
 			</li></ul>
@@ -214,96 +215,50 @@ lazy-youtube a > span {
 
     <main>
     <style>
-main > *, .dotsep {
-	padding: 2em 0 3em;
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
 }
-.masthead-img {
-	padding: 0;
-	margin-block: 4em 1em;
-}
-.masthead-img img {
-	max-width: 90%;
-	max-width: min(800px,100%);
-	margin-block: -2em;
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
 }
 </style>
-<header class="page">
-<h1>WPE Design</h1>
-<p>WPE is the official <a href="https://webkit.org">WebKit</a> port for embedded platforms. WPE is uniquely designed
-for embedded systems in that it doesn’t depend on any user-interface toolkit
-such as the traditional Cocoa, GTK, etc toolkits.</p>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/redesign/blog/2022-success-metrological.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">Success Story: Metrological</h1>
+ 
+   <meta itemprop="datePublished" content="Tue Sep 13 2022">
+   <time itemprop="dateCreated">13 September 2022</time>
+ 
+  
 </header>
-<div class="masthead-img full-bleed" align="center">
-<img src="/wpewebkit.org/redesign/assets/img/diagram-WPE-design.svg" alt="">
+
+<div itemprop="articleBody">
+
+<div class="success-top">
+<img alt="Metrological: A Comcast Company" align="center" src="/wpewebkit.org/redesign/assets/img/logo-metrological@2x.png">
+<img alt="WPE" align="center" src="/wpewebkit.org/redesign/assets/img/logo-blue.svg">
 </div>
-<section class="dotsep">
-<h2 id="web-page-rendering" tabindex="-1">Web page rendering</h2>
-<p class="leadin">WPE is considered a hybrid port because it defers the final web page delivery for display to a rendering backend. A traditional port would provide a widget for a given toolkit, but WPE opted for a different and more flexible approach.</p>
-<p>The common interface between WPEWebKit and its rendering backends is provided by
-<a href="https://github.com/WebPlatformForEmbedded/libwpe">libwpe</a>. On one side, once
-WPEWebKit has a graphical representation of the final composited Web page ready
-for rendering, it invokes a callback function on <code>libwpe</code>. On the other side,
-the WPE application has to register a view backend on the WPE WebView. This view
-backend is provided by the rendering backend. The view backend receives the Web
-page representation from <code>libwpe</code>, usually as an EGLImage, and is in charge of
-presenting it in the application, on-screen.</p>
-<p>The decoupling between generating the WebPage representation on WebKit side and
-the actual rendering on the application side provides a very flexible design.
-For instance, WPE integrators can easily develop a new rendering backend for
-specific embedded platforms that might have a graphics driver with special API
-requirements.</p>
-<p>WPE provides a rendering backend aiming to target the most common platforms and
-leverage the existing graphics stack available in the
-<a href="https://freedesktop.org">Freedesktop</a> umbrella eco-system.
-<a href="https://github.com/Igalia/WPEBackend-FDO">WPEBackend-FDO</a> is the reference
-implementation of the base rendering backend design. WPEBackend-FDO provides an API
-for WPE applications that aims to ease the handling of rendering either
-on-screen using EGL, or off-screen using SHM.</p>
-</section>
-<section>
-<h2 id="input-events-handling" tabindex="-1">Input events handling</h2>
-<p class="leadin">In a traditional WebKit port, the provided widget usually also handles input
-(keyboard, mouse, touch) events and is in charge of relaying them to the
-internal WebKit input-methods components.</p>
-<p>As WPE doesn’t provide a widget, it relies on <code>libwpe</code> APIs to relay input
-events from the WPE application to the internal WebKit input-methods components.
-This design again adds flexibility to the overall WPE architecture, enabling
-applications to support new input devices without having to go through a UI
-toolkit first.</p>
-<p>In the example of the <a href="https://github.com/Igalia/cog">Cog WPE browser</a>, the
-application relies on Wayland protocols for user input to communicate events
-coming from the Wayland compositor to WPE.</p>
-</section>
-<section class="resources">
-<header class="full-bleed dotsep">
-<h2><a href="">Resources</a></h2>
-<img src="/wpewebkit.org/redesign/assets/img/illustration-resources.svg" alt="" class="decoration">
-</header>
-<div>
-<ul class="gallery c5">
-<li>
-<h3><a href="">Guides and sample code</a></h3>
-<p>Get details on implementing web technologies with guides, reference, and sample code.</p>
-</li>
-<li>
-<h3><a href="">Videos</a></h3>
-<p>Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari.</p>
-</li>
-<li>
-<h3><a href="">Forums</a></h3>
-<p>Open standards with great longevity allows lots more things to benefit from the same investments.</p>
-</li>
-<li>
-<h3><a href="">Downloads</a></h3>
-<p>The number of people with the basic skills to build things with web technologies is massive.</p>
-</li>
-<li>
-<h3><a href="">Source</a></h3>
-<p>The number of people with the basic skills to build things with web technologies is massive.</p>
-</li>
-</ul>
+<p>A project led by Metrological, <strong>RDK (Reference Design Kit)</strong> is a fully modular, portable, and customizable open source software solution that standardizes core functions used in video, broadband and Internet-of-Things devices. In particular, RDK also provides the web browser for millions of cable set top boxes.</p>
+<p>Delivering a fast and memory-efficient browser for embbedded systems is a challenging task, so
+Igalia helped Metrological build a new full-screen browser engine which stripped away all unecessary toolkit elements.</p>
+<p>With years of experience around WebKit platform integration, Igalia worked to produce a new WebKit port, WPE, which interfaced directly with Wayland and the graphics driver. Additionally, Igalia pushed forward the implementation of a multi-platform multi-threaded compositer, enabling better
+performance on low-end multicore processors. WPE is an official port of WebKit.</p>
+<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. Utilizing open source components, RDK drastically reduced development cycles, encourages collaboration, and enhances innovation. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
+
+
+
+
 </div>
-</section>
+
+<a class="btn btn-primary" href="/wpewebkit.org/redesign/"><i class="icon-home mr-1"></i> Home</a>
 
     </main>
 

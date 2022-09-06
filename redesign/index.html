@@ -237,16 +237,20 @@ header.page {
 	color: #FFF;
 	position: relative;
 }
-header.page video {
+header.page video, header.page > span {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100vw;
+	width: 99vw;
 	height: 100%;
 	object-fit: cover;
 	object-position: 50% 50%;
 	aspect-ratio: 16/9;
 	z-index: 1;
+}
+header.page > span {
+	background: linear-gradient(111deg,#000C 30%,#0002 80%);
+	z-index: 2;
 }
 header.page div {
 	position: relative;
@@ -293,7 +297,7 @@ header.page div::before {
 	background: var(--dashV);
 }
 header.page div > * {
-	filter: drop-shadow(0 0 1px #0008) drop-shadow(0 0 2px #0008);
+	filter: drop-shadow(0 0 1px #0008) drop-shadow(0 0 2px #0008) drop-shadow(0 0 4px #0008) drop-shadow(0 0 8px #0008);
 }
 header.page div h1 {
 	font-size: 3em;
@@ -358,6 +362,7 @@ header.page div h1 {
 
 <header class="page">
 <video autoplay muted loop><source src="/wpewebkit.org/redesign/assets/video/WPE-1.mp4" type="video/mp4"></video>
+<span></span>
 <div>
 <h1>
 Create simple and performant systems based on <strong>Web platform technologies.</strong>
@@ -432,12 +437,12 @@ Open standards with great longevity allows lots more things to benefit from the 
 <section class="notable-customers c2 full-bleed dotsep">
 
 <div class="spotlight">
-<p>Customer Highlight</p> 
-<h2><a href="#">Metrological</a></h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-<p><a href="">Read all about it</a></p>
+<p>Success Story</p> 
+<h2><a href="/wpewebkit.org/redesign/blog/2022-success-metrological.html">Metrological</a></h2>
+<p>A project led by Metrological, RDK (Reference Design Kit) is a fully modular, portable, and customizable open source software solution that standardizes core functions used in video, broadband and Internet-of-Things devices. In particular, RDK also provides the web browser for millions of cable set top boxes.</p>
+<p><a href="/wpewebkit.org/redesign/blog/2022-success-metrological.html">Read all about it</a></p>
 </div>
-<a class="spotlight" href="#"><img src="/wpewebkit.org/redesign/assets/img/logo-metrological@2x.png" alt=""></a>
+<a class="spotlight" href="/wpewebkit.org/redesign/blog/2022-success-metrological.html"><img src="/wpewebkit.org/redesign/assets/img/logo-metrological@2x.png" alt=""></a>
 
 
 </section>
