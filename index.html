@@ -106,7 +106,11 @@ header.page div h1 {
 	max-width: 100%;
 }
 
-.notable-customers.c2 {
+.nodot {
+	padding: 2em 0 1em;
+}
+
+.success-stories.c2 {
 	padding: 4rem 6rem;
 	padding-right: 0;
 	background: #171717;
@@ -114,17 +118,17 @@ header.page div h1 {
 	border-image-source: linear-gradient(0deg,#171717,#171717);
 	align-items: center;
 }
-.notable-customers > * {
+.success-stories > * {
 	margin: 0;
 	padding: 0;
 }
-.notable-customers h2 {
+.success-stories h2 {
 	margin-bottom: 1.5em;
 }
-.notable-customers > * + ::before {
+.success-stories > * + ::before {
 	content: none;
 }
-.notable-customers a.spotlight img {
+.success-stories a.spotlight img {
 	display: block;
 	width: 100%;
 	height: auto;
@@ -133,7 +137,7 @@ header.page div h1 {
 	padding: 1em;
 	object-fit: contain;
 }
-.notable-customers::before {
+.success-stories::before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -142,7 +146,7 @@ header.page div h1 {
 	width: 1px;
 	background: var(--dashV);
 }
-.notable-customers h2 {
+.success-stories h2 {
 	margin: 0 0 0.5em;
 	padding: 0.75em 0;
 	background: url({{ '/assets/img/graphic-title-white.svg' | url }}) 0 100% / 7rem auto no-repeat;
@@ -196,7 +200,7 @@ Open standards with great longevity allows lots more things to benefit from the 
 </ul>
 </div>
 
-<div class="c2">
+<div class="c2 nodot">
 <h3><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></h3>
 <p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
 <img src="{{ '/assets/img/WhyChooseWPE-homepage.png' | url }}" alt="">
@@ -224,7 +228,7 @@ Open standards with great longevity allows lots more things to benefit from the 
 </section>
 
 
-<section class="notable-customers c2 full-bleed dotsep">
+<section class="success-stories c2 full-bleed dotsep">
 
 <div class="spotlight">
 <p>Success Story</p> 
