@@ -4,8 +4,21 @@
 <h2><a href="">Resources</a></h2>
 <img src="{{ '/assets/img/illustration-resources.svg' | url }}" alt="" class="decoration">
 </header>
-
 <div>
+
+{% if resources %}
+
+<ul class="gallery c{{ resources|size }}">
+{% for item in resources %}
+<li>
+<h3><a href="{{ item.url | url}}">{{item.title}}</a></h3>
+<p>{{item.text | markdown}}</p>
+</li>
+{% endfor %}
+</ul>
+
+{% else %}
+
 <ul class="gallery c5">
 <li>
 <h3><a href="">Guides and sample code</a></h3>
@@ -28,6 +41,8 @@
 <p>The number of people with the basic skills to build things with web technologies is massive.</p>
 </li>
 </ul>
-</div>
 
+{% endif %}
+
+</div>
 </section>

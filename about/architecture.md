@@ -84,5 +84,3 @@ application relies on Wayland protocols for user input to communicate events
 coming from the Wayland compositor to WPE.
 
 </section>
-
-{% include resources.html %}

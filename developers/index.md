@@ -52,7 +52,7 @@ WPE WebKit follows a **6-month development cycle**:
 <li>Development releases are the base for the feature releases that follow them.  They do not follow a fixed schedule in the release cycle.</li>
 </ul>
 
-WPE WebKit and [WebKitGTK]() share a fair amount of code.  Therefore, both projects produce their feature releases simultaneously, and share the same release branches.  For bug-fix releases, the release teams for both projects try to sync their version numbers as well as they can.
+WPE WebKit and [WebKitGTK](https://webkitgtk.org/) share a fair amount of code.  Therefore, both projects produce their feature releases simultaneously, and share the same release branches.  For bug-fix releases, the release teams for both projects try to sync their version numbers as well as they can.
 
 </div>
 
@@ -68,7 +68,3 @@ WPE WebKit and [WebKitGTK]() share a fair amount of code.  Therefore, both proje
 <h2><a href="{{ '/about/faq.html' | url }}">WPE’s Frequently Asked Questions</a></h2>
 <p>We've been collecting answers to lots of common questions we've been asked. If you've got questions, you might just find a ready answer in the FAQ.</p>
 </div>
-
-
-
-{% include resources.html %}

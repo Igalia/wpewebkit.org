@@ -4,6 +4,28 @@ title: "Supported Hardware"
 tags: [about] 
 data: { dateless: "true" }
 permalink: /about/supported-hardware.html 
+resources: [
+	{
+		"title": "Why Choose WPE?",
+		"url": "/about/a-good-choice.html",
+		"text": "WPE WebKit is widely adopted in many industries, including digital signage, professional audio, video and broadcasting, home appliances, set-top boxes, and automative and in-flight infotainment systems."
+	},
+	{
+		"title": "Get Started",
+		"url": "/about/explore-wpe.html",
+		"text": "Links to pre-built installations for platforms like Linux, Respberry Pi, and more."
+	},
+	{
+		"title": "Try WPE with Flatpak",
+		"url": "/about/flatpak.html",
+		"text": "WPE maintainers leverage Flatpak to allow users to try two different WPE flavors."
+	},
+	{
+		"title": "Igalia",
+		"url": "https://igalia.com",
+		"text": "The maintainer and sponsor of WPEwebkit, an open-source consultancy based in northwest Spain."
+	}
+]
 --- 
 <style type="text/css">
 .tables {

@@ -83,5 +83,3 @@ WPE WebKit offers great possibilities for deployment on different platforms, tha
 </ul>
 
 </section>
-
-{% include resources.html %}

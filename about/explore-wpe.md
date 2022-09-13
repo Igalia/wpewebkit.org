@@ -4,6 +4,28 @@ title: "Get Started with WPEwebkit"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/explore-wpe.html
+resources: [
+	{
+		"title": "Package Releases",
+		"url": "/release/",
+		"text": "The most recent stable and development releases of WPE codebases."
+	},
+	{
+		"title": "Release Schedule",
+		"url": "/release/schedule/",
+		"text": "How often does WEPWebKit release, and when?"
+	},
+	{
+		"title": "Security Advisories",
+		"url": "/security/",
+		"text": "A complete archive of our security adviories, often with download links."
+	},
+	{
+		"title": "Performance Tips",
+		"url": "https://github.com/Igalia/meta-webkit/wiki/PerformanceTips",
+		"text": "A few pointers on how to get better performance out of WPEwebkit. (Github Wiki)"
+	}
+]
 ---
 
 <header class="page">
@@ -39,35 +61,4 @@ We've also tried to make it easy for developers who aren't comfortable building 
 
 If you find any problem with the packages or images, or want to know more about optimizing WPE for your hardware or use cases, please [contact us]({{'/code' | url}}).
 
-<section class="resources">
-
-<header class="full-bleed dotsep">
-
-## Resources
-
-<img src="{{ '/assets/img/illustration-resources.svg' | url }}" alt="" class="decoration">
-</header>
-
-<div>
-<ul class="gallery c4">
-<li>
-<h3><a href="{{'/release/'|url}}">Package Releases</a></h3>
-<p>The most recent stable and development releases of WPE codebases.</p>
-</li>
-<li>
-<h3><a href="{{'/release/schedule/'|url}}">Release Schedule</a></h3>
-<p>How often does WEPWebKit release, and when?</p>
-</li>
-<li>
-<h3><a href="{{'/security/'|url}}">Security Advisories</a></h3>
-<p>A complete archive of our security adviories, often with download links.</p>
-</li>
-<li>
-<h3><a href="https://github.com/Igalia/meta-webkit/wiki/PerformanceTips">Performance tips</a></h3>
-<p>A few pointers on how to get better performance out of WPEwebkit. (Github Wiki)</p>
-</li>
-
-</ul>
-</div>
-
-</section>
+{% include resources.html %}
