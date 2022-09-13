@@ -112,5 +112,3 @@ We understand that WPE is interesting from many perspectives, and to people of p
 		</lazy-youtube>
 	</div>
 </div>
-
-{% include resources.html %}

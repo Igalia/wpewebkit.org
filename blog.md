@@ -92,5 +92,3 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
     </p>
   </div>
 </div>
-
-{% include resources.html %}
