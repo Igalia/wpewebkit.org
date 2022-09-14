@@ -323,8 +323,7 @@ header.page div h1 {
 .success-stories.c2 {
 	padding: 4rem 6rem;
 	padding-right: 0;
-	background: #171717;
-	color: white;
+	background: linear-gradient(90deg, #F3F3F3 50%, #050505 50%);
 	border-image-source: linear-gradient(0deg,#171717,#171717);
 	align-items: center;
 }
@@ -332,20 +331,8 @@ header.page div h1 {
 	margin: 0;
 	padding: 0;
 }
-.success-stories h2 {
-	margin-bottom: 1.5em;
-}
 .success-stories > * + ::before {
 	content: none;
-}
-.success-stories a.spotlight img {
-	display: block;
-	width: 100%;
-	height: auto;
-	aspect-ratio: 5/4;
-	background: #FFF;
-	padding: 1em;
-	object-fit: contain;
 }
 .success-stories::before {
 	content: '';
@@ -357,11 +344,65 @@ header.page div h1 {
 	background: var(--dashV);
 }
 .success-stories h2 {
-	margin: 0 0 0.5em;
+	margin: 0;
 	padding: 0.75em 0;
-	background: url(/wpewebkit.org/redesign/assets/img/graphic-title-white.svg) 0 100% / 7rem auto no-repeat;
+	font-size: 1.4em;
+}
+.success-stories h3 img {
+	display: block;
+	max-height: 6.5rem;
+}
+.success-stories > img.hero {
+	height: 100%;
+	width: 100%;
+	max-width: none;
+	justify-self: start;
+	margin-block: -4rem;
+	object-fit: cover;
+	object-position: 50% 50%;
 }
 
+section.igalia {
+	background: var(--dashV),
+	linear-gradient(to bottom right,#142B7AFA,#80A0B2) 100% 0 / 50% 100% no-repeat,
+	url(/wpewebkit.org/redesign/assets/img/dotted-continents.svg) 50% 25% / cover;
+	background-blend-mode: multiply;
+}
+section.igalia > div {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: min-content auto;
+	gap: 0 15%;
+}
+section.igalia > div > h3 {
+	grid-row: 1;
+	grid-column: 1;
+	margin-block-start: 5rem;
+}
+section.igalia > div > a {
+	grid-row: 2;
+	grid-column: 1;
+}
+section.igalia > div > a img {
+	width: 100%;
+	max-width: 300px;
+}
+section.igalia > div > div {
+	grid-row: 2;
+	grid-column: 2;
+	color: white;
+	width: 75%;
+	justify-self: start;
+	margin-block-end: 4rem;
+}
+section.igalia > div > div a {
+	color: inherit;
+}
+section.igalia > div > div > img {
+	display: block;
+	max-height: 5em;
+	margin-block: 0 1em;
+}
 </style>
 
 <header class="page">
@@ -374,7 +415,7 @@ Create simple and performant systems based on <strong>Web platform technologies.
 <p>
 A WebKit port designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best performance.
 </p>
-<a class="cta btn" href="/wpewebkit.org/redesign/about/explore-wpe.html">Get Started</a>
+<a class="cta btn large" href="/wpewebkit.org/redesign/about/explore-wpe.html">Get Started</a>
 </div>
 </header>
 
@@ -410,32 +451,14 @@ Open standards with great longevity allows lots more things to benefit from the 
 </ul>
 </div>
 
-<div class="c2 dotsep">
+<div class="c2 nodot">
 <h3><a href="/wpewebkit.org/redesign/about/a-good-choice.html">Why Choose WPE?</a></h3>
 <p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
 <img src="/wpewebkit.org/redesign/assets/img/WhyChooseWPE-homepage.png" alt="">
 </div>
 
-<div class="c2 nodot">
-<h3><a href="https://igalia.com/">Who Makes WPE?</a></h3>
-<p>WPEWebKit is developed by <a href="https://igalia.com/">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="https://igalia.com/contact/">Get in touch!</a></p>
-<img src="/wpewebkit.org/redesign/assets/img/logo-igalia.png" alt="">
-</div>
-
 </section>
 
-
-<section class="success-stories c2 full-bleed dotsep">
-
-<div class="spotlight">
-<p>Success Story</p> 
-<h2><a href="/wpewebkit.org/redesign/blog/2022-success-metrological.html">Metrological</a></h2>
-<p>A project led by Metrological, RDK (Reference Design Kit) is a fully modular, portable, and customizable open source software solution that standardizes core functions used in video, broadband and Internet-of-Things devices. In particular, RDK also provides the web browser for millions of cable set top boxes.</p>
-<p><a href="/wpewebkit.org/redesign/blog/2022-success-metrological.html">Read all about it</a></p>
-</div>
-<a class="spotlight" href="/wpewebkit.org/redesign/blog/2022-success-metrological.html"><img src="/wpewebkit.org/redesign/assets/img/logo-metrological@2x.png" alt=""></a>
-
-</section>
 
 
 <section class="developers embedded dotsep">
@@ -456,6 +479,31 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 </section>
 
+<section class="success-stories c2 dotsep">
+
+<div class="spotlight">
+<h2>Customer Success Story</h2> 
+<h3><a href="/wpewebkit.org/redesign/blog/2022-success-metrological.html"><img src="/wpewebkit.org/redesign/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+<p>A project led by Metrological, RDK (Reference Design Kit) is a fully modular, portable, and customizable open source software solution that standardizes core functions used in video, broadband and Internet-of-Things devices. In particular, RDK also provides the web browser for millions of cable set top boxes.</p>
+<p><a href="/wpewebkit.org/redesign/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
+</div>
+<img src="/wpewebkit.org/redesign/assets/img/metrological-hero.jpg" alt="" class="hero">
+
+</section>
+
+<section class="igalia">
+
+<div>
+<h3>Brought to you by</h3>
+<a href="https://igalia.com/"><img src="/wpewebkit.org/redesign/assets/img/igalia-larger.png" alt="Igalia"></a>
+<div>
+<img src="/wpewebkit.org/redesign/assets/img/Igalia_tagline-white-1.png" alt="Open Source Consultancy">
+<p>WPEWebKit is developed by <a href="https://igalia.com/">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="https://igalia.com/contact/">Get in touch!</a></p>
+<a href="https://igalia.com/" class="cta btn large">igalia.com</a>
+</div>
+</div>
+
+</section>
 
 </main>
 
