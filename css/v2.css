@@ -320,7 +320,7 @@ main section div h3 {
 	grid-column: 1;
 	grid-row: 1;
 }
-main section div:not(.text) h3 {
+main section div:not(.text) > h3 {
 	align-self: end;
 }
 main section div p {
@@ -328,7 +328,7 @@ main section div p {
 	grid-row: 2;
 	margin-top: 0;
 }
-main section div:not(.text) p {
+main section div:not(.text) > p {
 	align-self: start;
 }
 main section div > :last-child {
