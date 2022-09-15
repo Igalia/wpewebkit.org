@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-09-14T16:05:52.407Z">
+  <meta property="article:published_time" content="2022-09-15T14:50:46.205Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -236,7 +236,7 @@ such as the traditional Cocoa, GTK, etc toolkits.</p>
 <div class="masthead-img full-bleed" align="center">
 <img src="/wpewebkit.org/redesign/assets/img/diagram-WPE-design.svg" alt="">
 </div>
-<section class="dotsep">
+<section>
 <h2 id="web-page-rendering" tabindex="-1">Web page rendering</h2>
 <p class="leadin">WPE is considered a hybrid port because it defers the final web page delivery for display to a rendering backend. A traditional port would provide a widget for a given toolkit, but WPE opted for a different and more flexible approach.</p>
 <p>The common interface between WPEWebKit and its rendering backends is provided by
@@ -260,7 +260,7 @@ implementation of the base rendering backend design. WPEBackend-FDO provides an 
 for WPE applications that aims to ease the handling of rendering either
 on-screen using EGL, or off-screen using SHM.</p>
 </section>
-<section>
+<section class="dotsep">
 <h2 id="input-events-handling" tabindex="-1">Input events handling</h2>
 <p class="leadin">In a traditional WebKit port, the provided widget usually also handles input
 (keyboard, mouse, touch) events and is in charge of relaying them to the
@@ -278,6 +278,7 @@ coming from the Wayland compositor to WPE.</p>
     </main>
 
     <footer class="global">
+	<b></b>
 	<div>
 		<a href="/wpewebkit.org/redesign/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg"></a>
 		<ul>

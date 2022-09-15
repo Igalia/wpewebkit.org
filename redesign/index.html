@@ -217,6 +217,21 @@ lazy-youtube a > span {
 
 /* specific to home page */
 
+main, main > .full-width {
+	display: grid;
+	grid-template-columns: 1fr [dash] 1px [main] minmax(30rem,var(--mainColMax)) 1px 1fr;
+	grid-template-rows: repeat(10,auto);
+}
+main > * {
+	grid-column: main / -2;
+}
+main > .full-width {
+	grid-column: 1 / -1;
+}
+main > .full-width > div {
+	grid-column: main / -2;
+}
+
 main {
 	padding-inline: 0;
 }
@@ -287,6 +302,10 @@ header.page div {
 	}
 }
 
+body header.page::after {
+	content: none;
+}
+
 header.page div::before {
 	content: '';
 	position: absolute;
@@ -320,12 +339,21 @@ header.page div h1 {
 	padding: 2em 0 1em;
 }
 
-.success-stories.c2 {
-	padding: 4rem 6rem;
-	padding-right: 0;
-	background: linear-gradient(90deg, #F3F3F3 50%, #050505 50%);
-	border-image-source: linear-gradient(0deg,#171717,#171717);
+.success-stories {
+	padding: 0;
+	background: linear-gradient(90deg, #F3F3F3, #F3F3F3) 0 0 / 50% 100% no-repeat,
+		 linear-gradient(90deg, #050505, #050505) 100% 0 / 50% 100% no-repeat;
 	align-items: center;
+	overflow-x: hidden;
+}
+.success-stories > div {
+	padding: 4rem 6rem;
+	grid-column: main / -2;
+	display: grid;
+	grid-template-columns: calc(50% - 5rem) 1fr;
+	grid-template-rows: min-content;
+	align-items: center;
+	gap: 10rem;
 }
 .success-stories > * {
 	margin: 0;
@@ -333,15 +361,6 @@ header.page div h1 {
 }
 .success-stories > * + ::before {
 	content: none;
-}
-.success-stories::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 1px;
-	background: var(--dashV);
 }
 .success-stories h2 {
 	margin: 0;
@@ -352,28 +371,31 @@ header.page div h1 {
 	display: block;
 	max-height: 6.5rem;
 }
-.success-stories > img.hero {
-	height: 100%;
-	width: 100%;
+.success-stories img.hero {
+	height: calc(100% + 8rem);
 	max-width: none;
+	max-height: 35rem;
 	justify-self: start;
 	margin-block: -4rem;
+	margin-inline-start: -5rem;
 	object-fit: cover;
 	object-position: 50% 50%;
 }
 
 section.igalia {
-	background: var(--dashV),
-	linear-gradient(to bottom right,#142B7AFA,#80A0B2) 100% 0 / 50% 100% no-repeat,
-	url(/wpewebkit.org/redesign/assets/img/dotted-continents.svg) 50% 25% / cover;
+	background: 
+		linear-gradient(to bottom right,#142B7AFA,#80A0B2) 100% 0 / 50% 100% no-repeat,
+		url(/wpewebkit.org/redesign/assets/img/dotted-continents.svg) 50% 25% / cover;
 	background-blend-mode: multiply;
 }
 section.igalia > div {
+	grid-column: main / -2;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: min-content auto;
-	gap: 0 15%;
+	gap: 1rem 10rem;
 }
+
 section.igalia > div > h3 {
 	grid-row: 1;
 	grid-column: 1;
@@ -405,7 +427,7 @@ section.igalia > div > div > img {
 }
 </style>
 
-<header class="page">
+<header class="page full-width">
 <video autoplay muted loop><source src="/wpewebkit.org/redesign/assets/video/WPE-1.mp4" type="video/mp4"></video>
 <span></span>
 <div>
@@ -424,7 +446,7 @@ A WebKit port designed with flexibility and hardware acceleration in mind, lever
 
 <section class="explore-embedded dotsep">
 
-<header class="full-bleed c2 text dotsep">
+<header class="c2 text full-bleed">
 <h2>Explore Embedded Browsers</h2> 
 <p><big>The Web Platform is a frequently chosen foundational technology for many reasons, including:</big></p>
 <div><!-- placeholder for grid, whee --></div>
@@ -434,9 +456,7 @@ A WebKit port designed with flexibility and hardware acceleration in mind, lever
 Open standards with great longevity allows lots more things to benefit from the same investments</li>
   <li>The number of people with the basic skills to build things with web technologies is massive</li>
 </ul>
-<div><!-- placeholder for grid, whee --></div>
 <p>Embedded browsers provide a means to use this technology in lots of interesting ways...</p>
-<div><!-- placeholder for grid, whee --></div>
 <a class="cta btn" style="font-size: smaller;text-align: center;" href="/wpewebkit.org/redesign/about/what-is-embedded.html">Learn more about embedded browsers</a>
 </header>
 
@@ -451,7 +471,7 @@ Open standards with great longevity allows lots more things to benefit from the 
 </ul>
 </div>
 
-<div class="c2 nodot">
+<div class="c2 dotsep">
 <h3><a href="/wpewebkit.org/redesign/about/a-good-choice.html">Why Choose WPE?</a></h3>
 <p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
 <img src="/wpewebkit.org/redesign/assets/img/WhyChooseWPE-homepage.png" alt="">
@@ -462,7 +482,9 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 
 <section class="developers embedded dotsep">
-<header class="full-bleed dotsep">
+<div>
+
+<header class="full-bleed">
 <h2><a href="/wpewebkit.org/redesign/developers">Developers</a></h2>
 <img src="/wpewebkit.org/redesign/assets/img/illustration-resources.svg" alt="" class="decoration">
 </header>
@@ -472,14 +494,16 @@ Open standards with great longevity allows lots more things to benefit from the 
 <p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
 </div>
 
-<div class="c2 text">
+<div class="c2 dotsep">
 <h3><a href="/wpewebkit.org/redesign/about/faq.html">WPE’s Frequently Asked Questions</a></h3>
 <p>We’ve been collecting answers to lots of common questions we’ve been asked. If you have questions, you might find a ready answer in the FAQ.</p>
 </div>
 
+</div>
 </section>
 
-<section class="success-stories c2 dotsep">
+<section class="success-stories full-width dotsep">
+<div>
 
 <div class="spotlight">
 <h2>Customer Success Story</h2> 
@@ -489,25 +513,28 @@ Open standards with great longevity allows lots more things to benefit from the 
 </div>
 <img src="/wpewebkit.org/redesign/assets/img/metrological-hero.jpg" alt="" class="hero">
 
+</div>
 </section>
 
-<section class="igalia">
-
+<section class="igalia full-width">
 <div>
+
 <h3>Brought to you by</h3>
 <a href="https://igalia.com/"><img src="/wpewebkit.org/redesign/assets/img/igalia-larger.png" alt="Igalia"></a>
+
 <div>
 <img src="/wpewebkit.org/redesign/assets/img/Igalia_tagline-white-1.png" alt="Open Source Consultancy">
 <p>WPEWebKit is developed by <a href="https://igalia.com/">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="https://igalia.com/contact/">Get in touch!</a></p>
 <a href="https://igalia.com/" class="cta btn large">igalia.com</a>
 </div>
-</div>
 
+</div>
 </section>
 
 </main>
 
     <footer class="global">
+	<b></b>
 	<div>
 		<a href="/wpewebkit.org/redesign/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg"></a>
 		<ul>
