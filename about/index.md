@@ -51,7 +51,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 </div>
 </section>
 
-<div class="dotsep">
+<div>
 <h3><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></h3>
 <p>WPE is currently running on a wide range of hardware, including devices made by:</p>
 <ul class="gallery c4">
@@ -68,6 +68,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 <img src="{{ '/assets/img/WhyChooseWPE-ExploreLand.png' | url }}" alt="">
 </div>
 
+<div class="dotsep">
 
 ## See WPE In Action…
 <div class="container text-center my-auto" style="display:grid;grid-template-columns: 1fr 1fr 1fr;justify-items:center;grid-gap: 1rem 2rem;text-align: center;" id="wpe-in-action">
@@ -111,4 +112,6 @@ We understand that WPE is interesting from many perspectives, and to people of p
 			</div>
 		</lazy-youtube>
 	</div>
+</div>
+
 </div>

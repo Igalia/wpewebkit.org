@@ -34,7 +34,7 @@ such as the traditional Cocoa, GTK, etc toolkits.
 <img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
 </div>
 
-<section class="dotsep">
+<section>
 
 ## Web page rendering
 
@@ -65,7 +65,7 @@ on-screen using EGL, or off-screen using SHM.
 
 </section>
 
-<section>
+<section class="dotsep">
 
 ## Input events handling
 

@@ -27,7 +27,7 @@ h2 {
 </header>
 
 
-<div class="dotsep">
+<div>
 
 ## [WPE Builds]({{ '/about/builds.html' | url }})
 
@@ -64,7 +64,7 @@ WPE WebKit and [WebKitGTK](https://webkitgtk.org/) share a fair amount of code. 
 <img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
 </div>
 
-<div>
+<div class="dotsep">
 <h2><a href="{{ '/about/faq.html' | url }}">WPE’s Frequently Asked Questions</a></h2>
 <p>We've been collecting answers to lots of common questions we've been asked. If you've got questions, you might just find a ready answer in the FAQ.</p>
 </div>
