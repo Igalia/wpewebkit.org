@@ -36,7 +36,14 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/wpewebkit.org/redesign/css/stylish-portfolio.css">
-  
+  <script type="text/javascript">
+    window.onload = (function() {
+      document.querySelector('nav.global>div>.burger').addEventListener('click',menutog);
+    });
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+    }
+  </script>
   <!-- Matomo -->
   <script type="text/javascript">
     var _paq = window._paq = window._paq || [];
@@ -193,7 +200,7 @@ lazy-youtube a > span {
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
-		<ul class="/"><!-- link․url: '/'   pagedir: '/' -->
+		<ul class="/ off"><!-- link․url: '/'   pagedir: '/' -->
 			<li class="currentPage">
 			<a class="nav-link" href="/wpewebkit.org/redesign/">Home</a>
 			</li><!-- link․url: '/about'   pagedir: '/' -->
@@ -209,6 +216,7 @@ lazy-youtube a > span {
 			<li>
 			<a class="btn cta" href="/wpewebkit.org/redesign/about/explore-wpe.html">Get Started</a>
 			</li></ul>
+		<a href="#" class="burger"></a>
 	</div>
 </nav>
 
