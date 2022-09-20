@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>What is an Embedded Browser?</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/redesign/about/what-is-embedded.html">
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0009</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/redesign/security/WSA-2022-0009.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/redesign/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/redesign/about/what-is-embedded.html">
-  <meta property="og:title" content="What is an Embedded Browser?">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/redesign/security/WSA-2022-0009.html">
+  <meta property="og:title" content="WebKitGTK and WPE WebKit Security Advisory WSA-2022-0009">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/redesign/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/redesign/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,8 +21,8 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-09-20T12:34:16.277Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2022-09-19T00:00:00.000Z">
+  <meta property="article:tag" content="WSA">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -192,19 +192,19 @@ lazy-youtube a > span {
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt=""></a>
-		<ul class="/about"><!-- link․url: '/'   pagedir: '/about' -->
+		<ul class="/security"><!-- link․url: '/'   pagedir: '/security' -->
 			<li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/">Home</a>
-			</li><!-- link․url: '/about'   pagedir: '/about' -->
-			<li class="currentPage">
+			</li><!-- link․url: '/about'   pagedir: '/security' -->
+			<li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/about">Learn & Discover</a>
-			</li><!-- link․url: '/blog'   pagedir: '/about' -->
+			</li><!-- link․url: '/blog'   pagedir: '/security' -->
 			<li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/blog">Blog</a>
-			</li><!-- link․url: '/developers'   pagedir: '/about' -->
+			</li><!-- link․url: '/developers'   pagedir: '/security' -->
 			<li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/developers">Developers</a>
-			</li><!-- link․url: '/about/explore-wpe.html'   pagedir: '/about' -->
+			</li><!-- link․url: '/about/explore-wpe.html'   pagedir: '/security' -->
 			<li>
 			<a class="btn cta" href="/wpewebkit.org/redesign/about/explore-wpe.html">Get Started</a>
 			</li></ul>
@@ -213,28 +213,92 @@ lazy-youtube a > span {
 
 
     <main>
-    <header class="page">
-<h1>What is an Embedded Browser?</h1>
-<p>Long ago, it might have been reasonable to imagine browsers only in the realm of desktop computers.  However, embedded browsers are in everything these days: cars, signs, tablets, gaming systems, televisions and appliances.  They’re even in space!</p>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/redesign/security/WSA-2022-0009.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WebKitGTK and WPE WebKit Security Advisory WSA-2022-0009</h1>
+ 
+   <meta itemprop="datePublished" content="Mon Sep 19 2022">
+   <time itemprop="dateCreated">19 September 2022</time>
+ 
+  
 </header>
-<p>The Web Platform is a frequently chosen foundational technology for <em>many reasons</em>, including:</p>
+
+<div itemprop="articleBody">
+
 <ul>
-<li>Because Web Platform technologies are built on standards, they have great longevity</li>
-<li>Because these standards are open, embedded systems can incorporate them without licensing fees or other worries.</li>
-<li>Open standards with great longevity allows lots more things to benefit from the same investments</li>
-<li>The number of people with the basic skills to build things with web technologies is massive</li>
+<li>
+<p>Date Reported: <strong>September 19, 2022</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2022-0009</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2022-32886">CVE-2022-32886</a>, <a href="#CVE-2022-32891">CVE-2022-32891</a>,
+<a href="#CVE-2022-32912">CVE-2022-32912</a>.</p>
+</li>
 </ul>
-<p>The fact that over the past few years, <em>billions</em> of new devices have come online, and the implications of this are still under-discussed.  We believe developers need to be able explore and understand this space, and that lessons learned here are potentially helpful to the larger web ecosystem as well. However, this can be challenging, because embedded browsers are a little different…</p>
-<h2 id="why-embedded-browsers-are-different" tabindex="-1">Why embedded browsers are different</h2>
-<p>For many of us, a browser is an application like the one you’re probably using now.  You click an icon on your graphical operating system (OS), navigate somewhere with a URL bar, search, and so on.  You have bookmarks and tabs that you can drag around, and lots of other features.</p>
-<p>In contrast, an embedded browser is contained within another application or is built for a specific purpose and runs in an embedded system, and the application controlling the embedded browser does not provide all the typical features of browsers running in desktops.</p>
-<p>Furthermore, for most embedded systems there isn’t a common desktop <abbr title="Operating System">OS</abbr> for the browser to run on — in fact, the <abbr title="Operating System">OS</abbr> is built specifically for that type of device, and the embedded browser is built along with it.  Part of the reason for this is that, by and large, they are not general-purpose computing devices.  They have slightly different security concerns, and they also run on often radically different sorts of hardware than desktop, laptop or many mobile devices.</p>
-<p>So, what really <em>is</em> an embedded browser?</p>
-<h3 id="browsers%2C-engines-and-ports" tabindex="-1">Browsers, engines and ports</h3>
-<p>A “proper” <em>browser</em> is, in all likelihood, the application in which you are reading this.  This browser is built on one of three open source projects: WebKit, Chromium or Gecko.  Each of these projects defines an <em>engine</em> — that is, they provide an architecture through which something else (e.g., a browser) can bind to the top layer of the engine in order to drive us from URL to URL, and use the engine’s bottom layer to do things like actually put content on the screen, render graphics, receive input from devices like keyboards, mice and pointing devices, and connect to things like the text-to-speech subsystem.</p>
-<p>In terms of WebKit-based browsers, a “port” is the set of extra layers that provides facilities at those top and bottom layers of the engine.  The WebKit project has a few “official” ports that are available from <a href="https://webkit.org/downloads/">webkit.org/downloads/</a>.  Some, like Safari, are fully-featured desktop browsers.  WebKitGTK is a port for the GTK GUI toolkit, used among others by the desktop browser Epiphany.</p>
-<p>WPE (“Web Platform for Embedded”) is the official port for embedded systems, and it adds another layer to the architecture allowing for more easily swappable <em>backends</em> (the graphics layers, windowing and so on) and simpler bindings for programmatic top-level control in Linux based systems.  Cog is another project that makes it easier to launch and drive WPE views.</p>
-<p>In other words, WPE is designed to be <em>built</em> and optimized for your embedded device in order to deliver the best performance.  What all of this means is that there isn’t really a single “WPE” that’s as easy to provide as many browsers that you’re probably familiar with.</p>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+<ul>
+<li>
+<p><a name="CVE-2022-32886" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32886">CVE-2022-32886</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.36.8.</li>
+<li>Credit to P1umer, afang5472, xmzyshypnc.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A buffer overflow issue was
+addressed with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2022-32891" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32891">CVE-2022-32891</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.36.5.</li>
+<li>Credit to @real_as3617, an anonymous researcher.</li>
+<li>Impact: Visiting a website that frames malicious content may lead to
+UI spoofing. Description: The issue was addressed with improved UI
+handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2022-32912" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32912">CVE-2022-32912</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.36.8.</li>
+<li>Credit to Jeonghoon Shin (@singi21a) at Theori working with Trend
+Micro Zero Day Initiative.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An out-of-bounds read was
+addressed with improved bounds checking. This issue only affects
+MacOS builds (Linux builds are not affected).</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
+
+
+
+
+</div>
 
     </main>
 

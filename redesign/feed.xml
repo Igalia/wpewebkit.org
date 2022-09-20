@@ -4,8 +4,170 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-09-13T00:00:00Z</updated>
+  <updated>2022-09-20T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPEBackend-fdo 1.14.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/wpebackend-fdo-1.14.0.html"/>
+    <updated>2022-09-20T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/wpebackend-fdo-1.14.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpebackend-fdo-1.14.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPEBackend-fdo 1.14.0 Release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed a crash caused by trying to deallocate already freed graphics buffers in certain situations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpebackend-fdo-1.14.0.tar.xz (42.1 KiB)
+   md5sum: ea62dfa9ecb366598a837d7446ed48ac
+   sha1sum: 1500be9212381a404f4a46b22b90a9880ba11c01
+   sha256sum: e75b0cb2c7145448416e8696013d8883f675c66c11ed750e06865efec5809155
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0009</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/security/WSA-2022-0009.html"/>
+    <updated>2022-09-19T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/security/WSA-2022-0009.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;September 19, 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0009&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/redesign/security/WSA-2022-0009.html#CVE-2022-32886&quot;&gt;CVE-2022-32886&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/redesign/security/WSA-2022-0009.html#CVE-2022-32891&quot;&gt;CVE-2022-32891&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/redesign/security/WSA-2022-0009.html#CVE-2022-32912&quot;&gt;CVE-2022-32912&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-32886&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32886&quot;&gt;CVE-2022-32886&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.8.&lt;/li&gt;
+&lt;li&gt;Credit to P1umer, afang5472, xmzyshypnc.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A buffer overflow issue was
+addressed with improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-32891&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32891&quot;&gt;CVE-2022-32891&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.5.&lt;/li&gt;
+&lt;li&gt;Credit to @real_as3617, an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Visiting a website that frames malicious content may lead to
+UI spoofing. Description: The issue was addressed with improved UI
+handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-32912&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32912&quot;&gt;CVE-2022-32912&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.8.&lt;/li&gt;
+&lt;li&gt;Credit to Jeonghoon Shin (@singi21a) at Theori working with Trend
+Micro Zero Day Initiative.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An out-of-bounds read was
+addressed with improved bounds checking. This issue only affects
+MacOS builds (Linux builds are not affected).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.14.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/libwpe-1.14.0.html"/>
+    <updated>2022-09-19T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/libwpe-1.14.0.html</id>
+    <content type="html">&lt;!-- Shiver me timbers! It&#39;s a new re-re-releeease! --&gt;
+&lt;p&gt;This is the first stable release in the 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-libwpe-1.14.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the libwpe 1.14.0 Release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New API to provide input events to be treated by WebKit as gamepad inputs.&lt;/li&gt;
+&lt;li&gt;New API to configure the target refresh rate of view backends.&lt;/li&gt;
+&lt;li&gt;New API which allow clients to supply an alternative mechanism for
+spawning WebKit auxiliary processes.&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;WPE_ENABLE_XKB&lt;/code&gt; build option, enabled by default, which can be used
+to avoid usage of &lt;code&gt;libxkbcommon&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.14.0.tar.xz (61.5 KiB)
+   md5sum: f9737912975f979f9e4e01eec174a271
+   sha1sum: 7a5d51c99254fc14ffcbcca9e8550cc7940fe871
+   sha256sum: c073305bbac5f4402cc1c8a4753bfa3d63a408901f86182051eaa5a75dd89c00
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.38.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.38.0.html"/>
+    <updated>2022-09-16T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.38.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.38 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.38.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.38.0 Release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New media controls user interface style.&lt;/li&gt;
+&lt;li&gt;New API to set the web view’s default &lt;code&gt;Content-Security-Policy&lt;/code&gt;, which can
+be used to implement support for web extensions.&lt;/li&gt;
+&lt;li&gt;New API to run asynchronous JavaScript functions.&lt;/li&gt;
+&lt;li&gt;New JavaScriptCore GLib API for typed arrays.&lt;/li&gt;
+&lt;li&gt;Support for using the remote inspector from other browsers, using the
+&lt;code&gt;WEBKIT_INSPECTOR_HTTP_SERVER&lt;/code&gt; environment variable.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/MediaSession&quot;&gt;MediaSession&lt;/a&gt; is now enabled by default, allowing remote
+media control using the &lt;a href=&quot;https://specifications.freedesktop.org/mpris-spec/latest/&quot;&gt;MPRIS D-Bus API&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Add support for displaying PDF documents using &lt;a href=&quot;https://mozilla.github.io/pdf.js/&quot;&gt;PDF.js&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Add support for generating crash reports using &lt;a href=&quot;https://chromium.googlesource.com/breakpad/breakpad&quot;&gt;Breakpad&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;libnotify&lt;/code&gt; dependency has been removed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.38.0.tar.xz (29.1 MiB)
+   md5sum: e0e6b98c86351c39e41da475afc50780
+   sha1sum: 66e6dd1c285a21ce50370fb4d60332838d801663
+   sha256sum: e653e12eca63e6371c06d4cd9efcd5492db67f7d9ef324fd5d8668b1151e72b2
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.36.8 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.36.8.html"/>
+    <updated>2022-09-16T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.36.8.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.8%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.8?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix jumpy elements when scrolling GitLab and other web sites.&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;WebKitWebView:web-process-terminated&lt;/code&gt; signal not being emitted
+for the first web view when sandboxing is enabled.&lt;/li&gt;
+&lt;li&gt;Fix kinetic scrolling with elements that use overflow scrolling.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.36.8.tar.xz (24.6 MiB)
+   md5sum: 939dc646bb6652fde9a5b6512c17fc58
+   sha1sum: f45936c578f7dcfbb6064e87da6c098efe093e68
+   sha256sum: 8d42a349c910b2d0961b8d34fecef29cec3d21e3af5977346c90026692dc75eb
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Success Story: Metrological</title>
@@ -109,160 +271,6 @@ wpewebkit-2.36.7.tar.xz (24.6 MiB)
    md5sum: a9f8d521d8171292aab842d3e8ba227e
    sha1sum: e9255b3592bbaac8b20af03cafa31cedfb0b4898
    sha256sum: f3747d72ffc562ad0cfb6218fdf6d897c78c4bdbf5618e0fa26906fba52b95c9
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0008</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/security/WSA-2022-0008.html"/>
-    <updated>2022-08-25T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/security/WSA-2022-0008.html</id>
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Date Reported: &lt;strong&gt;August 25, 2022&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0008&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/redesign/security/WSA-2022-0008.html#CVE-2022-32893&quot;&gt;CVE-2022-32893&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a name=&quot;CVE-2022-32893&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32893&quot;&gt;CVE-2022-32893&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.36.7.&lt;/li&gt;
-&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Apple is aware of a report that this issue
-may have been actively exploited.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
-WebKit. It is the best way to ensure that you are running safe versions
-of WebKit. Please check our websites for information about the latest
-stable releases.&lt;/p&gt;
-&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
-&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>libwpe 1.12.3 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/libwpe-1.12.3.html"/>
-    <updated>2022-08-24T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/libwpe-1.12.3.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.12 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.12.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.12.3?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix the build when using Clang’s libc++ or the Musl libc.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-libwpe-1.12.3.tar.xz (54.3 KiB)
-   md5sum: e538eb8e521d92f2bde3c4cd864abaa1
-   sha1sum: 9d94c411a502a10e68f69bd1fa273539cc6af2ca
-   sha256sum: b84fdbfbc849ce4fdf084bb28b58e5463b1b4b6cc8f200dc77b41f8545d5329d
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.14.0 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/cog-0.14.0.html"/>
-    <updated>2022-08-24T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/cog-0.14.0.html</id>
-    <content type="html">&lt;p&gt;This is the first stable release in the 0.14 series.&lt;/p&gt;
-&lt;h3 id=&quot;highlights-of-the-0.14.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the 0.14.0 release&lt;/h3&gt;
-&lt;p&gt;Launcher (&lt;code&gt;cog&lt;/code&gt;):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Support setting memory limits using command line options.&lt;/li&gt;
-&lt;li&gt;Support passing initialization parameters to platform plug-ins using
-the &lt;code&gt;--platform-params&lt;/code&gt;/&lt;code&gt;-O&lt;/code&gt; command line option.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Core library (&lt;code&gt;libcogcore&lt;/code&gt;):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;CogLauncher&lt;/code&gt; class is no longer available, as it was an
-implementation detail of the launcher.&lt;/li&gt;
-&lt;li&gt;Built-in error pages now have a “Try again” button.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;DRM/KMS platform (&lt;code&gt;drm&lt;/code&gt;):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;New OpenGL ES renderer, which supports output rotation and improved
-compatibility with some graphics drivers.&lt;/li&gt;
-&lt;li&gt;Added refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;GTK4 platform (&lt;code&gt;gtk4&lt;/code&gt;):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Improved compatibility with more graphics drivers.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Wayland platform (&lt;code&gt;wl&lt;/code&gt;):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Improved compatibility with different compositors.&lt;/li&gt;
-&lt;li&gt;Added keybindings to refresh the current page (&lt;key&gt;Ctrl-R&lt;/key&gt;, &lt;key&gt;F5&lt;/key&gt;).&lt;/li&gt;
-&lt;li&gt;Added refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;X11 platform (&lt;code&gt;x11&lt;/code&gt;):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Fixed rendering with traditional, non-composited window managers.&lt;/li&gt;
-&lt;li&gt;Added refresh rate reporting to let WebKit pace rendering to match the output device.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.14.0.tar.xz (119.8 KiB)
-   md5sum: 2352aaba1a4ff31b1d1fb559c4941a01
-   sha1sum: 2da37ea6c25e45425aa80de4a129484ee226dd96
-   sha256sum: e23936f1ce350ea5ea6fa0709b63d34776b05709388aed9c6cf3fdc41299de9f
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>libwpe 1.13.90 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/libwpe-1.13.90.html"/>
-    <updated>2022-08-23T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/libwpe-1.13.90.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 1.14 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.13.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.13.90?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Improved the gamepad API.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-libwpe-1.13.90.tar.xz (60.8 KiB)
-   md5sum: d09ddc39ae33d09940f731c3cb1b5b51
-   sha1sum: f73400ee19480eebd439c9aaea90ae3e11f2e742
-   sha256sum: 97af9fbea3a70093e5f3979fa89594343e255942645c3b781d4f3517df5388a1
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.37.90 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.37.90.html"/>
-    <updated>2022-08-21T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.37.90.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 2.38 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.37.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.37.90?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Remove the &lt;code&gt;libnotify&lt;/code&gt; dependency.&lt;/li&gt;
-&lt;li&gt;Add support for generating crash reports using
-&lt;a href=&quot;https://chromium.googlesource.com/breakpad/breakpad&quot;&gt;Breakpad&lt;/a&gt;…&lt;/li&gt;
-&lt;li&gt;Add support for service worker notifications.&lt;/li&gt;
-&lt;li&gt;Add support for loading notification icons.&lt;/li&gt;
-&lt;li&gt;Add support for PAC proxy in the WebDriver implementation.&lt;/li&gt;
-&lt;li&gt;Fix the build with &lt;code&gt;USE_SYSTEM_MALLOC=ON&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.37.90.tar.xz (29.1 MiB)
-   md5sum: 0fff92b923b422b7309019db6ba62ca5
-   sha1sum: 326dc99a594132bdcd56d0a3133b853cfdc6b2cd
-   sha256sum: e944f68958ee0bfd5dbb342179c3d9178a7e388a59c4e1ea8e98b7337ecf12f7
 &lt;/pre&gt;
 </content>
   </entry>
