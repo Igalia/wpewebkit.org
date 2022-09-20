@@ -88,7 +88,7 @@ ul.arrows li::before {
 	filter: none;
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 80rem) {
 	.global a.igalia.logo.home {
 		position: relative;
 		left: -31px;
@@ -202,6 +202,7 @@ nav.global ul li.currentPage a {
 nav.global .cta.btn {
 	font-size: 1em;
 	padding: 0.33em 0.75em 0.25em;
+	margin-inline-end: 1rem;
 }
 
 
