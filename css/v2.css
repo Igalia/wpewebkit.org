@@ -222,12 +222,11 @@ nav.global .burger {
 	nav.global ul {
 		font-size: 1.25em;
 		position: fixed;
-		top: 0;
+		top: 4em;
 		right: 0;
 		max-width: 67vw;
 		min-width: min-content;
 		box-shadow: 0 0 0.5em 0.5em #FFF, 0 0 1em 0.25em #FFF;
-		padding-right: 4em;
 		background: #FFF;
 	}
 	nav.global ul li a {
