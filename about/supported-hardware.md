@@ -8,12 +8,12 @@ resources: [
 	{
 		"title": "Why Choose WPE?",
 		"url": "/about/a-good-choice.html",
-		"text": "WPE WebKit is widely adopted in many industries, including digital signage, professional audio, video and broadcasting, home appliances, set-top boxes, and automative and in-flight infotainment systems."
+		"text": "WPE WebKit is widely adopted in many industries, including digital signage, home appliances, set-top boxes, and automative and in-flight infotainment systems."
 	},
 	{
 		"title": "Get Started",
 		"url": "/about/explore-wpe.html",
-		"text": "Links to pre-built installations for platforms like Linux, Respberry Pi, and more."
+		"text": "Links to pre-built installations for platforms like Linux, Raspberry Pi, and more."
 	},
 	{
 		"title": "Try WPE with Flatpak",
@@ -23,7 +23,7 @@ resources: [
 	{
 		"title": "Igalia",
 		"url": "https://igalia.com",
-		"text": "The maintainer and sponsor of WPEwebkit, an open-source consultancy based in northwest Spain."
+		"text": "The maintainer and sponsor of WPEwebkit, Igalia is an open-source and web standards consultancy spanning the globe."
 	}
 ]
 --- 
