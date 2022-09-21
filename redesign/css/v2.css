@@ -150,6 +150,7 @@ main::before {
 	left: 0;
 }
 .full-width::before {
+	display: block;
 	grid-column: 1 / -1;
 	grid-row: 1;
 	background: var(--dashH);
@@ -524,6 +525,7 @@ header .decoration {
 
 
 footer.global {
+	position: relative;
 	padding: 4rem 1rem;
 	background: url(../assets/img/dash-h.svg) 0 0 / 8px 1px repeat-x;
 	background-color: #1593ED;
@@ -571,8 +573,10 @@ footer.global ul li {
 	margin-block: 0.33em;
 }
 footer.global > b {
-	grid-row: 1;
-	grid-column: 1 / -1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr [dash] 1px [main] minmax(30rem,var(--mainColMax)) 1px 1fr;
 }
@@ -584,6 +588,5 @@ footer.global > b::before {
 	position: relative;
 	left: -5px;
 	top: -5px;
-	margin-top: -4rem;
 	font-size: 11px;
 }
