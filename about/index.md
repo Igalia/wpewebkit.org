@@ -5,7 +5,22 @@ tags: [learn]
 data: { dateless: "true" }
 permalink: /about/index.html
 --- 
-
+<style>
+@media (min-width: 30rem) {
+	#wpe-in-action {
+		display:grid;
+		grid-template-columns: 1fr 1fr;
+		justify-items:center;
+		grid-gap: 1rem 2rem;
+		text-align: center;
+	}
+}
+@media (min-width: 60rem) {
+	#wpe-in-action {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+</style>
 
 <nav class="sidebar">
 <ul>
@@ -71,7 +86,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 <div class="dotsep">
 
 ## See WPE In Action…
-<div class="container text-center my-auto" style="display:grid;grid-template-columns: 1fr 1fr 1fr;justify-items:center;grid-gap: 1rem 2rem;text-align: center;" id="wpe-in-action">
+<div class="container text-center my-auto" id="wpe-in-action">
 	<div class="item">
   		<lazy-youtube hash="bg6yCx7VdPY" title="WPE WebGL performance demos">
 			<div>

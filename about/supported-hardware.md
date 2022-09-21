@@ -39,6 +39,12 @@ resources: [
 .tables code {
 	color: #C00;
 }
+@media (max-width: 450px) {
+	.tables code {
+		word-break: break-all;
+	}
+}
+
 table, table thead, table th, table tbody tr:nth-child(n) {
 	background: transparent;
 	border: none;

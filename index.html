@@ -9,8 +9,13 @@ description: WebKit port optimized for embedded devices
 
 main, main > .full-width {
 	display: grid;
-	grid-template-columns: 1fr [dash] 1px [main] minmax(30rem,var(--mainColMax)) 1px 1fr;
+	grid-template-columns: 1fr [dash] 1px [main] auto 1px 1fr;
 	grid-template-rows: repeat(10,auto);
+}
+@media (min-width: 45rem) {
+	main, main > .full-width {
+		grid-template-columns: 1fr [dash] 1px [main] minmax(30rem,var(--mainColMax)) 1px 1fr;
+	}
 }
 main > * {
 	grid-column: main / -2;
@@ -60,7 +65,7 @@ header.page > span {
 header.page div {
 	position: relative;
 	z-index: 2;
-	padding: 2em 0 3em;
+	padding: 2em 1rem 3em;
 	min-height: min-content;
 }
 @media (min-width: 45rem) {
@@ -100,9 +105,9 @@ header.page div::before {
 	content: '';
 	position: absolute;
 	top: 0;
+	left: 0;
 	height: 100%;
 	width: 1px;
-	margin-left: -5rem;
 	background: var(--dashV);
 }
 header.page div > * {
@@ -131,23 +136,8 @@ header.page div h1 {
 
 .success-stories {
 	padding: 0;
-	background: linear-gradient(90deg, #F3F3F3, #F3F3F3) 0 0 / 50% 100% no-repeat,
-		 linear-gradient(90deg, #050505, #050505) 100% 0 / 50% 100% no-repeat;
 	align-items: center;
 	overflow-x: clip;
-}
-.success-stories > div {
-	padding: 4rem 6rem;
-	grid-column: main / -2;
-	display: grid;
-	grid-template-columns: calc(50% - 5rem) 1fr;
-	grid-template-rows: min-content;
-	align-items: center;
-	gap: 10rem;
-}
-.success-stories > * {
-	margin: 0;
-	padding: 0;
 }
 .success-stories > * + ::before {
 	content: none;
@@ -162,58 +152,94 @@ header.page div h1 {
 	max-height: 6.5rem;
 }
 .success-stories img.hero {
-	height: calc(100% + 8rem);
-	max-width: none;
-	max-height: 35rem;
 	justify-self: start;
-	margin-block: -4rem;
-	margin-inline-start: -5rem;
 	object-fit: cover;
 	object-position: 50% 50%;
 }
+@media (min-width: 45rem) {
+	.success-stories {
+		background: linear-gradient(90deg, #F3F3F3, #F3F3F3) 0 0 / 50% 100% no-repeat,
+		 linear-gradient(90deg, #050505, #050505) 100% 0 / 50% 100% no-repeat;
+	}
+	.success-stories > div {
+		padding: 4rem 6rem;
+		grid-column: main / -2;
+		display: grid;
+		grid-template-columns: calc(50% - 5rem) 1fr;
+		grid-template-rows: min-content;
+		align-items: center;
+		gap: 10rem;
+	}
+	.success-stories > * {
+		margin: 0;
+		padding: 0;
+	}
+	.success-stories img.hero {
+		height: calc(100% + 8rem);
+		max-width: none;
+		max-height: 35rem;
+		margin-block: -4rem;
+		margin-inline-start: -5rem;
+	}
+}
 
 section.igalia {
+	padding-inline: 0;
 	background: 
-		linear-gradient(to bottom right,#142B7AFA,#80A0B2) 100% 0 / 50% 100% no-repeat,
 		url({{ '/assets/img/dotted-continents.svg' | url }}) 50% 25% / cover;
-	background-blend-mode: multiply;
 }
 section.igalia > div {
-	grid-column: main / -2;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: min-content auto;
-	gap: 1rem 10rem;
-}
-
-section.igalia > div > h3 {
-	grid-row: 1;
-	grid-column: 1;
-	margin-block-start: 5rem;
-}
-section.igalia > div > a {
-	grid-row: 2;
-	grid-column: 1;
+	padding-block-end: 3em;
 }
 section.igalia > div > a img {
-	width: 100%;
-	max-width: 300px;
-}
-section.igalia > div > div {
-	grid-row: 2;
-	grid-column: 2;
-	color: white;
-	width: 75%;
-	justify-self: start;
-	margin-block-end: 4rem;
-}
-section.igalia > div > div a {
-	color: inherit;
+	display: block;
+	height: 4em;
+	margin-block-end: 1em;
+	
 }
 section.igalia > div > div > img {
-	display: block;
-	max-height: 5em;
-	margin-block: 0 1em;
+	display: none;
+}
+
+@media (min-width: 45rem) {
+	section.igalia {
+		background: 
+			linear-gradient(to bottom right,#142B7AFA,#80A0B2) 100% 0 / 50% 100% no-repeat,
+			url({{ '/assets/img/dotted-continents.svg' | url }}) 50% 25% / cover;
+		background-blend-mode: multiply;
+	}
+	section.igalia > div {
+		grid-column: main / -2;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: min-content auto;
+		gap: 1rem 10rem;
+	}
+	section.igalia > div > h3 {
+		grid-row: 1;
+		grid-column: 1;
+		margin-block-start: 5rem;
+	}
+	section.igalia > div > a {
+		grid-row: 2;
+		grid-column: 1;
+	}
+	section.igalia > div > div {
+		grid-row: 2;
+		grid-column: 2;
+		color: white;
+		width: 75%;
+		justify-self: start;
+		margin-block-end: 4rem;
+	}
+	section.igalia > div > div > img {
+		display: block;
+		max-height: 5em;
+		margin-block: 0 1em;
+	}
+	section.igalia > div > div a {
+		color: inherit;
+	}
 }
 </style>
 
