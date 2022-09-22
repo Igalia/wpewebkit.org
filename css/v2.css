@@ -89,10 +89,12 @@ ul.arrows li::before {
 	filter: none;
 }
 
+.global a.igalia.logo.home {
+	transform: translateX(10px);
+}
 @media (min-width: 80rem) {
 	.global a.igalia.logo.home {
-		position: relative;
-		left: -31px;
+		transform: translateX(-30px);
 	}
 }
 
@@ -331,6 +333,12 @@ nav.sidebar a[href] {
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.125em;
 	background: #EAFEFE;
+	white-space: pre;
+}
+@media (max-width: 30rem) {
+	nav.sidebar a[href] {
+		font-size: smaller;
+	}
 }
 nav.sidebar .currentPage a[href] {
 	color: #FFF;
@@ -437,6 +445,7 @@ main section div > :last-child {
 	gap: 10%;
 	margin: 0;
 	padding-block: 1.5em;
+	padding-inline: 0;
 	list-style: none;
 	align-items: center;
 }
