@@ -356,6 +356,11 @@ header.page div h1 {
 	padding: 0;
 	align-items: center;
 	overflow-x: clip;
+	background: radial-gradient(13rem at 45% 55%, #FFF, transparent),
+		#F1F1F1;
+}
+.success-stories > div {
+	padding-block: 2em;
 }
 .success-stories > * + ::before {
 	content: none;
@@ -375,12 +380,8 @@ header.page div h1 {
 	object-position: 50% 50%;
 }
 @media (min-width: 45rem) {
-	.success-stories {
-		background: linear-gradient(90deg, #F3F3F3, #F3F3F3) 0 0 / 50% 100% no-repeat,
-		 linear-gradient(90deg, #050505, #050505) 100% 0 / 50% 100% no-repeat;
-	}
 	.success-stories > div {
-		padding: 4rem 6rem;
+		padding: 6rem;
 		grid-column: main / -2;
 		display: grid;
 		grid-template-columns: calc(50% - 5rem) 1fr;
@@ -393,11 +394,11 @@ header.page div h1 {
 		padding: 0;
 	}
 	.success-stories img.hero {
-		height: calc(100% + 8rem);
+		height: 100%;
 		max-width: none;
-		max-height: 35rem;
-		margin-block: -4rem;
+		max-height: 30rem;
 		margin-inline-start: -5rem;
+		box-shadow: -0.25em 0 0.5em #06C3, 1em 1.5em 2.5em #0066DD99;
 	}
 }
 
