@@ -216,6 +216,7 @@ nav.global .burger {
 	background-color: hsl(205,85.7%,50.6%);
 	border-left: 1px solid;
 	color: #FFF;
+	text-indent: -20220930px;
 }
 
 @media (max-width: 719px) {
