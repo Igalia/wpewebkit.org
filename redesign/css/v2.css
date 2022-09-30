@@ -4,7 +4,10 @@ max-height: 4em;
 
 html {
 	--mainColMax: 75rem;
+/*
 	--colorMain: #1593ED;
+*/
+	--colorMain: #0D71B9;
 	--dashH: linear-gradient(90deg, currentColor 25%, 25%, transparent 75%, 75%, currentColor 100%) 0 100% / 8px 1px repeat-x;
 	--dashV: linear-gradient(180deg, currentColor 25%, 25%, transparent 75%, 75%, currentColor 100%) 0 0 / 1px 8px repeat-y;
 	height: auto;
@@ -45,7 +48,7 @@ img {
 	max-width: 100%;
 }
 a[href] {
-	color: #1593ED;
+	color: var(--colorMain);
 	text-decoration-thickness: 0.05em;
 	text-underline-offset: 0.15em;
 }
@@ -79,7 +82,7 @@ ul.arrows li::before {
 
 .cta.btn {
 	display: inline-block;
-	background: #1593ED;
+	background: var(--colorMain);
 	color: #FFF;
 	padding: 0.67em 1.33em;
 	border-radius: 10em;
@@ -537,7 +540,7 @@ footer.global {
 	position: relative;
 	padding: 4rem 1rem;
 	background: url(../assets/img/dash-h.svg) 0 0 / 8px 1px repeat-x;
-	background-color: #1593ED;
+	background-color: var(--colorMain);
 	color: #FFF;
 	font: 1.1em monospace;
 }
@@ -571,7 +574,7 @@ footer.global div > :last-child {
 }
 
 footer.global a[href] {
-	color: #000;
+	color: inherit;
 }
 footer.global ul {
 	margin: 0;
