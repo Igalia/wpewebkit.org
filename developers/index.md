@@ -33,10 +33,12 @@ h2 {
 
 While there are several simple ways for developers to experiment with and explore WPE, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds. To make this easier, there is also meta-webkit, which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
 
-* Linux distros for debian, ubuntu, raspbian, arch linux
-* [Install WPE and minibrowser with flatpak]({{ '/about/flatpak.html' | url }})
-* Raspberry Pi OS images
-* [Install with Balena]({{ '/about/balena-wpe.html' | url }})
+<ul class="arrows">
+<li>Linux distros for debian, ubuntu, raspbian, arch linux</li>
+<li>[Install WPE and minibrowser with flatpak]({{ '/about/flatpak.html' | url }})</li>
+<li>Raspberry Pi OS images</li>
+<li>[Install with Balena]({{ '/about/balena-wpe.html' | url }})</li>
+</ul>
 
 </div>
 
