@@ -4,8 +4,90 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-09-20T00:00:00Z</updated>
+  <updated>2022-09-29T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE Networking Overview</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/blog/04-wpe-networking-overview.html"/>
+    <updated>2022-09-29T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/blog/04-wpe-networking-overview.html</id>
+    <content type="html">&lt;p&gt;At the heart of any browser engine is networking: Connecting with services and other users.  Unlike other engines, WebKit approaches this more abstractly by leaving a large portion of the networking up to individual ports. This includes network protocols such as HTTP, WebSockets, and WebRTC. The upside to this approach is a higher level of integration with the system-provided libraries and features so WebKit will behave similarly to other software on the platform often with more centralized configuration.&lt;/p&gt;
+&lt;p&gt;Due to this abstraction there are a few independent layers that make up the networking stack of WPE. In this post, I’ll break down what each layer accomplishes as well as give some insight into the codebase’s structure.&lt;/p&gt;
+&lt;h2 id=&quot;networking-layers&quot; tabindex=&quot;-1&quot;&gt;Networking Layers&lt;/h2&gt;
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img alt=&quot;WebKit Network Layers&quot; src=&quot;https://wpewebkit.org/assets/networking-layers.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;webkit&quot; tabindex=&quot;-1&quot;&gt;WebKit&lt;/h3&gt;
+&lt;p&gt;Before we get into the libraries used for WPE, let’s discuss WebKit itself. Despite abstracting out a lot of the protocol handling, WebKit itself still needs to understand a lot of fundamentals of HTTP.&lt;/p&gt;
+&lt;p&gt;WebCore (discussed in &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html&quot;&gt;WPE Overview&lt;/a&gt;) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by &lt;code&gt;ResourceRequest&lt;/code&gt; and &lt;code&gt;ResourceResponse&lt;/code&gt; objects, which map to general HTTP functionality.&lt;/p&gt;
+&lt;h4 id=&quot;networkprocess&quot; tabindex=&quot;-1&quot;&gt;NetworkProcess&lt;/h4&gt;
+&lt;p&gt;A core part of modern web engine security is the multi-process model.  In order to defend against exploits, each website runs in its own isolated process that does not have network access. In order to allow for network access, they must talk over IPC to a dedicated NetworkProcess, typically one per browser instance. The NetworkProcess receives a &lt;code&gt;ResourceRequest&lt;/code&gt;, creates a &lt;code&gt;NetworkDataTask&lt;/code&gt; with it to download the data, and responds with a &lt;code&gt;ResourceResponse&lt;/code&gt; to the WebProcess which looks like this:&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img alt=&quot;WebKit Network Flowchart&quot; src=&quot;https://wpewebkit.org/assets/networking-flow.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;wpe&quot; tabindex=&quot;-1&quot;&gt;WPE&lt;/h3&gt;
+&lt;p&gt;WPE implements the platform-specific versions of the classes above as &lt;code&gt;ResourceRequestSoup&lt;/code&gt; and &lt;code&gt;NetworkDataTaskSoup&lt;/code&gt;, primarily using a library called libsoup.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://libsoup.org/&quot;&gt;libsoup&lt;/a&gt; library was originally created for the GNOME project’s email client and has since grown to be a very featureful HTTP implementation, now maintained by Igalia.&lt;/p&gt;
+&lt;p&gt;At a high level, the main task that libsoup does is manage connections and queued requests to websites and then efficiently streams the responses back to WPE. Properly implementing HTTP is a fairly large task, and this is a non-exhaustive list of features it implements: HTTP/1.1, HTTP/2, WebSockets, cookies, decompression, multiple authentication standards, HSTS, and HTTP proxies.&lt;/p&gt;
+&lt;p&gt;On its own, libsoup is really focused on the HTTP layer and uses the &lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib&quot;&gt;GLib&lt;/a&gt; library to implement many of its networking features in a portable way. This is where TCP, DNS, and TLS are handled. It is also directly used by WebKit for URI parsing and DNS pre-caching.&lt;/p&gt;
+&lt;p&gt;Using GLib also helps standardize behavior across modern Linux systems. It allows configuration of a global proxy resolver that WebKit, along with other applications, can use.&lt;/p&gt;
+&lt;h4 id=&quot;tls&quot; tabindex=&quot;-1&quot;&gt;TLS&lt;/h4&gt;
+&lt;p&gt;Another unique detail of our stack is that TLS is fully abstracted inside of GLib by a project called &lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib-networking&quot;&gt;GLib-Networking&lt;/a&gt;. This project provides multiple implementations of TLS that can be chosen at runtime, including OpenSSL and gnutls on Linux. The benefit here is that clients can choose the implementation they prefer—whether for licensing, certification, or technical reasons.&lt;/p&gt;
+&lt;h3 id=&quot;usage&quot; tabindex=&quot;-1&quot;&gt;Usage&lt;/h3&gt;
+&lt;p&gt;Let’s go step by step to see some real world usage. If we call &lt;code&gt;webkit_web_view_load_uri()&lt;/code&gt; for a new domain it will:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a &lt;code&gt;ResourceRequest&lt;/code&gt; in WebCore that represents an HTTP request with a few basic headers set.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ResourceRequestSoup&lt;/code&gt; will create its own internal representation for the request using &lt;code&gt;soup_message_new_for_uri()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;This is passed to the &lt;code&gt;NetworkProcess&lt;/code&gt; to load this request as a &lt;code&gt;NetworkDataTask&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NetworkDataTaskSoup&lt;/code&gt; will send/receive the request/response with &lt;code&gt;soup_session_send()&lt;/code&gt; which queues the message to be sent.&lt;/li&gt;
+&lt;li&gt;libsoup will connect to the host using &lt;code&gt;GSocketClient&lt;/code&gt; which does a DNS lookup and TCP connection.
+&lt;ul&gt;
+&lt;li&gt;If this is a TLS connection &lt;code&gt;GTlsClientConnection&lt;/code&gt; will use a library such as gnutls to do a TLS handshake.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;libsoup will write the HTTP request and read from the socket parsing the HTTP responses eventually returning the data to WebKit.&lt;/li&gt;
+&lt;li&gt;WebKit receives this data, along with periodic updates about the state of the request, and sends it out of the &lt;code&gt;NetworkProcess&lt;/code&gt; back to the main process as a &lt;code&gt;ResourceResponse&lt;/code&gt; eventually loading the data in the &lt;code&gt;WebProcess&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;summary&quot; tabindex=&quot;-1&quot;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In conclusion, WebKit provides a very flexible abstraction for platforms, and WPE leverages mature system libraries to provide a portable implementation. It has many layers, but they are all well organized and suited to their tasks.&lt;/p&gt;
+&lt;p&gt;If you are working with WPE and are interested in collaborating, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. If you are interested in working with Igalia, you can &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;apply here&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.16.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/cog-0.16.0.html"/>
+    <updated>2022-09-27T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/cog-0.16.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 0.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-cog-0.16.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the Cog 0.16.0 Release&lt;/h3&gt;
+&lt;p&gt;General:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Add support for gamepads, using &lt;a href=&quot;https://gitlab.gnome.org/GNOME/libmanette&quot;&gt;libmanette&lt;/a&gt;
+for hardware access.&lt;/li&gt;
+&lt;li&gt;Switch the build system from CMake to Meson.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Launcher (&lt;code&gt;cog&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;New &lt;code&gt;--gamepad=&lt;/code&gt; command line option to choose the gamepad
+implementation to use.&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;--proxy=&lt;/code&gt; and &lt;code&gt;--ignore-host=&lt;/code&gt; command line options, which
+allow setting up a network proxy and a list of hosts that would
+bypass it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.16.0.tar.xz (119.1 KiB)
+   md5sum: 2705472ea4f333290973722c0862b21d
+   sha1sum: ef16e5e3d91d0da056fe5e4f596c211af7453b4e
+   sha256sum: 2956f719d36c9a6368f63901a0d1ceaf4d27f529f7df441b3748c36d72906fc6
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPEBackend-fdo 1.14.0 released</title>
@@ -228,49 +310,6 @@ wpewebkit-2.37.91.tar.xz (29.1 MiB)
    md5sum: 59f8570a7f08ff2f86e59a44ec413c2e
    sha1sum: a8fc283f60f2cd0d1dd56a3ee5acfa1d3934e531
    sha256sum: 0e7e907367366797f657c4ba793988b15e6c5fff747a449521ea264c55f6d614
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.15.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/cog-0.15.1.html"/>
-    <updated>2022-09-02T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/cog-0.15.1.html</id>
-    <content type="html">&lt;p&gt;This is the first development release leading towards the 0.16 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.15.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.15.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;launcher: Add new &lt;code&gt;--proxy&lt;/code&gt; and &lt;code&gt;--ignore-host&lt;/code&gt; command line options, which
-allow setting up a network proxy and a list of hosts that would bypass it.&lt;/li&gt;
-&lt;li&gt;drm, gtk4, wl, x11: Add support for gamepads using &lt;a href=&quot;https://github.com/GNOME/libmanette&quot;&gt;libmanette&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;build: Switch the build system from CMake to Meson.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.15.1.tar.xz (118.6 KiB)
-   md5sum: 8b2021df565d6780a645728a3e17cb9c
-   sha1sum: 67e186e8d7897bed5cfc07a36ce7e166d675358a
-   sha256sum: 9f8ab14696077c0b64a7e8dc269709e33aae17336f9405c9734752c4d174f350
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.36.7 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.36.7.html"/>
-    <updated>2022-08-25T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.36.7.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.36 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.36.7%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.36.7?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.36.7.tar.xz (24.6 MiB)
-   md5sum: a9f8d521d8171292aab842d3e8ba227e
-   sha1sum: e9255b3592bbaac8b20af03cafa31cedfb0b4898
-   sha256sum: f3747d72ffc562ad0cfb6218fdf6d897c78c4bdbf5618e0fa26906fba52b95c9
 &lt;/pre&gt;
 </content>
   </entry>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE Networking Overview</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/redesign/blog/04-wpe-networking-overview.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/redesign/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/redesign/blog/04-wpe-networking-overview.html">
+  <meta property="og:title" content="WPE Networking Overview">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/redesign/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/redesign/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-09-29T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/redesign/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/redesign/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/redesign/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/redesign/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.onload = (function() {
+      document.querySelector('nav.global>div>.burger').addEventListener('click',menutog);
+    });
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+
+  <style>
+    .related-card {
+      min-height: 10rem;
+      border: 1px solid gray;
+      border-radius: 10%;
+      margin:  1rem;
+      text-align:  center;
+    }
+
+lazy-youtube iframe,
+lazy-youtube img {
+  max-width: 100%;
+}
+
+lazy-youtube a {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+lazy-youtube a:hover {
+  text-decoration: none;
+}
+
+/*
+lazy-youtube a:hover span {
+  background-color: white;
+}
+*/
+
+lazy-youtube a > * {
+  grid-row: 1;
+  grid-column: 1;
+  display: block;
+}
+lazy-youtube a > span {
+  z-index: 2;
+  width: 68px;
+  color: transparent;
+  height: 48px;
+  cursor: pointer;
+  transform: translate3d(-50%, -50%, 0);
+  margin-top: 68px;
+  margin-left: 68px;
+  z-index: 1;
+  background-color: transparent;
+  /* YT's actual play button svg */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 68 48"><path fill="%23f00" fill-opacity="0.8" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"></path><path d="M 45,24 27,14 27,34" fill="%23fff"></path></svg>');
+  filter: grayscale(100%);
+  transition: filter .1s cubic-bezier(0, 0, 0.2, 1);
+  border: none;
+}
+
+
+#demos .btn { display: none; }
+
+@media (min-width: 992px) {
+  #demos .scroller {
+   overflow-x: hidden;
+   display: flex;
+  }
+
+  #demos .btn {
+    display: grid;
+    align-content: center;
+    z-index: 1;
+    box-shadow: none;
+  } 
+
+  #demos .btn > span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    align-content: center;
+  }
+
+  #demos.initialized .btn {
+     visibility: visible;
+  }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let vids = [...document.querySelectorAll('#demos .item > *')];
+      let i=0;
+
+      function stopVideos() {
+        vids.forEach((vid) => {
+          if (vid._player) {
+            vid._player.pauseVideo()
+          }
+        })
+      }
+
+      let demos = document.getElementById('demos');
+      if (demos) demos.classList.add('initialized');
+    })
+
+    class LazyYTElementLite extends HTMLElement {
+
+      connectedCallback() {
+        let hash = this.getAttribute('hash')
+        let element = this;
+        element.innerHTML = `
+        <div><a href=https://www.youtube-nocookie.com/embed/${hash}?autoplay=1><img src=https://img.youtube.com/vi/${hash}/hqdefault.jpg alt='Video: ${this.getAttribute('title')}'><span>▶</span></a>
+        <div>${this.getAttribute('title')}</div>
+      </div>` /*
+        */
+        element.addEventListener('click', (evt) => {
+          element._player = new YT.Player(element.firstElementChild, {
+              height: '315',
+              width: '560',
+              videoId: hash,
+              playerVars: { 'autoplay': 1 }
+            });
+            evt.preventDefault()
+        })
+      }
+    }
+
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    function onYouTubeIframeAPIReady() {
+      customElements.define('lazy-youtube', LazyYTElementLite);
+    }
+  </script>
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="/blog off"><!-- link․url: '/'   pagedir: '/blog' -->
+			<li>
+			<a class="nav-link" href="/wpewebkit.org/redesign/">Home</a>
+			</li><!-- link․url: '/about'   pagedir: '/blog' -->
+			<li>
+			<a class="nav-link" href="/wpewebkit.org/redesign/about">Learn & Discover</a>
+			</li><!-- link․url: '/blog'   pagedir: '/blog' -->
+			<li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/redesign/blog">Blog</a>
+			</li><!-- link․url: '/developers'   pagedir: '/blog' -->
+			<li>
+			<a class="nav-link" href="/wpewebkit.org/redesign/developers">Developers</a>
+			</li><!-- link․url: '/about/explore-wpe.html'   pagedir: '/blog' -->
+			<li>
+			<a class="btn cta" href="/wpewebkit.org/redesign/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger"></a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/redesign/blog/04-wpe-networking-overview.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE Networking Overview</h1>
+ 
+   <meta itemprop="datePublished" content="Thu Sep 29 2022">
+   <time itemprop="dateCreated">29 September 2022</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>At the heart of any browser engine is networking: Connecting with services and other users.  Unlike other engines, WebKit approaches this more abstractly by leaving a large portion of the networking up to individual ports. This includes network protocols such as HTTP, WebSockets, and WebRTC. The upside to this approach is a higher level of integration with the system-provided libraries and features so WebKit will behave similarly to other software on the platform often with more centralized configuration.</p>
+<p>Due to this abstraction there are a few independent layers that make up the networking stack of WPE. In this post, I’ll break down what each layer accomplishes as well as give some insight into the codebase’s structure.</p>
+<h2 id="networking-layers" tabindex="-1">Networking Layers</h2>
+<div align="center">
+    <img alt="WebKit Network Layers" src="/assets/networking-layers.svg">
+</div>
+<h3 id="webkit" tabindex="-1">WebKit</h3>
+<p>Before we get into the libraries used for WPE, let’s discuss WebKit itself. Despite abstracting out a lot of the protocol handling, WebKit itself still needs to understand a lot of fundamentals of HTTP.</p>
+<p>WebCore (discussed in <a href="/blog/02-overview-of-wpe.html">WPE Overview</a>) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by <code>ResourceRequest</code> and <code>ResourceResponse</code> objects, which map to general HTTP functionality.</p>
+<h4 id="networkprocess" tabindex="-1">NetworkProcess</h4>
+<p>A core part of modern web engine security is the multi-process model.  In order to defend against exploits, each website runs in its own isolated process that does not have network access. In order to allow for network access, they must talk over IPC to a dedicated NetworkProcess, typically one per browser instance. The NetworkProcess receives a <code>ResourceRequest</code>, creates a <code>NetworkDataTask</code> with it to download the data, and responds with a <code>ResourceResponse</code> to the WebProcess which looks like this:</p>
+<div align="center">
+    <img alt="WebKit Network Flowchart" src="/assets/networking-flow.svg">
+</div>
+<h3 id="wpe" tabindex="-1">WPE</h3>
+<p>WPE implements the platform-specific versions of the classes above as <code>ResourceRequestSoup</code> and <code>NetworkDataTaskSoup</code>, primarily using a library called libsoup.</p>
+<p>The <a href="https://libsoup.org">libsoup</a> library was originally created for the GNOME project’s email client and has since grown to be a very featureful HTTP implementation, now maintained by Igalia.</p>
+<p>At a high level, the main task that libsoup does is manage connections and queued requests to websites and then efficiently streams the responses back to WPE. Properly implementing HTTP is a fairly large task, and this is a non-exhaustive list of features it implements: HTTP/1.1, HTTP/2, WebSockets, cookies, decompression, multiple authentication standards, HSTS, and HTTP proxies.</p>
+<p>On its own, libsoup is really focused on the HTTP layer and uses the <a href="https://gitlab.gnome.org/GNOME/glib">GLib</a> library to implement many of its networking features in a portable way. This is where TCP, DNS, and TLS are handled. It is also directly used by WebKit for URI parsing and DNS pre-caching.</p>
+<p>Using GLib also helps standardize behavior across modern Linux systems. It allows configuration of a global proxy resolver that WebKit, along with other applications, can use.</p>
+<h4 id="tls" tabindex="-1">TLS</h4>
+<p>Another unique detail of our stack is that TLS is fully abstracted inside of GLib by a project called <a href="https://gitlab.gnome.org/GNOME/glib-networking">GLib-Networking</a>. This project provides multiple implementations of TLS that can be chosen at runtime, including OpenSSL and gnutls on Linux. The benefit here is that clients can choose the implementation they prefer—whether for licensing, certification, or technical reasons.</p>
+<h3 id="usage" tabindex="-1">Usage</h3>
+<p>Let’s go step by step to see some real world usage. If we call <code>webkit_web_view_load_uri()</code> for a new domain it will:</p>
+<ol>
+<li>Create a <code>ResourceRequest</code> in WebCore that represents an HTTP request with a few basic headers set.
+<ul>
+<li><code>ResourceRequestSoup</code> will create its own internal representation for the request using <code>soup_message_new_for_uri()</code>.</li>
+</ul>
+</li>
+<li>This is passed to the <code>NetworkProcess</code> to load this request as a <code>NetworkDataTask</code>.</li>
+<li><code>NetworkDataTaskSoup</code> will send/receive the request/response with <code>soup_session_send()</code> which queues the message to be sent.</li>
+<li>libsoup will connect to the host using <code>GSocketClient</code> which does a DNS lookup and TCP connection.
+<ul>
+<li>If this is a TLS connection <code>GTlsClientConnection</code> will use a library such as gnutls to do a TLS handshake.</li>
+</ul>
+</li>
+<li>libsoup will write the HTTP request and read from the socket parsing the HTTP responses eventually returning the data to WebKit.</li>
+<li>WebKit receives this data, along with periodic updates about the state of the request, and sends it out of the <code>NetworkProcess</code> back to the main process as a <code>ResourceResponse</code> eventually loading the data in the <code>WebProcess</code>.</li>
+</ol>
+<h2 id="summary" tabindex="-1">Summary</h2>
+<p>In conclusion, WebKit provides a very flexible abstraction for platforms, and WPE leverages mature system libraries to provide a portable implementation. It has many layers, but they are all well organized and suited to their tasks.</p>
+<p>If you are working with WPE and are interested in collaborating, feel free to <a href="https://www.igalia.com/contact/">contact us</a>. If you are interested in working with Igalia, you can <a href="https://www.igalia.com/jobs/browsers_webkit_position">apply here</a>.</p>
+
+
+
+<section class="content-section bg-light small-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+          <hr class="author-line">
+          <div class="card">
+            <span>
+              This article was written by <a href="https://www.igalia.com/team/pgriffis">Patrick Griffis</a>. <br><br>Patrick has been contributing to WebKit since 2018 and does work around networking, security, and the platform libraries WPE uses.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+</div>
+
+    </main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/redesign/" class="igalia logo home"><img src="/wpewebkit.org/redesign/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2022 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
