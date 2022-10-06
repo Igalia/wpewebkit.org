@@ -4,8 +4,23 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-09-29T00:00:00Z</updated>
+  <updated>2022-10-15T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>Success Story: Metrological</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/blog/2022-success-metrological.html"/>
+    <updated>2022-10-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/blog/2022-success-metrological.html</id>
+    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
+&lt;img alt=&quot;Metrological: A Comcast Company&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/redesign/assets/img/logo-metrological@2x.png&quot; /&gt;
+&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/redesign/assets/img/logo-blue.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;WPE WebKit brought &lt;strong&gt;RDK (Reference Design Kit)&lt;/strong&gt;, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.&lt;/p&gt;
+&lt;p&gt;Delivering a fast and memory-efficient browser for embbedded systems is a challenging task, so Igalia helped Metrological build a new full-screen browser engine which stripped away all unecessary toolkit elements.&lt;/p&gt;
+&lt;p&gt;With years of experience around WebKit platform integration, Igalia worked to produce a new WebKit port, WPE, which interfaced directly with Wayland and the graphics driver. Additionally, Igalia pushed forward the implementation of a multi-platform multi-threaded compositer, enabling better performance on low-end multicore processors. WPE is an official port of WebKit.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE Networking Overview</title>
@@ -248,24 +263,6 @@ wpewebkit-2.36.8.tar.xz (24.6 MiB)
    sha1sum: f45936c578f7dcfbb6064e87da6c098efe093e68
    sha256sum: 8d42a349c910b2d0961b8d34fecef29cec3d21e3af5977346c90026692dc75eb
 &lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Success Story: Metrological</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/blog/2022-success-metrological.html"/>
-    <updated>2022-09-13T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/blog/2022-success-metrological.html</id>
-    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
-&lt;img alt=&quot;Metrological: A Comcast Company&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/redesign/assets/img/logo-metrological@2x.png&quot; /&gt;
-&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/redesign/assets/img/logo-blue.svg&quot; /&gt;
-&lt;/div&gt;
-&lt;p&gt;A project led by Metrological, &lt;strong&gt;RDK (Reference Design Kit)&lt;/strong&gt; is a fully modular, portable, and customizable open source software solution that standardizes core functions used in video, broadband and Internet-of-Things devices. In particular, RDK also provides the web browser for millions of cable set top boxes.&lt;/p&gt;
-&lt;p&gt;Delivering a fast and memory-efficient browser for embbedded systems is a challenging task, so
-Igalia helped Metrological build a new full-screen browser engine which stripped away all unecessary toolkit elements.&lt;/p&gt;
-&lt;p&gt;With years of experience around WebKit platform integration, Igalia worked to produce a new WebKit port, WPE, which interfaced directly with Wayland and the graphics driver. Additionally, Igalia pushed forward the implementation of a multi-platform multi-threaded compositer, enabling better
-performance on low-end multicore processors. WPE is an official port of WebKit.&lt;/p&gt;
-&lt;p&gt;WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. Utilizing open source components, RDK drastically reduced development cycles, encourages collaboration, and enhances innovation. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.&lt;/p&gt;
 </content>
   </entry>
   
