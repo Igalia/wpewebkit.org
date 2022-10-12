@@ -8,8 +8,12 @@ html {
 	--colorMain: #1593ED;
 */
 	--colorMain: #0D71B9;
-	--dashH: linear-gradient(90deg, currentColor 25%, 25%, transparent 75%, 75%, currentColor 100%) 0 100% / 8px 1px repeat-x;
-	--dashV: linear-gradient(180deg, currentColor 25%, 25%, transparent 75%, 75%, currentColor 100%) 0 0 / 1px 8px repeat-y;
+	--dashH: linear-gradient(90deg, currentColor 25%,
+		transparent 25% 75%, 
+		currentColor 75%) 0 100% / 8px 1px repeat-x;
+	--dashV: linear-gradient(180deg, currentColor 25%,
+		transparent 25% 75%, 
+		currentColor 75%) 0 0 / 1px 8px repeat-y;
 	height: auto;
 	min-height: 100%;
 	max-width: 100vw;
@@ -278,22 +282,11 @@ nav.global .burger {
 		display: flex;
 		align-items: center;
 	}
-	nav.global ul li.currentPage {
-		position: relative;
-	}
-	nav.global ul li.currentPage a {
-		padding: 0;
-		padding-block: 0.25em;
-		margin: 1em;
-		background: var(--dashH);
-		background-size: 0.5em 1px;
-		background-position: 50% 100%;
-		color: inherit;
-	}
-	nav.global ul li.currentPage a::before {
+	nav.global ul li.currentPage::before {
 		content: '';
 		position: absolute;
-		top: calc(50% + 0.875em);
+		z-index: 1;
+		top: 50%;
 		bottom: 0;
 		left: 50%;
 		right: 0;
@@ -302,6 +295,24 @@ nav.global .burger {
 			linear-gradient(0deg, #FFFF 2px, transparent 2px)
 			;
 		background-size: 1px 0.5em, auto;
+	}
+	nav.global ul li.currentPage {
+		position: relative;
+	}
+	nav.global ul li.currentPage a {
+		position: relative;
+		z-index: 2;
+		padding: 0;
+		padding-block: 0.25em;
+		margin: 1em;
+		background: var(--dashH);
+		background-size: 0.5em 1px;
+		background-position: 50% 100%;
+		background-color: #FFF;
+		color: inherit;
+	}
+	nav.global ul li.currentPage a::before {
+		content: '';
 	}
 	nav.global ul li.currentPage ~ li {
 		background: linear-gradient(0deg, #FFFF 2px, transparent 2px);
