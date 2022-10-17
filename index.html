@@ -260,7 +260,7 @@ section.igalia > div > div > img {
 </style>
 
 <header class="page full-width">
-<video autoplay muted loop id="banner"><source src="{{ '/assets/video/homepage.mp4' | url }}" type="video/mp4"></video>
+<video muted loop id="banner"><source src="{{ '/assets/video/homepage.mp4' | url }}" type="video/mp4"></video>
 <span></span>
 <div>
 <h1>
@@ -270,7 +270,7 @@ Create simple and performant systems based on <strong>Web platform technologies.
 A WebKit port designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best performance.
 </p>
 <a class="cta btn large" href="{{ '/about/explore-wpe.html' | url }}">Get Started</a>
-<button id="bannerControl"><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><rect x="33" y="30" width="12" height="40" /><rect x="55" y="30" width="12" height="40" /></svg></button></div>
+<button id="bannerControl"><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><path d="M 35,30 l 40,20 -40,20 z" /></svg></button></div>
 </header>
 
 
@@ -371,13 +371,19 @@ var ppbutton = document.getElementById("bannerControl");
 ppbutton.addEventListener("click", playPause);
 myVideo = document.getElementById("banner");
 function playPause() { 
-    if (myVideo.paused) {
-        myVideo.play();
-        ppbutton.innerHTML = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><rect x="33" y="30" width="12" height="40" /><rect x="55" y="30" width="12" height="40" /></svg>';
-        }
-    else  {
-        myVideo.pause(); 
-        ppbutton.innerHTML = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><path d="M 35,30 l 40,20 -40,20 z" /></svg>';
-        }
+	if (myVideo.paused) {
+		myVideo.play();
+		ppbutton.innerHTML = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><rect x="33" y="30" width="12" height="40" /><rect x="55" y="30" width="12" height="40" /></svg>';
+	} else {
+		myVideo.pause(); 
+		ppbutton.innerHTML = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><path d="M 35,30 l 40,20 -40,20 z" /></svg>';
+	}
+}
+window.onload = function() {
+	let mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+	if (mediaQuery || !mediaQuery.matches) {
+		myVideo.play();
+		ppbutton.innerHTML = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><rect x="33" y="30" width="12" height="40" /><rect x="55" y="30" width="12" height="40" /></svg>';
+	}
 }
 </script>
