@@ -210,9 +210,6 @@ nav.global .cta.btn {
 	font-size: 1em;
 }
 nav.global .burger {
-	display: fixed;
-	top: 0;
-	right: 0;
 	z-index: 9999;
 	height: 5em;
 	width: 5em;
@@ -348,11 +345,11 @@ nav.sidebar a[href] {
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.125em;
 	background: #EAFEFE;
-	white-space: pre;
 }
 @media (max-width: 30rem) {
 	nav.sidebar a[href] {
 		font-size: smaller;
+		white-space: pre;
 	}
 }
 nav.sidebar .currentPage a[href] {

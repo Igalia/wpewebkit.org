@@ -35,9 +35,9 @@ While there are several simple ways for developers to experiment with and explor
 
 <ul class="arrows">
 <li>Linux distros for debian, ubuntu, raspbian, arch linux</li>
-<li>[Install WPE and minibrowser with flatpak]({{ '/about/flatpak.html' | url }})</li>
+<li><a href="{{ '/about/flatpak.html' | url }}">Install WPE and minibrowser with flatpak</a></li>
 <li>Raspberry Pi OS images</li>
-<li>[Install with Balena]({{ '/about/balena-wpe.html' | url }})</li>
+<li><a href="{{ '/about/balena-wpe.html' | url }}">Install with Balena</a></li>
 </ul>
 
 </div>
@@ -58,7 +58,7 @@ WPE WebKit and [WebKitGTK](https://webkitgtk.org/) share a fair amount of code. 
 
 </div>
 
-<div class="gallery c2 dotsep">
+<div class="dotsep">
 <div>
 <h2><a href="{{ '/about/architecture.html' | url }}">WPE Design</a></h2>
 <p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
