@@ -23,7 +23,6 @@ body {
 	min-height: 100%;
 	margin: 0;
 	padding: 5rem 0 0;
-	overflow-x: hidden;
 }
 
 :is(nav, footer).global, header.page {
