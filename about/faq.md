@@ -158,7 +158,7 @@ ALSA is always tried as the last fallback if all the other available sinks
 fail.
 
 
-## Why the browser/launcher (e.g. Cog) does not load local files?
+## Why does the browser/launcher (e.g. Cog) not load local files?
 
 If you are building an embedded system image yourself, make sure to install
 the [shared MIME database][shared-mime-db] is installed—in most distributions
