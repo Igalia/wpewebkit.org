@@ -98,7 +98,7 @@ table tbody tr:nth-child(n + 2) > * {
 <ul>
 <li class="currentPage"><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></li>
 <li><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
-<li><a href="{{ '' | url }}">WPE in Action</a></li>
+<li><a href="{{ '#wpe-in-action' | url }}">WPE in Action</a></li>
 </ul>
 </nav>
 
