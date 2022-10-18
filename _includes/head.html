@@ -83,9 +83,7 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ '/css/stylish-portfolio.css' | url }}">
   <script type="text/javascript">
-    window.onload = (function() {
-      document.querySelector('nav.global>div>.burger').addEventListener('click',menutog);
-    });
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
     function menutog(e) {
       document.querySelector('nav.global>div>ul').classList.toggle('off');
       e.preventDefault();
