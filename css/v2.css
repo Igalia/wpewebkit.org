@@ -210,9 +210,6 @@ nav.global .cta.btn {
 	font-size: 1em;
 }
 nav.global .burger {
-	display: fixed;
-	top: 0;
-	right: 0;
 	z-index: 9999;
 	height: 5em;
 	width: 5em;
