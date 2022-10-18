@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>The Architecture of WPE</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/redesign/about/architecture.html">
+  <title>Cog 0.16.1 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/redesign/release/cog-0.16.1.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/redesign/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/redesign/about/architecture.html">
-  <meta property="og:title" content="The Architecture of WPE">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/redesign/release/cog-0.16.1.html">
+  <meta property="og:title" content="Cog 0.16.1 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/redesign/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/redesign/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,8 +21,9 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-10-18T13:59:35.962Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2022-10-18T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -199,9 +200,9 @@ lazy-youtube a > span {
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/redesign/"><img src="/wpewebkit.org/redesign/assets/img/logo-blue.svg" alt="WPE"></a>
-		<ul class="about off"><li>
+		<ul class="release off"><li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/">Home</a>
-			</li><li class="currentPage">
+			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/about">Learn & Discover</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/redesign/blog">Blog</a>
@@ -217,66 +218,58 @@ lazy-youtube a > span {
 
     <main>
     <style>
-main > *, .dotsep {
-	padding: 2em 0 3em;
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
 }
-.masthead-img {
-	padding: 0;
-	margin-block: 4em 1em;
-}
-.masthead-img img {
-	max-width: 90%;
-	max-width: min(800px,100%);
-	margin-block: -2em;
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
 }
 </style>
-<header class="page">
-<h1>WPE Design</h1>
-<p>WPE is the official <a href="https://webkit.org">WebKit</a> port for embedded platforms. WPE is uniquely designed
-for embedded systems in that it doesn’t depend on any user-interface toolkit
-such as the traditional Cocoa, GTK, etc toolkits.</p>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/redesign/release/cog-0.16.1.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">Cog 0.16.1 released</h1>
+ 
+   <meta itemprop="datePublished" content="Tue Oct 18 2022">
+   <time itemprop="dateCreated">18 October 2022</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//cog-0.16.1.tar.xz">Download</a>
+  
 </header>
-<div class="masthead-img full-bleed" align="center">
-<img src="/wpewebkit.org/redesign/assets/img/diagram-WPE-design.svg" alt="">
+
+<div itemprop="articleBody">
+
+<p>This is the first bug fix release in the stable 0.16 series.</p>
+<h3 id="what%E2%80%99s-new-in-cog-0.16.1%3F" tabindex="-1">What’s new in Cog 0.16.1?</h3>
+<ul>
+<li>core: Fix build failure in some systems.</li>
+<li>drm: Fix missing symbol which made the platform unusable.</li>
+<li>wl: Fix build in systems where the <code>drm_fourcc.h</code> header is not installed
+in the default search paths.</li>
+<li>wl: Allow building against <code>libweston-12-protocols</code>.</li>
+<li>meson: Do not check for platform plug-in dependencies if no platform
+plug-ins are enabled.</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+cog-0.16.1.tar.xz (119.3 KiB)
+   md5sum: 1489740db6b4ea568578035c30b8b2f4
+   sha1sum: 1235203085e7ccd8fc76eab6bdfcdb2e3ae38ea9
+   sha256sum: 37c5f14123b8dcf077839f6c60f0d721d2a91bb37829e796f420126e6b0d38b5
+</pre>
+
+
+
+
 </div>
-<section>
-<h2 id="web-page-rendering" tabindex="-1">Web page rendering</h2>
-<p class="leadin">WPE is considered a hybrid port because it defers the final web page delivery for display to a rendering backend. A traditional port would provide a widget for a given toolkit, but WPE opted for a different and more flexible approach.</p>
-<p>The common interface between WPEWebKit and its rendering backends is provided by
-<a href="https://github.com/WebPlatformForEmbedded/libwpe">libwpe</a>. On one side, once
-WPEWebKit has a graphical representation of the final composited Web page ready
-for rendering, it invokes a callback function on <code>libwpe</code>. On the other side,
-the WPE application has to register a view backend on the WPE WebView. This view
-backend is provided by the rendering backend. The view backend receives the Web
-page representation from <code>libwpe</code>, usually as an EGLImage, and is in charge of
-presenting it in the application, on-screen.</p>
-<p>The decoupling between generating the WebPage representation on WebKit side and
-the actual rendering on the application side provides a very flexible design.
-For instance, WPE integrators can easily develop a new rendering backend for
-specific embedded platforms that might have a graphics driver with special API
-requirements.</p>
-<p>WPE provides a rendering backend aiming to target the most common platforms and
-leverage the existing graphics stack available in the
-<a href="https://freedesktop.org">Freedesktop</a> umbrella eco-system.
-<a href="https://github.com/Igalia/WPEBackend-FDO">WPEBackend-FDO</a> is the reference
-implementation of the base rendering backend design. WPEBackend-FDO provides an API
-for WPE applications that aims to ease the handling of rendering either
-on-screen using EGL, or off-screen using SHM.</p>
-</section>
-<section class="dotsep">
-<h2 id="input-events-handling" tabindex="-1">Input events handling</h2>
-<p class="leadin">In a traditional WebKit port, the provided widget usually also handles input
-(keyboard, mouse, touch) events and is in charge of relaying them to the
-internal WebKit input-methods components.</p>
-<p>As WPE doesn’t provide a widget, it relies on <code>libwpe</code> APIs to relay input
-events from the WPE application to the internal WebKit input-methods components.
-This design again adds flexibility to the overall WPE architecture, enabling
-applications to support new input devices without having to go through a UI
-toolkit first.</p>
-<p>In the example of the <a href="https://github.com/Igalia/cog">Cog WPE browser</a>, the
-application relies on Wayland protocols for user input to communicate events
-coming from the Wayland compositor to WPE.</p>
-</section>
 
     </main>
 

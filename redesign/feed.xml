@@ -4,8 +4,34 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2022-10-15T00:00:00Z</updated>
+  <updated>2022-10-18T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>Cog 0.16.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/cog-0.16.1.html"/>
+    <updated>2022-10-18T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/cog-0.16.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 0.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.16.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.16.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;core: Fix build failure in some systems.&lt;/li&gt;
+&lt;li&gt;drm: Fix missing symbol which made the platform unusable.&lt;/li&gt;
+&lt;li&gt;wl: Fix build in systems where the &lt;code&gt;drm_fourcc.h&lt;/code&gt; header is not installed
+in the default search paths.&lt;/li&gt;
+&lt;li&gt;wl: Allow building against &lt;code&gt;libweston-12-protocols&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;meson: Do not check for platform plug-in dependencies if no platform
+plug-ins are enabled.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.16.1.tar.xz (119.3 KiB)
+   md5sum: 1489740db6b4ea568578035c30b8b2f4
+   sha1sum: 1235203085e7ccd8fc76eab6bdfcdb2e3ae38ea9
+   sha256sum: 37c5f14123b8dcf077839f6c60f0d721d2a91bb37829e796f420126e6b0d38b5
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Success Story: Metrological</title>
@@ -283,30 +309,6 @@ cog-0.14.1.tar.xz (119.8 KiB)
    md5sum: 69d72ac046a0fc485ea7b61b96e7e7fc
    sha1sum: 6236972b0ae0bce38a0a017610f161b349723862
    sha256sum: fb91104e25e1dde27189c91c70acc356e387f47acebaa8997e01ce5879c3a600
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.37.91 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.37.91.html"/>
-    <updated>2022-09-02T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/redesign/release/wpewebkit-2.37.91.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 2.38 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.37.91%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.37.91?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Cache and reuse image-based backing stores to improve memory consumption.&lt;/li&gt;
-&lt;li&gt;Deprecate the &lt;code&gt;WebKitSettings.enable-frame-flattening&lt;/code&gt; setting because the
-functionality will be removed in 2.40.&lt;/li&gt;
-&lt;li&gt;Fix deadlock when disposing player while handling rotation tag.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.37.91.tar.xz (29.1 MiB)
-   md5sum: 59f8570a7f08ff2f86e59a44ec413c2e
-   sha1sum: a8fc283f60f2cd0d1dd56a3ee5acfa1d3934e531
-   sha256sum: 0e7e907367366797f657c4ba793988b15e6c5fff747a449521ea264c55f6d614
 &lt;/pre&gt;
 </content>
   </entry>
