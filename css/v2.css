@@ -345,11 +345,11 @@ nav.sidebar a[href] {
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.125em;
 	background: #EAFEFE;
-	white-space: pre;
 }
 @media (max-width: 30rem) {
 	nav.sidebar a[href] {
 		font-size: smaller;
+		white-space: pre;
 	}
 }
 nav.sidebar .currentPage a[href] {
