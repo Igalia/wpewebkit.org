@@ -30,10 +30,20 @@ ul.gallery.c2 li {
 		top: 50%;
 		left: -5rem;
 		width: 5rem;
-		height: 1px;
-		background: linear-gradient(90deg,#000,#0008);
-		-webkit-mask-image: repeating-linear-gradient(270deg, transparent, #89A 1px, #999 3px, transparent 4px, transparent 7px);
-		mask-image: repeating-linear-gradient(270deg, transparent, #89A 1px, #999 3px, transparent 4px, transparent 7px);
+		height: 2px;
+		margin-top: -1px;
+		background: linear-gradient(90deg,#444,#888);
+		-webkit-mask-image:
+			repeating-linear-gradient(270deg, transparent, #89A4 1px 3px, transparent 4px 7px),
+			repeating-linear-gradient(270deg, transparent, #89AF 1px 3px, transparent 4px 7px)
+			;
+		mask-image:
+			repeating-linear-gradient(270deg, transparent, #89A4 1px 3px, transparent 4px 7px),
+			repeating-linear-gradient(270deg, transparent, #89AF 1px 3px, transparent 4px 7px)
+			;
+		mask-size: 100% 1px;
+		mask-repeat: no-repeat;
+		mask-position: 100% 0%, 100% 100%;
 	}
 }
 .banner img {
