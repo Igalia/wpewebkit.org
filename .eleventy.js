@@ -89,7 +89,7 @@ module.exports = function(eleventyConfig) {
       let thisPkg = pkgCatalog[pkg];
     //https://www.javascripttutorial.net/array/javascript-sort-an-array-of-objects/
       thisPkg.list.sort((a,b) => {
-        return b.date - a.date;
+        return b.date - a.date - 0.1;
       });
 
       let stableVer = thisPkg.list.findIndex(x => x.type === "stable");

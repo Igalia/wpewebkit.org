@@ -9,40 +9,40 @@ layout: page
 </header>
 
 <section class="content-section bg-light small-section">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-lg-10 mx-auto lead text-left">
-        {%- for pkg in collections.pkgCatalog -%}
-          <article>
-						<h2>{{ pkg[0] }}</h2>
-						{%- assign package = pkg[1] -%}
-						<header>
-							<p>
-							<strong>Stable</strong>
-							<a href="{{ package.latestStable.url }}">{{ package.latestStable.version }}</a>
-							</p>
-							<p>
-							<strong>Development</strong>
-							<a href="{{ package.latestDev.url }}">{{ package.latestDev.version }}</a>
-							</p>
-						</header>
-						<h3>Recent releases</h3>
-						<ol>
-						{%- for entry in package.recent -%}
-							<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
-						{%- endfor -%}
-						</ol>
-						<details>
-						<summary>Older releases ({{ package.list | arrayLength }})</summary>
-						<ol>
-						{%- for entry in package.list -%}
-							<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
-						{%- endfor -%}
-						</ol>
-						</details>
-          </article>
-        {%- endfor -%}
-		  </div>
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-lg-10 mx-auto lead text-left">
+			{%- for pkg in collections.pkgCatalog -%}
+				<article>
+					<h2>{{ pkg[0] }}</h2>
+					{%- assign package = pkg[1] -%}
+					<header>
+						<p>
+						<strong>Stable</strong>
+						<a href="{{ package.latestStable.url }}">{{ package.latestStable.version }}</a>
+						</p>
+						<p>
+						<strong>Development</strong>
+						<a href="{{ package.latestDev.url }}">{{ package.latestDev.version }}</a>
+						</p>
+					</header>
+					<h3>Recent releases</h3>
+					<ol>
+					{%- for entry in package.recent -%}
+						<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
+					{%- endfor -%}
+					</ol>
+					<details>
+					<summary>Older releases ({{ package.list | arrayLength }})</summary>
+					<ol>
+					{%- for entry in package.list -%}
+						<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
+					{%- endfor -%}
+					</ol>
+					</details>
+				</article>
+			{%- endfor -%}
+			</div>
 		</div>
 	</div> 
 </section>
