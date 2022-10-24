@@ -32,7 +32,7 @@ ul.gallery.c2 li {
 		width: 5rem;
 		height: 2px;
 		margin-top: -1px;
-		background: linear-gradient(90deg,#444,#888);
+		background: linear-gradient(90deg,#222,#888);
 		-webkit-mask-image:
 			repeating-linear-gradient(270deg, transparent, #89A4 1px 3px, transparent 4px 7px),
 			repeating-linear-gradient(270deg, transparent, #89AF 1px 3px, transparent 4px 7px)
