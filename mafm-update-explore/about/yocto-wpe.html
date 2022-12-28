@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-12-28T21:38:18.781Z">
+  <meta property="article:published_time" content="2022-12-28T21:58:23.705Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -133,7 +133,7 @@ device.</p>
 <pre><code>wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/&quot;${MACHINE}&quot;/&quot;${SDIMG}&quot;.{bz2,bmap}
 </code></pre>
 <h3 id="writing-using-%E2%80%98bmaptool%E2%80%99-(faster%2C-recommended)-or-classic-%E2%80%98dd%E2%80%99" tabindex="-1">Writing using ‘<code>bmaptool</code>’ (faster, recommended) or classic ‘<code>dd</code>’</h3>
-<p>Homepage for bmaptool: (https://github.com/intel/bmap-tools)</p>
+<p>Homepage for bmaptool: <a href="https://github.com/intel/bmap-tools">https://github.com/intel/bmap-tools</a></p>
 <p>You can typically get this in GNU/Linux-based distributions installing ‘<code>bmap-tools</code>’ package if available.</p>
 <h3 id="combined-instructions-for-raspberry-pi-3b%2F3b%2B-(32-bit)-and-raspberry-pi-4-(64-bit)" tabindex="-1">Combined instructions for Raspberry Pi 3B/3B+ (32-bit) and Raspberry Pi 4 (64-bit)</h3>
 <p>Choose one of:</p>
@@ -156,20 +156,21 @@ wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/${MA
 <h2 id="set-up" tabindex="-1">Set-up</h2>
 <p>After writing the micro-SD card and using it to boot the device, it
 should boot to a graphical environment, using Weston (from Wayland),
-with a minimal top panel bar and some icons.</p>
-<p>To test WPE network is needed, either by pluggin-in an ethernet cable
-and have networking set-up automatically, or by clicking the
-“wireless” icon in the panel to bring up a basic script to help to set
-the network up (selecting SSID and password).</p>
+with a minimal top panel bar and some icons within it.</p>
+<p>To test WPE networking is needed, either by pluggin-in an ethernet
+cable (with DHCP networking should set-up automatically), or by
+clicking the “wireless” icon in the panel, that brings up a basic
+script to help to set the network up (selecting SSID and password).</p>
 <h2 id="testing-and-demos" tabindex="-1">Testing and demos</h2>
-<p>After having network, the browser (<code>cog</code>) can be launched from one of
-the icons in the panel, or alternatively by opening a terminal with
-another of the icons and launching it from the command line.</p>
+<p>After having the network working, the browser (<code>cog</code>) can be launched
+from one of the icons in the panel, or alternatively by opening a
+terminal with another of the icons and launching it from the command
+line.</p>
 <p>This is a quick list of environment variables and key bindings that
 can be used with <code>cog</code> to perform certain actions or change its
 behaviour (e.g. toggle fullscreen, reload, exit):</p>
 <ul>
-<li>(https://github.com/Igalia/cog/blob/master/docs/platform-wl.md)</li>
+<li><a href="https://github.com/Igalia/cog/blob/master/docs/platform-wl.md">https://github.com/Igalia/cog/blob/master/docs/platform-wl.md</a></li>
 </ul>
 <p>Example:</p>
 <pre><code>COG_PLATFORM_WL_VIEW_FULLSCREEN=1 cog -P wl &quot;https://www.wikipedia.org/&quot;
