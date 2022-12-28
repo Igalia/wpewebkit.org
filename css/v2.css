@@ -383,14 +383,6 @@ nav.sidebar .currentPage a[href] {
 	}
 }
 
-pre:has(code) {
-	background: #f1f1f1;
-	padding-block: 1em;
-	padding-inline: 1.5em;
-	border-radius: 0.5em;
-	white-space: pre-wrap;
-}
-
 header.page {
 	position: relative;
 	font-size: 0.75em;
@@ -404,10 +396,12 @@ header.page p {
 	font-size: 1.6em;
 }
 
-pre:has(code) {
+pre {
 	background: #f1f1f1;
-	padding: 0.5em;
+	padding-block: 1em;
+	padding-inline: 1.5em;
 	border-radius: 0.5em;
+	white-space: pre-wrap;
 }
 
 main section div h3 {
