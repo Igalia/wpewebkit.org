@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE WebKit 2.23.91 released!</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-update-developers/release/wpewebkit-2.23.91.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/mafm-update-developers/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-update-developers/release/wpewebkit-2.23.91.html">
+  <meta property="og:title" content="WPE WebKit 2.23.91 released!">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/mafm-update-developers/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/mafm-update-developers/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2019-03-18T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="unstable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/mafm-update-developers/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/mafm-update-developers/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/mafm-update-developers/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/mafm-update-developers/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/mafm-update-developers/"><img src="/wpewebkit.org/mafm-update-developers/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="release off"><li>
+			<a class="nav-link" href="/wpewebkit.org/mafm-update-developers/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/mafm-update-developers/about">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/mafm-update-developers/blog">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/mafm-update-developers/developers">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/mafm-update-developers/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/mafm-update-developers/release/wpewebkit-2.23.91.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE WebKit 2.23.91 released!</h1>
+ 
+   <meta itemprop="datePublished" content="Mon Mar 18 2019">
+   <time itemprop="dateCreated">18 March 2019</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases/wpewebkit-2.23.91.tar.xz">Download</a>
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This is a development release leading towards the 2.24 series.</p>
+<h3 id="what%E2%80%99s-new-in-the-webkitgtk-2.23.91-release%3F" tabindex="-1">What’s new in the WebKitGTK 2.23.91 release?</h3>
+<ul>
+<li>Add setting to configure the page background color.</li>
+<li>Add support for hole-punching using external media players.</li>
+<li>Add support for 16bpp rendering in RGB565 format.</li>
+<li>Add autocleanup definitions for <code>g_autoptr</code> and friends.</li>
+<li>Add <code>WebKitUserContentFilterStore</code> to the API docs.</li>
+<li>Change dependencies to use <code>wpe-1.0</code> and <code>wpe-fdo-1.0</code>.</li>
+<li>Fix constructors returning a <code>GObject</code> in the JSC GLib API.</li>
+<li>Fix build failure with Clang due to usage of <code>wl_array_foreach</code>.</li>
+<li>Fix build failure due to missing <code>WebKitUserContentFilterStore.h</code> header.</li>
+<li>Fix several crashes and rendering issues.</li>
+</ul>
+<p>Thanks to all the contributors who made possible this release.</p>
+<h5 id="checksums" tabindex="-1">Checksums</h5>
+<pre>
+wpewebkit-2.23.91.tar.xz (16.0MB)
+   md5sum: 2c823548d9da12b466a8e2fb46c68d52
+   sha1sum: 46ce9264373a6eb3f90beda3b94bf3a41cdeaf9e
+   sha256sum: 23885d07d19e25cd804dc1eda8d14c7ed248fcc0a2268d0a2133d38a2a81ac4b
+</pre>
+
+
+
+
+</div>
+
+    </main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/mafm-update-developers/" class="igalia logo home"><img src="/wpewebkit.org/mafm-update-developers/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2022 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
