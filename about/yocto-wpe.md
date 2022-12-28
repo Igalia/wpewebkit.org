@@ -34,7 +34,7 @@ wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/"${M
 
 ### Writing using '`bmaptool`' (faster, recommended) or classic '`dd`'
 
-Homepage for bmaptool: (https://github.com/intel/bmap-tools)
+Homepage for bmaptool: [https://github.com/intel/bmap-tools](https://github.com/intel/bmap-tools)
 
 You can typically get this in GNU/Linux-based distributions installing '`bmap-tools`' package if available.
 
@@ -71,24 +71,25 @@ bzip2 -dc "${SDIMG}".bz2 | sudo dd of="${SDCARD_DEV}" bs=4k status=progress
 
 After writing the micro-SD card and using it to boot the device, it
 should boot to a graphical environment, using Weston (from Wayland),
-with a minimal top panel bar and some icons.
+with a minimal top panel bar and some icons within it.
 
-To test WPE network is needed, either by pluggin-in an ethernet cable
-and have networking set-up automatically, or by clicking the
-"wireless" icon in the panel to bring up a basic script to help to set
-the network up (selecting SSID and password).
+To test WPE networking is needed, either by pluggin-in an ethernet
+cable (with DHCP networking should set-up automatically), or by
+clicking the "wireless" icon in the panel, that brings up a basic
+script to help to set the network up (selecting SSID and password).
 
 
 ## Testing and demos
 
-After having network, the browser (`cog`) can be launched from one of
-the icons in the panel, or alternatively by opening a terminal with
-another of the icons and launching it from the command line.
+After having the network working, the browser (`cog`) can be launched
+from one of the icons in the panel, or alternatively by opening a
+terminal with another of the icons and launching it from the command
+line.
 
 This is a quick list of environment variables and key bindings that
 can be used with `cog` to perform certain actions or change its
 behaviour (e.g. toggle fullscreen, reload, exit):
-* (https://github.com/Igalia/cog/blob/master/docs/platform-wl.md)
+* [https://github.com/Igalia/cog/blob/master/docs/platform-wl.md](https://github.com/Igalia/cog/blob/master/docs/platform-wl.md)
 
 Example:
 
