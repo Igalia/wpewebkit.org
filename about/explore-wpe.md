@@ -53,6 +53,8 @@ We've also tried to make it easy for developers who aren't comfortable building 
 
 * [Install with Flatpak]({{'/about/flatpak.html' | url}}): If you have support for Flatpak on your current hardware and operating system, and your graphics drivers are supported, there are various options to try WPE through Flatpak.  This can be a very easy way to let you explore WPE, check the features and specifications supported by WPE, or just want to experiment and learn more about what some of the differences with a full browser are.
 
+* [Yocto images on Raspberry Pi]({{'/about/yocto-wpe.html' | url}}): For these devices we provide images based on Yocto that can be used to boot-up the device and run WPE right away.
+
 * [Install with Balena]({{'/about/balena-wpe.html' | url}}): If there is support in [Balena](https://www.balena.io/) for your current hardware then it can be another easy way to let you explore WPE, and use the extra possibilities provided in the Balena ecosystem.
 
 If you find any problem with the packages or images, or want to know more about optimizing WPE for your hardware or use cases, please [contact us]({{'/code' | url}}).
