@@ -17,7 +17,7 @@ Use the following values:
 * **MACHINE**: one of **{raspberrypi3-mesa|raspberrypi4-64-mesa}**
   * raspberrypi3-mesa is 32-bit, to be able to test WPE in a more resource-starved environment
   * raspberrypi4-64-mesa is 64-bit
-* **SDIMG**: based on the machine, '`core-image-browsers-${MACHINE}.wic`', e.g. '`core-image-browsers-raspberrypi3-mesa.wic`'
+* **SDIMG**: based on the machine, '`core-image-weston-browsers-${MACHINE}.wic`', e.g. '`core-image-weston-browsers-raspberrypi3-mesa.wic`'
 * **SDCARD_DEV**: whatever the device in your system, e.g. '`/dev/mmcblk0_REMOVE_THIS`'
   * **note that PREVIOUS DATA WILL BE ERASED**, be specially careful to not overwrite the wrong disk/card
 
@@ -52,7 +52,7 @@ MACHINE=raspberrypi4-64-mesa
 
 Then to download the image:
 ```
-SDIMG="core-image-browsers-${MACHINE}.wic"
+SDIMG="core-image-weston-browsers-${MACHINE}.wic"
 SDCARD_DEV=/dev/mmcblk0_REMOVE_THIS
 wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/${MACHINE}/${SDIMG}.{bz2,bmap}
 ```
