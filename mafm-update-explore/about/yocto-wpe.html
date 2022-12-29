@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-12-28T22:21:39.161Z">
+  <meta property="article:published_time" content="2022-12-29T10:01:52.751Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -120,7 +120,7 @@ device.</p>
 <li>raspberrypi4-64-mesa is 64-bit</li>
 </ul>
 </li>
-<li><strong>SDIMG</strong>: based on the machine, ‘<code>core-image-browsers-${MACHINE}.wic</code>’, e.g. ‘<code>core-image-browsers-raspberrypi3-mesa.wic</code>’</li>
+<li><strong>SDIMG</strong>: based on the machine, ‘<code>core-image-weston-browsers-${MACHINE}.wic</code>’, e.g. ‘<code>core-image-weston-browsers-raspberrypi3-mesa.wic</code>’</li>
 <li><strong>SDCARD_DEV</strong>: whatever the device in your system, e.g. ‘<code>/dev/mmcblk0_REMOVE_THIS</code>’
 <ul>
 <li><strong>note that PREVIOUS DATA WILL BE ERASED</strong>, be specially careful to not overwrite the wrong disk/card</li>
@@ -143,7 +143,7 @@ device.</p>
 <pre><code>MACHINE=raspberrypi4-64-mesa
 </code></pre>
 <p>Then to download the image:</p>
-<pre><code>SDIMG=&quot;core-image-browsers-${MACHINE}.wic&quot;
+<pre><code>SDIMG=&quot;core-image-weston-browsers-${MACHINE}.wic&quot;
 SDCARD_DEV=/dev/mmcblk0_REMOVE_THIS
 wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/${MACHINE}/${SDIMG}.{bz2,bmap}
 </code></pre>
