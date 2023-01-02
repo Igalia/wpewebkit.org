@@ -49,3 +49,4 @@ you just have to create a new file inside `_posts` folder using
 
 
 Should you need anything else, you will find [11ty's documentation](https://www.11ty.dev/docs/) pretty helpful.
+
