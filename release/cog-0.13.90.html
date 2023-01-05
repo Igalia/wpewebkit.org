@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>Cog 0.13.90 released</title>
+  <link rel="canonical" href="https://wpewebkit.org/release/cog-0.13.90.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://wpewebkit.org/feed.xml">
+  <meta property="og:url" content="https://wpewebkit.org/release/cog-0.13.90.html">
+  <meta property="og:title" content="Cog 0.13.90 released">
+  <meta property="og:image" content="https://wpewebkit.org/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://wpewebkit.org/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-06-29T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="unstable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/"><img src="/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="release off"><li>
+			<a class="nav-link" href="/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/about">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/blog">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/developers">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://wpewebkit.org/release/cog-0.13.90.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">Cog 0.13.90 released</h1>
+ 
+   <meta itemprop="datePublished" content="Wed Jun 29 2022">
+   <time itemprop="dateCreated">29 June 2022</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//cog-0.13.90.tar.xz">Download</a>
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This is a development release leading towards the 0.14 series.</p>
+<h3 id="what%E2%80%99s-new-in-cog-0.13.90%3F" tabindex="-1">What’s new in Cog 0.13.90?</h3>
+<ul>
+<li>cmake: Enable libsoup3 usage by default, <code>USE_SOUP2=ON</code> can still be specified to build against libsoup2.</li>
+<li>cmake: Require version 3.12, which is the same minimum as needed by WebKit.</li>
+<li>cmake: Link the same <code>wpebackend-fdo</code> library in all components to avoid crashes due to multiple copies loaded with different behaviours.</li>
+<li>cmake: Fix generated <code>.pc</code> file when using an absolute directory for the <code>CMAKE_INSTALL_LIBDIR</code> option instead of a relative one.</li>
+<li>core: Add “Try again” button to default error pages.</li>
+<li>gtk4: Fix rendering with drivers that support OpenGL 4.</li>
+<li>wl: Avoid crashing due to missing callbacks by explicitly binding to supported versions of Wayland protocols.</li>
+<li>wl: Fix the build with <code>COG_WESTON_DIRECT_DISPLAY</code> enabled.</li>
+<li>wl: Fix fullscreen surface dimensions when using SHM buffers.</li>
+<li>wl: Add keybindings to refresh the current page (<key>Ctrl-R</key>, <key>F5</key>).</li>
+<li>x11: Fix underlinking when the <code>--as-needed</code> linker flag is in use.</li>
+<li>x11: Fix rendering in non-composited (traditional) window managers.</li>
+<li>drm, gtk4, x11: Factor out and reuse the GLES textured quad painting code.</li>
+<li>drm, wl, x11: Add refresh rate reporting to let WebKit pace rendering to match the output device.</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+cog-0.13.90.tar.xz (119.7 KiB)
+   md5sum: 749f55793438c552185023a9bd744d6a
+   sha1sum: 82c885e8e942a97c7bb7d7c9b6e25ceba1b462c7
+   sha256sum: a7ed11a10c41a9c4ad9692730357e6d86f2544d308d96018d26f80b234e16080
+</pre>
+
+
+
+
+</div>
+
+    </main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/" class="igalia logo home"><img src="/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
