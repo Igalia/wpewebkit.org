@@ -56,7 +56,7 @@ a[href] {
 	text-decoration-thickness: 0.05em;
 	text-underline-offset: 0.15em;
 }
-main a[href^="http"]:not([href*="igalia.com"], [href*="youtube"]) {
+main a[href^="http"]:not(.btn, [href*="youtube"]) {
 	background: url(../assets/img/link_ext_icon.svg) 100% 50% / auto 0.9em no-repeat;
 	padding-right: 0.9em; 
 }
