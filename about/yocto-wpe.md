@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Try WPE with Yocto images for Raspberry Pi"
+title: "WPE Yocto images for Raspberry Pi"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/yocto-wpe.html
@@ -24,14 +24,6 @@ Use the following values:
 The version of WPE in these images is **2.38.x**.
 
 
-### Getting the image
-
-Generically, using the substitutions mentioned previously:
-
-```
-wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/"${MACHINE}"/"${SDIMG}".{bz2,bmap}
-```
-
 ### Writing using '`bmaptool`' (faster, recommended) or classic '`dd`'
 
 Homepage for bmaptool: [https://github.com/intel/bmap-tools](https://github.com/intel/bmap-tools)
@@ -53,8 +45,12 @@ MACHINE=raspberrypi4-64-mesa
 Then to download the image:
 ```
 SDIMG="core-image-weston-browsers-${MACHINE}.wic"
-SDCARD_DEV=/dev/mmcblk0_REMOVE_THIS
 wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/${MACHINE}/${SDIMG}.{bz2,bmap}
+```
+
+Export micro-SD device to write to:
+```
+SDCARD_DEV=/dev/mmcblk0_REMOVE_THIS
 ```
 
 To write with '`bmaptool`':
@@ -86,10 +82,13 @@ from one of the icons in the panel, or alternatively by opening a
 terminal with another of the icons and launching it from the command
 line.
 
-This is a quick list of environment variables and key bindings that
-can be used with `cog` to perform certain actions or change its
-behaviour (e.g. toggle fullscreen, reload, exit):
-* [https://github.com/Igalia/cog/blob/master/docs/platform-wl.md](https://github.com/Igalia/cog/blob/master/docs/platform-wl.md)
+There are also some environment variables that can be used to change
+the behaviour of Cog's window (e.g.  fullscreen, maximized, specific
+dimensions), as well as some key bindings that can be used to perform
+certain actions with Cog or change its behaviour (e.g. toggle
+fullscreen, reload, zooming, exit...), when running on Wayland. You
+can check more details about this in
+[https://github.com/Igalia/cog/blob/master/docs/platform-wl.md](https://github.com/Igalia/cog/blob/master/docs/platform-wl.md).
 
 Example:
 
