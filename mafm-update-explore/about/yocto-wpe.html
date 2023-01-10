@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Try WPE with Yocto images for Raspberry Pi</title>
+  <title>WPE Yocto images for Raspberry Pi</title>
   <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-update-explore/about/yocto-wpe.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/mafm-update-explore/feed.xml">
   <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/about/yocto-wpe.html">
-  <meta property="og:title" content="Try WPE with Yocto images for Raspberry Pi">
+  <meta property="og:title" content="WPE Yocto images for Raspberry Pi">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2023-01-09T11:04:08.285Z">
+  <meta property="article:published_time" content="2023-01-10T10:43:18.773Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -101,7 +101,7 @@ header.page time {
 <meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/about/yocto-wpe.html">
 
 <header class="page full-bleed">
- <h1 itemprop="headline">Try WPE with Yocto images for Raspberry Pi</h1>
+ <h1 itemprop="headline">WPE Yocto images for Raspberry Pi</h1>
  
   
 </header>
@@ -128,10 +128,6 @@ device.</p>
 </li>
 </ul>
 <p>The version of WPE in these images is <strong>2.38.x</strong>.</p>
-<h3 id="getting-the-image" tabindex="-1">Getting the image</h3>
-<p>Generically, using the substitutions mentioned previously:</p>
-<pre><code>wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/&quot;${MACHINE}&quot;/&quot;${SDIMG}&quot;.{bz2,bmap}
-</code></pre>
 <h3 id="writing-using-%E2%80%98bmaptool%E2%80%99-(faster%2C-recommended)-or-classic-%E2%80%98dd%E2%80%99" tabindex="-1">Writing using ‘<code>bmaptool</code>’ (faster, recommended) or classic ‘<code>dd</code>’</h3>
 <p>Homepage for bmaptool: <a href="https://github.com/intel/bmap-tools">https://github.com/intel/bmap-tools</a></p>
 <p>You can typically get this in GNU/Linux-based distributions installing ‘<code>bmap-tools</code>’ package if available.</p>
@@ -144,8 +140,10 @@ device.</p>
 </code></pre>
 <p>Then to download the image:</p>
 <pre><code>SDIMG=&quot;core-image-weston-browsers-${MACHINE}.wic&quot;
-SDCARD_DEV=/dev/mmcblk0_REMOVE_THIS
 wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/${MACHINE}/${SDIMG}.{bz2,bmap}
+</code></pre>
+<p>Export micro-SD device to write to:</p>
+<pre><code>SDCARD_DEV=/dev/mmcblk0_REMOVE_THIS
 </code></pre>
 <p>To write with ‘<code>bmaptool</code>’:</p>
 <pre><code>sudo bmaptool copy &quot;${SDIMG}&quot;.bz2 &quot;${SDCARD_DEV}&quot;
@@ -166,12 +164,13 @@ script to help to set the network up (selecting SSID and password).</p>
 from one of the icons in the panel, or alternatively by opening a
 terminal with another of the icons and launching it from the command
 line.</p>
-<p>This is a quick list of environment variables and key bindings that
-can be used with <code>cog</code> to perform certain actions or change its
-behaviour (e.g. toggle fullscreen, reload, exit):</p>
-<ul>
-<li><a href="https://github.com/Igalia/cog/blob/master/docs/platform-wl.md">https://github.com/Igalia/cog/blob/master/docs/platform-wl.md</a></li>
-</ul>
+<p>There are also some environment variables that can be used to change
+the behaviour of Cog’s window (e.g.  fullscreen, maximized, specific
+dimensions), as well as some key bindings that can be used to perform
+certain actions with Cog or change its behaviour (e.g. toggle
+fullscreen, reload, zooming, exit…), when running on Wayland. You
+can check more details about this in
+<a href="https://github.com/Igalia/cog/blob/master/docs/platform-wl.md">https://github.com/Igalia/cog/blob/master/docs/platform-wl.md</a>.</p>
 <p>Example:</p>
 <pre><code>COG_PLATFORM_WL_VIEW_FULLSCREEN=1 cog -P wl &quot;https://www.wikipedia.org/&quot;
 </code></pre>
