@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Why Choose WPE?</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-update-explore/about/a-good-choice.html">
+  <title>Try WPE images for Raspberry Pi</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-update-explore/about/rpi-yocto-wpe.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/mafm-update-explore/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/about/a-good-choice.html">
-  <meta property="og:title" content="Why Choose WPE?">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/about/rpi-yocto-wpe.html">
+  <meta property="og:title" content="Try WPE images for Raspberry Pi">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -84,81 +84,80 @@
 
     <main>
     <style>
-:not(header) > h2 {
-	background: url(/wpewebkit.org/mafm-update-explore/assets/img/graphic-title-blue.svg) 0 100% / 7rem auto no-repeat;
-	padding-bottom: 1em;
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
 }
-ul.gallery.c2 {
-	align-items: stretch;
-	gap: 1em;
-}
-ul.gallery.c2 li {
-	padding: 3.5em 1.5em 1.5em;
-	border: 1px dashed var(--colorMain);
-	background: url(/wpewebkit.org/mafm-update-explore/assets/img/checkmark.png) 1em 1em / 2em 2em no-repeat;
-}
-.full-bleed.banner {
-	margin-block: 5rem 4rem;
-	padding: 1px 0;
-}
-@media (min-width: 75rem) {
-	.banner::before {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: -5rem;
-		width: 5rem;
-		height: 2px;
-		margin-top: -1px;
-		background: linear-gradient(90deg,#222,#888);
-		-webkit-mask-image:
-			repeating-linear-gradient(270deg, transparent, #89A4 1px 3px, transparent 4px 7px),
-			repeating-linear-gradient(270deg, transparent, #89AF 1px 3px, transparent 4px 7px)
-			;
-		mask-image:
-			repeating-linear-gradient(270deg, transparent, #89A4 1px 3px, transparent 4px 7px),
-			repeating-linear-gradient(270deg, transparent, #89AF 1px 3px, transparent 4px 7px)
-			;
-		mask-size: 100% 1px;
-		mask-repeat: no-repeat;
-		mask-position: 100% 0%, 100% 100%;
-	}
-}
-.banner img {
-	display: block;
-	margin: -5rem auto;
-	margin-block: calc( min(65rem,100vw) * 0.31229 * -0.25 );
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
 }
 </style>
-<nav class="sidebar">
-<ul>
-<li><a href="/wpewebkit.org/mafm-update-explore/about/supported-hardware.html">Supported Hardware</a></li>
-<li class="currentPage"><a href="/wpewebkit.org/mafm-update-explore/about/a-good-choice.html">Why Choose WPE?</a></li>
-<li><a href=".">WPE in Action</a></li>
-</ul>
-</nav>
-<header class="page">
-<h1>Why Choose WPE?</h1>
-<p>WPE WebKit is widely adopted in many industries, including digital signage, professional audio, video and broadcasting, home appliances, set-top boxes, and automative and in-flight infotainment systems.</p>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/mafm-update-explore/about/rpi-yocto-wpe.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">Try WPE images for Raspberry Pi</h1>
+ 
+  
 </header>
-<section class="full-bleed banner">
-<img src="/wpewebkit.org/mafm-update-explore/assets/img/WhyChooseWPE.png" alt="">
-</section>
-<section>
-<p class="leadin">If you need a fast and lightweight web runtime for embedded devices that supports most current web standards, has hardware acceleration wherever it is advantageous, and has a strong focus on multimedia applications, WPE WebKit is a great choice.</p>
-<p>WPE WebKit offers great possibilities for deployment on different platforms, thanks to its underlying design which allows for integration in a variety of hardware configurations. At a minimum, only EGL and OpenGL ES 2 support and basic GStreamer integration are required.</p>
-</section>
-<section class="dotsep">
-<h2 id="some-advantages-of-wpe-webkit" tabindex="-1">Some advantages of WPE WebKit</h2>
-<ul class="gallery c2">
-<li>The minimal set of dependencies needed to run WPE WebKit ensures that its footprint is small and it consumes less memory, which allows applications built with WPE WebKit to run on low-end devices.</li>
-<li>Enables rich and fast 2D and 3D HTML-based user interfaces, multimedia integration, 3D content, and many more of the latest Web technologies to run smoothly and efficiently on low-cost devices.</li>
-<li>Displays multimedia content with high-quality CSS 3D animations, WebGL, and fluid high-quality HTML videos.</li>
-<li>Focused on graphics performance with multi-threading optimizations to improve CSS animation, scrolling, scaling, and rendering of canvas and video elements.</li>
-<li>Provides a strong focus on multimedia applications and performance with WebRTC, MSE (MP4, WebM, VP9, Opus) and EME (ClearKey and other third-party DRM frameworks) supported and constantly improving.</li>
-<li>Unlicensed parts of YouTube TV and similar platforms are supported.</li>
-</ul>
-</section>
+
+<div itemprop="articleBody">
+
+<p>One way to easily test WPE is to use Yocto images for Raspberry Pi
+devices, write them in a micro-SD card and use them to boot the
+device.</p>
+<h2 id="getting-and-flashing-the-image-on-a-micro-sd-card" tabindex="-1">Getting and flashing the image on a micro-SD card</h2>
+<h3 id="downloads" tabindex="-1">Downloads</h3>
+<h4 id="download-for-raspberry-pi-4-(64-bit)" tabindex="-1">Download for Raspberry Pi 4 (64-bit)</h4>
+<p>The current version of WPE in these images is <strong>2.38.x</strong>.</p>
+<p>Download image with:</p>
+<pre><code>wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/raspberrypi4-64-mesa/core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
+</code></pre>
+<h4 id="download-for-raspberry-pi-3b%2F3b%2B-(32-bit)" tabindex="-1">Download for Raspberry Pi 3B/3B+ (32-bit)</h4>
+<p>The current version of WPE in these images is <strong>2.38.x</strong>.</p>
+<p>Download image with:</p>
+<pre><code>wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/raspberrypi3-mesa/core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
+</code></pre>
+<h3 id="flash-the-image" tabindex="-1">Flash the image</h3>
+<p>To write with ‘<code>dd</code>’ (replace ‘<code>mmcblk_XYZ</code>’ with your actual target
+device) and use the downloaded image, for example:</p>
+<pre><code>bzip2 -d core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
+sudo dd if=core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of=&quot;/dev/mmcblk_XYZ&quot; bs=4k status=progress
+</code></pre>
+<p>‘<code>bmaptool</code>’ can also be used and is typically (faster), we also provide the <code>.bmap</code> files to download.</p>
+<h2 id="set-up" tabindex="-1">Set-up</h2>
+<p>After writing the micro-SD card and using it to boot the device, it
+should boot to a graphical environment, using Weston (from Wayland),
+with a minimal top panel bar and some icons within it.</p>
+<p>To test WPE networking is needed, either by pluggin-in an ethernet
+cable (with DHCP networking should set-up automatically), or by
+clicking the “wireless” icon in the panel, that brings up a basic
+script to help to set the network up (selecting SSID and password).</p>
+<h2 id="testing-and-demos" tabindex="-1">Testing and demos</h2>
+<p>After having the network working, the browser (<code>cog</code>) can be launched
+from one of the icons in the panel, or alternatively by opening a
+terminal with another of the icons and launching it from the command
+line.</p>
+<p>There are also some environment variables that can be used to change
+the behaviour of Cog’s window (e.g.  fullscreen, maximized, specific
+dimensions), as well as some key bindings that can be used to perform
+certain actions with Cog or change its behaviour (e.g. toggle
+fullscreen, reload, zooming, exit…), when running on Wayland. You
+can check more details about this in
+<a href="https://github.com/Igalia/cog/blob/master/docs/platform-wl.md">https://github.com/Igalia/cog/blob/master/docs/platform-wl.md</a>.</p>
+<p>Example:</p>
+<pre><code>COG_PLATFORM_WL_VIEW_FULLSCREEN=1 cog -P wl &quot;https://www.wikipedia.org/&quot;
+</code></pre>
+
+
+
+
+</div>
 
     </main>
 
