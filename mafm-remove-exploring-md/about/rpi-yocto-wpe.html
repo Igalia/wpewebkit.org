@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Try WPE with Flatpak</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/about/flatpak.html">
+  <title>Try WPE images for Raspberry Pi</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/about/rpi-yocto-wpe.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/about/flatpak.html">
-  <meta property="og:title" content="Try WPE with Flatpak">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/about/rpi-yocto-wpe.html">
+  <meta property="og:title" content="Try WPE images for Raspberry Pi">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2023-01-12T18:59:49.361Z">
+  <meta property="article:published_time" content="2023-01-12T18:59:49.365Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -98,72 +98,61 @@ header.page time {
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/about/flatpak.html">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-exploring-md/about/rpi-yocto-wpe.html">
 
 <header class="page full-bleed">
- <h1 itemprop="headline">Try WPE with Flatpak</h1>
+ <h1 itemprop="headline">Try WPE images for Raspberry Pi</h1>
  
   
 </header>
 
 <div itemprop="articleBody">
 
-<p><a href="https://flatpak.org">Flatpak</a> is generally advertised as the next-generation
-technology for building and distributing applications on Linux. The WPE
-maintainers leverage Flatpak to allow users to try two different WPE flavors.</p>
-<h2 id="stable-wpe-releases" tabindex="-1">Stable WPE releases</h2>
-<p>Stable releases are packaged and available through Flatpak. Users and WPE
-application developers can easily try the <a href="https://github.com/igalia/cog">Cog WPE
-browser</a> and even build new applications relying
-on the WPE Sdk provided through Flatpak.</p>
-<p>Besides a <a href="https://flatpak.org/setup/">working Flatpak setup</a> you need to
-register the Igalia Flatpak repository in your Linux environment:</p>
-<pre><code class="language-shell">$ flatpak --user remote-add wpe-releases --from \
-  https://software.igalia.com/flatpak-refs/wpe-releases.flatpakrepo
+<p>One way to easily test WPE is to use Yocto images for Raspberry Pi
+devices, write them in a micro-SD card and use them to boot the
+device.</p>
+<h2 id="getting-and-flashing-the-image-on-a-micro-sd-card" tabindex="-1">Getting and flashing the image on a micro-SD card</h2>
+<h3 id="downloads" tabindex="-1">Downloads</h3>
+<h4 id="download-for-raspberry-pi-4-(64-bit)" tabindex="-1">Download for Raspberry Pi 4 (64-bit)</h4>
+<p>The current version of WPE in these images is <strong>2.38.x</strong>.</p>
+<p>Download image with:</p>
+<pre><code>wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/raspberrypi4-64-mesa/core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
 </code></pre>
-<p>This repository contains binary builds of WPE for the <code>x86_64</code> architecture and
-provides packages for Cog as well.</p>
-<p>The current Cog/WPE stack still imposes the Wayland-only limitation, with
-Mesa-based graphics stacks most likely to work well. In future release, we plan
-to add support for new platforms, graphics stacks and methods of integration.</p>
-<h3 id="cog" tabindex="-1">Cog</h3>
-<p>To install and run Cog, use the following commands:</p>
-<pre><code>$ flatpak --user install org.wpe.Cog
-$ flatpak run org.wpe.Cog -P fdo &lt;URL&gt;
+<h4 id="download-for-raspberry-pi-3b%2F3b%2B-(32-bit)" tabindex="-1">Download for Raspberry Pi 3B/3B+ (32-bit)</h4>
+<p>The current version of WPE in these images is <strong>2.38.x</strong>.</p>
+<p>Download image with:</p>
+<pre><code>wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/raspberrypi3-mesa/core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
 </code></pre>
-<h3 id="sdk-for-application-developers" tabindex="-1">Sdk for application developers</h3>
-<p>Application developers can package their WPE application with Flatpak and basing
-the application upon the WPE Sdk runtime. The following <code>flatpak-builder</code>
-manifest snippet can be used to target the WPE Sdk:</p>
-<pre><code class="language-yaml">runtime: org.wpe.Platform
-runtime-version: stable
-sdk: org.wpe.Sdk
+<h3 id="flash-the-image" tabindex="-1">Flash the image</h3>
+<p>To write with ‘<code>dd</code>’ (replace ‘<code>mmcblk_XYZ</code>’ with your actual target
+device) and use the downloaded image, for example:</p>
+<pre><code>bzip2 -d core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
+sudo dd if=core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of=&quot;/dev/mmcblk_XYZ&quot; bs=4k status=progress
 </code></pre>
-<p>More information is available on the <a href="https://docs.flatpak.org/en/latest/first-build.html#add-a-manifest">Flatpak
-website</a>
-regarding applications packaging.</p>
-<h2 id="nightly-wpe-builds" tabindex="-1">Nightly WPE builds</h2>
-<p>To complement the <a href="/wpewebkit.org/mafm-remove-exploring-md/release/schedule">six months release cycle</a>,
-users interested in testing the latest development version of WPE can download
-it directly from the <a href="https://build.webkit.org/waterfall?category=WPE">build
-bots</a> using a Python script.</p>
-<p>This is a convenient and easy way to test the bleeding edge version of WPE,
-exposing features that will be shipped in the next stable release.</p>
-<p>To download and test nightly WPE builds, download the
-<code>webkit-flatpak-run-nightly</code> script and run it like this:</p>
-<pre><code class="language-shell">$ wget https://raw.githubusercontent.com/WebKit/webkit/master/Tools/Scripts/webkit-flatpak-run-nightly
-$ chmod +x webkit-flatpak-run-nightly
-$ ./webkit-flatpak-run-nightly --wpe MiniBrowser &lt;browser options or URL&gt;
+<p>‘<code>bmaptool</code>’ can also be used and is typically (faster), we also provide the <code>.bmap</code> files to download.</p>
+<h2 id="set-up" tabindex="-1">Set-up</h2>
+<p>After writing the micro-SD card and using it to boot the device, it
+should boot to a graphical environment, using Weston (from Wayland),
+with a minimal top panel bar and some icons within it.</p>
+<p>To test WPE networking is needed, either by pluggin-in an ethernet
+cable (with DHCP networking should set-up automatically), or by
+clicking the “wireless” icon in the panel, that brings up a basic
+script to help to set the network up (selecting SSID and password).</p>
+<h2 id="testing" tabindex="-1">Testing</h2>
+<p>After having the network working, the browser (<code>cog</code>) can be launched
+from one of the icons in the panel, or alternatively by opening a
+terminal with another of the icons and launching it from the command
+line.</p>
+<p>There are also some environment variables that can be used to change
+the behaviour of Cog’s window (e.g.  fullscreen, maximized, specific
+dimensions), as well as some key bindings that can be used to perform
+certain actions with Cog or change its behaviour (e.g. toggle
+fullscreen, reload, zooming, exit…), when running on Wayland. You
+can check more details about this in
+<a href="https://github.com/Igalia/cog/blob/master/docs/platform-wl.md">https://github.com/Igalia/cog/blob/master/docs/platform-wl.md</a>.</p>
+<p>Example:</p>
+<pre><code>COG_PLATFORM_WL_VIEW_FULLSCREEN=1 cog -P wl &quot;https://www.wikipedia.org/&quot;
 </code></pre>
-<p>This script locally installs the WebKit Flatpak-based developer SDK in
-<code>~/.cache/wk-nightly</code> and then downloads a zip archive of the build artefacts
-from the buildbot server. The downloaded zip file is unpacked in <code>/tmp</code> and kept
-around in case you want to run this again without re-downloading the build
-archive:</p>
-<pre><code class="language-shell">$ ./webkit-flatpak-run-nightly --wpe -p /tmp/wpewebkit-release-bXXXXX \
-  MiniBrowser &lt;browser options or URL&gt;
-</code></pre>
-<p>Nightly builds are currently provided only for machines using the <code>x86_64</code> architecture.</p>
 
 
 
