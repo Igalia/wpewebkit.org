@@ -117,17 +117,6 @@ interface to change dynamically the URL being shown.  It can be
 accessed in port 8080, something like: `http://devicename.local:8080/`.
 
 
-## Demos
-
-| Name | Animation |
-|:----|:---:|
-| CSS transformation and animations in [WebKit poster circle example](https://webkit.org/blog-files/3d-transforms/poster-circle.html) | ![Image: WebKit poster circle demo](../assets/balena-wpe/postercircle.gif "WebKit poster circle demo") |
-| Playing an embedded video from [wpewebkit.org](https://wpewebkit.org/) | ![Image: Embedded video demo](../assets/balena-wpe/wpewebkitorg.gif "Embedded video demo") |
-| Playing [BouncyBalls](https://bouncyballs.org/) | ![Image: Playing BouncyBalls demo](../assets/balena-wpe/bouncyballs.gif "Playing BouncyBalls demo") |
-| Rendering WebGL [Aquarium](https://webglsamples.org/aquarium/aquarium.html) demo | ![Image: Rendering WebGL Aquarium demo](../assets/balena-wpe/webgl_aquarium.gif "Rendering WebGL Aquarium demo") |
-| Rendering WebGL [Abstract Shapes](https://mrdoob.neocities.org/023/) | ![Image: Rendering WebGL Abstract Shapes demo](../assets/balena-wpe/webgl_abstractshapes.gif "Rendering WebGL Abstract Shapes demo") |
-
-
 ## Further info
 
 Check this collection of blog posts for more info, tips, new releases,
