@@ -67,7 +67,7 @@ Before we jump to the upstreaming status, one question should be answered, that 
 
 <img style="float: right; width: 55%;" alt="LBSE logo" src="{{ '/assets/lbse-logo-wide.png' | url }}">
 
-There was *no initial intention* to come up with a new SVG engine. During LBSE development it became apparent how much SVG-specific code can be erased when unifying certain aspects with HTML/CSS. After carrying out the integration work, layout/painting and hit-testing work are fundamentally different than before. Since that time, LBSE is labeled as a *"new SVG engine"*, even though the SVG DOM tree part remained almost identical. Web compatibility will *improve* with LBSE: a few long-standing, critical interop issues with other browser vendors are solved in LBSE therefore there are no concerns regarding Web compatibility from our side.
+There was *no initial intention* to come up with a new SVG engine. During LBSE development it became apparent how much SVG-specific code can be erased when unifying certain aspects with HTML/CSS. After carrying out the integration work, layout/painting and hit-testing work fundamentally different than before. Since that time, LBSE is labeled as a *"new SVG engine"*, even though the SVG DOM tree part remained almost identical. Web compatibility will *improve* with LBSE: a few long-standing, critical interop issues with other browser vendors are solved in LBSE therefore there are no concerns regarding Web compatibility from our side.
 
 Let's close the introduction and review the upstreaming status, and discuss where we stand today.
 
