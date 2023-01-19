@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE Networking Overview</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/png-optimize/blog/04-wpe-networking-overview.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/aperezdc/png-optimize/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/png-optimize/blog/04-wpe-networking-overview.html">
+  <meta property="og:title" content="WPE Networking Overview">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/png-optimize/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/png-optimize/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-09-29T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/png-optimize/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/png-optimize/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/png-optimize/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/png-optimize/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/aperezdc/png-optimize/"><img src="/wpewebkit.org/aperezdc/png-optimize/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/png-optimize/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/png-optimize/about">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/png-optimize/blog">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/png-optimize/developers">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/aperezdc/png-optimize/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/png-optimize/blog/04-wpe-networking-overview.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE Networking Overview</h1>
+ 
+   <meta itemprop="datePublished" content="Thu Sep 29 2022">
+   <time itemprop="dateCreated">29 September 2022</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>At the heart of any browser engine is networking: Connecting with services and other users.  Unlike other engines, WebKit approaches this more abstractly by leaving a large portion of the networking up to individual ports. This includes network protocols such as HTTP, WebSockets, and WebRTC. The upside to this approach is a higher level of integration with the system-provided libraries and features so WebKit will behave similarly to other software on the platform often with more centralized configuration.</p>
+<p>Due to this abstraction there are a few independent layers that make up the networking stack of WPE. In this post, I’ll break down what each layer accomplishes as well as give some insight into the codebase’s structure.</p>
+<h2 id="networking-layers" tabindex="-1">Networking Layers</h2>
+<div align="center">
+    <img alt="WebKit Network Layers" src="/assets/networking-layers.svg">
+</div>
+<h3 id="webkit" tabindex="-1">WebKit</h3>
+<p>Before we get into the libraries used for WPE, let’s discuss WebKit itself. Despite abstracting out a lot of the protocol handling, WebKit itself still needs to understand a lot of fundamentals of HTTP.</p>
+<p>WebCore (discussed in <a href="/blog/02-overview-of-wpe.html">WPE Overview</a>) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by <code>ResourceRequest</code> and <code>ResourceResponse</code> objects, which map to general HTTP functionality.</p>
+<h4 id="networkprocess" tabindex="-1">NetworkProcess</h4>
+<p>A core part of modern web engine security is the multi-process model.  In order to defend against exploits, each website runs in its own isolated process that does not have network access. In order to allow for network access, they must talk over IPC to a dedicated NetworkProcess, typically one per browser instance. The NetworkProcess receives a <code>ResourceRequest</code>, creates a <code>NetworkDataTask</code> with it to download the data, and responds with a <code>ResourceResponse</code> to the WebProcess which looks like this:</p>
+<div align="center">
+    <img alt="WebKit Network Flowchart" src="/assets/networking-flow.svg">
+</div>
+<h3 id="wpe" tabindex="-1">WPE</h3>
+<p>WPE implements the platform-specific versions of the classes above as <code>ResourceRequestSoup</code> and <code>NetworkDataTaskSoup</code>, primarily using a library called libsoup.</p>
+<p>The <a href="https://libsoup.org">libsoup</a> library was originally created for the GNOME project’s email client and has since grown to be a very featureful HTTP implementation, now maintained by Igalia.</p>
+<p>At a high level, the main task that libsoup does is manage connections and queued requests to websites and then efficiently streams the responses back to WPE. Properly implementing HTTP is a fairly large task, and this is a non-exhaustive list of features it implements: HTTP/1.1, HTTP/2, WebSockets, cookies, decompression, multiple authentication standards, HSTS, and HTTP proxies.</p>
+<p>On its own, libsoup is really focused on the HTTP layer and uses the <a href="https://gitlab.gnome.org/GNOME/glib">GLib</a> library to implement many of its networking features in a portable way. This is where TCP, DNS, and TLS are handled. It is also directly used by WebKit for URI parsing and DNS pre-caching.</p>
+<p>Using GLib also helps standardize behavior across modern Linux systems. It allows configuration of a global proxy resolver that WebKit, along with other applications, can use.</p>
+<h4 id="tls" tabindex="-1">TLS</h4>
+<p>Another unique detail of our stack is that TLS is fully abstracted inside of GLib by a project called <a href="https://gitlab.gnome.org/GNOME/glib-networking">GLib-Networking</a>. This project provides multiple implementations of TLS that can be chosen at runtime, including OpenSSL and gnutls on Linux. The benefit here is that clients can choose the implementation they prefer—whether for licensing, certification, or technical reasons.</p>
+<h3 id="usage" tabindex="-1">Usage</h3>
+<p>Let’s go step by step to see some real world usage. If we call <code>webkit_web_view_load_uri()</code> for a new domain it will:</p>
+<ol>
+<li>Create a <code>ResourceRequest</code> in WebCore that represents an HTTP request with a few basic headers set.
+<ul>
+<li><code>ResourceRequestSoup</code> will create its own internal representation for the request using <code>soup_message_new_for_uri()</code>.</li>
+</ul>
+</li>
+<li>This is passed to the <code>NetworkProcess</code> to load this request as a <code>NetworkDataTask</code>.</li>
+<li><code>NetworkDataTaskSoup</code> will send/receive the request/response with <code>soup_session_send()</code> which queues the message to be sent.</li>
+<li>libsoup will connect to the host using <code>GSocketClient</code> which does a DNS lookup and TCP connection.
+<ul>
+<li>If this is a TLS connection <code>GTlsClientConnection</code> will use a library such as gnutls to do a TLS handshake.</li>
+</ul>
+</li>
+<li>libsoup will write the HTTP request and read from the socket parsing the HTTP responses eventually returning the data to WebKit.</li>
+<li>WebKit receives this data, along with periodic updates about the state of the request, and sends it out of the <code>NetworkProcess</code> back to the main process as a <code>ResourceResponse</code> eventually loading the data in the <code>WebProcess</code>.</li>
+</ol>
+<h2 id="summary" tabindex="-1">Summary</h2>
+<p>In conclusion, WebKit provides a very flexible abstraction for platforms, and WPE leverages mature system libraries to provide a portable implementation. It has many layers, but they are all well organized and suited to their tasks.</p>
+<p>If you are working with WPE and are interested in collaborating, feel free to <a href="https://www.igalia.com/contact/">contact us</a>. If you are interested in working with Igalia, you can <a href="https://www.igalia.com/jobs/browsers_webkit_position">apply here</a>.</p>
+
+
+
+<section class="content-section bg-light small-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+          <hr class="author-line">
+          <div class="card">
+            <span>
+              This article was written by <a href="https://www.igalia.com/team/pgriffis">Patrick Griffis</a>. <br><br>Patrick has been contributing to WebKit since 2018 and does work around networking, security, and the platform libraries WPE uses.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+</div>
+
+    </main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/aperezdc/png-optimize/" class="igalia logo home"><img src="/wpewebkit.org/aperezdc/png-optimize/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
