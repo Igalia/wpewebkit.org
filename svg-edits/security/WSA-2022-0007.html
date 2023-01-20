@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0007</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/svg-edits/security/WSA-2022-0007.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/svg-edits/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/svg-edits/security/WSA-2022-0007.html">
+  <meta property="og:title" content="WebKitGTK and WPE WebKit Security Advisory WSA-2022-0007">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/svg-edits/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/svg-edits/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-07-28T00:00:00.000Z">
+  <meta property="article:tag" content="WSA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/svg-edits/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/svg-edits/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/svg-edits/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/svg-edits/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/svg-edits/"><img src="/wpewebkit.org/svg-edits/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="security off"><li>
+			<a class="nav-link" href="/wpewebkit.org/svg-edits/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/svg-edits/about">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/svg-edits/blog">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/svg-edits/developers">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/svg-edits/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/svg-edits/security/WSA-2022-0007.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WebKitGTK and WPE WebKit Security Advisory WSA-2022-0007</h1>
+ 
+   <meta itemprop="datePublished" content="Thu Jul 28 2022">
+   <time itemprop="dateCreated">28 July 2022</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<ul>
+<li>
+<p>Date Reported: <strong>July 28, 2022</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2022-0007</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2022-32792">CVE-2022-32792</a>, <a href="#CVE-2022-32816">CVE-2022-32816</a>,
+<a href="#CVE-2022-2294">CVE-2022-2294</a>.</p>
+</li>
+</ul>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+<ul>
+<li>
+<p><a name="CVE-2022-32792" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32792">CVE-2022-32792</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.36.5.</li>
+<li>Credit to Manfred Paul (@_manfp) working with Trend Micro Zero Day
+Initiative.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An out-of-bounds write issue
+was addressed with improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2022-32816" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32816">CVE-2022-32816</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.36.5.</li>
+<li>Credit to Dohyun Lee (@l33d0hyun) of SSD Secure Disclosure Labs &amp;
+DNSLab, Korea Univ.</li>
+<li>Impact: Visiting a website that frames malicious content may lead to
+UI spoofing. Description: The issue was addressed with improved UI
+handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2022-2294" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2294">CVE-2022-2294</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.36.5 if
+USE_LIBWEBRTC is enabled.</li>
+<li>Credit to Jan Vojtesek of Avast Threat Intelligence team.</li>
+<li>Heap buffer overflow in LibWebRTC allowed a remote attacker to
+potentially exploit heap corruption via a crafted HTML page. NOTE:
+The tarballs of WebKitGTK or WPE WebKit don’t ship LibWebRTC. Also
+the LibWebRTC support is disabled by default. You only are affected
+by this vulnerability if your build enabled the USE_LIBWEBRTC CMake
+option and used the repository as source instead of the tarballs.</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
+
+
+
+
+</div>
+
+    </main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/svg-edits/" class="igalia logo home"><img src="/wpewebkit.org/svg-edits/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
