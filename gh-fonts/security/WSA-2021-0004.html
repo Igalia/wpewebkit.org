@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2021-0004</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/gh-fonts/security/WSA-2021-0004.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/gh-fonts/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/gh-fonts/security/WSA-2021-0004.html">
+  <meta property="og:title" content="WebKitGTK and WPE WebKit Security Advisory WSA-2021-0004">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/gh-fonts/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/gh-fonts/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2021-07-23T00:00:00.000Z">
+  <meta property="article:tag" content="WSA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/gh-fonts/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/gh-fonts/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/gh-fonts/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/gh-fonts/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/gh-fonts/"><img src="/wpewebkit.org/gh-fonts/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="security off"><li>
+			<a class="nav-link" href="/wpewebkit.org/gh-fonts/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/gh-fonts/about">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/gh-fonts/blog">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/gh-fonts/developers">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/gh-fonts/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/gh-fonts/security/WSA-2021-0004.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WebKitGTK and WPE WebKit Security Advisory WSA-2021-0004</h1>
+ 
+   <meta itemprop="datePublished" content="Fri Jul 23 2021">
+   <time itemprop="dateCreated">23 July 2021</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<ul>
+<li>
+<p>Date Reported: <strong>July 23, 2021</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2021-0004</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2021-1817">CVE-2021-1817</a>, <a href="#CVE-2021-1820">CVE-2021-1820</a>,
+<a href="#CVE-2021-1825">CVE-2021-1825</a>, <a href="#CVE-2021-1826">CVE-2021-1826</a>,
+<a href="#CVE-2021-21775">CVE-2021-21775</a>, <a href="#CVE-2021-21779">CVE-2021-21779</a>,
+<a href="#CVE-2021-21806">CVE-2021-21806</a>, <a href="#CVE-2021-30661">CVE-2021-30661</a>,
+<a href="#CVE-2021-30663">CVE-2021-30663</a>, <a href="#CVE-2021-30665">CVE-2021-30665</a>,
+<a href="#CVE-2021-30666">CVE-2021-30666</a>, <a href="#CVE-2021-30682">CVE-2021-30682</a>,
+<a href="#CVE-2021-30689">CVE-2021-30689</a>, <a href="#CVE-2021-30720">CVE-2021-30720</a>,
+<a href="#CVE-2021-30734">CVE-2021-30734</a>, <a href="#CVE-2021-30744">CVE-2021-30744</a>,
+<a href="#CVE-2021-30749">CVE-2021-30749</a>, <a href="#CVE-2021-30758">CVE-2021-30758</a>,
+<a href="#CVE-2021-30761">CVE-2021-30761</a>, <a href="#CVE-2021-30762">CVE-2021-30762</a>,
+<a href="#CVE-2021-30795">CVE-2021-30795</a>, <a href="#CVE-2021-30797">CVE-2021-30797</a>,
+<a href="#CVE-2021-30799">CVE-2021-30799</a>.</p>
+</li>
+</ul>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+<ul>
+<li>
+<p><a name="CVE-2021-1817" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-1817">CVE-2021-1817</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.30.0.</li>
+<li>Credit to zhunki.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A memory corruption issue was
+addressed with improved state management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-1820" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-1820">CVE-2021-1820</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.30.0.</li>
+<li>Credit to André Bargull.</li>
+<li>Impact: Processing maliciously crafted web content may result in the
+disclosure of process memory. Description: A memory initialization
+issue was addressed with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-1825" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-1825">CVE-2021-1825</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.30.0.</li>
+<li>Credit to Alex Camboe of Aon’s Cyber Solutions.</li>
+<li>Impact: Processing maliciously crafted web content may lead to a
+cross site scripting attack. Description: An input validation issue
+was addressed with improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-1826" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-1826">CVE-2021-1826</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.30.0.</li>
+<li>Credit to an anonymous researcher.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+universal cross site scripting. Description: A logic issue was
+addressed with improved restrictions.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-21775" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-21775">CVE-2021-21775</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to Marcin Towalski of Cisco Talos.</li>
+<li>A use-after-free vulnerability exists in the way certain events are
+processed for ImageLoader objects of WebKit. A specially crafted web
+page can lead to a potential information leak and further memory
+corruption. In order to trigger the vulnerability, a victim must be
+tricked into visiting a malicious webpage.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-21779" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-21779">CVE-2021-21779</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to Marcin Towalski of Cisco Talos.</li>
+<li>A use-after-free vulnerability exists in the way that WebKit
+GraphicsContext handles certain events. A specially crafted web page
+can lead to a potential information leak and further memory
+corruption. A victim must be tricked into visiting a malicious web
+page to trigger this vulnerability.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-21806" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-21806">CVE-2021-21806</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.30.6.</li>
+<li>Credit to Marcin ‘Icewall’ Noga of Cisco Talos.</li>
+<li>An exploitable use-after-free vulnerability exists in WebKit. A
+specially crafted HTML web page can cause a use-after-free
+condition, resulting in remote code execution. The victim needs to
+visit a malicious web site to trigger the vulnerability.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30661" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30661">CVE-2021-30661</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.30.0.</li>
+<li>Credit to yangkang(@dnpushme) of 360 ATA.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A use after free
+issue was addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30663" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30663">CVE-2021-30663</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to an anonymous researcher.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: An integer overflow was
+addressed with improved input validation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30665" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30665">CVE-2021-30665</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to yangkang (@dnpushme)&amp;zerokeeper&amp;bianliang of 360 ATA.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A memory corruption
+issue was addressed with improved state management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30666" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30666">CVE-2021-30666</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.26.0.</li>
+<li>Credit to yangkang (@dnpushme)&amp;zerokeeper&amp;bianliang of 360 ATA.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A buffer overflow
+issue was addressed with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30682" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30682">CVE-2021-30682</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.0.</li>
+<li>Credit to an anonymous researcher and 1lastBr3ath.</li>
+<li>Impact: A malicious application may be able to leak sensitive user
+information. Description: A logic issue was addressed with improved
+restrictions.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30689" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30689">CVE-2021-30689</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to an anonymous researcher.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+universal cross site scripting. Description: A logic issue was
+addressed with improved state management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30720" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30720">CVE-2021-30720</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to David Schütz (@xdavidhu).</li>
+<li>Impact: A malicious website may be able to access restricted ports
+on arbitrary servers. Description: A logic issue was addressed with
+improved restrictions.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30734" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30734">CVE-2021-30734</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to Jack Dates of RET2 Systems, Inc. (@ret2systems) working
+with Trend Micro Zero Day Initiative.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: Multiple memory corruption
+issues were addressed with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30744" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30744">CVE-2021-30744</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to Dan Hite of jsontop.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+universal cross site scripting. Description: A cross-origin issue
+with iframe elements was addressed with improved tracking of
+security origins.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30749" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30749">CVE-2021-30749</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to an anonymous researcher and mipu94 of SEFCOM lab, ASU.
+working with Trend Micro Zero Day Initiative.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: Multiple memory corruption
+issues were addressed with improved memory handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30758" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30758">CVE-2021-30758</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.2.</li>
+<li>Credit to Christoph Guttandin of Media Codings.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A type confusion issue was
+addressed with improved state handling.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30761" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30761">CVE-2021-30761</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.26.0.</li>
+<li>Credit to an anonymous researcher.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A memory corruption
+issue was addressed with improved state management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30762" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30762">CVE-2021-30762</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.28.0.</li>
+<li>Credit to an anonymous researcher.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A use after free
+issue was addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30795" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30795">CVE-2021-30795</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to Sergei Glazunov of Google Project Zero.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30797" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30797">CVE-2021-30797</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to Ivan Fratric of Google Project Zero.</li>
+<li>Impact: Processing maliciously crafted web content may lead to code
+execution. Description: This issue was addressed with improved
+checks.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2021-30799" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30799">CVE-2021-30799</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.32.3.</li>
+<li>Credit to Sergei Glazunov of Google Project Zero.</li>
+<li>Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: Multiple memory corruption
+issues were addressed with improved memory handling.</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">https://webkitgtk.org/security.html</a> or <a href="https://wpewebkit.org/security/">https://wpewebkit.org/security/</a>.</p>
+
+
+
+
+</div>
+
+    </main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/gh-fonts/" class="igalia logo home"><img src="/wpewebkit.org/gh-fonts/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>

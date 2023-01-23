@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPE WebKit Blog</title>
+  <description>News related to WPE WebKit.</description>
+  <link href="https://wpewebkit.org/blog.xml" rel="self"/>
+  <link href="https://wpewebkit.org/blog/"/>
+  <updated>2023-01-19T00:00:00Z</updated>
+  <id>https://wpewebkit.org/blog/</id>
+  
+  <entry>
+    <title>Status of the new SVG engine in WebKit</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/05-new-svg-engine.html"/>
+    <updated>2023-01-19T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/05-new-svg-engine.html</id>
+    <content type="html">&lt;style&gt;
+figure {
+margin: 0;
+}
+
+figure &gt; figure {
+  border: 1px #cccccc solid;
+  padding: 4px;
+}
+
+figcaption {
+  background-color: #cccccc;
+  color: black;
+  padding: 1px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+&lt;/style&gt;
+&lt;p&gt;In the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/04-wpe-networking-overview.html&quot;&gt;previous posts of this series&lt;/a&gt;, various aspects of the WPE port architecture were covered. Besides maintaining and advancing the WPE port according to our customers’ needs, Igalia also participates in the development of the &lt;strong&gt;WebCore&lt;/strong&gt; engine itself, which is shared by &lt;em&gt;all&lt;/em&gt; WebKit ports. WebCore is the part of the browser engine that does the heavy lifting: it contains all functionality necessary to load, parse, lay out, and paint Web content.&lt;/p&gt;
+&lt;p&gt;Since late 2019, Igalia has been working on a new SVG engine, dubbed &lt;strong&gt;L&lt;/strong&gt;ayer-&lt;strong&gt;B&lt;/strong&gt;ased &lt;strong&gt;S&lt;/strong&gt;VG &lt;strong&gt;E&lt;/strong&gt;ngine (&lt;strong&gt;LBSE&lt;/strong&gt;), that will unify the HTML/SVG rendering pipelines in WebCore. This will resolve long-standing design issues of the “legacy” SVG engine and unlock a bunch of new &lt;em&gt;exciting&lt;/em&gt; possibilities for Web developers to get creative with SVG. &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-13-svg-performance/&quot;&gt;Hardware-accelerated compositing&lt;/a&gt;, driven by CSS &lt;code&gt;transform&lt;/code&gt; animations, &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2019-12-12-3d-transformations/&quot;&gt;3D perspective transformations&lt;/a&gt; for arbitrary SVG elements, CSS &lt;code&gt;z-index&lt;/code&gt; support for all SVG graphics elements, and proper coverage rectangle computations and repaints are just a few highlights of the capabilities the future SVG engine will offer.&lt;/p&gt;
+&lt;p&gt;In this article, an overview is given about the problems that LBSE aims to solve, and the importance of a performant, well-integrated SVG engine &lt;em&gt;especially&lt;/em&gt; for the embedded market. Finally, the current upstreaming status is summarized including an outlook for the year &lt;strong&gt;2023&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;lbse-in-a-nutshell&quot; tabindex=&quot;-1&quot;&gt;LBSE in a nutshell&lt;/h2&gt;
+&lt;p&gt;Before diving into the technical topics, let’s take a few minutes to recap the motivations behind the LBSE work, and explain the importance of a well-integrated, performant SVG engine in WebKit, &lt;em&gt;especially&lt;/em&gt; for the embedded market.&lt;/p&gt;
+&lt;h3 id=&quot;motivation&quot; tabindex=&quot;-1&quot;&gt;Motivation&lt;/h3&gt;
+&lt;p&gt;Many of our customers build products that utilize a Linux-powered embedded device, typically using non-x86 CPUs, custom displays with built-in input capabilities (e.g., capacitive touchscreens) often without large amounts of memory or even permanent storage. The software stack for these devices usually consists of a device-specific Linux distribution, containing the proprietary network, GPU, and drivers for the embedded device - the vendor-approved &lt;em&gt;“reference distribution”&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;No matter what type of product is built nowadays, many of them need an active Internet connection, to e.g. update their software stack and access additional information. Besides the UI needed to control the product, a lot of additional dialogs, wizards and menus have to be provided to be able to alter the devices’ “system settings”, such as date/time information, time zones, display brightness, WiFi credentials, Bluetooth settings, and so on.&lt;/p&gt;
+&lt;p&gt;A variety of toolkits exist that assist in writing GUI applications for embedded devices, with a few open-source projects on the market, as well as commercial products providing closed-source, proprietary solutions, that &lt;em&gt;specifically&lt;/em&gt; target the embedded market and are often optimized for specific target device families, e.g. certain ARM processors / certain GPUs.&lt;/p&gt;
+&lt;p&gt;If the need arises, not only to communicate with the Internet but also to display arbitrary Web content, WPE comes into play. As presented in the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/02-overview-of-wpe.html#how-does-wpe-integrate-with-webkit%3F&quot;&gt;first post in this series&lt;/a&gt;, the flexible and modular WPE architecture makes it an ideal choice for any product in the embedded market that needs Web browsing abilities. The &lt;a href=&quot;https://docs.gtk.org/glib&quot;&gt;GLib&lt;/a&gt;/C-based &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1&quot;&gt;WPE public APIs&lt;/a&gt; allow for customization of the browsing engine and its settings (react on page load/input events, inject custom JS objects, modify style sheets, etc.) and allow the embedder to control/monitor all relevant Web browsing-related activities.&lt;/p&gt;
+&lt;p&gt;With a full-fledged Web engine at hand, one might ponder if it is feasible to replace the whole native GUI stack with a set of Web pages/applications, and only use WPE to paint the UI in full-screen mode, thus migrating away from native GUI applications — following the trend in the desktop market. The number of organizations migrating native GUI applications into Web applications is &lt;em&gt;rapidly&lt;/em&gt; increasing, since there are compelling reasons for Web apps: “write once, use everywhere”, avoiding vendor lock-in, easy/reliable deployment and update mechanisms, and efficient test/development cycles (local in-browser testing!).&lt;/p&gt;
+&lt;p&gt;Due to the sheer capabilities of the Web platform, it has grown to an environment in which any kind of application can be developed – ranging from video editing applications, big data processing pipelines to 3D games, all using JS/WebAssembly in a browser, presented using HTML5/CSS. And as an important bonus: in 2023, it’s much easier to find and attract talented Web developers and designers that are fluent in HTML/CSS/JS, than those that are comfortable designing UI applications in proprietary, closed-source C/C++ frameworks.&lt;/p&gt;
+&lt;p&gt;A long-term customer, successfully using WPE in their products, had very similar thoughts and carried out a study, contracting external Web designers to build a complete UI prototype using Web technology. The mock-up made extensive use of SVG2, embedded inline into HTML5 documents or via other mechanisms (CSS &lt;code&gt;background-image&lt;/code&gt;, etc.). The UI fulfilled all expectations and worked great in Blink and WebKit-based browsers, delivering smooth animations. On the target device, however, the performance was too slow, far away from usable. A thorough analysis revealed that large parts of the Web page were constantly repainted, and layout operations were repeated for every frame when animations were active. The accumulated time to display a new frame during animations was in the order of a few milliseconds on desktop machines, but took 20-25 milliseconds on the target device, making smooth 60 FPS animations &lt;em&gt;impossible&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The poor performance is not the result of shortcomings in the WPE port of WebKit: when replacing the aforementioned animated SVG document fragments with HTML/CSS “equivalents” (e.g. simulating SVG circles with CSS &lt;code&gt;border-radius&lt;/code&gt; tricks) the performance issue vanisheed. Why? SVG lacks support for a key feature called &lt;strong&gt;accelerated compositing&lt;/strong&gt;, which has been available for HTML/CSS since its introduction more than a decade ago. This compositing heavily relies on the &lt;strong&gt;Layer Tree&lt;/strong&gt;, which is unaware of SVG. Extending the &lt;strong&gt;Layer Tree&lt;/strong&gt; implementation to account for SVG is the &lt;strong&gt;main motivation for LBSE&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;If you are unfamiliar with the concepts of &lt;strong&gt;Render Tree&lt;/strong&gt; and &lt;strong&gt;Layer Tree&lt;/strong&gt;, you might want to read the &lt;em&gt;“Key concepts”&lt;/em&gt; section of an earlier &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-29-layer-based-svg-engine/page/3/#key-concepts&quot;&gt;LBSE design document&lt;/a&gt;, which provides an overview of the topic.&lt;/p&gt;
+&lt;h3 id=&quot;prototyping&quot; tabindex=&quot;-1&quot;&gt;Prototyping&lt;/h3&gt;
+&lt;p&gt;The LBSE effort began in October 2019 as &lt;strong&gt;a research project&lt;/strong&gt;, to find out an ideal design for the SVG &lt;strong&gt;Render Tree&lt;/strong&gt;, that allows SVG to re-use the existing &lt;strong&gt;Layer Tree&lt;/strong&gt; implementation with minimal changes. The aim for LBSE is to share as much code as possible with the HTML/CSS implementation, removing the need for things like SVG specific clipping/masking/filter code and disjoint HTML counterparts for the same operations.&lt;/p&gt;
+&lt;p&gt;After an extensive phase of experimentation, two abandoned approaches, and a long time spent on regression fixing, the LBSE prototype was finally finished after almost two years of work. It passed all 60k+ WebKit layout tests and offered initial support for compositing, 3D transformations, &lt;code&gt;z-index&lt;/code&gt;, and more. The intent was to prove that we can reach feature parity with the legacy SVG engine and retrieve the very same visual results, pixel-by-pixel (except for progressions of LBSE). Shortly after the finalization, the prototype was presented during the &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-13-svg-performance/&quot;&gt;WebKit contributors meeting in 2021&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As the name “prototype” indicates, LBSE was not ready for integration into WebKit at this point. It &lt;strong&gt;replaced&lt;/strong&gt; the old SVG engine with a new one, resulting in a monolithic patch exceeding &lt;em&gt;650 KB&lt;/em&gt; of code changes. External contributions generally demand small patches, with ChangeLogs, tests, etc. – no conscientious reviewer in any company would approve a patch replacing a core component of a browser engine in one shot. Splitting up into small pieces is also not going to work, since SVG needs to be kept intact upstream all the time. Duplicating the whole SVG engine? Not practicable either. With that problem in mind, a fruitful discussion took place with Apple during and after the WebKit contributors meeting: a realistic upstreaming strategy was defined - thanks &lt;em&gt;Simon Fraser&lt;/em&gt; for suggesting a pragmatic approach!&lt;/p&gt;
+&lt;p&gt;The idea is simple: bootstrap LBSE &lt;em&gt;in parallel&lt;/em&gt; to the legacy SVG engine. Upstream LBSE behind a compile-time flag and additionally a runtime setting. This way the LBSE code is compiled by the &lt;a href=&quot;https://trac.webkit.org/wiki/EarlyWarningSystem&quot;&gt;EWS bots&lt;/a&gt; during upstreaming (rules out bit-rot) and we gain the ability to turn LBSE on, selectively, from our layout tests – very useful during early bootstrapping. For WebKit, that strategy is the best – for LBSE another &lt;em&gt;major&lt;/em&gt; effort is necessary: moving from a &lt;strong&gt;drop-in replacement&lt;/strong&gt; approach to a &lt;strong&gt;dual-stack&lt;/strong&gt; SVG engine: LBSE + legacy built into the same WebKit binaries. At least the timing was good since a split-up into small pieces was needed anyhow for upstreaming. Time to dissect the huge branch into logical, atomic pieces with proper change logs.&lt;/p&gt;
+&lt;p&gt;Before we jump to the upstreaming status, one question should be answered, that came up during the WebKit contributors meeting and also during various discussions: why don’t you just &lt;em&gt;fix&lt;/em&gt; the existing SVG engine and instead propose a new one - isn’t that too risky for Web compatibility?&lt;/p&gt;
+&lt;h3 id=&quot;why-don%E2%80%99t-you-fix-the-existing-svg-engine%3F&quot; tabindex=&quot;-1&quot;&gt;Why don’t you fix the existing SVG engine?&lt;/h3&gt;
+&lt;img style=&quot;float: right; width: 55%;&quot; alt=&quot;LBSE logo&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/lbse-logo-wide.png&quot; /&gt;
+&lt;p&gt;There was &lt;em&gt;no initial intention&lt;/em&gt; to come up with a new SVG engine. During LBSE development it became apparent how much SVG-specific code can be erased when unifying certain aspects with HTML/CSS. After carrying out the integration work, layout/painting and hit-testing work fundamentally different than before. Since that time, LBSE is labeled as a &lt;em&gt;“new SVG engine”&lt;/em&gt;, even though the SVG DOM tree part remained almost identical. Web compatibility will &lt;em&gt;improve&lt;/em&gt; with LBSE: a few long-standing, critical interop issues with other browser vendors are solved in LBSE. Therefore, there are no concerns regarding Web compatibility risks from our side.&lt;/p&gt;
+&lt;p&gt;To answer the initial question, whether it is possible to fix the existing SVG engine to add layer support without adding a “new” SVG engine in parallel? Short answer: &lt;em&gt;no&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;In the following section, it is shown that adding support for layers implies changing the class hierarchy of the SVG render tree. All SVG renderers need to inherit from &lt;code&gt;RenderLayerModelObject&lt;/code&gt; – a change like this cannot be split up easily into small, atomic pieces. Improving the design is difficult if there’s a requirement to keep the SVG engine working all the time upstream: all patches in that direction end up being large as many renderers have to be changed at the same time. Having distinct, LBSE-only implementations of SVG renderers, independent of the legacy engine, leaves a lot of freedom to strive for an optimal design, free of legacy constraints, and avoids huge patches that are &lt;em&gt;impossible&lt;/em&gt; to review.&lt;/p&gt;
+&lt;p&gt;Let’s close the introduction and review the upstreaming status, and discuss where we stand today.&lt;/p&gt;
+&lt;h2 id=&quot;upstreaming-progress&quot; tabindex=&quot;-1&quot;&gt;Upstreaming progress&lt;/h2&gt;
+&lt;h3 id=&quot;planning&quot; tabindex=&quot;-1&quot;&gt;Planning&lt;/h3&gt;
+&lt;p&gt;To unify the HTML/CSS and SVG rendering pipelines there are two possible paths to choose from: teach the &lt;strong&gt;Layer Tree&lt;/strong&gt; about the SVG &lt;strong&gt;Render Tree&lt;/strong&gt; and its rendering model, or vice-versa. For the latter path, the HTML/CSS-specific &lt;code&gt;RenderLayer&lt;/code&gt; needs to split into HTML/SVG subclasses and a base class, that is constructible from non-&lt;code&gt;RenderLayerModelObject&lt;/code&gt;-derived renderers. The layer management code currently in &lt;code&gt;RenderLayerModelObject&lt;/code&gt; would need to move into another place, and so forth. This &lt;em&gt;invasive&lt;/em&gt; approach can potentially break lots of things. Besides that danger, many places in the layer/compositing system would need subtle changes to account for the specific needs of SVG (e.g. different coordinate system origin/convention).&lt;/p&gt;
+&lt;p&gt;Therefore the former route was chosen, which requires transforming the SVG render tree class hierarchy, such that all renderers that need to manage layers derive from &lt;strong&gt;&lt;code&gt;RenderLayerModelObject&lt;/code&gt;&lt;/strong&gt;. Using this approach support, for SVG can be added to the layer/compositing system in a &lt;em&gt;non-invasive&lt;/em&gt; manner, with only a minimum of SVG-specific changes. The following class hierarchy diagrams illustrate the planned changes.&lt;/p&gt;
+&lt;figure style=&quot;display: inline-block;&quot;&gt;
+&lt;figure style=&quot;margin-left: 0; margin-right: auto; display: inline-block; width: 48%;&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/svg/svg_render_tree_legacy.svg&quot; target=&quot;_blank&quot;&gt;Legacy design (click to enlarge)&lt;/a&gt;&lt;/figcaption&gt;
+&lt;img alt=&quot;Visualization of the legacy SVG render tree class hierarchy in WebCore&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/svg/svg_render_tree_legacy.svg&quot; /&gt;
+&lt;/figure&gt;
+&lt;figure style=&quot;margin-left: auto; margin-right: 0; display: inline-block; width: 48%&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/svg/svg_render_tree_lbse.svg&quot; target=&quot;_blank&quot;&gt;LBSE design (click to enlarge)&lt;/a&gt;&lt;/figcaption&gt;
+&lt;img alt=&quot;Visualization of the LBSE SVG render tree class hierarchy in WebCore&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/svg/svg_render_tree_lbse.svg&quot; /&gt;
+&lt;/figure&gt;
+&lt;/figure&gt;
+&lt;p&gt;The first graph shows the class hierarchy of the render tree in the legacy SVG engine: &lt;code&gt;RenderObject&lt;/code&gt; is the base class for all nodes in the render tree. &lt;code&gt;RenderBoxModelObject&lt;/code&gt; is the common base class for all HTML/CSS renderers. It inherits from &lt;code&gt;RenderLayerModelObject&lt;/code&gt;, potentially allowing HTML renderers to create layers. For the SVG part of the render tree, there is no common base class shared by all the SVG renderers, for historical reasons.&lt;/p&gt;
+&lt;p&gt;The second graph shows only the SVG renderers of the LBSE class hierarchy. In that design, all relevant SVG renderers may create/destroy/manage layers, via &lt;code&gt;RenderLayerModelObject&lt;/code&gt;. More information regarding the challenges can be found in the earlier &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-29-layer-based-svg-engine/page/6/#legacy-class-hierarchy&quot;&gt;LBSE design document&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;report&quot; tabindex=&quot;-1&quot;&gt;Report&lt;/h3&gt;
+&lt;p&gt;The upstreaming work started in &lt;strong&gt;December 2021&lt;/strong&gt;, with the introduction of a new layer-aware root renderer for the SVG render subtree: &lt;code&gt;RenderSVGRoot&lt;/code&gt;. The existing &lt;a href=&quot;https://trac.webkit.org/changeset/286392/webkit&quot;&gt;&lt;code&gt;RenderSVGRoot&lt;/code&gt; class was renamed to &lt;code&gt;LegacyRenderSVGRoot&lt;/code&gt;&lt;/a&gt; (as well as any files, comments, etc.) and all call sites and build systems were adapted. Afterward, a stub implementation &lt;a href=&quot;https://trac.webkit.org/changeset/286842/webkit&quot;&gt;of a layer-aware &lt;code&gt;RenderSVGRoot&lt;/code&gt; class was added&lt;/a&gt; and assured that the &lt;a href=&quot;https://trac.webkit.org/changeset/286846/webkit&quot;&gt;new renderer is created for the corresponding SVG DOM element&lt;/a&gt; if LBSE is activated.&lt;/p&gt;
+&lt;p&gt;That process needs to be repeated for all SVG renderers that have substantially changed in LBSE and thus deserve an LBSE-specific upstream implementation. For all other cases, in-file &lt;code&gt;#if ENABLE(LAYER_BASED_SVG_ENGINE) ... #endif&lt;/code&gt; blocks will be used to encapsulate LBSE-specific behavior. For example, &lt;code&gt;RenderSVGText&lt;/code&gt; / &lt;code&gt;RenderSVGInlineText&lt;/code&gt; are almost identical in LBSE downstream, compared to their legacy variants; thus, they are going to share the renderer implementation between the legacy SVG engine and LBSE.&lt;/p&gt;
+&lt;p&gt;The multi-step procedure was repeated for &lt;a href=&quot;https://trac.webkit.org/changeset/287538/webkit&quot;&gt;&lt;code&gt;RenderSVGModelObject&lt;/code&gt;&lt;/a&gt; (the base class for SVG graphics primitives), &lt;a href=&quot;https://trac.webkit.org/changeset/287832/webkit&quot;&gt;&lt;code&gt;RenderSVGShape&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://trac.webkit.org/changeset/287834/webkit&quot;&gt;&lt;code&gt;RenderSVGRect&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&quot;https://trac.webkit.org/changeset/287921/webkit&quot;&gt;&lt;code&gt;RenderSVGContainer&lt;/code&gt;&lt;/a&gt;. Core functionality such as laying out children of a container, previously hidden in &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/main/Source/WebCore/rendering/svg/SVGRenderSupport.cpp#L241&quot;&gt;&lt;code&gt;SVGRenderSupport::layoutChildren()&lt;/code&gt;&lt;/a&gt; in the legacy SVG engine, now lives in a dedicated class: &lt;a href=&quot;https://trac.webkit.org/changeset/288011/webkit&quot;&gt;&lt;code&gt;SVGContainerLayout&lt;/code&gt;&lt;/a&gt;. Computing the various SVG bounding boxes - &lt;strong&gt;object/stroke/decorated  bounding box&lt;/strong&gt; - is &lt;a href=&quot;https://svgwg.org/svg2-draft/coords.html#BoundingBoxes&quot;&gt;precisely specified in SVG2&lt;/a&gt; and got a dedicated implementation as the &lt;a href=&quot;https://trac.webkit.org/changeset/287873/webkit&quot;&gt;&lt;code&gt;SVGBoundingBoxComputation&lt;/code&gt;&lt;/a&gt; class, instead of fragmenting the algorithms all over the SVG render tree as in the legacy SVG engine.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;February 2022&lt;/strong&gt;, enough functionality was in place to construct the LBSE render tree for basic SVG documents, utilizing nested containers and rectangles as leaves. While this doesn’t sound exciting &lt;em&gt;at all&lt;/em&gt;, it provided an ideal environment to implement support for SVG in the &lt;code&gt;RenderLayer&lt;/code&gt;-related code - &lt;strong&gt;before&lt;/strong&gt; converting all SVG renderers to LBSE, and &lt;strong&gt;before&lt;/strong&gt; implementing painting in the SVG renderers.&lt;/p&gt;
+&lt;p&gt;Both &lt;code&gt;RenderLayer&lt;/code&gt; and &lt;code&gt;RenderLayerBacking&lt;/code&gt; query CSS geometry information such as &lt;strong&gt;border box&lt;/strong&gt;, &lt;strong&gt;padding box&lt;/strong&gt;, or &lt;strong&gt;content box&lt;/strong&gt; from their associated renderer, which is expected to be a &lt;strong&gt;&lt;code&gt;RenderBox&lt;/code&gt;&lt;/strong&gt; in many places. This is &lt;em&gt;incorrect&lt;/em&gt; for SVG: &lt;code&gt;RenderSVGModelObject&lt;/code&gt; inherits from &lt;code&gt;RenderLayerModelObject&lt;/code&gt;, but not from &lt;code&gt;RenderBox&lt;/code&gt; since it doesn’t adhere to the CSS box model. Various call sites cast the associated renderer to &lt;code&gt;RenderBox&lt;/code&gt; to call e.g. &lt;code&gt;borderBoxRect()&lt;/code&gt; to retrieve the border box rectangle. There are similar accessors in SVG to query the geometry, but there is no equivalent of a &lt;strong&gt;border box&lt;/strong&gt; or other CSS concetps in SVG. Therefore, we extended &lt;code&gt;RenderSVGModelObject&lt;/code&gt; to provide a &lt;strong&gt;CSS box model view&lt;/strong&gt; of an SVG renderer, by offering methods such as &lt;code&gt;borderBoxRectEquivalent()&lt;/code&gt; or &lt;code&gt;visualOverflowRectEquivalent()&lt;/code&gt; that return geometry information in the same coordinate system using the same conventions as their HTML/CSS counterparts.&lt;/p&gt;
+&lt;p&gt;We also refactored &lt;code&gt;RenderLayer&lt;/code&gt; to use a proxy method - &lt;code&gt;rendererBorderBoxRect()&lt;/code&gt; - &lt;a href=&quot;https://trac.webkit.org/changeset/289210/webkit&quot;&gt;that provides access&lt;/a&gt; to the &lt;code&gt;borderBoxRect()&lt;/code&gt; for HTML and the &lt;code&gt;borderBoxRectEquivalent()&lt;/code&gt; for SVG renderers, and the same &lt;a href=&quot;https://trac.webkit.org/changeset/289213/webkit&quot;&gt;fix&lt;/a&gt; to &lt;code&gt;RenderLayerBacking&lt;/code&gt;. With these fixes in place, support to &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/%3Ehttps://trac.webkit.org/changeset/289207/webkit&quot;&gt;position and size SVG layers&lt;/a&gt; and to &lt;a href=&quot;https://trac.webkit.org/changeset/289204/webkit&quot;&gt;compute overflow information&lt;/a&gt; could be added – &lt;em&gt;both&lt;/em&gt; pre-conditions to enable painting.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;March 2022&lt;/strong&gt;, LBSE &lt;a href=&quot;https://trac.webkit.org/changeset/290324/webkit&quot;&gt;was able to paint basic SVG documents&lt;/a&gt; - a major milestone for the bootstrapping process, demonstrating that the layer painting code was functional for SVG. It was time to move on to &lt;em&gt;transformations&lt;/em&gt;: implementing &lt;a href=&quot;https://trac.webkit.org/changeset/290880/webkit&quot;&gt;&lt;code&gt;RenderSVGTransformableContainer&lt;/code&gt;&lt;/a&gt; (e.g. &lt;code&gt;&amp;lt;g&amp;gt;&lt;/code&gt; elements with a non-identity &lt;code&gt;transform&lt;/code&gt; attribute or CSS &lt;code&gt;transform&lt;/code&gt; property) and CSS/SVG &lt;code&gt;transform&lt;/code&gt; support for all other graphics primitives, utilizing the &lt;code&gt;RenderLayer&lt;/code&gt;-based &lt;strong&gt;CSS Transform&lt;/strong&gt; implementation. As preparation, the existing code was reviewed and &lt;a href=&quot;https://trac.webkit.org/changeset/291338/webkit&quot;&gt;cleaned up&lt;/a&gt;: &lt;code&gt;transform-origin&lt;/code&gt; computation &lt;a href=&quot;https://trac.webkit.org/changeset/291338/webkit&quot;&gt;was decoupled&lt;/a&gt; from CTM computation (CTM = current transformation matrix, see &lt;a href=&quot;https://www.w3.org/TR/css-transforms-1/#current-transformation-matrix&quot;&gt;CSS Transforms Module Level 1&lt;/a&gt;) and &lt;code&gt;transform-box&lt;/code&gt; computations &lt;a href=&quot;https://trac.webkit.org/changeset/292525/webkit&quot;&gt;were unified in a single place&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;April 2022&lt;/strong&gt;, &lt;strong&gt;2D transforms&lt;/strong&gt; &lt;a href=&quot;https://trac.webkit.org/changeset/292706/webkit&quot;&gt;were enabled&lt;/a&gt; and became &lt;a href=&quot;https://trac.webkit.org/changeset/293504/webkit&quot;&gt;fully functional&lt;/a&gt; a few weeks later. Besides missing &lt;em&gt;compositing support&lt;/em&gt; upstream, downstream work showed that enabling 3D transforms for SVG required &lt;a href=&quot;https://trac.webkit.org/changeset/294615/webkit&quot;&gt;fixing a decade-old bug&lt;/a&gt; that made the computed &lt;code&gt;perspective&lt;/code&gt; transformation dependent on the choice of &lt;code&gt;transform-origin&lt;/code&gt;. That became apparent when testing the layer code with SVG, which uses different default values for certain transform-related CSS properties than HTML does: &lt;code&gt;transform-box: view-box&lt;/code&gt; and &lt;code&gt;transform-origin: 0 0&lt;/code&gt; are the relevant defaults for SVG, referring to the top-left corner of nearest SVG viewport vs. the center of the element in HTML.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;May 2022&lt;/strong&gt;, the legacy SVG text rendering code was &lt;a href=&quot;https://trac.webkit.org/changeset/294385/webkit&quot;&gt;altered to be usable for LBSE as well&lt;/a&gt;. At this point, it made sense to run layout tests using LBSE. Previously most tests were expected to fail, as most either utilize text, paths, or shapes, and sometimes all three together. LBSE render tree text dumps (dumping the parsed render tree structure in a text file) were added for all tests in the &lt;code&gt;LayoutTests/svg&lt;/code&gt; subdirectory, as well as a new pixel test baseline (screenshots of the rendering as PNGs), generated using the legacy SVG engine, to verify that LBSE produces pixel-accurate results. All upcoming LBSE patches are expected to &lt;em&gt;change&lt;/em&gt; the expected layout test result baseline, and/or the &lt;code&gt;TestExpectations&lt;/code&gt; file, depending on the type of patch. This will ease the reviewing process a lot for future patches.&lt;/p&gt;
+&lt;p&gt;To further proceed, a &lt;strong&gt;test-driven approach&lt;/strong&gt; was used to prioritize the implementation of the missing functionality. At that time, missing &lt;code&gt;viewBox&lt;/code&gt; support for outer &amp;lt;svg&amp;gt; elements was causing many broken tests. The effect of the transformation induced by the &lt;strong&gt;viewBox&lt;/strong&gt; attribute, specified on outer &amp;lt;svg&amp;gt; elements, cannot be implemented as an additional CSS transformation applied to the outermost &amp;lt;svg&amp;gt; element, as that would affect the painted dimensions of the SVG document, which are subject to the CSS &lt;code&gt;width&lt;/code&gt;/&lt;code&gt;height&lt;/code&gt; properties and the size negotiation logic only. The &lt;code&gt;viewBox&lt;/code&gt; attribute is supposed to only affect the visual appearance of the descendants, by establishing a new local coordinate system for them. The legacy SVG engine manually handled the &lt;code&gt;viewBox&lt;/code&gt;-induced transformation in various places throughout &lt;code&gt;LegacyRenderSVGRoot&lt;/code&gt;, to only affect the painting of the descendants and not e.g. the position/dimension of the border surrounding the &amp;lt;svg&amp;gt;, if the CSS &lt;code&gt;border&lt;/code&gt; property is specified. In LBSE, transformations are handled on &lt;code&gt;RenderLayer&lt;/code&gt;-level and not in the renderers anymore.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;July 2022&lt;/strong&gt;, after testing different approaches, a proper solution &lt;a href=&quot;https://commits.webkit.org/252643@main&quot;&gt;to add &lt;code&gt;viewBox&lt;/code&gt; support was upstreamed&lt;/a&gt;. The chosen solution makes use of another CSS concept that arises in the context of generated content: &lt;em&gt;“anonymous boxes”&lt;/em&gt;. The idea is to wrap the direct descendants of &lt;code&gt;RenderSVGRoot&lt;/code&gt; in an anonymous &lt;code&gt;RenderSVGViewportContainer&lt;/code&gt; (“anonymous” = no associated DOM element) and apply the &lt;code&gt;viewBox&lt;/code&gt; transformation as a regular CSS transformation on the anonymous renderer. With that approach, LBSE is left with just a &lt;em&gt;single, unified&lt;/em&gt; &lt;code&gt;viewBox&lt;/code&gt; implementation, without error-prone special cases in &lt;code&gt;RenderSVGRoot&lt;/code&gt;, unlike the legacy SVG engine which has two disjoint implementations in &lt;code&gt;LegacyRenderSVGViewportContainer&lt;/code&gt; and &lt;code&gt;LegacyRenderSVGRoot&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;After the summer holidays, in &lt;strong&gt;August 2022&lt;/strong&gt;, the next major milestone was reached: &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=242833&quot;&gt;enabling compositing support for arbitrary SVG elements&lt;/a&gt;, bringing &lt;strong&gt;z-index&lt;/strong&gt; support, &lt;strong&gt;hardware-accelerated compositing&lt;/strong&gt; and &lt;strong&gt;3D transforms&lt;/strong&gt; to SVG. This time &lt;em&gt;all lessons&lt;/em&gt; learned from the previous LBSE prototypes were taken into account, resulting in a &lt;em&gt;complete&lt;/em&gt; compositing implementation, that works in various scenarios: different &lt;code&gt;transform-box&lt;/code&gt; / &lt;code&gt;transform-origin&lt;/code&gt; combinations, inline SVG enclosed by absolute/relative positioned CSS boxes and many more, all way more polished than in the “final” LBSE prototype.&lt;/p&gt;
+&lt;p&gt;The aforementioned patch contained a fix for a &lt;a href=&quot;https://webkit.org/b/27684&quot;&gt;long-standing bug&lt;/a&gt; (&lt;em&gt;“Composited elements appear pixelated when scaled up using transform”&lt;/em&gt;), that made composited elements look blurry when scaling up with a CSS &lt;code&gt;transform&lt;/code&gt; animation. The so-called &lt;em&gt;“backing scale factor”&lt;/em&gt; of the associated &lt;code&gt;GraphicLayers&lt;/code&gt; (see &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/03-wpe-graphics-architecture.html&quot;&gt;here for details&lt;/a&gt; about the role of &lt;code&gt;GraphicLayer&lt;/code&gt; in the compositing system) never changes during the animation. Therefore, the rendered image was scaled up instead of re-rendering the content at the right scale. LBSE now enforces updates of that scale factor, to avoid blurry SVGs. The fix is &lt;em&gt;not&lt;/em&gt; activated yet for HTML as that requires more thought - see the previously-linked bug report for details.&lt;/p&gt;
+&lt;p&gt;With all the new features in place and covered by tests, it was time to finish the remaining SVG renderers: &lt;a href=&quot;https://commits.webkit.org/250913@main&quot;&gt;RenderSVGEllipse&lt;/a&gt;, &lt;a href=&quot;https://commits.webkit.org/251688@main&quot;&gt;RenderSVGPath&lt;/a&gt; and &lt;a href=&quot;https://commits.webkit.org/252500@main&quot;&gt;RenderSVGViewportContainer&lt;/a&gt; (for inner &amp;lt;svg&amp;gt; elements), &lt;a href=&quot;https://commits.webkit.org/253510@main&quot;&gt;RenderSVGHiddenContainer&lt;/a&gt;, &lt;a href=&quot;https://commits.webkit.org/253793@main&quot;&gt;RenderSVGImage&lt;/a&gt;, and &lt;a href=&quot;https://commits.webkit.org/253816@main&quot;&gt;RenderSVGForeignObject&lt;/a&gt;. A proper &amp;lt;foreignObject&amp;gt; implementation was lacking in WebKit for 15+ years, due to the fundamental problem that the layer tree was not aware of the SVG subtree. The LBSE variant of &lt;code&gt;RenderSVGForeignObject&lt;/code&gt; looks trivial, yet offers a fully compatible &lt;strong&gt;&amp;lt;foreignObject&amp;gt; implementation&lt;/strong&gt; - for the first time without issues with non-static positioned content as a direct child of &amp;lt;foreignObject&amp;gt;, at least a few weeks later after &lt;a href=&quot;https://commits.webkit.org/256960@main&quot;&gt;it landed&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Returning to the test-driven approach, the next best target to fix was text rendering, which was working but not pixel-perfect. The legacy SVG engine takes into account the transformation from the text element up to the topmost renderer when computing the effective “on-screen” font size used to select a font for drawing/measuring, during &lt;em&gt;layout&lt;/em&gt; time. LBSE needed a way to calculate the CTM for a given SVG renderer, up to a given ancestor renderer (or root), taking into account all possible transformation scenarios, including CSS &lt;code&gt;transform&lt;/code&gt;, &lt;code&gt;translate&lt;/code&gt;, &lt;code&gt;rotate&lt;/code&gt;, SVG &lt;code&gt;transform&lt;/code&gt; attribute, shifts due to &lt;code&gt;transform-origin&lt;/code&gt;, perspective transformations, and much more. The &lt;em&gt;same functionality&lt;/em&gt; is required to implement &lt;code&gt;getCTM()&lt;/code&gt; / &lt;code&gt;getScreenCTM()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;By the end of &lt;strong&gt;August 2022&lt;/strong&gt;, &lt;a href=&quot;https://commits.webkit.org/253938@main&quot;&gt;&lt;code&gt;SVGLayerTransformComputation&lt;/code&gt; was added&lt;/a&gt; that re-used the existing &lt;code&gt;mapLocalToContainer()&lt;/code&gt; / &lt;code&gt;TranformState&lt;/code&gt; API to obtain the CTM. The CTM construction and ancestor chain walk - to accumulate the final transformation matrix - is performed by &lt;code&gt;mapLocalToContainer()&lt;/code&gt; and no longer needs a special, &lt;em&gt;incomplete&lt;/em&gt; SVG approach: the existing general approach now works for SVG too.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;September 2022&lt;/strong&gt; was mostly devoted to bug fixes related to &lt;strong&gt;pixel-snapping&lt;/strong&gt;. Outermost &amp;lt;svg&amp;gt; elements &lt;a href=&quot;https://commits.webkit.org/254314@main&quot;&gt;were not always enforcing stacking contexts&lt;/a&gt; and &lt;a href=&quot;https://commits.webkit.org/254558@main&quot;&gt;failed to align to device pixels&lt;/a&gt;. All other elements behaved fine with respect to pixel snapping (&lt;em&gt;not&lt;/em&gt; applied for SVG elements) unless compositing layers were active. In that case, a &lt;code&gt;RenderLayerBacking&lt;/code&gt; code path was used that unconditionally applied pixel-snapping - &lt;a href=&quot;https://commits.webkit.org/254863@main&quot;&gt;avoid that for SVG&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;October 2022&lt;/strong&gt; LBSE could &lt;a href=&quot;https://commits.webkit.org/255291@main&quot;&gt;properly display&lt;/a&gt; SVGs embedded into HTML host documents via &amp;lt;object&amp;gt; elements – the size negotiation logic failed to take into account the LBSE-specific renderers before. CSS &lt;code&gt;background-image&lt;/code&gt; / &lt;code&gt;list-image&lt;/code&gt; / HTML &amp;lt;img&amp;gt; / etc. &lt;a href=&quot;https://commits.webkit.org/255625@main&quot;&gt;were fixed as well&lt;/a&gt;. Zooming and panning support were &lt;a href=&quot;https://commits.webkit.org/255727@main&quot;&gt;implemented and improved compared to the legacy engine&lt;/a&gt;. Along the way an important bug was fixed, one that other browsers had already fixed back in 2014. The bug caused percentage-sized documents (e.g. &lt;code&gt;width: 100%; height: 100%&lt;/code&gt;) that also specify a &lt;code&gt;viewBox&lt;/code&gt; to always keep the document size, regardless of the zoom level. Thus, upon zooming, only the stroke width enlarged, but not the boundaries of the document, and thus scrollbars never appeared.&lt;/p&gt;
+&lt;p&gt;Over the following weeks, text-related issues had to be fixed, which were responsible for a bunch of the remaining test issues. Transformed text did not render, which turned out to be a simple &lt;a href=&quot;https://commits.webkit.org/255801@main&quot;&gt;mistake&lt;/a&gt;. More tests were upstreamed, related to &lt;a href=&quot;https://commits.webkit.org/256502@main&quot;&gt;compositing&lt;/a&gt; and &lt;a href=&quot;https://commits.webkit.org/256948@main&quot;&gt;transformations&lt;/a&gt;. More test coverage revealed that transform changes were not handled consistently – it took a period of investigation to &lt;a href=&quot;https://commits.webkit.org/256787@main&quot;&gt;land a proper fix&lt;/a&gt;. SVG transform / SMIL &amp;lt;animateMotion&amp;gt; / SMIL &amp;lt;animateTransform&amp;gt; / CSS transform changes are now handled consistently in LBSE, leading to proper repaints, as expected.&lt;/p&gt;
+&lt;p&gt;Transformation support can be considered complete and properly handled both during the painting and layout phases. Dynamic changes at runtime are correctly triggering invalidations. However, the Web-exposed &lt;strong&gt;SVG DOM API&lt;/strong&gt; that allows querying the transformation matrices of SVG elements, such as &lt;code&gt;getCTM()&lt;/code&gt; and &lt;code&gt;getScreenCTM()&lt;/code&gt;, was still missing. By &lt;strong&gt;November 2022&lt;/strong&gt; a complete implementation &lt;a href=&quot;https://commits.webkit.org/256862@main&quot;&gt;was upstreamed&lt;/a&gt;, that utilized the new &lt;code&gt;SVGLayerTransformComputation&lt;/code&gt; class to construct the desired transformation matrices. This way the same internal API is used for painting/layout/hit-testing and implementing the &lt;strong&gt;SVG DOM accessors&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;December 2022&lt;/strong&gt; LBSE was in a good shape: most important architectural changes were upstreamed and the most basic features were implemented. The year closed with a proposed &lt;a href=&quot;https://github.com/WebKit/WebKit/pull/7482&quot;&gt;patch&lt;/a&gt; that will avoid re-layout when an element’s transform changes. The legacy SVG engine always needs a re-layout if transform changes, as the size of each ancestor can depend on the presence of transformations on the child elements – a bad design decision two decades ago that LBSE will resolve. Only repainting should happen, but no layouts, in LBSE.&lt;/p&gt;
+&lt;p&gt;Let’s move on to 2023, and recap what’s still missing in LBSE.&lt;/p&gt;
+&lt;h3 id=&quot;next-steps&quot; tabindex=&quot;-1&quot;&gt;Next steps&lt;/h3&gt;
+&lt;p&gt;Besides fixing all remaining test regressions (see &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/main/LayoutTests/platform/mac-ventura-wk2-lbse-text/TestExpectations&quot;&gt;&lt;code&gt;LayoutTests/platform/mac-ventura-wk2-lbse-text/TestExpectations&lt;/code&gt;&lt;/a&gt;) “SVG resources” are missing in LBSE. That includes all “paint servers” and advanced painting operations: there is no support for linear/radial gradients, no support for patterns, and no support for clipping/masking and filters.&lt;/p&gt;
+&lt;p&gt;From the painting capabilities, LBSE is still in a &lt;em&gt;basic shape&lt;/em&gt;. However, this was intentional, since a lot of the existing code for SVG resource handling is &lt;em&gt;no longer needed&lt;/em&gt; in LBSE. Clipping/masking and filters will be handled via &lt;code&gt;RenderLayer&lt;/code&gt;, reusing the existing HTML/CSS implementations. Temporary &lt;code&gt;ImageBuffers&lt;/code&gt; are no longer needed for clipping, and thus there is no need to cache the “per client” state in the resource system (e.g. re-using the cached clipping mask for repainting). This will simplify the implementation of the “SVG resources” a lot.&lt;/p&gt;
+&lt;p&gt;Therefore the first task in 2023 is to implement clipping, then masking, gradients, patterns, and as the last item, filters, since they require a substantial amount of refactoring in &lt;code&gt;RenderLayerFilters&lt;/code&gt;.
+Note that these implementations are already complete in LBSE downstream and do not need to be invented from scratch. The first patches in that direction should be up for review by &lt;strong&gt;February 2023&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;After all “SVG resources” are implemented in LBSE, feature parity is almost there and performance work will follow afterward. WebKit has a golden rule to never ship a performance regression; therefore, LBSE needs to be at least as fast in the standard performance tests, such as &lt;em&gt;MotionMark&lt;/em&gt;, before it can replace the legacy engine. Currently, LBSE is &lt;em&gt;slower than the legacy engine&lt;/em&gt; with respect to static rendering performance. Quoting numbers does not help at present, since the problem is well understood and will be resolved in the following months.&lt;/p&gt;
+&lt;p&gt;LBSE currently creates more &lt;code&gt;RenderLayer&lt;/code&gt; objects than necessary: for each renderer, unconditionally. This is a great stress test of the layer system, and helpful for bootstrapping, but the associated overhead and complexity are simply not necessary for many cases, and actively hurt performance. LBSE already outperforms the legacy SVG engine whenever animated content is viewed, if it benefits from the &lt;em&gt;hardware acceleration&lt;/em&gt; in LBSE.&lt;/p&gt;
+&lt;p&gt;2023 will be an exciting year, and hopefully brings LBSE to the masses, stay tuned!&lt;/p&gt;
+&lt;h2 id=&quot;demos&quot; tabindex=&quot;-1&quot;&gt;Demos&lt;/h2&gt;
+&lt;p&gt;“A picture is worth a thousand words”, so we’d like to share with you the videos shown during the &lt;strong&gt;WebKit contributors meeting in 2022&lt;/strong&gt; that demo the LBSE capabilities. Be sure to check them out so you can get a good picture of the state of the work. Enjoy!&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cloud.igalia.com/s/fXjsXmqQocxF5P7/download/01-demo-tiger-2d.mp4&quot;&gt;Accelerated 2D transforms (Tiger)&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;
+    &lt;video width=&quot;800&quot; height=&quot;600&quot; controls=&quot;&quot;&gt;&lt;source src=&quot;https://cloud.igalia.com/s/fXjsXmqQocxF5P7/download/01-demo-tiger-2d.mp4&quot; /&gt;&lt;/video&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cloud.igalia.com/s/FDx9koYej65wcFb/download/02-demo-tiger-3d.mp4&quot;&gt;Accelerated 3D transform (Tiger)&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;
+    &lt;video width=&quot;800&quot; height=&quot;600&quot; controls=&quot;&quot;&gt;&lt;source src=&quot;https://cloud.igalia.com/s/FDx9koYej65wcFb/download/02-demo-tiger-3d.mp4&quot; /&gt;&lt;/video&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cloud.igalia.com/s/zyAAwLWRaFQMatL/download/03-demo-tiger-transition-storm.mp4&quot;&gt;Transition storm (Tiger)&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;
+    &lt;video width=&quot;800&quot; height=&quot;600&quot; controls=&quot;&quot;&gt;&lt;source src=&quot;https://cloud.igalia.com/s/zyAAwLWRaFQMatL/download/03-demo-tiger-transition-storm.mp4&quot; /&gt;&lt;/video&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cloud.igalia.com/s/e2ZfqWpnT44awEZ/download/04-demo-vibrant.mp4&quot;&gt;Vibrant example&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;
+    &lt;video width=&quot;800&quot; height=&quot;600&quot; controls=&quot;&quot;&gt;&lt;source src=&quot;https://cloud.igalia.com/s/e2ZfqWpnT44awEZ/download/04-demo-vibrant.mp4&quot; /&gt;&lt;/video&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;We at Igalia are doing our best to fulfill the mission and complete the LBSE upstreaming as fast as possible. In the meanwhile, let us know about &lt;em&gt;your&lt;/em&gt; thoughts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What would you do with a performant, next-level SVG engine?&lt;/li&gt;
+&lt;li&gt;Any particular desktop / embedded project that would benefit from it?&lt;/li&gt;
+&lt;li&gt;Anything in reach now, that seemed impossible before with the given constraints in WebKit?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thanks for your attention! Be sure to keep an eye on &lt;a href=&quot;https://github.com/nikolaszimmermann/WebKitIgalia/issues/1&quot;&gt;our “Upstreaming status” page at GitHub&lt;/a&gt; to follow LBSE development.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Success Story: Metrological</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/2022-success-metrological.html"/>
+    <updated>2022-10-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/2022-success-metrological.html</id>
+    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
+&lt;img alt=&quot;Metrological: A Comcast Company&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/img/logo-metrological@2x.png&quot; /&gt;
+&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/img/logo-blue.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;WPE WebKit brought &lt;strong&gt;RDK (Reference Design Kit)&lt;/strong&gt;, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.&lt;/p&gt;
+&lt;p&gt;Delivering a fast and memory-efficient browser for embbedded systems is a challenging task, so Igalia helped Metrological build a new full-screen browser engine which stripped away all unecessary toolkit elements.&lt;/p&gt;
+&lt;p&gt;With years of experience around WebKit platform integration, Igalia worked to produce a new WebKit port, WPE, which interfaced directly with Wayland and the graphics driver. Additionally, Igalia pushed forward the implementation of a multi-platform multi-threaded compositer, enabling better performance on low-end multicore processors. WPE is an official port of WebKit.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE Networking Overview</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/04-wpe-networking-overview.html"/>
+    <updated>2022-09-29T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/04-wpe-networking-overview.html</id>
+    <content type="html">&lt;p&gt;At the heart of any browser engine is networking: Connecting with services and other users.  Unlike other engines, WebKit approaches this more abstractly by leaving a large portion of the networking up to individual ports. This includes network protocols such as HTTP, WebSockets, and WebRTC. The upside to this approach is a higher level of integration with the system-provided libraries and features so WebKit will behave similarly to other software on the platform often with more centralized configuration.&lt;/p&gt;
+&lt;p&gt;Due to this abstraction there are a few independent layers that make up the networking stack of WPE. In this post, I’ll break down what each layer accomplishes as well as give some insight into the codebase’s structure.&lt;/p&gt;
+&lt;h2 id=&quot;networking-layers&quot; tabindex=&quot;-1&quot;&gt;Networking Layers&lt;/h2&gt;
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img alt=&quot;WebKit Network Layers&quot; src=&quot;https://wpewebkit.org/assets/networking-layers.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;webkit&quot; tabindex=&quot;-1&quot;&gt;WebKit&lt;/h3&gt;
+&lt;p&gt;Before we get into the libraries used for WPE, let’s discuss WebKit itself. Despite abstracting out a lot of the protocol handling, WebKit itself still needs to understand a lot of fundamentals of HTTP.&lt;/p&gt;
+&lt;p&gt;WebCore (discussed in &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html&quot;&gt;WPE Overview&lt;/a&gt;) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by &lt;code&gt;ResourceRequest&lt;/code&gt; and &lt;code&gt;ResourceResponse&lt;/code&gt; objects, which map to general HTTP functionality.&lt;/p&gt;
+&lt;h4 id=&quot;networkprocess&quot; tabindex=&quot;-1&quot;&gt;NetworkProcess&lt;/h4&gt;
+&lt;p&gt;A core part of modern web engine security is the multi-process model.  In order to defend against exploits, each website runs in its own isolated process that does not have network access. In order to allow for network access, they must talk over IPC to a dedicated NetworkProcess, typically one per browser instance. The NetworkProcess receives a &lt;code&gt;ResourceRequest&lt;/code&gt;, creates a &lt;code&gt;NetworkDataTask&lt;/code&gt; with it to download the data, and responds with a &lt;code&gt;ResourceResponse&lt;/code&gt; to the WebProcess which looks like this:&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img alt=&quot;WebKit Network Flowchart&quot; src=&quot;https://wpewebkit.org/assets/networking-flow.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;wpe&quot; tabindex=&quot;-1&quot;&gt;WPE&lt;/h3&gt;
+&lt;p&gt;WPE implements the platform-specific versions of the classes above as &lt;code&gt;ResourceRequestSoup&lt;/code&gt; and &lt;code&gt;NetworkDataTaskSoup&lt;/code&gt;, primarily using a library called libsoup.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://libsoup.org/&quot;&gt;libsoup&lt;/a&gt; library was originally created for the GNOME project’s email client and has since grown to be a very featureful HTTP implementation, now maintained by Igalia.&lt;/p&gt;
+&lt;p&gt;At a high level, the main task that libsoup does is manage connections and queued requests to websites and then efficiently streams the responses back to WPE. Properly implementing HTTP is a fairly large task, and this is a non-exhaustive list of features it implements: HTTP/1.1, HTTP/2, WebSockets, cookies, decompression, multiple authentication standards, HSTS, and HTTP proxies.&lt;/p&gt;
+&lt;p&gt;On its own, libsoup is really focused on the HTTP layer and uses the &lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib&quot;&gt;GLib&lt;/a&gt; library to implement many of its networking features in a portable way. This is where TCP, DNS, and TLS are handled. It is also directly used by WebKit for URI parsing and DNS pre-caching.&lt;/p&gt;
+&lt;p&gt;Using GLib also helps standardize behavior across modern Linux systems. It allows configuration of a global proxy resolver that WebKit, along with other applications, can use.&lt;/p&gt;
+&lt;h4 id=&quot;tls&quot; tabindex=&quot;-1&quot;&gt;TLS&lt;/h4&gt;
+&lt;p&gt;Another unique detail of our stack is that TLS is fully abstracted inside of GLib by a project called &lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib-networking&quot;&gt;GLib-Networking&lt;/a&gt;. This project provides multiple implementations of TLS that can be chosen at runtime, including OpenSSL and gnutls on Linux. The benefit here is that clients can choose the implementation they prefer—whether for licensing, certification, or technical reasons.&lt;/p&gt;
+&lt;h3 id=&quot;usage&quot; tabindex=&quot;-1&quot;&gt;Usage&lt;/h3&gt;
+&lt;p&gt;Let’s go step by step to see some real world usage. If we call &lt;code&gt;webkit_web_view_load_uri()&lt;/code&gt; for a new domain it will:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a &lt;code&gt;ResourceRequest&lt;/code&gt; in WebCore that represents an HTTP request with a few basic headers set.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ResourceRequestSoup&lt;/code&gt; will create its own internal representation for the request using &lt;code&gt;soup_message_new_for_uri()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;This is passed to the &lt;code&gt;NetworkProcess&lt;/code&gt; to load this request as a &lt;code&gt;NetworkDataTask&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NetworkDataTaskSoup&lt;/code&gt; will send/receive the request/response with &lt;code&gt;soup_session_send()&lt;/code&gt; which queues the message to be sent.&lt;/li&gt;
+&lt;li&gt;libsoup will connect to the host using &lt;code&gt;GSocketClient&lt;/code&gt; which does a DNS lookup and TCP connection.
+&lt;ul&gt;
+&lt;li&gt;If this is a TLS connection &lt;code&gt;GTlsClientConnection&lt;/code&gt; will use a library such as gnutls to do a TLS handshake.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;libsoup will write the HTTP request and read from the socket parsing the HTTP responses eventually returning the data to WebKit.&lt;/li&gt;
+&lt;li&gt;WebKit receives this data, along with periodic updates about the state of the request, and sends it out of the &lt;code&gt;NetworkProcess&lt;/code&gt; back to the main process as a &lt;code&gt;ResourceResponse&lt;/code&gt; eventually loading the data in the &lt;code&gt;WebProcess&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;summary&quot; tabindex=&quot;-1&quot;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In conclusion, WebKit provides a very flexible abstraction for platforms, and WPE leverages mature system libraries to provide a portable implementation. It has many layers, but they are all well organized and suited to their tasks.&lt;/p&gt;
+&lt;p&gt;If you are working with WPE and are interested in collaborating, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. If you are interested in working with Igalia, you can &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;apply here&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE QA and tooling</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/04-wpe-qa-tooling.html"/>
+    <updated>2022-07-28T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/04-wpe-qa-tooling.html</id>
+    <content type="html">&lt;p&gt;In the previous posts, my colleagues Claudio and Miguel wrote respectively about the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/02-overview-of-wpe.html&quot;&gt;major components&lt;/a&gt; of the project and, specifically, the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/03-wpe-graphics-architecture.html&quot;&gt;graphics architecture&lt;/a&gt; of WPE. Today, you’ll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/&quot;&gt;WPE&lt;/a&gt; aren’t necessarily required in order to read this one, we recommend you to starting with the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/01-happy-birthday-wpe.html&quot;&gt;first post in the series&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;automated-testing&quot; tabindex=&quot;-1&quot;&gt;Automated testing&lt;/h2&gt;
+&lt;p&gt;Testing is an essential part of the WebKit project, primarily due to the large number of use cases covered by HTML/CSS/Javascript specifications and the need for the project to work correctly in a wide range of configurations.&lt;/p&gt;
+&lt;p&gt;As an official port of WebKit, WPE uses the former’s testing infrastructure, based on &lt;a href=&quot;https://buildbot.net/&quot;&gt;BuildBot&lt;/a&gt;. There are two primary servers, &lt;a href=&quot;https://ews-build.webkit.org/&quot;&gt;one working as an early warning system&lt;/a&gt; by testing the patches before they’re committed to the main repository, and &lt;a href=&quot;https://build.webkit.org/&quot;&gt;another&lt;/a&gt; for more extensive testing after accepting the incoming changes.&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img style=&quot;width: 75%&quot; alt=&quot;build.webkit.org screenshot&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/build-webkit-org-screenshot.png&quot; /&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+&lt;p&gt;Currently, the WPE testing bots target debug and release configurations using the &lt;a href=&quot;https://flatpak.org/&quot;&gt;Flatpak&lt;/a&gt; SDK (more on it later in this article) on 64bit Intel-based Linux Debian systems. We have plans of adding bots running on Raspberry Pi boards in the future. Alongside nightly testing, we keep builder bots covering the &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitGTK/DependenciesPolicy&quot;&gt;Ubuntu LTS/Debian versions&lt;/a&gt; we support. After August 14th, 2022, the earliest supported versions will be Ubuntu 20.04 LTS and Debian 11 (Bullseye).&lt;/p&gt;
+&lt;h3 id=&quot;test-suites&quot; tabindex=&quot;-1&quot;&gt;Test suites&lt;/h3&gt;
+&lt;p&gt;Initially, the WPE &lt;a href=&quot;https://build.webkit.org/#/builders?tags=%2BWPE&amp;amp;tags=%2BBuild&quot;&gt;builder bots&lt;/a&gt; build WPE in both release and debug configurations and feed the built packages into the &lt;a href=&quot;https://build.webkit.org/#/builders?tags=%2BWPE&amp;amp;tags=%2BTests&quot;&gt;tester bots&lt;/a&gt;, which run some test suites according to their configuration, each suite focused in one aspect of the project:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Layout tests: The main suite tests whether WebKit correctly renders web pages and its implementation of web APIs. This suite comprises both WebKit’s test cases and the imported tests from &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Test&lt;/a&gt;. At the time of writing, it runs over 50,000 test cases.&lt;/li&gt;
+&lt;li&gt;API Tests: This suite tests the API provided to developers by WebKit and its ports. For example, this step tests the WPE API used in &lt;a href=&quot;https://github.com/Igalia/cog&quot;&gt;Cog&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Javascriptcore tests: Covers the JavascriptCore engine, running  WebKit’s tests alongside &lt;a href=&quot;https://github.com/tc39/test262&quot;&gt;test262&lt;/a&gt;, the reference test suite for JS/ECMAScript implementations.&lt;/li&gt;
+&lt;li&gt;WebDriver: Tests from &lt;a href=&quot;https://www.selenium.dev/selenium/docs/api/py/index.html&quot;&gt;Selenium&lt;/a&gt; and &lt;a href=&quot;https://www.w3.org/TR/webdriver/&quot;&gt;W3C WebDriver&lt;/a&gt; APIs for browser automation.&lt;/li&gt;
+&lt;li&gt;Other small suites: Tests for WebKit’s tooling components.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Due to a large number of tests and the fast development of both WebKit and the specifications—it’s not uncommon to have dozens of daily commits touching dozens of tests—it’s hard to keep the testing bots green.&lt;/p&gt;
+&lt;p&gt;For example, while we try to make the tests work on all platforms, many old layout tests use the &lt;code&gt;-expected.txt&lt;/code&gt; scheme, where the render tree is printed in a textual format with the text sized in pixels for every node. While this works fine in most cases, many tests have minor differences between the expected result in the Mac platform and the WPE/GTK platform. One of the causes is the font rendering particularities of each port.&lt;/p&gt;
+&lt;p&gt;Thankfully, this situation improved significantly since the beginning of the project. Among the efforts, many tests are now using a “reference” HTML file, which are HTML files that render to the same expected result as the test case, so both the test case and the reference will use the same font rendering scheme and can be compared pixel by pixel.&lt;/p&gt;
+&lt;h2 id=&quot;building-and-running-wpe&quot; tabindex=&quot;-1&quot;&gt;Building and running WPE&lt;/h2&gt;
+&lt;p&gt;This section focuses on the experience of building and running WPE in a regular Linux x86–64 system. In a future post, we’ll cover building for and running on embedded devices.&lt;/p&gt;
+&lt;h3 id=&quot;checking-out-the-code&quot; tabindex=&quot;-1&quot;&gt;Checking out the code&lt;/h3&gt;
+&lt;p&gt;Recently, &lt;a href=&quot;https://github.com/WebKit/WebKit&quot;&gt;WebKit moved to GitHub&lt;/a&gt;, so you can clone it directly from there:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ mkdir ~/dev
+$ git clone https://github.com/WebKit/WebKit.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note: Due to the size of the project history, you might want to use &lt;code&gt;--depth=1&lt;/code&gt; to clone a single revision, followed by &lt;code&gt;git pull --unshallow&lt;/code&gt; from inside the cloned repository to fetch the history if needed.&lt;/p&gt;
+&lt;p&gt;There’s more information in &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#checking-out-WebKit&quot;&gt;WebKit’s GitHub wiki&lt;/a&gt; about setting up the git checkout for contributing code back to WebKit. It’ll set up some git hooks to do some tasks required by the project, like formatting the commit message and automatically linking the pull request to the Bugzilla issue.&lt;/p&gt;
+&lt;p&gt;All commands in the following sections are run from inside the cloned repository.&lt;/p&gt;
+&lt;h3 id=&quot;updating-the-dependencies-(aka-the-webkit-flatpak-sdk)&quot; tabindex=&quot;-1&quot;&gt;Updating the dependencies (aka The WebKit Flatpak SDK)&lt;/h3&gt;
+&lt;p&gt;Like most complex software projects, WebKit has a reasonably extensive list of dependencies. Keeping a reference set of their versions frozen during development is desirable to make it easier to reproduce bugs and test results. In older times, WPE and WebKitGTK used &lt;a href=&quot;https://gnome.pages.gitlab.gnome.org/jhbuild/&quot;&gt;JHBuild&lt;/a&gt; to freeze a set of dependencies. While this worked for a long time, it did not cover all dependencies. Sometimes, there could be minor differences in the layout tests between the reference test bots and the developer machine due to some dependency resolved by the host system outside JHBuild.&lt;/p&gt;
+&lt;p&gt;To improve reproducibility, since 2020, WPE and WebKitGTK have been using an SDK based on Flatpak (kudos to my colleagues &lt;a href=&quot;https://blogs.gnome.org/tsaunier/&quot;&gt;Thibault Saunier&lt;/a&gt; and &lt;a href=&quot;https://base-art.net/&quot;&gt;Philippe Normand&lt;/a&gt;), with a much more extensive dependency coverage and isolation from the host system. Alongside the dependencies, it ships &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitFlatpakSDK/DebugWithRR&quot;&gt;some tools like rr&lt;/a&gt; and &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitEnablingFlatpakClangd&quot;&gt;supports tools like &lt;code&gt;clangd&lt;/code&gt;&lt;/a&gt;. Almost all bots enable this SDK, the exception being the LTS/Stable bots; as in the latter, we want to build with the already available packages in each distribution.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/update-webkit-flatpak
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The command will set up the local flatpak repository at &lt;code&gt;./WebKitBuild/UserFlatpak&lt;/code&gt; with the downloaded SDK and create some bundled icecc toolchains. This enables distributed builds in local networks…&lt;/p&gt;
+&lt;h3 id=&quot;building&quot; tabindex=&quot;-1&quot;&gt;Building&lt;/h3&gt;
+&lt;p&gt;Once the SDK download finishes, you can use the helper script &lt;code&gt;./Tools/Scripts/build-webkit&lt;/code&gt;, which wraps the &lt;code&gt;cmake&lt;/code&gt; command with some pre-set options commonly used in normal development, like enabling developer-only features usually disabled in regular builds. Manually invoking cmake is possible, although usually only when you want more control over the build. To build WPE in release mode, use:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/build-webkit --release --wpe
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Optionally, you can pass it multiple arguments to be fed directly to make or cmake with the switches  &lt;code&gt;--makeargs=...&lt;/code&gt; and &lt;code&gt;--cmakeargs=...&lt;/code&gt;, respectively. For example, &lt;code&gt;--makeargs=&amp;quot;-j8&amp;quot;&lt;/code&gt; will limit make to 8 parallel jobs and &lt;code&gt;--cmakeargs=&amp;quot;-DENABLE_GAMEPAD=1&amp;quot;&lt;/code&gt; will enable gamepad support (requires &lt;code&gt;libmanette&lt;/code&gt;, bundled in the SDK).&lt;/p&gt;
+&lt;p&gt;The first build might take a while (up to almost one hour in a regular laptop). Fortunately, the SDK uses &lt;code&gt;ccache&lt;/code&gt; to avoid recompiling the same object files, so subsequent builds without significant changes usually are faster. For more info on speeding the build, check &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitGTK/SpeedUpBuild&quot;&gt;the wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;running-the-browser-(cog)&quot; tabindex=&quot;-1&quot;&gt;Running the browser (Cog)&lt;/h3&gt;
+&lt;p&gt;To run Cog, the reference WPE browser, you need a Wayland server, which is common in most Linux systems nowadays.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/run-minibrowser --wpe --release https://wpewebkit.org/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img style=&quot;width: 75%&quot; alt=&quot;Cog with GTK4 shell screenshot&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/gtk-cog-screenshot.png&quot; /&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+&lt;h3 id=&quot;running-some-tests&quot; tabindex=&quot;-1&quot;&gt;Running some tests&lt;/h3&gt;
+&lt;p&gt;To run the API tests, which reside in &lt;code&gt;Tools/TestWebKitAPI/Tests/&lt;/code&gt;, you can use the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/run-wpe-tests --release --display-server=headless
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Other test suites:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Layout tests: &lt;code&gt;./Tools/Scripts/run-wpe-tests&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;JSC tests: &lt;code&gt;./Tools/Scripts/run-javascriptcore-tests&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WebDriver: &lt;code&gt;./Tools/Scripts/run-webdriver-tests&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As stated when we described the test suites, the main challenge in testing is keeping up with the fast pace of development, as it’s not uncommon to have some revisions updating hundreds of tests.&lt;/p&gt;
+&lt;h3 id=&quot;contributing-code-to-wpe&quot; tabindex=&quot;-1&quot;&gt;Contributing code to WPE&lt;/h3&gt;
+&lt;p&gt;After hacking locally, you can submit your changes following the workflow listed in the &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#contributing-code&quot;&gt;WebKit wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;testing-wpe-in-the-wild&quot; tabindex=&quot;-1&quot;&gt;Testing WPE in the wild&lt;/h2&gt;
+&lt;p&gt;If you don’t want to build your WPE build or image, there are some options to &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/about/exploring.html&quot;&gt;get a taste of WPE&lt;/a&gt; listed on our website, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Prebuilt distribution packages
+&lt;ul&gt;
+&lt;li&gt;For &lt;a href=&quot;https://packages.debian.org/search?searchon=sourcenames&amp;amp;keywords=wpewebkit&quot;&gt;Debian&lt;/a&gt;, &lt;a href=&quot;https://packages.ubuntu.com/search?keywords=wpewebkit&amp;amp;searchon=sourcenames&amp;amp;suite=all&amp;amp;section=all&quot;&gt;Ubuntu&lt;/a&gt;, &lt;a href=&quot;https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/&quot;&gt;Raspbian&lt;/a&gt;, &lt;a href=&quot;https://archlinux.org/packages/extra/x86_64/wpewebkit/&quot;&gt;Arch Linux&lt;/a&gt;, and &lt;a href=&quot;https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/&quot;&gt;Fedora&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/about/flatpak.html&quot;&gt;Flatpak image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Prebuilt Raspberry Pi (3B, 3B+ and 4) images
+&lt;ul&gt;
+&lt;li&gt;For &lt;a href=&quot;https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip&quot;&gt;stable&lt;/a&gt; and &lt;a href=&quot;https://wk-contrib.igalia.com/debian/images/nightly/wpe-raspbian.img.zip&quot;&gt;nightly&lt;/a&gt; releases&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/about/balena-wpe.html&quot;&gt;Balena blocks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.&lt;/p&gt;
+&lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;With this, we conclude this brief overview of WPE automated testing and the main tools we use in our daily work with WPE. In future posts in this area we’ll go deeper in other subjects like testing on embedded boards and debugging practices.&lt;/p&gt;
+&lt;p&gt;If this post got you interested in collaborating with WPE development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
+&lt;p&gt;We also have open positions at the WebKit team at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. If you’re motivated by this field and you’re interested in developing your career around it, you can apply &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;here&lt;/a&gt;!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE Graphics architecture</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/03-wpe-graphics-architecture.html"/>
+    <updated>2022-07-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/03-wpe-graphics-architecture.html</id>
+    <content type="html">&lt;p&gt;Following &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/02-overview-of-wpe.html&quot;&gt;the previous post in the series&lt;/a&gt; about &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/&quot;&gt;WPE&lt;/a&gt; where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display. If you haven’t read the previous entries in this blog post series about WPE, we recommend you to start with the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/01-happy-birthday-wpe.html&quot;&gt;first post in the series&lt;/a&gt; for an introduction, and then come back to this.&lt;/p&gt;
+&lt;h2 id=&quot;dom-%2B-css-%3D-rendertree&quot; tabindex=&quot;-1&quot;&gt;DOM + CSS = RenderTree&lt;/h2&gt;
+&lt;p&gt;As the document is parsed, it will begin building the DOM tree and load-blocking CSS resources.  At some point, possibly before the entire DOM tree is built, it’s time to draw things on the screen. The first step to render the content of a page is to perform what’s called the &lt;em&gt;attachment&lt;/em&gt;, which is merging the DOM tree with the CSS rules, in order to create the RenderTree. This RenderTree is a collection of &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt;, structured into a tree, and each of these &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; represent the elements in the DOM tree that have visual output. &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; have the capability to render the associated DOM tree node into a surface by using the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h&quot;&gt;GraphicsContext&lt;/a&gt; class (in the case of WPE, this &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h&quot;&gt;GraphicsContext&lt;/a&gt; uses &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;Cairo&lt;/a&gt; to perform the rendering).&lt;/p&gt;
+&lt;p&gt;Once the RenderTree is created, the layout is performed, ensuring that each of the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; have their proper size and position set.&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin: 1em auto;&quot; alt=&quot;Going from source content to displayed content&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/graphics-attachment.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;It would be possible to render the content of the web page just traversing this RenderTree and painting each of the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt;, but there would be problems when rendering elements that overlap each other, because the order of the elements in the RenderTree doesn’t necessarily match the order in which they must be painted in order to get the appropriate result. For example, an element with a big &lt;code&gt;z-index&lt;/code&gt; value should be painted last, no matter its position in the RenderTree.&lt;/p&gt;
+&lt;p&gt;This is an example of how some HTML content is translated into the RenderTree (there are some &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; missing here that are not relevant for the explanation).&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin: 1em auto;&quot; alt=&quot;RenderTree generated from example HTML&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/graphics-rendertree.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;renderlayers&quot; tabindex=&quot;-1&quot;&gt;RenderLayers&lt;/h2&gt;
+&lt;p&gt;In order to ensure that the elements of the RenderTree are rendered in the appropriate order, the concept of &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; is added. A &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; represents a layer in the document containing some elements that have to be rendered at the same depth (even though this is not exactly the case, you can think of each &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; as a group of &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; that are at a certain &lt;code&gt;z-index&lt;/code&gt;). Each &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObject&lt;/a&gt; is associated to a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; either directly or indirectly via an ancestor &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObject&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; are grouped into a tree, which is called the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; tree, and &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; children are sorted into two lists: those that are below the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt;, and those that are above. With this we have a structure that has grouped all the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; that have to be rendered together: they will be on top of the content that has been rendered by the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; below this one, and below the content rendered by the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; over this one.&lt;/p&gt;
+&lt;p&gt;There are several conditions that can decide whether a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; is needed for some element, it doesn’t necessarily needs to be due to the usage of &lt;code&gt;z-index&lt;/code&gt;. It can be required due to transparency, CSS filters, overflow, transformations, and so on.&lt;/p&gt;
+&lt;p&gt;Continuing with the example, these are &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; that we would get for that HTML code:&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin: 1em auto;&quot; alt=&quot;RenderLayer tree generated from example HTML&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/graphics-renderlayertree.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We can see that there are four &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The root one, corresponding to the RenderView element. This is mandatory.&lt;/li&gt;
+&lt;li&gt;Another one corresponding to the first RenderBlock.&lt;/li&gt;
+&lt;li&gt;One corresponding to the RenderVideo element, because video elements always get their own &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;One corresponding to the transformed RenderBlock.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; have a paint method that is able to paint all the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h&quot;&gt;RenderObjects&lt;/a&gt; associated to the layer into a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h&quot;&gt;GraphicsContext&lt;/a&gt; (as mentioned, WPE uses &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;Cairo&lt;/a&gt; for this). As in the previous case, it’s possible to paint the content of the page at this point just by traversing the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; tree and requesting the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; to paint their content, but in this case the result will be the correct one. Actually this is what &lt;a href=&quot;https://webkitgtk.org/&quot;&gt;WebKitGTK&lt;/a&gt; does when it’s run with accelerated compositing disabled.&lt;/p&gt;
+&lt;h2 id=&quot;layer-composition&quot; tabindex=&quot;-1&quot;&gt;Layer composition&lt;/h2&gt;
+&lt;p&gt;While with the previous step we are already able to render the page contents, this approach is not very efficient, especially when the page contains animations, elements with transparency, etc. This is because in order to paint a single pixel, all the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; need to be traversed, and those that are contributing to that pixel need to be repainted (totally or partially), even if the content of those &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; hasn’t changed. For example, think about an animation that’s moving an element. For each frame of that animation, the animated element needs to be repainted, but the area that was covered by the animated element in the last frame needs to be repainted as well. The same happens if there’s a translucent element on top of other content. If the translucent element changes, it needs to be repainted, but the content below the translucent element needs to be repainted as well because the blend needs to be performed again.&lt;/p&gt;
+&lt;p&gt;This would be much more efficient if the content that &lt;em&gt;doesn’t&lt;/em&gt; change was somehow separated from the content that’s changing, and we could render those two types of content separately. This is where the composition stage comes into action.&lt;/p&gt;
+&lt;p&gt;The idea here is that we’re going to paint the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; contents into intermediate buffers, and then compose those buffers one on top of the other to get the final result. This last step is what we call &lt;em&gt;composition&lt;/em&gt;. And it fixes the problems we mentioned with animations of transparency: animations don’t require repainting several &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt;. Actually moving an element just means painting one buffer with an offset during the composition. And for transparency, we just need to perform the new blending of the two buffers during the composition, but the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; of the content below the translucent element don’t need to be repainted.&lt;/p&gt;
+&lt;p&gt;Once we have the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; tree, we could just paint each &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; in its own buffer in order to perform the composition. But this would be a waste of memory, as not every &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; needs a buffer. We introduce here a new component, the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt; are a structure used to group those &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayers&lt;/a&gt; that will render into the same buffer, and it will also contain all the information required to perform the composition of these buffers. A &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h&quot;&gt;RenderLayer&lt;/a&gt; may have a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt; associated to it if it requires its own buffer to render. Otherwise, it will render into an ancestor’s buffer (specifically, the first ancestor that has a &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt;). As usual, &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt; are structured into a tree.&lt;/p&gt;
+&lt;p&gt;This is how the example code would be translated into &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin: 1em auto;&quot; alt=&quot;GraphicsLayer tree generated from example HTML&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/graphics-graphicslayertree.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We can see that we have now three &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The root one, which is mandatory. It belongs to the RenderView element, but the first RenderBlock will render into this &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt;&#39;s buffer as well.&lt;/li&gt;
+&lt;li&gt;The one for the RenderVideo element, as videos are updated independently from the rest of the content.&lt;/li&gt;
+&lt;li&gt;The one for the transformed element, as the transformed elements are updated independently from the rest of the content.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With this structure, now we can render the intermediate buffers of the RenderView and the transformed RenderBlock, and we don’t need to update them any more. For each frame, those buffers will be composited together with the RenderVideo buffer. This RenderVideo will be updating its buffer whenever a new video frame arrives, but it won’t affect the content of the other &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayers&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So now we have successfully separated the content that is changing and needs to be updated from the content that remains constant and doesn’t need to be repainted anymore, just composited.&lt;/p&gt;
+&lt;h2 id=&quot;accelerated-compositing-and-threaded-accelerated-compositing&quot; tabindex=&quot;-1&quot;&gt;Accelerated compositing and threaded accelerated compositing&lt;/h2&gt;
+&lt;p&gt;There’s something else that be done in order to increase the rendering performance, and it’s using the GPU to perform the composition. The GPU is highly optimized to perform operations like the buffer composition that we need to do, as well as handle 3D transforms, blending, etc. We just need to upload the buffers into textures and let the GPU handle the required operations. WPE does this though the usage of the &lt;a href=&quot;https://www.khronos.org/egl&quot;&gt;EGL&lt;/a&gt; and &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; graphics APIs. In order to perform the composition, &lt;a href=&quot;https://www.khronos.org/egl&quot;&gt;EGL&lt;/a&gt; is used to create a &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; &lt;code&gt;EGLContext&lt;/code&gt;. Using that context, the intermediate buffers are uploaded to textures, and then those textures are positioned and composited according to their appropriate positions. This leverages the GPU for the composition work, leaving the CPU free to perform other tasks.&lt;/p&gt;
+&lt;p&gt;This is why this step is called accelerated compositing.&lt;/p&gt;
+&lt;p&gt;But there’s more.&lt;/p&gt;
+&lt;p&gt;Until this point, all the steps that are needed to render the content of the page are performed in the main &lt;a href=&quot;https://en.wikipedia.org/wiki/Thread_(computing)&quot;&gt;thread&lt;/a&gt;. This means that while the main thread is rendering and compositing, it’s not able to perform other tasks, like run JS code.&lt;/p&gt;
+&lt;p&gt;WPE improves this by using a parallel thread whose only mission is to perform the composition. You can think of it as a thread that runs a loop that composites the incoming buffers using the GPU when there’s content to render. This is what we call &lt;em&gt;threaded accelerated compositing&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;This is specially useful when there’s a video or an animation running on the page:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If there’s a video running in the page, in the non-threaded case, for each video frame the main thread would need to get the frame and perform the composition with the rest of the page content. In the threaded case, the video element delivers the frames directly to the compositor thread, and requests a composition to be done, without the main thread being involved at all.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If there’s an animation, in the non-threaded case, for each frame of the animation the main thread would need to calculate the animation step and then perform the composition of the animated element with the rest of the page content. In the threaded case, the animation is passed to the compositor thread, and the animation steps are calculated on that thread, triggering a composition when needed. The main thread doesn’t need to do anything besides starting the animation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It would take another post to explain in detail how the threaded accelerated composition is implemented on WPE, but if you’re curious about it, know that WPE uses an specialization of the &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h&quot;&gt;GraphicsLayer&lt;/a&gt; called &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/texmap/coordinated/CoordinatedGraphicsLayer.h&quot;&gt;CoordinatedGraphicsLayer&lt;/a&gt; in order to implement this. You can use that as an starting point.&lt;/p&gt;
+&lt;p&gt;So this is the whole process that’s performed in WPE in order to display the content of a page. We hope it’s useful!&lt;/p&gt;
+&lt;h2 id=&quot;future&quot; tabindex=&quot;-1&quot;&gt;Future&lt;/h2&gt;
+&lt;p&gt;At &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt; we’re constantly evolving and improving WPE, and have ongoing efforts to improve the graphics architecture as well. Besides small optimizations and refactors here and there, the most important goals that we have are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Add a GPU process.&lt;/strong&gt; Currently the &lt;a href=&quot;https://www.khronos.org/egl&quot;&gt;EGL&lt;/a&gt; and &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; operations are performed in the web process. As there can be several web processes running when several pages are open, this means the browser can be using a lot of EGL contexts in total, which is a waste of memory. Also, all these processes could potentially be affected by errors, leaks, etc., in the code that handles the GPU operations. The idea is to centralize all the GPU operations into a single process, the GPU one, so all the web processes will issue paint requests to the GPU process instead of painting their content themselves. This will reduce the memory usage and improve the software’s robustness.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Remove CPU rasterization and paint all the content with &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt;.&lt;/strong&gt; Using the CPU to paint the layer contents with &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;cairo&lt;/a&gt; is expensive, especially in platforms with slow CPUs, as embedded devices sometimes do. Our goal here is to completely remove the &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;cairo&lt;/a&gt; rasterization and use &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; calls to render the 2D primitives. This will greatly improve the rendering performance.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;a href=&quot;https://github.com/google/angle&quot;&gt;ANGLE&lt;/a&gt; to perform &lt;a href=&quot;https://www.khronos.org/webgl/&quot;&gt;WebGL&lt;/a&gt; operations.&lt;/strong&gt; WPE currently implements the &lt;a href=&quot;https://www.khronos.org/registry/webgl/specs/latest/1.0/&quot;&gt;WebGL 1.0 specification&lt;/a&gt; through direct calls to &lt;a href=&quot;https://www.khronos.org/opengles/&quot;&gt;GLES2&lt;/a&gt; methods. We are changing this in order to perform the operations using &lt;a href=&quot;https://github.com/google/angle&quot;&gt;ANGLE&lt;/a&gt;, which will allow WPE to support the &lt;a href=&quot;https://www.khronos.org/registry/webgl/specs/latest/2.0/&quot;&gt;WebGL 2.0 specification&lt;/a&gt; as well.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;but-what-about-the-backends%3F&quot; tabindex=&quot;-1&quot;&gt;But what about the backends?&lt;/h2&gt;
+&lt;p&gt;In &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/02-overview-of-wpe.html&quot;&gt;the previous post&lt;/a&gt; there was a mention of backends that are used to integrate with the underlying platform. How is this relevant to the graphics architecture?&lt;/p&gt;
+&lt;p&gt;Backends have several missions when it comes to communicate with the platform, but regarding graphics, they have two functions to achieve:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Provide a platform dependent surface that WPE will render to. This can be a normal buffer, a &lt;a href=&quot;https://wayland.freedesktop.org/&quot;&gt;Wayland&lt;/a&gt; buffer, a native window, or whatever, as long as the system &lt;a href=&quot;https://www.khronos.org/egl&quot;&gt;EGL&lt;/a&gt; implementation allows creating an &lt;code&gt;EGLContext&lt;/code&gt; to render to it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Process WPE indications that a new frame has been rendered, performing whatever tasks are necessary to take that frame to the display. Also notify WPE when that frame was been displayed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The most common example of this is a &lt;a href=&quot;https://wayland.freedesktop.org/&quot;&gt;Wayland&lt;/a&gt; backend, which provides a buffer to WPE for rendering. When WPE has finished rendering the content, it notifies the backend, which sends the buffer to the Wayland compositor, and notifies back to WPE when the frame has been displayed.&lt;/p&gt;
+&lt;p&gt;So, whatever platform you want to run WPE on, you need to have a backend providing at least these capabilities.&lt;/p&gt;
+&lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;This was a brief overview of how WPE rendering works, and also what are the major improvements we’re trying to achieve at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. We’re constantly putting in a lot of work to keep WPE the best web engine available for embedded devices.&lt;/p&gt;
+&lt;p&gt;If this post got you interested in collaborating with WPE development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
+&lt;p&gt;We also have open positions at the WebKit team at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. If you’re motivated by this field and you’re interested in developing your career around it, you can apply &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;here&lt;/a&gt;!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>An overview of the WPE WebKit project</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/02-overview-of-wpe.html"/>
+    <updated>2022-07-01T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/02-overview-of-wpe.html</id>
+    <content type="html">&lt;p&gt;In &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/blog/01-happy-birthday-wpe.html&quot;&gt;the previous post in this series&lt;/a&gt;,
+we explained that WPE is a WebKit
+port optimized for embedded devices. In this post, we’ll dive into a
+more technical overview of the different components of WPE, WebKit,
+and how they all fit together. If you’re still wondering what a web
+engine is or how WPE came to be, we recommend you to go back to the
+first post in the series and then come back here.&lt;/p&gt;
+&lt;h2 id=&quot;webkit-architecture-in-a-nutshell&quot; tabindex=&quot;-1&quot;&gt;WebKit architecture in a nutshell&lt;/h2&gt;
+&lt;p&gt;To understand what makes WPE special, we first need to have a basic
+understanding of the architecture of WebKit itself, and how it ties
+together a given architecture/platform and a user-facing web browser.&lt;/p&gt;
+&lt;p&gt;WebKit, the engine, is split into different components that
+encapsulate its different parts. At the heart of it is WebCore. As the
+name suggests, this contains the core features of the engine
+(rendering, layout, platform access, HTML and DOM support, the
+graphics layer, etc). However, some of these ultimately depend heavily
+on the OS and underlying software platform in order to function. For
+example: how do we actually do any I/O on different platforms? How do
+we render onscreen? What’s the underlying multimedia platform and how
+does it decode media and play it?&lt;/p&gt;
+&lt;p&gt;WebCore handles the multitude of potential answers to these questions
+by abstracting the implementation of each component and allowing port
+developers to fill the gaps for each supported platforms. For example,
+for rendering on Mac, Cocoa APIs implement the graphics APIs
+needed. On Linux, this can be done through different implementations
+via Wayland, Vulkan, etc. For networking I/O on Mac, the networking
+APIs in the Foundation framework are used. On Linux, libsoup fills
+that gap, and so on.&lt;/p&gt;
+&lt;p&gt;On the opposite side, for browser implementors to be able to write a
+browser using WebKit, an API is needed. WebKit, after all, is a
+library. WebKit ports, besides providing the platform support
+described above, also provide APIs that suit the target environments:
+The Apple ports provide Objective-C APIs (which are then used to write
+Safari and the iOS browsers, for instance), while the GTK+ port
+provides a GObject-based APIs for Linux (that are used in Epiphany,
+the GNOME browser, and other GNOME applications that rely on WebKit to
+render HTML). All of these APIs are built on top of an internal,
+middle-man, C API that is meant to make it easy for each port to
+provide a high-level API for browser developers.&lt;/p&gt;
+&lt;p&gt;With all this in place, it would seem that it shouldn’t be so
+difficult for any vendor trying to reuse WebKit in a new platform to
+support new hardware and implement a browser, right? All that you need
+to do is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implement backends that integrate with your hardware platform: for
+multimedia, IO, OS support, networking, graphics, etc.&lt;/li&gt;
+&lt;li&gt;Write an API that you can use to plug the engine into your browser.&lt;/li&gt;
+&lt;li&gt;Maintain the changes needed off-tree, that is, outside the source code tree
+of WebKit.&lt;/li&gt;
+&lt;li&gt;Keep your implementation up-to-date with the many changes that happen in the
+WebKit codebase on a daily basis, so that you can update WebKit regularly
+and take advantage of the many bug fixes, improvements, and new features
+that land on WebKit continuously.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Does that sound easy? No, it’s not easy at all! In fact,
+implementation of ports in this fashion is strongly discouraged and
+vendors who have tried this approach in the past have had to do a huge
+effort just to play catch-up with the fast-paced development of
+WebKit. This is where WPE comes to the rescue.&lt;/p&gt;
+&lt;h2 id=&quot;simplifying-browsers-development-in-the-diverse-embedded-world&quot; tabindex=&quot;-1&quot;&gt;Simplifying browsers development in the diverse embedded world&lt;/h2&gt;
+&lt;p&gt;To simplify the task of porting WebKit to different platforms, Igalia
+started working on a platform-agnostic, Linux-based, and full-featured
+port of WebKit. This port relies on existing and mature platform
+backends for everything that can be easily reused across platforms:
+multimedia, networking, and I/O, which are already present in-tree and
+are used by Linux ports, like the GTK one. For the areas that are most
+likely to require hardware-specific support (that is, graphics and
+input), WPE abstracts the implementation so that it can be more easily
+provided out of tree, allowing implementors to avoid having to deal
+with the WebKit internals more than what’s strictly needed.&lt;/p&gt;
+&lt;p&gt;Additionally, WPE provides a high-level API that can be used to
+implement actual browsers. This API is very similar to the WebKitGTK
+API, making it easy for developers already familiar with the latter to
+start working with WPE. The cog library also serves as a wrapper
+around WPE to make it easier still. Once WPE was mature enough, it was
+accepted by Apple as an official WebKit port, meaning that the port
+lives now in-tree and takes immediate advantage of the many
+improvements that land on the WebKit repository on a daily basis.&lt;/p&gt;
+&lt;h2 id=&quot;how-does-wpe-integrate-with-webkit%3F&quot; tabindex=&quot;-1&quot;&gt;How does WPE integrate with WebKit?&lt;/h2&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin: 1em auto;&quot; alt=&quot;A diagram of the WPE WebKit architecture&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/assets/wpe-architecture-diagram.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The WPE port has several components. Some are in-tree (that is, are a
+part of WebKit itself), while others are out-of-tree. Let’s examine
+those components and how they relate to each other, from top to
+bottom:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href=&quot;https://github.com/Igalia/cog#cog&quot;&gt;Cog library&lt;/a&gt;.
+While not an integral part of WPE, libcog is a shell library that simplifies
+the task of writing a WPE browser from the scratch, by providing common
+functionality and helper APIs. This component also includes the cog browser,
+a simple WPE browser built on top of libcog that can be used as a reference
+or a starting point for the development of a new browser for a specific use
+case.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/&quot;&gt;WPE WebKit API&lt;/a&gt;:
+the entry point for browser developers to the WebKit engine, provides a
+comprehensive GObject/C API. The cog library uses this API extensively and
+we recommend relying on it, but for more specific needs and more fine-tuning
+of the engine, working directly with the WebKit API can be often necessary.
+The API is stable and easy to use, especially, and for those familiar with
+the GTK/GNOME platform.&lt;/li&gt;
+&lt;li&gt;WPE’s WebCore implementation: This part, internal to WebKit, implements
+an abstraction of the graphics and input layers of WebKit. This
+implementation relies on the libwpe library to provide the functionality
+required in an abstract way. Thanks to the architecture of WPE, implementors
+don’t need to bother with the complexities of WebCore and WebKit internals.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe&quot;&gt;libwpe&lt;/a&gt;
+library. This is an out-of-tree library that provides the API required by
+the WPE port in a generic way to implement the graphical and input backends.
+Specific functionality for a concrete platform is not provided, but the
+library relies on the existence of a backend implementation, as is described
+next.&lt;/li&gt;
+&lt;li&gt;Finally, a WPE backend implementation. This is where all the
+platform-specific code lives. Backends are loadable modules that can be
+chosen depending on the underlying hardware. These should provide access to
+graphics and input depending on the specific architecture, platform, and
+operating system requirements. As a reference, &lt;a href=&quot;https://github.com/Igalia/WPEBackend-fdo&quot;&gt;WPEBackend-fdo&lt;/a&gt; is a
+freedesktop.org-based backend, which uses Wayland and freekdesktop.org
+technologies, and is &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/about/supported-hardware.html&quot;&gt;
+supported for several architectures&lt;/a&gt;, including NXP and Broadcom chipsets, like the
+Raspberry Pi, and also regular PC architectures, easing testing and
+development.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An implementor interested in building a browser in a new architecture
+only needs to focus on the development of the last component – a WPE
+backend. Having a backend, starting the development of a
+WebKit-powered browser is already much easier than it ever was!&lt;/p&gt;
+&lt;p&gt;For a more detailed description of the architecture of WPE and WebKit,
+check this article on &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/about/architecture.html&quot;&gt;the architecture of WPE&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;ok%2C-sounds-interesting%2C-how-do-i-get-my-hands-dirty%3F&quot; tabindex=&quot;-1&quot;&gt;OK, sounds interesting, how do I get my hands dirty?&lt;/h2&gt;
+&lt;p&gt;If you have made it this far, you should give WPE a try!&lt;/p&gt;
+&lt;p&gt;We have listed several on the &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/about/exploring.html&quot;&gt;exploring WPE&lt;/a&gt;
+page. From there, you will see that depending on how interested you
+are in the project, your background, and what you’d like to do with
+it, there are different ways!&lt;/p&gt;
+&lt;p&gt;It can be as easy as installing WPE directly from the most popular
+Linux distributions or downloading and flashing prebuilt images for
+the Raspberry Pi. There are easy and flexible options like
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/about/flatpak.html&quot;&gt;Flatpak&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/gh-fonts/about/balena-wpe.html&quot;&gt;Balena&lt;/a&gt;, which
+you can dig into to learn more. If you want to build WPE yourself,
+you can use &lt;a href=&quot;https://github.com/Igalia/meta-webkit/wiki/WPE&quot;&gt;Yocto&lt;/a&gt; and if
+you’d like to contribute—that’s very welcome!&lt;/p&gt;
+&lt;p&gt;Happy hacking!&lt;/p&gt;
+</content>
+  </entry>
+</feed>
