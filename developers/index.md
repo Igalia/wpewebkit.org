@@ -31,7 +31,7 @@ h2 {
 
 ## [WPE Builds]({{ '/about/builds.html' | url }})
 
-While there are several simple ways for developers to experiment with and explore WPE, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds. To make this easier, there is also meta-webkit, which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
+While there are several simple ways for developers to experiment with and explore WPE, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds. To make this easier, there is also [meta-webkit](https://github.com/Igalia/meta-webkit), which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
 
 <ul class="arrows">
 <li><a href="{{ '/about/explore-wpe.html' | url }}">Linux distros for Debian, Ubuntu, Raspbian, Arch, Fedora...</a></li>
@@ -61,7 +61,7 @@ WPE WebKit and [WebKitGTK](https://webkitgtk.org/) share a fair amount of code. 
 <div class="dotsep">
 <div>
 <h2><a href="{{ '/about/architecture.html' | url }}">WPE Design</a></h2>
-<p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
+<p>WPE is the official WebKit port for Linux-based embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
 </div>
 <img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
 </div>
