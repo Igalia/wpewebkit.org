@@ -75,7 +75,7 @@ WPE WebKit is widely adopted in many industries, including digital signage, prof
 
 <section>
 
-<p class="leadin">If you need a fast and lightweight web runtime for embedded devices that supports most current web standards, has hardware acceleration wherever it is advantageous, and has a strong focus on multimedia applications, WPE WebKit is a great choice.</p>
+<p class="leadin">If you need a fast and lightweight web runtime for Linux-based embedded devices that supports most current web standards, has hardware acceleration wherever it is advantageous, and has a strong focus on multimedia applications, WPE WebKit is a great choice.</p>
 
 WPE WebKit offers great possibilities for deployment on different platforms, thanks to its underlying design which allows for integration in a variety of hardware configurations. At a minimum, only EGL and OpenGL ES 2 support and basic GStreamer integration are required.
 </section>
