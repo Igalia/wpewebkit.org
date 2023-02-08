@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE QA and tooling</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/manuelafm-patch-1/blog/04-wpe-qa-tooling.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/manuelafm-patch-1/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/manuelafm-patch-1/blog/04-wpe-qa-tooling.html">
+  <meta property="og:title" content="WPE QA and tooling">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/manuelafm-patch-1/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/manuelafm-patch-1/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-07-28T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/manuelafm-patch-1/"><img src="/wpewebkit.org/manuelafm-patch-1/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/manuelafm-patch-1/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/manuelafm-patch-1/blog/04-wpe-qa-tooling.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE QA and tooling</h1>
+ 
+   <meta itemprop="datePublished" content="Thu Jul 28 2022">
+   <time itemprop="dateCreated">28 July 2022</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/wpewebkit.org/manuelafm-patch-1/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/wpewebkit.org/manuelafm-patch-1/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you’ll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="/wpewebkit.org/manuelafm-patch-1/">WPE</a> aren’t necessarily required in order to read this one, we recommend you to starting with the <a href="/wpewebkit.org/manuelafm-patch-1/blog/01-happy-birthday-wpe.html">first post in the series</a>.</p>
+<h2 id="automated-testing" tabindex="-1">Automated testing</h2>
+<p>Testing is an essential part of the WebKit project, primarily due to the large number of use cases covered by HTML/CSS/Javascript specifications and the need for the project to work correctly in a wide range of configurations.</p>
+<p>As an official port of WebKit, WPE uses the former’s testing infrastructure, based on <a href="https://buildbot.net/">BuildBot</a>. There are two primary servers, <a href="https://ews-build.webkit.org">one working as an early warning system</a> by testing the patches before they’re committed to the main repository, and <a href="https://build.webkit.org">another</a> for more extensive testing after accepting the incoming changes.</p>
+<div align="center">
+<img style="width: 75%" alt="build.webkit.org screenshot" align="center" src="/wpewebkit.org/manuelafm-patch-1/assets/build-webkit-org-screenshot.png">
+</div>
+<br>
+<p>Currently, the WPE testing bots target debug and release configurations using the <a href="https://flatpak.org/">Flatpak</a> SDK (more on it later in this article) on 64bit Intel-based Linux Debian systems. We have plans of adding bots running on Raspberry Pi boards in the future. Alongside nightly testing, we keep builder bots covering the <a href="https://trac.webkit.org/wiki/WebKitGTK/DependenciesPolicy">Ubuntu LTS/Debian versions</a> we support. After August 14th, 2022, the earliest supported versions will be Ubuntu 20.04 LTS and Debian 11 (Bullseye).</p>
+<h3 id="test-suites" tabindex="-1">Test suites</h3>
+<p>Initially, the WPE <a href="https://build.webkit.org/#/builders?tags=%2BWPE&amp;tags=%2BBuild">builder bots</a> build WPE in both release and debug configurations and feed the built packages into the <a href="https://build.webkit.org/#/builders?tags=%2BWPE&amp;tags=%2BTests">tester bots</a>, which run some test suites according to their configuration, each suite focused in one aspect of the project:</p>
+<ul>
+<li>Layout tests: The main suite tests whether WebKit correctly renders web pages and its implementation of web APIs. This suite comprises both WebKit’s test cases and the imported tests from <a href="https://web-platform-tests.org/">Web Platform Test</a>. At the time of writing, it runs over 50,000 test cases.</li>
+<li>API Tests: This suite tests the API provided to developers by WebKit and its ports. For example, this step tests the WPE API used in <a href="https://github.com/Igalia/cog">Cog</a>.</li>
+<li>Javascriptcore tests: Covers the JavascriptCore engine, running  WebKit’s tests alongside <a href="https://github.com/tc39/test262">test262</a>, the reference test suite for JS/ECMAScript implementations.</li>
+<li>WebDriver: Tests from <a href="https://www.selenium.dev/selenium/docs/api/py/index.html">Selenium</a> and <a href="https://www.w3.org/TR/webdriver/">W3C WebDriver</a> APIs for browser automation.</li>
+<li>Other small suites: Tests for WebKit’s tooling components.</li>
+</ul>
+<p>Due to a large number of tests and the fast development of both WebKit and the specifications—it’s not uncommon to have dozens of daily commits touching dozens of tests—it’s hard to keep the testing bots green.</p>
+<p>For example, while we try to make the tests work on all platforms, many old layout tests use the <code>-expected.txt</code> scheme, where the render tree is printed in a textual format with the text sized in pixels for every node. While this works fine in most cases, many tests have minor differences between the expected result in the Mac platform and the WPE/GTK platform. One of the causes is the font rendering particularities of each port.</p>
+<p>Thankfully, this situation improved significantly since the beginning of the project. Among the efforts, many tests are now using a “reference” HTML file, which are HTML files that render to the same expected result as the test case, so both the test case and the reference will use the same font rendering scheme and can be compared pixel by pixel.</p>
+<h2 id="building-and-running-wpe" tabindex="-1">Building and running WPE</h2>
+<p>This section focuses on the experience of building and running WPE in a regular Linux x86–64 system. In a future post, we’ll cover building for and running on embedded devices.</p>
+<h3 id="checking-out-the-code" tabindex="-1">Checking out the code</h3>
+<p>Recently, <a href="https://github.com/WebKit/WebKit">WebKit moved to GitHub</a>, so you can clone it directly from there:</p>
+<pre><code>$ mkdir ~/dev
+$ git clone https://github.com/WebKit/WebKit.git
+</code></pre>
+<p>Note: Due to the size of the project history, you might want to use <code>--depth=1</code> to clone a single revision, followed by <code>git pull --unshallow</code> from inside the cloned repository to fetch the history if needed.</p>
+<p>There’s more information in <a href="https://github.com/WebKit/WebKit/wiki/Contributing#checking-out-WebKit">WebKit’s GitHub wiki</a> about setting up the git checkout for contributing code back to WebKit. It’ll set up some git hooks to do some tasks required by the project, like formatting the commit message and automatically linking the pull request to the Bugzilla issue.</p>
+<p>All commands in the following sections are run from inside the cloned repository.</p>
+<h3 id="updating-the-dependencies-(aka-the-webkit-flatpak-sdk)" tabindex="-1">Updating the dependencies (aka The WebKit Flatpak SDK)</h3>
+<p>Like most complex software projects, WebKit has a reasonably extensive list of dependencies. Keeping a reference set of their versions frozen during development is desirable to make it easier to reproduce bugs and test results. In older times, WPE and WebKitGTK used <a href="https://gnome.pages.gitlab.gnome.org/jhbuild/">JHBuild</a> to freeze a set of dependencies. While this worked for a long time, it did not cover all dependencies. Sometimes, there could be minor differences in the layout tests between the reference test bots and the developer machine due to some dependency resolved by the host system outside JHBuild.</p>
+<p>To improve reproducibility, since 2020, WPE and WebKitGTK have been using an SDK based on Flatpak (kudos to my colleagues <a href="https://blogs.gnome.org/tsaunier/">Thibault Saunier</a> and <a href="https://base-art.net">Philippe Normand</a>), with a much more extensive dependency coverage and isolation from the host system. Alongside the dependencies, it ships <a href="https://trac.webkit.org/wiki/WebKitFlatpakSDK/DebugWithRR">some tools like rr</a> and <a href="https://trac.webkit.org/wiki/WebKitEnablingFlatpakClangd">supports tools like <code>clangd</code></a>. Almost all bots enable this SDK, the exception being the LTS/Stable bots; as in the latter, we want to build with the already available packages in each distribution.</p>
+<pre><code>$ ./Tools/Scripts/update-webkit-flatpak
+</code></pre>
+<p>The command will set up the local flatpak repository at <code>./WebKitBuild/UserFlatpak</code> with the downloaded SDK and create some bundled icecc toolchains. This enables distributed builds in local networks…</p>
+<h3 id="building" tabindex="-1">Building</h3>
+<p>Once the SDK download finishes, you can use the helper script <code>./Tools/Scripts/build-webkit</code>, which wraps the <code>cmake</code> command with some pre-set options commonly used in normal development, like enabling developer-only features usually disabled in regular builds. Manually invoking cmake is possible, although usually only when you want more control over the build. To build WPE in release mode, use:</p>
+<pre><code>$ ./Tools/Scripts/build-webkit --release --wpe
+</code></pre>
+<p>Optionally, you can pass it multiple arguments to be fed directly to make or cmake with the switches  <code>--makeargs=...</code> and <code>--cmakeargs=...</code>, respectively. For example, <code>--makeargs=&quot;-j8&quot;</code> will limit make to 8 parallel jobs and <code>--cmakeargs=&quot;-DENABLE_GAMEPAD=1&quot;</code> will enable gamepad support (requires <code>libmanette</code>, bundled in the SDK).</p>
+<p>The first build might take a while (up to almost one hour in a regular laptop). Fortunately, the SDK uses <code>ccache</code> to avoid recompiling the same object files, so subsequent builds without significant changes usually are faster. For more info on speeding the build, check <a href="https://trac.webkit.org/wiki/WebKitGTK/SpeedUpBuild">the wiki</a>.</p>
+<h3 id="running-the-browser-(cog)" tabindex="-1">Running the browser (Cog)</h3>
+<p>To run Cog, the reference WPE browser, you need a Wayland server, which is common in most Linux systems nowadays.</p>
+<pre><code>$ ./Tools/Scripts/run-minibrowser --wpe --release https://wpewebkit.org/
+</code></pre>
+<div align="center">
+<img style="width: 75%" alt="Cog with GTK4 shell screenshot" align="center" src="/wpewebkit.org/manuelafm-patch-1/assets/gtk-cog-screenshot.png">
+</div>
+<br>
+<h3 id="running-some-tests" tabindex="-1">Running some tests</h3>
+<p>To run the API tests, which reside in <code>Tools/TestWebKitAPI/Tests/</code>, you can use the following command:</p>
+<pre><code>$ ./Tools/Scripts/run-wpe-tests --release --display-server=headless
+</code></pre>
+<p>Other test suites:</p>
+<ul>
+<li>Layout tests: <code>./Tools/Scripts/run-wpe-tests</code></li>
+<li>JSC tests: <code>./Tools/Scripts/run-javascriptcore-tests</code></li>
+<li>WebDriver: <code>./Tools/Scripts/run-webdriver-tests</code></li>
+</ul>
+<p>As stated when we described the test suites, the main challenge in testing is keeping up with the fast pace of development, as it’s not uncommon to have some revisions updating hundreds of tests.</p>
+<h3 id="contributing-code-to-wpe" tabindex="-1">Contributing code to WPE</h3>
+<p>After hacking locally, you can submit your changes following the workflow listed in the <a href="https://github.com/WebKit/WebKit/wiki/Contributing#contributing-code">WebKit wiki</a>.</p>
+<h2 id="testing-wpe-in-the-wild" tabindex="-1">Testing WPE in the wild</h2>
+<p>If you don’t want to build your WPE build or image, there are some options to <a href="/wpewebkit.org/manuelafm-patch-1/about/exploring.html">get a taste of WPE</a> listed on our website, including:</p>
+<ul>
+<li>Prebuilt distribution packages
+<ul>
+<li>For <a href="https://packages.debian.org/search?searchon=sourcenames&amp;keywords=wpewebkit">Debian</a>, <a href="https://packages.ubuntu.com/search?keywords=wpewebkit&amp;searchon=sourcenames&amp;suite=all&amp;section=all">Ubuntu</a>, <a href="https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/">Raspbian</a>, <a href="https://archlinux.org/packages/extra/x86_64/wpewebkit/">Arch Linux</a>, and <a href="https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/">Fedora</a></li>
+</ul>
+</li>
+<li><a href="/wpewebkit.org/manuelafm-patch-1/about/flatpak.html">Flatpak image</a></li>
+<li>Prebuilt Raspberry Pi (3B, 3B+ and 4) images
+<ul>
+<li>For <a href="https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip">stable</a> and <a href="https://wk-contrib.igalia.com/debian/images/nightly/wpe-raspbian.img.zip">nightly</a> releases</li>
+</ul>
+</li>
+<li><a href="/wpewebkit.org/manuelafm-patch-1/about/balena-wpe.html">Balena blocks</a></li>
+</ul>
+<p>Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.</p>
+<h2 id="final-thoughts" tabindex="-1">Final thoughts</h2>
+<p>With this, we conclude this brief overview of WPE automated testing and the main tools we use in our daily work with WPE. In future posts in this area we’ll go deeper in other subjects like testing on embedded boards and debugging practices.</p>
+<p>If this post got you interested in collaborating with WPE development, or you are in need of a web engine to run on your embedded device, feel free to <a href="https://www.igalia.com/contact/">contact us</a>. We’ll be pleased to help!</p>
+<p>We also have open positions at the WebKit team at <a href="https://www.igalia.com/">Igalia</a>. If you’re motivated by this field and you’re interested in developing your career around it, you can apply <a href="https://www.igalia.com/jobs/browsers_webkit_position">here</a>!</p>
+
+
+
+<section class="content-section bg-light small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+        <hr class="author-line">
+        <div class="card">
+          <span>
+            This article was written by <a href="https://www.igalia.com/team/lmoura">Lauro Moura</a>. <br><br>Lauro is webkit contributor from Igalia, working mainly on QA.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+</div>
+
+    </main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/manuelafm-patch-1/" class="igalia logo home"><img src="/wpewebkit.org/manuelafm-patch-1/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
