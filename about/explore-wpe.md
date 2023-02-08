@@ -36,7 +36,7 @@ resources: [
 
 ## Grab the code
 
-If you're an experienced embedded engineer, you'll most likely want to grab the [code](https://github.com/Igalia/meta-webkit/wiki/WPE) and build and tune WPE for your specific needs.
+If you're an experienced embedded engineer, you'll most likely want to grab the [code](https://wpewebkit.org/release/) and build and tune WPE for your specific needs.
  
 
 ## Easy pre-builts
