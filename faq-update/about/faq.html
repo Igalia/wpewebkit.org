@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2023-02-17T17:48:04.629Z">
+  <meta property="article:published_time" content="2023-02-17T17:49:55.270Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -141,7 +141,7 @@ was still under the dual OpenSSL and SSLeay licences.</li>
 <li>The lack of hardware-accelerated support in LibWebRTC would incur a bad
 performance impact on the embedded platforms that WPE targets.</li>
 </ul>
-<p>In order to solve these issues, an alternative WebRTC backend based on <a href="http://blog.nirbheek.in/2018/02/gstreamer-webrtc.html">GstWebRTC</a> will be merged in WPE upstream, hopefully during 2023; bug <a href="https://bugs.webkit.org/show_bug.cgi?id=235885">#235885</a> is being used to track progress. This new backend will seamlessly integrate with hardware-accelerated encoders and decoders on most embedded platforms. GstWebRTC depends on <a href="https://www.openssl.org/">OpenSSL</a>, which is released under an Apache-style license, so it doesn’t have limitations regarding redistribution in binary form.</p>
+<p>In order to solve these issues, an alternative WebRTC backend based on <a href="http://blog.nirbheek.in/2018/02/gstreamer-webrtc.html">GstWebRTC</a> will be enabled by default in the WPE upstream CMake build, hopefully during 2023; bug <a href="https://bugs.webkit.org/show_bug.cgi?id=235885">#235885</a> is being used to track progress. This new backend will seamlessly integrate with hardware-accelerated encoders and decoders on most embedded platforms. GstWebRTC depends on <a href="https://www.openssl.org/">OpenSSL</a>, which is released under an Apache-style license, so it doesn’t have limitations regarding redistribution in binary form.</p>
 <h2 id="what%E2%80%99s-up-with-eme%3F-how-can-i-support-this-feature-in-my-wpe-based-product%3F" tabindex="-1">What’s up with EME? How can I support this feature in my WPE-based product?</h2>
 <p>There is code in WebKit to support Encrypted Media Extensions (EME), but in any case, you will need a license agreement with DRM CDM providers to access it, since this part is not open source. There are three ways you can get this working:</p>
 <ul>
