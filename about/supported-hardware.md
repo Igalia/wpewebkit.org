@@ -13,12 +13,7 @@ resources: [
 	{
 		"title": "Get Started",
 		"url": "/about/explore-wpe.html",
-		"text": "Links to pre-built installations for platforms like Linux, Raspberry Pi, and more."
-	},
-	{
-		"title": "Try WPE with Flatpak",
-		"url": "/about/flatpak.html",
-		"text": "WPE maintainers leverage Flatpak to allow users to try two different WPE flavors."
+		"text": "Links to pre-built installations for platforms like Linux."
 	},
 	{
 		"title": "Igalia",

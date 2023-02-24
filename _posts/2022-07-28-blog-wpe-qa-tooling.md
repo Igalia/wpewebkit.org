@@ -118,16 +118,7 @@ After hacking locally, you can submit your changes following the workflow listed
 
 ## Testing WPE in the wild
 
-If you don't want to build your WPE build or image, there are some options to [get a taste of WPE]({{ '/about/exploring.html' | url }}) listed on our website, including:
-
-* Prebuilt distribution packages
-    * For [Debian](https://packages.debian.org/search?searchon=sourcenames&keywords=wpewebkit), [Ubuntu](https://packages.ubuntu.com/search?keywords=wpewebkit&searchon=sourcenames&suite=all&section=all), [Raspbian](https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/), [Arch Linux](https://archlinux.org/packages/extra/x86_64/wpewebkit/), and [Fedora](https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/)
-* [Flatpak image]({{ '/about/flatpak.html' | url }})
-* Prebuilt Raspberry Pi (3B, 3B+ and 4) images
-    * For [stable](https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip) and [nightly](https://wk-contrib.igalia.com/debian/images/nightly/wpe-raspbian.img.zip) releases
-* [Balena blocks]({{ '/about/balena-wpe.html' | url }})
-
-Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.
+If you don't want to build your WPE build or image, there are some options to [get a taste of WPE]({{ '/about/exploring.html' | url }}) listed on our website.
 
 ## Final thoughts
 

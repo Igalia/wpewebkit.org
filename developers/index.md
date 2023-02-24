@@ -33,12 +33,7 @@ h2 {
 
 While there are several simple ways for developers to experiment with and explore WPE, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds. To make this easier, there is also [meta-webkit](https://github.com/Igalia/meta-webkit), which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
 
-<ul class="arrows">
-<li><a href="{{ '/about/explore-wpe.html' | url }}">Linux distros for Debian, Ubuntu, Raspbian, Arch, Fedora...</a></li>
-<li><a href="{{ '/about/flatpak.html' | url }}">Install WPE and minibrowser with flatpak</a></li>
-<li><a href="{{ '/about/rpi-yocto-wpe.html' | url }}">Install with images for Raspberry Pi</a></li>
-<li><a href="{{ '/about/balena-wpe.html' | url }}">Install with Balena</a></li>
-</ul>
+There are also pre-build packages available for many <a href="{{ '/about/explore-wpe.html' | url }}">Linux distros</a>.
 
 </div>
 

@@ -162,11 +162,7 @@ are in the project, your background, and what you'd like to do with
 it, there are different ways!
 
 It can be as easy as installing WPE directly from the most popular
-Linux distributions or downloading and flashing prebuilt images for
-the Raspberry Pi. There are easy and flexible options like
-[Flatpak]({{ '/about/flatpak.html' | url }}) or
-[Balena]({{ '/about/balena-wpe.html' | url }}), which
-you can dig into to learn more. If you want to build WPE yourself,
+Linux distributions. If you want to build WPE yourself,
 you can use [Yocto](https://github.com/Igalia/meta-webkit/wiki/WPE) and if
 you'd like to contribute&mdash;that's very welcome!
 
