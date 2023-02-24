@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPEBackend 0.2.0 released!</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/update-gha/release/wpebackend-0.2.0.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/aperezdc/update-gha/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/update-gha/release/wpebackend-0.2.0.html">
+  <meta property="og:title" content="WPEBackend 0.2.0 released!">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/update-gha/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/update-gha/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-07-09T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/update-gha/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/update-gha/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/update-gha/css/fonts.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/update-gha/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/aperezdc/update-gha/"><img src="/wpewebkit.org/aperezdc/update-gha/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="release off"><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/update-gha/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/update-gha/about">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/update-gha/blog">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/update-gha/developers">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/aperezdc/update-gha/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/update-gha/release/wpebackend-0.2.0.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPEBackend 0.2.0 released!</h1>
+ 
+   <meta itemprop="datePublished" content="Mon Jul 09 2018">
+   <time itemprop="dateCreated"> 9 July 2018</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases/wpebackend-0.2.0.tar.xz">Download</a>
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This is a backwards-compatible, stable release of the WPE backend loader
+library.</p>
+<h3 id="what%E2%80%99s-new-in-the-wpbackend-0.2.0-release%3F" tabindex="-1">What’s new in the WPBackend 0.2.0 release?</h3>
+<ul>
+<li>
+<p>New API to set and query the backend implementation library being used
+(<a href="https://github.com/WebPlatformForEmbedded/WPEBackend/pull/19">#19</a>).</p>
+</li>
+<li>
+<p>New API to query the version library, both with macros at build time,
+and functions at runtime
+(<a href="https://github.com/WebPlatformForEmbedded/WPEBackend/pull/18">#18</a>).</p>
+</li>
+<li>
+<p>Trying to use a backend implementation library which does not provide
+a <code>load_object</code> callback will produce a meaningful error instead of
+silently failing.</p>
+</li>
+</ul>
+<h5 id="checksums" tabindex="-1">Checksums</h5>
+<pre>
+wpebackend-0.2.0.tar.xz (8.6KB)
+   md5sum: d04e44a32709dbb763ce1fcfc28bc6d8
+   sha1sum: 4089cac12877ee1e09372953a281a46b8c8951e9
+   sha256sum: ce33ff29b04175cb6fe6e6597a4b5e8ec9da0b8b5ae0745848902ac935d65823
+</pre>
+
+
+
+
+</div>
+
+    </main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/aperezdc/update-gha/" class="igalia logo home"><img src="/wpewebkit.org/aperezdc/update-gha/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
