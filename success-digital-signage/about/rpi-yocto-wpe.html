@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2023-02-06T18:02:10.585Z">
+  <meta property="article:published_time" content="2023-02-28T22:47:55.897Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -126,10 +126,14 @@ device.</p>
 <h3 id="flash-the-image" tabindex="-1">Flash the image</h3>
 <p>To write with ‘<code>dd</code>’ (replace ‘<code>mmcblk_XYZ</code>’ with your actual target
 device) and use the downloaded image, for example:</p>
-<pre><code>bzip2 -d core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
-sudo dd if=core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of=&quot;/dev/mmcblk_XYZ&quot; bs=4k status=progress
+<h4 id="raspberry-pi-4-(64-bit)" tabindex="-1">Raspberry Pi 4 (64-bit)</h4>
+<pre><code>bzip2 -d core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
+sudo dd if=core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of=&quot;/dev/mmcblk_XYZ&quot; bs=4M status=progress
 </code></pre>
-<p>‘<code>bmaptool</code>’ can also be used and is typically (faster), we also provide the <code>.bmap</code> files to download.</p>
+<h4 id="raspberry-pi-3b%2F3b%2B-(32-bit)" tabindex="-1">Raspberry Pi 3B/3B+ (32-bit)</h4>
+<pre><code>bzip2 -d core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
+sudo dd if=core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of=&quot;/dev/mmcblk_XYZ&quot; bs=4M status=progress
+</code></pre>
 <h2 id="set-up" tabindex="-1">Set-up</h2>
 <p>After writing the micro-SD card and using it to boot the device, it
 should boot to a graphical environment, using Weston (from Wayland),

@@ -4,8 +4,108 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2023-02-02T00:00:00Z</updated>
+  <updated>2023-02-23T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.39.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/success-digital-signage/release/wpewebkit-2.39.90.html"/>
+    <updated>2023-02-23T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/success-digital-signage/release/wpewebkit-2.39.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.40 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.39.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.39.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add network session API when building with the new API.&lt;/li&gt;
+&lt;li&gt;Add new JavaScript execution APIs.&lt;/li&gt;
+&lt;li&gt;Add support for speech synthesis using &lt;a href=&quot;http://www.festvox.org/flite/&quot;&gt;Flite&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Always update the active URI of &lt;code&gt;WebKitFrame&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Bring back the &lt;code&gt;WebKitConsoleMessage&lt;/code&gt; API implementation.&lt;/li&gt;
+&lt;li&gt;Do not allow the sandbox to mount the entire home directory.&lt;/li&gt;
+&lt;li&gt;Fix criticals from &lt;code&gt;webkitOptionMenuSetEvent&lt;/code&gt; when opening any combo box.&lt;/li&gt;
+&lt;li&gt;Fix large memory allocation when uploading content.&lt;/li&gt;
+&lt;li&gt;Fix scrolling after a history navigation with PSON enabled.&lt;/li&gt;
+&lt;li&gt;Fix the &lt;code&gt;webkit.h&lt;/code&gt; public header causing applications failing to build.&lt;/li&gt;
+&lt;li&gt;Enable WebGL2 by default, which was disabled by mistake.&lt;/li&gt;
+&lt;li&gt;Fix the build with WebGL disabled.&lt;/li&gt;
+&lt;li&gt;Remove the favicon functionality when building with the new API.&lt;/li&gt;
+&lt;li&gt;Make most public types final (non-derivable) and class struct declarations private when building with the new API.&lt;/li&gt;
+&lt;li&gt;Merge functions of registering and unregistering script message handlers in the new API.&lt;/li&gt;
+&lt;li&gt;Remove most of the &lt;code&gt;webkit_web_view_new_with_*()&lt;/code&gt; constructors when building with the new GLib API.&lt;/li&gt;
+&lt;li&gt;Remove &lt;code&gt;webkit_web_context_{get,set}_process_model()&lt;/code&gt; when building with the new GLib API.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.39.90.tar.xz (35.8 MiB)
+   md5sum: 36def91376043e3123e892336ea9965e
+   sha1sum: 8da1bcab365078346db5f9a971ec7ab344448817
+   sha256sum: 9fc2e39a6a4db0d4e8ee7ba051e44a8ba3fc090fa82ac9a008e3d839bdd4852d
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.38.5 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/success-digital-signage/release/wpewebkit-2.38.5.html"/>
+    <updated>2023-02-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/success-digital-signage/release/wpewebkit-2.38.5.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.38 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.38.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.38.5?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix large memory allocation when uploading content.&lt;/li&gt;
+&lt;li&gt;Fix scrolling after a history navigation with PSON enabled.&lt;/li&gt;
+&lt;li&gt;Always update the active URI of &lt;code&gt;WebKitFrame&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with the external hole-punch media playback enabled.&lt;/li&gt;
+&lt;li&gt;Fix the build on Ubuntu 20.04.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.38.5.tar.xz (29.1 MiB)
+   md5sum: 73f7abd0c1cc808032869f72602166e3
+   sha1sum: 3f10a04758eeb349f63f841aff765dae25bcde1b
+   sha256sum: ff00fd3d0a4c6d551850a78a7dfe4883b6b7ebd93c5549e1121b2f43d3ac1661
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2023-0002</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2023-0002.html"/>
+    <updated>2023-02-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2023-0002.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 15, 2023&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2023-0002&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2023-0002.html#CVE-2023-23529&quot;&gt;CVE-2023-23529&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2023-23529&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23529&quot;&gt;CVE-2023-23529&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.5.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A type confusion
+issue was addressed with improved checks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.38.4 released</title>
@@ -313,20 +413,6 @@ Note that these implementations are already complete in LBSE downstream and do n
   </entry>
   
   <entry>
-    <title>Success Story: WPE in digital signage</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/success-digital-signage/blog/2023-success-digital-signage.html"/>
-    <updated>2023-01-06T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/success-digital-signage/blog/2023-success-digital-signage.html</id>
-    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
-&lt;img alt=&quot;WPE WebKit in digital signage&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/success-digital-signage/assets/img/logo-digital-signage@2x.png&quot; /&gt;
-&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/success-digital-signage/assets/img/logo-blue.svg&quot; /&gt;
-&lt;/div&gt;
-&lt;p&gt;Digital signage web rendering players have many advantages and are a trend nowadays. They allow to use HTML5 for composing the UI, provisioning and scheduling new contents to the screens from the cloud is simple and effortless, they provide a robust environment with an automatic crash recovery system, etc. They are also a great choice for digital signage kiosk deployments.&lt;/p&gt;
-&lt;p&gt;WPE WebKit is an excellent option to use as web rendering engine for Linux-based digital signage players, specially for the low-end market, where WPE Webkit allows to achieve great graphics and rendering performance in the less powerful devices like the ones based on the Raspberry Pi. As a result, WPE WebKit is naturally compatible with the hardware of the main digital signage manufactures that rely on these kind of lower-powered devices.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
     <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0011</title>
     <link href="https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2022-0011.html"/>
     <updated>2022-12-26T00:00:00Z</updated>
@@ -469,111 +555,6 @@ wpewebkit-2.38.3.tar.xz (29.7 MiB)
    sha1sum: de15119a0dc29776d3a11fca1df4238b471f960f
    sha256sum: 1dd9075eec7253a1b0d038a73f92ddbb9174394e6a7527ec07b4464fa6290498
 &lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.38.2 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/success-digital-signage/release/wpewebkit-2.38.2.html"/>
-    <updated>2022-11-04T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/success-digital-signage/release/wpewebkit-2.38.2.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.38 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.38.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.38.2?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix scrolling issues in some sites having fixed background.&lt;/li&gt;
-&lt;li&gt;Fix prolonged buffering during progressive live playback.&lt;/li&gt;
-&lt;li&gt;Fix the build with accessibility disabled.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.38.2.tar.xz (29.7 MiB)
-   md5sum: 451a450d64a45f2965d3c09792c63466
-   sha1sum: 3bb8482562f3689b81c85936846af456620395ee
-   sha256sum: 5ce5ac6d5cb6c13469f52d2ece34b302524ff59caf05ecf0f7c62e12c48df422
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0010</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2022-0010.html"/>
-    <updated>2022-11-04T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2022-0010.html</id>
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Date Reported: &lt;strong&gt;November 04, 2022&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0010&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2022-0010.html#CVE-2022-32888&quot;&gt;CVE-2022-32888&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2022-0010.html#CVE-2022-32923&quot;&gt;CVE-2022-32923&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2022-0010.html#CVE-2022-42799&quot;&gt;CVE-2022-42799&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2022-0010.html#CVE-2022-42823&quot;&gt;CVE-2022-42823&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/success-digital-signage/security/WSA-2022-0010.html#CVE-2022-42824&quot;&gt;CVE-2022-42824&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-32888&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32888&quot;&gt;CVE-2022-32888&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.0.&lt;/li&gt;
-&lt;li&gt;Credit to P1umer (@p1umer).&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: An out-of-bounds write issue
-was addressed with improved bounds checking.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-32923&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32923&quot;&gt;CVE-2022-32923&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.0.&lt;/li&gt;
-&lt;li&gt;Credit to Wonyoung Jung (@nonetype_pwn) of KAIST Hacking Lab.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may disclose
-internal states of the app. Description: A correctness issue in the
-JIT was addressed with improved checks.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42799&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42799&quot;&gt;CVE-2022-42799&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.2.&lt;/li&gt;
-&lt;li&gt;Credit to Jihwan Kim (@gPayl0ad), Dohyun Lee. (@l33d0hyun).&lt;/li&gt;
-&lt;li&gt;Impact: Visiting a malicious website may lead to user interface
-spoofing. Description: The issue was addressed with improved UI
-handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42823&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42823&quot;&gt;CVE-2022-42823&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.2.&lt;/li&gt;
-&lt;li&gt;Credit to Dohyun Lee (@l33d0hyun) of SSD Labs.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A type confusion issue was
-addressed with improved memory handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42824&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42824&quot;&gt;CVE-2022-42824&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK before 2.38.2.&lt;/li&gt;
-&lt;li&gt;Credit to Abdulrahman Alqabandi of Microsoft Browser Vulnerability
-Research, Ryan Shin of IAAI SecLab at Korea University, Dohyun Lee
-(@l33d0hyun) of DNSLab at Korea University.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may disclose
-sensitive user information. Description: A logic issue was addressed
-with improved state management.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
-WebKit. It is the best way to ensure that you are running safe versions
-of WebKit. Please check our websites for information about the latest
-stable releases.&lt;/p&gt;
-&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
-&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
 </feed>
