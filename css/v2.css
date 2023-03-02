@@ -1,3 +1,15 @@
+@font-face {
+	font-family: 'Mona';
+	font-variant: common-ligatures;
+	src:
+		local('Mona Sans Variable'),
+		local('Mona Sans VF'),
+		url('../assets/Mona-Sans.woff2') format('woff2'),
+		url('../assets/Mona-Sans.woff') format('woff'),
+		url('../assets/Mona-Sans.ttf') format('truetype');
+}
+
+
 img[src*="placeholder"] {
 max-height: 4em;
 }
@@ -19,10 +31,12 @@ html {
 	max-width: 100vw;
 }
 
-body {
+html body {
 	min-height: 100%;
 	margin: 0;
 	padding: 5rem 0 0;
+	font-family: Mona;
+	line-height: 1.4;
 }
 
 :is(nav, footer).global, header.page {
@@ -81,6 +95,7 @@ ul.arrows {
 }
 ul.arrows li {
 	text-indent: -2em;
+	padding-block: 0.25em;
 }
 ul.arrows li::before {
 	display: inline-block;
