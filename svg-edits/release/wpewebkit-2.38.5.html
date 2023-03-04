@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Try WPE images for Raspberry Pi</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/svg-edits/about/rpi-yocto-wpe.html">
+  <title>WPE WebKit 2.38.5 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/svg-edits/release/wpewebkit-2.38.5.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/svg-edits/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/svg-edits/about/rpi-yocto-wpe.html">
-  <meta property="og:title" content="Try WPE images for Raspberry Pi">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/svg-edits/release/wpewebkit-2.38.5.html">
+  <meta property="og:title" content="WPE WebKit 2.38.5 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/svg-edits/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/svg-edits/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,8 +21,9 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2023-03-04T11:08:23.276Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2023-02-15T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -66,9 +67,9 @@
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/svg-edits/"><img src="/wpewebkit.org/svg-edits/assets/img/logo-blue.svg" alt="WPE"></a>
-		<ul class="about off"><li>
+		<ul class="release off"><li>
 			<a class="nav-link" href="/wpewebkit.org/svg-edits/">Home</a>
-			</li><li class="currentPage">
+			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/svg-edits/about">Learn & Discover</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/svg-edits/blog">Blog</a>
@@ -98,65 +99,38 @@ header.page time {
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/svg-edits/about/rpi-yocto-wpe.html">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/svg-edits/release/wpewebkit-2.38.5.html">
 
 <header class="page full-bleed">
- <h1 itemprop="headline">Try WPE images for Raspberry Pi</h1>
+ <h1 itemprop="headline">WPE WebKit 2.38.5 released</h1>
  
+   <meta itemprop="datePublished" content="Wed Feb 15 2023">
+   <time itemprop="dateCreated">15 February 2023</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpewebkit-2.38.5.tar.xz">Download</a>
   
 </header>
 
 <div itemprop="articleBody">
 
-<p>One way to easily test WPE is to use Yocto images for Raspberry Pi
-devices, write them in a micro-SD card and use them to boot the
-device.</p>
-<h2 id="getting-and-flashing-the-image-on-a-micro-sd-card" tabindex="-1">Getting and flashing the image on a micro-SD card</h2>
-<h3 id="downloads" tabindex="-1">Downloads</h3>
-<h4 id="download-for-raspberry-pi-4-(64-bit)" tabindex="-1">Download for Raspberry Pi 4 (64-bit)</h4>
-<p>The current version of WPE in these images is <strong>2.38.x</strong>.</p>
-<p>Download image with:</p>
-<pre><code>wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/raspberrypi4-64-mesa/core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
-</code></pre>
-<h4 id="download-for-raspberry-pi-3b%2F3b%2B-(32-bit)" tabindex="-1">Download for Raspberry Pi 3B/3B+ (32-bit)</h4>
-<p>The current version of WPE in these images is <strong>2.38.x</strong>.</p>
-<p>Download image with:</p>
-<pre><code>wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/raspberrypi3-mesa/core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
-</code></pre>
-<h3 id="flash-the-image" tabindex="-1">Flash the image</h3>
-<p>To write with ‘<code>dd</code>’ (replace ‘<code>mmcblk_XYZ</code>’ with your actual target
-device) and use the downloaded image, for example:</p>
-<h4 id="raspberry-pi-4-(64-bit)" tabindex="-1">Raspberry Pi 4 (64-bit)</h4>
-<pre><code>bzip2 -d core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
-sudo dd if=core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of=&quot;/dev/mmcblk_XYZ&quot; bs=4M status=progress
-</code></pre>
-<h4 id="raspberry-pi-3b%2F3b%2B-(32-bit)" tabindex="-1">Raspberry Pi 3B/3B+ (32-bit)</h4>
-<pre><code>bzip2 -d core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
-sudo dd if=core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of=&quot;/dev/mmcblk_XYZ&quot; bs=4M status=progress
-</code></pre>
-<h2 id="set-up" tabindex="-1">Set-up</h2>
-<p>After writing the micro-SD card and using it to boot the device, it
-should boot to a graphical environment, using Weston (from Wayland),
-with a minimal top panel bar and some icons within it.</p>
-<p>To test WPE networking is needed, either by pluggin-in an ethernet
-cable (with DHCP networking should set-up automatically), or by
-clicking the “wireless” icon in the panel, that brings up a basic
-script to help to set the network up (selecting SSID and password).</p>
-<h2 id="testing" tabindex="-1">Testing</h2>
-<p>After having the network working, the browser (<code>cog</code>) can be launched
-from one of the icons in the panel, or alternatively by opening a
-terminal with another of the icons and launching it from the command
-line.</p>
-<p>There are also some environment variables that can be used to change
-the behaviour of Cog’s window (e.g.  fullscreen, maximized, specific
-dimensions), as well as some key bindings that can be used to perform
-certain actions with Cog or change its behaviour (e.g. toggle
-fullscreen, reload, zooming, exit…), when running on Wayland. You
-can check more details about this in
-<a href="https://github.com/Igalia/cog/blob/master/docs/platform-wl.md">https://github.com/Igalia/cog/blob/master/docs/platform-wl.md</a>.</p>
-<p>Example:</p>
-<pre><code>COG_PLATFORM_WL_VIEW_FULLSCREEN=1 cog -P wl &quot;https://www.wikipedia.org/&quot;
-</code></pre>
+<p>This is a bug fix release in the stable 2.38 series.</p>
+<h3 id="what%E2%80%99s-new-in-wpe-webkit-2.38.5%3F" tabindex="-1">What’s new in WPE WebKit 2.38.5?</h3>
+<ul>
+<li>Fix large memory allocation when uploading content.</li>
+<li>Fix scrolling after a history navigation with PSON enabled.</li>
+<li>Always update the active URI of <code>WebKitFrame</code>.</li>
+<li>Fix the build with the external hole-punch media playback enabled.</li>
+<li>Fix the build on Ubuntu 20.04.</li>
+<li>Fix several crashes and rendering issues.</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+wpewebkit-2.38.5.tar.xz (29.1 MiB)
+   md5sum: 73f7abd0c1cc808032869f72602166e3
+   sha1sum: 3f10a04758eeb349f63f841aff765dae25bcde1b
+   sha256sum: ff00fd3d0a4c6d551850a78a7dfe4883b6b7ebd93c5549e1121b2f43d3ac1661
+</pre>
 
 
 

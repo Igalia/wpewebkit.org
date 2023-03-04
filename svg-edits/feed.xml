@@ -4,8 +4,229 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2023-01-19T00:00:00Z</updated>
+  <updated>2023-02-23T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.39.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.39.90.html"/>
+    <updated>2023-02-23T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.39.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.40 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.39.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.39.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add network session API when building with the new API.&lt;/li&gt;
+&lt;li&gt;Add new JavaScript execution APIs.&lt;/li&gt;
+&lt;li&gt;Add support for speech synthesis using &lt;a href=&quot;http://www.festvox.org/flite/&quot;&gt;Flite&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Always update the active URI of &lt;code&gt;WebKitFrame&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Bring back the &lt;code&gt;WebKitConsoleMessage&lt;/code&gt; API implementation.&lt;/li&gt;
+&lt;li&gt;Do not allow the sandbox to mount the entire home directory.&lt;/li&gt;
+&lt;li&gt;Fix criticals from &lt;code&gt;webkitOptionMenuSetEvent&lt;/code&gt; when opening any combo box.&lt;/li&gt;
+&lt;li&gt;Fix large memory allocation when uploading content.&lt;/li&gt;
+&lt;li&gt;Fix scrolling after a history navigation with PSON enabled.&lt;/li&gt;
+&lt;li&gt;Fix the &lt;code&gt;webkit.h&lt;/code&gt; public header causing applications failing to build.&lt;/li&gt;
+&lt;li&gt;Enable WebGL2 by default, which was disabled by mistake.&lt;/li&gt;
+&lt;li&gt;Fix the build with WebGL disabled.&lt;/li&gt;
+&lt;li&gt;Remove the favicon functionality when building with the new API.&lt;/li&gt;
+&lt;li&gt;Make most public types final (non-derivable) and class struct declarations private when building with the new API.&lt;/li&gt;
+&lt;li&gt;Merge functions of registering and unregistering script message handlers in the new API.&lt;/li&gt;
+&lt;li&gt;Remove most of the &lt;code&gt;webkit_web_view_new_with_*()&lt;/code&gt; constructors when building with the new GLib API.&lt;/li&gt;
+&lt;li&gt;Remove &lt;code&gt;webkit_web_context_{get,set}_process_model()&lt;/code&gt; when building with the new GLib API.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.39.90.tar.xz (35.8 MiB)
+   md5sum: 36def91376043e3123e892336ea9965e
+   sha1sum: 8da1bcab365078346db5f9a971ec7ab344448817
+   sha256sum: 9fc2e39a6a4db0d4e8ee7ba051e44a8ba3fc090fa82ac9a008e3d839bdd4852d
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.38.5 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.38.5.html"/>
+    <updated>2023-02-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.38.5.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.38 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.38.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.38.5?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix large memory allocation when uploading content.&lt;/li&gt;
+&lt;li&gt;Fix scrolling after a history navigation with PSON enabled.&lt;/li&gt;
+&lt;li&gt;Always update the active URI of &lt;code&gt;WebKitFrame&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with the external hole-punch media playback enabled.&lt;/li&gt;
+&lt;li&gt;Fix the build on Ubuntu 20.04.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.38.5.tar.xz (29.1 MiB)
+   md5sum: 73f7abd0c1cc808032869f72602166e3
+   sha1sum: 3f10a04758eeb349f63f841aff765dae25bcde1b
+   sha256sum: ff00fd3d0a4c6d551850a78a7dfe4883b6b7ebd93c5549e1121b2f43d3ac1661
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2023-0002</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2023-0002.html"/>
+    <updated>2023-02-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2023-0002.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 15, 2023&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2023-0002&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2023-0002.html#CVE-2023-23529&quot;&gt;CVE-2023-23529&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2023-23529&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23529&quot;&gt;CVE-2023-23529&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.5.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A type confusion
+issue was addressed with improved checks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.38.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.38.4.html"/>
+    <updated>2023-02-02T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.38.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.38 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.38.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.38.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve GStreamer multimedia playback across the board with improved
+codec selection logic, better handling of latency, and improving
+frame discard to avoid audio/video desynchronization, among other
+fixes.&lt;/li&gt;
+&lt;li&gt;Disable HLS media playback by default, which makes web sites use MSE
+instead. If needed &lt;code&gt;WEBKIT_GST_ENABLE_HLS_SUPPORT=1&lt;/code&gt; can be set in the
+environment to enable it back.&lt;/li&gt;
+&lt;li&gt;Fix MediaSession API not showing artwork images.&lt;/li&gt;
+&lt;li&gt;Fix MediaSession MPRIS usage when running inside a Flatpak sandbox.&lt;/li&gt;
+&lt;li&gt;Fix input element controls to correctly scale when applying a zoom
+factor different than the default.&lt;/li&gt;
+&lt;li&gt;Fix leakage of Web processes in certain situations.&lt;/li&gt;
+&lt;li&gt;Fix the injected bundle not being found when running inside a sandbox.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_INTROSPECTION&lt;/code&gt; when cross-compiling.&lt;/li&gt;
+&lt;li&gt;FIx the build with &lt;code&gt;ENABLE_WEBGL&lt;/code&gt; disabled.&lt;/li&gt;
+&lt;li&gt;Fix the build with GStreamer-based WebRTC enabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.38.4.tar.xz (29.1 MiB)
+   md5sum: 1c947ef5b73049fc6c102c92013009bf
+   sha1sum: 7fe9a7d98401256b0c9872f1c2b702e56840cbd3
+   sha256sum: 8c1bc113ef151fb0be2640824d323bc755dc97295ab7a1bc05e7ec589937a07b
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2023-0001</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2023-0001.html"/>
+    <updated>2023-02-02T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2023-0001.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 02, 2023&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2023-0001&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2023-0001.html#CVE-2023-23517&quot;&gt;CVE-2023-23517&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2023-0001.html#CVE-2023-23518&quot;&gt;CVE-2023-23518&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2023-0001.html#CVE-2022-42826&quot;&gt;CVE-2022-42826&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-23517&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23517&quot;&gt;CVE-2023-23517&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.4.&lt;/li&gt;
+&lt;li&gt;Credit to YeongHyeon Choi (@hyeon101010), Hyeon Park
+(@tree_segment), SeOk JEON (@_seokjeon), YoungSung Ahn (@_ZeroSung),
+JunSeo Bae (@snakebjs0107), Dohyun Lee (@l33d0hyun) of Team
+ApplePIE.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: The issue was addressed with
+improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-23518&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23518&quot;&gt;CVE-2023-23518&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.4.&lt;/li&gt;
+&lt;li&gt;Credit to YeongHyeon Choi (@hyeon101010), Hyeon Park
+(@tree_segment), SeOk JEON (@_seokjeon), YoungSung Ahn (@_ZeroSung),
+JunSeo Bae (@snakebjs0107), Dohyun Lee (@l33d0hyun) of Team
+ApplePIE.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: The issue was addressed with
+improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-42826&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42826&quot;&gt;CVE-2022-42826&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.4.&lt;/li&gt;
+&lt;li&gt;Credit to Francisco Alonso (@revskills).&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.14.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/release/libwpe-1.14.1.html"/>
+    <updated>2023-02-02T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/release/libwpe-1.14.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.14.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.14.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix the build with older glibc C library versions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.14.1.tar.xz (61.5 KiB)
+   md5sum: d834d70a6b3afb24a05ec188df248e52
+   sha1sum: e51caba8198601f2b7c8dec3c67770c56c46eb24
+   sha256sum: b1d0cdcf0f8dbb494e65b0f7913e357106da9a0d57f4fbb7b9d1238a6dbe9ade
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.39.5 released</title>
@@ -96,7 +317,7 @@ figcaption {
 &lt;h3 id=&quot;prototyping&quot; tabindex=&quot;-1&quot;&gt;Prototyping&lt;/h3&gt;
 &lt;p&gt;The LBSE effort began in October 2019 as &lt;strong&gt;a research project&lt;/strong&gt;, to find out an ideal design for the SVG &lt;strong&gt;Render Tree&lt;/strong&gt;, that allows SVG to re-use the existing &lt;strong&gt;Layer Tree&lt;/strong&gt; implementation with minimal changes. The aim for LBSE is to share as much code as possible with the HTML/CSS implementation, removing the need for things like SVG specific clipping/masking/filter code and disjoint HTML counterparts for the same operations.&lt;/p&gt;
 &lt;p&gt;After an extensive phase of experimentation, two abandoned approaches, and a long time spent on regression fixing, the LBSE prototype was finally finished after almost two years of work. It passed all 60k+ WebKit layout tests and offered initial support for compositing, 3D transformations, &lt;code&gt;z-index&lt;/code&gt;, and more. The intent was to prove that we can reach feature parity with the legacy SVG engine and retrieve the very same visual results, pixel-by-pixel (except for progressions of LBSE). Shortly after the finalization, the prototype was presented during the &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-13-svg-performance/&quot;&gt;WebKit contributors meeting in 2021&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;As the name “prototype” indicates, LBSE was not ready for integration into WebKit at this point. It &lt;strong&gt;replaced&lt;/strong&gt; the old SVG engine with a new one, resulting in a monolithic patch exceeding &lt;em&gt;650 KB&lt;/em&gt; of code changes. External contributions generally demand small patches, with ChangeLogs, tests, etc. – no conscientious reviewer in any company would approve a patch replacing a core component of a browser engine in one shot. Splitting up into small pieces is also not going to work, since SVG needs to be kept intact upstream all the time. Duplicating the whole SVG engine? Not practicable either. With that problem in mind, a fruitful discussion took place with Apple during and after the WebKit contributors meeting: a realistic upstreaming strategy was defined - thanks &lt;em&gt;Simon Fraser&lt;/em&gt; for suggesting a pragmatic approach!&lt;/p&gt;
+&lt;p&gt;As the name “prototype” indicates, LBSE was not ready for integration into WebKit at this point. It &lt;strong&gt;replaced&lt;/strong&gt; the old SVG engine with a new one, resulting in a monolithic patch exceeding &lt;em&gt;650 kb&lt;/em&gt; of code changes. WebKit demands small patches, with ChangeLogs, tests, etc. – no WebKit reviewer would sign off a patch replacing a core component of WebCore in one shot. Splitting up into small pieces is also not going to work, since SVG needs to be kept intact upstream all the time. Duplicating the whole SVG engine? Not practicable either. With that problem in mind, a fruitful discussion took place with Apple during and after the WebKit contributors meeting: a realistic upstreaming strategy was defined - thanks &lt;em&gt;Simon Fraser&lt;/em&gt; for suggesting a pragmatic approach!&lt;/p&gt;
 &lt;p&gt;The idea is simple: bootstrap LBSE &lt;em&gt;in parallel&lt;/em&gt; to the legacy SVG engine. Upstream LBSE behind a compile-time flag and additionally a runtime setting. This way the LBSE code is compiled by the &lt;a href=&quot;https://trac.webkit.org/wiki/EarlyWarningSystem&quot;&gt;EWS bots&lt;/a&gt; during upstreaming (rules out bit-rot) and we gain the ability to turn LBSE on, selectively, from our layout tests – very useful during early bootstrapping. For WebKit, that strategy is the best – for LBSE another &lt;em&gt;major&lt;/em&gt; effort is necessary: moving from a &lt;strong&gt;drop-in replacement&lt;/strong&gt; approach to a &lt;strong&gt;dual-stack&lt;/strong&gt; SVG engine: LBSE + legacy built into the same WebKit binaries. At least the timing was good since a split-up into small pieces was needed anyhow for upstreaming. Time to dissect the huge branch into logical, atomic pieces with proper change logs.&lt;/p&gt;
 &lt;p&gt;Before we jump to the upstreaming status, one question should be answered, that came up during the WebKit contributors meeting and also during various discussions: why don’t you just &lt;em&gt;fix&lt;/em&gt; the existing SVG engine and instead propose a new one - isn’t that too risky for Web compatibility?&lt;/p&gt;
 &lt;h3 id=&quot;why-don%E2%80%99t-you-fix-the-existing-svg-engine%3F&quot; tabindex=&quot;-1&quot;&gt;Why don’t you fix the existing SVG engine?&lt;/h3&gt;
@@ -334,231 +555,6 @@ wpewebkit-2.38.3.tar.xz (29.7 MiB)
    sha1sum: de15119a0dc29776d3a11fca1df4238b471f960f
    sha256sum: 1dd9075eec7253a1b0d038a73f92ddbb9174394e6a7527ec07b4464fa6290498
 &lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.38.2 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.38.2.html"/>
-    <updated>2022-11-04T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.38.2.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.38 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.38.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.38.2?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix scrolling issues in some sites having fixed background.&lt;/li&gt;
-&lt;li&gt;Fix prolonged buffering during progressive live playback.&lt;/li&gt;
-&lt;li&gt;Fix the build with accessibility disabled.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.38.2.tar.xz (29.7 MiB)
-   md5sum: 451a450d64a45f2965d3c09792c63466
-   sha1sum: 3bb8482562f3689b81c85936846af456620395ee
-   sha256sum: 5ce5ac6d5cb6c13469f52d2ece34b302524ff59caf05ecf0f7c62e12c48df422
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0010</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2022-0010.html"/>
-    <updated>2022-11-04T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2022-0010.html</id>
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Date Reported: &lt;strong&gt;November 04, 2022&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0010&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2022-0010.html#CVE-2022-32888&quot;&gt;CVE-2022-32888&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2022-0010.html#CVE-2022-32923&quot;&gt;CVE-2022-32923&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2022-0010.html#CVE-2022-42799&quot;&gt;CVE-2022-42799&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2022-0010.html#CVE-2022-42823&quot;&gt;CVE-2022-42823&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/security/WSA-2022-0010.html#CVE-2022-42824&quot;&gt;CVE-2022-42824&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-32888&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32888&quot;&gt;CVE-2022-32888&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.0.&lt;/li&gt;
-&lt;li&gt;Credit to P1umer (@p1umer).&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: An out-of-bounds write issue
-was addressed with improved bounds checking.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-32923&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32923&quot;&gt;CVE-2022-32923&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.0.&lt;/li&gt;
-&lt;li&gt;Credit to Wonyoung Jung (@nonetype_pwn) of KAIST Hacking Lab.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may disclose
-internal states of the app. Description: A correctness issue in the
-JIT was addressed with improved checks.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42799&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42799&quot;&gt;CVE-2022-42799&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.2.&lt;/li&gt;
-&lt;li&gt;Credit to Jihwan Kim (@gPayl0ad), Dohyun Lee. (@l33d0hyun).&lt;/li&gt;
-&lt;li&gt;Impact: Visiting a malicious website may lead to user interface
-spoofing. Description: The issue was addressed with improved UI
-handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42823&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42823&quot;&gt;CVE-2022-42823&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.2.&lt;/li&gt;
-&lt;li&gt;Credit to Dohyun Lee (@l33d0hyun) of SSD Labs.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A type confusion issue was
-addressed with improved memory handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42824&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42824&quot;&gt;CVE-2022-42824&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK before 2.38.2.&lt;/li&gt;
-&lt;li&gt;Credit to Abdulrahman Alqabandi of Microsoft Browser Vulnerability
-Research, Ryan Shin of IAAI SecLab at Korea University, Dohyun Lee
-(@l33d0hyun) of DNSLab at Korea University.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may disclose
-sensitive user information. Description: A logic issue was addressed
-with improved state management.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
-WebKit. It is the best way to ensure that you are running safe versions
-of WebKit. Please check our websites for information about the latest
-stable releases.&lt;/p&gt;
-&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
-&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.38.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.38.1.html"/>
-    <updated>2022-10-28T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/release/wpewebkit-2.38.1.html</id>
-    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 2.38 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.38.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.38.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Make xdg-dbus-proxy work if host session bus address is an abstract socket.&lt;/li&gt;
-&lt;li&gt;Use a single xdg-dbus-proxy process when sandbox is enabled.&lt;/li&gt;
-&lt;li&gt;Fix high resolution video playback due to unimplemented changeType operation.&lt;/li&gt;
-&lt;li&gt;Ensure GSubprocess uses posix_spawn() again and inherit file descriptors.&lt;/li&gt;
-&lt;li&gt;Fix player stucking in buffering (paused) state for progressive streaming.&lt;/li&gt;
-&lt;li&gt;Do not try to preconnect on link click when link preconnect setting is disabled.&lt;/li&gt;
-&lt;li&gt;Fix close status code returned when the client closes a WebSocket in some cases.&lt;/li&gt;
-&lt;li&gt;Fix media player duration calculation.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.38.1.tar.xz (29.7 MiB)
-   md5sum: c3a6e2c74543a4dd54bf0ca4879886c0
-   sha1sum: bf7367472d8cbe2dd1a36e6b57ac6bc2ce7fbe2a
-   sha256sum: bfa913aa60c39659983cd906c10a97b2cef1ae0c0574c89ed43dae2a35fefc00
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.16.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/release/cog-0.16.1.html"/>
-    <updated>2022-10-18T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/release/cog-0.16.1.html</id>
-    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 0.16 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.16.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.16.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;core: Fix build failure in some systems.&lt;/li&gt;
-&lt;li&gt;drm: Fix missing symbol which made the platform unusable.&lt;/li&gt;
-&lt;li&gt;wl: Fix build in systems where the &lt;code&gt;drm_fourcc.h&lt;/code&gt; header is not installed
-in the default search paths.&lt;/li&gt;
-&lt;li&gt;wl: Allow building against &lt;code&gt;libweston-12-protocols&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;meson: Do not check for platform plug-in dependencies if no platform
-plug-ins are enabled.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.16.1.tar.xz (119.3 KiB)
-   md5sum: 1489740db6b4ea568578035c30b8b2f4
-   sha1sum: 1235203085e7ccd8fc76eab6bdfcdb2e3ae38ea9
-   sha256sum: 37c5f14123b8dcf077839f6c60f0d721d2a91bb37829e796f420126e6b0d38b5
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Success Story: Metrological</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/blog/2022-success-metrological.html"/>
-    <updated>2022-10-15T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/blog/2022-success-metrological.html</id>
-    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
-&lt;img alt=&quot;Metrological: A Comcast Company&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/assets/img/logo-metrological@2x.png&quot; /&gt;
-&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/svg-edits/assets/img/logo-blue.svg&quot; /&gt;
-&lt;/div&gt;
-&lt;p&gt;WPE WebKit brought &lt;strong&gt;RDK (Reference Design Kit)&lt;/strong&gt;, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.&lt;/p&gt;
-&lt;p&gt;Delivering a fast and memory-efficient browser for embbedded systems is a challenging task, so Igalia helped Metrological build a new full-screen browser engine which stripped away all unecessary toolkit elements.&lt;/p&gt;
-&lt;p&gt;With years of experience around WebKit platform integration, Igalia worked to produce a new WebKit port, WPE, which interfaced directly with Wayland and the graphics driver. Additionally, Igalia pushed forward the implementation of a multi-platform multi-threaded compositer, enabling better performance on low-end multicore processors. WPE is an official port of WebKit.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE Networking Overview</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/svg-edits/blog/04-wpe-networking-overview.html"/>
-    <updated>2022-09-29T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/svg-edits/blog/04-wpe-networking-overview.html</id>
-    <content type="html">&lt;p&gt;At the heart of any browser engine is networking: Connecting with services and other users.  Unlike other engines, WebKit approaches this more abstractly by leaving a large portion of the networking up to individual ports. This includes network protocols such as HTTP, WebSockets, and WebRTC. The upside to this approach is a higher level of integration with the system-provided libraries and features so WebKit will behave similarly to other software on the platform often with more centralized configuration.&lt;/p&gt;
-&lt;p&gt;Due to this abstraction there are a few independent layers that make up the networking stack of WPE. In this post, I’ll break down what each layer accomplishes as well as give some insight into the codebase’s structure.&lt;/p&gt;
-&lt;h2 id=&quot;networking-layers&quot; tabindex=&quot;-1&quot;&gt;Networking Layers&lt;/h2&gt;
-&lt;div align=&quot;center&quot;&gt;
-    &lt;img alt=&quot;WebKit Network Layers&quot; src=&quot;https://wpewebkit.org/assets/networking-layers.svg&quot; /&gt;
-&lt;/div&gt;
-&lt;h3 id=&quot;webkit&quot; tabindex=&quot;-1&quot;&gt;WebKit&lt;/h3&gt;
-&lt;p&gt;Before we get into the libraries used for WPE, let’s discuss WebKit itself. Despite abstracting out a lot of the protocol handling, WebKit itself still needs to understand a lot of fundamentals of HTTP.&lt;/p&gt;
-&lt;p&gt;WebCore (discussed in &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html&quot;&gt;WPE Overview&lt;/a&gt;) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by &lt;code&gt;ResourceRequest&lt;/code&gt; and &lt;code&gt;ResourceResponse&lt;/code&gt; objects, which map to general HTTP functionality.&lt;/p&gt;
-&lt;h4 id=&quot;networkprocess&quot; tabindex=&quot;-1&quot;&gt;NetworkProcess&lt;/h4&gt;
-&lt;p&gt;A core part of modern web engine security is the multi-process model.  In order to defend against exploits, each website runs in its own isolated process that does not have network access. In order to allow for network access, they must talk over IPC to a dedicated NetworkProcess, typically one per browser instance. The NetworkProcess receives a &lt;code&gt;ResourceRequest&lt;/code&gt;, creates a &lt;code&gt;NetworkDataTask&lt;/code&gt; with it to download the data, and responds with a &lt;code&gt;ResourceResponse&lt;/code&gt; to the WebProcess which looks like this:&lt;/p&gt;
-&lt;div align=&quot;center&quot;&gt;
-    &lt;img alt=&quot;WebKit Network Flowchart&quot; src=&quot;https://wpewebkit.org/assets/networking-flow.svg&quot; /&gt;
-&lt;/div&gt;
-&lt;h3 id=&quot;wpe&quot; tabindex=&quot;-1&quot;&gt;WPE&lt;/h3&gt;
-&lt;p&gt;WPE implements the platform-specific versions of the classes above as &lt;code&gt;ResourceRequestSoup&lt;/code&gt; and &lt;code&gt;NetworkDataTaskSoup&lt;/code&gt;, primarily using a library called libsoup.&lt;/p&gt;
-&lt;p&gt;The &lt;a href=&quot;https://libsoup.org/&quot;&gt;libsoup&lt;/a&gt; library was originally created for the GNOME project’s email client and has since grown to be a very featureful HTTP implementation, now maintained by Igalia.&lt;/p&gt;
-&lt;p&gt;At a high level, the main task that libsoup does is manage connections and queued requests to websites and then efficiently streams the responses back to WPE. Properly implementing HTTP is a fairly large task, and this is a non-exhaustive list of features it implements: HTTP/1.1, HTTP/2, WebSockets, cookies, decompression, multiple authentication standards, HSTS, and HTTP proxies.&lt;/p&gt;
-&lt;p&gt;On its own, libsoup is really focused on the HTTP layer and uses the &lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib&quot;&gt;GLib&lt;/a&gt; library to implement many of its networking features in a portable way. This is where TCP, DNS, and TLS are handled. It is also directly used by WebKit for URI parsing and DNS pre-caching.&lt;/p&gt;
-&lt;p&gt;Using GLib also helps standardize behavior across modern Linux systems. It allows configuration of a global proxy resolver that WebKit, along with other applications, can use.&lt;/p&gt;
-&lt;h4 id=&quot;tls&quot; tabindex=&quot;-1&quot;&gt;TLS&lt;/h4&gt;
-&lt;p&gt;Another unique detail of our stack is that TLS is fully abstracted inside of GLib by a project called &lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib-networking&quot;&gt;GLib-Networking&lt;/a&gt;. This project provides multiple implementations of TLS that can be chosen at runtime, including OpenSSL and gnutls on Linux. The benefit here is that clients can choose the implementation they prefer—whether for licensing, certification, or technical reasons.&lt;/p&gt;
-&lt;h3 id=&quot;usage&quot; tabindex=&quot;-1&quot;&gt;Usage&lt;/h3&gt;
-&lt;p&gt;Let’s go step by step to see some real world usage. If we call &lt;code&gt;webkit_web_view_load_uri()&lt;/code&gt; for a new domain it will:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Create a &lt;code&gt;ResourceRequest&lt;/code&gt; in WebCore that represents an HTTP request with a few basic headers set.
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;ResourceRequestSoup&lt;/code&gt; will create its own internal representation for the request using &lt;code&gt;soup_message_new_for_uri()&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;This is passed to the &lt;code&gt;NetworkProcess&lt;/code&gt; to load this request as a &lt;code&gt;NetworkDataTask&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;NetworkDataTaskSoup&lt;/code&gt; will send/receive the request/response with &lt;code&gt;soup_session_send()&lt;/code&gt; which queues the message to be sent.&lt;/li&gt;
-&lt;li&gt;libsoup will connect to the host using &lt;code&gt;GSocketClient&lt;/code&gt; which does a DNS lookup and TCP connection.
-&lt;ul&gt;
-&lt;li&gt;If this is a TLS connection &lt;code&gt;GTlsClientConnection&lt;/code&gt; will use a library such as gnutls to do a TLS handshake.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;libsoup will write the HTTP request and read from the socket parsing the HTTP responses eventually returning the data to WebKit.&lt;/li&gt;
-&lt;li&gt;WebKit receives this data, along with periodic updates about the state of the request, and sends it out of the &lt;code&gt;NetworkProcess&lt;/code&gt; back to the main process as a &lt;code&gt;ResourceResponse&lt;/code&gt; eventually loading the data in the &lt;code&gt;WebProcess&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;summary&quot; tabindex=&quot;-1&quot;&gt;Summary&lt;/h2&gt;
-&lt;p&gt;In conclusion, WebKit provides a very flexible abstraction for platforms, and WPE leverages mature system libraries to provide a portable implementation. It has many layers, but they are all well organized and suited to their tasks.&lt;/p&gt;
-&lt;p&gt;If you are working with WPE and are interested in collaborating, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. If you are interested in working with Igalia, you can &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;apply here&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
 </feed>
