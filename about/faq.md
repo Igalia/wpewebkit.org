@@ -52,12 +52,11 @@ As of March 2022 the facts are:
 Taking these facts into account, the WPEWebKit maintainers have decided to leave WebRTC support disabled in the default build configuration of the official release tarballs because:
 
 - Bundling LibWebRTC in tarballs significantly increases the archive size.
-- The dependency on BoringSSL prevents LibWebRTC usage in non-GPL applications
-  and redistribution in binary form.
+- The dependency on BoringSSL prevents LibWebRTC usage in GPL applications.
 - The lack of hardware-accelerated support in LibWebRTC would incur a bad
   performance impact on the embedded platforms that WPE targets.
 
-In order to solve these issues, an alternative WebRTC backend based on [GstWebRTC](http://blog.nirbheek.in/2018/02/gstreamer-webrtc.html) will be merged in WPE upstream, most likely during 2022; bug [#235885](https://bugs.webkit.org/show_bug.cgi?id=235885) is being used to track progress. This new backend will seamlessly integrate with hardware-accelerated encoders and decoders on most embedded platforms. GstWebRTC depends on [OpenSSL](https://www.openssl.org/), which is released under an Apache-style license, so it doesn't have limitations regarding redistribution in binary form.
+In order to solve these issues, an alternative WebRTC backend based on [GstWebRTC](http://blog.nirbheek.in/2018/02/gstreamer-webrtc.html) will be enabled by default in the WPE upstream CMake build, hopefully during 2023; bug [#235885](https://bugs.webkit.org/show_bug.cgi?id=235885) is being used to track progress. This new backend will seamlessly integrate with hardware-accelerated encoders and decoders on most embedded platforms. GstWebRTC depends on [OpenSSL](https://www.openssl.org/), which is released under an Apache-style license, so it doesn't have limitations regarding redistribution in binary form.
 
 
 ## What's up with EME? How can I support this feature in my WPE-based product?

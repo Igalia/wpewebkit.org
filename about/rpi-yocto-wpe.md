@@ -38,12 +38,19 @@ wget https://wk-contrib.igalia.com/yocto/meta-webkit/browsers/stable/images/rasp
 To write with '`dd`' (replace '`mmcblk_XYZ`' with your actual target
 device) and use the downloaded image, for example:
 
+#### Raspberry Pi 4 (64-bit)
+
 ```
-bzip2 -d core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
-sudo dd if=core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of="/dev/mmcblk_XYZ" bs=4k status=progress
+bzip2 -d core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
+sudo dd if=core-image-weston-browsers-raspberrypi4-64-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of="/dev/mmcblk_XYZ" bs=4M status=progress
 ```
 
-'`bmaptool`' can also be used and is typically (faster), we also provide the `.bmap` files to download.
+#### Raspberry Pi 3B/3B+ (32-bit)
+
+```
+bzip2 -d core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic.bz2
+sudo dd if=core-image-weston-browsers-raspberrypi3-mesa_202205_4.0_kirkstone_r1_20221228073347.wic of="/dev/mmcblk_XYZ" bs=4M status=progress
+```
 
 ## Set-up
 
