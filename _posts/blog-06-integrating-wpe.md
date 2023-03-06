@@ -12,32 +12,32 @@ preview: |-
   Web content seamlessly.
 ---
 
-While most Web content is designed for display&mdash;and there are
-*lots*&mdash;will spend its life in the somewhat restricted sandbox
-implemented by the browser, taking advantage of Web technologies to provide
+While most Web content designed entirely for screen display&mdash;and there is
+*a lot* of it&mdash;will spend its life in the somewhat restricted sandbox
+implemented by a web browser, taking advantage of Web technologies to provide
 rich user interfaces in all kinds of consumer devices requires at least *some*
 degree of integration with the rest of their software and hardware. This is
-where a Web engine designed to be *embeddable* shines: not only does WPE
-provide a [stable API][wpewebkit-api], it is also comprehensive to the point
-of supporting a number of ways to *integrate* with its environment further
+where a Web engine like WPE designed to be *embeddable* shines: not only does WPE
+provide a [stable API][wpewebkit-api], it is also comprehensive in
+supporting a number of ways to *integrate* with its environment further
 than the plethora of available [Web platform APIs][mdn-web-apis].
 
 Integrating a “Web view” (the main [entry point of the WPE embedding
-API][api-webview]) with involves providing extension points, which allow the
+API][api-webview]) involves providing extension points, which allow the
 Web content (HTML/CSS/JavaScript) it loads to call into native code provided
 by the client application (typically written in C/C++) from JavaScript, and
 vice versa. There are a number of ways in which this can be achieved:
 
 - **[URI scheme handlers](#uri-scheme-handlers)** allow native code to
   register a custom <abbr title="Uniform Resource Identifier">URI</abbr>
-  scheme, which will run an user provided
+  scheme, which will run a user provided
   function to produce content that can be “fetched” regularly.
 - **[User script messaging](#user-script-messages)** can be used to send JSON
   messages from JavaScript running in the same context as Web pages to an user
   function, and vice versa.
 - The **JavaScriptCore API** is a powerful solution to provide new JavaScript
   functionality to Web content seamlessly, almost as if they were implemented
-  inside the Web engine itself&mdash;akin [NodeJS C++ addons][node-addons].
+  inside the Web engine itself&mdash;akin to [NodeJS C++ addons][node-addons].
 
 In this post we will explore the first two, as they can support many
 interesting use cases without introducing the additional complexity of
@@ -46,7 +46,7 @@ extending the JavaScript virtual machine. Let's dive in!
 ## Intermission
 
 We will be referring to the code of a tiny browser written for the occasion.
-Telling WebKit how to call our native code involves creating an
+Telling WebKit how to call our native code involves creating a
 [WebKitUserContentManager][api-contentmgr], customizing it, and then
 associating it with web views during their creation. The only exception to
 this are [URI scheme handlers](#uri-scheme-handlers), which are registered
@@ -83,7 +83,7 @@ The size has been kept small thanks to reusing code from the [Cog
 core](https://github.com/Igalia/cog#cog) library. As a bonus, it should
 run on Wayland, X11, and even on a bare display using the <abbr title="Direct
 Rendering Manager">DRM<abbr>/<abbr title="Kernel Mode Setting">KMS</abbr>
-subsystem directly. The compile and run it, assuming you already have the
+subsystem directly. Compiling and running it, assuming you already have the
 dependencies installed, should be as easy as running:
 
 ```sh
@@ -178,7 +178,7 @@ main(int argc, char *argv[])
 
 <figure>
   <img src="{{ '/assets/svg/URI_syntax_diagram.svg' | url }}"
-      title="“Railroad” diagram of URI syntax">
+      alt="“Railroad” diagram of URI syntax">
   <figcaption>URI syntax (<a target="_blank" rel="noopener"
       href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>,
     <a target="_blank" rel="noopener"
@@ -187,7 +187,7 @@ main(int argc, char *argv[])
   </figcaption>
 </figure>
 
-An URI scheme handler allows “teaching” the web engine how to handle *any*
+A URI scheme handler allows “teaching” the web engine how to handle *any*
 load (pages, subresources, the [Fetch API][mdn-web-api-fetch],
 `XmlHttpRequest`, ...)&mdash;if you ever wondered how Firefox implements
 `about:config` or how Chromium does `chrome://flags`, this is it. Also,
@@ -201,14 +201,14 @@ WPE WebKit has public API for this. Roughly:
 3. The function generates data to be returned as the result of the load,
    as a [GInputStream](https://docs.gtk.org/gio/class.InputStream.html)
    and calls [webkit_uri_scheme_request_finish()](https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html).
-4. WebKit will read the data from the input stream.
+4. WebKit will now read the data from the input stream.
 
 
 ### Echoes
 
 Let's add an echo handler to our [minimal browser](#intermission)
 that returns the requested URI as plain text. Registering the scheme is
-easy enough:
+straightforward enough:
 
 ```c
 static void
@@ -289,8 +289,8 @@ to help troubleshoot issues.
 
 ### Further Ideas
 
-Once we have WPE WebKit calling into our own code, there are no limits
-about what an URI scheme handler can do&mdash;as long as it involves replying
+Once we have WPE WebKit calling into our custom code, there are no limits
+to what a URI scheme handler can do&mdash;as long as it involves replying
 to requests. Here are some ideas:
 
 * Allow pages to access a subset of paths from the local file system in a
@@ -306,19 +306,19 @@ to requests. Here are some ideas:
 * Provide a REST API, which internally calls into
   [NetworkManager](https://networkmanager.dev/) to list and configure
   wireless network adapters. Combine it with a local web application and
-  embedded devices can now get easily get on the network.
+  embedded devices can now easily get on the network.
 
 
 ## User Script Messages
 
 While [URI scheme handlers](#uri-scheme-handlers)
-allow streaming large chunks data back into the Web engine, for exchanging
+allow streaming large chunks of data back into the Web engine, for exchanging
 smaller pieces of information in a more programmatic fashion it may be
 preferable to exchange messages without the need to trigger resource loads. 
 The user script messages part of the
 [WebKitUserContentManager][api-contentmgr] API can be used this way:
 
-1. Register an user message handler with
+1. Register a user message handler with
    [webkit_user_content_manager_register_script_message_handler()](https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.UserContentManager.register_script_message_handler.html).
    As opposed to URI scheme handlers, this only enables receiving messages,
    but does not associate a callback function *yet*.
@@ -335,12 +335,12 @@ Let's add a feature to our [minimal browser](#intermission) that will allow
 JavaScript code to trigger rebooting or powering off the device where it is
 running. While this should definitely *not* be functionality exposed to the
 open Web, it is perfectly acceptable in an embedded device where we control
-what gets loaded with WPE, and that uses exclusively a web application as its
+what gets loaded with WPE, and that exclusively uses a web application as its
 user interface.
 
 <figure>
   <img src="{{ '/assets/img/pepe-silvia-all-javascript.jpg' | url }}"
-    class="picture" alt="Pepe Silvia image meme, with the text “It's all JavaScript” superimposed">
+    class="picture" alt="Pepe Silvia conspiracy image meme, with the text “It's all JavaScript” superimposed">
   <figcaption>Pepe Silvia has it all figured out.</figcaption>
 </figure>
 
@@ -393,9 +393,9 @@ handle_power_control_message(WebKitUserContentManager *content_manager,
 
 Note that the `reboot()` system call above will most likely fail because it
 needs administrative privileges. While the browser process could run as `root`
-to sidestep this issue&mdash;definitely *not* recommended!&mdash;, it would be
+to sidestep this issue&mdash;definitely *not* recommended!&mdash;it would be
 better to grant the `CAP_SYS_BOOT` capability to the process, and *much*
-better to let ask the system manager daemon to handle the job. In machines
+better to ask the system manager daemon to handle the job. In machines
 using [systemd](https://systemd.io/) a good option is to call the `.Halt()`
 and `.Reboot()` methods of its `org.freedesktop.systemd1` interface.
 
@@ -432,33 +432,33 @@ The complete source code for this example can be found
 
 But how can one return values from user messages back to the JavaScript code
 running in the context of the web page? Until recently, the only option
-available was exposing some known function in the page JavaScript code, and
-then use
+available was exposing some known function in the page’s JavaScript code, and
+then using
 [webkit_web_view_run_javascript()](https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebView.run_javascript.html)
-to call it from native code later on. To make this a more idiomatic and allow
+to call it from native code later on. To make this more idiomatic and allow
 waiting on a [Promise][mdn-promise], an approach like the following works:
 
 1. Have convenience JavaScript functions wrapping the calls to
-   `.postMessage()`, which add an unique identifier as part of the message,
+   `.postMessage()` which add an unique identifier as part of the message,
    create a `Promise`, and store it in a `Map` indexed by the identifier.
    The `Promise` is itself returned from the functions.
 2. When the callback in native code handle messages, they need to take
    note of the message identifier, and then use
-   `webkit_web_view_run_javascript()` passing it back, along with the
+   `webkit_web_view_run_javascript()` to pass it back, along with the
    information needed to resolve the promise.
-3. The Javascript code running in the page takes from the `Promise` from
+3. The Javascript code running in the page takes the `Promise` from
    the `Map` that corresponds to the identifier, and resolves it.
 
 To make this approach a bit more palatable, we could tell WebKit to [inject a
 script](https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.UserContentManager.add_script.html)
-along with the regular content, which would provide the needed [helper
+along with the regular content, which would provide the [helper
 functions](https://gist.github.com/aperezdc/a112c6a61a5a11885eac2498702e3a6d)
-to achieve this.
+needed to achieve this.
 
-Nevertheless, the approach outlined above is quite cumbersome and can be
-tricky to get right. Not to mention that the effort needs to be duplicated in
-each application. Therefore, we have recently added new API to provide this
-feature built-in, so starting in WPE WebKit 2.40 the recommended approach
+Nevertheless, the approach outlined above is cumbersome and can be
+tricky to get right, not to mention that the effort needs to be duplicated in
+each application. Therefore, we have recently added new API hooks to provide this
+as a built-in feature, so starting in WPE WebKit 2.40 the recommended approach
 involves using
 [webkit_user_content_manager_register_script_message_handler_with_reply()](https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/method.UserContentManager.register_script_message_handler_with_reply.html)
 to register handlers instead. This way, calling `.postMessage()` now returns a
@@ -466,7 +466,7 @@ to register handlers instead. This way, calling `.postMessage()` now returns a
 [script-message-with-reply-received](https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.UserContentManager.script-message-with-reply-received.html)
 signal now receive a
 [WebKitScriptMessageReply](https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/struct.ScriptMessageReply.html),
-which can be used to resolve the promise&mdash;either on the spot or
+which can be used to resolve the promise&mdash;either on the spot, or
 asynchronously later on.
 
 
@@ -475,7 +475,7 @@ asynchronously later on.
 User script messages are a powerful and rather flexible facility to make WPE
 integrate web content into a complete system. The provided example is rather
 simple, but as long as we do not need to pass huge amounts of data in
-messages the possibilities are almost endless&mdash;specially with the
+messages the possibilities are almost endless&mdash;especially with the
 added convenience in WPE WebKit 2.40. Here are more ideas that can
 be built on top of user script messages:
 
@@ -491,8 +491,8 @@ be built on top of user script messages:
 ## Wrapping Up
 
 WPE has been designed from the ground up to integrate with the rest of the
-system, instead of having solely the focus of rendering Web content inside a
-monolithic web browser application&mdash;instead, the public API must be
+system, instead of having a sole focus on rendering Web content inside a
+monolithic web browser application. Accordingly, the public API must be
 comprehensive enough to use it as a component of *any* application. This
 results in features that allow plugging into the web engine at different
 layers to provide custom behaviour.
