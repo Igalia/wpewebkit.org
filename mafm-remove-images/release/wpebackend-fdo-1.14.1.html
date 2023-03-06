@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Why Choose WPE?</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-remove-images/about/a-good-choice.html">
+  <title>WPEBackend-fdo 1.14.1 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/mafm-remove-images/release/wpebackend-fdo-1.14.1.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/mafm-remove-images/feed.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-images/about/a-good-choice.html">
-  <meta property="og:title" content="Why Choose WPE?">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-images/release/wpebackend-fdo-1.14.1.html">
+  <meta property="og:title" content="WPEBackend-fdo 1.14.1 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/mafm-remove-images/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-images/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -21,8 +21,9 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2023-03-06T12:39:19.640Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2023-03-04T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -66,9 +67,9 @@
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/mafm-remove-images/"><img src="/wpewebkit.org/mafm-remove-images/assets/img/logo-blue.svg" alt="WPE"></a>
-		<ul class="about off"><li>
+		<ul class="release off"><li>
 			<a class="nav-link" href="/wpewebkit.org/mafm-remove-images/">Home</a>
-			</li><li class="currentPage">
+			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/mafm-remove-images/about">Learn & Discover</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/mafm-remove-images/blog">Blog</a>
@@ -84,81 +85,55 @@
 
     <main>
     <style>
-:not(header) > h2 {
-	background: url(/wpewebkit.org/mafm-remove-images/assets/img/graphic-title-blue.svg) 0 100% / 7rem auto no-repeat;
-	padding-bottom: 1em;
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
 }
-ul.gallery.c2 {
-	align-items: stretch;
-	gap: 1em;
-}
-ul.gallery.c2 li {
-	padding: 3.5em 1.5em 1.5em;
-	border: 1px dashed var(--colorMain);
-	background: url(/wpewebkit.org/mafm-remove-images/assets/img/checkmark.png) 1em 1em / 2em 2em no-repeat;
-}
-.full-bleed.banner {
-	margin-block: 5rem 4rem;
-	padding: 1px 0;
-}
-@media (min-width: 75rem) {
-	.banner::before {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: -5rem;
-		width: 5rem;
-		height: 2px;
-		margin-top: -1px;
-		background: linear-gradient(90deg,#222,#888);
-		-webkit-mask-image:
-			repeating-linear-gradient(270deg, transparent, #89A4 1px 3px, transparent 4px 7px),
-			repeating-linear-gradient(270deg, transparent, #89AF 1px 3px, transparent 4px 7px)
-			;
-		mask-image:
-			repeating-linear-gradient(270deg, transparent, #89A4 1px 3px, transparent 4px 7px),
-			repeating-linear-gradient(270deg, transparent, #89AF 1px 3px, transparent 4px 7px)
-			;
-		mask-size: 100% 1px;
-		mask-repeat: no-repeat;
-		mask-position: 100% 0%, 100% 100%;
-	}
-}
-.banner img {
-	display: block;
-	margin: -5rem auto;
-	margin-block: calc( min(65rem,100vw) * 0.31229 * -0.25 );
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
 }
 </style>
-<nav class="sidebar">
-<ul>
-<li><a href="/wpewebkit.org/mafm-remove-images/about/supported-hardware.html">Supported Hardware</a></li>
-<li class="currentPage"><a href="/wpewebkit.org/mafm-remove-images/about/a-good-choice.html">Why Choose WPE?</a></li>
-<li><a href=".">WPE in Action</a></li>
-</ul>
-</nav>
-<header class="page">
-<h1>Why Choose WPE?</h1>
-<p>WPE WebKit is widely adopted in many industries, including digital signage, professional audio, video and broadcasting, home appliances, set-top boxes, and automative and in-flight infotainment systems.</p>
+<div itemscope itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/mafm-remove-images/release/wpebackend-fdo-1.14.1.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPEBackend-fdo 1.14.1 released</h1>
+ 
+   <meta itemprop="datePublished" content="Sat Mar 04 2023">
+   <time itemprop="dateCreated"> 4 March 2023</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpebackend-fdo-1.14.1.tar.xz">Download</a>
+  
 </header>
-<section class="full-bleed banner">
-<img src="/wpewebkit.org/mafm-remove-images/assets/img/WhyChooseWPE.png" alt="">
-</section>
-<section>
-<p class="leadin">If you need a fast and lightweight web runtime for Linux-based embedded devices that supports most current web standards, has hardware acceleration wherever it is advantageous, and has a strong focus on multimedia applications, WPE WebKit is a great choice.</p>
-<p>WPE WebKit offers great possibilities for deployment on different platforms, thanks to its underlying design which allows for integration in a variety of hardware configurations. At a minimum, only EGL and OpenGL ES 2 support and basic GStreamer integration are required.</p>
-</section>
-<section class="dotsep">
-<h2 id="some-advantages-of-wpe-webkit" tabindex="-1">Some advantages of WPE WebKit</h2>
-<ul class="gallery c2">
-<li>The minimal set of dependencies needed to run WPE WebKit ensures that its footprint is small and it consumes less memory, which allows applications built with WPE WebKit to run on low-end devices.</li>
-<li>Enables rich and fast 2D and 3D HTML-based user interfaces, multimedia integration, 3D content, and many more of the latest Web technologies to run smoothly and efficiently on low-cost devices.</li>
-<li>Displays multimedia content with high-quality CSS 3D animations, WebGL, and fluid high-quality HTML videos.</li>
-<li>Focused on graphics performance with multi-threading optimizations to improve CSS animation, scrolling, scaling, and rendering of canvas and video elements.</li>
-<li>Provides a strong focus on multimedia applications and performance with WebRTC, MSE (MP4, WebM, VP9, Opus) and EME (ClearKey and other third-party DRM frameworks) supported and constantly improving.</li>
-<li>Unlicensed parts of YouTube TV and similar platforms are supported.</li>
+
+<div itemprop="articleBody">
+
+<p>This is the first bug fix release in the stable 1.14 series.</p>
+<h3 id="what%E2%80%99s-new-in-wpebackend-fdo-1.14.1%3F" tabindex="-1">What’s new in WPEBackend-fdo 1.14.1?</h3>
+<ul>
+<li>Fix WebKit no longer repainting after provisional navigation with
+PSON enabled.</li>
+<li>Fix graphics buffer leaks by always freeing them in buffer destroy
+listener callbacks.</li>
 </ul>
-</section>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+wpebackend-fdo-1.14.1.tar.xz (42.2 KiB)
+   md5sum: 2b49218cdd16075b028bbaf5a4f57890
+   sha1sum: a68db2480d29d53d7fa24c69888bacbab6efea11
+   sha256sum: 01938dd93c62b3a47b18dd13c70d50490a8b8a6caec23c8550a3dbdbcc6bbb50
+</pre>
+
+
+
+
+</div>
 
     </main>
 

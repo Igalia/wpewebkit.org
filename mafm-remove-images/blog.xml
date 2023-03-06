@@ -48,7 +48,7 @@ figcaption {
 &lt;h3 id=&quot;prototyping&quot; tabindex=&quot;-1&quot;&gt;Prototyping&lt;/h3&gt;
 &lt;p&gt;The LBSE effort began in October 2019 as &lt;strong&gt;a research project&lt;/strong&gt;, to find out an ideal design for the SVG &lt;strong&gt;Render Tree&lt;/strong&gt;, that allows SVG to re-use the existing &lt;strong&gt;Layer Tree&lt;/strong&gt; implementation with minimal changes. The aim for LBSE is to share as much code as possible with the HTML/CSS implementation, removing the need for things like SVG specific clipping/masking/filter code and disjoint HTML counterparts for the same operations.&lt;/p&gt;
 &lt;p&gt;After an extensive phase of experimentation, two abandoned approaches, and a long time spent on regression fixing, the LBSE prototype was finally finished after almost two years of work. It passed all 60k+ WebKit layout tests and offered initial support for compositing, 3D transformations, &lt;code&gt;z-index&lt;/code&gt;, and more. The intent was to prove that we can reach feature parity with the legacy SVG engine and retrieve the very same visual results, pixel-by-pixel (except for progressions of LBSE). Shortly after the finalization, the prototype was presented during the &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-13-svg-performance/&quot;&gt;WebKit contributors meeting in 2021&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;As the name “prototype” indicates, LBSE was not ready for integration into WebKit at this point. It &lt;strong&gt;replaced&lt;/strong&gt; the old SVG engine with a new one, resulting in a monolithic patch exceeding &lt;em&gt;650 kb&lt;/em&gt; of code changes. WebKit demands small patches, with ChangeLogs, tests, etc. – no WebKit reviewer would sign off a patch replacing a core component of WebCore in one shot. Splitting up into small pieces is also not going to work, since SVG needs to be kept intact upstream all the time. Duplicating the whole SVG engine? Not practicable either. With that problem in mind, a fruitful discussion took place with Apple during and after the WebKit contributors meeting: a realistic upstreaming strategy was defined - thanks &lt;em&gt;Simon Fraser&lt;/em&gt; for suggesting a pragmatic approach!&lt;/p&gt;
+&lt;p&gt;As the name “prototype” indicates, LBSE was not ready for integration into WebKit at this point. It &lt;strong&gt;replaced&lt;/strong&gt; the old SVG engine with a new one, resulting in a monolithic patch exceeding &lt;em&gt;650 KB&lt;/em&gt; of code changes. External contributions generally demand small patches, with ChangeLogs, tests, etc. – no conscientious reviewer in any company would approve a patch replacing a core component of a browser engine in one shot. Splitting up into small pieces is also not going to work, since SVG needs to be kept intact upstream all the time. Duplicating the whole SVG engine? Not practicable either. With that problem in mind, a fruitful discussion took place with Apple during and after the WebKit contributors meeting: a realistic upstreaming strategy was defined - thanks &lt;em&gt;Simon Fraser&lt;/em&gt; for suggesting a pragmatic approach!&lt;/p&gt;
 &lt;p&gt;The idea is simple: bootstrap LBSE &lt;em&gt;in parallel&lt;/em&gt; to the legacy SVG engine. Upstream LBSE behind a compile-time flag and additionally a runtime setting. This way the LBSE code is compiled by the &lt;a href=&quot;https://trac.webkit.org/wiki/EarlyWarningSystem&quot;&gt;EWS bots&lt;/a&gt; during upstreaming (rules out bit-rot) and we gain the ability to turn LBSE on, selectively, from our layout tests – very useful during early bootstrapping. For WebKit, that strategy is the best – for LBSE another &lt;em&gt;major&lt;/em&gt; effort is necessary: moving from a &lt;strong&gt;drop-in replacement&lt;/strong&gt; approach to a &lt;strong&gt;dual-stack&lt;/strong&gt; SVG engine: LBSE + legacy built into the same WebKit binaries. At least the timing was good since a split-up into small pieces was needed anyhow for upstreaming. Time to dissect the huge branch into logical, atomic pieces with proper change logs.&lt;/p&gt;
 &lt;p&gt;Before we jump to the upstreaming status, one question should be answered, that came up during the WebKit contributors meeting and also during various discussions: why don’t you just &lt;em&gt;fix&lt;/em&gt; the existing SVG engine and instead propose a new one - isn’t that too risky for Web compatibility?&lt;/p&gt;
 &lt;h3 id=&quot;why-don%E2%80%99t-you-fix-the-existing-svg-engine%3F&quot; tabindex=&quot;-1&quot;&gt;Why don’t you fix the existing SVG engine?&lt;/h3&gt;
@@ -279,7 +279,22 @@ $ git clone https://github.com/WebKit/WebKit.git
 &lt;h3 id=&quot;contributing-code-to-wpe&quot; tabindex=&quot;-1&quot;&gt;Contributing code to WPE&lt;/h3&gt;
 &lt;p&gt;After hacking locally, you can submit your changes following the workflow listed in the &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#contributing-code&quot;&gt;WebKit wiki&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;testing-wpe-in-the-wild&quot; tabindex=&quot;-1&quot;&gt;Testing WPE in the wild&lt;/h2&gt;
-&lt;p&gt;If you don’t want to build your WPE build or image, there are some options to &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-remove-images/about/exploring.html&quot;&gt;get a taste of WPE&lt;/a&gt; listed on our website.&lt;/p&gt;
+&lt;p&gt;If you don’t want to build your WPE build or image, there are some options to &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-remove-images/about/exploring.html&quot;&gt;get a taste of WPE&lt;/a&gt; listed on our website, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Prebuilt distribution packages
+&lt;ul&gt;
+&lt;li&gt;For &lt;a href=&quot;https://packages.debian.org/search?searchon=sourcenames&amp;amp;keywords=wpewebkit&quot;&gt;Debian&lt;/a&gt;, &lt;a href=&quot;https://packages.ubuntu.com/search?keywords=wpewebkit&amp;amp;searchon=sourcenames&amp;amp;suite=all&amp;amp;section=all&quot;&gt;Ubuntu&lt;/a&gt;, &lt;a href=&quot;https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/&quot;&gt;Raspbian&lt;/a&gt;, &lt;a href=&quot;https://archlinux.org/packages/extra/x86_64/wpewebkit/&quot;&gt;Arch Linux&lt;/a&gt;, and &lt;a href=&quot;https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/&quot;&gt;Fedora&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-remove-images/about/flatpak.html&quot;&gt;Flatpak image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Prebuilt Raspberry Pi (3B, 3B+ and 4) images
+&lt;ul&gt;
+&lt;li&gt;For &lt;a href=&quot;https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip&quot;&gt;stable&lt;/a&gt; and &lt;a href=&quot;https://wk-contrib.igalia.com/debian/images/nightly/wpe-raspbian.img.zip&quot;&gt;nightly&lt;/a&gt; releases&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-remove-images/about/balena-wpe.html&quot;&gt;Balena blocks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.&lt;/p&gt;
 &lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
 &lt;p&gt;With this, we conclude this brief overview of WPE automated testing and the main tools we use in our daily work with WPE. In future posts in this area we’ll go deeper in other subjects like testing on embedded boards and debugging practices.&lt;/p&gt;
 &lt;p&gt;If this post got you interested in collaborating with WPE development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
@@ -519,7 +534,11 @@ page. From there, you will see that depending on how interested you
 are in the project, your background, and what you’d like to do with
 it, there are different ways!&lt;/p&gt;
 &lt;p&gt;It can be as easy as installing WPE directly from the most popular
-Linux distributions. If you want to build WPE yourself,
+Linux distributions or downloading and flashing prebuilt images for
+the Raspberry Pi. There are easy and flexible options like
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-remove-images/about/flatpak.html&quot;&gt;Flatpak&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/mafm-remove-images/about/balena-wpe.html&quot;&gt;Balena&lt;/a&gt;, which
+you can dig into to learn more. If you want to build WPE yourself,
 you can use &lt;a href=&quot;https://github.com/Igalia/meta-webkit/wiki/WPE&quot;&gt;Yocto&lt;/a&gt; and if
 you’d like to contribute—that’s very welcome!&lt;/p&gt;
 &lt;p&gt;Happy hacking!&lt;/p&gt;
