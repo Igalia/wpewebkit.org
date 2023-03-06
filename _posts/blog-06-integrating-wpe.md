@@ -3,7 +3,7 @@ layout: post
 title: "Integrating WPE: URI Scheme Handlers and Script Messages"
 tags: [blogpost]
 author: aperez
-date: 2023-03-05
+date: 2023-03-07
 permalink: /blog/06-integrating-wpe.html
 thumbnail: /assets/img/extending-minicog-echouri.png
 preview: |-
@@ -12,15 +12,15 @@ preview: |-
   Web content seamlessly.
 ---
 
-While most Web content designed entirely for screen display&mdash;and there is
-*a lot* of it&mdash;will spend its life in the somewhat restricted sandbox
-implemented by a web browser, taking advantage of Web technologies to provide
-rich user interfaces in all kinds of consumer devices requires at least *some*
-degree of integration with the rest of their software and hardware. This is
-where a Web engine like WPE designed to be *embeddable* shines: not only does WPE
-provide a [stable API][wpewebkit-api], it is also comprehensive in
-supporting a number of ways to *integrate* with its environment further
-than the plethora of available [Web platform APIs][mdn-web-apis].
+Most Web content is designed entirely for screen display&mdash;and there is *a
+lot* of it&mdash;so it will spend its life in the somewhat restricted sandbox
+implemented by a web browser. But rich user interfaces using Web technologies
+in all kinds of consumer devices require *some* degree of integration, an
+escape hatch to interact with the rest of their software and hardware. This is
+where a Web engine like WPE designed to be *embeddable* shines: not only does
+WPE provide a [stable API][wpewebkit-api], it is also comprehensive in
+supporting a number of ways to *integrate* with its environment further than
+the plethora of available [Web platform APIs][mdn-web-apis].
 
 Integrating a “Web view” (the main [entry point of the WPE embedding
 API][api-webview]) involves providing extension points, which allow the
@@ -78,6 +78,32 @@ on_create_view(CogShell *shell, CogPlatform *platform)
     return g_steal_pointer(&web_view);
 }
 ```
+
+<details>
+  <summary>What is <code>g_autoptr</code>?
+    Does it relate to <code>g_steal_pointer</code>?
+    This does not look like C!</summary><div>
+
+In the shown code examples, `g_autoptr(T)` is a preprocessor macro provided by
+GLib that declares a pointer variable of the `T` type, and arranges for
+freeing resources automatically when the variable goes out of scope. For
+objects this results in
+[g_object_unref()](https://docs.gtk.org/gobject/method.Object.unref.html)
+being called.
+
+Internally the macro takes advantage of the `__attribute__((cleanup, ...))`
+compiler extension, which is supported by GCC and Clang. GLib also includes [a
+convenience
+macro](https://docs.gtk.org/glib/func.DEFINE_AUTOPTR_CLEANUP_FUNC.html) that
+can be used to  define cleanups for your own types.
+
+As for `g_steal_pointer`, it is useful to indicate that the ownership of a
+pointer declared with `g_autoptr` is transferred outside from the current
+scope. The function returns the same pointer passed as parameter and
+resets it to `NULL`, thus preventing cleanup functions from running.
+
+</div></details>
+
 
 The size has been kept small thanks to reusing code from the [Cog
 core](https://github.com/Igalia/cog#cog) library. As a bonus, it should
@@ -201,14 +227,16 @@ WPE WebKit has public API for this. Roughly:
    [WebKitURISchemeRequest](https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.URISchemeRequest.html).
 3. The function generates data to be returned as the result of the load,
    as a [GInputStream](https://docs.gtk.org/gio/class.InputStream.html)
-   and calls [webkit_uri_scheme_request_finish()](https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html).
+   and calls [webkit_uri_scheme_request_finish()](https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html). This sends the stream to WebKit as the
+   response, indicating the length of the response (if known), and the
+   MIME content type of the data in the stream.
 4. WebKit will now read the data from the input stream.
 
 
 ### Echoes
 
-Let's add an echo handler to our [minimal browser](#intermission)
-that returns the requested URI as plain text. Registering the scheme is
+Let's add an echo handler to our [minimal browser](#intermission) that
+replies back with the requested URI. Registering the scheme is
 straightforward enough:
 
 ```c
@@ -222,6 +250,25 @@ configure_web_context(WebKitWebContext *context)
                                            NULL /* destroy_notify */);
 }
 ```
+
+<details>
+  <summary>What are “user data” and “destroy notify”?</summary><div>
+
+The `userdata` parameter above is a convention used in many C libraries, and
+specially in these based on GLib when there are callback functions involved.
+It allows the *user* to supply a pointer to arbitrary *data*, which will be
+passed later on as a parameter to the callback (`handle_echo_request` in the
+example) when it gets invoked later on.
+
+As for the `destroy_notify` parameter, it allows passing a function with the
+signature `void func(void*)` (type
+[GDestroyNotify](https://docs.gtk.org/glib/callback.DestroyNotify.html)) which
+is invoked with `userdata` as the argument once the user data is no longer
+needed. In the example above, this callback function would be invoked when the
+URI scheme is unregistered. Or, from a different perspective, this callback is
+used to *notify* that the user data can now be *destroyed*.
+
+</div></details>
 
 One way of implementing `handle_echo_request()` could be wrapping the request
 URI, which is part of the `WebKitURISchemeRequest` parameter to the handler,
@@ -283,6 +330,11 @@ which allows fine-grained control of the response, including setting
 and finishing the request instead with
 `webkit_uri_scheme_request_finish_with_response()`.
 
+Note that WebKit cuts some corners when using CORS with custom URI schemes:
+handlers will *not* receive preflight `OPTIONS` requests. Instead, the CORS
+headers from the replies are inspected, and if access needs to be denied
+then the data stream with the response contents is discarded.
+
 In addition to providing a complete CORS-enabled custom URI scheme [example](https://gist.github.com/aperezdc/74809a6cd617faf445c22097a47bcb50),
 we recommend the [Will It CORS?](https://httptoolkit.com/will-it-cors) tool
 to help troubleshoot issues.
@@ -329,6 +381,20 @@ The user script messages part of the
 3. Now, whenever JavaScript code calls
    `window.webkit.messageHandlers.<name>.postMessage()`, the signal is
    emitted, and the native callback functions invoked.
+
+<details>
+  <summary>Haven't I seen <code>postMessage()</code> elsewhere?</summary><div>
+
+[Yes](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage),
+[you](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage)
+[have](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker/postMessage).
+The name is the same because it provides a similar functionality (send a
+message), it guarantees little (the receiver should validate messages), and
+there are [similar
+restrictions](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm)
+in the kind of values that can be passed along.
+
+</div></details>
 
 ### It's All JavaScript
 
@@ -471,7 +537,7 @@ which can be used to resolve the promise&mdash;either on the spot, or
 asynchronously later on.
 
 
-### Further Ideas (Bis)
+### Even More Ideas
 
 User script messages are a powerful and rather flexible facility to make WPE
 integrate web content into a complete system. The provided example is rather
