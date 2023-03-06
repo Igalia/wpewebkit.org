@@ -1,6 +1,7 @@
 const MarkdownIt = require("markdown-it");
 const MarkdownItAnchor = require("markdown-it-anchor");
 const MarkdownItTOC = require("markdown-it-toc-done-right");
+const MarkdownItPrism = require("markdown-it-prism");
 const { DateTime } = require("luxon");
 
 class DefaultDict {
@@ -155,7 +156,7 @@ module.exports = function(eleventyConfig) {
     level: 2,
   }).use(MarkdownItTOC, {
     level: [2, 3],
-  })
+  }).use(MarkdownItPrism)
   );
 
   return {
