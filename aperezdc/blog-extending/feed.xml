@@ -4,8 +4,497 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2023-03-04T00:00:00Z</updated>
+  <updated>2023-03-05T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>Integrating WPE: URI Scheme Handlers and Script Messages</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html"/>
+    <updated>2023-03-05T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html</id>
+    <content type="html">&lt;p&gt;Most Web content is designed entirely for screen display—and there is &lt;em&gt;a
+lot&lt;/em&gt; of it—so it will spend its life in the somewhat restricted sandbox
+implemented by a web browser. But rich user interfaces using Web technologies
+in all kinds of consumer devices require &lt;em&gt;some&lt;/em&gt; degree of integration, an
+escape hatch to interact with the rest of their software and hardware. This is
+where a Web engine like WPE designed to be &lt;em&gt;embeddable&lt;/em&gt; shines: not only does
+WPE provide a &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/&quot;&gt;stable API&lt;/a&gt;, it is also comprehensive in
+supporting a number of ways to &lt;em&gt;integrate&lt;/em&gt; with its environment further than
+the plethora of available &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API&quot;&gt;Web platform APIs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Integrating a “Web view” (the main &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.WebView.html&quot;&gt;entry point of the WPE embedding
+API&lt;/a&gt;) involves providing extension points, which allow the
+Web content (HTML/CSS/JavaScript) it loads to call into native code provided
+by the client application (typically written in C/C++) from JavaScript, and
+vice versa. There are a number of ways in which this can be achieved:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html#uri-scheme-handlers&quot;&gt;URI scheme handlers&lt;/a&gt;&lt;/strong&gt; allow native code to
+register a custom &lt;abbr title=&quot;Uniform Resource Identifier&quot;&gt;URI&lt;/abbr&gt;
+scheme, which will run a user provided
+function to produce content that can be “fetched” regularly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html#user-script-messages&quot;&gt;User script messaging&lt;/a&gt;&lt;/strong&gt; can be used to send JSON
+messages from JavaScript running in the same context as Web pages to an user
+function, and vice versa.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;JavaScriptCore API&lt;/strong&gt; is a powerful solution to provide new JavaScript
+functionality to Web content seamlessly, almost as if they were implemented
+inside the Web engine itself—akin to &lt;a href=&quot;https://nodejs.org/api/addons.html#c-addons&quot;&gt;NodeJS C++ addons&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this post we will explore the first two, as they can support many
+interesting use cases without introducing the additional complexity of
+extending the JavaScript virtual machine. Let’s dive in!&lt;/p&gt;
+&lt;h2 id=&quot;intermission&quot; tabindex=&quot;-1&quot;&gt;Intermission&lt;/h2&gt;
+&lt;p&gt;We will be referring to the code of a tiny browser written for the occasion.
+Telling WebKit how to call our native code involves creating a
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.UserContentManager.html&quot;&gt;WebKitUserContentManager&lt;/a&gt;, customizing it, and then
+associating it with web views during their creation. The only exception to
+this are &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html#uri-scheme-handlers&quot;&gt;URI scheme handlers&lt;/a&gt;, which are registered
+using &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.register_uri_scheme.html&quot;&gt;webkit_web_context_register_uri_scheme()&lt;/a&gt;. This
+minimal browser includes an &lt;code&gt;on_create_view&lt;/code&gt; function, which is the perfect
+place to do the configuration:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; WebKitWebView&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;on_create_view&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;CogShell &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;shell&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; CogPlatform &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;platform&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;GError&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; error &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    WebKitWebViewBackend &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;view_backend &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;cog_platform_get_view_backend&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;platform&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;error&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;view_backend&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;g_error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Cannot obtain view backend: %s&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; error&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;message&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitUserContentManager&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; content_manager &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;create_content_manager&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;/** NEW! **/&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;configure_web_context&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;cog_shell_get_web_context&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;shell&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;                         &lt;span class=&quot;token comment&quot;&gt;/** NEW! **/&lt;/span&gt;
+ 
+    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitWebView&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; web_view &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;g_object_new&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WEBKIT_TYPE_WEB_VIEW&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                     &lt;span class=&quot;token string&quot;&gt;&quot;user-content-manager&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; content_manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;/** NEW! **/&lt;/span&gt;
+                     &lt;span class=&quot;token string&quot;&gt;&quot;settings&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;cog_shell_get_web_settings&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;shell&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                     &lt;span class=&quot;token string&quot;&gt;&quot;web-context&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;cog_shell_get_web_context&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;shell&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                     &lt;span class=&quot;token string&quot;&gt;&quot;backend&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; view_backend&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                     &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;cog_platform_init_web_view&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;platform&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; web_view&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;webkit_web_view_load_uri&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;web_view&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; s_starturl&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_steal_pointer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;web_view&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;details&gt;
+  &lt;summary&gt;What is &lt;code&gt;g_autoptr&lt;/code&gt;?
+    Does it relate to &lt;code&gt;g_steal_pointer&lt;/code&gt;?
+    This does not look like C!&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;In the shown code examples, &lt;code&gt;g_autoptr(T)&lt;/code&gt; is a preprocessor macro provided by
+GLib that declares a pointer variable of the &lt;code&gt;T&lt;/code&gt; type, and arranges for
+freeing resources automatically when the variable goes out of scope. For
+objects this results in
+&lt;a href=&quot;https://docs.gtk.org/gobject/method.Object.unref.html&quot;&gt;g_object_unref()&lt;/a&gt;
+being called.&lt;/p&gt;
+&lt;p&gt;Internally the macro takes advantage of the &lt;code&gt;__attribute__((cleanup, ...))&lt;/code&gt;
+compiler extension, which is supported by GCC and Clang. GLib also includes &lt;a href=&quot;https://docs.gtk.org/glib/func.DEFINE_AUTOPTR_CLEANUP_FUNC.html&quot;&gt;a
+convenience
+macro&lt;/a&gt; that
+can be used to  define cleanups for your own types.&lt;/p&gt;
+&lt;p&gt;As for &lt;code&gt;g_steal_pointer&lt;/code&gt;, it is useful to indicate that the ownership of a
+pointer declared with &lt;code&gt;g_autoptr&lt;/code&gt; is transferred outside from the current
+scope. The function returns the same pointer passed as parameter and
+resets it to &lt;code&gt;NULL&lt;/code&gt;, thus preventing cleanup functions from running.&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;The size has been kept small thanks to reusing code from the &lt;a href=&quot;https://github.com/Igalia/cog#cog&quot;&gt;Cog
+core&lt;/a&gt; library. As a bonus, it should
+run on Wayland, X11, and even on a bare display using the &lt;abbr title=&quot;Direct
+Rendering Manager&quot;&gt;DRM&lt;abbr&gt;/&lt;abbr title=&quot;Kernel Mode Setting&quot;&gt;KMS&lt;/abbr&gt;
+subsystem directly. Compiling and running it, assuming you already have the
+dependencies installed, should be as easy as running:&lt;/abbr&gt;&lt;/abbr&gt;&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;cc &lt;span class=&quot;token parameter variable&quot;&gt;-o&lt;/span&gt; minicog minicog.c &lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;$(&lt;/span&gt;pkg-config cogcore &lt;span class=&quot;token parameter variable&quot;&gt;--libs&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--cflags&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;)&lt;/span&gt;&lt;/span&gt;
+./minicog wpewebkit.org
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the current session kind is not automatically detected, a second parameter
+can be used to manually choose among &lt;code&gt;wl&lt;/code&gt; (Wayland), &lt;code&gt;x11&lt;/code&gt;, &lt;code&gt;drm&lt;/code&gt;, and so on:&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;./minicog wpewebkit.org x11
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The full, unmodified source for this minimal browser is included right below.&lt;/p&gt;
+&lt;details&gt;
+  &lt;summary&gt;Complete &lt;code&gt;minicog.c&lt;/code&gt; source
+    (&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://gist.github.com/aperezdc/f6a65a95f2baa222c0ce9d65e516e13b&quot;&gt;Gist&lt;/a&gt;)
+  &lt;/summary&gt;
+&lt;!-- minicog.c &lt;&lt;&lt;1 --&gt;
+&lt;div&gt;
+&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;
+/*
+ * SPDX-License-Identifier: MIT
+ *
+ * cc -o minicog minicog.c $(pkg-config wpe-webkit-1.1 cogcore --cflags --libs)
+ */
+&amp;nbsp;
+#include &amp;lt;cog/cog.h&amp;gt;
+&amp;nbsp;
+static const char *s_starturl = NULL;
+&amp;nbsp;
+static WebKitWebView*
+on_create_view(CogShell *shell, CogPlatform *platform)
+{
+    g_autoptr(GError) error = NULL;
+    WebKitWebViewBackend *view_backend = cog_platform_get_view_backend(platform, NULL, &amp;error);
+    if (!view_backend)
+        g_error(&quot;Cannot obtain view backend: %s&quot;, error-&gt;message);
+&amp;nbsp;
+    g_autoptr(WebKitWebView) web_view =
+        g_object_new(WEBKIT_TYPE_WEB_VIEW,
+                     &quot;settings&quot;, cog_shell_get_web_settings(shell),
+                     &quot;web-context&quot;, cog_shell_get_web_context(shell),
+                     &quot;backend&quot;, view_backend,
+                     NULL);
+    cog_platform_init_web_view(platform, web_view);
+    webkit_web_view_load_uri(web_view, s_starturl);
+    return g_steal_pointer(&amp;web_view);
+}
+&amp;nbsp;
+int
+main(int argc, char *argv[])
+{
+    g_set_application_name(&quot;minicog&quot;);
+&amp;nbsp;
+    if (argc != 2 &amp;&amp; argc != 3) {
+        g_printerr(&quot;Usage: %s [URL [platform]]\n&quot;, argv[0]);
+        return EXIT_FAILURE;
+    }
+&amp;nbsp;
+    g_autoptr(GError) error = NULL;
+    if (!(s_starturl = cog_uri_guess_from_user_input(argv[1], TRUE, &amp;error)))
+        g_error(&quot;Invalid URL &#39;%s&#39;: %s&quot;, argv[1], error-&gt;message);
+&amp;nbsp;
+    cog_modules_add_directory(COG_MODULEDIR);
+&amp;nbsp;
+    g_autoptr(GApplication) app = g_application_new(NULL, G_APPLICATION_DEFAULT_FLAGS);
+    g_autoptr(CogShell) shell = cog_shell_new(&quot;minicog&quot;, FALSE);
+    g_autoptr(CogPlatform) platform =
+        cog_platform_new((argc == 3) ? argv[2] : g_getenv(&quot;COG_PLATFORM&quot;), &amp;error);
+    if (!platform)
+        g_error(&quot;Cannot create platform: %s&quot;, error-&gt;message);
+&amp;nbsp;
+    if (!cog_platform_setup(platform, shell, &quot;&quot;, &amp;error))
+        g_error(&quot;Cannot setup platform: %s\n&quot;, error-&gt;message);
+&amp;nbsp;
+    g_signal_connect(shell, &quot;create-view&quot;, G_CALLBACK(on_create_view), platform);
+    g_signal_connect_swapped(app, &quot;shutdown&quot;, G_CALLBACK(cog_shell_shutdown), shell);
+    g_signal_connect_swapped(app, &quot;startup&quot;, G_CALLBACK(cog_shell_startup), shell);
+    g_signal_connect(app, &quot;activate&quot;, G_CALLBACK(g_application_hold), NULL);
+&amp;nbsp;
+    return g_application_run(app, 1, argv);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- 1&gt;&gt;&gt; --&gt;
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;h2 id=&quot;uri-scheme-handlers&quot; tabindex=&quot;-1&quot;&gt;URI Scheme Handlers&lt;/h2&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/assets/svg/URI_syntax_diagram.svg&quot; alt=&quot;“Railroad” diagram of URI syntax&quot; /&gt;
+  &lt;figcaption&gt;URI syntax (&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://creativecommons.org/licenses/by-sa/4.0&quot;&gt;CC BY-SA 4.0&lt;/a&gt;,
+    &lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://commons.wikimedia.org/wiki/File:URI_syntax_diagram.svg&quot;&gt;source&lt;/a&gt;),
+    notice the “scheme” component at the top left.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;A URI scheme handler allows “teaching” the web engine how to handle &lt;em&gt;any&lt;/em&gt;
+load (pages, subresources, the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&quot;&gt;Fetch API&lt;/a&gt;,
+&lt;code&gt;XmlHttpRequest&lt;/code&gt;, …)—if you ever wondered how Firefox implements
+&lt;code&gt;about:config&lt;/code&gt; or how Chromium does &lt;code&gt;chrome://flags&lt;/code&gt;, this is it. Also,
+WPE WebKit has public API for this. Roughly:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A custom URI scheme is registered using
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.register_uri_scheme.html&quot;&gt;webkit_web_context_register_uri_scheme()&lt;/a&gt;. This also associates a callback function to it.&lt;/li&gt;
+&lt;li&gt;When WebKit detects a load for the scheme, it invokes the provided
+function, passing a
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.URISchemeRequest.html&quot;&gt;WebKitURISchemeRequest&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The function generates data to be returned as the result of the load,
+as a &lt;a href=&quot;https://docs.gtk.org/gio/class.InputStream.html&quot;&gt;GInputStream&lt;/a&gt;
+and calls &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html&quot;&gt;webkit_uri_scheme_request_finish()&lt;/a&gt;. This sends the stream to WebKit as the
+response, indicating the length of the response (if known), and the
+MIME content type of the data in the stream.&lt;/li&gt;
+&lt;li&gt;WebKit will now read the data from the input stream.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;echoes&quot; tabindex=&quot;-1&quot;&gt;Echoes&lt;/h3&gt;
+&lt;p&gt;Let’s add an echo handler to our &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html#intermission&quot;&gt;minimal browser&lt;/a&gt; that
+replies back with the requested URI. Registering the scheme is
+straightforward enough:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;configure_web_context&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitWebContext &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;context&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;webkit_web_context_register_uri_scheme&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;context&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                                           &lt;span class=&quot;token string&quot;&gt;&quot;echo&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                                           handle_echo_request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                                           &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;/* userdata */&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                                           &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;/* destroy_notify */&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;details&gt;
+  &lt;summary&gt;What are “user data” and “destroy notify”?&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;The &lt;code&gt;userdata&lt;/code&gt; parameter above is a convention used in many C libraries, and
+specially in these based on GLib when there are callback functions involved.
+It allows the &lt;em&gt;user&lt;/em&gt; to supply a pointer to arbitrary &lt;em&gt;data&lt;/em&gt;, which will be
+passed later on as a parameter to the callback (&lt;code&gt;handle_echo_request&lt;/code&gt; in the
+example) when it gets invoked later on.&lt;/p&gt;
+&lt;p&gt;As for the &lt;code&gt;destroy_notify&lt;/code&gt; parameter, it allows passing a function with the
+signature &lt;code&gt;void func(void*)&lt;/code&gt; (type
+&lt;a href=&quot;https://docs.gtk.org/glib/callback.DestroyNotify.html&quot;&gt;GDestroyNotify&lt;/a&gt;) which
+is invoked with &lt;code&gt;userdata&lt;/code&gt; as the argument once the user data is no longer
+needed. In the example above, this callback function would be invoked when the
+URI scheme is unregistered. Or, from a different perspective, this callback is
+used to &lt;em&gt;notify&lt;/em&gt; that the user data can now be &lt;em&gt;destroyed&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;One way of implementing &lt;code&gt;handle_echo_request()&lt;/code&gt; could be wrapping the request
+URI, which is part of the &lt;code&gt;WebKitURISchemeRequest&lt;/code&gt; parameter to the handler,
+stash it into a &lt;a href=&quot;https://docs.gtk.org/glib/struct.Bytes.html&quot;&gt;GBytes&lt;/a&gt;
+container, and &lt;a href=&quot;https://docs.gtk.org/gio/ctor.MemoryInputStream.new_from_bytes.html&quot;&gt;create an input stream to read back its
+contents&lt;/a&gt;:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;handle_echo_request&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitURISchemeRequest &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;userdata&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;request_uri &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;webkit_uri_scheme_request_get_uri&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;request&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;g_print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Request URI: %s\n&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; request_uri&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;GBytes&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_bytes_new&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;request_uri&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;request_uri&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;GInputStream&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; stream &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_memory_input_stream_new_from_bytes&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token function&quot;&gt;webkit_uri_scheme_request_finish&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; stream&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_bytes_get_size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;text/plain&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note how we need to tell WebKit how to &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html&quot;&gt;finish the load
+request&lt;/a&gt;,
+in this case only with the data stream, but it is possible to have &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish_with_response.html&quot;&gt;more
+control of the
+response&lt;/a&gt;
+or &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish_error.html&quot;&gt;return an
+error&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With these changes, it is now possible to make page loads from the new custom
+URI scheme:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img alt=&quot;Screenshot of the minicog browser loading a custom echo:// URI&quot; src=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/assets/img/extending-minicog-echouri.png&quot; class=&quot;picture&quot; /&gt;
+  &lt;figcaption&gt;It worked!&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h3 id=&quot;et-tu%2C-cors%3F&quot; tabindex=&quot;-1&quot;&gt;Et Tu, CORS?&lt;/h3&gt;
+&lt;p&gt;The main roadblock one may find when using custom URI schemes is that loads
+are affected by &lt;abbr title=&quot;Cross-Origin Resource Sharing&quot;&gt;CORS&lt;/abbr&gt;
+checks. Not only that, WebKit by default does &lt;em&gt;not&lt;/em&gt; allow sending cross-origin
+requests to custom URI schemes. This is by design: instead of accidentally
+leaking potentially sensitive data to websites, developers embedding a web
+view &lt;em&gt;need&lt;/em&gt; to consciously opt-in to allow &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS&quot;&gt;CORS&lt;/a&gt; requests &lt;em&gt;and&lt;/em&gt;
+send back suitable &lt;code&gt;Access-Control-Allow-*&lt;/code&gt; response headers.&lt;/p&gt;
+&lt;p&gt;In practice, the additional setup involves
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.get_security_manager.html&quot;&gt;retrieving&lt;/a&gt;
+the &lt;code&gt;WebKitSecurityManager&lt;/code&gt; being used by the &lt;code&gt;WebKitWebContext&lt;/code&gt; and
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.SecurityManager.register_uri_scheme_as_cors_enabled.html&quot;&gt;registering the scheme as
+CORS-enabled&lt;/a&gt;.
+Then, in the handler function for the custom URI scheme, create a
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.URISchemeResponse.html&quot;&gt;WebKitURISchemeResponse&lt;/a&gt;,
+which allows fine-grained control of the response, including setting
+&lt;a href=&quot;https://libsoup.org/libsoup-3.0/struct.MessageHeaders.html&quot;&gt;headers&lt;/a&gt;,
+and finishing the request instead with
+&lt;code&gt;webkit_uri_scheme_request_finish_with_response()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Note that WebKit cuts some corners when using CORS with custom URI schemes:
+handlers will &lt;em&gt;not&lt;/em&gt; receive preflight &lt;code&gt;OPTIONS&lt;/code&gt; requests. Instead, the CORS
+headers from the replies are inspected, and if access needs to be denied
+then the data stream with the response contents is discarded.&lt;/p&gt;
+&lt;p&gt;In addition to providing a complete CORS-enabled custom URI scheme &lt;a href=&quot;https://gist.github.com/aperezdc/74809a6cd617faf445c22097a47bcb50&quot;&gt;example&lt;/a&gt;,
+we recommend the &lt;a href=&quot;https://httptoolkit.com/will-it-cors&quot;&gt;Will It CORS?&lt;/a&gt; tool
+to help troubleshoot issues.&lt;/p&gt;
+&lt;h3 id=&quot;further-ideas&quot; tabindex=&quot;-1&quot;&gt;Further Ideas&lt;/h3&gt;
+&lt;p&gt;Once we have WPE WebKit calling into our custom code, there are no limits
+to what a URI scheme handler can do—as long as it involves replying
+to requests. Here are some ideas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Allow pages to access a subset of paths from the local file system in a
+controlled way (as &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html#et-tu%2C-cors%3F&quot;&gt;CORS applies&lt;/a&gt;). For inspiration,
+see &lt;a href=&quot;https://igalia.github.io/cog/class.DirectoryFilesHandler.html&quot;&gt;CogDirectoryFilesHandler&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Package all your web application assets into a single ZIP file, making
+loads from &lt;code&gt;app:/...&lt;/code&gt; fetch content from it. Or, make the scheme handler
+load data using &lt;a href=&quot;https://docs.gtk.org/gio/struct.Resource.html&quot;&gt;GResource&lt;/a&gt; and bundle the application
+inside your program.&lt;/li&gt;
+&lt;li&gt;Use the presence of a well-known custom URI to have a web application
+realize that it is running on a certain device, and make its user
+interface adapt accordingly.&lt;/li&gt;
+&lt;li&gt;Provide a REST API, which internally calls into
+&lt;a href=&quot;https://networkmanager.dev/&quot;&gt;NetworkManager&lt;/a&gt; to list and configure
+wireless network adapters. Combine it with a local web application and
+embedded devices can now easily get on the network.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;user-script-messages&quot; tabindex=&quot;-1&quot;&gt;User Script Messages&lt;/h2&gt;
+&lt;p&gt;While &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html#uri-scheme-handlers&quot;&gt;URI scheme handlers&lt;/a&gt;
+allow streaming large chunks of data back into the Web engine, for exchanging
+smaller pieces of information in a more programmatic fashion it may be
+preferable to exchange messages without the need to trigger resource loads.
+The user script messages part of the
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.UserContentManager.html&quot;&gt;WebKitUserContentManager&lt;/a&gt; API can be used this way:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Register a user message handler with
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.UserContentManager.register_script_message_handler.html&quot;&gt;webkit_user_content_manager_register_script_message_handler()&lt;/a&gt;.
+As opposed to URI scheme handlers, this only enables receiving messages,
+but does not associate a callback function &lt;em&gt;yet&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Associate a callback to the
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/signal.UserContentManager.script-message-received.html&quot;&gt;script-message-received&lt;/a&gt;
+signal. The signal detail should be the name of the registered handler.&lt;/li&gt;
+&lt;li&gt;Now, whenever JavaScript code calls
+&lt;code&gt;window.webkit.messageHandlers.&amp;lt;name&amp;gt;.postMessage()&lt;/code&gt;, the signal is
+emitted, and the native callback functions invoked.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;details&gt;
+  &lt;summary&gt;Haven&#39;t I seen &lt;code&gt;postMessage()&lt;/code&gt; elsewhere?&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage&quot;&gt;Yes&lt;/a&gt;,
+&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage&quot;&gt;you&lt;/a&gt;
+&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker/postMessage&quot;&gt;have&lt;/a&gt;.
+The name is the same because it provides a similar functionality (send a
+message), it guarantees little (the receiver should validate messages), and
+there are &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm&quot;&gt;similar
+restrictions&lt;/a&gt;
+in the kind of values that can be passed along.&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;h3 id=&quot;it%E2%80%99s-all-javascript&quot; tabindex=&quot;-1&quot;&gt;It’s All JavaScript&lt;/h3&gt;
+&lt;p&gt;Let’s add a feature to our &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/blog/06-integrating-wpe.html#intermission&quot;&gt;minimal browser&lt;/a&gt; that will allow
+JavaScript code to trigger rebooting or powering off the device where it is
+running. While this should definitely &lt;em&gt;not&lt;/em&gt; be functionality exposed to the
+open Web, it is perfectly acceptable in an embedded device where we control
+what gets loaded with WPE, and that exclusively uses a web application as its
+user interface.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/assets/img/pepe-silvia-all-javascript.jpg&quot; class=&quot;picture&quot; alt=&quot;Pepe Silvia conspiracy image meme, with the text “It&#39;s all JavaScript” superimposed&quot; /&gt;
+  &lt;figcaption&gt;Yet most of the code shown in this post is C.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;First, create a &lt;code&gt;WebKitUserContentManager&lt;/code&gt;, register the message handler,
+and connect a callback to its associated signal:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; WebKitUserContentManager&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;create_content_manager&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitUserContentManager&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; content_manager &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;webkit_user_content_manager_new&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;webkit_user_content_manager_register_script_message_handler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;content_manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;powerControl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;g_signal_connect&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;content_manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;script-message-received::powerControl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                     &lt;span class=&quot;token function&quot;&gt;G_CALLBACK&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;handle_power_control_message&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_steal_pointer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;content_manager&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The callback receives a &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/struct.JavascriptResult.html&quot;&gt;WebKitJavascriptResult&lt;/a&gt;, from which we
+can get the &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-javascriptcore-1.1/class.Value.html&quot;&gt;JSCValue&lt;/a&gt; with the contents of the parameter
+passed to the &lt;code&gt;postMessage()&lt;/code&gt; function. The &lt;code&gt;JSCValue&lt;/code&gt; can now be inspected
+to check for malformed messages and determine the action to take, and
+then arrange to call &lt;code&gt;reboot()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;handle_power_control_message&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitUserContentManager &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;content_manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                             WebKitJavascriptResult &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;js_result&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;userdata&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    JSCValue &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;webkit_javascript_result_get_js_value&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;js_result&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;jsc_value_is_string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;g_warning&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Invalid powerControl message: argument is not a string&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    g_autofree &lt;span class=&quot;token keyword&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;value_as_string &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;jsc_value_to_string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; action&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value_as_string&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;poweroff&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        action &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; RB_POWER_OFF&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value_as_string&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;reboot&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        action &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; RB_AUTOBOOT&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;g_warning&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Invalid powerControl message: &#39;%s&#39;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value_as_string&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token function&quot;&gt;g_message&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Device will %s now!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value_as_string&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;sync&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;reboot&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;action&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that the &lt;code&gt;reboot()&lt;/code&gt; system call above will most likely fail because it
+needs administrative privileges. While the browser process could run as &lt;code&gt;root&lt;/code&gt;
+to sidestep this issue—definitely &lt;em&gt;not&lt;/em&gt; recommended!—it would be
+better to grant the &lt;code&gt;CAP_SYS_BOOT&lt;/code&gt; capability to the process, and &lt;em&gt;much&lt;/em&gt;
+better to ask the system manager daemon to handle the job. In machines
+using &lt;a href=&quot;https://systemd.io/&quot;&gt;systemd&lt;/a&gt; a good option is to call the &lt;code&gt;.Halt()&lt;/code&gt;
+and &lt;code&gt;.Reboot()&lt;/code&gt; methods of its &lt;code&gt;org.freedesktop.systemd1&lt;/code&gt; interface.&lt;/p&gt;
+&lt;p&gt;Now we can write a small HTML document with some JavaScript sprinkled on top
+to arrange sending the messages:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;head&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;utf-8&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Device Power Control&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;head&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;reboot&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Reboot&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;poweroff&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Power Off&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;text/javascript&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;span class=&quot;token language-javascript&quot;&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;addHandler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;click&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          window&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;webkit&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;messageHandlers&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;powerControl&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;postMessage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token function&quot;&gt;addHandler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;reboot&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token function&quot;&gt;addHandler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;poweroff&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The complete source code for this example can be found
+&lt;a href=&quot;https://gist.github.com/aperezdc/621c1ec6bb78923e27fc035fa0689522&quot;&gt;in this Gist&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;going-in-the-other-direction&quot; tabindex=&quot;-1&quot;&gt;Going In The Other Direction&lt;/h3&gt;
+&lt;p&gt;But how can one return values from user messages back to the JavaScript code
+running in the context of the web page? Until recently, the only option
+available was exposing some known function in the page’s JavaScript code, and
+then using
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebView.run_javascript.html&quot;&gt;webkit_web_view_run_javascript()&lt;/a&gt;
+to call it from native code later on. To make this more idiomatic and allow
+waiting on a &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promise&lt;/a&gt;, an approach like the following works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Have convenience JavaScript functions wrapping the calls to
+&lt;code&gt;.postMessage()&lt;/code&gt; which add an unique identifier as part of the message,
+create a &lt;code&gt;Promise&lt;/code&gt;, and store it in a &lt;code&gt;Map&lt;/code&gt; indexed by the identifier.
+The &lt;code&gt;Promise&lt;/code&gt; is itself returned from the functions.&lt;/li&gt;
+&lt;li&gt;When the callback in native code handle messages, they need to take
+note of the message identifier, and then use
+&lt;code&gt;webkit_web_view_run_javascript()&lt;/code&gt; to pass it back, along with the
+information needed to resolve the promise.&lt;/li&gt;
+&lt;li&gt;The Javascript code running in the page takes the &lt;code&gt;Promise&lt;/code&gt; from
+the &lt;code&gt;Map&lt;/code&gt; that corresponds to the identifier, and resolves it.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To make this approach a bit more palatable, we could tell WebKit to &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.UserContentManager.add_script.html&quot;&gt;inject a
+script&lt;/a&gt;
+along with the regular content, which would provide the &lt;a href=&quot;https://gist.github.com/aperezdc/a112c6a61a5a11885eac2498702e3a6d&quot;&gt;helper
+functions&lt;/a&gt;
+needed to achieve this.&lt;/p&gt;
+&lt;p&gt;Nevertheless, the approach outlined above is cumbersome and can be
+tricky to get right, not to mention that the effort needs to be duplicated in
+each application. Therefore, we have recently added new API hooks to provide this
+as a built-in feature, so starting in WPE WebKit 2.40 the recommended approach
+involves using
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/method.UserContentManager.register_script_message_handler_with_reply.html&quot;&gt;webkit_user_content_manager_register_script_message_handler_with_reply()&lt;/a&gt;
+to register handlers instead. This way, calling &lt;code&gt;.postMessage()&lt;/code&gt; now returns a
+&lt;code&gt;Promise&lt;/code&gt; to the JavaScript code, and the callbacks connected to the
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.UserContentManager.script-message-with-reply-received.html&quot;&gt;script-message-with-reply-received&lt;/a&gt;
+signal now receive a
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/struct.ScriptMessageReply.html&quot;&gt;WebKitScriptMessageReply&lt;/a&gt;,
+which can be used to resolve the promise—either on the spot, or
+asynchronously later on.&lt;/p&gt;
+&lt;h3 id=&quot;even-more-ideas&quot; tabindex=&quot;-1&quot;&gt;Even More Ideas&lt;/h3&gt;
+&lt;p&gt;User script messages are a powerful and rather flexible facility to make WPE
+integrate web content into a complete system. The provided example is rather
+simple, but as long as we do not need to pass huge amounts of data in
+messages the possibilities are almost endless—especially with the
+added convenience in WPE WebKit 2.40. Here are more ideas that can
+be built on top of user script messages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A handler could receive requests to “monitor” some object, and
+return a &lt;code&gt;Promise&lt;/code&gt; that gets resolved when it has received changes.
+For example, this could make the user interface of a smart thermostat
+react to temperate updates from a sensor.&lt;/li&gt;
+&lt;li&gt;A generic handler that takes the message payload and converts it into
+&lt;a href=&quot;https://en.wikipedia.org/wiki/D-Bus&quot;&gt;D-Bus&lt;/a&gt; method calls, allowing
+web pages to control many aspects of a typical Linux system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;wrapping-up&quot; tabindex=&quot;-1&quot;&gt;Wrapping Up&lt;/h2&gt;
+&lt;p&gt;WPE has been designed from the ground up to integrate with the rest of the
+system, instead of having a sole focus on rendering Web content inside a
+monolithic web browser application. Accordingly, the public API must be
+comprehensive enough to use it as a component of &lt;em&gt;any&lt;/em&gt; application. This
+results in features that allow plugging into the web engine at different
+layers to provide custom behaviour.&lt;/p&gt;
+&lt;p&gt;At Igalia we have years of experience embedding WebKit into all kinds of
+applications, and we are always sympathetic to the needs of such systems. If
+you are interested collaborating with WPE development, or searching for a
+solution that can tightly integrate web content in your device, feel free to
+&lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- vim:set foldmethod=marker foldmarker=&lt;&lt;&lt;,&gt;&gt;&gt;: --&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPEBackend-fdo 1.14.1 released</title>
@@ -432,129 +921,6 @@ Note that these implementations are already complete in LBSE downstream and do n
 &lt;li&gt;Anything in reach now, that seemed impossible before with the given constraints in WebKit?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Thanks for your attention! Be sure to keep an eye on &lt;a href=&quot;https://github.com/nikolaszimmermann/WebKitIgalia/issues/1&quot;&gt;our “Upstreaming status” page at GitHub&lt;/a&gt; to follow LBSE development.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2022-0011</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html"/>
-    <updated>2022-12-26T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html</id>
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Date Reported: &lt;strong&gt;December 26, 2022&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2022-0011&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-42852&quot;&gt;CVE-2022-42852&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-42856&quot;&gt;CVE-2022-42856&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-42863&quot;&gt;CVE-2022-42863&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-42867&quot;&gt;CVE-2022-42867&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-46691&quot;&gt;CVE-2022-46691&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-46692&quot;&gt;CVE-2022-46692&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-46698&quot;&gt;CVE-2022-46698&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-46699&quot;&gt;CVE-2022-46699&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/blog-extending/security/WSA-2022-0011.html#CVE-2022-46700&quot;&gt;CVE-2022-46700&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42852&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42852&quot;&gt;CVE-2022-42852&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.3.&lt;/li&gt;
-&lt;li&gt;Credit to hazbinhotel working with Trend Micro Zero Day Initiative.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may result in the
-disclosure of process memory. Description: The issue was addressed
-with improved memory handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42856&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42856&quot;&gt;CVE-2022-42856&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.3.&lt;/li&gt;
-&lt;li&gt;Credit to Clément Lecigne of Google’s Threat Analysis Group.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A type confusion issue was
-addressed with improved state handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42863&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42863&quot;&gt;CVE-2022-42863&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.0.&lt;/li&gt;
-&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A memory corruption issue was
-addressed with improved state management.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-42867&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42867&quot;&gt;CVE-2022-42867&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.3.&lt;/li&gt;
-&lt;li&gt;Credit to Maddie Stone of Google Project Zero.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A use after free issue was
-addressed with improved memory management.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-46691&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46691&quot;&gt;CVE-2022-46691&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.1.&lt;/li&gt;
-&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A memory consumption issue
-was addressed with improved memory handling.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-46692&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46692&quot;&gt;CVE-2022-46692&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.3.&lt;/li&gt;
-&lt;li&gt;Credit to KirtiKumar Anandrao Ramchandani.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may bypass Same
-Origin Policy. Description: A logic issue was addressed with
-improved state management.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-46698&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46698&quot;&gt;CVE-2022-46698&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.3.&lt;/li&gt;
-&lt;li&gt;Credit to Dohyun Lee (@l33d0hyun) of DNSLab at Korea University,
-Ryan Shin of IAAI SecLab at Korea University.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may disclose
-sensitive user information. Description: A logic issue was addressed
-with improved checks.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-46699&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46699&quot;&gt;CVE-2022-46699&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.3.&lt;/li&gt;
-&lt;li&gt;Credit to Samuel Groß of Google V8 Security.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A memory corruption issue was
-addressed with improved state management.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2022-46700&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46700&quot;&gt;CVE-2022-46700&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.3.&lt;/li&gt;
-&lt;li&gt;Credit to Samuel Groß of Google V8 Security.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Description: A memory corruption issue was
-addressed with improved input validation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
-WebKit. It is the best way to ensure that you are running safe versions
-of WebKit. Please check our websites for information about the latest
-stable releases.&lt;/p&gt;
-&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
-&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
 </feed>
