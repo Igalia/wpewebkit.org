@@ -204,7 +204,7 @@ main(int argc, char *argv[])
 ## URI Scheme Handlers
 
 <figure>
-  <img src="{{ '/assets/svg/URI_syntax_diagram.svg' | url }}"
+  <img src="/assets/svg/URI_syntax_diagram.svg"
       alt="“Railroad” diagram of URI syntax">
   <figcaption>URI syntax (<a target="_blank" rel="noopener"
       href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>,
@@ -303,7 +303,7 @@ URI scheme:
 
 <figure>
   <img alt="Screenshot of the minicog browser loading a custom echo:// URI"
-    src="{{ '/assets/img/extending-minicog-echouri.png' | url }}" class="picture">
+    src="/assets/img/extending-minicog-echouri.png" class="picture">
   <figcaption>It worked!</figcaption>
 </figure>
 
@@ -406,7 +406,7 @@ what gets loaded with WPE, and that exclusively uses a web application as its
 user interface.
 
 <figure>
-  <img src="{{ '/assets/img/pepe-silvia-all-javascript.jpg' | url }}"
+  <img src="/assets/img/pepe-silvia-all-javascript.jpg"
     class="picture" alt="Pepe Silvia conspiracy image meme, with the text “It's all JavaScript” superimposed">
   <figcaption>Yet most of the code shown in this post is C.</figcaption>
 </figure>

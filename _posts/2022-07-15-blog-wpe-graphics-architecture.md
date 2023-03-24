@@ -8,7 +8,7 @@ preview: Following <a href="/blog/02-overview-of-wpe.html">the previous post in 
 thumbnail: /assets/graphics-attachment.png
 ---
 
-Following <a href="{{ '/blog/02-overview-of-wpe.html' | url }}">the previous post in the series</a> about <a href="{{ '/' | url }}">WPE</a> where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display. If you haven't read the previous entries in this blog post series about WPE, we recommend you to start with the <a href="{{ '/blog/01-happy-birthday-wpe.html' | url}}">first post in the series</a> for an introduction, and then come back to this.
+Following <a href="/blog/02-overview-of-wpe.html">the previous post in the series</a> about <a href="/">WPE</a> where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display. If you haven't read the previous entries in this blog post series about WPE, we recommend you to start with the <a href="/blog/01-happy-birthday-wpe.html">first post in the series</a> for an introduction, and then come back to this.
 
 
 ## DOM + CSS = RenderTree
@@ -19,7 +19,7 @@ Once the RenderTree is created, the layout is performed, ensuring that each of t
 
 <img style="display: block; margin: 1em auto;"
 	alt="Going from source content to displayed content"
-	src="{{ '/assets/graphics-attachment.png' | url }}">
+	src="/assets/graphics-attachment.png">
 
 It would be possible to render the content of the web page just traversing this RenderTree and painting each of the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a>, but there would be problems when rendering elements that overlap each other, because the order of the elements in the RenderTree doesn't necessarily match the order in which they must be painted in order to get the appropriate result. For example, an element with a big `z-index` value should be painted last, no matter its position in the RenderTree.
 
@@ -27,7 +27,7 @@ This is an example of how some HTML content is translated into the RenderTree (t
 
 <img style="display: block; margin: 1em auto;"
 	alt="RenderTree generated from example HTML"
-	src="{{ '/assets/graphics-rendertree.png' | url }}">
+	src="/assets/graphics-rendertree.png">
 
 ## RenderLayers
 
@@ -41,7 +41,7 @@ Continuing with the example, these are <a href="https://github.com/WebKit/WebKit
 
 <img style="display: block; margin: 1em auto;"
 	alt="RenderLayer tree generated from example HTML"
-	src="{{ '/assets/graphics-renderlayertree.png' | url }}">
+	src="/assets/graphics-renderlayertree.png">
 
 We can see that there are four <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a>:
 
@@ -68,7 +68,7 @@ This is how the example code would be translated into <a href="https://github.co
 
 <img style="display: block; margin: 1em auto;"
 	alt="GraphicsLayer tree generated from example HTML"
-	src="{{ '/assets/graphics-graphicslayertree.png' | url }}">
+	src="/assets/graphics-graphicslayertree.png">
 
 We can see that we have now three <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a>:
 
@@ -114,7 +114,7 @@ At <a href="https://www.igalia.com/">Igalia</a> we're constantly evolving and im
 
 ## But what about the backends?
 
-In <a href="{{ '/blog/02-overview-of-wpe.html' | url }}">the previous post</a> there was a mention of backends that are used to integrate with the underlying platform. How is this relevant to the graphics architecture?
+In <a href="/blog/02-overview-of-wpe.html">the previous post</a> there was a mention of backends that are used to integrate with the underlying platform. How is this relevant to the graphics architecture?
 
 Backends have several missions when it comes to communicate with the platform, but regarding graphics, they have two functions to achieve:
 

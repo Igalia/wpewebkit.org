@@ -2,7 +2,7 @@
 
 <header class="full-bleed">
 <h2><a href="">Resources</a></h2>
-<img src="{{ '/assets/img/illustration-resources.svg' | url }}" alt="" class="decoration">
+<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
 </header>
 <div class="dotsep">
 
@@ -11,7 +11,7 @@
 <ul class="gallery c{{ resources|size }}">
 {% for item in resources %}
 <li>
-<h3><a href="{{ item.url | url}}">{{item.title}}</a></h3>
+<h3><a href="{{ item.url }}">{{item.title}}</a></h3>
 <p>{{item.text | markdown}}</p>
 </li>
 {% endfor %}

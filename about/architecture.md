@@ -31,7 +31,7 @@ such as the traditional Cocoa, GTK, etc toolkits.
 </header>
 
 <div class="masthead-img full-bleed" align="center">
-<img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
+<img src="/assets/img/diagram-WPE-design.svg" alt="">
 </div>
 
 <section>

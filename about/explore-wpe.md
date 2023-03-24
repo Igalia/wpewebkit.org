@@ -36,14 +36,14 @@ resources: [
 
 ## Grab the code
 
-If you're an experienced embedded engineer, you'll most likely want to grab the [code](https://wpewebkit.org/release/) and build and tune WPE for your specific needs.
+If you're an experienced embedded engineer, you'll most likely want to grab the [code](/release) and build and tune WPE for your specific needs.
  
 
 ## Easy pre-builts
 
 We've also tried to make it easy for developers who aren't comfortable building entire embedded systems to get their hands on _something_ where they can begin exploring and learning useful things. Our easy prebuilts do just that - they won't be well optimized in the way a final product usually is, but they're nonetheless very useful.
 
-If you find any problem or want to know more about optimizing WPE for your hardware or use cases, please [contact us]({{'/code' | url}}).
+If you find any problem or want to know more about optimizing WPE for your hardware or use cases, please [contact us](/code).
 
 ### __Install it from your GNU/Linux OS distribution__
 

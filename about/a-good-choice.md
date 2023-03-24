@@ -7,7 +7,7 @@ permalink: /about/a-good-choice.html
 ---
 <style>
 :not(header) > h2 {
-	background: url({{ '/assets/img/graphic-title-blue.svg' | url }}) 0 100% / 7rem auto no-repeat;
+	background: url({{ '/assets/img/graphic-title-blue.svg' | htmlBaseUrl }}) 0 100% / 7rem auto no-repeat;
 	padding-bottom: 1em;
 }
 ul.gallery.c2 {
@@ -17,7 +17,7 @@ ul.gallery.c2 {
 ul.gallery.c2 li {
 	padding: 3.5em 1.5em 1.5em;
 	border: 1px dashed var(--colorMain);
-	background: url({{ '/assets/img/checkmark.png' | url}}) 1em 1em / 2em 2em no-repeat;
+	background: url({{ '/assets/img/checkmark.png' | htmlBaseUrl }}) 1em 1em / 2em 2em no-repeat;
 }
 .full-bleed.banner {
 	margin-block: 5rem 4rem;
@@ -55,9 +55,9 @@ ul.gallery.c2 li {
 
 <nav class="sidebar">
 <ul>
-<li><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></li>
-<li class="currentPage"><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
-<li><a href="{{ '' | url }}">WPE in Action</a></li>
+<li><a href="/about/supported-hardware.html">Supported Hardware</a></li>
+<li class="currentPage"><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
+<li><a href="/about">WPE in Action</a></li>
 </ul>
 </nav>
 
@@ -70,7 +70,7 @@ WPE WebKit is widely adopted in many industries, including digital signage, prof
 </header>
 
 <section class="full-bleed banner">
-<img src="{{ '/assets/img/WhyChooseWPE.png' | url }}" alt="">
+<img src="/assets/img/WhyChooseWPE.png" alt="">
 </section>
 
 <section>

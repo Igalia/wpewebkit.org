@@ -91,9 +91,9 @@ table tbody tr:nth-child(n + 2) > * {
 
 <nav class="sidebar">
 <ul>
-<li class="currentPage"><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></li>
-<li><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
-<li><a href="{{ '#wpe-in-action' | url }}">WPE in Action</a></li>
+<li class="currentPage"><a href="/about/supported-hardware.html">Supported Hardware</a></li>
+<li><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
+<li><a href="#wpe-in-action">WPE in Action</a></li>
 </ul>
 </nav>
 

@@ -5,7 +5,7 @@ tags: [blogpost]
 author: nzimmermann
 permalink: /blog/05-new-svg-engine.html
 thumbnail: /assets/lbse-logo-wide.png
-preview: Let's take a detour from the <a href="{{ '/blog/04-wpe-networking-overview.html' | url }}">previous WPE architecture related posts</a> to other aspects of our work on WebKit at Igalia. Today, the status of the development of WebKits' new SVG engine is presented, along with an introduction to the topic, and an outlook for 2023.
+preview: Let's take a detour from the <a href="/blog/04-wpe-networking-overview.html">previous WPE architecture related posts</a> to other aspects of our work on WebKit at Igalia. Today, the status of the development of WebKits' new SVG engine is presented, along with an introduction to the topic, and an outlook for 2023.
 ---
 
 <style>
@@ -27,7 +27,7 @@ figcaption {
 }
 </style>
 
-In the <a href="{{ '/blog/04-wpe-networking-overview.html' | url }}">previous posts of this series</a>, various aspects of the WPE port architecture were covered. Besides maintaining and advancing the WPE port according to our customers' needs, Igalia also participates in the development of the **WebCore** engine itself, which is shared by *all* WebKit ports. WebCore is the part of the browser engine that does the heavy lifting: it contains all functionality necessary to load, parse, lay out, and paint Web content.
+In the <a href="/blog/04-wpe-networking-overview.html">previous posts of this series</a>, various aspects of the WPE port architecture were covered. Besides maintaining and advancing the WPE port according to our customers' needs, Igalia also participates in the development of the **WebCore** engine itself, which is shared by *all* WebKit ports. WebCore is the part of the browser engine that does the heavy lifting: it contains all functionality necessary to load, parse, lay out, and paint Web content.
 
 Since late 2019, Igalia has been working on a new SVG engine, dubbed **L**ayer-**B**ased **S**VG **E**ngine (**LBSE**), that will unify the HTML/SVG rendering pipelines in WebCore. This will resolve long-standing design issues of the "legacy" SVG engine and unlock a bunch of new *exciting* possibilities for Web developers to get creative with SVG. <a href="https://blogs.igalia.com/nzimmermann/posts/2021-10-13-svg-performance/">Hardware-accelerated compositing</a>, driven by CSS `transform` animations, <a href="https://blogs.igalia.com/nzimmermann/posts/2019-12-12-3d-transformations/">3D perspective transformations</a> for arbitrary SVG elements, CSS `z-index` support for all SVG graphics elements, and proper coverage rectangle computations and repaints are just a few highlights of the capabilities the future SVG engine will offer.
 
@@ -45,7 +45,7 @@ No matter what type of product is built nowadays, many of them need an active In
 
 A variety of toolkits exist that assist in writing GUI applications for embedded devices, with a few open-source projects on the market, as well as commercial products providing closed-source, proprietary solutions, that *specifically* target the embedded market and are often optimized for specific target device families, e.g. certain ARM processors / certain GPUs.
 
-If the need arises, not only to communicate with the Internet but also to display arbitrary Web content, WPE comes into play. As presented in the <a href="{{ '/blog/02-overview-of-wpe.html#how-does-wpe-integrate-with-webkit%3F' | url}}">first post in this series</a>, the flexible and modular WPE architecture makes it an ideal choice for any product in the embedded market that needs Web browsing abilities. The <a href="https://docs.gtk.org/glib">GLib</a>/C-based <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1">WPE public APIs</a> allow for customization of the browsing engine and its settings (react on page load/input events, inject custom JS objects, modify style sheets, etc.) and allow the embedder to control/monitor all relevant Web browsing-related activities.
+If the need arises, not only to communicate with the Internet but also to display arbitrary Web content, WPE comes into play. As presented in the <a href="/blog/02-overview-of-wpe.html#how-does-wpe-integrate-with-webkit%3F">first post in this series</a>, the flexible and modular WPE architecture makes it an ideal choice for any product in the embedded market that needs Web browsing abilities. The <a href="https://docs.gtk.org/glib">GLib</a>/C-based <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1">WPE public APIs</a> allow for customization of the browsing engine and its settings (react on page load/input events, inject custom JS objects, modify style sheets, etc.) and allow the embedder to control/monitor all relevant Web browsing-related activities.
 
 With a full-fledged Web engine at hand, one might ponder if it is feasible to replace the whole native GUI stack with a set of Web pages/applications, and only use WPE to paint the UI in full-screen mode, thus migrating away from native GUI applications — following the trend in the desktop market. The number of organizations migrating native GUI applications into Web applications is *rapidly* increasing, since there are compelling reasons for Web apps: "write once, use everywhere", avoiding vendor lock-in, easy/reliable deployment and update mechanisms, and efficient test/development cycles (local in-browser testing!).
 
@@ -71,7 +71,7 @@ Before we jump to the upstreaming status, one question should be answered, that 
 
 ### Why don't you fix the existing SVG engine?
 
-<img style="float: right; width: 55%;" alt="LBSE logo" src="{{ '/assets/lbse-logo-wide.png' | url }}">
+<img style="float: right; width: 55%;" alt="LBSE logo" src="/assets/lbse-logo-wide.png">
 
 There was *no initial intention* to come up with a new SVG engine. During LBSE development it became apparent how much SVG-specific code can be erased when unifying certain aspects with HTML/CSS. After carrying out the integration work, layout/painting and hit-testing work fundamentally different than before. Since that time, LBSE is labeled as a *"new SVG engine"*, even though the SVG DOM tree part remained almost identical. Web compatibility will *improve* with LBSE: a few long-standing, critical interop issues with other browser vendors are solved in LBSE. Therefore, there are no concerns regarding Web compatibility risks from our side.
 
@@ -91,13 +91,13 @@ Therefore the former route was chosen, which requires transforming the SVG rende
 
 <figure style="display: inline-block;">
 <figure style="margin-left: 0; margin-right: auto; display: inline-block; width: 48%;">
-<figcaption><a href="{{ '/assets/svg/svg_render_tree_legacy.svg' | url }}" target="_blank">Legacy design (click to enlarge)</a></figcaption>
-<img alt="Visualization of the legacy SVG render tree class hierarchy in WebCore" src="{{ '/assets/svg/svg_render_tree_legacy.svg' | url }}">
+<figcaption><a href="/assets/svg/svg_render_tree_legacy.svg" target="_blank">Legacy design (click to enlarge)</a></figcaption>
+<img alt="Visualization of the legacy SVG render tree class hierarchy in WebCore" src="/assets/svg/svg_render_tree_legacy.svg">
 </figure>
 
 <figure style="margin-left: auto; margin-right: 0; display: inline-block; width: 48%">
-<figcaption><a href="{{ '/assets/svg/svg_render_tree_lbse.svg' | url }}" target="_blank">LBSE design (click to enlarge)</a></figcaption>
-<img alt="Visualization of the LBSE SVG render tree class hierarchy in WebCore" src="{{ '/assets/svg/svg_render_tree_lbse.svg' | url }}">
+<figcaption><a href="/assets/svg/svg_render_tree_lbse.svg" target="_blank">LBSE design (click to enlarge)</a></figcaption>
+<img alt="Visualization of the LBSE SVG render tree class hierarchy in WebCore" src="/assets/svg/svg_render_tree_lbse.svg">
 </figure>
 </figure>
 
@@ -131,7 +131,7 @@ By **July 2022**, after testing different approaches, a proper solution <a href=
 
 After the summer holidays, in **August 2022**, the next major milestone was reached: <a href="https://bugs.webkit.org/show_bug.cgi?id=242833">enabling compositing support for arbitrary SVG elements</a>, bringing **z-index** support, **hardware-accelerated compositing** and **3D transforms** to SVG. This time *all lessons* learned from the previous LBSE prototypes were taken into account, resulting in a *complete* compositing implementation, that works in various scenarios: different `transform-box` / `transform-origin` combinations, inline SVG enclosed by absolute/relative positioned CSS boxes and many more, all way more polished than in the "final" LBSE prototype.
 
-The aforementioned patch contained a fix for a <a href="https://webkit.org/b/27684">long-standing bug</a> (*"Composited elements appear pixelated when scaled up using transform"*), that made composited elements look blurry when scaling up with a CSS `transform` animation. The so-called *"backing scale factor"* of the associated `GraphicLayers` (see <a href="{{ '/blog/03-wpe-graphics-architecture.html' | url }}">here for details</a> about the role of `GraphicLayer` in the compositing system</a>) never changes during the animation. Therefore, the rendered image was scaled up instead of re-rendering the content at the right scale. LBSE now enforces updates of that scale factor, to avoid blurry SVGs. The fix is *not* activated yet for HTML as that requires more thought - see the previously-linked bug report for details.
+The aforementioned patch contained a fix for a <a href="https://webkit.org/b/27684">long-standing bug</a> (*"Composited elements appear pixelated when scaled up using transform"*), that made composited elements look blurry when scaling up with a CSS `transform` animation. The so-called *"backing scale factor"* of the associated `GraphicLayers` (see <a href="/blog/03-wpe-graphics-architecture.html">here for details</a> about the role of `GraphicLayer` in the compositing system</a>) never changes during the animation. Therefore, the rendered image was scaled up instead of re-rendering the content at the right scale. LBSE now enforces updates of that scale factor, to avoid blurry SVGs. The fix is *not* activated yet for HTML as that requires more thought - see the previously-linked bug report for details.
  
 With all the new features in place and covered by tests, it was time to finish the remaining SVG renderers: <a href="https://commits.webkit.org/250913@main">RenderSVGEllipse</a>, <a href="https://commits.webkit.org/251688@main">RenderSVGPath</a> and <a href="https://commits.webkit.org/252500@main">RenderSVGViewportContainer</a> (for inner \<svg\> elements), <a href="https://commits.webkit.org/253510@main">RenderSVGHiddenContainer</a>, <a href="https://commits.webkit.org/253793@main">RenderSVGImage</a>, and <a href="https://commits.webkit.org/253816@main">RenderSVGForeignObject</a>. A proper \<foreignObject\> implementation was lacking in WebKit for 15+ years, due to the fundamental problem that the layer tree was not aware of the SVG subtree. The LBSE variant of `RenderSVGForeignObject` looks trivial, yet offers a fully compatible **\<foreignObject\> implementation** - for the first time without issues with non-static positioned content as a direct child of \<foreignObject\>, at least a few weeks later after <a href="https://commits.webkit.org/256960@main">it landed</a>.
 

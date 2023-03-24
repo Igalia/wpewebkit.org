@@ -28,11 +28,11 @@ The following PGP keys are currently in use for signing releases:
     <tr><th>Developer</th><th>Fingerprint</th></tr>
   </thead>
     <tr>
-      <td>Adrián Pérez de Castro (<a href="{{ '/release/verify/aperez.key' | url }}">key</a>)</td>
+      <td>Adrián Pérez de Castro (<a href="/release/verify/aperez.key">key</a>)</td>
       <td><tt>5AA3 BC33 4FD7 E336 9E7C  77B2 91C5 59DB E4C9 123B</tt></td>
     </tr>
     <tr>
-      <td>Carlos García Campos (<a href="{{ '/release/verify/cgarcia.key' | url }}">key</a>)</td>
+      <td>Carlos García Campos (<a href="/release/verify/cgarcia.key">key</a>)</td>
       <td><tt>D7FC F61C F9A2 DEAB 31D8  1BD3 F3D3 22D0 EC45 82C3</tt></td>
     </tr>
   <tbody>
