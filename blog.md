@@ -44,14 +44,14 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 	<ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;">
 	{%- for blogPost in collections.recentBlogPosts -%}
 		<li class="listitem">
-			<img src="{{ blogPost.data.thumbnail | url }}" alt="">
+			<img src="{{ blogPost.data.thumbnail }}" alt="">
 			<time>{{ blogPost.date | postDate }}</time>
-			<h3><a href="{{ blogPost.url | url }}">{{ blogPost.data.title }}</a></h3>
+			<h3><a href="{{ blogPost.url }}">{{ blogPost.data.title }}</a></h3>
 			<p>{{ blogPost.data.preview | strip_html }}</p>
 		</li>
 	{%- endfor -%}
 	</ol>
-	<a class="btn" href="{{ '/blog.xml' | url }}"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
+	<a class="btn" href="/blog.xml"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
 </div>
 
 
@@ -66,7 +66,7 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           {{ item[0] }}:
           <a class="badge badge-secondary"
-             href="{{ item[1].stable.url | url }}">{{ item[1].stable.version }}</a>
+             href="{{ item[1].stable.url }}">{{ item[1].stable.version }}</a>
         </div>
         {%- endfor -%}
       </div>
@@ -81,14 +81,14 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
           <span>
           <a class="badge badge-secondary"
              title="Release notes for {{ item[0] }} {{ item[1].unstable.version }}"
-             href="{{ item[1].unstable.url | url }}">{{ item[1].unstable.version }}</a>
+             href="{{ item[1].unstable.url }}">{{ item[1].unstable.version }}</a>
           </span>
         </div>
         {%- endfor -%}
       </div>
     </div>
     <p class="m-3 mt-4 text-center">
-      <a class="btn btn-light btn-sm" href="{{ '/release/' | url }}">All Release Notes…</a>
+      <a class="btn btn-light btn-sm" href="/release/">All Release Notes…</a>
     </p>
   </div>
 </div>

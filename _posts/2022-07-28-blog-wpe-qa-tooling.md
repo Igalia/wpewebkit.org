@@ -8,7 +8,7 @@ preview: In the previous posts, my colleagues Claudio and Miguel wrote respectiv
 thumbnail: /assets/build-webkit-org-screenshot.png
 ---
 
-In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="{{ '/blog/02-overview-of-wpe.html' | url }}">major components</a> of the project and, specifically, the <a href="{{ '/blog/03-wpe-graphics-architecture.html' | url }}">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="{{ '/' | url }}">WPE</a> aren't necessarily required in order to read this one, we recommend you to starting with the <a href="{{ '/blog/01-happy-birthday-wpe.html' | url }}">first post in the series</a>.
+In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="/">WPE</a> aren't necessarily required in order to read this one, we recommend you to starting with the <a href="/blog/01-happy-birthday-wpe.html">first post in the series</a>.
 
 ## Automated testing
 
@@ -17,7 +17,7 @@ Testing is an essential part of the WebKit project, primarily due to the large n
 As an official port of WebKit, WPE uses the former's testing infrastructure, based on [BuildBot](https://buildbot.net/). There are two primary servers, [one working as an early warning system](https://ews-build.webkit.org) by testing the patches before they're committed to the main repository, and [another](https://build.webkit.org) for more extensive testing after accepting the incoming changes.
 
 <div align="center">
-<img style="width: 75%" alt="build.webkit.org screenshot" align="center" src="{{ '/assets/build-webkit-org-screenshot.png' | url }}">
+<img style="width: 75%" alt="build.webkit.org screenshot" align="center" src="/assets/build-webkit-org-screenshot.png">
 </div>
 
 <br>
@@ -92,7 +92,7 @@ $ ./Tools/Scripts/run-minibrowser --wpe --release https://wpewebkit.org/
 ```
 
 <div align="center">
-<img style="width: 75%" alt="Cog with GTK4 shell screenshot" align="center" src="{{ '/assets/gtk-cog-screenshot.png' | url }}">
+<img style="width: 75%" alt="Cog with GTK4 shell screenshot" align="center" src="/assets/gtk-cog-screenshot.png">
 </div>
 <br>
 
@@ -118,7 +118,7 @@ After hacking locally, you can submit your changes following the workflow listed
 
 ## Testing WPE in the wild
 
-If you don't want to build your WPE build or image, there are some options to [get a taste of WPE]({{ '/about/exploring.html' | url }}) listed on our website.
+If you don't want to build your WPE build or image, there are some options to [get a taste of WPE](/about/exploring.html) listed on our website.
 
 ## Final thoughts
 

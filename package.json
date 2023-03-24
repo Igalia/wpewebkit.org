@@ -4,6 +4,7 @@
   "description": "",
   "main": "eleventy",
   "scripts": {
+    "build": "eleventy --quiet --pathprefix=/",
     "serve": "eleventy --serve --quiet --pathprefix=/",
     "deploy-dev": "gh-pages -d _site"
   },

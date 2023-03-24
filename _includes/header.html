@@ -1,11 +1,11 @@
 <nav class="global">
 	<div>
-		<a class="igalia logo home" href="{{ '/' | url }}"><img src="{{ '/assets/img/logo-blue.svg' | url }}" alt="WPE"></a>
+		<a class="igalia logo home" href="/"><img src="/assets/img/logo-blue.svg" alt="WPE"></a>
 		<ul class="{{ page.url | topLevel | replace_first: "/","" }} off">
 		{%- for link in menu -%}
 			{%- assign pagedir = page.url | topLevel -%}
 			<li{% if link.url == pagedir %} class="currentPage"{% endif %}>
-			<a class="{{ link.class | default: 'nav-link' }}" href="{{ link.url | url | default: '#' }}">{{ link.title }}</a>
+			<a class="{{ link.class | default: 'nav-link' }}" href="{{ link.url | default: '#' }}">{{ link.title }}</a>
 			</li>
 		{%- endfor -%}
 		</ul>

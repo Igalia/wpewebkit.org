@@ -3,6 +3,7 @@ const MarkdownItAnchor = require("markdown-it-anchor");
 const MarkdownItTOC = require("markdown-it-toc-done-right");
 const MarkdownItPrism = require("markdown-it-prism");
 const { DateTime } = require("luxon");
+const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 
 class DefaultDict {
   constructor(defaultValue) {
@@ -19,6 +20,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('vendor')
   eleventyConfig.addPassthroughCopy('assets')
   eleventyConfig.addPassthroughCopy('release/verify/*.key')
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(pluginRss);
   
   eleventyConfig.setLiquidOptions({
@@ -161,6 +163,5 @@ module.exports = function(eleventyConfig) {
 
   return {
     passthroughFileCopy: true,
-    pathPrefix: "/wpewebkit.org/"
   }
 }
