@@ -4,6 +4,8 @@ title: "Learn & Discover"
 tags: [learn]
 data: { dateless: "true" }
 permalink: /about/
+sitemapChangeFrequency: yearly
+sitemapPriority: 0.9
 --- 
 <style>
 @media (min-width: 30rem) {

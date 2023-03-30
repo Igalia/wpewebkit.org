@@ -4,6 +4,8 @@ title: "Supported Hardware"
 tags: [about] 
 data: { dateless: "true" }
 permalink: /about/supported-hardware.html 
+sitemapChangeFrequency: monthly
+sitemapPriority: 0.7
 resources: [
 	{
 		"title": "Why Choose WPE?",

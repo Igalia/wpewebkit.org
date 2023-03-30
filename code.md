@@ -4,6 +4,7 @@ title: "Code"
 tags: [about]
 data: { dateless: "true" }
 permalink: /code/
+sitemapChangeFrequency: yearly
 ---
 
 <header class="page">

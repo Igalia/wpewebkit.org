@@ -1,6 +1,8 @@
 ---
 title: Releases
 layout: page
+sitemapChangeFrequency: yearly
+sitemapPriority: 0.7
 ---
 <header class="page">
 

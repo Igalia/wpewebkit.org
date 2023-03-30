@@ -3,6 +3,7 @@ title: "Developers"
 layout: page
 tags: [devs]
 data: { dateless: "true" }
+sitemapChangeFrequency: yearly
 ---
 <style>
 header.page h1 {

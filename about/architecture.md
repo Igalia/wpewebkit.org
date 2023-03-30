@@ -4,6 +4,7 @@ title: "The Architecture of WPE"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/architecture.html
+sitemapChangeFrequency: yearly
 ---
 <style>
 main > *, .dotsep {
