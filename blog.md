@@ -4,6 +4,8 @@ title: "Blog"
 tags: [blog]
 data: { dateless: "true" }
 permalink: /blog/
+sitemapChangeFrequency: weekly
+sitemapPriority: 0.9
 ---
 <style>
 .card ol {

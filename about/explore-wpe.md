@@ -4,6 +4,7 @@ title: "Get Started with WPEwebkit"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/explore-wpe.html
+sitemapChangeFrequency: yearly
 resources: [
 	{
 		"title": "Package Releases",

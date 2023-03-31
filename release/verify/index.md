@@ -2,6 +2,8 @@
 title: Verifying Releases
 layout: post
 data: { dateless: "true" }
+sitemapChangeFrequency: yearly
+sitemapPriority: 0.4
 ---
 
 WPE release tarballs are cryptographically signed and can be verified

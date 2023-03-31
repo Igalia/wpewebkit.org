@@ -4,6 +4,7 @@ title: "Why Choose WPE?"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/a-good-choice.html
+sitemapChangeFrequency: yearly
 ---
 <style>
 :not(header) > h2 {

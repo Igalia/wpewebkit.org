@@ -1,6 +1,7 @@
 ---
 title: Security Advisories
 layout: page
+sitemapChangeFrequency: monthly
 pagination:
   data: collections.WSA
   size: 50
