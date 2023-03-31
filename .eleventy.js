@@ -1,7 +1,7 @@
 const MarkdownIt = require("markdown-it");
 const MarkdownItAnchor = require("markdown-it-anchor");
 const MarkdownItTOC = require("markdown-it-toc-done-right");
-const MarkdownItPrism = require("markdown-it-prism");
+const EleventySyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const { DateTime } = require("luxon");
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 
@@ -21,6 +21,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('assets')
   eleventyConfig.addPassthroughCopy('release/verify/*.key')
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+  eleventyConfig.addPlugin(EleventySyntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);
   
   eleventyConfig.setLiquidOptions({
@@ -158,7 +159,7 @@ module.exports = function(eleventyConfig) {
     level: 2,
   }).use(MarkdownItTOC, {
     level: [2, 3],
-  }).use(MarkdownItPrism)
+  })
   );
 
   return {
