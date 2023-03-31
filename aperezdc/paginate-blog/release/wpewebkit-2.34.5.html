@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE WebKit 2.34.5 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/paginate-blog/release/wpewebkit-2.34.5.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/aperezdc/paginate-blog/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/paginate-blog/release/wpewebkit-2.34.5.html">
+  <meta property="og:title" content="WPE WebKit 2.34.5 released">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/paginate-blog/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/paginate-blog/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-02-09T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/paginate-blog/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/paginate-blog/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/paginate-blog/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/paginate-blog/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/paginate-blog/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/aperezdc/paginate-blog/"><img src="/wpewebkit.org/aperezdc/paginate-blog/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="release off"><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/paginate-blog/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/paginate-blog/about/">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/paginate-blog/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/paginate-blog/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/aperezdc/paginate-blog/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/paginate-blog/release/wpewebkit-2.34.5.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE WebKit 2.34.5 released</h1>
+ 
+   <meta itemprop="datePublished" content="Wed Feb 09 2022">
+   <time itemprop="dateCreated"> 9 February 2022</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpewebkit-2.34.5.tar.xz">Download</a>
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This is a bug fix release in the stable 2.34 series.</p>
+<h3 id="what%E2%80%99s-new-in-wpe-webkit-2.34.5%3F" tabindex="-1">What’s new in WPE WebKit 2.34.5?</h3>
+<ul>
+<li>Improve VP8 codec selection when using GStreamer 1.20.</li>
+<li>Fix connecting to the accessibility bus when using the Bubblewrap sandbox.</li>
+<li>Fix the build with recent toolchains based on GCC 12 and on older ones as included e.g. in Ubuntu 18.04.</li>
+<li>Fix the build with ICU 60, version 61 is no longer required.</li>
+<li>Fix several crashes and rendering issues.</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+wpewebkit-2.34.5.tar.xz (22.5 MiB)
+   md5sum: 27a8b9714868dd890d4a54f4ae4cf2b1
+   sha1sum: 63259a958a380cc8c75a4f51dada630f4fe5dc1e
+   sha256sum: 0ef187cdcb83dbe9e7b2870f43543b68766ea3535fe8b056866e8e1d3ef02bc1
+</pre>
+
+
+
+
+</div>
+
+    </div></main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/aperezdc/paginate-blog/" class="igalia logo home"><img src="/wpewebkit.org/aperezdc/paginate-blog/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
