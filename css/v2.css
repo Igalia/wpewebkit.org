@@ -625,6 +625,40 @@ footer.global div > :last-child {
 	grid-column: span 2;
 }
 
+nav.pagination {
+	display: block;
+	color: #88b;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	font-feature-settings: "pnum" 0;
+}
+nav.pagination > ol {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+nav.pagination > ol > li {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+nav.pagination > ol > li > a,
+nav.pagination > ol > li > span {
+	display: inline;
+	text-decoration: none;
+	margin: 0;
+	padding: 0.35rem 0.75rem;
+	font-weight: normal;
+}
+nav.pagination > ol > li > a:hover {
+	background-color: #eaeaee;
+}
+nav.pagination > ol > li > a[aria-current="page"] {
+	background-color: var(--colorMain);
+	color: #eef;
+}
+
 @media (min-width: 50rem) {
 	footer.global div {
 		grid-template-columns: minmax(125px, auto) repeat(2,max-content);
