@@ -1,8 +1,7 @@
 ---
-layout: post
 title: "Success Story: Metrological"
 date: 2022-10-15
-tags: [blogpost, success]
+tags: success
 permalink: /blog/2022-success-metrological.html
 preview: WPE WebKit brought RDK (Reference Design Kit), a modern, performant web browser, to millions of screens.
 thumbnail: /assets/img/logo-metrological@2x.png

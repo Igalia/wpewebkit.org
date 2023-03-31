@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "An overview of the WPE WebKit project"
-tags: [blogpost]
 author: csaavedra
 permalink: /blog/02-overview-of-wpe.html
 preview: In <a href="/blog/01-happy-birthday-wpe.html">the previous post in this series</a>, we explained that WPE is a WebKit port optimized for embedded devices. In this post, we'll dive into a more technical overview of the different components of WPE, WebKit, and how they all fit together.

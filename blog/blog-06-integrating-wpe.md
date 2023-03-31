@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Integrating WPE: URI Scheme Handlers and Script Messages"
-tags: [blogpost]
 author: aperez
 date: 2023-03-07
 permalink: /blog/06-integrating-wpe.html
