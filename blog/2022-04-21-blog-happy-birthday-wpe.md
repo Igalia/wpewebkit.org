@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Happy birthday WPE!"
-tags: [blogpost]
 author: nzimmermann
 permalink: /blog/01-happy-birthday-wpe.html
 preview: Welcome to the new Blog section on wpewebkit.org! Let's take some time to celebrate and recap how WPE evolved from the early prototyping days to the product empowering hundreds of millions of devices worldwide today.

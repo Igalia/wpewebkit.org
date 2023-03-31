@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Status of the new SVG engine in WebKit"
-tags: [blogpost]
 author: nzimmermann
 permalink: /blog/05-new-svg-engine.html
 thumbnail: /assets/lbse-logo-wide.png

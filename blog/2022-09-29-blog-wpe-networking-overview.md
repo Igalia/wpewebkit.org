@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "WPE Networking Overview"
-tags: [blogpost]
 author: pgriffis
 permalink: /blog/04-wpe-networking-overview.html
 thumbnail: /assets/networking-layers.svg
