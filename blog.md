@@ -3,9 +3,13 @@ layout: page
 title: "Blog"
 tags: [blog]
 data: { dateless: "true" }
-permalink: /blog/
 sitemapChangeFrequency: weekly
 sitemapPriority: 0.9
+pagination:
+  data: collections.blogpost
+  reverse: true
+  size: 6
+permalink: /blog/{% if pagination.pageNumber > 0 %}{{ (pagination.pageNumber + 1) }}/{% endif %}
 ---
 <style>
 .card ol {
@@ -40,11 +44,9 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 
 </header>
 
-## Recent Articles
-
 <div class="card">
 	<ol reversed role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;">
-	{%- for blogPost in collections.recentBlogPosts -%}
+	{%- for blogPost in pagination.items -%}
 		<li class="listitem">
 			<img src="{{ blogPost.data.thumbnail }}" alt="">
 			<time>{{ blogPost.date | postDate }}</time>
@@ -53,6 +55,17 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
 		</li>
 	{%- endfor -%}
 	</ol>
+
+  <nav class="pagination">
+    <ol>
+      <li>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" title="Previous">«</a>{% else %}<span>«</span>{% endif %}</li>
+      {%- for pageEntry in pagination.pages %}
+      <li><a href="{{ pagination.hrefs[ forloop.index0 ] }}"{% if page.url == pagination.hrefs[ forloop.index0 ] %} aria-current="page"{% endif %}>{{ forloop.index }}</a></li>
+      {%- endfor %}
+      <li>{% if pagination.href.next %}<a href="{{ pagination.href.next }}" title="Next">»</a>{% else %}<span>»</span>{% endif %}</li>
+    </ol>
+  </nav>
+
 	<a class="btn" href="/blog.xml"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
 </div>
 
