@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Release Schedule
+sitemapChangeFrequency: yearly
+sitemapPriority: 0.4
 ---
 
 WPE WebKit follows a 6-month development cycle:

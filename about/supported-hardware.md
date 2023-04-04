@@ -4,6 +4,8 @@ title: "Supported Hardware"
 tags: [about] 
 data: { dateless: "true" }
 permalink: /about/supported-hardware.html 
+sitemapChangeFrequency: monthly
+sitemapPriority: 0.7
 resources: [
 	{
 		"title": "Why Choose WPE?",
@@ -13,12 +15,7 @@ resources: [
 	{
 		"title": "Get Started",
 		"url": "/about/explore-wpe.html",
-		"text": "Links to pre-built installations for platforms like Linux, Raspberry Pi, and more."
-	},
-	{
-		"title": "Try WPE with Flatpak",
-		"url": "/about/flatpak.html",
-		"text": "WPE maintainers leverage Flatpak to allow users to try two different WPE flavors."
+		"text": "Links to pre-built installations for platforms like Linux."
 	},
 	{
 		"title": "Igalia",
@@ -96,9 +93,9 @@ table tbody tr:nth-child(n + 2) > * {
 
 <nav class="sidebar">
 <ul>
-<li class="currentPage"><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></li>
-<li><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
-<li><a href="{{ '#wpe-in-action' | url }}">WPE in Action</a></li>
+<li class="currentPage"><a href="/about/supported-hardware.html">Supported Hardware</a></li>
+<li><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
+<li><a href="#wpe-in-action">WPE in Action</a></li>
 </ul>
 </nav>
 

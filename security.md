@@ -1,6 +1,7 @@
 ---
 title: Security Advisories
 layout: page
+sitemapChangeFrequency: monthly
 pagination:
   data: collections.WSA
   size: 50
@@ -89,7 +90,7 @@ main section ol > li:first-child a[href]:is(:hover, :focus) {
 <ol reversed>
 {%- for post in posts reversed -%}
 <li {% if forloop.first %}class="first"{% endif %}>
-<a href="{{ post.url | url }}">
+<a href="{{ post.url }}">
 <time>{{ post.date | date: "%Y-%m-%d" }}</time>
 <h2>{% if forloop.index < 8 %}
 {{ post.data.title }}

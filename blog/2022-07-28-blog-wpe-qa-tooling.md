@@ -1,14 +1,12 @@
 ---
-layout: post
 title: "WPE QA and tooling"
-tags: [blogpost]
 author: lmoura
 permalink: /blog/04-wpe-qa-tooling.html
 preview: In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it.
 thumbnail: /assets/build-webkit-org-screenshot.png
 ---
 
-In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="{{ '/blog/02-overview-of-wpe.html' | url }}">major components</a> of the project and, specifically, the <a href="{{ '/blog/03-wpe-graphics-architecture.html' | url }}">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="{{ '/' | url }}">WPE</a> aren't necessarily required in order to read this one, we recommend you to starting with the <a href="{{ '/blog/01-happy-birthday-wpe.html' | url }}">first post in the series</a>.
+In the previous posts, my colleagues Claudio and Miguel wrote respectively about the <a href="/blog/02-overview-of-wpe.html">major components</a> of the project and, specifically, the <a href="/blog/03-wpe-graphics-architecture.html">graphics architecture</a> of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about <a href="/">WPE</a> aren't necessarily required in order to read this one, we recommend you to starting with the <a href="/blog/01-happy-birthday-wpe.html">first post in the series</a>.
 
 ## Automated testing
 
@@ -17,7 +15,7 @@ Testing is an essential part of the WebKit project, primarily due to the large n
 As an official port of WebKit, WPE uses the former's testing infrastructure, based on [BuildBot](https://buildbot.net/). There are two primary servers, [one working as an early warning system](https://ews-build.webkit.org) by testing the patches before they're committed to the main repository, and [another](https://build.webkit.org) for more extensive testing after accepting the incoming changes.
 
 <div align="center">
-<img style="width: 75%" alt="build.webkit.org screenshot" align="center" src="{{ '/assets/build-webkit-org-screenshot.png' | url }}">
+<img style="width: 75%" alt="build.webkit.org screenshot" align="center" src="/assets/build-webkit-org-screenshot.png">
 </div>
 
 <br>
@@ -92,7 +90,7 @@ $ ./Tools/Scripts/run-minibrowser --wpe --release https://wpewebkit.org/
 ```
 
 <div align="center">
-<img style="width: 75%" alt="Cog with GTK4 shell screenshot" align="center" src="{{ '/assets/gtk-cog-screenshot.png' | url }}">
+<img style="width: 75%" alt="Cog with GTK4 shell screenshot" align="center" src="/assets/gtk-cog-screenshot.png">
 </div>
 <br>
 
@@ -118,16 +116,7 @@ After hacking locally, you can submit your changes following the workflow listed
 
 ## Testing WPE in the wild
 
-If you don't want to build your WPE build or image, there are some options to [get a taste of WPE]({{ '/about/exploring.html' | url }}) listed on our website, including:
-
-* Prebuilt distribution packages
-    * For [Debian](https://packages.debian.org/search?searchon=sourcenames&keywords=wpewebkit), [Ubuntu](https://packages.ubuntu.com/search?keywords=wpewebkit&searchon=sourcenames&suite=all&section=all), [Raspbian](https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/), [Arch Linux](https://archlinux.org/packages/extra/x86_64/wpewebkit/), and [Fedora](https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/)
-* [Flatpak image]({{ '/about/flatpak.html' | url }})
-* Prebuilt Raspberry Pi (3B, 3B+ and 4) images
-    * For [stable](https://wk-contrib.igalia.com/debian/images/wpe-raspbian.img.zip) and [nightly](https://wk-contrib.igalia.com/debian/images/nightly/wpe-raspbian.img.zip) releases
-* [Balena blocks]({{ '/about/balena-wpe.html' | url }})
-
-Some of these options, like the prebuilt images and the Balena blocks, will be the subject of future blog posts in this series.
+If you don't want to build your WPE build or image, there are some options to [get a taste of WPE](/about/exploring.html) listed on our website.
 
 ## Final thoughts
 

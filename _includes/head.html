@@ -29,13 +29,13 @@
   {%- if page_description %}
   <meta name="description" content="{{ page_description | escape }}">
   {%- endif %}
-  <link rel="canonical" href="{{ site.base_url }}{{ page.url | replace:'index.html','' | url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.base_url }}{{ '/feed.xml' | url }}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | htmlBaseUrl: site.base_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | htmlBaseUrl: site.base_url  }}">
 
   {%- comment %}
   <!-- OpenGraph metadata, see https://ogp.me -->
   {%- endcomment %}
-  <meta property="og:url" content="{{ site.base_url }}{{ page.url | replace:'index.html','' | url }}">
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | htmlBaseUrl: site.base_url }}">
   <meta property="og:title" content="{{ title | escape }}">
 
   {%- if page_description %}
@@ -45,8 +45,8 @@
   {%- comment %}
   <!-- Devise some way of using images other than always the logo. -->
   {%- endcomment %}
-  <meta property="og:image" content="{{ site.base_url }}{{ '/assets/twitter_Profile_WhiteBg_400px.png' | url }}">
-  <meta property="og:image:secure_url" content="{{ site.base_url }}{{ '/assets/twitter_Profile_WhiteBg_400px.png' | url }}">
+  <meta property="og:image" content="{{ '/assets/twitter_Profile_WhiteBg_400px.png' | htmlBaseUrl: site.base_url }}">
+  <meta property="og:image:secure_url" content="{{ '/assets/twitter_Profile_WhiteBg_400px.png' | htmlBaseUrl: site.base_url }}">
   <meta property="og:image:alt" content="WPE logo">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="400">
@@ -74,14 +74,17 @@
   <meta name="twitter:site" content="@WPEWebKit">
 
   <!-- CSS v2 -->
-  <link rel="stylesheet" href="{{ '/css/v2.css' | url }}">
+  <link rel="stylesheet" href="/css/v2.css">
 
   <!-- Custom Fonts -->
-  <link rel="stylesheet" href="{{ '/vendor/font-awesome/css/font-awesome.min.css' | url }}">
-  <link rel="stylesheet" href="{{ '/css/fonts.css' | url }}">
+  <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/css/prism.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="{{ '/css/stylish-portfolio.css' | url }}">
+  <link rel="stylesheet" href="/css/stylish-portfolio.css">
   <script type="text/javascript">
     window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
     function menutog(e) {

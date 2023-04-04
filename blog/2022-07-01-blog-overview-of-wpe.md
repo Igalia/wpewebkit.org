@@ -1,14 +1,12 @@
 ---
-layout: post
 title: "An overview of the WPE WebKit project"
-tags: [blogpost]
 author: csaavedra
 permalink: /blog/02-overview-of-wpe.html
 preview: In <a href="/blog/01-happy-birthday-wpe.html">the previous post in this series</a>, we explained that WPE is a WebKit port optimized for embedded devices. In this post, we'll dive into a more technical overview of the different components of WPE, WebKit, and how they all fit together.
 thumbnail: /assets/wpe-architecture-diagram.png
 ---
 
-In [the previous post in this series]({{ '/blog/01-happy-birthday-wpe.html' | url }}),
+In [the previous post in this series](/blog/01-happy-birthday-wpe.html),
 we explained that WPE is a WebKit
 port optimized for embedded devices. In this post, we'll dive into a
 more technical overview of the different components of WPE, WebKit,
@@ -100,7 +98,7 @@ improvements that land on the WebKit repository on a daily basis.
 
 <img style="display: block; margin: 1em auto;"
 	alt="A diagram of the WPE WebKit architecture"
-	src="{{ '/assets/wpe-architecture-diagram.png' | url }}">
+	src="/assets/wpe-architecture-diagram.png">
 
 The WPE port has several components. Some are in-tree (that is, are a
 part of WebKit itself), while others are out-of-tree. Let's examine
@@ -139,7 +137,7 @@ bottom:
   operating system requirements. As a reference, <a
   href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a> is a
   freedesktop.org-based backend, which uses Wayland and freekdesktop.org
-  technologies, and is <a href="{{ '/about/supported-hardware.html' | url }}">
+  technologies, and is <a href="/about/supported-hardware.html">
   supported for several architectures</a>, including NXP and Broadcom chipsets, like the
   Raspberry Pi, and also regular PC architectures, easing testing and
   development.
@@ -150,23 +148,19 @@ backend. Having a backend, starting the development of a
 WebKit-powered browser is already much easier than it ever was!
 
 For a more detailed description of the architecture of WPE and WebKit,
-check this article on [the architecture of WPE]({{ '/about/architecture.html' | url }}).
+check this article on [the architecture of WPE](/about/architecture.html).
 
 ## OK, sounds interesting, how do I get my hands dirty?
 
 If you have made it this far, you should give WPE a try!
 
-We have listed several on the [exploring WPE]({{ '/about/exploring.html' | url }})
+We have listed several on the [exploring WPE](/about/exploring.html)
 page. From there, you will see that depending on how interested you
 are in the project, your background, and what you'd like to do with
 it, there are different ways!
 
 It can be as easy as installing WPE directly from the most popular
-Linux distributions or downloading and flashing prebuilt images for
-the Raspberry Pi. There are easy and flexible options like
-[Flatpak]({{ '/about/flatpak.html' | url }}) or
-[Balena]({{ '/about/balena-wpe.html' | url }}), which
-you can dig into to learn more. If you want to build WPE yourself,
+Linux distributions. If you want to build WPE yourself,
 you can use [Yocto](https://github.com/Igalia/meta-webkit/wiki/WPE) and if
 you'd like to contribute&mdash;that's very welcome!
 

@@ -1,0 +1,9 @@
+---
+eleventyExcludeFromCollections: true
+permalink: /robots.txt
+---
+User-Agent: *
+Allow: /
+Disallow: /reference/
+Disallow: /releases/
+Sitemap: {{ "/sitemap.xml" | htmlBaseUrl: site.base_url }}

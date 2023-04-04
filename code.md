@@ -4,6 +4,7 @@ title: "Code"
 tags: [about]
 data: { dateless: "true" }
 permalink: /code/
+sitemapChangeFrequency: yearly
 ---
 
 <header class="page">
@@ -38,11 +39,11 @@ With each new release of WPE, we make source tarballs available.
           <span>
           <a class="badge badge-primary"
              title="Download {{ item[0] }} {{ item[1].stable.version }}"
-             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].stable.version | append: '.tar.xz' | url }}"><span class="sr-only">Download v</span>{{ item[1].stable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].stable.version | append: '.tar.xz' }}"><span class="sr-only">Download v</span>{{ item[1].stable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
           <span class="sr-only">-</span>
           <a class="badge badge-secondary"
              title="Release notes for {{ item[0] }} {{ item[1].stable.version }}"
-             href="{{ item[1].stable.url | url }}"><span class="sr-only">Release notes for v{{ item[1].stable.version }}</span><i class="icon-info align-text-bottom"></i></a>
+             href="{{ item[1].stable.url }}"><span class="sr-only">Release notes for v{{ item[1].stable.version }}</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div>
         {%- endfor -%}
@@ -58,11 +59,11 @@ With each new release of WPE, we make source tarballs available.
           <span>
           <a class="badge badge-primary"
              title="Download {{ item[0] }} {{ item[1].unstable.version }}"
-             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].unstable.version | append: '.tar.xz' | url }}"><span class="sr-only">Download v</span>{{ item[1].unstable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].unstable.version | append: '.tar.xz' }}"><span class="sr-only">Download v</span>{{ item[1].unstable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
           <span class="sr-only">-</span>
           <a class="badge badge-secondary"
              title="Release notes for {{ item[0] }} {{ item[1].unstable.version }}"
-             href="{{ item[1].unstable.url | url }}"><span class="sr-only">Release notes for v{{ item[1].unstable.version }}</span><i class="icon-info align-text-bottom"></i></a>
+             href="{{ item[1].unstable.url }}"><span class="sr-only">Release notes for v{{ item[1].unstable.version }}</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div>
         {%- endfor -%}

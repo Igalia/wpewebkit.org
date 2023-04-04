@@ -3,6 +3,7 @@ title: "Developers"
 layout: page
 tags: [devs]
 data: { dateless: "true" }
+sitemapChangeFrequency: yearly
 ---
 <style>
 header.page h1 {
@@ -29,22 +30,17 @@ h2 {
 
 <div>
 
-## [WPE Builds]({{ '/about/builds.html' | url }})
+## [WPE Builds](/about/builds.html)
 
 While there are several simple ways for developers to experiment with and explore WPE, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds. To make this easier, there is also [meta-webkit](https://github.com/Igalia/meta-webkit), which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
 
-<ul class="arrows">
-<li><a href="{{ '/about/explore-wpe.html' | url }}">Linux distros for Debian, Ubuntu, Raspbian, Arch, Fedora...</a></li>
-<li><a href="{{ '/about/flatpak.html' | url }}">Install WPE and minibrowser with flatpak</a></li>
-<li><a href="{{ '/about/rpi-yocto-wpe.html' | url }}">Install with images for Raspberry Pi</a></li>
-<li><a href="{{ '/about/balena-wpe.html' | url }}">Install with Balena</a></li>
-</ul>
+There are also pre-build packages available for many <a href="/about/explore-wpe.html">Linux distributions</a>.
 
 </div>
 
 <div class="dotsep">
 
-## [Release Schedule]({{ '/release/schedule' | url }})
+## [Release Schedule](/release/schedule)
 
 WPE WebKit follows a **6-month development cycle**:
 
@@ -60,13 +56,13 @@ WPE WebKit and [WebKitGTK](https://webkitgtk.org/) share a fair amount of code. 
 
 <div class="dotsep">
 <div>
-<h2><a href="{{ '/about/architecture.html' | url }}">WPE Design</a></h2>
+<h2><a href="/about/architecture.html">WPE Design</a></h2>
 <p>WPE is the official WebKit port for Linux-based embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
 </div>
-<img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
+<img src="/assets/img/diagram-WPE-design.svg" alt="">
 </div>
 
 <div class="dotsep">
-<h2><a href="{{ '/about/faq.html' | url }}">WPE’s Frequently Asked Questions</a></h2>
+<h2><a href="/about/faq.html">WPE’s Frequently Asked Questions</a></h2>
 <p>We've been collecting answers to lots of common questions we've been asked. If you've got questions, you might just find a ready answer in the FAQ.</p>
 </div>

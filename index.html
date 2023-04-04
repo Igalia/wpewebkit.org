@@ -2,6 +2,8 @@
 layout: home.html
 title: WPE
 description: WebKit port optimized for embedded devices
+sitemapPriority: 1.0
+sitemapChangeFrequency: yearly
 ---
 <style>
 
@@ -130,7 +132,7 @@ header.page div > * {
 header.page div h1 {
 	font-size: 3em;
 	font-weight: 400;
-	background: url({{ '/assets/img/graphic-title-white.svg' | url }}) 0 100% / 7rem auto no-repeat;
+	background: url({{ '/assets/img/graphic-title-white.svg' | baseHtmlUrl }}) 0 100% / 7rem auto no-repeat;
 }
 
 .explore-embedded, .resources, .developers {
@@ -204,7 +206,7 @@ header.page div h1 {
 section.igalia {
 	padding-inline: 0;
 	background: 
-		url({{ '/assets/img/dotted-continents.svg' | url }}) 50% 25% / cover;
+		url({{ '/assets/img/dotted-continents.svg' | baseHtmlUrl }}) 50% 25% / cover;
 }
 section.igalia > div {
 	padding-block-end: 3em;
@@ -226,7 +228,7 @@ section.igalia > div > div > img {
 	section.igalia {
 		background: 
 			linear-gradient(to bottom right,#142B7AFA,#80A0B2) 100% 0 / 50% 100% no-repeat,
-			url({{ '/assets/img/dotted-continents.svg' | url }}) 50% 25% / cover;
+			url({{ '/assets/img/dotted-continents.svg' | baseHtmlUrl }}) 50% 25% / cover;
 		background-blend-mode: multiply;
 	}
 	section.igalia > div {
@@ -265,7 +267,7 @@ section.igalia > div > div > img {
 </style>
 
 <header class="page full-width">
-<video muted loop id="banner"><source src="{{ '/assets/video/homepage.mp4' | url }}" type="video/mp4"></video>
+<video muted loop id="banner"><source src="/assets/video/homepage.mp4" type="video/mp4"></video>
 <span></span>
 <div>
 <h1>
@@ -274,7 +276,7 @@ Create simple and performant systems based on <strong>Web platform technologies.
 <p>
 A WebKit port for Linux-based embedded devices designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best performance.
 </p>
-<a class="cta btn large" href="{{ '/about/explore-wpe.html' | url }}">Get Started</a>
+<a class="cta btn large" href="/about/explore-wpe.html">Get Started</a>
 <button id="bannerControl" aria-label="Play/Pause silent background video"><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><path d="M 35,30 l 40,20 -40,20 z" /></svg></button></div>
 </header>
 
@@ -293,25 +295,25 @@ A WebKit port for Linux-based embedded devices designed with flexibility and har
 Open standards with great longevity allows lots more things to benefit from the same investments</li>
   <li>The number of people with the basic skills to build things with web technologies is massive</li>
 </ul>
-<a class="cta btn" style="font-size: smaller;text-align: center;" href="{{ '/about/what-is-embedded.html' | url }}">Learn more about embedded browsers</a>
+<a class="cta btn" style="font-size: smaller;text-align: center;" href="/about/what-is-embedded.html">Learn more about embedded browsers</a>
 </div>
 </header>
 
 <div class="c2 dotsep">
-<h3><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></h3>
+<h3><a href="/about/supported-hardware.html">Supported Hardware</a></h3>
 <p>WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:</p>
 <ul class="gallery c2">
-<li><img src="{{ '/assets/img/logo-rockchip@2x.png' | url }}" alt=""></li>
-<li><img src="{{ '/assets/img/logo-nvidia@2x.png' | url }}" alt=""></li>
-<li><img src="{{ '/assets/img/logo-nxp@2x.png' | url }}" alt=""></li>
-<li><img src="{{ '/assets/img/logo-qualcomm@2x.png' | url }}" alt=""></li>
+<li><img src="/assets/img/logo-rockchip@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-nvidia@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-nxp@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-qualcomm@2x.png" alt=""></li>
 </ul>
 </div>
 
 <div class="c2 dotsep">
-<h3><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></h3>
+<h3><a href="/about/a-good-choice.html">Why Choose WPE?</a></h3>
 <p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
-<img src="{{ '/assets/img/WhyChooseWPE-homepage.png' | url }}" alt="">
+<img src="/assets/img/WhyChooseWPE-homepage.png" alt="">
 </div>
 
 </section>
@@ -322,11 +324,11 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 <div class="spotlight">
 <h2>Customer Success Story</h2> 
-<h3><a href="{{ '/blog/2022-success-metrological.html' | url }}"><img src="{{ '/assets/img/logo-metrological@2x.png' | url }}" alt="Metrological"></a></h3>
+<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
 <p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
-<p><a href="{{ '/blog/2022-success-metrological.html' | url }}" class="cta btn large">Read Success Story</a></p>
+<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
 </div>
-<img src="{{ '/assets/img/Metrological-hero.jpg' | url }}" alt="" class="hero">
+<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
 
 </div>
 </section>
@@ -336,18 +338,18 @@ Open standards with great longevity allows lots more things to benefit from the 
 <div>
 
 <header class="full-bleed">
-<h2><a href="{{ '/developers' | url }}">Developers</a></h2>
-<img src="{{ '/assets/img/illustration-resources.svg' | url }}" alt="" class="decoration">
+<h2><a href="/developers">Developers</a></h2>
+<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
 </header>
 
 <div class="c2 dotsep">
-<h3><a href="{{ '/about/architecture.html' | url }}">WPE Design</a></h3>
+<h3><a href="/about/architecture.html">WPE Design</a></h3>
 <p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
-<img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="" class="decoration">
+<img src="/assets/img/diagram-WPE-design.svg" alt="" class="decoration">
 </div>
 
 <div class="c2 dotsep text">
-<h3><a href="{{ '/about/faq.html' | url }}">WPE’s Frequently Asked Questions</a></h3>
+<h3><a href="/about/faq.html">WPE’s Frequently Asked Questions</a></h3>
 <p>We’ve been collecting answers to lots of common questions we’ve been asked. If you have questions, you might find a ready answer in the FAQ.</p>
 </div>
 
@@ -358,12 +360,12 @@ Open standards with great longevity allows lots more things to benefit from the 
 <div>
 
 <h3>Brought to you by</h3>
-<a href="{{ 'https://igalia.com/' | url }}"><img src="{{ '/assets/img/igalia-larger.png' | url }}" alt="Igalia"></a>
+<a href="https://igalia.com/"><img src="/assets/img/igalia-larger.png" alt="Igalia"></a>
 
 <div>
-<img src="{{ '/assets/img/Igalia_tagline-white-1.png' | url }}" alt="Open Source Consultancy">
-<p>WPEWebKit is developed by <a href="{{ 'https://igalia.com/' | url }}">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="{{ 'https://igalia.com/contact/' | url }}">Get in touch!</a></p>
-<a href="{{ 'https://igalia.com/' | url }}" class="cta btn large">igalia.com</a>
+<img src="/assets/img/Igalia_tagline-white-1.png" alt="Open Source Consultancy">
+<p>WPEWebKit is developed by <a href="https://igalia.com">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="https://igalia.com/contact/">Get in touch!</a></p>
+<a href="https://igalia.com" class="cta btn large">igalia.com</a>
 </div>
 
 </div>

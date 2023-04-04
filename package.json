@@ -4,6 +4,7 @@
   "description": "",
   "main": "eleventy",
   "scripts": {
+    "build": "eleventy --quiet --pathprefix=/",
     "serve": "eleventy --serve --quiet --pathprefix=/",
     "deploy-dev": "gh-pages -d _site"
   },
@@ -19,8 +20,9 @@
   },
   "homepage": "https://github.com/Igalia/wpewebkit.org#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy": "^2.0.0",
     "@11ty/eleventy-plugin-rss": "^1.1.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.2.0",
     "gh-pages": "^3.0.0"
   },
   "dependencies": {

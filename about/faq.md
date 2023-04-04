@@ -4,6 +4,7 @@ title: "WPE's Frequently Asked Questions"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/faq.html
+sitemapChangeFrequency: monthly
 ---
 
 [[toc]]

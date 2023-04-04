@@ -4,6 +4,7 @@ title: "The Architecture of WPE"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/architecture.html
+sitemapChangeFrequency: yearly
 ---
 <style>
 main > *, .dotsep {
@@ -31,7 +32,7 @@ such as the traditional Cocoa, GTK, etc toolkits.
 </header>
 
 <div class="masthead-img full-bleed" align="center">
-<img src="{{ '/assets/img/diagram-WPE-design.svg' | url }}" alt="">
+<img src="/assets/img/diagram-WPE-design.svg" alt="">
 </div>
 
 <section>

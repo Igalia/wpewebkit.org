@@ -3,7 +3,9 @@ layout: page
 title: "Learn & Discover"
 tags: [learn]
 data: { dateless: "true" }
-permalink: /about/index.html
+permalink: /about/
+sitemapChangeFrequency: yearly
+sitemapPriority: 0.9
 --- 
 <style>
 @media (min-width: 30rem) {
@@ -156,8 +158,8 @@ lazy-youtube a > span {
 
 <nav class="sidebar">
 <ul>
-<li><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></li>
-<li><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></li>
+<li><a href="/about/supported-hardware.html">Supported Hardware</a></li>
+<li><a href="/about/a-good-choice.html">Why Choose WPE?</a></li>
 <li><a href="#wpe-in-action">WPE in Action</a></li>
 </ul>
 </nav>
@@ -188,10 +190,10 @@ We understand that WPE is interesting from many perspectives, and to people of p
 ### An embedded developer
 
 <ul class="arrows">
-<li>Wondering if WPE is <a href="{{ '/about/supported-hardware.html' | url }}">currently available for your device?</a></li>
-<li>Wondering <a href="{{ '/about/a-good-choice.html' | url }}">what makes WPE a good choice</a></li>
-<li>Interested in learning more about <a href="{{ '/about/architecture.html' | url }}">the architecture of WPE</a></li>
-<li>An experienced embedded developer ready to <a href="{{ 'https://github.com/Igalia/meta-webkit/wiki/WPE' | url }}">build and tune WPE</a></li>
+<li>Wondering if WPE is <a href="/about/supported-hardware.html">currently available for your device?</a></li>
+<li>Wondering <a href="/about/a-good-choice.html">what makes WPE a good choice</a></li>
+<li>Interested in learning more about <a href="/about/architecture.html">the architecture of WPE</a></li>
+<li>An experienced embedded developer ready to <a href="https://github.com/Igalia/meta-webkit/wiki/WPE">build and tune WPE</a></li>
 <li>Interested in all of the various ways you can get <a href="explore-wpe.html">started actually using and exploring WPE</a></li>
 </ul>
 
@@ -199,20 +201,20 @@ We understand that WPE is interesting from many perspectives, and to people of p
 </section>
 
 <div>
-<h3><a href="{{ '/about/supported-hardware.html' | url }}">Supported Hardware</a></h3>
+<h3><a href="/about/supported-hardware.html">Supported Hardware</a></h3>
 <p>WPE is currently running on a wide range of hardware, including devices made by:</p>
 <ul class="gallery c4">
-<li><img src="{{ '/assets/img/logo-rockchip@2x.png' | url }}" alt=""></li>
-<li><img src="{{ '/assets/img/logo-nvidia@2x.png' | url }}" alt=""></li>
-<li><img src="{{ '/assets/img/logo-nxp@2x.png' | url }}" alt=""></li>
-<li><img src="{{ '/assets/img/logo-qualcomm@2x.png' | url }}" alt=""></li>
+<li><img src="/assets/img/logo-rockchip@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-nvidia@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-nxp@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-qualcomm@2x.png" alt=""></li>
 </ul>
 </div>
 
 <div class="dotsep">
-<h3><a href="{{ '/about/a-good-choice.html' | url }}">Why Choose WPE?</a></h3>
+<h3><a href="/about/a-good-choice.html">Why Choose WPE?</a></h3>
 <p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
-<img src="{{ '/assets/img/WhyChooseWPE-ExploreLand.png' | url }}" alt="">
+<img src="/assets/img/WhyChooseWPE-ExploreLand.png" alt="">
 </div>
 
 <div class="dotsep">

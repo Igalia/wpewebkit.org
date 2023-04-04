@@ -16,7 +16,7 @@ header.page time {
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="{{ site.base_url }}{{ page.url | url }}">
+<meta itemprop="url" content="{{ page.url | htmlBaseUrl: site.base_url }}">
 
 <header class="page full-bleed">
  <h1 itemprop="headline">{{ title }}</h1>
@@ -27,7 +27,7 @@ header.page time {
   {% if download %}
   <a class="btn btn-xl btn-secondary mt-3" href="{{ download }}">Download</a>
   {% elsif package and version %}
-  <a class="btn btn-xl btn-secondary mt-3" href="{{ site.release_dir | append:'/' | append: package | append: '-' | append: version | append: '.tar.xz' | url }}">Download</a>
+  <a class="btn btn-xl btn-secondary mt-3" href="{{ site.release_dir | append:'/' | append: package | append: '-' | append: version | append: '.tar.xz' }}">Download</a>
   {% endif %}
 </header>
 
