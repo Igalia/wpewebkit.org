@@ -34,6 +34,9 @@
   <link rel="stylesheet" href="/wpewebkit.org/success-digital-signage/vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/wpewebkit.org/success-digital-signage/css/fonts.css">
 
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/success-digital-signage/css/prism.css">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/wpewebkit.org/success-digital-signage/css/stylish-portfolio.css">
   <script type="text/javascript">
@@ -70,11 +73,11 @@
 		<ul class=" off"><li class="currentPage">
 			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/">Home</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/about">Learn & Discover</a>
+			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/about/">Learn & Discover</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/blog">Blog</a>
+			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/blog/">Blog</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/developers">Developers</a>
+			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/developers/">Developers</a>
 			</li><li>
 			<a class="btn cta" href="/wpewebkit.org/success-digital-signage/about/explore-wpe.html">Get Started</a>
 			</li></ul>
@@ -210,7 +213,7 @@ header.page div > * {
 header.page div h1 {
 	font-size: 3em;
 	font-weight: 400;
-	background: url(/wpewebkit.org/success-digital-signage/assets/img/graphic-title-white.svg) 0 100% / 7rem auto no-repeat;
+	background: url(/assets/img/graphic-title-white.svg) 0 100% / 7rem auto no-repeat;
 }
 
 .explore-embedded, .resources, .developers {
@@ -284,7 +287,7 @@ header.page div h1 {
 section.igalia {
 	padding-inline: 0;
 	background: 
-		url(/wpewebkit.org/success-digital-signage/assets/img/dotted-continents.svg) 50% 25% / cover;
+		url(/assets/img/dotted-continents.svg) 50% 25% / cover;
 }
 section.igalia > div {
 	padding-block-end: 3em;
@@ -306,7 +309,7 @@ section.igalia > div > div > img {
 	section.igalia {
 		background: 
 			linear-gradient(to bottom right,#142B7AFA,#80A0B2) 100% 0 / 50% 100% no-repeat,
-			url(/wpewebkit.org/success-digital-signage/assets/img/dotted-continents.svg) 50% 25% / cover;
+			url(/assets/img/dotted-continents.svg) 50% 25% / cover;
 		background-blend-mode: multiply;
 	}
 	section.igalia > div {
@@ -345,7 +348,7 @@ section.igalia > div > div > img {
 </style>
 
 <header class="page full-width">
-<video muted loop id="banner"><source src="/wpewebkit.org/success-digital-signage/assets/video/homepage.mp4" type="video/mp4"></video>
+<video muted="" loop="" id="banner"><source src="/wpewebkit.org/success-digital-signage/assets/video/homepage.mp4" type="video/mp4"></video>
 <span></span>
 <div>
 <h1>
@@ -355,7 +358,7 @@ Create simple and performant systems based on <strong>Web platform technologies.
 A WebKit port for Linux-based embedded devices designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best performance.
 </p>
 <a class="cta btn large" href="/wpewebkit.org/success-digital-signage/about/explore-wpe.html">Get Started</a>
-<button id="bannerControl" aria-label="Play/Pause silent background video"><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><path d="M 35,30 l 40,20 -40,20 z" /></svg></button></div>
+<button id="bannerControl" aria-label="Play/Pause silent background video"><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none"></circle><path d="M 35,30 l 40,20 -40,20 z"></path></svg></button></div>
 </header>
 
 
@@ -442,8 +445,8 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 <div>
 <img src="/wpewebkit.org/success-digital-signage/assets/img/Igalia_tagline-white-1.png" alt="Open Source Consultancy">
-<p>WPEWebKit is developed by <a href="https://igalia.com/">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="https://igalia.com/contact/">Get in touch!</a></p>
-<a href="https://igalia.com/" class="cta btn large">igalia.com</a>
+<p>WPEWebKit is developed by <a href="https://igalia.com">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="https://igalia.com/contact/">Get in touch!</a></p>
+<a href="https://igalia.com" class="cta btn large">igalia.com</a>
 </div>
 
 </div>
@@ -472,6 +475,7 @@ window.onload = function() {
 	}
 }
 </script>
+
 
     <footer class="global">
 	<b></b>

@@ -477,10 +477,19 @@ blockquote {
     width: 100%;
 }
 
+hr.author-line + div {
+    margin-top: 1.5rem;
+    color: #666;
+}
+hr.author-line + div > img.circle-mask {
+	margin-top: -1rem;
+}
+
 .circle-mask {
     width: 8rem;
     height: auto;
     float: left;
     margin-right: 2rem;
+    margin-bottom: 2rem;
     border-radius: 50%;
 }

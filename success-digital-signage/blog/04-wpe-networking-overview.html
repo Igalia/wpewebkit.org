@@ -33,6 +33,9 @@
   <link rel="stylesheet" href="/wpewebkit.org/success-digital-signage/vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/wpewebkit.org/success-digital-signage/css/fonts.css">
 
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/success-digital-signage/css/prism.css">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/wpewebkit.org/success-digital-signage/css/stylish-portfolio.css">
   <script type="text/javascript">
@@ -69,11 +72,11 @@
 		<ul class="blog off"><li>
 			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/">Home</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/about">Learn & Discover</a>
-			</li><li class="currentPage">
-			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/blog">Blog</a>
+			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/about/">Learn & Discover</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/developers">Developers</a>
+			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/success-digital-signage/developers/">Developers</a>
 			</li><li>
 			<a class="btn cta" href="/wpewebkit.org/success-digital-signage/about/explore-wpe.html">Get Started</a>
 			</li></ul>
@@ -93,7 +96,7 @@ header.page time {
 	opacity: 0.67;
 }
 </style>
-<div itemscope itemtype="http://schema.org/TechArticle">
+<div itemscope="" itemtype="http://schema.org/TechArticle">
 <meta itemprop="creativeWorkStatus" content="Published">
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
@@ -115,15 +118,15 @@ header.page time {
 <p>Due to this abstraction there are a few independent layers that make up the networking stack of WPE. In this post, I’ll break down what each layer accomplishes as well as give some insight into the codebase’s structure.</p>
 <h2 id="networking-layers" tabindex="-1">Networking Layers</h2>
 <div align="center">
-    <img alt="WebKit Network Layers" src="/assets/networking-layers.svg">
+    <img alt="WebKit Network Layers" src="/wpewebkit.org/success-digital-signage/assets/networking-layers.svg">
 </div>
 <h3 id="webkit" tabindex="-1">WebKit</h3>
 <p>Before we get into the libraries used for WPE, let’s discuss WebKit itself. Despite abstracting out a lot of the protocol handling, WebKit itself still needs to understand a lot of fundamentals of HTTP.</p>
-<p>WebCore (discussed in <a href="/blog/02-overview-of-wpe.html">WPE Overview</a>) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by <code>ResourceRequest</code> and <code>ResourceResponse</code> objects, which map to general HTTP functionality.</p>
+<p>WebCore (discussed in <a href="/wpewebkit.org/success-digital-signage/blog/02-overview-of-wpe.html">WPE Overview</a>) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by <code>ResourceRequest</code> and <code>ResourceResponse</code> objects, which map to general HTTP functionality.</p>
 <h4 id="networkprocess" tabindex="-1">NetworkProcess</h4>
 <p>A core part of modern web engine security is the multi-process model.  In order to defend against exploits, each website runs in its own isolated process that does not have network access. In order to allow for network access, they must talk over IPC to a dedicated NetworkProcess, typically one per browser instance. The NetworkProcess receives a <code>ResourceRequest</code>, creates a <code>NetworkDataTask</code> with it to download the data, and responds with a <code>ResourceResponse</code> to the WebProcess which looks like this:</p>
 <div align="center">
-    <img alt="WebKit Network Flowchart" src="/assets/networking-flow.svg">
+    <img alt="WebKit Network Flowchart" src="/wpewebkit.org/success-digital-signage/assets/networking-flow.svg">
 </div>
 <h3 id="wpe" tabindex="-1">WPE</h3>
 <p>WPE implements the platform-specific versions of the classes above as <code>ResourceRequestSoup</code> and <code>NetworkDataTaskSoup</code>, primarily using a library called libsoup.</p>
@@ -176,7 +179,7 @@ header.page time {
 
 </div>
 
-    </main>
+    </div></main>
 
     <footer class="global">
 	<b></b>
