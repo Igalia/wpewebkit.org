@@ -224,7 +224,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 	<div class="item">
   		<lazy-youtube hash="bg6yCx7VdPY" title="WPE WebGL performance demos">
 			<div>
-				<a href="https:/www.youtube-nocookie.com/embed/bg6yCx7VdPY?autoplay=1"><img src="https:/img.youtube.com/vi/bg6yCx7VdPY/hqdefault.jpg" alt="Video: WPE WebGL performance demos"><span>▶</span></a>
+				<a href="https://www.youtube-nocookie.com/embed/bg6yCx7VdPY?autoplay=1"><img src="https://img.youtube.com/vi/bg6yCx7VdPY/hqdefault.jpg" alt="Video: WPE WebGL performance demos"><span>▶</span></a>
 				<div>WPE WebGL performance demos</div>
 			</div>
 		</lazy-youtube>
@@ -232,7 +232,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 	<div class="item">
 		<lazy-youtube hash="Nz2Y8HGdZDE" title="WPE SVG Transformations and Hardware Acceleration">
 	  		<div>
-	  			<a href="https:/www.youtube-nocookie.com/embed/Nz2Y8HGdZDE?autoplay=1"><img src="https:/img.youtube.com/vi/Nz2Y8HGdZDE/hqdefault.jpg" alt="Video: WPE SVG Transformations and Hardware Acceleration"><span>▶</span></a>
+	  			<a href="https://www.youtube-nocookie.com/embed/Nz2Y8HGdZDE?autoplay=1"><img src="https://img.youtube.com/vi/Nz2Y8HGdZDE/hqdefault.jpg" alt="Video: WPE SVG Transformations and Hardware Acceleration"><span>▶</span></a>
 				<div>WPE SVG Transformations and Hardware Acceleration</div>
 			</div>
 		</lazy-youtube>
@@ -240,7 +240,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 	<div class="item">
   		<lazy-youtube hash="_X_23cb8l6o" title="WPE 2d canvas and video performance on low end-hardware">
   			<div>
-  				<a href="https:/www.youtube-nocookie.com/embed/_X_23cb8l6o?autoplay=1"><img src="https:/img.youtube.com/vi/_X_23cb8l6o/hqdefault.jpg" alt="Video: WPE 2d canvas and video performance on low end-hardware"><span>▶</span></a>
+  				<a href="https://www.youtube-nocookie.com/embed/_X_23cb8l6o?autoplay=1"><img src="https://img.youtube.com/vi/_X_23cb8l6o/hqdefault.jpg" alt="Video: WPE 2d canvas and video performance on low end-hardware"><span>▶</span></a>
   				<div>WPE 2d canvas and video performance on low end-hardware</div>
 			</div>
 		</lazy-youtube>
@@ -248,7 +248,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 	<div class="item">
   		<lazy-youtube hash="QNZJYOuVGiE" title="Web-augmented video overlays with WPEWebKit and GStreamer">
 			<div>
-				<a href="https:/www.youtube-nocookie.com/embed/QNZJYOuVGiE?autoplay=1"><img src="https:/img.youtube.com/vi/QNZJYOuVGiE/hqdefault.jpg" alt="Video: Web-augmented video overlays with WPEWebKit and GStreamer"><span>▶</span></a>
+				<a href="https://www.youtube-nocookie.com/embed/QNZJYOuVGiE?autoplay=1"><img src="https://img.youtube.com/vi/QNZJYOuVGiE/hqdefault.jpg" alt="Video: Web-augmented video overlays with WPEWebKit and GStreamer"><span>▶</span></a>
 				<div>Web-augmented video overlays with WPEWebKit and GStreamer</div>
 			</div>
 		</lazy-youtube>
@@ -256,7 +256,7 @@ We understand that WPE is interesting from many perspectives, and to people of p
 	<div class="item">
   		<lazy-youtube hash="0L8Fv7sswSk" title="WPE CSS Transforms and Performance">
 			<div>
-				<a href="https:/www.youtube-nocookie.com/embed/0L8Fv7sswSk?autoplay=1"><img src="https:/img.youtube.com/vi/0L8Fv7sswSk/hqdefault.jpg" alt="Video: WPE CSS Transforms and Performance"><span>▶</span></a>
+				<a href="https://www.youtube-nocookie.com/embed/0L8Fv7sswSk?autoplay=1"><img src="https://img.youtube.com/vi/0L8Fv7sswSk/hqdefault.jpg" alt="Video: WPE CSS Transforms and Performance"><span>▶</span></a>
 				<div>WPE CSS Transforms and Performance</div>
 			</div>
 		</lazy-youtube>
