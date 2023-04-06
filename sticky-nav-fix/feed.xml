@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2023-03-22T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPEBackend-fdo 1.14.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpebackend-fdo-1.14.2.html"/>
+    <updated>2023-03-22T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpebackend-fdo-1.14.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpebackend-fdo-1.14.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPEBackend-fdo 1.14.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Reverted a change introduced in 1.14.1 which introduced crashes both
+with WebKitGTK and WPE running under Wayland in some configurations.&lt;/li&gt;
+&lt;li&gt;Fix a crash caused by wrong assertion, which was typically triggered in
+debug builds when using the NVidia drivers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpebackend-fdo-1.14.2.tar.xz (42.3 KiB)
+   md5sum: dafd899646b2e31ef2d97938a638c48d
+   sha1sum: f453f8d77e93f4ac6ac81c1874d4d6bdcb45c253
+   sha256sum: 93c9766ae9864eeaeaee2b0a74f22cbca08df42c1a1bdb55b086f2528e380d38
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.40.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.40.0.html"/>
+    <updated>2023-03-18T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.40.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.40 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.40.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.40.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The new 2.0 API is now considered stable. It is still possible to build the
+old 1.0 API using &lt;code&gt;-USE_SOUP2=ON&lt;/code&gt;, or the 1.1 API using
+&lt;code&gt;-DENABLE_WPE_1_1_API=ON&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Support for &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API#webgl_2&quot;&gt;WebGL 2&lt;/a&gt;,
+built on top of &lt;a href=&quot;https://angleproject.org/&quot;&gt;ANGLE&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Support for the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis&quot;&gt;Speech Synthesis API&lt;/a&gt;,
+using &lt;a href=&quot;http://www.festvox.org/flite/&quot;&gt;Flite&lt;/a&gt;. This may be disabled at build
+time using &lt;code&gt;-DENABLE_SPEECH_SYNTHESIS=OFF&lt;/code&gt;, which also avoids the Flite
+dependency.&lt;/li&gt;
+&lt;li&gt;Support client-side TLS certificates over WebSocket connections.&lt;/li&gt;
+&lt;li&gt;Support CSS &lt;code&gt;background-repeat: space&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Added new API to respond to permission requests for a number of &lt;a href=&quot;https://w3c.github.io/permissions/&quot;&gt;web-facing
+features&lt;/a&gt;
+(&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.WebView.query-permission-state.html&quot;&gt;reference&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Added new API to register user script message handlers that return values
+asynchronously
+(&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.UserContentManager.script-message-with-reply-received.html&quot;&gt;reference&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Added new API to get the request body of a &lt;code&gt;WebKitURISchemeRequest&lt;/code&gt;
+(&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/method.URISchemeRequest.get_http_body.html&quot;&gt;reference&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Added new API to run JavaScript code that may use asynchronous constructs,
+like &lt;code&gt;Promise&lt;/code&gt; and &lt;code&gt;await&lt;/code&gt;
+(&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/method.WebView.call_async_javascript_function.html&quot;&gt;reference&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Allow handling the &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.Download.decide-destination.html&quot;&gt;WebKitDownload::decide-destination
+signal&lt;/a&gt;
+asynchronously.&lt;/li&gt;
+&lt;li&gt;Allow copying the contents of &lt;code&gt;webkit://gpu&lt;/code&gt; to the clipboard as JSON.&lt;/li&gt;
+&lt;li&gt;Make check boxes, radio buttons, and spin buttons scale along with the page
+zoom.&lt;/li&gt;
+&lt;li&gt;Improved scrolling performance.&lt;/li&gt;
+&lt;li&gt;Fix inordinately large memory allocations when uploading data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.40.0.tar.xz (35.8 MiB)
+   md5sum: a90114f905b7996925a73dbb6a36aa72
+   sha1sum: 06e475479c71c829c1eb67a77cd1e7fe7f952ad0
+   sha256sum: a8ec2bcfa1613768ab3ce7f65cac4f214835266c2ff59440d72180baec3086b6
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.17.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/cog-0.17.1.html"/>
+    <updated>2023-03-12T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/cog-0.17.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 0.18 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.17.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.17.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support building against the new WPE WebKit 2.0 API.&lt;/li&gt;
+&lt;li&gt;Allow choosing the gamepad backend at runtime.&lt;/li&gt;
+&lt;li&gt;meson: Build in C11 mode by default.&lt;/li&gt;
+&lt;li&gt;drm, wl: Improved plug-in documentation.&lt;/li&gt;
+&lt;li&gt;headless: Allow configuring the maximum refresh rate.&lt;/li&gt;
+&lt;li&gt;gtk4: Follow device scale factor changes.&lt;/li&gt;
+&lt;li&gt;wl: Add support for &lt;code&gt;libweston-12-protocols&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;wl: Fix usage of raw codes for keyboard input.&lt;/li&gt;
+&lt;li&gt;wl: Fix issues due to attachment of buffers with mismatched sizes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.17.1.tar.xz (121.4 KiB)
+   md5sum: 35c936b90ae89c976fc5d3bbe26a8ba6
+   sha1sum: 36c7528fbf0b7e36826c629303016d488e431b87
+   sha256sum: 69e7d3b62c206210c3c436746d1241bfb99a1e789e6c4b7cb65dd9ae72459d42
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.39.91 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.39.91.html"/>
+    <updated>2023-03-08T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.39.91.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.40 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.39.91%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.39.91?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Rename &lt;code&gt;WebKitWebExtension&lt;/code&gt; to &lt;code&gt;WebKitWebProcessExtension&lt;/code&gt; in the new API.&lt;/li&gt;
+&lt;li&gt;Remove &lt;code&gt;WebKitJavascriptResult&lt;/code&gt; in favor of using &lt;code&gt;JSCValue&lt;/code&gt; directly in the new API.&lt;/li&gt;
+&lt;li&gt;Add new API to get the request body of &lt;code&gt;WebKitURISchemeRequest&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Make it possible to handle the &lt;code&gt;WebKitDownload::decide-destination&lt;/code&gt; signal asynchronously.&lt;/li&gt;
+&lt;li&gt;Allow &lt;code&gt;WebKitDownload destination&lt;/code&gt; to be a path instead of a URI.&lt;/li&gt;
+&lt;li&gt;Make the output from &lt;code&gt;webkit://gpu&lt;/code&gt; exportable as JSON.&lt;/li&gt;
+&lt;li&gt;Improve scrolling performance in accelerated compositing mode.&lt;/li&gt;
+&lt;li&gt;Implement &lt;code&gt;KeyboardEvent.repeat&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build in Ubuntu 20.04 and Debian Stable.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.39.91.tar.xz (35.8 MiB)
+   md5sum: 5062e94c0e5c6e70266c27f06be96add
+   sha1sum: 63d496852c5b0474aa5d6e45d34cefbbc4e5d1f4
+   sha256sum: 1dab45e12697157d7970469620ce706fe3fc01daed4a4674b7a61dad1ee64259
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPEBackend-fdo 1.14.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpebackend-fdo-1.14.1.html"/>
+    <updated>2023-03-04T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpebackend-fdo-1.14.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpebackend-fdo-1.14.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPEBackend-fdo 1.14.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix WebKit no longer repainting after provisional navigation with
+PSON enabled.&lt;/li&gt;
+&lt;li&gt;Fix graphics buffer leaks by always freeing them in buffer destroy
+listener callbacks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpebackend-fdo-1.14.1.tar.xz (42.2 KiB)
+   md5sum: 2b49218cdd16075b028bbaf5a4f57890
+   sha1sum: a68db2480d29d53d7fa24c69888bacbab6efea11
+   sha256sum: 01938dd93c62b3a47b18dd13c70d50490a8b8a6caec23c8550a3dbdbcc6bbb50
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.39.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.39.90.html"/>
+    <updated>2023-02-23T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.39.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.40 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.39.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.39.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add network session API when building with the new API.&lt;/li&gt;
+&lt;li&gt;Add new JavaScript execution APIs.&lt;/li&gt;
+&lt;li&gt;Add support for speech synthesis using &lt;a href=&quot;http://www.festvox.org/flite/&quot;&gt;Flite&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Always update the active URI of &lt;code&gt;WebKitFrame&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Bring back the &lt;code&gt;WebKitConsoleMessage&lt;/code&gt; API implementation.&lt;/li&gt;
+&lt;li&gt;Do not allow the sandbox to mount the entire home directory.&lt;/li&gt;
+&lt;li&gt;Fix criticals from &lt;code&gt;webkitOptionMenuSetEvent&lt;/code&gt; when opening any combo box.&lt;/li&gt;
+&lt;li&gt;Fix large memory allocation when uploading content.&lt;/li&gt;
+&lt;li&gt;Fix scrolling after a history navigation with PSON enabled.&lt;/li&gt;
+&lt;li&gt;Fix the &lt;code&gt;webkit.h&lt;/code&gt; public header causing applications failing to build.&lt;/li&gt;
+&lt;li&gt;Enable WebGL2 by default, which was disabled by mistake.&lt;/li&gt;
+&lt;li&gt;Fix the build with WebGL disabled.&lt;/li&gt;
+&lt;li&gt;Remove the favicon functionality when building with the new API.&lt;/li&gt;
+&lt;li&gt;Make most public types final (non-derivable) and class struct declarations private when building with the new API.&lt;/li&gt;
+&lt;li&gt;Merge functions of registering and unregistering script message handlers in the new API.&lt;/li&gt;
+&lt;li&gt;Remove most of the &lt;code&gt;webkit_web_view_new_with_*()&lt;/code&gt; constructors when building with the new GLib API.&lt;/li&gt;
+&lt;li&gt;Remove &lt;code&gt;webkit_web_context_{get,set}_process_model()&lt;/code&gt; when building with the new GLib API.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.39.90.tar.xz (35.8 MiB)
+   md5sum: 36def91376043e3123e892336ea9965e
+   sha1sum: 8da1bcab365078346db5f9a971ec7ab344448817
+   sha256sum: 9fc2e39a6a4db0d4e8ee7ba051e44a8ba3fc090fa82ac9a008e3d839bdd4852d
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.38.5 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.38.5.html"/>
+    <updated>2023-02-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.38.5.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.38 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.38.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.38.5?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix large memory allocation when uploading content.&lt;/li&gt;
+&lt;li&gt;Fix scrolling after a history navigation with PSON enabled.&lt;/li&gt;
+&lt;li&gt;Always update the active URI of &lt;code&gt;WebKitFrame&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with the external hole-punch media playback enabled.&lt;/li&gt;
+&lt;li&gt;Fix the build on Ubuntu 20.04.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.38.5.tar.xz (29.1 MiB)
+   md5sum: 73f7abd0c1cc808032869f72602166e3
+   sha1sum: 3f10a04758eeb349f63f841aff765dae25bcde1b
+   sha256sum: ff00fd3d0a4c6d551850a78a7dfe4883b6b7ebd93c5549e1121b2f43d3ac1661
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2023-0002</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/security/WSA-2023-0002.html"/>
+    <updated>2023-02-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/security/WSA-2023-0002.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 15, 2023&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2023-0002&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/security/WSA-2023-0002.html#CVE-2023-23529&quot;&gt;CVE-2023-23529&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2023-23529&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23529&quot;&gt;CVE-2023-23529&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.5.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been actively exploited. Description: A type confusion
+issue was addressed with improved checks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.38.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.38.4.html"/>
+    <updated>2023-02-02T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/release/wpewebkit-2.38.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.38 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.38.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.38.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve GStreamer multimedia playback across the board with improved
+codec selection logic, better handling of latency, and improving
+frame discard to avoid audio/video desynchronization, among other
+fixes.&lt;/li&gt;
+&lt;li&gt;Disable HLS media playback by default, which makes web sites use MSE
+instead. If needed &lt;code&gt;WEBKIT_GST_ENABLE_HLS_SUPPORT=1&lt;/code&gt; can be set in the
+environment to enable it back.&lt;/li&gt;
+&lt;li&gt;Fix MediaSession API not showing artwork images.&lt;/li&gt;
+&lt;li&gt;Fix MediaSession MPRIS usage when running inside a Flatpak sandbox.&lt;/li&gt;
+&lt;li&gt;Fix input element controls to correctly scale when applying a zoom
+factor different than the default.&lt;/li&gt;
+&lt;li&gt;Fix leakage of Web processes in certain situations.&lt;/li&gt;
+&lt;li&gt;Fix the injected bundle not being found when running inside a sandbox.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_INTROSPECTION&lt;/code&gt; when cross-compiling.&lt;/li&gt;
+&lt;li&gt;FIx the build with &lt;code&gt;ENABLE_WEBGL&lt;/code&gt; disabled.&lt;/li&gt;
+&lt;li&gt;Fix the build with GStreamer-based WebRTC enabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.38.4.tar.xz (29.1 MiB)
+   md5sum: 1c947ef5b73049fc6c102c92013009bf
+   sha1sum: 7fe9a7d98401256b0c9872f1c2b702e56840cbd3
+   sha256sum: 8c1bc113ef151fb0be2640824d323bc755dc97295ab7a1bc05e7ec589937a07b
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2023-0001</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/security/WSA-2023-0001.html"/>
+    <updated>2023-02-02T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/security/WSA-2023-0001.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 02, 2023&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2023-0001&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/security/WSA-2023-0001.html#CVE-2023-23517&quot;&gt;CVE-2023-23517&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/security/WSA-2023-0001.html#CVE-2023-23518&quot;&gt;CVE-2023-23518&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/sticky-nav-fix/security/WSA-2023-0001.html#CVE-2022-42826&quot;&gt;CVE-2022-42826&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-23517&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23517&quot;&gt;CVE-2023-23517&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.4.&lt;/li&gt;
+&lt;li&gt;Credit to YeongHyeon Choi (@hyeon101010), Hyeon Park
+(@tree_segment), SeOk JEON (@_seokjeon), YoungSung Ahn (@_ZeroSung),
+JunSeo Bae (@snakebjs0107), Dohyun Lee (@l33d0hyun) of Team
+ApplePIE.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: The issue was addressed with
+improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-23518&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-23518&quot;&gt;CVE-2023-23518&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.4.&lt;/li&gt;
+&lt;li&gt;Credit to YeongHyeon Choi (@hyeon101010), Hyeon Park
+(@tree_segment), SeOk JEON (@_seokjeon), YoungSung Ahn (@_ZeroSung),
+JunSeo Bae (@snakebjs0107), Dohyun Lee (@l33d0hyun) of Team
+ApplePIE.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: The issue was addressed with
+improved memory handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2022-42826&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42826&quot;&gt;CVE-2022-42826&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.4.&lt;/li&gt;
+&lt;li&gt;Credit to Francisco Alonso (@revskills).&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+</feed>
