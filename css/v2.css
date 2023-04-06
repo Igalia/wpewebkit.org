@@ -424,6 +424,7 @@ nav.sidebar .currentPage a[href] {
 	}
 	nav.sidebar ul {
 		display: block;
+		width: max-content;
 	}
 	nav.sidebar a[href] {
 		display: block;
