@@ -50,7 +50,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("recentPosts", (collectionApi) => {
     let i =0;
-    return collectionApi.getFilteredByGlob(["_posts/*.md", "release/*.md", "blog/*.md"]).reverse().filter((item) => {
+    return collectionApi.getFilteredByGlob(["security/*.md", "release/*.md", "blog/*.md"]).reverse().filter((item) => {
       return i++ < 10;
     });
   })
