@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>Integrating WPE: URI Scheme Handlers and Script Messages</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/organize-files/blog/06-integrating-wpe.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/aperezdc/organize-files/feed.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/organize-files/blog/06-integrating-wpe.html">
+  <meta property="og:title" content="Integrating WPE: URI Scheme Handlers and Script Messages">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/organize-files/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/organize-files/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2023-03-07T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/organize-files/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/organize-files/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/organize-files/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/organize-files/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/organize-files/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/aperezdc/organize-files/"><img src="/wpewebkit.org/aperezdc/organize-files/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/organize-files/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/organize-files/about/">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/organize-files/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/organize-files/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/aperezdc/organize-files/about/explore-wpe.html">Get Started</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/aperezdc/organize-files/blog/06-integrating-wpe.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">Integrating WPE: URI Scheme Handlers and Script Messages</h1>
+ 
+   <meta itemprop="datePublished" content="Tue Mar 07 2023">
+   <time itemprop="dateCreated"> 7 March 2023</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>Most Web content is designed entirely for screen display—and there is <em>a
+lot</em> of it—so it will spend its life in the somewhat restricted sandbox
+implemented by a web browser. But rich user interfaces using Web technologies
+in all kinds of consumer devices require <em>some</em> degree of integration, an
+escape hatch to interact with the rest of their software and hardware. This is
+where a Web engine like WPE designed to be <em>embeddable</em> shines: not only does
+WPE provide a <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/">stable API</a>, it is also comprehensive in
+supporting a number of ways to <em>integrate</em> with its environment further than
+the plethora of available <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web platform APIs</a>.</p>
+<p>Integrating a “Web view” (the main <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.WebView.html">entry point of the WPE embedding
+API</a>) involves providing extension points, which allow the
+Web content (HTML/CSS/JavaScript) it loads to call into native code provided
+by the client application (typically written in C/C++) from JavaScript, and
+vice versa. There are a number of ways in which this can be achieved:</p>
+<ul>
+<li><strong><a href="#uri-scheme-handlers">URI scheme handlers</a></strong> allow native code to
+register a custom <abbr title="Uniform Resource Identifier">URI</abbr>
+scheme, which will run a user provided
+function to produce content that can be “fetched” regularly.</li>
+<li><strong><a href="#user-script-messages">User script messaging</a></strong> can be used to send JSON
+messages from JavaScript running in the same context as Web pages to an user
+function, and vice versa.</li>
+<li>The <strong>JavaScriptCore API</strong> is a powerful solution to provide new JavaScript
+functionality to Web content seamlessly, almost as if they were implemented
+inside the Web engine itself—akin to <a href="https://nodejs.org/api/addons.html#c-addons">NodeJS C++ addons</a>.</li>
+</ul>
+<p>In this post we will explore the first two, as they can support many
+interesting use cases without introducing the additional complexity of
+extending the JavaScript virtual machine. Let’s dive in!</p>
+<h2 id="intermission" tabindex="-1">Intermission</h2>
+<p>We will be referring to the code of a tiny browser written for the occasion.
+Telling WebKit how to call our native code involves creating a
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.UserContentManager.html">WebKitUserContentManager</a>, customizing it, and then
+associating it with web views during their creation. The only exception to
+this are <a href="#uri-scheme-handlers">URI scheme handlers</a>, which are registered
+using <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.register_uri_scheme.html">webkit_web_context_register_uri_scheme()</a>. This
+minimal browser includes an <code>on_create_view</code> function, which is the perfect
+place to do the configuration:</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> WebKitWebView<span class="token operator">*</span><br><span class="token function">on_create_view</span><span class="token punctuation">(</span>CogShell <span class="token operator">*</span>shell<span class="token punctuation">,</span> CogPlatform <span class="token operator">*</span>platform<span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GError<span class="token punctuation">)</span> error <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><br>    WebKitWebViewBackend <span class="token operator">*</span>view_backend <span class="token operator">=</span> <span class="token function">cog_platform_get_view_backend</span><span class="token punctuation">(</span>platform<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>view_backend<span class="token punctuation">)</span><br>        <span class="token function">g_error</span><span class="token punctuation">(</span><span class="token string">"Cannot obtain view backend: %s"</span><span class="token punctuation">,</span> error<span class="token operator">-></span>message<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitUserContentManager<span class="token punctuation">)</span> content_manager <span class="token operator">=</span> <span class="token function">create_content_manager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/** NEW! **/</span><br>    <span class="token function">configure_web_context</span><span class="token punctuation">(</span><span class="token function">cog_shell_get_web_context</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment">/** NEW! **/</span><br> <br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitWebView<span class="token punctuation">)</span> web_view <span class="token operator">=</span><br>        <span class="token function">g_object_new</span><span class="token punctuation">(</span>WEBKIT_TYPE_WEB_VIEW<span class="token punctuation">,</span><br>                     <span class="token string">"user-content-manager"</span><span class="token punctuation">,</span> content_manager<span class="token punctuation">,</span>  <span class="token comment">/** NEW! **/</span><br>                     <span class="token string">"settings"</span><span class="token punctuation">,</span> <span class="token function">cog_shell_get_web_settings</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">,</span><br>                     <span class="token string">"web-context"</span><span class="token punctuation">,</span> <span class="token function">cog_shell_get_web_context</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">,</span><br>                     <span class="token string">"backend"</span><span class="token punctuation">,</span> view_backend<span class="token punctuation">,</span><br>                     <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">cog_platform_init_web_view</span><span class="token punctuation">(</span>platform<span class="token punctuation">,</span> web_view<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">webkit_web_view_load_uri</span><span class="token punctuation">(</span>web_view<span class="token punctuation">,</span> s_starturl<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">return</span> <span class="token function">g_steal_pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>web_view<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<details>
+  <summary>What is <code>g_autoptr</code>?
+    Does it relate to <code>g_steal_pointer</code>?
+    This does not look like C!</summary><div>
+<p>In the shown code examples, <code>g_autoptr(T)</code> is a preprocessor macro provided by
+GLib that declares a pointer variable of the <code>T</code> type, and arranges for
+freeing resources automatically when the variable goes out of scope. For
+objects this results in
+<a href="https://docs.gtk.org/gobject/method.Object.unref.html">g_object_unref()</a>
+being called.</p>
+<p>Internally the macro takes advantage of the <code>__attribute__((cleanup, ...))</code>
+compiler extension, which is supported by GCC and Clang. GLib also includes <a href="https://docs.gtk.org/glib/func.DEFINE_AUTOPTR_CLEANUP_FUNC.html">a
+convenience
+macro</a> that
+can be used to  define cleanups for your own types.</p>
+<p>As for <code>g_steal_pointer</code>, it is useful to indicate that the ownership of a
+pointer declared with <code>g_autoptr</code> is transferred outside from the current
+scope. The function returns the same pointer passed as parameter and
+resets it to <code>NULL</code>, thus preventing cleanup functions from running.</p>
+</div></details>
+<p>The size has been kept small thanks to reusing code from the <a href="https://github.com/Igalia/cog#cog">Cog
+core</a> library. As a bonus, it should
+run on Wayland, X11, and even on a bare display using the <abbr title="Direct
+Rendering Manager">DRM<abbr>/<abbr title="Kernel Mode Setting">KMS</abbr>
+subsystem directly. Compiling and running it, assuming you already have the
+dependencies installed, should be as easy as running:</abbr></abbr></p>
+<pre class="language-sh"><code class="language-sh">cc <span class="token parameter variable">-o</span> minicog minicog.c <span class="token variable"><span class="token variable">$(</span>pkg-config cogcore <span class="token parameter variable">--libs</span> <span class="token parameter variable">--cflags</span><span class="token variable">)</span></span><br>./minicog wpewebkit.org</code></pre>
+<p>If the current session kind is not automatically detected, a second parameter
+can be used to manually choose among <code>wl</code> (Wayland), <code>x11</code>, <code>drm</code>, and so on:</p>
+<pre class="language-sh"><code class="language-sh">./minicog wpewebkit.org x11</code></pre>
+<p>The full, unmodified source for this minimal browser is included right below.</p>
+<details>
+  <summary>Complete <code>minicog.c</code> source
+    (<a target="_blank" rel="noopener" href="https://gist.github.com/aperezdc/f6a65a95f2baa222c0ce9d65e516e13b">Gist</a>)
+  </summary>
+<!-- minicog.c <<<1 -->
+<div>
+<pre><code class="language-c">
+/*
+ * SPDX-License-Identifier: MIT
+ *
+ * cc -o minicog minicog.c $(pkg-config wpe-webkit-1.1 cogcore --cflags --libs)
+ */
+&nbsp;
+#include &lt;cog/cog.h&gt;
+&nbsp;
+static const char *s_starturl = NULL;
+&nbsp;
+static WebKitWebView*
+on_create_view(CogShell *shell, CogPlatform *platform)
+{
+    g_autoptr(GError) error = NULL;
+    WebKitWebViewBackend *view_backend = cog_platform_get_view_backend(platform, NULL, &error);
+    if (!view_backend)
+        g_error("Cannot obtain view backend: %s", error->message);
+&nbsp;
+    g_autoptr(WebKitWebView) web_view =
+        g_object_new(WEBKIT_TYPE_WEB_VIEW,
+                     "settings", cog_shell_get_web_settings(shell),
+                     "web-context", cog_shell_get_web_context(shell),
+                     "backend", view_backend,
+                     NULL);
+    cog_platform_init_web_view(platform, web_view);
+    webkit_web_view_load_uri(web_view, s_starturl);
+    return g_steal_pointer(&web_view);
+}
+&nbsp;
+int
+main(int argc, char *argv[])
+{
+    g_set_application_name("minicog");
+&nbsp;
+    if (argc != 2 && argc != 3) {
+        g_printerr("Usage: %s [URL [platform]]\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+&nbsp;
+    g_autoptr(GError) error = NULL;
+    if (!(s_starturl = cog_uri_guess_from_user_input(argv[1], TRUE, &error)))
+        g_error("Invalid URL '%s': %s", argv[1], error->message);
+&nbsp;
+    cog_modules_add_directory(COG_MODULEDIR);
+&nbsp;
+    g_autoptr(GApplication) app = g_application_new(NULL, G_APPLICATION_DEFAULT_FLAGS);
+    g_autoptr(CogShell) shell = cog_shell_new("minicog", FALSE);
+    g_autoptr(CogPlatform) platform =
+        cog_platform_new((argc == 3) ? argv[2] : g_getenv("COG_PLATFORM"), &error);
+    if (!platform)
+        g_error("Cannot create platform: %s", error->message);
+&nbsp;
+    if (!cog_platform_setup(platform, shell, "", &error))
+        g_error("Cannot setup platform: %s\n", error->message);
+&nbsp;
+    g_signal_connect(shell, "create-view", G_CALLBACK(on_create_view), platform);
+    g_signal_connect_swapped(app, "shutdown", G_CALLBACK(cog_shell_shutdown), shell);
+    g_signal_connect_swapped(app, "startup", G_CALLBACK(cog_shell_startup), shell);
+    g_signal_connect(app, "activate", G_CALLBACK(g_application_hold), NULL);
+&nbsp;
+    return g_application_run(app, 1, argv);
+}
+</code></pre>
+<!-- 1>>> -->
+</div>
+</details>
+<h2 id="uri-scheme-handlers" tabindex="-1">URI Scheme Handlers</h2>
+<figure>
+  <img src="/wpewebkit.org/aperezdc/organize-files/assets/svg/URI_syntax_diagram.svg" alt="“Railroad” diagram of URI syntax">
+  <figcaption>URI syntax (<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>,
+    <a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:URI_syntax_diagram.svg">source</a>),
+    notice the “scheme” component at the top left.
+  </figcaption>
+</figure>
+<p>A URI scheme handler allows “teaching” the web engine how to handle <em>any</em>
+load (pages, subresources, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>,
+<code>XmlHttpRequest</code>, …)—if you ever wondered how Firefox implements
+<code>about:config</code> or how Chromium does <code>chrome://flags</code>, this is it. Also,
+WPE WebKit has public API for this. Roughly:</p>
+<ol>
+<li>A custom URI scheme is registered using
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.register_uri_scheme.html">webkit_web_context_register_uri_scheme()</a>. This also associates a callback function to it.</li>
+<li>When WebKit detects a load for the scheme, it invokes the provided
+function, passing a
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.URISchemeRequest.html">WebKitURISchemeRequest</a>.</li>
+<li>The function generates data to be returned as the result of the load,
+as a <a href="https://docs.gtk.org/gio/class.InputStream.html">GInputStream</a>
+and calls <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html">webkit_uri_scheme_request_finish()</a>. This sends the stream to WebKit as the
+response, indicating the length of the response (if known), and the
+MIME content type of the data in the stream.</li>
+<li>WebKit will now read the data from the input stream.</li>
+</ol>
+<h3 id="echoes" tabindex="-1">Echoes</h3>
+<p>Let’s add an echo handler to our <a href="#intermission">minimal browser</a> that
+replies back with the requested URI. Registering the scheme is
+straightforward enough:</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span><br><span class="token function">configure_web_context</span><span class="token punctuation">(</span>WebKitWebContext <span class="token operator">*</span>context<span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    <span class="token function">webkit_web_context_register_uri_scheme</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span><br>                                           <span class="token string">"echo"</span><span class="token punctuation">,</span><br>                                           handle_echo_request<span class="token punctuation">,</span><br>                                           <span class="token constant">NULL</span> <span class="token comment">/* userdata */</span><span class="token punctuation">,</span><br>                                           <span class="token constant">NULL</span> <span class="token comment">/* destroy_notify */</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<details>
+  <summary>What are “user data” and “destroy notify”?</summary><div>
+<p>The <code>userdata</code> parameter above is a convention used in many C libraries, and
+specially in these based on GLib when there are callback functions involved.
+It allows the <em>user</em> to supply a pointer to arbitrary <em>data</em>, which will be
+passed later on as a parameter to the callback (<code>handle_echo_request</code> in the
+example) when it gets invoked later on.</p>
+<p>As for the <code>destroy_notify</code> parameter, it allows passing a function with the
+signature <code>void func(void*)</code> (type
+<a href="https://docs.gtk.org/glib/callback.DestroyNotify.html">GDestroyNotify</a>) which
+is invoked with <code>userdata</code> as the argument once the user data is no longer
+needed. In the example above, this callback function would be invoked when the
+URI scheme is unregistered. Or, from a different perspective, this callback is
+used to <em>notify</em> that the user data can now be <em>destroyed</em>.</p>
+</div></details>
+<p>One way of implementing <code>handle_echo_request()</code> could be wrapping the request
+URI, which is part of the <code>WebKitURISchemeRequest</code> parameter to the handler,
+stash it into a <a href="https://docs.gtk.org/glib/struct.Bytes.html">GBytes</a>
+container, and <a href="https://docs.gtk.org/gio/ctor.MemoryInputStream.new_from_bytes.html">create an input stream to read back its
+contents</a>:</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span><br><span class="token function">handle_echo_request</span><span class="token punctuation">(</span>WebKitURISchemeRequest <span class="token operator">*</span>request<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>userdata<span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>request_uri <span class="token operator">=</span> <span class="token function">webkit_uri_scheme_request_get_uri</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">g_print</span><span class="token punctuation">(</span><span class="token string">"Request URI: %s\n"</span><span class="token punctuation">,</span> request_uri<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GBytes<span class="token punctuation">)</span> data <span class="token operator">=</span> <span class="token function">g_bytes_new</span><span class="token punctuation">(</span>request_uri<span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>request_uri<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GInputStream<span class="token punctuation">)</span> stream <span class="token operator">=</span> <span class="token function">g_memory_input_stream_new_from_bytes</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token function">webkit_uri_scheme_request_finish</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> stream<span class="token punctuation">,</span> <span class="token function">g_bytes_get_size</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"text/plain"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<p>Note how we need to tell WebKit how to <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html">finish the load
+request</a>,
+in this case only with the data stream, but it is possible to have <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish_with_response.html">more
+control of the
+response</a>
+or <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish_error.html">return an
+error</a>.</p>
+<p>With these changes, it is now possible to make page loads from the new custom
+URI scheme:</p>
+<figure>
+  <img alt="Screenshot of the minicog browser loading a custom echo:// URI" src="/wpewebkit.org/aperezdc/organize-files/assets/img/extending-minicog-echouri.png" class="picture">
+  <figcaption>It worked!</figcaption>
+</figure>
+<h3 id="et-tu%2C-cors%3F" tabindex="-1">Et Tu, CORS?</h3>
+<p>The main roadblock one may find when using custom URI schemes is that loads
+are affected by <abbr title="Cross-Origin Resource Sharing">CORS</abbr>
+checks. Not only that, WebKit by default does <em>not</em> allow sending cross-origin
+requests to custom URI schemes. This is by design: instead of accidentally
+leaking potentially sensitive data to websites, developers embedding a web
+view <em>need</em> to consciously opt-in to allow <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> requests <em>and</em>
+send back suitable <code>Access-Control-Allow-*</code> response headers.</p>
+<p>In practice, the additional setup involves
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.get_security_manager.html">retrieving</a>
+the <code>WebKitSecurityManager</code> being used by the <code>WebKitWebContext</code> and
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.SecurityManager.register_uri_scheme_as_cors_enabled.html">registering the scheme as
+CORS-enabled</a>.
+Then, in the handler function for the custom URI scheme, create a
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.URISchemeResponse.html">WebKitURISchemeResponse</a>,
+which allows fine-grained control of the response, including setting
+<a href="https://libsoup.org/libsoup-3.0/struct.MessageHeaders.html">headers</a>,
+and finishing the request instead with
+<code>webkit_uri_scheme_request_finish_with_response()</code>.</p>
+<p>Note that WebKit cuts some corners when using CORS with custom URI schemes:
+handlers will <em>not</em> receive preflight <code>OPTIONS</code> requests. Instead, the CORS
+headers from the replies are inspected, and if access needs to be denied
+then the data stream with the response contents is discarded.</p>
+<p>In addition to providing a complete CORS-enabled custom URI scheme <a href="https://gist.github.com/aperezdc/74809a6cd617faf445c22097a47bcb50">example</a>,
+we recommend the <a href="https://httptoolkit.com/will-it-cors">Will It CORS?</a> tool
+to help troubleshoot issues.</p>
+<h3 id="further-ideas" tabindex="-1">Further Ideas</h3>
+<p>Once we have WPE WebKit calling into our custom code, there are no limits
+to what a URI scheme handler can do—as long as it involves replying
+to requests. Here are some ideas:</p>
+<ul>
+<li>Allow pages to access a subset of paths from the local file system in a
+controlled way (as <a href="#et-tu%2C-cors%3F">CORS applies</a>). For inspiration,
+see <a href="https://igalia.github.io/cog/class.DirectoryFilesHandler.html">CogDirectoryFilesHandler</a>.</li>
+<li>Package all your web application assets into a single ZIP file, making
+loads from <code>app:/...</code> fetch content from it. Or, make the scheme handler
+load data using <a href="https://docs.gtk.org/gio/struct.Resource.html">GResource</a> and bundle the application
+inside your program.</li>
+<li>Use the presence of a well-known custom URI to have a web application
+realize that it is running on a certain device, and make its user
+interface adapt accordingly.</li>
+<li>Provide a REST API, which internally calls into
+<a href="https://networkmanager.dev/">NetworkManager</a> to list and configure
+wireless network adapters. Combine it with a local web application and
+embedded devices can now easily get on the network.</li>
+</ul>
+<h2 id="user-script-messages" tabindex="-1">User Script Messages</h2>
+<p>While <a href="#uri-scheme-handlers">URI scheme handlers</a>
+allow streaming large chunks of data back into the Web engine, for exchanging
+smaller pieces of information in a more programmatic fashion it may be
+preferable to exchange messages without the need to trigger resource loads.
+The user script messages part of the
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.UserContentManager.html">WebKitUserContentManager</a> API can be used this way:</p>
+<ol>
+<li>Register a user message handler with
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.UserContentManager.register_script_message_handler.html">webkit_user_content_manager_register_script_message_handler()</a>.
+As opposed to URI scheme handlers, this only enables receiving messages,
+but does not associate a callback function <em>yet</em>.</li>
+<li>Associate a callback to the
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/signal.UserContentManager.script-message-received.html">script-message-received</a>
+signal. The signal detail should be the name of the registered handler.</li>
+<li>Now, whenever JavaScript code calls
+<code>window.webkit.messageHandlers.&lt;name&gt;.postMessage()</code>, the signal is
+emitted, and the native callback functions invoked.</li>
+</ol>
+<details>
+  <summary>Haven't I seen <code>postMessage()</code> elsewhere?</summary><div>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">Yes</a>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage">you</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker/postMessage">have</a>.
+The name is the same because it provides a similar functionality (send a
+message), it guarantees little (the receiver should validate messages), and
+there are <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">similar
+restrictions</a>
+in the kind of values that can be passed along.</p>
+</div></details>
+<h3 id="it%E2%80%99s-all-javascript" tabindex="-1">It’s All JavaScript</h3>
+<p>Let’s add a feature to our <a href="#intermission">minimal browser</a> that will allow
+JavaScript code to trigger rebooting or powering off the device where it is
+running. While this should definitely <em>not</em> be functionality exposed to the
+open Web, it is perfectly acceptable in an embedded device where we control
+what gets loaded with WPE, and that exclusively uses a web application as its
+user interface.</p>
+<figure>
+  <img src="/wpewebkit.org/aperezdc/organize-files/assets/img/pepe-silvia-all-javascript.jpg" class="picture" alt="Pepe Silvia conspiracy image meme, with the text “It's all JavaScript” superimposed">
+  <figcaption>Yet most of the code shown in this post is C.</figcaption>
+</figure>
+<p>First, create a <code>WebKitUserContentManager</code>, register the message handler,
+and connect a callback to its associated signal:</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> WebKitUserContentManager<span class="token operator">*</span><br><span class="token function">create_content_manager</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitUserContentManager<span class="token punctuation">)</span> content_manager <span class="token operator">=</span> <span class="token function">webkit_user_content_manager_new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">webkit_user_content_manager_register_script_message_handler</span><span class="token punctuation">(</span>content_manager<span class="token punctuation">,</span> <span class="token string">"powerControl"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">g_signal_connect</span><span class="token punctuation">(</span>content_manager<span class="token punctuation">,</span> <span class="token string">"script-message-received::powerControl"</span><span class="token punctuation">,</span><br>                     <span class="token function">G_CALLBACK</span><span class="token punctuation">(</span>handle_power_control_message<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">return</span> <span class="token function">g_steal_pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>content_manager<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<p>The callback receives a <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/struct.JavascriptResult.html">WebKitJavascriptResult</a>, from which we
+can get the <a href="https://people.igalia.com/aperez/Documentation/wpe-javascriptcore-1.1/class.Value.html">JSCValue</a> with the contents of the parameter
+passed to the <code>postMessage()</code> function. The <code>JSCValue</code> can now be inspected
+to check for malformed messages and determine the action to take, and
+then arrange to call <code>reboot()</code>:</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span><br><span class="token function">handle_power_control_message</span><span class="token punctuation">(</span>WebKitUserContentManager <span class="token operator">*</span>content_manager<span class="token punctuation">,</span><br>                             WebKitJavascriptResult <span class="token operator">*</span>js_result<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>userdata<span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    JSCValue <span class="token operator">*</span>value <span class="token operator">=</span> <span class="token function">webkit_javascript_result_get_js_value</span><span class="token punctuation">(</span>js_result<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">jsc_value_is_string</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        <span class="token function">g_warning</span><span class="token punctuation">(</span><span class="token string">"Invalid powerControl message: argument is not a string"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">return</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    g_autofree <span class="token keyword">char</span> <span class="token operator">*</span>value_as_string <span class="token operator">=</span> <span class="token function">jsc_value_to_string</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">int</span> action<span class="token punctuation">;</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>value_as_string<span class="token punctuation">,</span> <span class="token string">"poweroff"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        action <span class="token operator">=</span> RB_POWER_OFF<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>value_as_string<span class="token punctuation">,</span> <span class="token string">"reboot"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        action <span class="token operator">=</span> RB_AUTOBOOT<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span><br>        <span class="token function">g_warning</span><span class="token punctuation">(</span><span class="token string">"Invalid powerControl message: '%s'"</span><span class="token punctuation">,</span> value_as_string<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">return</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token function">g_message</span><span class="token punctuation">(</span><span class="token string">"Device will %s now!"</span><span class="token punctuation">,</span> value_as_string<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">sync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">reboot</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<p>Note that the <code>reboot()</code> system call above will most likely fail because it
+needs administrative privileges. While the browser process could run as <code>root</code>
+to sidestep this issue—definitely <em>not</em> recommended!—it would be
+better to grant the <code>CAP_SYS_BOOT</code> capability to the process, and <em>much</em>
+better to ask the system manager daemon to handle the job. In machines
+using <a href="https://systemd.io/">systemd</a> a good option is to call the <code>.Halt()</code>
+and <code>.Reboot()</code> methods of its <code>org.freedesktop.systemd1</code> interface.</p>
+<p>Now we can write a small HTML document with some JavaScript sprinkled on top
+to arrange sending the messages:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Device Power Control<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reboot<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Reboot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>poweroff<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Power Off<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>      <span class="token keyword">function</span> <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>          window<span class="token punctuation">.</span>webkit<span class="token punctuation">.</span>messageHandlers<span class="token punctuation">.</span>powerControl<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span><br>          <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span><br>        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>      <span class="token punctuation">}</span><br>      <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token string">"reboot"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>      <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token string">"poweroff"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+<p>The complete source code for this example can be found
+<a href="https://gist.github.com/aperezdc/621c1ec6bb78923e27fc035fa0689522">in this Gist</a>.</p>
+<h3 id="going-in-the-other-direction" tabindex="-1">Going In The Other Direction</h3>
+<p>But how can one return values from user messages back to the JavaScript code
+running in the context of the web page? Until recently, the only option
+available was exposing some known function in the page’s JavaScript code, and
+then using
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebView.run_javascript.html">webkit_web_view_run_javascript()</a>
+to call it from native code later on. To make this more idiomatic and allow
+waiting on a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>, an approach like the following works:</p>
+<ol>
+<li>Have convenience JavaScript functions wrapping the calls to
+<code>.postMessage()</code> which add an unique identifier as part of the message,
+create a <code>Promise</code>, and store it in a <code>Map</code> indexed by the identifier.
+The <code>Promise</code> is itself returned from the functions.</li>
+<li>When the callback in native code handle messages, they need to take
+note of the message identifier, and then use
+<code>webkit_web_view_run_javascript()</code> to pass it back, along with the
+information needed to resolve the promise.</li>
+<li>The Javascript code running in the page takes the <code>Promise</code> from
+the <code>Map</code> that corresponds to the identifier, and resolves it.</li>
+</ol>
+<p>To make this approach a bit more palatable, we could tell WebKit to <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.UserContentManager.add_script.html">inject a
+script</a>
+along with the regular content, which would provide the <a href="https://gist.github.com/aperezdc/a112c6a61a5a11885eac2498702e3a6d">helper
+functions</a>
+needed to achieve this.</p>
+<p>Nevertheless, the approach outlined above is cumbersome and can be
+tricky to get right, not to mention that the effort needs to be duplicated in
+each application. Therefore, we have recently added new API hooks to provide this
+as a built-in feature, so starting in WPE WebKit 2.40 the recommended approach
+involves using
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/method.UserContentManager.register_script_message_handler_with_reply.html">webkit_user_content_manager_register_script_message_handler_with_reply()</a>
+to register handlers instead. This way, calling <code>.postMessage()</code> now returns a
+<code>Promise</code> to the JavaScript code, and the callbacks connected to the
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.UserContentManager.script-message-with-reply-received.html">script-message-with-reply-received</a>
+signal now receive a
+<a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/struct.ScriptMessageReply.html">WebKitScriptMessageReply</a>,
+which can be used to resolve the promise—either on the spot, or
+asynchronously later on.</p>
+<h3 id="even-more-ideas" tabindex="-1">Even More Ideas</h3>
+<p>User script messages are a powerful and rather flexible facility to make WPE
+integrate web content into a complete system. The provided example is rather
+simple, but as long as we do not need to pass huge amounts of data in
+messages the possibilities are almost endless—especially with the
+added convenience in WPE WebKit 2.40. Here are more ideas that can
+be built on top of user script messages:</p>
+<ul>
+<li>A handler could receive requests to “monitor” some object, and
+return a <code>Promise</code> that gets resolved when it has received changes.
+For example, this could make the user interface of a smart thermostat
+react to temperate updates from a sensor.</li>
+<li>A generic handler that takes the message payload and converts it into
+<a href="https://en.wikipedia.org/wiki/D-Bus">D-Bus</a> method calls, allowing
+web pages to control many aspects of a typical Linux system.</li>
+</ul>
+<h2 id="wrapping-up" tabindex="-1">Wrapping Up</h2>
+<p>WPE has been designed from the ground up to integrate with the rest of the
+system, instead of having a sole focus on rendering Web content inside a
+monolithic web browser application. Accordingly, the public API must be
+comprehensive enough to use it as a component of <em>any</em> application. This
+results in features that allow plugging into the web engine at different
+layers to provide custom behaviour.</p>
+<p>At Igalia we have years of experience embedding WebKit into all kinds of
+applications, and we are always sympathetic to the needs of such systems. If
+you are interested collaborating with WPE development, or searching for a
+solution that can tightly integrate web content in your device, feel free to
+<a href="https://www.igalia.com/contact/">contact us</a>.</p>
+<!-- vim:set foldmethod=marker foldmarker=<<<,>>>: -->
+
+
+
+<section class="content-section bg-light small-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+				<hr class="author-line">
+				<div class="card">
+					<img class="circle-mask" width="128" height="128" loading="lazy" alt="Head shot of Adrián Pérez" src="/wpewebkit.org/aperezdc/organize-files/assets/author-aperez@1x.png" srcset="/wpewebkit.org/aperezdc/organize-files/assets/author-aperez@2x.png 2x">
+					This article was written by <a href="https://igalia.com/team/aperez">Adrián Pérez</a>.
+					<br>
+					I have been working on WebKit since 2012, with a focus on
+					environment integration, embedding, and distribution. Igalia
+					has been a life-long project since even earlier.
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+</div>
+
+    </div></main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/aperezdc/organize-files/" class="igalia logo home"><img src="/wpewebkit.org/aperezdc/organize-files/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
