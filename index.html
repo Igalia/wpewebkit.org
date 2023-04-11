@@ -179,31 +179,72 @@ header.page div h1 {
 	object-fit: cover;
 	object-position: 50% 50%;
 }
+main .success-stories [data-slider] {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: scroll;
+	overscroll-behavior-x: contain;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+}
+main .success-stories [data-slider]::-webkit-scrollbar {
+	background: transparent; /* Chrome/Safari/Webkit */
+	width: 0px;
+}
+main .success-stories [data-slider] > div {
+	scroll-snap-align: start;
+	flex-shrink: 0;
+	width: 100%;
+}
+
 @media (min-width: 45rem) {
-	.success-stories > div {
-		grid-column: main / -2;
+	.success-stories #sliderGrid {
+		grid-column: main / -1;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 1fr;
+	}
+	.success-stories [data-slide-nav] {
+		grid-row: 1;
+		grid-column: 1;
+		z-index: 2;
+	  padding-inline: 6rem;
+	}
+	.success-stories [data-slide-nav] button {
+		padding: 0.5em 0.75em;
+		border-radius: 5em;
+		border-style: solid;
+		border-color: silver;
+		border-width: 1px;
+		color: gray;
+	}
+	.success-stories [data-slider] {
+		grid-row: 1 / -1;
+		grid-column: 1;
+		justify-self: auto;
+	}
+	.success-stories [data-slider] > div {
+		display: grid;
+		grid-template-columns: 4fr 3fr;
 		grid-template-rows: min-content;
 		align-items: center;
-		gap: 4rem;
+		gap: 2rem;
 	}
 	.success-stories > * {
 		margin: 0;
 		padding: 0;
 	}
-	.success-stories img.hero {
-		height: 100%;
-		max-width: none;
-		max-height: 30rem;
-		margin-inline-start: -5rem;
-		box-shadow: -0.25em 0 0.5em #06C3, 1em 1.5em 2.5em #0066DD99;
-		  justify-self: end;
-		  margin-inline: 0 -4rem;
-	}
 	.success-stories .spotlight {
 	  padding-inline: 6rem;
 	  padding-block: 2rem;
+	}
+	.success-stories img.hero {
+		width: 100%;
+		max-width: none;
+		max-height: 30rem;
+		box-shadow: -0.25em 0 0.5em #06C3, 1em 1.5em 2.5em #0066DD99;
+		  justify-self: end;
 	}
 }
 
@@ -269,6 +310,40 @@ section.igalia > div > div > img {
 	}
 }
 </style>
+<script type="module">
+const slider = document.querySelector('[data-slider]')
+const prevButton = document.querySelector('[data-prev]')
+const nextButton = document.querySelector('[data-next]')
+const slideContainer = document.querySelector('[data-slide]')
+const slides = document.querySelectorAll('[data-slide]').length
+function slide(direction) {
+  let left
+  const { scrollLeft } = slider
+  const width = slideContainer.getBoundingClientRect().width
+  switch (direction) {
+    case 'prev':
+      if (scrollLeft <= 0)
+        left = width * ( slides - 1)
+      else
+        left = scrollLeft - width
+      break
+    case 'next':
+    default:
+      if (scrollLeft >= width * ( slides - 1)) 
+        left = 0
+      else
+        left = scrollLeft + width
+      break
+  }
+  slider.scroll({
+    left,
+  })
+}
+if (slider && prevButton && nextButton) {
+  prevButton.addEventListener('click', () => slide('prev'))
+  nextButton.addEventListener('click', () => slide('next'))
+}
+</script>
 
 <header class="page full-width">
 <video muted loop id="banner"><source src="/assets/video/homepage.mp4" type="video/mp4"></video>
@@ -307,10 +382,10 @@ Open standards with great longevity allows lots more things to benefit from the 
 <h3><a href="/about/supported-hardware.html">Supported Hardware</a></h3>
 <p>WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer:</p>
 <ul class="gallery c2">
-<li><img src="/assets/img/logo-rockchip@2x.png" alt=""></li>
-<li><img src="/assets/img/logo-nvidia@2x.png" alt=""></li>
-<li><img src="/assets/img/logo-nxp@2x.png" alt=""></li>
-<li><img src="/assets/img/logo-qualcomm@2x.png" alt=""></li>
+<li><img src="/assets/img/logo-rockchip.png" srcset="/assets/img/logo-rockchip@2x.png 2x" alt=""></li>
+<li><img src="/assets/img/logo-nvidia.png" srcset="/assets/img/logo-nvidia@2x.png 2x" alt=""></li>
+<li><img src="/assets/img/logo-nxp.png" srcset="/assets/img/logo-nxp@2x.png 2x" alt=""></li>
+<li><img src="/assets/img/logo-qualcomm.png" srcset="/assets/img/logo-qualcomm@2x.png 2x" alt=""></li>
 </ul>
 </div>
 
@@ -324,7 +399,12 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 
 <section class="success-stories full-width dotsep">
-<div>
+<div id="sliderGrid">
+<div data-slide-nav><button data-prev>&lt;</button> <button data-next>&gt;</button></div>
+
+<div data-slider>
+
+<div data-slide>
 <div class="spotlight">
 <h2>Use Case</h2>
 <h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
@@ -332,6 +412,20 @@ Open standards with great longevity allows lots more things to benefit from the 
 <p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
 </div>
 <img src="/assets/img/use_case-digital_signage.png" alt="">
+</div>
+
+<div data-slide>
+<div class="spotlight">
+<h2>Customer Success Story</h2> 
+<h3><a href="/blog/2022-success-metrological.html">Metrological</a></h3>
+<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
+<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
+</div>
+<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
+</div>
+
+</div>
+
 </div>
 </section>
 
