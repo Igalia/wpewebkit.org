@@ -4,11 +4,11 @@ date: 2023-01-06
 tags: [success]
 permalink: /blog/2023-success-digital-signage.html
 preview: Digital signage web rendering players have many advantages and are a trend nowadays.
-thumbnail: /assets/img/logo-digital-signage@2x.png
+thumbnail: /assets/img/logo-digital-signage.png
 ---
 
 <div class="success-top">
-<img alt="WPE WebKit in digital signage" align="center" src="/assets/img/logo-digital-signage@2x.png">
+<img alt="WPE WebKit in digital signage" align="center" src="/assets/img/logo-digital-signage.png" srcset="/assets/img/logo-digital-signage@2x.png 2x">
 <img alt="WPE" align="center" src="/assets/img/logo-blue.svg">
 </div>
 
