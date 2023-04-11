@@ -323,13 +323,13 @@ function slide(direction) {
   switch (direction) {
     case 'prev':
       if (scrollLeft <= 0)
-        left = width * ( slides - 1)
+        left = width * ( slides - 1 )
       else
         left = scrollLeft - width
       break
     case 'next':
     default:
-      if (scrollLeft >= width * ( slides - 1) - 1) 
+      if (scrollLeft > ( width * ( slides - 1 )) - slides )
         left = 0
       else
         left = scrollLeft + width
