@@ -17,6 +17,7 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css')
+  eleventyConfig.addPassthroughCopy('js')
   eleventyConfig.addPassthroughCopy('vendor')
   eleventyConfig.addPassthroughCopy('assets')
   eleventyConfig.addPassthroughCopy('release/verify/*.key')
