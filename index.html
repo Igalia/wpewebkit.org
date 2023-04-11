@@ -329,7 +329,7 @@ function slide(direction) {
       break
     case 'next':
     default:
-      if (scrollLeft >= width * ( slides - 1)) 
+      if (scrollLeft >= width * ( slides - 1) - 1) 
         left = 0
       else
         left = scrollLeft + width
