@@ -21,7 +21,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2023-02-08T15:09:31.316Z">
+  <meta property="article:published_time" content="2023-04-21T10:28:48.566Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -32,6 +32,9 @@
   <!-- Custom Fonts -->
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/prism.css">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/stylish-portfolio.css">
@@ -69,11 +72,11 @@
 		<ul class="code off"><li>
 			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/">Home</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about">Learn & Discover</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about/">Learn & Discover</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog">Blog</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog/">Blog</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers">Developers</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers/">Developers</a>
 			</li><li>
 			<a class="btn cta" href="/wpewebkit.org/manuelafm-patch-1/about/explore-wpe.html">Get Started</a>
 			</li></ul>
@@ -103,46 +106,30 @@
       <div class="list-group list-group-flush"><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           wpewebkit<span class="sr-only">:</span>
           <span>
-          <a class="badge badge-primary"
-             title="Download wpewebkit 2.38.4"
-             href="https://wpewebkit.org/releases//wpewebkit-2.38.4.tar.xz"><span class="sr-only">Download v</span>2.38.4<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <a class="badge badge-primary" title="Download wpewebkit 2.40.1" href="https://wpewebkit.org/releases//wpewebkit-2.40.1.tar.xz"><span class="sr-only">Download v</span>2.40.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
           <span class="sr-only">-</span>
-          <a class="badge badge-secondary"
-             title="Release notes for wpewebkit 2.38.4"
-             href="/wpewebkit.org/manuelafm-patch-1/release/wpewebkit-2.38.4.html"><span class="sr-only">Release notes for v2.38.4</span><i class="icon-info align-text-bottom"></i></a>
-          </span>
-        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          libwpe<span class="sr-only">:</span>
-          <span>
-          <a class="badge badge-primary"
-             title="Download libwpe 1.14.1"
-             href="https://wpewebkit.org/releases//libwpe-1.14.1.tar.xz"><span class="sr-only">Download v</span>1.14.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
-          <span class="sr-only">-</span>
-          <a class="badge badge-secondary"
-             title="Release notes for libwpe 1.14.1"
-             href="/wpewebkit.org/manuelafm-patch-1/release/libwpe-1.14.1.html"><span class="sr-only">Release notes for v1.14.1</span><i class="icon-info align-text-bottom"></i></a>
-          </span>
-        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          cog<span class="sr-only">:</span>
-          <span>
-          <a class="badge badge-primary"
-             title="Download cog 0.16.1"
-             href="https://wpewebkit.org/releases//cog-0.16.1.tar.xz"><span class="sr-only">Download v</span>0.16.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
-          <span class="sr-only">-</span>
-          <a class="badge badge-secondary"
-             title="Release notes for cog 0.16.1"
-             href="/wpewebkit.org/manuelafm-patch-1/release/cog-0.16.1.html"><span class="sr-only">Release notes for v0.16.1</span><i class="icon-info align-text-bottom"></i></a>
+          <a class="badge badge-secondary" title="Release notes for wpewebkit 2.40.1" href="/wpewebkit.org/manuelafm-patch-1/release/wpewebkit-2.40.1.html"><span class="sr-only">Release notes for v2.40.1</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           wpebackend-fdo<span class="sr-only">:</span>
           <span>
-          <a class="badge badge-primary"
-             title="Download wpebackend-fdo 1.14.0"
-             href="https://wpewebkit.org/releases//wpebackend-fdo-1.14.0.tar.xz"><span class="sr-only">Download v</span>1.14.0<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <a class="badge badge-primary" title="Download wpebackend-fdo 1.14.2" href="https://wpewebkit.org/releases//wpebackend-fdo-1.14.2.tar.xz"><span class="sr-only">Download v</span>1.14.2<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
           <span class="sr-only">-</span>
-          <a class="badge badge-secondary"
-             title="Release notes for wpebackend-fdo 1.14.0"
-             href="/wpewebkit.org/manuelafm-patch-1/release/wpebackend-fdo-1.14.0.html"><span class="sr-only">Release notes for v1.14.0</span><i class="icon-info align-text-bottom"></i></a>
+          <a class="badge badge-secondary" title="Release notes for wpebackend-fdo 1.14.2" href="/wpewebkit.org/manuelafm-patch-1/release/wpebackend-fdo-1.14.2.html"><span class="sr-only">Release notes for v1.14.2</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          libwpe<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary" title="Download libwpe 1.14.1" href="https://wpewebkit.org/releases//libwpe-1.14.1.tar.xz"><span class="sr-only">Download v</span>1.14.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary" title="Release notes for libwpe 1.14.1" href="/wpewebkit.org/manuelafm-patch-1/release/libwpe-1.14.1.html"><span class="sr-only">Release notes for v1.14.1</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          cog<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary" title="Download cog 0.16.1" href="https://wpewebkit.org/releases//cog-0.16.1.tar.xz"><span class="sr-only">Download v</span>0.16.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary" title="Release notes for cog 0.16.1" href="/wpewebkit.org/manuelafm-patch-1/release/cog-0.16.1.html"><span class="sr-only">Release notes for v0.16.1</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div></div>
     </div>
@@ -151,46 +138,30 @@
       <div class="list-group list-group-flush"><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           wpewebkit<span class="sr-only">:</span>
           <span>
-          <a class="badge badge-primary"
-             title="Download wpewebkit 2.39.5"
-             href="https://wpewebkit.org/releases//wpewebkit-2.39.5.tar.xz"><span class="sr-only">Download v</span>2.39.5<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <a class="badge badge-primary" title="Download wpewebkit 2.41.2" href="https://wpewebkit.org/releases//wpewebkit-2.41.2.tar.xz"><span class="sr-only">Download v</span>2.41.2<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
           <span class="sr-only">-</span>
-          <a class="badge badge-secondary"
-             title="Release notes for wpewebkit 2.39.5"
-             href="/wpewebkit.org/manuelafm-patch-1/release/wpewebkit-2.39.5.html"><span class="sr-only">Release notes for v2.39.5</span><i class="icon-info align-text-bottom"></i></a>
-          </span>
-        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          libwpe<span class="sr-only">:</span>
-          <span>
-          <a class="badge badge-primary"
-             title="Download libwpe 1.13.90"
-             href="https://wpewebkit.org/releases//libwpe-1.13.90.tar.xz"><span class="sr-only">Download v</span>1.13.90<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
-          <span class="sr-only">-</span>
-          <a class="badge badge-secondary"
-             title="Release notes for libwpe 1.13.90"
-             href="/wpewebkit.org/manuelafm-patch-1/release/libwpe-1.13.90.html"><span class="sr-only">Release notes for v1.13.90</span><i class="icon-info align-text-bottom"></i></a>
-          </span>
-        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          cog<span class="sr-only">:</span>
-          <span>
-          <a class="badge badge-primary"
-             title="Download cog 0.15.1"
-             href="https://wpewebkit.org/releases//cog-0.15.1.tar.xz"><span class="sr-only">Download v</span>0.15.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
-          <span class="sr-only">-</span>
-          <a class="badge badge-secondary"
-             title="Release notes for cog 0.15.1"
-             href="/wpewebkit.org/manuelafm-patch-1/release/cog-0.15.1.html"><span class="sr-only">Release notes for v0.15.1</span><i class="icon-info align-text-bottom"></i></a>
+          <a class="badge badge-secondary" title="Release notes for wpewebkit 2.41.2" href="/wpewebkit.org/manuelafm-patch-1/release/wpewebkit-2.41.2.html"><span class="sr-only">Release notes for v2.41.2</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           wpebackend-fdo<span class="sr-only">:</span>
           <span>
-          <a class="badge badge-primary"
-             title="Download wpebackend-fdo 1.13.1"
-             href="https://wpewebkit.org/releases//wpebackend-fdo-1.13.1.tar.xz"><span class="sr-only">Download v</span>1.13.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <a class="badge badge-primary" title="Download wpebackend-fdo 1.13.1" href="https://wpewebkit.org/releases//wpebackend-fdo-1.13.1.tar.xz"><span class="sr-only">Download v</span>1.13.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
           <span class="sr-only">-</span>
-          <a class="badge badge-secondary"
-             title="Release notes for wpebackend-fdo 1.13.1"
-             href="/wpewebkit.org/manuelafm-patch-1/release/wpebackend-fdo-1.13.1.html"><span class="sr-only">Release notes for v1.13.1</span><i class="icon-info align-text-bottom"></i></a>
+          <a class="badge badge-secondary" title="Release notes for wpebackend-fdo 1.13.1" href="/wpewebkit.org/manuelafm-patch-1/release/wpebackend-fdo-1.13.1.html"><span class="sr-only">Release notes for v1.13.1</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          libwpe<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary" title="Download libwpe 1.13.90" href="https://wpewebkit.org/releases//libwpe-1.13.90.tar.xz"><span class="sr-only">Download v</span>1.13.90<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary" title="Release notes for libwpe 1.13.90" href="/wpewebkit.org/manuelafm-patch-1/release/libwpe-1.13.90.html"><span class="sr-only">Release notes for v1.13.90</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div><div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          cog<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary" title="Download cog 0.17.1" href="https://wpewebkit.org/releases//cog-0.17.1.tar.xz"><span class="sr-only">Download v</span>0.17.1<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary" title="Release notes for cog 0.17.1" href="/wpewebkit.org/manuelafm-patch-1/release/cog-0.17.1.html"><span class="sr-only">Release notes for v0.17.1</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div></div>
     </div>
@@ -218,29 +189,29 @@ list.</li>
 </ul>
 <section class="resources">
 <header class="full-bleed">
-<h2><a href="">Resources</a></h2>
+<h2><a href=".">Resources</a></h2>
 <img src="/wpewebkit.org/manuelafm-patch-1/assets/img/illustration-resources.svg" alt="" class="decoration">
 </header>
 <div class="dotsep">
 <ul class="gallery c5">
 <li>
-<h3><a href="">Guides and sample code</a></h3>
+<h3><a href=".">Guides and sample code</a></h3>
 <p>Get details on implementing web technologies with guides, reference, and sample code.</p>
 </li>
 <li>
-<h3><a href="">Videos</a></h3>
+<h3><a href=".">Videos</a></h3>
 <p>Watch and learn from our engineers as they show how to bring the latest web technolgoies to your websites on Safari.</p>
 </li>
 <li>
-<h3><a href="">Forums</a></h3>
+<h3><a href=".">Forums</a></h3>
 <p>Open standards with great longevity allows lots more things to benefit from the same investments.</p>
 </li>
 <li>
-<h3><a href="">Downloads</a></h3>
+<h3><a href=".">Downloads</a></h3>
 <p>The number of people with the basic skills to build things with web technologies is massive.</p>
 </li>
 <li>
-<h3><a href="">Source</a></h3>
+<h3><a href=".">Source</a></h3>
 <p>The number of people with the basic skills to build things with web technologies is massive.</p>
 </li>
 </ul>

@@ -33,6 +33,9 @@
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/fonts.css">
 
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/prism.css">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/stylish-portfolio.css">
   <script type="text/javascript">
@@ -69,11 +72,11 @@
 		<ul class="blog off"><li>
 			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/">Home</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about">Learn & Discover</a>
-			</li><li class="currentPage">
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog">Blog</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about/">Learn & Discover</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers">Developers</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers/">Developers</a>
 			</li><li>
 			<a class="btn cta" href="/wpewebkit.org/manuelafm-patch-1/about/explore-wpe.html">Get Started</a>
 			</li></ul>
@@ -93,7 +96,7 @@ header.page time {
 	opacity: 0.67;
 }
 </style>
-<div itemscope itemtype="http://schema.org/TechArticle">
+<div itemscope="" itemtype="http://schema.org/TechArticle">
 <meta itemprop="creativeWorkStatus" content="Published">
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
@@ -190,9 +193,7 @@ accepted by Apple as an official WebKit port, meaning that the port
 lives now in-tree and takes immediate advantage of the many
 improvements that land on the WebKit repository on a daily basis.</p>
 <h2 id="how-does-wpe-integrate-with-webkit%3F" tabindex="-1">How does WPE integrate with WebKit?</h2>
-<p><img style="display: block; margin: 1em auto;"
-	alt="A diagram of the WPE WebKit architecture"
-	src="/wpewebkit.org/manuelafm-patch-1/assets/wpe-architecture-diagram.png"></p>
+<p><img style="display: block; margin: 1em auto;" alt="A diagram of the WPE WebKit architecture" src="/wpewebkit.org/manuelafm-patch-1/assets/wpe-architecture-diagram.png"></p>
 <p>The WPE port has several components. Some are in-tree (that is, are a
 part of WebKit itself), while others are out-of-tree. Let’s examine
 those components and how they relate to each other, from top to
@@ -227,8 +228,7 @@ next.</li>
 platform-specific code lives. Backends are loadable modules that can be
 chosen depending on the underlying hardware. These should provide access to
 graphics and input depending on the specific architecture, platform, and
-operating system requirements. As a reference, <a
-href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a> is a
+operating system requirements. As a reference, <a href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a> is a
 freedesktop.org-based backend, which uses Wayland and freekdesktop.org
 technologies, and is <a href="/wpewebkit.org/manuelafm-patch-1/about/supported-hardware.html">
 supported for several architectures</a>, including NXP and Broadcom chipsets, like the
@@ -248,11 +248,7 @@ page. From there, you will see that depending on how interested you
 are in the project, your background, and what you’d like to do with
 it, there are different ways!</p>
 <p>It can be as easy as installing WPE directly from the most popular
-Linux distributions or downloading and flashing prebuilt images for
-the Raspberry Pi. There are easy and flexible options like
-<a href="/wpewebkit.org/manuelafm-patch-1/about/flatpak.html">Flatpak</a> or
-<a href="/wpewebkit.org/manuelafm-patch-1/about/balena-wpe.html">Balena</a>, which
-you can dig into to learn more. If you want to build WPE yourself,
+Linux distributions. If you want to build WPE yourself,
 you can use <a href="https://github.com/Igalia/meta-webkit/wiki/WPE">Yocto</a> and if
 you’d like to contribute—that’s very welcome!</p>
 <p>Happy hacking!</p>
@@ -278,7 +274,7 @@ you’d like to contribute—that’s very welcome!</p>
 
 </div>
 
-    </main>
+    </div></main>
 
     <footer class="global">
 	<b></b>

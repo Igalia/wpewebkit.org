@@ -33,6 +33,9 @@
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/fonts.css">
 
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/prism.css">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/stylish-portfolio.css">
   <script type="text/javascript">
@@ -69,11 +72,11 @@
 		<ul class="blog off"><li>
 			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/">Home</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about">Learn & Discover</a>
-			</li><li class="currentPage">
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog">Blog</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about/">Learn & Discover</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers">Developers</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers/">Developers</a>
 			</li><li>
 			<a class="btn cta" href="/wpewebkit.org/manuelafm-patch-1/about/explore-wpe.html">Get Started</a>
 			</li></ul>
@@ -93,7 +96,7 @@ header.page time {
 	opacity: 0.67;
 }
 </style>
-<div itemscope itemtype="http://schema.org/TechArticle">
+<div itemscope="" itemtype="http://schema.org/TechArticle">
 <meta itemprop="creativeWorkStatus" content="Published">
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
@@ -115,22 +118,16 @@ header.page time {
 <h2 id="dom-%2B-css-%3D-rendertree" tabindex="-1">DOM + CSS = RenderTree</h2>
 <p>As the document is parsed, it will begin building the DOM tree and load-blocking CSS resources.  At some point, possibly before the entire DOM tree is built, it’s time to draw things on the screen. The first step to render the content of a page is to perform what’s called the <em>attachment</em>, which is merging the DOM tree with the CSS rules, in order to create the RenderTree. This RenderTree is a collection of <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a>, structured into a tree, and each of these <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> represent the elements in the DOM tree that have visual output. <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> have the capability to render the associated DOM tree node into a surface by using the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h">GraphicsContext</a> class (in the case of WPE, this <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h">GraphicsContext</a> uses <a href="https://www.cairographics.org/">Cairo</a> to perform the rendering).</p>
 <p>Once the RenderTree is created, the layout is performed, ensuring that each of the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> have their proper size and position set.</p>
-<p><img style="display: block; margin: 1em auto;"
-	alt="Going from source content to displayed content"
-	src="/wpewebkit.org/manuelafm-patch-1/assets/graphics-attachment.png"></p>
+<p><img style="display: block; margin: 1em auto;" alt="Going from source content to displayed content" src="/wpewebkit.org/manuelafm-patch-1/assets/graphics-attachment.png"></p>
 <p>It would be possible to render the content of the web page just traversing this RenderTree and painting each of the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a>, but there would be problems when rendering elements that overlap each other, because the order of the elements in the RenderTree doesn’t necessarily match the order in which they must be painted in order to get the appropriate result. For example, an element with a big <code>z-index</code> value should be painted last, no matter its position in the RenderTree.</p>
 <p>This is an example of how some HTML content is translated into the RenderTree (there are some <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> missing here that are not relevant for the explanation).</p>
-<p><img style="display: block; margin: 1em auto;"
-	alt="RenderTree generated from example HTML"
-	src="/wpewebkit.org/manuelafm-patch-1/assets/graphics-rendertree.png"></p>
+<p><img style="display: block; margin: 1em auto;" alt="RenderTree generated from example HTML" src="/wpewebkit.org/manuelafm-patch-1/assets/graphics-rendertree.png"></p>
 <h2 id="renderlayers" tabindex="-1">RenderLayers</h2>
 <p>In order to ensure that the elements of the RenderTree are rendered in the appropriate order, the concept of <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> is added. A <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> represents a layer in the document containing some elements that have to be rendered at the same depth (even though this is not exactly the case, you can think of each <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> as a group of <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> that are at a certain <code>z-index</code>). Each <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObject</a> is associated to a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> either directly or indirectly via an ancestor <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObject</a>.</p>
 <p><a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> are grouped into a tree, which is called the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> tree, and <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> children are sorted into two lists: those that are below the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a>, and those that are above. With this we have a structure that has grouped all the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> that have to be rendered together: they will be on top of the content that has been rendered by the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> below this one, and below the content rendered by the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> over this one.</p>
 <p>There are several conditions that can decide whether a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> is needed for some element, it doesn’t necessarily needs to be due to the usage of <code>z-index</code>. It can be required due to transparency, CSS filters, overflow, transformations, and so on.</p>
 <p>Continuing with the example, these are <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> that we would get for that HTML code:</p>
-<p><img style="display: block; margin: 1em auto;"
-	alt="RenderLayer tree generated from example HTML"
-	src="/wpewebkit.org/manuelafm-patch-1/assets/graphics-renderlayertree.png"></p>
+<p><img style="display: block; margin: 1em auto;" alt="RenderLayer tree generated from example HTML" src="/wpewebkit.org/manuelafm-patch-1/assets/graphics-renderlayertree.png"></p>
 <p>We can see that there are four <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a>:</p>
 <ul>
 <li>The root one, corresponding to the RenderView element. This is mandatory.</li>
@@ -146,9 +143,7 @@ header.page time {
 <p>Once we have the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> tree, we could just paint each <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> in its own buffer in order to perform the composition. But this would be a waste of memory, as not every <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> needs a buffer. We introduce here a new component, the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a>.</p>
 <p><a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a> are a structure used to group those <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> that will render into the same buffer, and it will also contain all the information required to perform the composition of these buffers. A <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> may have a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a> associated to it if it requires its own buffer to render. Otherwise, it will render into an ancestor’s buffer (specifically, the first ancestor that has a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a>). As usual, <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a> are structured into a tree.</p>
 <p>This is how the example code would be translated into <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a>.</p>
-<p><img style="display: block; margin: 1em auto;"
-	alt="GraphicsLayer tree generated from example HTML"
-	src="/wpewebkit.org/manuelafm-patch-1/assets/graphics-graphicslayertree.png"></p>
+<p><img style="display: block; margin: 1em auto;" alt="GraphicsLayer tree generated from example HTML" src="/wpewebkit.org/manuelafm-patch-1/assets/graphics-graphicslayertree.png"></p>
 <p>We can see that we have now three <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a>:</p>
 <ul>
 <li>The root one, which is mandatory. It belongs to the RenderView element, but the first RenderBlock will render into this <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a>'s buffer as well.</li>
@@ -226,7 +221,7 @@ header.page time {
 
 </div>
 
-    </main>
+    </div></main>
 
     <footer class="global">
 	<b></b>

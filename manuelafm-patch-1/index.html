@@ -34,6 +34,9 @@
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/fonts.css">
 
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/prism.css">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/wpewebkit.org/manuelafm-patch-1/css/stylish-portfolio.css">
   <script type="text/javascript">
@@ -70,11 +73,11 @@
 		<ul class=" off"><li class="currentPage">
 			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/">Home</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about">Learn & Discover</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/about/">Learn & Discover</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog">Blog</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/blog/">Blog</a>
 			</li><li>
-			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers">Developers</a>
+			<a class="nav-link" href="/wpewebkit.org/manuelafm-patch-1/developers/">Developers</a>
 			</li><li>
 			<a class="btn cta" href="/wpewebkit.org/manuelafm-patch-1/about/explore-wpe.html">Get Started</a>
 			</li></ul>
@@ -119,9 +122,6 @@ main > section > * {
 	position: relative;
 	padding-left: 5px;
 	margin-left: 1rem;
-}
-main > section img {
-	max-width: 95%;
 }
 
 header.page {
@@ -210,7 +210,7 @@ header.page div > * {
 header.page div h1 {
 	font-size: 3em;
 	font-weight: 400;
-	background: url(/wpewebkit.org/manuelafm-patch-1/assets/img/graphic-title-white.svg) 0 100% / 7rem auto no-repeat;
+	background: url(/assets/img/graphic-title-white.svg) 0 100% / 7rem auto no-repeat;
 }
 
 .explore-embedded, .resources, .developers {
@@ -249,9 +249,11 @@ header.page div h1 {
 	padding: 0.75em 0;
 	font-size: 1.4em;
 }
-.success-stories h3 img {
-	display: block;
-	max-height: 6.5rem;
+.success-stories h3 a {
+  font-size: 3em;
+  color: inherit;
+  text-decoration: none;
+  line-height: 1.1;
 }
 .success-stories img.hero {
 	justify-self: start;
@@ -260,13 +262,12 @@ header.page div h1 {
 }
 @media (min-width: 45rem) {
 	.success-stories > div {
-		padding: 6rem;
 		grid-column: main / -2;
 		display: grid;
-		grid-template-columns: calc(50% - 5rem) 1fr;
+		grid-template-columns: 1fr 1fr;
 		grid-template-rows: min-content;
 		align-items: center;
-		gap: 10rem;
+		gap: 4rem;
 	}
 	.success-stories > * {
 		margin: 0;
@@ -278,13 +279,19 @@ header.page div h1 {
 		max-height: 30rem;
 		margin-inline-start: -5rem;
 		box-shadow: -0.25em 0 0.5em #06C3, 1em 1.5em 2.5em #0066DD99;
+		  justify-self: end;
+		  margin-inline: 0 -4rem;
+	}
+	.success-stories .spotlight {
+	  padding-inline: 6rem;
+	  padding-block: 2rem;
 	}
 }
 
 section.igalia {
 	padding-inline: 0;
 	background: 
-		url(/wpewebkit.org/manuelafm-patch-1/assets/img/dotted-continents.svg) 50% 25% / cover;
+		url(/assets/img/dotted-continents.svg) 50% 25% / cover;
 }
 section.igalia > div {
 	padding-block-end: 3em;
@@ -306,7 +313,7 @@ section.igalia > div > div > img {
 	section.igalia {
 		background: 
 			linear-gradient(to bottom right,#142B7AFA,#80A0B2) 100% 0 / 50% 100% no-repeat,
-			url(/wpewebkit.org/manuelafm-patch-1/assets/img/dotted-continents.svg) 50% 25% / cover;
+			url(/assets/img/dotted-continents.svg) 50% 25% / cover;
 		background-blend-mode: multiply;
 	}
 	section.igalia > div {
@@ -345,7 +352,7 @@ section.igalia > div > div > img {
 </style>
 
 <header class="page full-width">
-<video muted loop id="banner"><source src="/wpewebkit.org/manuelafm-patch-1/assets/video/homepage.mp4" type="video/mp4"></video>
+<video muted="" loop="" id="banner"><source src="/wpewebkit.org/manuelafm-patch-1/assets/video/homepage.mp4" type="video/mp4"></video>
 <span></span>
 <div>
 <h1>
@@ -355,7 +362,7 @@ Create simple and performant systems based on <strong>Web platform technologies.
 A WebKit port for Linux-based embedded devices designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best performance.
 </p>
 <a class="cta btn large" href="/wpewebkit.org/manuelafm-patch-1/about/explore-wpe.html">Get Started</a>
-<button id="bannerControl" aria-label="Play/Pause silent background video"><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><path d="M 35,30 l 40,20 -40,20 z" /></svg></button></div>
+<button id="bannerControl" aria-label="Play/Pause silent background video"><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none"></circle><path d="M 35,30 l 40,20 -40,20 z"></path></svg></button></div>
 </header>
 
 
@@ -399,15 +406,13 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 <section class="success-stories full-width dotsep">
 <div>
-
 <div class="spotlight">
-<h2>Customer Success Story</h2> 
-<h3><a href="/wpewebkit.org/manuelafm-patch-1/blog/2022-success-metrological.html"><img src="/wpewebkit.org/manuelafm-patch-1/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
-<p><a href="/wpewebkit.org/manuelafm-patch-1/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
+<h2>Use Case</h2>
+<h3><a href="/wpewebkit.org/manuelafm-patch-1/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
+<p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
+<p><a href="/wpewebkit.org/manuelafm-patch-1/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
 </div>
-<img src="/wpewebkit.org/manuelafm-patch-1/assets/img/Metrological-hero.jpg" alt="" class="hero">
-
+<img src="/wpewebkit.org/manuelafm-patch-1/assets/img/use_case-digital_signage.png" alt="">
 </div>
 </section>
 
@@ -442,8 +447,8 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 <div>
 <img src="/wpewebkit.org/manuelafm-patch-1/assets/img/Igalia_tagline-white-1.png" alt="Open Source Consultancy">
-<p>WPEWebKit is developed by <a href="https://igalia.com/">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="https://igalia.com/contact/">Get in touch!</a></p>
-<a href="https://igalia.com/" class="cta btn large">igalia.com</a>
+<p>WPEWebKit is developed by <a href="https://igalia.com">Igalia</a>, an open-source consultancy with a lot of experience working on the Web platform.  As the maintainers of this official port of WebKit, Igalia has a great deal of experience with meeting hardware and software challenges in the embedded space and several others. <a href="https://igalia.com/contact/">Get in touch!</a></p>
+<a href="https://igalia.com" class="cta btn large">igalia.com</a>
 </div>
 
 </div>
@@ -472,6 +477,7 @@ window.onload = function() {
 	}
 }
 </script>
+
 
     <footer class="global">
 	<b></b>
