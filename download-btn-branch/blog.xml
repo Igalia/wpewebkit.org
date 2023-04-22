@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPE WebKit Blog</title>
+  <description>News related to WPE WebKit.</description>
+  <link href="https://wpewebkit.org/blog.xml" rel="self"/>
+  <link href="https://wpewebkit.org/blog/"/>
+  <updated>2023-03-07T00:00:00Z</updated>
+  <id>https://wpewebkit.org/blog/</id>
+  
+  <entry>
+    <title>Integrating WPE: URI Scheme Handlers and Script Messages</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html"/>
+    <updated>2023-03-07T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html</id>
+    <content type="html">&lt;p&gt;Most Web content is designed entirely for screen display—and there is &lt;em&gt;a
+lot&lt;/em&gt; of it—so it will spend its life in the somewhat restricted sandbox
+implemented by a web browser. But rich user interfaces using Web technologies
+in all kinds of consumer devices require &lt;em&gt;some&lt;/em&gt; degree of integration, an
+escape hatch to interact with the rest of their software and hardware. This is
+where a Web engine like WPE designed to be &lt;em&gt;embeddable&lt;/em&gt; shines: not only does
+WPE provide a &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/&quot;&gt;stable API&lt;/a&gt;, it is also comprehensive in
+supporting a number of ways to &lt;em&gt;integrate&lt;/em&gt; with its environment further than
+the plethora of available &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API&quot;&gt;Web platform APIs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Integrating a “Web view” (the main &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.WebView.html&quot;&gt;entry point of the WPE embedding
+API&lt;/a&gt;) involves providing extension points, which allow the
+Web content (HTML/CSS/JavaScript) it loads to call into native code provided
+by the client application (typically written in C/C++) from JavaScript, and
+vice versa. There are a number of ways in which this can be achieved:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html#uri-scheme-handlers&quot;&gt;URI scheme handlers&lt;/a&gt;&lt;/strong&gt; allow native code to
+register a custom &lt;abbr title=&quot;Uniform Resource Identifier&quot;&gt;URI&lt;/abbr&gt;
+scheme, which will run a user provided
+function to produce content that can be “fetched” regularly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html#user-script-messages&quot;&gt;User script messaging&lt;/a&gt;&lt;/strong&gt; can be used to send JSON
+messages from JavaScript running in the same context as Web pages to an user
+function, and vice versa.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;JavaScriptCore API&lt;/strong&gt; is a powerful solution to provide new JavaScript
+functionality to Web content seamlessly, almost as if they were implemented
+inside the Web engine itself—akin to &lt;a href=&quot;https://nodejs.org/api/addons.html#c-addons&quot;&gt;NodeJS C++ addons&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this post we will explore the first two, as they can support many
+interesting use cases without introducing the additional complexity of
+extending the JavaScript virtual machine. Let’s dive in!&lt;/p&gt;
+&lt;h2 id=&quot;intermission&quot; tabindex=&quot;-1&quot;&gt;Intermission&lt;/h2&gt;
+&lt;p&gt;We will be referring to the code of a tiny browser written for the occasion.
+Telling WebKit how to call our native code involves creating a
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.UserContentManager.html&quot;&gt;WebKitUserContentManager&lt;/a&gt;, customizing it, and then
+associating it with web views during their creation. The only exception to
+this are &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html#uri-scheme-handlers&quot;&gt;URI scheme handlers&lt;/a&gt;, which are registered
+using &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.register_uri_scheme.html&quot;&gt;webkit_web_context_register_uri_scheme()&lt;/a&gt;. This
+minimal browser includes an &lt;code&gt;on_create_view&lt;/code&gt; function, which is the perfect
+place to do the configuration:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; WebKitWebView&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;on_create_view&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;CogShell &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;shell&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; CogPlatform &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;platform&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;GError&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; error &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    WebKitWebViewBackend &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;view_backend &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;cog_platform_get_view_backend&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;platform&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;error&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;view_backend&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token function&quot;&gt;g_error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Cannot obtain view backend: %s&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; error&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;message&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitUserContentManager&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; content_manager &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;create_content_manager&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;/** NEW! **/&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;configure_web_context&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;cog_shell_get_web_context&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;shell&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;                         &lt;span class=&quot;token comment&quot;&gt;/** NEW! **/&lt;/span&gt;&lt;br /&gt; &lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitWebView&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; web_view &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token function&quot;&gt;g_object_new&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WEBKIT_TYPE_WEB_VIEW&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                     &lt;span class=&quot;token string&quot;&gt;&quot;user-content-manager&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; content_manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;/** NEW! **/&lt;/span&gt;&lt;br /&gt;                     &lt;span class=&quot;token string&quot;&gt;&quot;settings&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;cog_shell_get_web_settings&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;shell&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                     &lt;span class=&quot;token string&quot;&gt;&quot;web-context&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;cog_shell_get_web_context&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;shell&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                     &lt;span class=&quot;token string&quot;&gt;&quot;backend&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; view_backend&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                     &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;cog_platform_init_web_view&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;platform&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; web_view&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;webkit_web_view_load_uri&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;web_view&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; s_starturl&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_steal_pointer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;web_view&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;details&gt;
+  &lt;summary&gt;What is &lt;code&gt;g_autoptr&lt;/code&gt;?
+    Does it relate to &lt;code&gt;g_steal_pointer&lt;/code&gt;?
+    This does not look like C!&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;In the shown code examples, &lt;code&gt;g_autoptr(T)&lt;/code&gt; is a preprocessor macro provided by
+GLib that declares a pointer variable of the &lt;code&gt;T&lt;/code&gt; type, and arranges for
+freeing resources automatically when the variable goes out of scope. For
+objects this results in
+&lt;a href=&quot;https://docs.gtk.org/gobject/method.Object.unref.html&quot;&gt;g_object_unref()&lt;/a&gt;
+being called.&lt;/p&gt;
+&lt;p&gt;Internally the macro takes advantage of the &lt;code&gt;__attribute__((cleanup, ...))&lt;/code&gt;
+compiler extension, which is supported by GCC and Clang. GLib also includes &lt;a href=&quot;https://docs.gtk.org/glib/func.DEFINE_AUTOPTR_CLEANUP_FUNC.html&quot;&gt;a
+convenience
+macro&lt;/a&gt; that
+can be used to  define cleanups for your own types.&lt;/p&gt;
+&lt;p&gt;As for &lt;code&gt;g_steal_pointer&lt;/code&gt;, it is useful to indicate that the ownership of a
+pointer declared with &lt;code&gt;g_autoptr&lt;/code&gt; is transferred outside from the current
+scope. The function returns the same pointer passed as parameter and
+resets it to &lt;code&gt;NULL&lt;/code&gt;, thus preventing cleanup functions from running.&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;The size has been kept small thanks to reusing code from the &lt;a href=&quot;https://github.com/Igalia/cog#cog&quot;&gt;Cog
+core&lt;/a&gt; library. As a bonus, it should
+run on Wayland, X11, and even on a bare display using the &lt;abbr title=&quot;Direct
+Rendering Manager&quot;&gt;DRM&lt;abbr&gt;/&lt;abbr title=&quot;Kernel Mode Setting&quot;&gt;KMS&lt;/abbr&gt;
+subsystem directly. Compiling and running it, assuming you already have the
+dependencies installed, should be as easy as running:&lt;/abbr&gt;&lt;/abbr&gt;&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;cc &lt;span class=&quot;token parameter variable&quot;&gt;-o&lt;/span&gt; minicog minicog.c &lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;$(&lt;/span&gt;pkg-config cogcore &lt;span class=&quot;token parameter variable&quot;&gt;--libs&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--cflags&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;./minicog wpewebkit.org&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the current session kind is not automatically detected, a second parameter
+can be used to manually choose among &lt;code&gt;wl&lt;/code&gt; (Wayland), &lt;code&gt;x11&lt;/code&gt;, &lt;code&gt;drm&lt;/code&gt;, and so on:&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;./minicog wpewebkit.org x11&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The full, unmodified source for this minimal browser is included right below.&lt;/p&gt;
+&lt;details&gt;
+  &lt;summary&gt;Complete &lt;code&gt;minicog.c&lt;/code&gt; source
+    (&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://gist.github.com/aperezdc/f6a65a95f2baa222c0ce9d65e516e13b&quot;&gt;Gist&lt;/a&gt;)
+  &lt;/summary&gt;
+&lt;!-- minicog.c &lt;&lt;&lt;1 --&gt;
+&lt;div&gt;
+&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;
+/*
+ * SPDX-License-Identifier: MIT
+ *
+ * cc -o minicog minicog.c $(pkg-config wpe-webkit-1.1 cogcore --cflags --libs)
+ */
+&amp;nbsp;
+#include &amp;lt;cog/cog.h&amp;gt;
+&amp;nbsp;
+static const char *s_starturl = NULL;
+&amp;nbsp;
+static WebKitWebView*
+on_create_view(CogShell *shell, CogPlatform *platform)
+{
+    g_autoptr(GError) error = NULL;
+    WebKitWebViewBackend *view_backend = cog_platform_get_view_backend(platform, NULL, &amp;error);
+    if (!view_backend)
+        g_error(&quot;Cannot obtain view backend: %s&quot;, error-&gt;message);
+&amp;nbsp;
+    g_autoptr(WebKitWebView) web_view =
+        g_object_new(WEBKIT_TYPE_WEB_VIEW,
+                     &quot;settings&quot;, cog_shell_get_web_settings(shell),
+                     &quot;web-context&quot;, cog_shell_get_web_context(shell),
+                     &quot;backend&quot;, view_backend,
+                     NULL);
+    cog_platform_init_web_view(platform, web_view);
+    webkit_web_view_load_uri(web_view, s_starturl);
+    return g_steal_pointer(&amp;web_view);
+}
+&amp;nbsp;
+int
+main(int argc, char *argv[])
+{
+    g_set_application_name(&quot;minicog&quot;);
+&amp;nbsp;
+    if (argc != 2 &amp;&amp; argc != 3) {
+        g_printerr(&quot;Usage: %s [URL [platform]]\n&quot;, argv[0]);
+        return EXIT_FAILURE;
+    }
+&amp;nbsp;
+    g_autoptr(GError) error = NULL;
+    if (!(s_starturl = cog_uri_guess_from_user_input(argv[1], TRUE, &amp;error)))
+        g_error(&quot;Invalid URL &#39;%s&#39;: %s&quot;, argv[1], error-&gt;message);
+&amp;nbsp;
+    cog_modules_add_directory(COG_MODULEDIR);
+&amp;nbsp;
+    g_autoptr(GApplication) app = g_application_new(NULL, G_APPLICATION_DEFAULT_FLAGS);
+    g_autoptr(CogShell) shell = cog_shell_new(&quot;minicog&quot;, FALSE);
+    g_autoptr(CogPlatform) platform =
+        cog_platform_new((argc == 3) ? argv[2] : g_getenv(&quot;COG_PLATFORM&quot;), &amp;error);
+    if (!platform)
+        g_error(&quot;Cannot create platform: %s&quot;, error-&gt;message);
+&amp;nbsp;
+    if (!cog_platform_setup(platform, shell, &quot;&quot;, &amp;error))
+        g_error(&quot;Cannot setup platform: %s\n&quot;, error-&gt;message);
+&amp;nbsp;
+    g_signal_connect(shell, &quot;create-view&quot;, G_CALLBACK(on_create_view), platform);
+    g_signal_connect_swapped(app, &quot;shutdown&quot;, G_CALLBACK(cog_shell_shutdown), shell);
+    g_signal_connect_swapped(app, &quot;startup&quot;, G_CALLBACK(cog_shell_startup), shell);
+    g_signal_connect(app, &quot;activate&quot;, G_CALLBACK(g_application_hold), NULL);
+&amp;nbsp;
+    return g_application_run(app, 1, argv);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- 1&gt;&gt;&gt; --&gt;
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;h2 id=&quot;uri-scheme-handlers&quot; tabindex=&quot;-1&quot;&gt;URI Scheme Handlers&lt;/h2&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;https://wpewebkit.org/assets/svg/URI_syntax_diagram.svg&quot; alt=&quot;“Railroad” diagram of URI syntax&quot; /&gt;
+  &lt;figcaption&gt;URI syntax (&lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://creativecommons.org/licenses/by-sa/4.0&quot;&gt;CC BY-SA 4.0&lt;/a&gt;,
+    &lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://commons.wikimedia.org/wiki/File:URI_syntax_diagram.svg&quot;&gt;source&lt;/a&gt;),
+    notice the “scheme” component at the top left.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;A URI scheme handler allows “teaching” the web engine how to handle &lt;em&gt;any&lt;/em&gt;
+load (pages, subresources, the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&quot;&gt;Fetch API&lt;/a&gt;,
+&lt;code&gt;XmlHttpRequest&lt;/code&gt;, …)—if you ever wondered how Firefox implements
+&lt;code&gt;about:config&lt;/code&gt; or how Chromium does &lt;code&gt;chrome://flags&lt;/code&gt;, this is it. Also,
+WPE WebKit has public API for this. Roughly:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A custom URI scheme is registered using
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.register_uri_scheme.html&quot;&gt;webkit_web_context_register_uri_scheme()&lt;/a&gt;. This also associates a callback function to it.&lt;/li&gt;
+&lt;li&gt;When WebKit detects a load for the scheme, it invokes the provided
+function, passing a
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.URISchemeRequest.html&quot;&gt;WebKitURISchemeRequest&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The function generates data to be returned as the result of the load,
+as a &lt;a href=&quot;https://docs.gtk.org/gio/class.InputStream.html&quot;&gt;GInputStream&lt;/a&gt;
+and calls &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html&quot;&gt;webkit_uri_scheme_request_finish()&lt;/a&gt;. This sends the stream to WebKit as the
+response, indicating the length of the response (if known), and the
+MIME content type of the data in the stream.&lt;/li&gt;
+&lt;li&gt;WebKit will now read the data from the input stream.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;echoes&quot; tabindex=&quot;-1&quot;&gt;Echoes&lt;/h3&gt;
+&lt;p&gt;Let’s add an echo handler to our &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html#intermission&quot;&gt;minimal browser&lt;/a&gt; that
+replies back with the requested URI. Registering the scheme is
+straightforward enough:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;configure_web_context&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitWebContext &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;context&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;webkit_web_context_register_uri_scheme&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;context&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                                           &lt;span class=&quot;token string&quot;&gt;&quot;echo&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                                           handle_echo_request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                                           &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;/* userdata */&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                                           &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;/* destroy_notify */&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;details&gt;
+  &lt;summary&gt;What are “user data” and “destroy notify”?&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;The &lt;code&gt;userdata&lt;/code&gt; parameter above is a convention used in many C libraries, and
+specially in these based on GLib when there are callback functions involved.
+It allows the &lt;em&gt;user&lt;/em&gt; to supply a pointer to arbitrary &lt;em&gt;data&lt;/em&gt;, which will be
+passed later on as a parameter to the callback (&lt;code&gt;handle_echo_request&lt;/code&gt; in the
+example) when it gets invoked later on.&lt;/p&gt;
+&lt;p&gt;As for the &lt;code&gt;destroy_notify&lt;/code&gt; parameter, it allows passing a function with the
+signature &lt;code&gt;void func(void*)&lt;/code&gt; (type
+&lt;a href=&quot;https://docs.gtk.org/glib/callback.DestroyNotify.html&quot;&gt;GDestroyNotify&lt;/a&gt;) which
+is invoked with &lt;code&gt;userdata&lt;/code&gt; as the argument once the user data is no longer
+needed. In the example above, this callback function would be invoked when the
+URI scheme is unregistered. Or, from a different perspective, this callback is
+used to &lt;em&gt;notify&lt;/em&gt; that the user data can now be &lt;em&gt;destroyed&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;One way of implementing &lt;code&gt;handle_echo_request()&lt;/code&gt; could be wrapping the request
+URI, which is part of the &lt;code&gt;WebKitURISchemeRequest&lt;/code&gt; parameter to the handler,
+stash it into a &lt;a href=&quot;https://docs.gtk.org/glib/struct.Bytes.html&quot;&gt;GBytes&lt;/a&gt;
+container, and &lt;a href=&quot;https://docs.gtk.org/gio/ctor.MemoryInputStream.new_from_bytes.html&quot;&gt;create an input stream to read back its
+contents&lt;/a&gt;:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;handle_echo_request&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitURISchemeRequest &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;userdata&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;request_uri &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;webkit_uri_scheme_request_get_uri&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;request&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Request URI: %s\n&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; request_uri&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;GBytes&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_bytes_new&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;request_uri&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;request_uri&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;GInputStream&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; stream &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_memory_input_stream_new_from_bytes&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;webkit_uri_scheme_request_finish&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;request&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; stream&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_bytes_get_size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;text/plain&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note how we need to tell WebKit how to &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html&quot;&gt;finish the load
+request&lt;/a&gt;,
+in this case only with the data stream, but it is possible to have &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish_with_response.html&quot;&gt;more
+control of the
+response&lt;/a&gt;
+or &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish_error.html&quot;&gt;return an
+error&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With these changes, it is now possible to make page loads from the new custom
+URI scheme:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img alt=&quot;Screenshot of the minicog browser loading a custom echo:// URI&quot; src=&quot;https://wpewebkit.org/assets/img/extending-minicog-echouri.png&quot; class=&quot;picture&quot; /&gt;
+  &lt;figcaption&gt;It worked!&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h3 id=&quot;et-tu%2C-cors%3F&quot; tabindex=&quot;-1&quot;&gt;Et Tu, CORS?&lt;/h3&gt;
+&lt;p&gt;The main roadblock one may find when using custom URI schemes is that loads
+are affected by &lt;abbr title=&quot;Cross-Origin Resource Sharing&quot;&gt;CORS&lt;/abbr&gt;
+checks. Not only that, WebKit by default does &lt;em&gt;not&lt;/em&gt; allow sending cross-origin
+requests to custom URI schemes. This is by design: instead of accidentally
+leaking potentially sensitive data to websites, developers embedding a web
+view &lt;em&gt;need&lt;/em&gt; to consciously opt-in to allow &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS&quot;&gt;CORS&lt;/a&gt; requests &lt;em&gt;and&lt;/em&gt;
+send back suitable &lt;code&gt;Access-Control-Allow-*&lt;/code&gt; response headers.&lt;/p&gt;
+&lt;p&gt;In practice, the additional setup involves
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.get_security_manager.html&quot;&gt;retrieving&lt;/a&gt;
+the &lt;code&gt;WebKitSecurityManager&lt;/code&gt; being used by the &lt;code&gt;WebKitWebContext&lt;/code&gt; and
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.SecurityManager.register_uri_scheme_as_cors_enabled.html&quot;&gt;registering the scheme as
+CORS-enabled&lt;/a&gt;.
+Then, in the handler function for the custom URI scheme, create a
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.URISchemeResponse.html&quot;&gt;WebKitURISchemeResponse&lt;/a&gt;,
+which allows fine-grained control of the response, including setting
+&lt;a href=&quot;https://libsoup.org/libsoup-3.0/struct.MessageHeaders.html&quot;&gt;headers&lt;/a&gt;,
+and finishing the request instead with
+&lt;code&gt;webkit_uri_scheme_request_finish_with_response()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Note that WebKit cuts some corners when using CORS with custom URI schemes:
+handlers will &lt;em&gt;not&lt;/em&gt; receive preflight &lt;code&gt;OPTIONS&lt;/code&gt; requests. Instead, the CORS
+headers from the replies are inspected, and if access needs to be denied
+then the data stream with the response contents is discarded.&lt;/p&gt;
+&lt;p&gt;In addition to providing a complete CORS-enabled custom URI scheme &lt;a href=&quot;https://gist.github.com/aperezdc/74809a6cd617faf445c22097a47bcb50&quot;&gt;example&lt;/a&gt;,
+we recommend the &lt;a href=&quot;https://httptoolkit.com/will-it-cors&quot;&gt;Will It CORS?&lt;/a&gt; tool
+to help troubleshoot issues.&lt;/p&gt;
+&lt;h3 id=&quot;further-ideas&quot; tabindex=&quot;-1&quot;&gt;Further Ideas&lt;/h3&gt;
+&lt;p&gt;Once we have WPE WebKit calling into our custom code, there are no limits
+to what a URI scheme handler can do—as long as it involves replying
+to requests. Here are some ideas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Allow pages to access a subset of paths from the local file system in a
+controlled way (as &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html#et-tu%2C-cors%3F&quot;&gt;CORS applies&lt;/a&gt;). For inspiration,
+see &lt;a href=&quot;https://igalia.github.io/cog/class.DirectoryFilesHandler.html&quot;&gt;CogDirectoryFilesHandler&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Package all your web application assets into a single ZIP file, making
+loads from &lt;code&gt;app:/...&lt;/code&gt; fetch content from it. Or, make the scheme handler
+load data using &lt;a href=&quot;https://docs.gtk.org/gio/struct.Resource.html&quot;&gt;GResource&lt;/a&gt; and bundle the application
+inside your program.&lt;/li&gt;
+&lt;li&gt;Use the presence of a well-known custom URI to have a web application
+realize that it is running on a certain device, and make its user
+interface adapt accordingly.&lt;/li&gt;
+&lt;li&gt;Provide a REST API, which internally calls into
+&lt;a href=&quot;https://networkmanager.dev/&quot;&gt;NetworkManager&lt;/a&gt; to list and configure
+wireless network adapters. Combine it with a local web application and
+embedded devices can now easily get on the network.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;user-script-messages&quot; tabindex=&quot;-1&quot;&gt;User Script Messages&lt;/h2&gt;
+&lt;p&gt;While &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html#uri-scheme-handlers&quot;&gt;URI scheme handlers&lt;/a&gt;
+allow streaming large chunks of data back into the Web engine, for exchanging
+smaller pieces of information in a more programmatic fashion it may be
+preferable to exchange messages without the need to trigger resource loads.
+The user script messages part of the
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/class.UserContentManager.html&quot;&gt;WebKitUserContentManager&lt;/a&gt; API can be used this way:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Register a user message handler with
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.UserContentManager.register_script_message_handler.html&quot;&gt;webkit_user_content_manager_register_script_message_handler()&lt;/a&gt;.
+As opposed to URI scheme handlers, this only enables receiving messages,
+but does not associate a callback function &lt;em&gt;yet&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Associate a callback to the
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/signal.UserContentManager.script-message-received.html&quot;&gt;script-message-received&lt;/a&gt;
+signal. The signal detail should be the name of the registered handler.&lt;/li&gt;
+&lt;li&gt;Now, whenever JavaScript code calls
+&lt;code&gt;window.webkit.messageHandlers.&amp;lt;name&amp;gt;.postMessage()&lt;/code&gt;, the signal is
+emitted, and the native callback functions invoked.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;details&gt;
+  &lt;summary&gt;Haven&#39;t I seen &lt;code&gt;postMessage()&lt;/code&gt; elsewhere?&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage&quot;&gt;Yes&lt;/a&gt;,
+&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage&quot;&gt;you&lt;/a&gt;
+&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker/postMessage&quot;&gt;have&lt;/a&gt;.
+The name is the same because it provides a similar functionality (send a
+message), it guarantees little (the receiver should validate messages), and
+there are &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm&quot;&gt;similar
+restrictions&lt;/a&gt;
+in the kind of values that can be passed along.&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;h3 id=&quot;it%E2%80%99s-all-javascript&quot; tabindex=&quot;-1&quot;&gt;It’s All JavaScript&lt;/h3&gt;
+&lt;p&gt;Let’s add a feature to our &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/06-integrating-wpe.html#intermission&quot;&gt;minimal browser&lt;/a&gt; that will allow
+JavaScript code to trigger rebooting or powering off the device where it is
+running. While this should definitely &lt;em&gt;not&lt;/em&gt; be functionality exposed to the
+open Web, it is perfectly acceptable in an embedded device where we control
+what gets loaded with WPE, and that exclusively uses a web application as its
+user interface.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;https://wpewebkit.org/assets/img/pepe-silvia-all-javascript.jpg&quot; class=&quot;picture&quot; alt=&quot;Pepe Silvia conspiracy image meme, with the text “It&#39;s all JavaScript” superimposed&quot; /&gt;
+  &lt;figcaption&gt;Yet most of the code shown in this post is C.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;First, create a &lt;code&gt;WebKitUserContentManager&lt;/code&gt;, register the message handler,
+and connect a callback to its associated signal:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; WebKitUserContentManager&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;create_content_manager&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_autoptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitUserContentManager&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; content_manager &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;webkit_user_content_manager_new&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;webkit_user_content_manager_register_script_message_handler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;content_manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;powerControl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_signal_connect&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;content_manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;script-message-received::powerControl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                     &lt;span class=&quot;token function&quot;&gt;G_CALLBACK&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;handle_power_control_message&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_steal_pointer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;content_manager&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The callback receives a &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/struct.JavascriptResult.html&quot;&gt;WebKitJavascriptResult&lt;/a&gt;, from which we
+can get the &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-javascriptcore-1.1/class.Value.html&quot;&gt;JSCValue&lt;/a&gt; with the contents of the parameter
+passed to the &lt;code&gt;postMessage()&lt;/code&gt; function. The &lt;code&gt;JSCValue&lt;/code&gt; can now be inspected
+to check for malformed messages and determine the action to take, and
+then arrange to call &lt;code&gt;reboot()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;handle_power_control_message&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WebKitUserContentManager &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;content_manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                             WebKitJavascriptResult &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;js_result&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;userdata&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    JSCValue &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;webkit_javascript_result_get_js_value&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;js_result&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;jsc_value_is_string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token function&quot;&gt;g_warning&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Invalid powerControl message: argument is not a string&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    g_autofree &lt;span class=&quot;token keyword&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;value_as_string &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;jsc_value_to_string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; action&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value_as_string&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;poweroff&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;        action &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; RB_POWER_OFF&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value_as_string&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;reboot&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;        action &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; RB_AUTOBOOT&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token function&quot;&gt;g_warning&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Invalid powerControl message: &#39;%s&#39;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value_as_string&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;g_message&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Device will %s now!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value_as_string&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;sync&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;reboot&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;action&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that the &lt;code&gt;reboot()&lt;/code&gt; system call above will most likely fail because it
+needs administrative privileges. While the browser process could run as &lt;code&gt;root&lt;/code&gt;
+to sidestep this issue—definitely &lt;em&gt;not&lt;/em&gt; recommended!—it would be
+better to grant the &lt;code&gt;CAP_SYS_BOOT&lt;/code&gt; capability to the process, and &lt;em&gt;much&lt;/em&gt;
+better to ask the system manager daemon to handle the job. In machines
+using &lt;a href=&quot;https://systemd.io/&quot;&gt;systemd&lt;/a&gt; a good option is to call the &lt;code&gt;.Halt()&lt;/code&gt;
+and &lt;code&gt;.Reboot()&lt;/code&gt; methods of its &lt;code&gt;org.freedesktop.systemd1&lt;/code&gt; interface.&lt;/p&gt;
+&lt;p&gt;Now we can write a small HTML document with some JavaScript sprinkled on top
+to arrange sending the messages:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;head&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;utf-8&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Device Power Control&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;head&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;reboot&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Reboot&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;poweroff&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Power Off&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;text/javascript&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;span class=&quot;token language-javascript&quot;&gt;&lt;br /&gt;      &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;addHandler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;        document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;click&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;          window&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;webkit&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;messageHandlers&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;powerControl&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;postMessage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;          &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br /&gt;      &lt;span class=&quot;token function&quot;&gt;addHandler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;reboot&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;      &lt;span class=&quot;token function&quot;&gt;addHandler&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;poweroff&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The complete source code for this example can be found
+&lt;a href=&quot;https://gist.github.com/aperezdc/621c1ec6bb78923e27fc035fa0689522&quot;&gt;in this Gist&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;going-in-the-other-direction&quot; tabindex=&quot;-1&quot;&gt;Going In The Other Direction&lt;/h3&gt;
+&lt;p&gt;But how can one return values from user messages back to the JavaScript code
+running in the context of the web page? Until recently, the only option
+available was exposing some known function in the page’s JavaScript code, and
+then using
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebView.run_javascript.html&quot;&gt;webkit_web_view_run_javascript()&lt;/a&gt;
+to call it from native code later on. To make this more idiomatic and allow
+waiting on a &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promise&lt;/a&gt;, an approach like the following works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Have convenience JavaScript functions wrapping the calls to
+&lt;code&gt;.postMessage()&lt;/code&gt; which add an unique identifier as part of the message,
+create a &lt;code&gt;Promise&lt;/code&gt;, and store it in a &lt;code&gt;Map&lt;/code&gt; indexed by the identifier.
+The &lt;code&gt;Promise&lt;/code&gt; is itself returned from the functions.&lt;/li&gt;
+&lt;li&gt;When the callback in native code handle messages, they need to take
+note of the message identifier, and then use
+&lt;code&gt;webkit_web_view_run_javascript()&lt;/code&gt; to pass it back, along with the
+information needed to resolve the promise.&lt;/li&gt;
+&lt;li&gt;The Javascript code running in the page takes the &lt;code&gt;Promise&lt;/code&gt; from
+the &lt;code&gt;Map&lt;/code&gt; that corresponds to the identifier, and resolves it.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To make this approach a bit more palatable, we could tell WebKit to &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.UserContentManager.add_script.html&quot;&gt;inject a
+script&lt;/a&gt;
+along with the regular content, which would provide the &lt;a href=&quot;https://gist.github.com/aperezdc/a112c6a61a5a11885eac2498702e3a6d&quot;&gt;helper
+functions&lt;/a&gt;
+needed to achieve this.&lt;/p&gt;
+&lt;p&gt;Nevertheless, the approach outlined above is cumbersome and can be
+tricky to get right, not to mention that the effort needs to be duplicated in
+each application. Therefore, we have recently added new API hooks to provide this
+as a built-in feature, so starting in WPE WebKit 2.40 the recommended approach
+involves using
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/method.UserContentManager.register_script_message_handler_with_reply.html&quot;&gt;webkit_user_content_manager_register_script_message_handler_with_reply()&lt;/a&gt;
+to register handlers instead. This way, calling &lt;code&gt;.postMessage()&lt;/code&gt; now returns a
+&lt;code&gt;Promise&lt;/code&gt; to the JavaScript code, and the callbacks connected to the
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.UserContentManager.script-message-with-reply-received.html&quot;&gt;script-message-with-reply-received&lt;/a&gt;
+signal now receive a
+&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/struct.ScriptMessageReply.html&quot;&gt;WebKitScriptMessageReply&lt;/a&gt;,
+which can be used to resolve the promise—either on the spot, or
+asynchronously later on.&lt;/p&gt;
+&lt;h3 id=&quot;even-more-ideas&quot; tabindex=&quot;-1&quot;&gt;Even More Ideas&lt;/h3&gt;
+&lt;p&gt;User script messages are a powerful and rather flexible facility to make WPE
+integrate web content into a complete system. The provided example is rather
+simple, but as long as we do not need to pass huge amounts of data in
+messages the possibilities are almost endless—especially with the
+added convenience in WPE WebKit 2.40. Here are more ideas that can
+be built on top of user script messages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A handler could receive requests to “monitor” some object, and
+return a &lt;code&gt;Promise&lt;/code&gt; that gets resolved when it has received changes.
+For example, this could make the user interface of a smart thermostat
+react to temperate updates from a sensor.&lt;/li&gt;
+&lt;li&gt;A generic handler that takes the message payload and converts it into
+&lt;a href=&quot;https://en.wikipedia.org/wiki/D-Bus&quot;&gt;D-Bus&lt;/a&gt; method calls, allowing
+web pages to control many aspects of a typical Linux system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;wrapping-up&quot; tabindex=&quot;-1&quot;&gt;Wrapping Up&lt;/h2&gt;
+&lt;p&gt;WPE has been designed from the ground up to integrate with the rest of the
+system, instead of having a sole focus on rendering Web content inside a
+monolithic web browser application. Accordingly, the public API must be
+comprehensive enough to use it as a component of &lt;em&gt;any&lt;/em&gt; application. This
+results in features that allow plugging into the web engine at different
+layers to provide custom behaviour.&lt;/p&gt;
+&lt;p&gt;At Igalia we have years of experience embedding WebKit into all kinds of
+applications, and we are always sympathetic to the needs of such systems. If
+you are interested collaborating with WPE development, or searching for a
+solution that can tightly integrate web content in your device, feel free to
+&lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- vim:set foldmethod=marker foldmarker=&lt;&lt;&lt;,&gt;&gt;&gt;: --&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Status of the new SVG engine in WebKit</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/05-new-svg-engine.html"/>
+    <updated>2023-01-19T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/05-new-svg-engine.html</id>
+    <content type="html">&lt;style&gt;
+figure {
+margin: 0;
+}
+
+figure &gt; figure {
+  border: 1px #cccccc solid;
+  padding: 4px;
+}
+
+figcaption {
+  background-color: #cccccc;
+  color: black;
+  padding: 1px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+&lt;/style&gt;
+&lt;p&gt;In the &lt;a href=&quot;https://wpewebkit.org/blog/04-wpe-networking-overview.html&quot;&gt;previous posts of this series&lt;/a&gt;, various aspects of the WPE port architecture were covered. Besides maintaining and advancing the WPE port according to our customers’ needs, Igalia also participates in the development of the &lt;strong&gt;WebCore&lt;/strong&gt; engine itself, which is shared by &lt;em&gt;all&lt;/em&gt; WebKit ports. WebCore is the part of the browser engine that does the heavy lifting: it contains all functionality necessary to load, parse, lay out, and paint Web content.&lt;/p&gt;
+&lt;p&gt;Since late 2019, Igalia has been working on a new SVG engine, dubbed &lt;strong&gt;L&lt;/strong&gt;ayer-&lt;strong&gt;B&lt;/strong&gt;ased &lt;strong&gt;S&lt;/strong&gt;VG &lt;strong&gt;E&lt;/strong&gt;ngine (&lt;strong&gt;LBSE&lt;/strong&gt;), that will unify the HTML/SVG rendering pipelines in WebCore. This will resolve long-standing design issues of the “legacy” SVG engine and unlock a bunch of new &lt;em&gt;exciting&lt;/em&gt; possibilities for Web developers to get creative with SVG. &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-13-svg-performance/&quot;&gt;Hardware-accelerated compositing&lt;/a&gt;, driven by CSS &lt;code&gt;transform&lt;/code&gt; animations, &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2019-12-12-3d-transformations/&quot;&gt;3D perspective transformations&lt;/a&gt; for arbitrary SVG elements, CSS &lt;code&gt;z-index&lt;/code&gt; support for all SVG graphics elements, and proper coverage rectangle computations and repaints are just a few highlights of the capabilities the future SVG engine will offer.&lt;/p&gt;
+&lt;p&gt;In this article, an overview is given about the problems that LBSE aims to solve, and the importance of a performant, well-integrated SVG engine &lt;em&gt;especially&lt;/em&gt; for the embedded market. Finally, the current upstreaming status is summarized including an outlook for the year &lt;strong&gt;2023&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;lbse-in-a-nutshell&quot; tabindex=&quot;-1&quot;&gt;LBSE in a nutshell&lt;/h2&gt;
+&lt;p&gt;Before diving into the technical topics, let’s take a few minutes to recap the motivations behind the LBSE work, and explain the importance of a well-integrated, performant SVG engine in WebKit, &lt;em&gt;especially&lt;/em&gt; for the embedded market.&lt;/p&gt;
+&lt;h3 id=&quot;motivation&quot; tabindex=&quot;-1&quot;&gt;Motivation&lt;/h3&gt;
+&lt;p&gt;Many of our customers build products that utilize a Linux-powered embedded device, typically using non-x86 CPUs, custom displays with built-in input capabilities (e.g., capacitive touchscreens) often without large amounts of memory or even permanent storage. The software stack for these devices usually consists of a device-specific Linux distribution, containing the proprietary network, GPU, and drivers for the embedded device - the vendor-approved &lt;em&gt;“reference distribution”&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;No matter what type of product is built nowadays, many of them need an active Internet connection, to e.g. update their software stack and access additional information. Besides the UI needed to control the product, a lot of additional dialogs, wizards and menus have to be provided to be able to alter the devices’ “system settings”, such as date/time information, time zones, display brightness, WiFi credentials, Bluetooth settings, and so on.&lt;/p&gt;
+&lt;p&gt;A variety of toolkits exist that assist in writing GUI applications for embedded devices, with a few open-source projects on the market, as well as commercial products providing closed-source, proprietary solutions, that &lt;em&gt;specifically&lt;/em&gt; target the embedded market and are often optimized for specific target device families, e.g. certain ARM processors / certain GPUs.&lt;/p&gt;
+&lt;p&gt;If the need arises, not only to communicate with the Internet but also to display arbitrary Web content, WPE comes into play. As presented in the &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html#how-does-wpe-integrate-with-webkit%3F&quot;&gt;first post in this series&lt;/a&gt;, the flexible and modular WPE architecture makes it an ideal choice for any product in the embedded market that needs Web browsing abilities. The &lt;a href=&quot;https://docs.gtk.org/glib&quot;&gt;GLib&lt;/a&gt;/C-based &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1&quot;&gt;WPE public APIs&lt;/a&gt; allow for customization of the browsing engine and its settings (react on page load/input events, inject custom JS objects, modify style sheets, etc.) and allow the embedder to control/monitor all relevant Web browsing-related activities.&lt;/p&gt;
+&lt;p&gt;With a full-fledged Web engine at hand, one might ponder if it is feasible to replace the whole native GUI stack with a set of Web pages/applications, and only use WPE to paint the UI in full-screen mode, thus migrating away from native GUI applications — following the trend in the desktop market. The number of organizations migrating native GUI applications into Web applications is &lt;em&gt;rapidly&lt;/em&gt; increasing, since there are compelling reasons for Web apps: “write once, use everywhere”, avoiding vendor lock-in, easy/reliable deployment and update mechanisms, and efficient test/development cycles (local in-browser testing!).&lt;/p&gt;
+&lt;p&gt;Due to the sheer capabilities of the Web platform, it has grown to an environment in which any kind of application can be developed – ranging from video editing applications, big data processing pipelines to 3D games, all using JS/WebAssembly in a browser, presented using HTML5/CSS. And as an important bonus: in 2023, it’s much easier to find and attract talented Web developers and designers that are fluent in HTML/CSS/JS, than those that are comfortable designing UI applications in proprietary, closed-source C/C++ frameworks.&lt;/p&gt;
+&lt;p&gt;A long-term customer, successfully using WPE in their products, had very similar thoughts and carried out a study, contracting external Web designers to build a complete UI prototype using Web technology. The mock-up made extensive use of SVG2, embedded inline into HTML5 documents or via other mechanisms (CSS &lt;code&gt;background-image&lt;/code&gt;, etc.). The UI fulfilled all expectations and worked great in Blink and WebKit-based browsers, delivering smooth animations. On the target device, however, the performance was too slow, far away from usable. A thorough analysis revealed that large parts of the Web page were constantly repainted, and layout operations were repeated for every frame when animations were active. The accumulated time to display a new frame during animations was in the order of a few milliseconds on desktop machines, but took 20-25 milliseconds on the target device, making smooth 60 FPS animations &lt;em&gt;impossible&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The poor performance is not the result of shortcomings in the WPE port of WebKit: when replacing the aforementioned animated SVG document fragments with HTML/CSS “equivalents” (e.g. simulating SVG circles with CSS &lt;code&gt;border-radius&lt;/code&gt; tricks) the performance issue vanisheed. Why? SVG lacks support for a key feature called &lt;strong&gt;accelerated compositing&lt;/strong&gt;, which has been available for HTML/CSS since its introduction more than a decade ago. This compositing heavily relies on the &lt;strong&gt;Layer Tree&lt;/strong&gt;, which is unaware of SVG. Extending the &lt;strong&gt;Layer Tree&lt;/strong&gt; implementation to account for SVG is the &lt;strong&gt;main motivation for LBSE&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;If you are unfamiliar with the concepts of &lt;strong&gt;Render Tree&lt;/strong&gt; and &lt;strong&gt;Layer Tree&lt;/strong&gt;, you might want to read the &lt;em&gt;“Key concepts”&lt;/em&gt; section of an earlier &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-29-layer-based-svg-engine/page/3/#key-concepts&quot;&gt;LBSE design document&lt;/a&gt;, which provides an overview of the topic.&lt;/p&gt;
+&lt;h3 id=&quot;prototyping&quot; tabindex=&quot;-1&quot;&gt;Prototyping&lt;/h3&gt;
+&lt;p&gt;The LBSE effort began in October 2019 as &lt;strong&gt;a research project&lt;/strong&gt;, to find out an ideal design for the SVG &lt;strong&gt;Render Tree&lt;/strong&gt;, that allows SVG to re-use the existing &lt;strong&gt;Layer Tree&lt;/strong&gt; implementation with minimal changes. The aim for LBSE is to share as much code as possible with the HTML/CSS implementation, removing the need for things like SVG specific clipping/masking/filter code and disjoint HTML counterparts for the same operations.&lt;/p&gt;
+&lt;p&gt;After an extensive phase of experimentation, two abandoned approaches, and a long time spent on regression fixing, the LBSE prototype was finally finished after almost two years of work. It passed all 60k+ WebKit layout tests and offered initial support for compositing, 3D transformations, &lt;code&gt;z-index&lt;/code&gt;, and more. The intent was to prove that we can reach feature parity with the legacy SVG engine and retrieve the very same visual results, pixel-by-pixel (except for progressions of LBSE). Shortly after the finalization, the prototype was presented during the &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-13-svg-performance/&quot;&gt;WebKit contributors meeting in 2021&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As the name “prototype” indicates, LBSE was not ready for integration into WebKit at this point. It &lt;strong&gt;replaced&lt;/strong&gt; the old SVG engine with a new one, resulting in a monolithic patch exceeding &lt;em&gt;650 KB&lt;/em&gt; of code changes. External contributions generally demand small patches, with ChangeLogs, tests, etc. – no conscientious reviewer in any company would approve a patch replacing a core component of a browser engine in one shot. Splitting up into small pieces is also not going to work, since SVG needs to be kept intact upstream all the time. Duplicating the whole SVG engine? Not practicable either. With that problem in mind, a fruitful discussion took place with Apple during and after the WebKit contributors meeting: a realistic upstreaming strategy was defined - thanks &lt;em&gt;Simon Fraser&lt;/em&gt; for suggesting a pragmatic approach!&lt;/p&gt;
+&lt;p&gt;The idea is simple: bootstrap LBSE &lt;em&gt;in parallel&lt;/em&gt; to the legacy SVG engine. Upstream LBSE behind a compile-time flag and additionally a runtime setting. This way the LBSE code is compiled by the &lt;a href=&quot;https://trac.webkit.org/wiki/EarlyWarningSystem&quot;&gt;EWS bots&lt;/a&gt; during upstreaming (rules out bit-rot) and we gain the ability to turn LBSE on, selectively, from our layout tests – very useful during early bootstrapping. For WebKit, that strategy is the best – for LBSE another &lt;em&gt;major&lt;/em&gt; effort is necessary: moving from a &lt;strong&gt;drop-in replacement&lt;/strong&gt; approach to a &lt;strong&gt;dual-stack&lt;/strong&gt; SVG engine: LBSE + legacy built into the same WebKit binaries. At least the timing was good since a split-up into small pieces was needed anyhow for upstreaming. Time to dissect the huge branch into logical, atomic pieces with proper change logs.&lt;/p&gt;
+&lt;p&gt;Before we jump to the upstreaming status, one question should be answered, that came up during the WebKit contributors meeting and also during various discussions: why don’t you just &lt;em&gt;fix&lt;/em&gt; the existing SVG engine and instead propose a new one - isn’t that too risky for Web compatibility?&lt;/p&gt;
+&lt;h3 id=&quot;why-don%E2%80%99t-you-fix-the-existing-svg-engine%3F&quot; tabindex=&quot;-1&quot;&gt;Why don’t you fix the existing SVG engine?&lt;/h3&gt;
+&lt;img style=&quot;float: right; width: 55%;&quot; alt=&quot;LBSE logo&quot; src=&quot;https://wpewebkit.org/assets/lbse-logo-wide.png&quot; /&gt;
+&lt;p&gt;There was &lt;em&gt;no initial intention&lt;/em&gt; to come up with a new SVG engine. During LBSE development it became apparent how much SVG-specific code can be erased when unifying certain aspects with HTML/CSS. After carrying out the integration work, layout/painting and hit-testing work fundamentally different than before. Since that time, LBSE is labeled as a &lt;em&gt;“new SVG engine”&lt;/em&gt;, even though the SVG DOM tree part remained almost identical. Web compatibility will &lt;em&gt;improve&lt;/em&gt; with LBSE: a few long-standing, critical interop issues with other browser vendors are solved in LBSE. Therefore, there are no concerns regarding Web compatibility risks from our side.&lt;/p&gt;
+&lt;p&gt;To answer the initial question, whether it is possible to fix the existing SVG engine to add layer support without adding a “new” SVG engine in parallel? Short answer: &lt;em&gt;no&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;In the following section, it is shown that adding support for layers implies changing the class hierarchy of the SVG render tree. All SVG renderers need to inherit from &lt;code&gt;RenderLayerModelObject&lt;/code&gt; – a change like this cannot be split up easily into small, atomic pieces. Improving the design is difficult if there’s a requirement to keep the SVG engine working all the time upstream: all patches in that direction end up being large as many renderers have to be changed at the same time. Having distinct, LBSE-only implementations of SVG renderers, independent of the legacy engine, leaves a lot of freedom to strive for an optimal design, free of legacy constraints, and avoids huge patches that are &lt;em&gt;impossible&lt;/em&gt; to review.&lt;/p&gt;
+&lt;p&gt;Let’s close the introduction and review the upstreaming status, and discuss where we stand today.&lt;/p&gt;
+&lt;h2 id=&quot;upstreaming-progress&quot; tabindex=&quot;-1&quot;&gt;Upstreaming progress&lt;/h2&gt;
+&lt;h3 id=&quot;planning&quot; tabindex=&quot;-1&quot;&gt;Planning&lt;/h3&gt;
+&lt;p&gt;To unify the HTML/CSS and SVG rendering pipelines there are two possible paths to choose from: teach the &lt;strong&gt;Layer Tree&lt;/strong&gt; about the SVG &lt;strong&gt;Render Tree&lt;/strong&gt; and its rendering model, or vice-versa. For the latter path, the HTML/CSS-specific &lt;code&gt;RenderLayer&lt;/code&gt; needs to split into HTML/SVG subclasses and a base class, that is constructible from non-&lt;code&gt;RenderLayerModelObject&lt;/code&gt;-derived renderers. The layer management code currently in &lt;code&gt;RenderLayerModelObject&lt;/code&gt; would need to move into another place, and so forth. This &lt;em&gt;invasive&lt;/em&gt; approach can potentially break lots of things. Besides that danger, many places in the layer/compositing system would need subtle changes to account for the specific needs of SVG (e.g. different coordinate system origin/convention).&lt;/p&gt;
+&lt;p&gt;Therefore the former route was chosen, which requires transforming the SVG render tree class hierarchy, such that all renderers that need to manage layers derive from &lt;strong&gt;&lt;code&gt;RenderLayerModelObject&lt;/code&gt;&lt;/strong&gt;. Using this approach support, for SVG can be added to the layer/compositing system in a &lt;em&gt;non-invasive&lt;/em&gt; manner, with only a minimum of SVG-specific changes. The following class hierarchy diagrams illustrate the planned changes.&lt;/p&gt;
+&lt;figure style=&quot;display: inline-block;&quot;&gt;
+&lt;figure style=&quot;margin-left: 0; margin-right: auto; display: inline-block; width: 48%;&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;https://wpewebkit.org/assets/svg/svg_render_tree_legacy.svg&quot; target=&quot;_blank&quot;&gt;Legacy design (click to enlarge)&lt;/a&gt;&lt;/figcaption&gt;
+&lt;img alt=&quot;Visualization of the legacy SVG render tree class hierarchy in WebCore&quot; src=&quot;https://wpewebkit.org/assets/svg/svg_render_tree_legacy.svg&quot; /&gt;
+&lt;/figure&gt;
+&lt;figure style=&quot;margin-left: auto; margin-right: 0; display: inline-block; width: 48%&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;https://wpewebkit.org/assets/svg/svg_render_tree_lbse.svg&quot; target=&quot;_blank&quot;&gt;LBSE design (click to enlarge)&lt;/a&gt;&lt;/figcaption&gt;
+&lt;img alt=&quot;Visualization of the LBSE SVG render tree class hierarchy in WebCore&quot; src=&quot;https://wpewebkit.org/assets/svg/svg_render_tree_lbse.svg&quot; /&gt;
+&lt;/figure&gt;
+&lt;/figure&gt;
+&lt;p&gt;The first graph shows the class hierarchy of the render tree in the legacy SVG engine: &lt;code&gt;RenderObject&lt;/code&gt; is the base class for all nodes in the render tree. &lt;code&gt;RenderBoxModelObject&lt;/code&gt; is the common base class for all HTML/CSS renderers. It inherits from &lt;code&gt;RenderLayerModelObject&lt;/code&gt;, potentially allowing HTML renderers to create layers. For the SVG part of the render tree, there is no common base class shared by all the SVG renderers, for historical reasons.&lt;/p&gt;
+&lt;p&gt;The second graph shows only the SVG renderers of the LBSE class hierarchy. In that design, all relevant SVG renderers may create/destroy/manage layers, via &lt;code&gt;RenderLayerModelObject&lt;/code&gt;. More information regarding the challenges can be found in the earlier &lt;a href=&quot;https://blogs.igalia.com/nzimmermann/posts/2021-10-29-layer-based-svg-engine/page/6/#legacy-class-hierarchy&quot;&gt;LBSE design document&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;report&quot; tabindex=&quot;-1&quot;&gt;Report&lt;/h3&gt;
+&lt;p&gt;The upstreaming work started in &lt;strong&gt;December 2021&lt;/strong&gt;, with the introduction of a new layer-aware root renderer for the SVG render subtree: &lt;code&gt;RenderSVGRoot&lt;/code&gt;. The existing &lt;a href=&quot;https://trac.webkit.org/changeset/286392/webkit&quot;&gt;&lt;code&gt;RenderSVGRoot&lt;/code&gt; class was renamed to &lt;code&gt;LegacyRenderSVGRoot&lt;/code&gt;&lt;/a&gt; (as well as any files, comments, etc.) and all call sites and build systems were adapted. Afterward, a stub implementation &lt;a href=&quot;https://trac.webkit.org/changeset/286842/webkit&quot;&gt;of a layer-aware &lt;code&gt;RenderSVGRoot&lt;/code&gt; class was added&lt;/a&gt; and assured that the &lt;a href=&quot;https://trac.webkit.org/changeset/286846/webkit&quot;&gt;new renderer is created for the corresponding SVG DOM element&lt;/a&gt; if LBSE is activated.&lt;/p&gt;
+&lt;p&gt;That process needs to be repeated for all SVG renderers that have substantially changed in LBSE and thus deserve an LBSE-specific upstream implementation. For all other cases, in-file &lt;code&gt;#if ENABLE(LAYER_BASED_SVG_ENGINE) ... #endif&lt;/code&gt; blocks will be used to encapsulate LBSE-specific behavior. For example, &lt;code&gt;RenderSVGText&lt;/code&gt; / &lt;code&gt;RenderSVGInlineText&lt;/code&gt; are almost identical in LBSE downstream, compared to their legacy variants; thus, they are going to share the renderer implementation between the legacy SVG engine and LBSE.&lt;/p&gt;
+&lt;p&gt;The multi-step procedure was repeated for &lt;a href=&quot;https://trac.webkit.org/changeset/287538/webkit&quot;&gt;&lt;code&gt;RenderSVGModelObject&lt;/code&gt;&lt;/a&gt; (the base class for SVG graphics primitives), &lt;a href=&quot;https://trac.webkit.org/changeset/287832/webkit&quot;&gt;&lt;code&gt;RenderSVGShape&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://trac.webkit.org/changeset/287834/webkit&quot;&gt;&lt;code&gt;RenderSVGRect&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&quot;https://trac.webkit.org/changeset/287921/webkit&quot;&gt;&lt;code&gt;RenderSVGContainer&lt;/code&gt;&lt;/a&gt;. Core functionality such as laying out children of a container, previously hidden in &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/main/Source/WebCore/rendering/svg/SVGRenderSupport.cpp#L241&quot;&gt;&lt;code&gt;SVGRenderSupport::layoutChildren()&lt;/code&gt;&lt;/a&gt; in the legacy SVG engine, now lives in a dedicated class: &lt;a href=&quot;https://trac.webkit.org/changeset/288011/webkit&quot;&gt;&lt;code&gt;SVGContainerLayout&lt;/code&gt;&lt;/a&gt;. Computing the various SVG bounding boxes - &lt;strong&gt;object/stroke/decorated  bounding box&lt;/strong&gt; - is &lt;a href=&quot;https://svgwg.org/svg2-draft/coords.html#BoundingBoxes&quot;&gt;precisely specified in SVG2&lt;/a&gt; and got a dedicated implementation as the &lt;a href=&quot;https://trac.webkit.org/changeset/287873/webkit&quot;&gt;&lt;code&gt;SVGBoundingBoxComputation&lt;/code&gt;&lt;/a&gt; class, instead of fragmenting the algorithms all over the SVG render tree as in the legacy SVG engine.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;February 2022&lt;/strong&gt;, enough functionality was in place to construct the LBSE render tree for basic SVG documents, utilizing nested containers and rectangles as leaves. While this doesn’t sound exciting &lt;em&gt;at all&lt;/em&gt;, it provided an ideal environment to implement support for SVG in the &lt;code&gt;RenderLayer&lt;/code&gt;-related code - &lt;strong&gt;before&lt;/strong&gt; converting all SVG renderers to LBSE, and &lt;strong&gt;before&lt;/strong&gt; implementing painting in the SVG renderers.&lt;/p&gt;
+&lt;p&gt;Both &lt;code&gt;RenderLayer&lt;/code&gt; and &lt;code&gt;RenderLayerBacking&lt;/code&gt; query CSS geometry information such as &lt;strong&gt;border box&lt;/strong&gt;, &lt;strong&gt;padding box&lt;/strong&gt;, or &lt;strong&gt;content box&lt;/strong&gt; from their associated renderer, which is expected to be a &lt;strong&gt;&lt;code&gt;RenderBox&lt;/code&gt;&lt;/strong&gt; in many places. This is &lt;em&gt;incorrect&lt;/em&gt; for SVG: &lt;code&gt;RenderSVGModelObject&lt;/code&gt; inherits from &lt;code&gt;RenderLayerModelObject&lt;/code&gt;, but not from &lt;code&gt;RenderBox&lt;/code&gt; since it doesn’t adhere to the CSS box model. Various call sites cast the associated renderer to &lt;code&gt;RenderBox&lt;/code&gt; to call e.g. &lt;code&gt;borderBoxRect()&lt;/code&gt; to retrieve the border box rectangle. There are similar accessors in SVG to query the geometry, but there is no equivalent of a &lt;strong&gt;border box&lt;/strong&gt; or other CSS concetps in SVG. Therefore, we extended &lt;code&gt;RenderSVGModelObject&lt;/code&gt; to provide a &lt;strong&gt;CSS box model view&lt;/strong&gt; of an SVG renderer, by offering methods such as &lt;code&gt;borderBoxRectEquivalent()&lt;/code&gt; or &lt;code&gt;visualOverflowRectEquivalent()&lt;/code&gt; that return geometry information in the same coordinate system using the same conventions as their HTML/CSS counterparts.&lt;/p&gt;
+&lt;p&gt;We also refactored &lt;code&gt;RenderLayer&lt;/code&gt; to use a proxy method - &lt;code&gt;rendererBorderBoxRect()&lt;/code&gt; - &lt;a href=&quot;https://trac.webkit.org/changeset/289210/webkit&quot;&gt;that provides access&lt;/a&gt; to the &lt;code&gt;borderBoxRect()&lt;/code&gt; for HTML and the &lt;code&gt;borderBoxRectEquivalent()&lt;/code&gt; for SVG renderers, and the same &lt;a href=&quot;https://trac.webkit.org/changeset/289213/webkit&quot;&gt;fix&lt;/a&gt; to &lt;code&gt;RenderLayerBacking&lt;/code&gt;. With these fixes in place, support to &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/%3Ehttps://trac.webkit.org/changeset/289207/webkit&quot;&gt;position and size SVG layers&lt;/a&gt; and to &lt;a href=&quot;https://trac.webkit.org/changeset/289204/webkit&quot;&gt;compute overflow information&lt;/a&gt; could be added – &lt;em&gt;both&lt;/em&gt; pre-conditions to enable painting.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;March 2022&lt;/strong&gt;, LBSE &lt;a href=&quot;https://trac.webkit.org/changeset/290324/webkit&quot;&gt;was able to paint basic SVG documents&lt;/a&gt; - a major milestone for the bootstrapping process, demonstrating that the layer painting code was functional for SVG. It was time to move on to &lt;em&gt;transformations&lt;/em&gt;: implementing &lt;a href=&quot;https://trac.webkit.org/changeset/290880/webkit&quot;&gt;&lt;code&gt;RenderSVGTransformableContainer&lt;/code&gt;&lt;/a&gt; (e.g. &lt;code&gt;&amp;lt;g&amp;gt;&lt;/code&gt; elements with a non-identity &lt;code&gt;transform&lt;/code&gt; attribute or CSS &lt;code&gt;transform&lt;/code&gt; property) and CSS/SVG &lt;code&gt;transform&lt;/code&gt; support for all other graphics primitives, utilizing the &lt;code&gt;RenderLayer&lt;/code&gt;-based &lt;strong&gt;CSS Transform&lt;/strong&gt; implementation. As preparation, the existing code was reviewed and &lt;a href=&quot;https://trac.webkit.org/changeset/291338/webkit&quot;&gt;cleaned up&lt;/a&gt;: &lt;code&gt;transform-origin&lt;/code&gt; computation &lt;a href=&quot;https://trac.webkit.org/changeset/291338/webkit&quot;&gt;was decoupled&lt;/a&gt; from CTM computation (CTM = current transformation matrix, see &lt;a href=&quot;https://www.w3.org/TR/css-transforms-1/#current-transformation-matrix&quot;&gt;CSS Transforms Module Level 1&lt;/a&gt;) and &lt;code&gt;transform-box&lt;/code&gt; computations &lt;a href=&quot;https://trac.webkit.org/changeset/292525/webkit&quot;&gt;were unified in a single place&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;April 2022&lt;/strong&gt;, &lt;strong&gt;2D transforms&lt;/strong&gt; &lt;a href=&quot;https://trac.webkit.org/changeset/292706/webkit&quot;&gt;were enabled&lt;/a&gt; and became &lt;a href=&quot;https://trac.webkit.org/changeset/293504/webkit&quot;&gt;fully functional&lt;/a&gt; a few weeks later. Besides missing &lt;em&gt;compositing support&lt;/em&gt; upstream, downstream work showed that enabling 3D transforms for SVG required &lt;a href=&quot;https://trac.webkit.org/changeset/294615/webkit&quot;&gt;fixing a decade-old bug&lt;/a&gt; that made the computed &lt;code&gt;perspective&lt;/code&gt; transformation dependent on the choice of &lt;code&gt;transform-origin&lt;/code&gt;. That became apparent when testing the layer code with SVG, which uses different default values for certain transform-related CSS properties than HTML does: &lt;code&gt;transform-box: view-box&lt;/code&gt; and &lt;code&gt;transform-origin: 0 0&lt;/code&gt; are the relevant defaults for SVG, referring to the top-left corner of nearest SVG viewport vs. the center of the element in HTML.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;May 2022&lt;/strong&gt;, the legacy SVG text rendering code was &lt;a href=&quot;https://trac.webkit.org/changeset/294385/webkit&quot;&gt;altered to be usable for LBSE as well&lt;/a&gt;. At this point, it made sense to run layout tests using LBSE. Previously most tests were expected to fail, as most either utilize text, paths, or shapes, and sometimes all three together. LBSE render tree text dumps (dumping the parsed render tree structure in a text file) were added for all tests in the &lt;code&gt;LayoutTests/svg&lt;/code&gt; subdirectory, as well as a new pixel test baseline (screenshots of the rendering as PNGs), generated using the legacy SVG engine, to verify that LBSE produces pixel-accurate results. All upcoming LBSE patches are expected to &lt;em&gt;change&lt;/em&gt; the expected layout test result baseline, and/or the &lt;code&gt;TestExpectations&lt;/code&gt; file, depending on the type of patch. This will ease the reviewing process a lot for future patches.&lt;/p&gt;
+&lt;p&gt;To further proceed, a &lt;strong&gt;test-driven approach&lt;/strong&gt; was used to prioritize the implementation of the missing functionality. At that time, missing &lt;code&gt;viewBox&lt;/code&gt; support for outer &amp;lt;svg&amp;gt; elements was causing many broken tests. The effect of the transformation induced by the &lt;strong&gt;viewBox&lt;/strong&gt; attribute, specified on outer &amp;lt;svg&amp;gt; elements, cannot be implemented as an additional CSS transformation applied to the outermost &amp;lt;svg&amp;gt; element, as that would affect the painted dimensions of the SVG document, which are subject to the CSS &lt;code&gt;width&lt;/code&gt;/&lt;code&gt;height&lt;/code&gt; properties and the size negotiation logic only. The &lt;code&gt;viewBox&lt;/code&gt; attribute is supposed to only affect the visual appearance of the descendants, by establishing a new local coordinate system for them. The legacy SVG engine manually handled the &lt;code&gt;viewBox&lt;/code&gt;-induced transformation in various places throughout &lt;code&gt;LegacyRenderSVGRoot&lt;/code&gt;, to only affect the painting of the descendants and not e.g. the position/dimension of the border surrounding the &amp;lt;svg&amp;gt;, if the CSS &lt;code&gt;border&lt;/code&gt; property is specified. In LBSE, transformations are handled on &lt;code&gt;RenderLayer&lt;/code&gt;-level and not in the renderers anymore.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;July 2022&lt;/strong&gt;, after testing different approaches, a proper solution &lt;a href=&quot;https://commits.webkit.org/252643@main&quot;&gt;to add &lt;code&gt;viewBox&lt;/code&gt; support was upstreamed&lt;/a&gt;. The chosen solution makes use of another CSS concept that arises in the context of generated content: &lt;em&gt;“anonymous boxes”&lt;/em&gt;. The idea is to wrap the direct descendants of &lt;code&gt;RenderSVGRoot&lt;/code&gt; in an anonymous &lt;code&gt;RenderSVGViewportContainer&lt;/code&gt; (“anonymous” = no associated DOM element) and apply the &lt;code&gt;viewBox&lt;/code&gt; transformation as a regular CSS transformation on the anonymous renderer. With that approach, LBSE is left with just a &lt;em&gt;single, unified&lt;/em&gt; &lt;code&gt;viewBox&lt;/code&gt; implementation, without error-prone special cases in &lt;code&gt;RenderSVGRoot&lt;/code&gt;, unlike the legacy SVG engine which has two disjoint implementations in &lt;code&gt;LegacyRenderSVGViewportContainer&lt;/code&gt; and &lt;code&gt;LegacyRenderSVGRoot&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;After the summer holidays, in &lt;strong&gt;August 2022&lt;/strong&gt;, the next major milestone was reached: &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=242833&quot;&gt;enabling compositing support for arbitrary SVG elements&lt;/a&gt;, bringing &lt;strong&gt;z-index&lt;/strong&gt; support, &lt;strong&gt;hardware-accelerated compositing&lt;/strong&gt; and &lt;strong&gt;3D transforms&lt;/strong&gt; to SVG. This time &lt;em&gt;all lessons&lt;/em&gt; learned from the previous LBSE prototypes were taken into account, resulting in a &lt;em&gt;complete&lt;/em&gt; compositing implementation, that works in various scenarios: different &lt;code&gt;transform-box&lt;/code&gt; / &lt;code&gt;transform-origin&lt;/code&gt; combinations, inline SVG enclosed by absolute/relative positioned CSS boxes and many more, all way more polished than in the “final” LBSE prototype.&lt;/p&gt;
+&lt;p&gt;The aforementioned patch contained a fix for a &lt;a href=&quot;https://webkit.org/b/27684&quot;&gt;long-standing bug&lt;/a&gt; (&lt;em&gt;“Composited elements appear pixelated when scaled up using transform”&lt;/em&gt;), that made composited elements look blurry when scaling up with a CSS &lt;code&gt;transform&lt;/code&gt; animation. The so-called &lt;em&gt;“backing scale factor”&lt;/em&gt; of the associated &lt;code&gt;GraphicLayers&lt;/code&gt; (see &lt;a href=&quot;https://wpewebkit.org/blog/03-wpe-graphics-architecture.html&quot;&gt;here for details&lt;/a&gt; about the role of &lt;code&gt;GraphicLayer&lt;/code&gt; in the compositing system) never changes during the animation. Therefore, the rendered image was scaled up instead of re-rendering the content at the right scale. LBSE now enforces updates of that scale factor, to avoid blurry SVGs. The fix is &lt;em&gt;not&lt;/em&gt; activated yet for HTML as that requires more thought - see the previously-linked bug report for details.&lt;/p&gt;
+&lt;p&gt;With all the new features in place and covered by tests, it was time to finish the remaining SVG renderers: &lt;a href=&quot;https://commits.webkit.org/250913@main&quot;&gt;RenderSVGEllipse&lt;/a&gt;, &lt;a href=&quot;https://commits.webkit.org/251688@main&quot;&gt;RenderSVGPath&lt;/a&gt; and &lt;a href=&quot;https://commits.webkit.org/252500@main&quot;&gt;RenderSVGViewportContainer&lt;/a&gt; (for inner &amp;lt;svg&amp;gt; elements), &lt;a href=&quot;https://commits.webkit.org/253510@main&quot;&gt;RenderSVGHiddenContainer&lt;/a&gt;, &lt;a href=&quot;https://commits.webkit.org/253793@main&quot;&gt;RenderSVGImage&lt;/a&gt;, and &lt;a href=&quot;https://commits.webkit.org/253816@main&quot;&gt;RenderSVGForeignObject&lt;/a&gt;. A proper &amp;lt;foreignObject&amp;gt; implementation was lacking in WebKit for 15+ years, due to the fundamental problem that the layer tree was not aware of the SVG subtree. The LBSE variant of &lt;code&gt;RenderSVGForeignObject&lt;/code&gt; looks trivial, yet offers a fully compatible &lt;strong&gt;&amp;lt;foreignObject&amp;gt; implementation&lt;/strong&gt; - for the first time without issues with non-static positioned content as a direct child of &amp;lt;foreignObject&amp;gt;, at least a few weeks later after &lt;a href=&quot;https://commits.webkit.org/256960@main&quot;&gt;it landed&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Returning to the test-driven approach, the next best target to fix was text rendering, which was working but not pixel-perfect. The legacy SVG engine takes into account the transformation from the text element up to the topmost renderer when computing the effective “on-screen” font size used to select a font for drawing/measuring, during &lt;em&gt;layout&lt;/em&gt; time. LBSE needed a way to calculate the CTM for a given SVG renderer, up to a given ancestor renderer (or root), taking into account all possible transformation scenarios, including CSS &lt;code&gt;transform&lt;/code&gt;, &lt;code&gt;translate&lt;/code&gt;, &lt;code&gt;rotate&lt;/code&gt;, SVG &lt;code&gt;transform&lt;/code&gt; attribute, shifts due to &lt;code&gt;transform-origin&lt;/code&gt;, perspective transformations, and much more. The &lt;em&gt;same functionality&lt;/em&gt; is required to implement &lt;code&gt;getCTM()&lt;/code&gt; / &lt;code&gt;getScreenCTM()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;By the end of &lt;strong&gt;August 2022&lt;/strong&gt;, &lt;a href=&quot;https://commits.webkit.org/253938@main&quot;&gt;&lt;code&gt;SVGLayerTransformComputation&lt;/code&gt; was added&lt;/a&gt; that re-used the existing &lt;code&gt;mapLocalToContainer()&lt;/code&gt; / &lt;code&gt;TranformState&lt;/code&gt; API to obtain the CTM. The CTM construction and ancestor chain walk - to accumulate the final transformation matrix - is performed by &lt;code&gt;mapLocalToContainer()&lt;/code&gt; and no longer needs a special, &lt;em&gt;incomplete&lt;/em&gt; SVG approach: the existing general approach now works for SVG too.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;September 2022&lt;/strong&gt; was mostly devoted to bug fixes related to &lt;strong&gt;pixel-snapping&lt;/strong&gt;. Outermost &amp;lt;svg&amp;gt; elements &lt;a href=&quot;https://commits.webkit.org/254314@main&quot;&gt;were not always enforcing stacking contexts&lt;/a&gt; and &lt;a href=&quot;https://commits.webkit.org/254558@main&quot;&gt;failed to align to device pixels&lt;/a&gt;. All other elements behaved fine with respect to pixel snapping (&lt;em&gt;not&lt;/em&gt; applied for SVG elements) unless compositing layers were active. In that case, a &lt;code&gt;RenderLayerBacking&lt;/code&gt; code path was used that unconditionally applied pixel-snapping - &lt;a href=&quot;https://commits.webkit.org/254863@main&quot;&gt;avoid that for SVG&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;October 2022&lt;/strong&gt; LBSE could &lt;a href=&quot;https://commits.webkit.org/255291@main&quot;&gt;properly display&lt;/a&gt; SVGs embedded into HTML host documents via &amp;lt;object&amp;gt; elements – the size negotiation logic failed to take into account the LBSE-specific renderers before. CSS &lt;code&gt;background-image&lt;/code&gt; / &lt;code&gt;list-image&lt;/code&gt; / HTML &amp;lt;img&amp;gt; / etc. &lt;a href=&quot;https://commits.webkit.org/255625@main&quot;&gt;were fixed as well&lt;/a&gt;. Zooming and panning support were &lt;a href=&quot;https://commits.webkit.org/255727@main&quot;&gt;implemented and improved compared to the legacy engine&lt;/a&gt;. Along the way an important bug was fixed, one that other browsers had already fixed back in 2014. The bug caused percentage-sized documents (e.g. &lt;code&gt;width: 100%; height: 100%&lt;/code&gt;) that also specify a &lt;code&gt;viewBox&lt;/code&gt; to always keep the document size, regardless of the zoom level. Thus, upon zooming, only the stroke width enlarged, but not the boundaries of the document, and thus scrollbars never appeared.&lt;/p&gt;
+&lt;p&gt;Over the following weeks, text-related issues had to be fixed, which were responsible for a bunch of the remaining test issues. Transformed text did not render, which turned out to be a simple &lt;a href=&quot;https://commits.webkit.org/255801@main&quot;&gt;mistake&lt;/a&gt;. More tests were upstreamed, related to &lt;a href=&quot;https://commits.webkit.org/256502@main&quot;&gt;compositing&lt;/a&gt; and &lt;a href=&quot;https://commits.webkit.org/256948@main&quot;&gt;transformations&lt;/a&gt;. More test coverage revealed that transform changes were not handled consistently – it took a period of investigation to &lt;a href=&quot;https://commits.webkit.org/256787@main&quot;&gt;land a proper fix&lt;/a&gt;. SVG transform / SMIL &amp;lt;animateMotion&amp;gt; / SMIL &amp;lt;animateTransform&amp;gt; / CSS transform changes are now handled consistently in LBSE, leading to proper repaints, as expected.&lt;/p&gt;
+&lt;p&gt;Transformation support can be considered complete and properly handled both during the painting and layout phases. Dynamic changes at runtime are correctly triggering invalidations. However, the Web-exposed &lt;strong&gt;SVG DOM API&lt;/strong&gt; that allows querying the transformation matrices of SVG elements, such as &lt;code&gt;getCTM()&lt;/code&gt; and &lt;code&gt;getScreenCTM()&lt;/code&gt;, was still missing. By &lt;strong&gt;November 2022&lt;/strong&gt; a complete implementation &lt;a href=&quot;https://commits.webkit.org/256862@main&quot;&gt;was upstreamed&lt;/a&gt;, that utilized the new &lt;code&gt;SVGLayerTransformComputation&lt;/code&gt; class to construct the desired transformation matrices. This way the same internal API is used for painting/layout/hit-testing and implementing the &lt;strong&gt;SVG DOM accessors&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;By &lt;strong&gt;December 2022&lt;/strong&gt; LBSE was in a good shape: most important architectural changes were upstreamed and the most basic features were implemented. The year closed with a proposed &lt;a href=&quot;https://github.com/WebKit/WebKit/pull/7482&quot;&gt;patch&lt;/a&gt; that will avoid re-layout when an element’s transform changes. The legacy SVG engine always needs a re-layout if transform changes, as the size of each ancestor can depend on the presence of transformations on the child elements – a bad design decision two decades ago that LBSE will resolve. Only repainting should happen, but no layouts, in LBSE.&lt;/p&gt;
+&lt;p&gt;Let’s move on to 2023, and recap what’s still missing in LBSE.&lt;/p&gt;
+&lt;h3 id=&quot;next-steps&quot; tabindex=&quot;-1&quot;&gt;Next steps&lt;/h3&gt;
+&lt;p&gt;Besides fixing all remaining test regressions (see &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/main/LayoutTests/platform/mac-ventura-wk2-lbse-text/TestExpectations&quot;&gt;&lt;code&gt;LayoutTests/platform/mac-ventura-wk2-lbse-text/TestExpectations&lt;/code&gt;&lt;/a&gt;) “SVG resources” are missing in LBSE. That includes all “paint servers” and advanced painting operations: there is no support for linear/radial gradients, no support for patterns, and no support for clipping/masking and filters.&lt;/p&gt;
+&lt;p&gt;From the painting capabilities, LBSE is still in a &lt;em&gt;basic shape&lt;/em&gt;. However, this was intentional, since a lot of the existing code for SVG resource handling is &lt;em&gt;no longer needed&lt;/em&gt; in LBSE. Clipping/masking and filters will be handled via &lt;code&gt;RenderLayer&lt;/code&gt;, reusing the existing HTML/CSS implementations. Temporary &lt;code&gt;ImageBuffers&lt;/code&gt; are no longer needed for clipping, and thus there is no need to cache the “per client” state in the resource system (e.g. re-using the cached clipping mask for repainting). This will simplify the implementation of the “SVG resources” a lot.&lt;/p&gt;
+&lt;p&gt;Therefore the first task in 2023 is to implement clipping, then masking, gradients, patterns, and as the last item, filters, since they require a substantial amount of refactoring in &lt;code&gt;RenderLayerFilters&lt;/code&gt;.
+Note that these implementations are already complete in LBSE downstream and do not need to be invented from scratch. The first patches in that direction should be up for review by &lt;strong&gt;February 2023&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;After all “SVG resources” are implemented in LBSE, feature parity is almost there and performance work will follow afterward. WebKit has a golden rule to never ship a performance regression; therefore, LBSE needs to be at least as fast in the standard performance tests, such as &lt;em&gt;MotionMark&lt;/em&gt;, before it can replace the legacy engine. Currently, LBSE is &lt;em&gt;slower than the legacy engine&lt;/em&gt; with respect to static rendering performance. Quoting numbers does not help at present, since the problem is well understood and will be resolved in the following months.&lt;/p&gt;
+&lt;p&gt;LBSE currently creates more &lt;code&gt;RenderLayer&lt;/code&gt; objects than necessary: for each renderer, unconditionally. This is a great stress test of the layer system, and helpful for bootstrapping, but the associated overhead and complexity are simply not necessary for many cases, and actively hurt performance. LBSE already outperforms the legacy SVG engine whenever animated content is viewed, if it benefits from the &lt;em&gt;hardware acceleration&lt;/em&gt; in LBSE.&lt;/p&gt;
+&lt;p&gt;2023 will be an exciting year, and hopefully brings LBSE to the masses, stay tuned!&lt;/p&gt;
+&lt;h2 id=&quot;demos&quot; tabindex=&quot;-1&quot;&gt;Demos&lt;/h2&gt;
+&lt;p&gt;“A picture is worth a thousand words”, so we’d like to share with you the videos shown during the &lt;strong&gt;WebKit contributors meeting in 2022&lt;/strong&gt; that demo the LBSE capabilities. Be sure to check them out so you can get a good picture of the state of the work. Enjoy!&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cloud.igalia.com/s/fXjsXmqQocxF5P7/download/01-demo-tiger-2d.mp4&quot;&gt;Accelerated 2D transforms (Tiger)&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;
+    &lt;video width=&quot;800&quot; height=&quot;600&quot; controls=&quot;&quot;&gt;&lt;source src=&quot;https://cloud.igalia.com/s/fXjsXmqQocxF5P7/download/01-demo-tiger-2d.mp4&quot; /&gt;&lt;/video&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cloud.igalia.com/s/FDx9koYej65wcFb/download/02-demo-tiger-3d.mp4&quot;&gt;Accelerated 3D transform (Tiger)&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;
+    &lt;video width=&quot;800&quot; height=&quot;600&quot; controls=&quot;&quot;&gt;&lt;source src=&quot;https://cloud.igalia.com/s/FDx9koYej65wcFb/download/02-demo-tiger-3d.mp4&quot; /&gt;&lt;/video&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cloud.igalia.com/s/zyAAwLWRaFQMatL/download/03-demo-tiger-transition-storm.mp4&quot;&gt;Transition storm (Tiger)&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;
+    &lt;video width=&quot;800&quot; height=&quot;600&quot; controls=&quot;&quot;&gt;&lt;source src=&quot;https://cloud.igalia.com/s/zyAAwLWRaFQMatL/download/03-demo-tiger-transition-storm.mp4&quot; /&gt;&lt;/video&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://cloud.igalia.com/s/e2ZfqWpnT44awEZ/download/04-demo-vibrant.mp4&quot;&gt;Vibrant example&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;
+    &lt;video width=&quot;800&quot; height=&quot;600&quot; controls=&quot;&quot;&gt;&lt;source src=&quot;https://cloud.igalia.com/s/e2ZfqWpnT44awEZ/download/04-demo-vibrant.mp4&quot; /&gt;&lt;/video&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;We at Igalia are doing our best to fulfill the mission and complete the LBSE upstreaming as fast as possible. In the meanwhile, let us know about &lt;em&gt;your&lt;/em&gt; thoughts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What would you do with a performant, next-level SVG engine?&lt;/li&gt;
+&lt;li&gt;Any particular desktop / embedded project that would benefit from it?&lt;/li&gt;
+&lt;li&gt;Anything in reach now, that seemed impossible before with the given constraints in WebKit?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thanks for your attention! Be sure to keep an eye on &lt;a href=&quot;https://github.com/nikolaszimmermann/WebKitIgalia/issues/1&quot;&gt;our “Upstreaming status” page at GitHub&lt;/a&gt; to follow LBSE development.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Success Story: WPE in digital signage</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/2023-success-digital-signage.html"/>
+    <updated>2023-01-06T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/2023-success-digital-signage.html</id>
+    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
+&lt;img alt=&quot;WPE WebKit in digital signage&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-digital-signage.png&quot; srcset=&quot;https://wpewebkit.org/assets/img/logo-digital-signage@2x.png 2x&quot; /&gt;
+&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-blue.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;Digital signage web rendering players have many advantages and are a trend nowadays. They allow to use HTML5 for composing the UI, provisioning and scheduling new contents to the screens from the cloud is simple and effortless, they provide a robust environment with an automatic crash recovery system, etc. They are also a great choice for digital signage kiosk deployments.&lt;/p&gt;
+&lt;p&gt;WPE WebKit is an excellent option to use as web rendering engine for Linux-based digital signage players, specially for the low-end market, where WPE Webkit allows to achieve great graphics and rendering performance in the less powerful devices like the ones based on the Raspberry Pi. As a result, WPE WebKit is naturally compatible with the hardware of the main digital signage manufactures that rely on these kind of lower-powered devices.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Success Story: Metrological</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/2022-success-metrological.html"/>
+    <updated>2022-10-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/2022-success-metrological.html</id>
+    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
+&lt;img alt=&quot;Metrological: A Comcast Company&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-metrological@2x.png&quot; /&gt;
+&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-blue.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;WPE WebKit brought &lt;strong&gt;RDK (Reference Design Kit)&lt;/strong&gt;, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.&lt;/p&gt;
+&lt;p&gt;Delivering a fast and memory-efficient browser for embedded systems is a challenging task, so Igalia helped Metrological build a new full-screen browser engine which stripped away all unnecessary toolkit elements.&lt;/p&gt;
+&lt;p&gt;With years of experience around WebKit platform integration, Igalia worked to produce a new WebKit port, WPE, which interfaced directly with Wayland and the graphics driver. Additionally, Igalia pushed forward the implementation of a multi-platform multi-threaded compositor, enabling better performance on low-end multicore processors. WPE is an official port of WebKit.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE Networking Overview</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/04-wpe-networking-overview.html"/>
+    <updated>2022-09-29T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/04-wpe-networking-overview.html</id>
+    <content type="html">&lt;p&gt;At the heart of any browser engine is networking: Connecting with services and other users.  Unlike other engines, WebKit approaches this more abstractly by leaving a large portion of the networking up to individual ports. This includes network protocols such as HTTP, WebSockets, and WebRTC. The upside to this approach is a higher level of integration with the system-provided libraries and features so WebKit will behave similarly to other software on the platform often with more centralized configuration.&lt;/p&gt;
+&lt;p&gt;Due to this abstraction there are a few independent layers that make up the networking stack of WPE. In this post, I’ll break down what each layer accomplishes as well as give some insight into the codebase’s structure.&lt;/p&gt;
+&lt;h2 id=&quot;networking-layers&quot; tabindex=&quot;-1&quot;&gt;Networking Layers&lt;/h2&gt;
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img alt=&quot;WebKit Network Layers&quot; src=&quot;https://wpewebkit.org/assets/networking-layers.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;webkit&quot; tabindex=&quot;-1&quot;&gt;WebKit&lt;/h3&gt;
+&lt;p&gt;Before we get into the libraries used for WPE, let’s discuss WebKit itself. Despite abstracting out a lot of the protocol handling, WebKit itself still needs to understand a lot of fundamentals of HTTP.&lt;/p&gt;
+&lt;p&gt;WebCore (discussed in &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html&quot;&gt;WPE Overview&lt;/a&gt;) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by &lt;code&gt;ResourceRequest&lt;/code&gt; and &lt;code&gt;ResourceResponse&lt;/code&gt; objects, which map to general HTTP functionality.&lt;/p&gt;
+&lt;h4 id=&quot;networkprocess&quot; tabindex=&quot;-1&quot;&gt;NetworkProcess&lt;/h4&gt;
+&lt;p&gt;A core part of modern web engine security is the multi-process model.  In order to defend against exploits, each website runs in its own isolated process that does not have network access. In order to allow for network access, they must talk over IPC to a dedicated NetworkProcess, typically one per browser instance. The NetworkProcess receives a &lt;code&gt;ResourceRequest&lt;/code&gt;, creates a &lt;code&gt;NetworkDataTask&lt;/code&gt; with it to download the data, and responds with a &lt;code&gt;ResourceResponse&lt;/code&gt; to the WebProcess which looks like this:&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img alt=&quot;WebKit Network Flowchart&quot; src=&quot;https://wpewebkit.org/assets/networking-flow.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;wpe&quot; tabindex=&quot;-1&quot;&gt;WPE&lt;/h3&gt;
+&lt;p&gt;WPE implements the platform-specific versions of the classes above as &lt;code&gt;ResourceRequestSoup&lt;/code&gt; and &lt;code&gt;NetworkDataTaskSoup&lt;/code&gt;, primarily using a library called libsoup.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://libsoup.org/&quot;&gt;libsoup&lt;/a&gt; library was originally created for the GNOME project’s email client and has since grown to be a very featureful HTTP implementation, now maintained by Igalia.&lt;/p&gt;
+&lt;p&gt;At a high level, the main task that libsoup does is manage connections and queued requests to websites and then efficiently streams the responses back to WPE. Properly implementing HTTP is a fairly large task, and this is a non-exhaustive list of features it implements: HTTP/1.1, HTTP/2, WebSockets, cookies, decompression, multiple authentication standards, HSTS, and HTTP proxies.&lt;/p&gt;
+&lt;p&gt;On its own, libsoup is really focused on the HTTP layer and uses the &lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib&quot;&gt;GLib&lt;/a&gt; library to implement many of its networking features in a portable way. This is where TCP, DNS, and TLS are handled. It is also directly used by WebKit for URI parsing and DNS pre-caching.&lt;/p&gt;
+&lt;p&gt;Using GLib also helps standardize behavior across modern Linux systems. It allows configuration of a global proxy resolver that WebKit, along with other applications, can use.&lt;/p&gt;
+&lt;h4 id=&quot;tls&quot; tabindex=&quot;-1&quot;&gt;TLS&lt;/h4&gt;
+&lt;p&gt;Another unique detail of our stack is that TLS is fully abstracted inside of GLib by a project called &lt;a href=&quot;https://gitlab.gnome.org/GNOME/glib-networking&quot;&gt;GLib-Networking&lt;/a&gt;. This project provides multiple implementations of TLS that can be chosen at runtime, including OpenSSL and gnutls on Linux. The benefit here is that clients can choose the implementation they prefer—whether for licensing, certification, or technical reasons.&lt;/p&gt;
+&lt;h3 id=&quot;usage&quot; tabindex=&quot;-1&quot;&gt;Usage&lt;/h3&gt;
+&lt;p&gt;Let’s go step by step to see some real world usage. If we call &lt;code&gt;webkit_web_view_load_uri()&lt;/code&gt; for a new domain it will:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a &lt;code&gt;ResourceRequest&lt;/code&gt; in WebCore that represents an HTTP request with a few basic headers set.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ResourceRequestSoup&lt;/code&gt; will create its own internal representation for the request using &lt;code&gt;soup_message_new_for_uri()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;This is passed to the &lt;code&gt;NetworkProcess&lt;/code&gt; to load this request as a &lt;code&gt;NetworkDataTask&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NetworkDataTaskSoup&lt;/code&gt; will send/receive the request/response with &lt;code&gt;soup_session_send()&lt;/code&gt; which queues the message to be sent.&lt;/li&gt;
+&lt;li&gt;libsoup will connect to the host using &lt;code&gt;GSocketClient&lt;/code&gt; which does a DNS lookup and TCP connection.
+&lt;ul&gt;
+&lt;li&gt;If this is a TLS connection &lt;code&gt;GTlsClientConnection&lt;/code&gt; will use a library such as gnutls to do a TLS handshake.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;libsoup will write the HTTP request and read from the socket parsing the HTTP responses eventually returning the data to WebKit.&lt;/li&gt;
+&lt;li&gt;WebKit receives this data, along with periodic updates about the state of the request, and sends it out of the &lt;code&gt;NetworkProcess&lt;/code&gt; back to the main process as a &lt;code&gt;ResourceResponse&lt;/code&gt; eventually loading the data in the &lt;code&gt;WebProcess&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;summary&quot; tabindex=&quot;-1&quot;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In conclusion, WebKit provides a very flexible abstraction for platforms, and WPE leverages mature system libraries to provide a portable implementation. It has many layers, but they are all well organized and suited to their tasks.&lt;/p&gt;
+&lt;p&gt;If you are working with WPE and are interested in collaborating, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. If you are interested in working with Igalia, you can &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;apply here&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE QA and tooling</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/04-wpe-qa-tooling.html"/>
+    <updated>2022-07-28T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/download-btn-branch/blog/04-wpe-qa-tooling.html</id>
+    <content type="html">&lt;p&gt;In the previous posts, my colleagues Claudio and Miguel wrote respectively about the &lt;a href=&quot;https://wpewebkit.org/blog/02-overview-of-wpe.html&quot;&gt;major components&lt;/a&gt; of the project and, specifically, the &lt;a href=&quot;https://wpewebkit.org/blog/03-wpe-graphics-architecture.html&quot;&gt;graphics architecture&lt;/a&gt; of WPE. Today, you’ll see our efforts to improve the quality of both WPE and the experience of working and using it. While the previous entries in this blog post series about &lt;a href=&quot;https://wpewebkit.org/&quot;&gt;WPE&lt;/a&gt; aren’t necessarily required in order to read this one, we recommend you to starting with the &lt;a href=&quot;https://wpewebkit.org/blog/01-happy-birthday-wpe.html&quot;&gt;first post in the series&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;automated-testing&quot; tabindex=&quot;-1&quot;&gt;Automated testing&lt;/h2&gt;
+&lt;p&gt;Testing is an essential part of the WebKit project, primarily due to the large number of use cases covered by HTML/CSS/Javascript specifications and the need for the project to work correctly in a wide range of configurations.&lt;/p&gt;
+&lt;p&gt;As an official port of WebKit, WPE uses the former’s testing infrastructure, based on &lt;a href=&quot;https://buildbot.net/&quot;&gt;BuildBot&lt;/a&gt;. There are two primary servers, &lt;a href=&quot;https://ews-build.webkit.org/&quot;&gt;one working as an early warning system&lt;/a&gt; by testing the patches before they’re committed to the main repository, and &lt;a href=&quot;https://build.webkit.org/&quot;&gt;another&lt;/a&gt; for more extensive testing after accepting the incoming changes.&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img style=&quot;width: 75%&quot; alt=&quot;build.webkit.org screenshot&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/build-webkit-org-screenshot.png&quot; /&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+&lt;p&gt;Currently, the WPE testing bots target debug and release configurations using the &lt;a href=&quot;https://flatpak.org/&quot;&gt;Flatpak&lt;/a&gt; SDK (more on it later in this article) on 64bit Intel-based Linux Debian systems. We have plans of adding bots running on Raspberry Pi boards in the future. Alongside nightly testing, we keep builder bots covering the &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitGTK/DependenciesPolicy&quot;&gt;Ubuntu LTS/Debian versions&lt;/a&gt; we support. After August 14th, 2022, the earliest supported versions will be Ubuntu 20.04 LTS and Debian 11 (Bullseye).&lt;/p&gt;
+&lt;h3 id=&quot;test-suites&quot; tabindex=&quot;-1&quot;&gt;Test suites&lt;/h3&gt;
+&lt;p&gt;Initially, the WPE &lt;a href=&quot;https://build.webkit.org/#/builders?tags=%2BWPE&amp;amp;tags=%2BBuild&quot;&gt;builder bots&lt;/a&gt; build WPE in both release and debug configurations and feed the built packages into the &lt;a href=&quot;https://build.webkit.org/#/builders?tags=%2BWPE&amp;amp;tags=%2BTests&quot;&gt;tester bots&lt;/a&gt;, which run some test suites according to their configuration, each suite focused in one aspect of the project:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Layout tests: The main suite tests whether WebKit correctly renders web pages and its implementation of web APIs. This suite comprises both WebKit’s test cases and the imported tests from &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Test&lt;/a&gt;. At the time of writing, it runs over 50,000 test cases.&lt;/li&gt;
+&lt;li&gt;API Tests: This suite tests the API provided to developers by WebKit and its ports. For example, this step tests the WPE API used in &lt;a href=&quot;https://github.com/Igalia/cog&quot;&gt;Cog&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Javascriptcore tests: Covers the JavascriptCore engine, running  WebKit’s tests alongside &lt;a href=&quot;https://github.com/tc39/test262&quot;&gt;test262&lt;/a&gt;, the reference test suite for JS/ECMAScript implementations.&lt;/li&gt;
+&lt;li&gt;WebDriver: Tests from &lt;a href=&quot;https://www.selenium.dev/selenium/docs/api/py/index.html&quot;&gt;Selenium&lt;/a&gt; and &lt;a href=&quot;https://www.w3.org/TR/webdriver/&quot;&gt;W3C WebDriver&lt;/a&gt; APIs for browser automation.&lt;/li&gt;
+&lt;li&gt;Other small suites: Tests for WebKit’s tooling components.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Due to a large number of tests and the fast development of both WebKit and the specifications—it’s not uncommon to have dozens of daily commits touching dozens of tests—it’s hard to keep the testing bots green.&lt;/p&gt;
+&lt;p&gt;For example, while we try to make the tests work on all platforms, many old layout tests use the &lt;code&gt;-expected.txt&lt;/code&gt; scheme, where the render tree is printed in a textual format with the text sized in pixels for every node. While this works fine in most cases, many tests have minor differences between the expected result in the Mac platform and the WPE/GTK platform. One of the causes is the font rendering particularities of each port.&lt;/p&gt;
+&lt;p&gt;Thankfully, this situation improved significantly since the beginning of the project. Among the efforts, many tests are now using a “reference” HTML file, which are HTML files that render to the same expected result as the test case, so both the test case and the reference will use the same font rendering scheme and can be compared pixel by pixel.&lt;/p&gt;
+&lt;h2 id=&quot;building-and-running-wpe&quot; tabindex=&quot;-1&quot;&gt;Building and running WPE&lt;/h2&gt;
+&lt;p&gt;This section focuses on the experience of building and running WPE in a regular Linux x86–64 system. In a future post, we’ll cover building for and running on embedded devices.&lt;/p&gt;
+&lt;h3 id=&quot;checking-out-the-code&quot; tabindex=&quot;-1&quot;&gt;Checking out the code&lt;/h3&gt;
+&lt;p&gt;Recently, &lt;a href=&quot;https://github.com/WebKit/WebKit&quot;&gt;WebKit moved to GitHub&lt;/a&gt;, so you can clone it directly from there:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ mkdir ~/dev
+$ git clone https://github.com/WebKit/WebKit.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note: Due to the size of the project history, you might want to use &lt;code&gt;--depth=1&lt;/code&gt; to clone a single revision, followed by &lt;code&gt;git pull --unshallow&lt;/code&gt; from inside the cloned repository to fetch the history if needed.&lt;/p&gt;
+&lt;p&gt;There’s more information in &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#checking-out-WebKit&quot;&gt;WebKit’s GitHub wiki&lt;/a&gt; about setting up the git checkout for contributing code back to WebKit. It’ll set up some git hooks to do some tasks required by the project, like formatting the commit message and automatically linking the pull request to the Bugzilla issue.&lt;/p&gt;
+&lt;p&gt;All commands in the following sections are run from inside the cloned repository.&lt;/p&gt;
+&lt;h3 id=&quot;updating-the-dependencies-(aka-the-webkit-flatpak-sdk)&quot; tabindex=&quot;-1&quot;&gt;Updating the dependencies (aka The WebKit Flatpak SDK)&lt;/h3&gt;
+&lt;p&gt;Like most complex software projects, WebKit has a reasonably extensive list of dependencies. Keeping a reference set of their versions frozen during development is desirable to make it easier to reproduce bugs and test results. In older times, WPE and WebKitGTK used &lt;a href=&quot;https://gnome.pages.gitlab.gnome.org/jhbuild/&quot;&gt;JHBuild&lt;/a&gt; to freeze a set of dependencies. While this worked for a long time, it did not cover all dependencies. Sometimes, there could be minor differences in the layout tests between the reference test bots and the developer machine due to some dependency resolved by the host system outside JHBuild.&lt;/p&gt;
+&lt;p&gt;To improve reproducibility, since 2020, WPE and WebKitGTK have been using an SDK based on Flatpak (kudos to my colleagues &lt;a href=&quot;https://blogs.gnome.org/tsaunier/&quot;&gt;Thibault Saunier&lt;/a&gt; and &lt;a href=&quot;https://base-art.net/&quot;&gt;Philippe Normand&lt;/a&gt;), with a much more extensive dependency coverage and isolation from the host system. Alongside the dependencies, it ships &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitFlatpakSDK/DebugWithRR&quot;&gt;some tools like rr&lt;/a&gt; and &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitEnablingFlatpakClangd&quot;&gt;supports tools like &lt;code&gt;clangd&lt;/code&gt;&lt;/a&gt;. Almost all bots enable this SDK, the exception being the LTS/Stable bots; as in the latter, we want to build with the already available packages in each distribution.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/update-webkit-flatpak
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The command will set up the local flatpak repository at &lt;code&gt;./WebKitBuild/UserFlatpak&lt;/code&gt; with the downloaded SDK and create some bundled icecc toolchains. This enables distributed builds in local networks…&lt;/p&gt;
+&lt;h3 id=&quot;building&quot; tabindex=&quot;-1&quot;&gt;Building&lt;/h3&gt;
+&lt;p&gt;Once the SDK download finishes, you can use the helper script &lt;code&gt;./Tools/Scripts/build-webkit&lt;/code&gt;, which wraps the &lt;code&gt;cmake&lt;/code&gt; command with some pre-set options commonly used in normal development, like enabling developer-only features usually disabled in regular builds. Manually invoking cmake is possible, although usually only when you want more control over the build. To build WPE in release mode, use:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/build-webkit --release --wpe
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Optionally, you can pass it multiple arguments to be fed directly to make or cmake with the switches  &lt;code&gt;--makeargs=...&lt;/code&gt; and &lt;code&gt;--cmakeargs=...&lt;/code&gt;, respectively. For example, &lt;code&gt;--makeargs=&amp;quot;-j8&amp;quot;&lt;/code&gt; will limit make to 8 parallel jobs and &lt;code&gt;--cmakeargs=&amp;quot;-DENABLE_GAMEPAD=1&amp;quot;&lt;/code&gt; will enable gamepad support (requires &lt;code&gt;libmanette&lt;/code&gt;, bundled in the SDK).&lt;/p&gt;
+&lt;p&gt;The first build might take a while (up to almost one hour in a regular laptop). Fortunately, the SDK uses &lt;code&gt;ccache&lt;/code&gt; to avoid recompiling the same object files, so subsequent builds without significant changes usually are faster. For more info on speeding the build, check &lt;a href=&quot;https://trac.webkit.org/wiki/WebKitGTK/SpeedUpBuild&quot;&gt;the wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;running-the-browser-(cog)&quot; tabindex=&quot;-1&quot;&gt;Running the browser (Cog)&lt;/h3&gt;
+&lt;p&gt;To run Cog, the reference WPE browser, you need a Wayland server, which is common in most Linux systems nowadays.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/run-minibrowser --wpe --release https://wpewebkit.org/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div align=&quot;center&quot;&gt;
+&lt;img style=&quot;width: 75%&quot; alt=&quot;Cog with GTK4 shell screenshot&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/gtk-cog-screenshot.png&quot; /&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+&lt;h3 id=&quot;running-some-tests&quot; tabindex=&quot;-1&quot;&gt;Running some tests&lt;/h3&gt;
+&lt;p&gt;To run the API tests, which reside in &lt;code&gt;Tools/TestWebKitAPI/Tests/&lt;/code&gt;, you can use the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./Tools/Scripts/run-wpe-tests --release --display-server=headless
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Other test suites:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Layout tests: &lt;code&gt;./Tools/Scripts/run-wpe-tests&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;JSC tests: &lt;code&gt;./Tools/Scripts/run-javascriptcore-tests&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WebDriver: &lt;code&gt;./Tools/Scripts/run-webdriver-tests&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As stated when we described the test suites, the main challenge in testing is keeping up with the fast pace of development, as it’s not uncommon to have some revisions updating hundreds of tests.&lt;/p&gt;
+&lt;h3 id=&quot;contributing-code-to-wpe&quot; tabindex=&quot;-1&quot;&gt;Contributing code to WPE&lt;/h3&gt;
+&lt;p&gt;After hacking locally, you can submit your changes following the workflow listed in the &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Contributing#contributing-code&quot;&gt;WebKit wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;testing-wpe-in-the-wild&quot; tabindex=&quot;-1&quot;&gt;Testing WPE in the wild&lt;/h2&gt;
+&lt;p&gt;If you don’t want to build your WPE build or image, there are some options to &lt;a href=&quot;https://wpewebkit.org/about/exploring.html&quot;&gt;get a taste of WPE&lt;/a&gt; listed on our website.&lt;/p&gt;
+&lt;h2 id=&quot;final-thoughts&quot; tabindex=&quot;-1&quot;&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;With this, we conclude this brief overview of WPE automated testing and the main tools we use in our daily work with WPE. In future posts in this area we’ll go deeper in other subjects like testing on embedded boards and debugging practices.&lt;/p&gt;
+&lt;p&gt;If this post got you interested in collaborating with WPE development, or you are in need of a web engine to run on your embedded device, feel free to &lt;a href=&quot;https://www.igalia.com/contact/&quot;&gt;contact us&lt;/a&gt;. We’ll be pleased to help!&lt;/p&gt;
+&lt;p&gt;We also have open positions at the WebKit team at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt;. If you’re motivated by this field and you’re interested in developing your career around it, you can apply &lt;a href=&quot;https://www.igalia.com/jobs/browsers_webkit_position&quot;&gt;here&lt;/a&gt;!&lt;/p&gt;
+</content>
+  </entry>
+</feed>
