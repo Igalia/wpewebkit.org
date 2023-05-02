@@ -1,7 +1,7 @@
 <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/"><img src="/assets/img/logo-blue.svg" alt="WPE"></a>
-		<ul class="{{ page.url | topLevel | replace_first: "/","" }} off">
+		<ul class="{{ page.url | topLevel | replace: "/","" }} off">
 		{%- for link in menu -%}
 			{%- assign pagedir = page.url | topLevel -%}
 			<li{% if link.url == pagedir %} class="currentPage"{% endif %}>

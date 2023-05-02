@@ -44,7 +44,7 @@ module.exports = function(eleventyConfig) {
   });
   eleventyConfig.addFilter('topLevel', (path) => {
     if (path == "/") return "/";
-    return path.match(/^(.+?)\//)[1];
+    return path.match(/^(.+?\/)/)[1];
   });
 
   eleventyConfig.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
