@@ -65,6 +65,4 @@ and the Web platform. Also check out [the official WebKit blog](https://webkit.o
       <li>{% if pagination.href.next %}<a href="{{ pagination.href.next }}" title="Next">»</a>{% else %}<span>»</span>{% endif %}</li>
     </ol>
   </nav>
-
-	<a class="btn" href="/blog.xml"><i class="icon-feed"></i>&nbsp;&nbsp;Feed</a>
 </div>
