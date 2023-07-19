@@ -13,9 +13,9 @@ resources: [
 		"text": "WPE WebKit is widely adopted in many industries, including digital signage, home appliances, set-top boxes, and automative and in-flight infotainment systems."
 	},
 	{
-		"title": "Get Started",
-		"url": "/about/explore-wpe.html",
-		"text": "Links to pre-built installations for platforms like Linux."
+		"title": "Get WPE",
+		"url": "/about/get-wpe.html",
+		"text": "Explore the different methods to get the source code and/or binaries for WPE"
 	},
 	{
 		"title": "Igalia",

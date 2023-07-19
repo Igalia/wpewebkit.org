@@ -34,7 +34,7 @@ h2 {
 
 While there are several simple ways for developers to experiment with and explore WPE, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds. To make this easier, there is also [meta-webkit](https://github.com/Igalia/meta-webkit), which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
 
-There are also pre-build packages available for many <a href="/about/explore-wpe.html">Linux distributions</a>.
+There are also pre-built packages available for many <a href="/about/get-wpe.html">Linux distributions</a>.
 
 </div>
 

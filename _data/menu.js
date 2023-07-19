@@ -3,5 +3,5 @@ module.exports = [
 	{ title: "Learn & Discover", url: "/about/" },
 	{ title: "Blog", url: "/blog/" },
 	{ title: "Developers", url: "/developers/" },
-	{ title: "Get Started", url: "/about/explore-wpe.html", class: "btn cta" },
+	{ title: "Get WPE", url: "/about/get-wpe.html", class: "btn cta" },
 ];
