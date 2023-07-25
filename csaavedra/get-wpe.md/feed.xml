@@ -4,8 +4,28 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2023-06-29T00:00:00Z</updated>
+  <updated>2023-07-21T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.40.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/csaavedra/get-wpe.md/release/wpewebkit-2.40.4.html"/>
+    <updated>2023-07-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/csaavedra/get-wpe.md/release/wpewebkit-2.40.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.40 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.40.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.40.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix a bug in JavaScript reading variable arguments in a call.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.40.4.tar.xz (36.3 MiB)
+   md5sum: 89a385f776095483f3479075bf5d4705
+   sha1sum: f0fde6eaa6de8b6a982a013fe3b962c688d7c381
+   sha256sum: 34d11fe79522081ecc2d623860c22ddd53ca29a0d08b4c0e55efbdc3e6a9435c
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.40.3 released</title>
@@ -264,55 +284,6 @@ wpebackend-fdo-1.14.2.tar.xz (42.3 KiB)
    md5sum: dafd899646b2e31ef2d97938a638c48d
    sha1sum: f453f8d77e93f4ac6ac81c1874d4d6bdcb45c253
    sha256sum: 93c9766ae9864eeaeaee2b0a74f22cbca08df42c1a1bdb55b086f2528e380d38
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.40.0 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/csaavedra/get-wpe.md/release/wpewebkit-2.40.0.html"/>
-    <updated>2023-03-18T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/csaavedra/get-wpe.md/release/wpewebkit-2.40.0.html</id>
-    <content type="html">&lt;p&gt;This is the first stable release in the 2.40 series.&lt;/p&gt;
-&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.40.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.40.0 release&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;The new 2.0 API is now considered stable. It is still possible to build the
-old 1.0 API using &lt;code&gt;-USE_SOUP2=ON&lt;/code&gt;, or the 1.1 API using
-&lt;code&gt;-DENABLE_WPE_1_1_API=ON&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Support for &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API#webgl_2&quot;&gt;WebGL 2&lt;/a&gt;,
-built on top of &lt;a href=&quot;https://angleproject.org/&quot;&gt;ANGLE&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Support for the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis&quot;&gt;Speech Synthesis API&lt;/a&gt;,
-using &lt;a href=&quot;http://www.festvox.org/flite/&quot;&gt;Flite&lt;/a&gt;. This may be disabled at build
-time using &lt;code&gt;-DENABLE_SPEECH_SYNTHESIS=OFF&lt;/code&gt;, which also avoids the Flite
-dependency.&lt;/li&gt;
-&lt;li&gt;Support client-side TLS certificates over WebSocket connections.&lt;/li&gt;
-&lt;li&gt;Support CSS &lt;code&gt;background-repeat: space&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Added new API to respond to permission requests for a number of &lt;a href=&quot;https://w3c.github.io/permissions/&quot;&gt;web-facing
-features&lt;/a&gt;
-(&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.WebView.query-permission-state.html&quot;&gt;reference&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;Added new API to register user script message handlers that return values
-asynchronously
-(&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.UserContentManager.script-message-with-reply-received.html&quot;&gt;reference&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;Added new API to get the request body of a &lt;code&gt;WebKitURISchemeRequest&lt;/code&gt;
-(&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/method.URISchemeRequest.get_http_body.html&quot;&gt;reference&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;Added new API to run JavaScript code that may use asynchronous constructs,
-like &lt;code&gt;Promise&lt;/code&gt; and &lt;code&gt;await&lt;/code&gt;
-(&lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/method.WebView.call_async_javascript_function.html&quot;&gt;reference&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;Allow handling the &lt;a href=&quot;https://people.igalia.com/aperez/Documentation/wpe-webkit-2.0/signal.Download.decide-destination.html&quot;&gt;WebKitDownload::decide-destination
-signal&lt;/a&gt;
-asynchronously.&lt;/li&gt;
-&lt;li&gt;Allow copying the contents of &lt;code&gt;webkit://gpu&lt;/code&gt; to the clipboard as JSON.&lt;/li&gt;
-&lt;li&gt;Make check boxes, radio buttons, and spin buttons scale along with the page
-zoom.&lt;/li&gt;
-&lt;li&gt;Improved scrolling performance.&lt;/li&gt;
-&lt;li&gt;Fix inordinately large memory allocations when uploading data.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.40.0.tar.xz (35.8 MiB)
-   md5sum: a90114f905b7996925a73dbb6a36aa72
-   sha1sum: 06e475479c71c829c1eb67a77cd1e7fe7f952ad0
-   sha256sum: a8ec2bcfa1613768ab3ce7f65cac4f214835266c2ff59440d72180baec3086b6
 &lt;/pre&gt;
 </content>
   </entry>
