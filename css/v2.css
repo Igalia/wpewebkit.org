@@ -19,6 +19,10 @@ html {
 	max-width: 100vw;
 }
 
+* {
+	scroll-margin-top: 7rem;
+}
+
 @supports not (-ms-ime-align: auto) {
 	/*
 	 * Resets for <details>/<summary>, see:
