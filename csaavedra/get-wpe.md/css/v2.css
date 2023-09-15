@@ -155,6 +155,10 @@ ul.arrows li::before {
 	text-decoration: none;
 	filter: none;
 }
+.currentPage .cta.btn {
+	box-shadow: none;
+}
+
 
 .global a.igalia.logo.home {
 	transform: translateX(10px);
