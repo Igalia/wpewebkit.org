@@ -4,7 +4,7 @@
 		<ul class="{{ page.url | topLevel | replace: "/","" }} off">
 		{%- for link in menu -%}
 			{%- assign pagedir = page.url -%}
-			{%- if page.url != '/about/explore-wpe.html' -%}
+			{%- if page.url != '/about/get-wpe.html' -%}
 			{%- assign pagedir = page.url | topLevel -%}
 			{%- endif -%}
 			<li{% if link.url == pagedir %} class="currentPage"{% endif %}>
