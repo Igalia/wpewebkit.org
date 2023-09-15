@@ -3,7 +3,10 @@
 		<a class="igalia logo home" href="/"><img src="/assets/img/logo-blue.svg" alt="WPE"></a>
 		<ul class="{{ page.url | topLevel | replace: "/","" }} off">
 		{%- for link in menu -%}
+			{%- assign pagedir = page.url -%}
+			{%- if page.url != '/about/explore-wpe.html' -%}
 			{%- assign pagedir = page.url | topLevel -%}
+			{%- endif -%}
 			<li{% if link.url == pagedir %} class="currentPage"{% endif %}>
 			<a class="{{ link.class | default: 'nav-link' }}" href="{{ link.url | default: '#' }}">{{ link.title }}</a>
 			</li>
