@@ -40,7 +40,6 @@ get the source code directly and modify it to serve your needs. While
 this can sometimes be an involved process, there are different ways to
 get your hands on WPE, depending on what you need.
 
-* [__Install it from your Linux distribution__](#install-it-from-your-linux-distribution): This is the easiest, and it allows you to quickly test WPE on the desktop.
 * [__Build an image for supported reference hardware__](#build-an-image-for-supported-reference-hardware): This is a bit more involved, but it's an easy way to try out WPE directly on embedded hardware.
 * [__Download the official tarball releases__](#download-the-official-tarball-releases): This is the best way to get periodical updates with new features and security fixes.
 * [__Get the source code directly from git__](#get-the-source-code-directly-from-git): This is only necessary if you want to get involved in the development of WPE.
@@ -54,23 +53,6 @@ will need. The different components that are needed to run WPE are:
 * [libwpe](https://github.com/WebPlatformForEmbedded/libwpe): A general-purpose library for WPE, that enables integration between WebKit and different platforms, through backends.
 * [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A reference FreeDesktop.org backend for WPE, that relies on different FreeDesktop.org projects and can serve as a starting point to either customize or create a completely new backend for specific configurations.
 * [Cog](https://github.com/Igalia/cog): A simple and minimalistic browser using WPE, with no user interface, suitable to be used as a Web application container or as a starting point to develop more complex browser applications based on WPE.
-
-## __Install it from your Linux distribution__
-
-These packages are not just a quick and simple way to test WPE but
-they also come with all the development files and documentation
-necessary to build and test software that uses this web engine. Some
-of the distributions that already have built packages for WPE are:
-
-  * [Debian](https://packages.debian.org/search?searchon=sourcenames&keywords=wpewebkit)
-  * [Ubuntu](https://packages.ubuntu.com/search?keywords=wpewebkit&searchon=sourcenames&suite=all&section=all)
-  * [Raspbian](https://archive.raspbian.org/raspbian/pool/main/w/wpewebkit/)
-  * [Arch Linux](https://archlinux.org/packages/extra/x86_64/wpewebkit/)
-  * [Fedora](https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/)
-
-This list is not exhaustive, so if you use a different distributions,
-there might be packages for it already. Refer to the official
-documentation of your distribution for information on how to install packages.
 
 ## __Build an image for supported reference hardware__
 
