@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>Cog 0.14.0 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/drop-distro-packages/release/cog-0.14.0.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/drop-distro-packages/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE blog" href="https://igalia.github.io/wpewebkit.org/drop-distro-packages/blog.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/drop-distro-packages/release/cog-0.14.0.html">
+  <meta property="og:title" content="Cog 0.14.0 released">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/drop-distro-packages/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/drop-distro-packages/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-08-24T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/drop-distro-packages/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/drop-distro-packages/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/drop-distro-packages/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/drop-distro-packages/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/drop-distro-packages/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/drop-distro-packages/"><img src="/wpewebkit.org/drop-distro-packages/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="release off"><li>
+			<a class="nav-link" href="/wpewebkit.org/drop-distro-packages/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/drop-distro-packages/about/">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/drop-distro-packages/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/drop-distro-packages/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/drop-distro-packages/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/drop-distro-packages/release/cog-0.14.0.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">Cog 0.14.0 released</h1>
+ 
+   <meta itemprop="datePublished" content="Wed Aug 24 2022">
+   <time itemprop="dateCreated">24 August 2022</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//cog-0.14.0.tar.xz">Download</a>
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This is the first stable release in the 0.14 series.</p>
+<h3 id="highlights-of-the-0.14.0-release" tabindex="-1">Highlights of the 0.14.0 release</h3>
+<p>Launcher (<code>cog</code>):</p>
+<ul>
+<li>Support setting memory limits using command line options.</li>
+<li>Support passing initialization parameters to platform plug-ins using
+the <code>--platform-params</code>/<code>-O</code> command line option.</li>
+</ul>
+<p>Core library (<code>libcogcore</code>):</p>
+<ul>
+<li>The <code>CogLauncher</code> class is no longer available, as it was an
+implementation detail of the launcher.</li>
+<li>Built-in error pages now have a “Try again” button.</li>
+</ul>
+<p>DRM/KMS platform (<code>drm</code>):</p>
+<ul>
+<li>New OpenGL ES renderer, which supports output rotation and improved
+compatibility with some graphics drivers.</li>
+<li>Added refresh rate reporting to let WebKit pace rendering to match the output device.</li>
+</ul>
+<p>GTK4 platform (<code>gtk4</code>):</p>
+<ul>
+<li>Improved compatibility with more graphics drivers.</li>
+</ul>
+<p>Wayland platform (<code>wl</code>):</p>
+<ul>
+<li>Improved compatibility with different compositors.</li>
+<li>Added keybindings to refresh the current page (<key>Ctrl-R</key>, <key>F5</key>).</li>
+<li>Added refresh rate reporting to let WebKit pace rendering to match the output device.</li>
+</ul>
+<p>X11 platform (<code>x11</code>):</p>
+<ul>
+<li>Fixed rendering with traditional, non-composited window managers.</li>
+<li>Added refresh rate reporting to let WebKit pace rendering to match the output device.</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+cog-0.14.0.tar.xz (119.8 KiB)
+   md5sum: 2352aaba1a4ff31b1d1fb559c4941a01
+   sha1sum: 2da37ea6c25e45425aa80de4a129484ee226dd96
+   sha256sum: e23936f1ce350ea5ea6fa0709b63d34776b05709388aed9c6cf3fdc41299de9f
+</pre>
+
+
+
+
+</div>
+
+    </div></main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/drop-distro-packages/" class="igalia logo home"><img src="/wpewebkit.org/drop-distro-packages/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
