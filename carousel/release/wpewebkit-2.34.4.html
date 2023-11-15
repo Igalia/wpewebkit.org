@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE WebKit 2.34.4 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/carousel/release/wpewebkit-2.34.4.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/carousel/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE blog" href="https://igalia.github.io/wpewebkit.org/carousel/blog.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/carousel/release/wpewebkit-2.34.4.html">
+  <meta property="og:title" content="WPE WebKit 2.34.4 released">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/carousel/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/carousel/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-01-21T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/carousel/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/carousel/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/carousel/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/carousel/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/carousel/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/carousel/"><img src="/wpewebkit.org/carousel/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="release off"><li>
+			<a class="nav-link" href="/wpewebkit.org/carousel/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/carousel/about/">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/carousel/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/carousel/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/carousel/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/carousel/release/wpewebkit-2.34.4.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE WebKit 2.34.4 released</h1>
+ 
+   <meta itemprop="datePublished" content="Fri Jan 21 2022">
+   <time itemprop="dateCreated">21 January 2022</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//wpewebkit-2.34.4.tar.xz">Download</a>
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This is a bug fix release in the stable 2.34 series.</p>
+<h3 id="what%E2%80%99s-new-in-wpe-webkit-2.34.4%3F" tabindex="-1">What’s new in WPE WebKit 2.34.4?</h3>
+<ul>
+<li>Fix several crashes and rendering issues.</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+wpewebkit-2.34.4.tar.xz (22.5 MiB)
+   md5sum: b0f7dcb18acfa94cfb42fea0fe10fb0d
+   sha1sum: de58481b43a6dba054097f619ee486f7889d7a56
+   sha256sum: 3653ba42dbe22a4e6751b3f7cab8d2ebb2db5b7654c5d135a2f9bedf94778cee
+</pre>
+
+
+
+
+</div>
+
+    </div></main>
+
+    <footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/carousel/" class="igalia logo home"><img src="/wpewebkit.org/carousel/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+		</ul>
+	</div>
+</footer>
+
+
+  </body>
+</html>
