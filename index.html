@@ -168,6 +168,10 @@ header.page div h1 {
 	padding: 0.75em 0;
 	font-size: 1.4em;
 }
+.success-stories h3 {
+	font-size: 1.33em;
+	margin-block-start: 0;
+}
 .success-stories h3 a {
   font-size: 3em;
   color: inherit;
@@ -179,6 +183,12 @@ header.page div h1 {
 	object-fit: cover;
 	object-position: 50% 50%;
 }
+.success-stories div + img {
+	max-height: 20rem;
+	display: block;
+	margin-inline: auto;
+}
+
 @media (min-width: 45rem) {
 	.success-stories > div {
 		grid-column: main / -2;
@@ -192,9 +202,13 @@ header.page div h1 {
 		margin: 0;
 		padding: 0;
 	}
+	.success-stories div + img {
+		max-height: 100%;
+		margin-inline: 0;
+	}
 	.success-stories img.hero {
-		height: 100%;
-		max-width: none;
+		max-width: 100%;
+		height: auto;
 		max-height: 30rem;
 		margin-inline-start: -5rem;
 		box-shadow: -0.25em 0 0.5em #06C3, 1em 1.5em 2.5em #0066DD99;
@@ -324,6 +338,16 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 
 <section class="success-stories full-width dotsep">
+
+<div>
+<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
+<div class="spotlight"><h2>Success Story</h2>
+<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
+<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
+</div>
+</div>
+
 <div>
 <div class="spotlight">
 <h2>Use Case</h2>
@@ -333,6 +357,7 @@ Open standards with great longevity allows lots more things to benefit from the 
 </div>
 <img src="/assets/img/use_case-digital_signage.png" alt="">
 </div>
+
 </section>
 
 
