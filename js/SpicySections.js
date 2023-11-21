@@ -225,7 +225,7 @@ class MediaAffordancesElement extends HTMLElement {
 					label.nextElementSibling.classList.remove('hide')
 					label.setAttribute('aria-expanded', 'true')
 					label.affordanceState.exclusiveExpanded = true
-					label.focus()
+					label.focus(preventScroll)
 				},
 			},
 			'tab-bar': {
@@ -250,7 +250,7 @@ class MediaAffordancesElement extends HTMLElement {
 					label.nextElementSibling.classList.remove('hide')
 					label.setAttribute('aria-selected', 'true')
 					label.affordanceState.exclusiveExpanded = true
-					label.focus()
+					label.focus(preventScroll)
 				},
 			},
 		}
