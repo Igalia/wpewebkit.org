@@ -155,15 +155,15 @@ header.page div h1 {
 /* SPICY!  */
 
 .success-stories spicy-sections {
-  --const-mq-affordances:
-    [screen and (max-width: 40em) ] collapse |
-    [screen and (min-width: 60em) ] tab-bar
-  ;
-  --tabActive: #1593ed;
-  --tabInactive: hsl(230deg 5% 60% / 0.85);
-  display: block;
-  padding: 1em;
-  grid-column: 2 / -2;
+	--const-mq-affordances:
+		[screen and (max-width: 40em) ] collapse |
+		[screen and (min-width: 60em) ] tab-bar
+	;
+	--tabActive: #1593ed;
+	--tabInactive: hsl(230deg 5% 60% / 0.85);
+	display: block;
+	padding: 1em;
+	grid-column: 2 / -2;
 }
 .success-stories spicy-sections::part(tab-list) {
 	display: flex;
@@ -222,10 +222,10 @@ header.page div h1 {
 	margin-block-start: 0;
 }
 .success-stories h3 a {
-  font-size: 3em;
-  color: inherit;
-  text-decoration: none;
-  line-height: 1.1;
+	font-size: 3em;
+	color: inherit;
+	text-decoration: none;
+	line-height: 1.1;
 }
 .success-stories img.hero {
 	justify-self: start;
@@ -268,12 +268,12 @@ header.page div h1 {
 		max-height: 30rem;
 		margin-inline-start: -5rem;
 		box-shadow: -0.25em 0 0.5em #06C3, 1em 1.5em 2.5em #0066DD99;
-		  justify-self: end;
-		  margin-inline: 0 -4rem;
+			justify-self: end;
+			margin-inline: 0 -4rem;
 	}
 	.success-stories spicy-sections .spotlight {
-	  padding-inline: 6rem;
-	  padding-block: 2rem;
+		padding-inline: 6rem;
+		padding-block: 2rem;
 	}
 }
 
@@ -365,10 +365,10 @@ A WebKit port for Linux-based embedded devices designed with flexibility and har
 <div><!-- placeholder for grid, whee -->
 <p><big>The Web Platform is a frequently chosen foundational technology for many reasons, including:</big></p>
 <ul class="arrows"> 
-  <li>Web Platform technologies are built on standards, they have great longevity</li>
-  <li>The standards are open, embedded systems can incorporate them without licensing fees or other worries.
+	<li>Web Platform technologies are built on standards, they have great longevity</li>
+	<li>The standards are open, embedded systems can incorporate them without licensing fees or other worries.
 Open standards with great longevity allows lots more things to benefit from the same investments</li>
-  <li>The number of people with the basic skills to build things with web technologies is massive</li>
+	<li>The number of people with the basic skills to build things with web technologies is massive</li>
 </ul>
 <a class="cta btn" style="font-size: smaller;text-align: center;" href="/about/what-is-embedded.html">Learn more about embedded browsers</a>
 </div>
@@ -525,10 +525,8 @@ window.onload = function() {
 const tabs = document.querySelectorAll('spicy-sections h2');
 const carousel = document.querySelector('spicy-sections');
 let loop;
-startCarousel();
-//tabswitch(tabs);
+const listlength = tabs.length;
 function tabswitch() {
-	const listlength = tabs.length;
 	for (let i = 0; i < listlength; i++) {
 		if (tabs[i].ariaSelected == "true") {
 			let next = (i + 1) % listlength;
@@ -538,11 +536,12 @@ function tabswitch() {
 	}
 }
 
-carousel.addEventListener('mouseover', (e) => {
+carousel.addEventListener('pointerenter', (e) => {
 	stopCarousel();
 });
-carousel.addEventListener('mouseout', (e) => {
+carousel.addEventListener('pointerleave', (e) => {
 	startCarousel();
+	tabswitch();
 });
 
 document.addEventListener('keydown', (e) => {
@@ -550,11 +549,58 @@ document.addEventListener('keydown', (e) => {
 		stopCarousel();
 	}
 });
+
 function startCarousel(interval = 5000) {
-	loop = setInterval(tabswitch,interval);
+	if (!loop) {
+		console.log('starting');
+		loop = setInterval(tabswitch,interval);
+	}
 }
 function stopCarousel() {
-	clearInterval(loop);
+	if (loop) {
+		console.log('stopping');
+		clearInterval(loop);
+		loop = null;
+	}
+}
+
+function intersectionCallback(entries) {
+	entries.forEach((entry) => {
+		const box = entry.target;
+		if (entry.isIntersecting) {
+			if (entry.intersectionRatio >= 0.1) {
+				box.classList.add('visible');
+				startCarousel();
+			}
+		} else {
+			box.classList.remove('visible');
+			stopCarousel();
+		}
+	});
+}
+
+function handleVisibilityChange() {
+	if (document.hidden) {
+		stopCarousel();
+	} else {
+		startCarousel();
+	}
+}
+
+window.addEventListener("load", startup, false);
+let carouselObserver;
+let carouselsection = document.querySelector('.success-stories');
+function startup() {
+	document.addEventListener("visibilitychange", handleVisibilityChange, false);
+
+	const observerOptions = {
+		root: null,
+		rootMargin: "0px",
+		threshold: [0.0, 1.0],
+	};
+
+	carouselObserver = new IntersectionObserver(intersectionCallback, observerOptions);
+	carouselObserver.observe(carouselsection);
 }
 
 </script>
