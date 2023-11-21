@@ -10,6 +10,7 @@ sitemapChangeFrequency: yearly
 /* specific to home page */
 body {
 	overflow-x: hidden;
+	--transTime: 500ms;
 }
 main, main > .full-width {
 	display: grid;
@@ -150,6 +151,25 @@ header.page div h1 {
 	padding: 2em 0 1em;
 }
 
+
+/* SPICY!  */
+
+.success-stories spicy-sections {
+  --const-mq-affordances:
+    [screen and (max-width: 40em) ] collapse |
+    [screen and (min-width: 60em) ] tab-bar
+  ;
+  --tabActive: #1593ed;
+  --tabInactive: hsl(230deg 5% 60% / 0.85);
+  display: block;
+  padding: 1em;
+  grid-column: 2 / -2;
+}
+.success-stories spicy-sections::part(tab-list) {
+	display: flex;
+	justify-content: space-evenly;
+}
+
 .success-stories {
 	padding: 0;
 	align-items: center;
@@ -157,16 +177,45 @@ header.page div h1 {
 	background: radial-gradient(13rem at 45% 55%, #FFF, transparent),
 		#F1F1F1;
 }
-.success-stories > div {
+.success-stories spicy-sections > div {
 	padding-block: 2em;
 }
-.success-stories > * + ::before {
+.success-stories spicy-sections > * + ::before {
 	content: none;
 }
-.success-stories h2 {
+.success-stories spicy-sections h2 {
 	margin: 0;
-	padding: 0.75em 0;
-	font-size: 1.4em;
+	border-block-end: 1em solid #DDD;
+	padding-block: 0.2em 0.25em;
+	padding-inline: 0;
+	font-family: Arvo, serif;
+	font-size: 1.1em;
+	cursor: pointer;
+	opacity: 0.5;
+	transition-duration: var(--transTime);
+}
+.success-stories spicy-sections h2[aria-selected="true"] {
+	border-block-end: 1em solid var(--tabActive);
+	cursor: default;
+	pointer-events: none;
+	opacity: 1;
+}
+.success-stories spicy-sections h2:focus-within {
+	outline: 0;
+}
+.success-stories h2::before {
+	content: '';
+	display: block;
+	font-family: Helvetica, sans-serif;
+	font-size: 67%;
+	font-style: italic;
+	font-weight: 400;
+}
+.success-stories h2.successstory::before {
+	content: "Success Story";
+}
+.success-stories h2.usecase::before {
+	content: "Use Case";
 }
 .success-stories h3 {
 	font-size: 1.33em;
@@ -190,23 +239,30 @@ header.page div h1 {
 }
 
 @media (min-width: 45rem) {
-	.success-stories > div {
+	.success-stories spicy-sections > div {
 		grid-column: main / -2;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: min-content;
 		align-items: center;
 		gap: 4rem;
+		transition-duration: var(--transTime);
 	}
-	.success-stories > * {
+	.success-stories spicy-sections > div:nth-of-type(even) {
+		grid-template-columns: 2fr 1fr;
+	}
+	.success-stories spicy-sections > div:nth-of-type(even) .spotlight {
+		padding-inline-end: 0;
+	}
+	.success-stories spicy-sections > * {
 		margin: 0;
 		padding: 0;
 	}
-	.success-stories div + img {
+	.success-stories spicy-sections div + img {
 		max-height: 100%;
 		margin-inline: 0;
 	}
-	.success-stories img.hero {
+	.success-stories spicy-sections img.hero {
 		max-width: 100%;
 		height: auto;
 		max-height: 30rem;
@@ -215,7 +271,7 @@ header.page div h1 {
 		  justify-self: end;
 		  margin-inline: 0 -4rem;
 	}
-	.success-stories .spotlight {
+	.success-stories spicy-sections .spotlight {
 	  padding-inline: 6rem;
 	  padding-block: 2rem;
 	}
@@ -282,6 +338,7 @@ section.igalia > div > div > img {
 		color: inherit;
 	}
 }
+
 </style>
 
 <header class="page full-width">
@@ -339,24 +396,66 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 <section class="success-stories full-width dotsep">
 
+<spicy-sections>
+<h2 class="successstory">Metrological</h2>
 <div>
 <img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
-<div class="spotlight"><h2>Success Story</h2>
+<div class="spotlight">
 <h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
 <p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
 <p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
 </div>
 </div>
 
+<h2 class="usecase">Digital Signage</h2>
 <div>
 <div class="spotlight">
-<h2>Use Case</h2>
 <h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
 <p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
 <p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
 </div>
 <img src="/assets/img/use_case-digital_signage.png" alt="">
 </div>
+
+<h2 class="successstory">Sony Playstation</h2>
+<div>
+<div class="spotlight">
+<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+<p>Something something Sony something.</p>
+<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
+</div>
+</div>
+
+<h2 class="successstory">Metrological</h2>
+<div>
+<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
+<div class="spotlight">
+<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
+<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
+</div>
+</div>
+
+<h2 class="usecase">Digital Signage</h2>
+<div>
+<div class="spotlight">
+<h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
+<p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
+<p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
+</div>
+<img src="/assets/img/use_case-digital_signage.png" alt="">
+</div>
+
+<h2 class="successstory">Sony Playstation</h2>
+<div>
+<div class="spotlight">
+<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+<p>Something something Sony something.</p>
+<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
+</div>
+</div>
+
+</spicy-sections>
 
 </section>
 
@@ -420,4 +519,42 @@ window.onload = function() {
 		ppbutton.innerHTML = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><rect x="33" y="30" width="12" height="40" /><rect x="55" y="30" width="12" height="40" /></svg>';
 	}
 }
+</script>
+<script type="module" src="/js/SpicySections.js"></script>
+<script type="module">
+const tabs = document.querySelectorAll('spicy-sections h2');
+const carousel = document.querySelector('spicy-sections');
+let loop;
+startCarousel();
+//tabswitch(tabs);
+function tabswitch() {
+	const listlength = tabs.length;
+	for (let i = 0; i < listlength; i++) {
+		if (tabs[i].ariaSelected == "true") {
+			let next = (i + 1) % listlength;
+			tabs[next].affordanceState.activate();
+			i = listlength;
+		}
+	}
+}
+
+carousel.addEventListener('mouseover', (e) => {
+	stopCarousel();
+});
+carousel.addEventListener('mouseout', (e) => {
+	startCarousel();
+});
+
+document.addEventListener('keydown', (e) => {
+	if (e.key == 'Escape') {
+		stopCarousel();
+	}
+});
+function startCarousel(interval = 5000) {
+	loop = setInterval(tabswitch,interval);
+}
+function stopCarousel() {
+	clearInterval(loop);
+}
+
 </script>
