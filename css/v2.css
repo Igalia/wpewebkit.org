@@ -14,6 +14,7 @@ html {
 	--dashV: linear-gradient(180deg, currentColor 25%,
 		transparent 25% 75%, 
 		currentColor 75%) 0 0 / 1px 8px repeat-y;
+	--colorCodeBg: #F1F1F1;
 	height: auto;
 	min-height: 100%;
 	max-width: 100vw;
@@ -455,12 +456,21 @@ header.page p {
 	font-size: 1.6em;
 }
 
+pre, code {
+	background: var(--colorCodeBg);
+}
+
 pre {
-	background: #f1f1f1;
+	white-space: pre-wrap;
+	border-radius: 0.5em;
 	padding-block: 1em;
 	padding-inline: 1.5em;
-	border-radius: 0.5em;
-	white-space: pre-wrap;
+}
+
+code {
+	color: #333;
+	padding: 0.1em 0.3em;
+	border-radius: 0.25em;
 }
 
 main section div h3 {
@@ -715,4 +725,17 @@ footer.global > b::before {
 	left: -5px;
 	top: -5px;
 	font-size: 11px;
+}
+
+div.sidebar {
+	color: #555;
+	font-style: italic;
+	margin: 0 0 1em 2em;
+	padding: 0.15em 1em;
+	width: 33%;
+	min-width: 12em;
+	border: 1px solid #d0d0d0;
+	border-left: 0.25em solid #d0d0d0;
+	background: #f2f2f2;
+	float: right;
 }
