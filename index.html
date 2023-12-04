@@ -17,6 +17,12 @@ main, main > .full-width {
 	grid-template-columns: 1fr [dash] 1px [main] auto 1px 1fr;
 	grid-template-rows: repeat(10,auto);
 }
+
+.full-width.success-stories {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
 @media (min-width: 45rem) {
 	main, main > .full-width {
 		grid-template-columns: 1fr [dash] 1px [main] minmax(30rem,var(--mainColMax)) 1px 1fr;
@@ -177,6 +183,22 @@ header.page div h1 {
 	background: radial-gradient(13rem at 45% 55%, #FFF, transparent),
 		#F1F1F1;
 }
+
+.success-stories figure {
+	display: block;
+	width: 50%;
+	margin: 1rem auto;
+}
+
+tess-carousel::part(button) {
+	filter: sepia(1);
+  color: purple;
+  border: 1px solid blue;
+  padding: 0.5rem;
+  height: 3rem;
+  width: 3rem;
+}
+
 .success-stories spicy-sections > div {
 	padding-block: 2em;
 }
@@ -396,66 +418,61 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 <section class="success-stories full-width dotsep">
 
-<spicy-sections>
-<h2 class="successstory">Metrological</h2>
-<div>
-<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
-<div class="spotlight">
-<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
-<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
-</div>
-</div>
+<figure>
+  <tess-carousel controls>
+  	<section>
+  		<h2 class="successstory">Metrological</h2>
+				<div>
+				<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
+				<div class="spotlight">
+				<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+				<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
+				<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
+				</div>
+				</div>
+		</section>
+		<section>
+			<h2 class="usecase">Digital Signage</h2>
+				<div>
+				<div class="spotlight">
+				<h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
+				<p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
+				<p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
+				</div>
+				<img src="/assets/img/use_case-digital_signage.png" alt="">
+				</div>
 
-<h2 class="usecase">Digital Signage</h2>
-<div>
-<div class="spotlight">
-<h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
-<p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
-<p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
-</div>
-<img src="/assets/img/use_case-digital_signage.png" alt="">
-</div>
+		</section>
 
-<h2 class="successstory">Sony Playstation</h2>
-<div>
-<div class="spotlight">
-<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>Something something Sony something.</p>
-<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
-</div>
-</div>
+		<section>
+				<h2 class="successstory">Sony Playstation</h2>
+				<div>
+				<div class="spotlight">
+				<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+				<p>Something something Sony something.</p>
+				<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
+				</div>
+			</div>
+		</section>
 
-<h2 class="successstory">Metrological</h2>
-<div>
-<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
-<div class="spotlight">
-<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
-<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
-</div>
-</div>
+		<section>
+			<h2 class="successstory">Metrological</h2>
+				<div>
+				<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
+				<div class="spotlight">
+				<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+				<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
+				<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
+				</div>
+				</div>
+		</section>
 
-<h2 class="usecase">Digital Signage</h2>
-<div>
-<div class="spotlight">
-<h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
-<p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
-<p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
-</div>
-<img src="/assets/img/use_case-digital_signage.png" alt="">
-</div>
+  </tess-carousel>
+  <figcaption>Use cases and Success Storiess</figcaption>
+</figure>
 
-<h2 class="successstory">Sony Playstation</h2>
-<div>
-<div class="spotlight">
-<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>Something something Sony something.</p>
-<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
-</div>
-</div>
 
-</spicy-sections>
+
 
 </section>
 
@@ -520,87 +537,276 @@ window.onload = function() {
 	}
 }
 </script>
-<script type="module" src="/js/SpicySections.js"></script>
 <script type="module">
-const tabs = document.querySelectorAll('spicy-sections h2');
-const carousel = document.querySelector('spicy-sections');
-let loop;
-const listlength = tabs.length;
-function tabswitch() {
-	for (let i = 0; i < listlength; i++) {
-		if (tabs[i].ariaSelected == "true") {
-			let next = (i + 1) % listlength;
-			tabs[next].affordanceState.activate();
-			i = listlength;
-		}
-	}
+"use strict";
+
+// <tess-carousel>
+// example usage at
+// https://tess.oconnor.cx/elements/tess-carousel/
+
+class Carousel extends HTMLElement {
+    static observedAttributes = ["controls"];
+    static #style = `
+:host {
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  touch-action: manipulation;
+  outline: none;
 }
 
-carousel.addEventListener('pointerenter', (e) => {
-	stopCarousel();
+:fullscreen::backdrop {
+  background: black;
+}
+
+.container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container:fullscreen {
+  border: 2px solid white;
+}
+
+.controls {
+  width: 0;
+  height: 0;
+  left: 50%;
+  top: 50%;
+}
+
+.controls button {
+  position: absolute;
+
+  height: 1em;
+  width: 1em;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2em;
+  line-height: 1;
+
+  cursor: pointer;
+  touch-action: manipulation;
+
+  border-radius: 50%;
+  border: none;
+  opacity: 0.75;
+}
+
+.controls button.previous {
+  top: calc(50% - 1em);
+  left: 4px;
+}
+
+.controls button.enter-fs {
+  top: 4px;
+  right: 4px;
+}
+
+.controls button.exit-fs {
+  display: none;
+}
+
+.container:fullscreen button.enter-fs {
+  display: none;
+}
+
+.container:fullscreen button.exit-fs {
+  display: flex;
+  top: 4px;
+  left: 4px;
+}
+
+.controls button.next {
+  top: calc(50% - 1em);
+  right: 4px;
+}
+
+:fullscreen .carousel-items {
+  width: 100vw;
+  height: 100vh;
+}
+
+.carousel-items {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-items > slot::slotted(*) {
+  display: block;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-items > slot::slotted(img) {
+  max-height: 70vh;
+  object-fit: scale-down;
+}
+
+:fullscreen .carousel-items > slot::slotted(img) {
+  max-height: 100vh;
+}
+
+.carousel-items > slot::slotted(:has(> img)) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-items > slot::slotted(figure) {
+  flex-direction: column;
+}
+`;
+
+    #shadow = null;
+    #container = null;
+    #items = null;
+    #controls = null;
+
+    next() {
+        const step = parseInt(getComputedStyle(this.#items).width);
+        this.#items.scrollLeft += step;
+    }
+
+    keydown(event) {
+        switch (event.key) {
+        case "ArrowUp":
+        case "ArrowLeft":
+            this.previous();
+            event.preventDefault();
+            break;
+        case "ArrowDown":
+        case "ArrowRight":
+            this.next();
+            event.preventDefault();
+        }
+    }
+
+    previous() {
+        const step = parseInt(getComputedStyle(this.#items).width);
+        this.#items.scrollLeft -= step;
+    }
+
+    constructor() {
+        super();
+
+        this.#shadow = this.attachShadow({
+            mode: "closed"
+        });
+
+        const sheet = document.createElement("style");
+        this.#shadow.appendChild(sheet);
+        sheet.textContent = Carousel.#style;
+
+        this.#container = document.createElement("div");
+        this.#shadow.appendChild(this.#container);
+        this.#container.classList.add("container");
+
+        this.#controls = document.createElement("div");
+        this.#controls.classList.add("controls");
+    }
+
+    connectedCallback() {
+        this.#items = document.createElement("div");
+        this.#container.appendChild(this.#items);
+
+        this.#items.classList.add("carousel-items");
+
+        const slot = document.createElement("slot");
+        this.#items.appendChild(slot);
+        slot.addEventListener("slotchange", function(event) {
+            const count = event.target.assignedElements().length;
+            const controls = event.target.parentElement.previousElementSibling;
+            if (count < 2) {
+                controls.setAttribute('hidden', '');
+            } else {
+                controls.removeAttribute('hidden');
+            }
+        });
+
+        this.#container.setAttribute('tabindex', '0');
+        this.#container.addEventListener('keydown', this.keydown.bind(this));
+
+        const prev = document.createElement("button");
+        prev.setAttribute("part", "button")
+        prev.classList.add('previous');
+        prev.setAttribute('title', 'Go to the previous item')
+        prev.appendChild(document.createTextNode("◀"));
+        prev.addEventListener("click", this.previous.bind(this));
+        this.#controls.appendChild(prev);
+
+        if ('exitFullscreen' in document) {
+            const exit_fs = document.createElement("button");
+            exit_fs.classList.add('exit-fs');
+            exit_fs.setAttribute('title', 'Exit fullscreen')
+            exit_fs.appendChild(document.createTextNode("⊟"));
+            exit_fs.addEventListener(
+                "click",
+                document.exitFullscreen.bind(document));
+            this.#controls.appendChild(exit_fs);
+
+            const enter_fs = document.createElement("button");
+            enter_fs.classList.add('enter-fs');
+            enter_fs.setAttribute('title', 'Enter fullscreen')
+            enter_fs.appendChild(document.createTextNode("⛶"));
+            enter_fs.addEventListener(
+                "click",
+                this.#container.requestFullscreen.bind(this.#container));
+            this.#controls.appendChild(enter_fs);
+        }
+
+        const thingy = this;
+        this.#container.addEventListener("fullscreenchange", function(event) {
+            if (document.fullscreenElement) {
+                thingy.focus();
+            } else {
+                thingy.blur();
+            }
+        });
+
+        const next = document.createElement("button");
+        next.classList.add('next');
+        next.setAttribute("part", "button")
+        next.setAttribute('title', 'Go to the next item')
+        next.appendChild(document.createTextNode("▶"));
+        next.addEventListener("click", this.next.bind(this));
+        this.#controls.appendChild(next);
+    }
+
+    attributeChangedCallback(name, old_value, new_value) {
+        if (name != "controls") {
+            return;
+        }
+        if (new_value !== null) {
+            this.#container.appendChild(this.#controls);
+        } else {
+            this.#container.removeChild(this.#controls);
+        }
+    }
+}
+
+customElements.define("tess-carousel", Carousel);
+
+document.addEventListener("DOMContentLoaded", function() {
+    for (const sheet of document.querySelectorAll("link[rel~=stylesheet]")) {
+        if (sheet.getAttribute("href").endsWith("tess-carousel/element.css")) {
+            sheet.remove();
+        }
+    }
 });
-carousel.addEventListener('pointerleave', (e) => {
-	startCarousel();
-	tabswitch();
-});
-
-document.addEventListener('keydown', (e) => {
-	if (e.key == 'Escape') {
-		stopCarousel();
-	}
-});
-
-function startCarousel(interval = 5000) {
-	if (!loop) {
-		console.log('starting');
-		loop = setInterval(tabswitch,interval);
-	}
-}
-function stopCarousel() {
-	if (loop) {
-		console.log('stopping');
-		clearInterval(loop);
-		loop = null;
-	}
-}
-
-function intersectionCallback(entries) {
-	entries.forEach((entry) => {
-		const box = entry.target;
-		if (entry.isIntersecting) {
-			if (entry.intersectionRatio >= 0.1) {
-				box.classList.add('visible');
-				startCarousel();
-			}
-		} else {
-			box.classList.remove('visible');
-			stopCarousel();
-		}
-	});
-}
-
-function handleVisibilityChange() {
-	if (document.hidden) {
-		stopCarousel();
-	} else {
-		startCarousel();
-	}
-}
-
-window.addEventListener("load", startup, false);
-let carouselObserver;
-let carouselsection = document.querySelector('.success-stories');
-function startup() {
-	document.addEventListener("visibilitychange", handleVisibilityChange, false);
-
-	const observerOptions = {
-		root: null,
-		rootMargin: "0px",
-		threshold: [0.0, 1.0],
-	};
-
-	carouselObserver = new IntersectionObserver(intersectionCallback, observerOptions);
-	carouselObserver.observe(carouselsection);
-}
-
 </script>
