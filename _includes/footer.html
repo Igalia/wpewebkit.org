@@ -104,21 +104,15 @@ function surveyRedirect() {
 	if (surveyURL) window.location = surveyURL;
 }
 
-class dismisser extends HTMLButtonElement {
-	connectedCallback() {
-//		let flagName = 'test-flag';
-		this.addEventListener("click", () => {
-			splash.close();
-			storedInfo.status = this.getAttribute('id').replace('dismiss-','');
-			console.log(storedInfo);
-			localStorage.setItem(flagName, JSON.stringify(storedInfo));
-			if (storedInfo.status == "Y") surveyRedirect();
-		});
-	}
-}
-
-customElements.define("dis-misser", dismisser, {extends: "button"});
-
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
 
 window.onload = startup(flagName);
 </script>
