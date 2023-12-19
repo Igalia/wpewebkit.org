@@ -275,10 +275,16 @@ header.page div h1 {
 	.success-stories > div {
 		grid-column: main / -2;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 2fr;
 		grid-template-rows: min-content;
 		align-items: center;
 		gap: 4rem;
+	}
+	.success-stories > div:nth-of-type(even) {
+		grid-template-columns: 2fr 1fr;
+	}
+	.success-stories > div:nth-of-type(even) .spotlight {
+		padding-inline-end: 0;
 	}
 	.success-stories > * {
 		margin: 0;
@@ -426,7 +432,7 @@ Open standards with great longevity allows lots more things to benefit from the 
 <div class="spotlight"><h2>Success Story</h2>
 <h3><a href="/wpewebkit.org/survey-splash/blog/2022-success-metrological.html"><img src="/wpewebkit.org/survey-splash/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
 <p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
-<p><a href="/wpewebkit.org/survey-splash/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
+<p><a href="/wpewebkit.org/survey-splash/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
 </div>
 </div>
 
