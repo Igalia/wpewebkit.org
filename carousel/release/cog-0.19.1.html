@@ -9,12 +9,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>WPE Builds</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/carousel/about/builds.html">
+  <title>Cog 0.19.1 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/carousel/release/cog-0.19.1.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/carousel/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="WPE blog" href="https://igalia.github.io/wpewebkit.org/carousel/blog.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/carousel/about/builds.html">
-  <meta property="og:title" content="WPE Builds">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/carousel/release/cog-0.19.1.html">
+  <meta property="og:title" content="Cog 0.19.1 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/carousel/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/carousel/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -22,8 +22,10 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2023-12-19T08:52:10.861Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2023-11-30T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="unstable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -70,9 +72,9 @@
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/carousel/"><img src="/wpewebkit.org/carousel/assets/img/logo-blue.svg" alt="WPE"></a>
-		<ul class="about off"><li>
+		<ul class="release off"><li>
 			<a class="nav-link" href="/wpewebkit.org/carousel/">Home</a>
-			</li><li class="currentPage">
+			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/carousel/about/">Learn & Discover</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/carousel/blog/">Blog</a>
@@ -106,18 +108,111 @@ header.page .btn-xl {
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/carousel/about/builds.html">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/carousel/release/cog-0.19.1.html">
 
 <header class="page full-bleed">
- <h1 itemprop="headline">WPE Builds</h1>
+ <h1 itemprop="headline">Cog 0.19.1 released</h1>
  
+   <meta itemprop="datePublished" content="Thu Nov 30 2023">
+   <time itemprop="dateCreated">30 November 2023</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//cog-0.19.1.tar.xz">Download</a>
   
 </header>
 
 <div itemprop="articleBody">
 
-<p>While there are several <a href="/wpewebkit.org/carousel/about/exploring.html">simple ways for developers to experiment with and explore WPE</a>, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds.  To make this easier, there is also <a href="https://github.com/Igalia/meta-webkit">meta-webkit</a>, which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.</p>
-<p>We also have some <a href="https://github.com/Igalia/meta-webkit/wiki/PerformanceTips">performance tips</a> that might be helpful.</p>
+<p>This is the first development release leading towards the 0.20 series.</p>
+<h3 id="what%E2%80%99s-new-in-cog-0.19.1%3F" tabindex="-1">What’s new in Cog 0.19.1?</h3>
+<ul>
+<li>Support multiple web views, using the new
+<a href="https://igalia.github.io/cog/class.View.html">CogView</a> and
+<a href="https://igalia.github.io/cog/class.Viewport.html">CogViewport</a> APIs.
+Each viewport may display one from a set of web views, and using many
+viewports is supported as well. Typically platform plug-ins map a
+viewport to some kind of “window” that can be displayed on screen.
+Most of the changes in this release are related to this new feature.</li>
+<li><em>launcher</em>:
+<ul>
+<li>Add command line flag to disable the built-in key bindings.</li>
+<li>Add command line flag to control media auto-play behaviour.</li>
+<li>Handle <code>GApplication</code> activation to avoid a warning.</li>
+</ul>
+</li>
+<li><em>core</em>:
+<ul>
+<li>Moved most of the key binding handling from the Wayland platform
+into <code>CogView</code>, making it common code for all platforms.</li>
+<li>Moved platform plug-in selection logic into the library, along
+with an always-built “fallback” implementation, which simplifies API
+usage.</li>
+<li>Avoid leaking web views due to <code>CogShell</code> holding one reference
+too much on them.</li>
+<li>The library now takes advantage of symbol visibility, and only
+the public symbols marked with the <code>COG_API</code> macro will be available for
+linking from the shared library.</li>
+<li>Avoid loading the same platform plug-in more than once.</li>
+<li>Automatically scan the default module path without needing
+programs to call
+<a href="https://igalia.github.io/cog/func.modules_add_directory.html">cog_modules_add_directory()</a>
+by themselves.</li>
+<li>Remove the <code>cog_platform_configure()</code> function, in favor of
+a new <a href="https://igalia.github.io/cog/func.init.html">cog_init()</a> function
+which is optional to call, and reorganized setup code to make API
+usage simpler.</li>
+</ul>
+</li>
+<li><em>meson</em>:
+<ul>
+<li>Fix configuration error when only the Wayland platform plug-in
+is selected.</li>
+</ul>
+</li>
+<li><em>drm</em>:
+<ul>
+<li>Fix touch region dimensions when the output is rotated by 90
+or 270 degrees.</li>
+<li>Fix crash on iMX.6 (and possibly others) by improving how the
+CRTC and encoder combination is chosen.</li>
+</ul>
+</li>
+<li><em>x11</em>:
+<ul>
+<li>Add support for using the <code>xcb-keysyms</code> library for handling key
+input events when the XKB extension is unavailable, either because
+its usage was disabled at build time, or the extension is missing at
+runtime.</li>
+</ul>
+</li>
+<li><em>wl</em>:
+<ul>
+<li>Add support for Weston protocols version 13.</li>
+<li>Fix blurry rendering in some compositors.</li>
+<li>Add a check for <code>memfd_create()</code> to avoid the need to have write
+permission in <code>XDG_RUNTIME_DIR</code>, which is the case in some systems.</li>
+<li>Set the opaque region also for non-fullscreen surfaces, resulting
+in a small performance improvement in some cases.</li>
+<li>Add support for multiple seats.</li>
+<li>Remove limit of 16 maximum outputs.</li>
+</ul>
+</li>
+<li><em>gtk4</em>, <em>x11</em>, <em>wl</em>:
+<ul>
+<li>Add support for file choosers using the XDG Desktop
+Portal through <code>libportal</code>.</li>
+<li>Add support for changing mouse cursors when hovering
+links (hand) and text (I-beam).</li>
+</ul>
+</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+cog-0.19.1.tar.xz (140.6 KiB)
+   md5sum: ec4566bd63ad570a9c7654ed79e46c3f
+   sha1sum: a226fedec99d2c92c2d8b6247ec57f4587c8041d
+   sha256sum: 633760ba69e36e4fbc24757c927f46fa1fdb3c526d0a6ac6ab35a21d35ad57b3
+</pre>
 
 
 
