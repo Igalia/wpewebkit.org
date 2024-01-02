@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2023-12-14T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.42.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.4.html"/>
+    <updated>2023-12-14T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix incorrect random images incorrectly displayed as backgrounds
+of &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; elements.&lt;/li&gt;
+&lt;li&gt;Fix videos displayed aliased after being resized e.g. on YouTube.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.4.tar.xz (30.9 MiB)
+   md5sum: 154dd24d1811bd51d2dd6bb22120d283
+   sha1sum: 34da38e9554586154c83fdbb5c20e353b6d97277
+   sha256sum: 8836040a3687581970b47a232b713e7023c080d5613427f52db619c29fb253a4
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.18.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/cog-0.18.2.html"/>
+    <updated>2023-12-13T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/cog-0.18.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.18 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;drm: Fix crash on iMX.6 (and possibly others) by improving how the CRTC
+and encoder combination is chosen.&lt;/li&gt;
+&lt;li&gt;wl: Add support for Weston protocols version 13.&lt;/li&gt;
+&lt;li&gt;launcher: Handle &lt;code&gt;GApplication&lt;/code&gt; activation to avoid a warning.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.18.2.tar.xz (123.1 KiB)
+   md5sum: 7fbfc2e19304132be0d73f5e5512151c
+   sha1sum: 045294f7fa878db86e4b8a617ee4ac056a71cb75
+   sha256sum: 3c4237cff6323b8c3eaf52c6f3f6415b898a22c0127c6c396c1eaa6eef46c279
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.42.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.3.html"/>
+    <updated>2023-12-04T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix flickering in videos when using VA-API with DMA-BUF for rendering.&lt;/li&gt;
+&lt;li&gt;Fix color picker being triggered in the inspector when typing &lt;code&gt;tan&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix wrong choice of font fallback in some cases when using &lt;code&gt;sans&lt;/code&gt; as
+the font family.&lt;/li&gt;
+&lt;li&gt;Fix build failure with &lt;code&gt;libxml2&lt;/code&gt; version 2.12.0 due to an API change.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.3.tar.xz (30.9 MiB)
+   md5sum: 44b7b60d439d917d8e9b97639e7d7509
+   sha1sum: 0523887944137206faca1080ab3f9e8b4cad6413
+   sha256sum: 499969acf25a56b4abd3f3e68324069f579ccb34e441259a5e04031b1f564daa
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.19.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/cog-0.19.1.html"/>
+    <updated>2023-11-30T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/cog-0.19.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 0.20 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.19.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.19.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support multiple web views, using the new
+&lt;a href=&quot;https://igalia.github.io/cog/class.View.html&quot;&gt;CogView&lt;/a&gt; and
+&lt;a href=&quot;https://igalia.github.io/cog/class.Viewport.html&quot;&gt;CogViewport&lt;/a&gt; APIs.
+Each viewport may display one from a set of web views, and using many
+viewports is supported as well. Typically platform plug-ins map a
+viewport to some kind of “window” that can be displayed on screen.
+Most of the changes in this release are related to this new feature.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;launcher&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Add command line flag to disable the built-in key bindings.&lt;/li&gt;
+&lt;li&gt;Add command line flag to control media auto-play behaviour.&lt;/li&gt;
+&lt;li&gt;Handle &lt;code&gt;GApplication&lt;/code&gt; activation to avoid a warning.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;core&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Moved most of the key binding handling from the Wayland platform
+into &lt;code&gt;CogView&lt;/code&gt;, making it common code for all platforms.&lt;/li&gt;
+&lt;li&gt;Moved platform plug-in selection logic into the library, along
+with an always-built “fallback” implementation, which simplifies API
+usage.&lt;/li&gt;
+&lt;li&gt;Avoid leaking web views due to &lt;code&gt;CogShell&lt;/code&gt; holding one reference
+too much on them.&lt;/li&gt;
+&lt;li&gt;The library now takes advantage of symbol visibility, and only
+the public symbols marked with the &lt;code&gt;COG_API&lt;/code&gt; macro will be available for
+linking from the shared library.&lt;/li&gt;
+&lt;li&gt;Avoid loading the same platform plug-in more than once.&lt;/li&gt;
+&lt;li&gt;Automatically scan the default module path without needing
+programs to call
+&lt;a href=&quot;https://igalia.github.io/cog/func.modules_add_directory.html&quot;&gt;cog_modules_add_directory()&lt;/a&gt;
+by themselves.&lt;/li&gt;
+&lt;li&gt;Remove the &lt;code&gt;cog_platform_configure()&lt;/code&gt; function, in favor of
+a new &lt;a href=&quot;https://igalia.github.io/cog/func.init.html&quot;&gt;cog_init()&lt;/a&gt; function
+which is optional to call, and reorganized setup code to make API
+usage simpler.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;meson&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Fix configuration error when only the Wayland platform plug-in
+is selected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;drm&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Fix touch region dimensions when the output is rotated by 90
+or 270 degrees.&lt;/li&gt;
+&lt;li&gt;Fix crash on iMX.6 (and possibly others) by improving how the
+CRTC and encoder combination is chosen.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;x11&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Add support for using the &lt;code&gt;xcb-keysyms&lt;/code&gt; library for handling key
+input events when the XKB extension is unavailable, either because
+its usage was disabled at build time, or the extension is missing at
+runtime.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;wl&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Add support for Weston protocols version 13.&lt;/li&gt;
+&lt;li&gt;Fix blurry rendering in some compositors.&lt;/li&gt;
+&lt;li&gt;Add a check for &lt;code&gt;memfd_create()&lt;/code&gt; to avoid the need to have write
+permission in &lt;code&gt;XDG_RUNTIME_DIR&lt;/code&gt;, which is the case in some systems.&lt;/li&gt;
+&lt;li&gt;Set the opaque region also for non-fullscreen surfaces, resulting
+in a small performance improvement in some cases.&lt;/li&gt;
+&lt;li&gt;Add support for multiple seats.&lt;/li&gt;
+&lt;li&gt;Remove limit of 16 maximum outputs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;gtk4&lt;/em&gt;, &lt;em&gt;x11&lt;/em&gt;, &lt;em&gt;wl&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Add support for file choosers using the XDG Desktop
+Portal through &lt;code&gt;libportal&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Add support for changing mouse cursors when hovering
+links (hand) and text (I-beam).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.19.1.tar.xz (140.6 KiB)
+   md5sum: ec4566bd63ad570a9c7654ed79e46c3f
+   sha1sum: a226fedec99d2c92c2d8b6247ec57f4587c8041d
+   sha256sum: 633760ba69e36e4fbc24757c927f46fa1fdb3c526d0a6ac6ab35a21d35ad57b3
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.43.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.43.1.html"/>
+    <updated>2023-11-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.43.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.44 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.43.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.43.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve V-Blank synchronization when rendering.&lt;/li&gt;
+&lt;li&gt;Improve DMA-BUF buffers handling for video frames.&lt;/li&gt;
+&lt;li&gt;Use the buffer format preferred by the driver in DMA-BUF renderer.&lt;/li&gt;
+&lt;li&gt;Do not block the compositing thread waiting for rendering threads.&lt;/li&gt;
+&lt;li&gt;Improve performance when scaling images in a canvas.&lt;/li&gt;
+&lt;li&gt;Allow disabling WebGL support using the API.&lt;/li&gt;
+&lt;li&gt;Enable usage of &lt;code&gt;libbacktrace&lt;/code&gt; by default.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.43.1.tar.xz (31.0 MiB)
+   md5sum: 9bdfd5e91254b348119dd41e256e3900
+   sha1sum: 776183823cb090b1c0c9646407fa22ed751370cb
+   sha256sum: 1713ede3016d5b027cc28779399873f2d9e8bd976291895d8085ba668e3a22f1
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.42.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.2.html"/>
+    <updated>2023-11-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Bump Safari version in &lt;code&gt;User-Agent&lt;/code&gt; header.&lt;/li&gt;
+&lt;li&gt;Fix CSP regression that broke Unity WebGL applications.&lt;/li&gt;
+&lt;li&gt;Fix the build with GBM disabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.2.tar.xz (30.9 MiB)
+   md5sum: 4cc2472bce41a376cc3b82b1d76834fa
+   sha1sum: 2de79928a1742076226470b821239db88aaaa9a1
+   sha256sum: df99bbc7007df60d77821e4c169312464f145c8aa6e34398a43da36a857285e8
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.18.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/cog-0.18.1.html"/>
+    <updated>2023-11-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/cog-0.18.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 0.18 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;core: Avoid leaking web views due to &lt;code&gt;CogShell&lt;/code&gt; holding one reference
+too much on them.&lt;/li&gt;
+&lt;li&gt;drm: Fix touch region dimensions when the output is rotated by 90 or
+270 degrees.&lt;/li&gt;
+&lt;li&gt;meson: Fix configuration error when only the Wayland platform plug-in
+is selected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.18.1.tar.xz (122.7 KiB)
+   md5sum: 204ae9353ed828e4ac39b1dd4c5c35dd
+   sha1sum: f0f0ebcd279170f427be0ad57fd356faff1a2732
+   sha256sum: 72e3a84052b459e2d53d0e8b947f20e27bf5d8049766c4c1594eb9c6b6cf7ab3
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.42.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.1.html"/>
+    <updated>2023-09-28T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix enable-html5-database setting to properly enable/disable IndexedDB API.&lt;/li&gt;
+&lt;li&gt;Fix the build with GBM disabled.&lt;/li&gt;
+&lt;li&gt;Fix rendering on the Raspberry Pi.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.1.tar.xz (35.1 MiB)
+   md5sum: 82b6c35797d3e640ed3c5e354d030dea
+   sha1sum: 6cb97b1d261ca47185f49a3b016586b825a5c750
+   sha256sum: 18a2cf547a503420f4cb8f523a2f4c24b4dc2773abbe74c7d585e6d23cb27bac
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.42.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.0.html"/>
+    <updated>2023-09-20T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.42.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.0%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.0?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;GBM is no longer required for WebGL implementation.&lt;/li&gt;
+&lt;li&gt;Add API to configure experimental features at runtime.&lt;/li&gt;
+&lt;li&gt;Add API to set the percentage of volume space that can be used for data storage.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.0.tar.xz (35.1 MiB)
+   md5sum: 8bc18620afafc5b5087d529cd47c0721
+   sha1sum: 125333c9bf4efa85f780ad422f3fb9fc39d43636
+   sha256sum: acda4be341c6021e092b36612c88d596dae4dd7f41e6ac47425d645dffdfe5ed
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.40.5 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.40.5.html"/>
+    <updated>2023-08-01T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-preview-test-patch/release/wpewebkit-2.40.5.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.40 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.40.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.40.5?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.40.5.tar.xz (36.3 MiB)
+   md5sum: 03a4628755bcd2edea12d1975587fd18
+   sha1sum: 40405f973c882ada48a759f06f00922fa727caeb
+   sha256sum: 4c658d3049c50e98b12fd6623ec42772f25a99cc1c05b5347a10a8633c266733
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
