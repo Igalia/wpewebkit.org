@@ -19,6 +19,10 @@ html {
 	max-width: 100vw;
 }
 
+:target {
+	scroll-margin-top: 7rem;
+}
+
 @supports not (-ms-ime-align: auto) {
 	/*
 	 * Resets for <details>/<summary>, see:
@@ -151,6 +155,10 @@ ul.arrows li::before {
 	text-decoration: none;
 	filter: none;
 }
+.currentPage .cta.btn {
+	box-shadow: none;
+}
+
 
 .global a.igalia.logo.home {
 	transform: translateX(10px);
@@ -424,6 +432,7 @@ nav.sidebar .currentPage a[href] {
 	}
 	nav.sidebar ul {
 		display: block;
+		width: max-content;
 	}
 	nav.sidebar a[href] {
 		display: block;
@@ -623,6 +632,40 @@ footer.global div {
 }
 footer.global div > :last-child {
 	grid-column: span 2;
+}
+
+nav.pagination {
+	display: block;
+	color: #88b;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	font-feature-settings: "pnum" 0;
+}
+nav.pagination > ol {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+nav.pagination > ol > li {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+nav.pagination > ol > li > a,
+nav.pagination > ol > li > span {
+	display: inline;
+	text-decoration: none;
+	margin: 0;
+	padding: 0.35rem 0.75rem;
+	font-weight: normal;
+}
+nav.pagination > ol > li > a:hover {
+	background-color: #eaeaee;
+}
+nav.pagination > ol > li > a[aria-current="page"] {
+	background-color: var(--colorMain);
+	color: #eef;
 }
 
 @media (min-width: 50rem) {

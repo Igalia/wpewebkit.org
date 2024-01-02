@@ -12,6 +12,7 @@
   <title>Integrating WPE: URI Scheme Handlers and Script Messages</title>
   <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/blog/06-integrating-wpe.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE blog" href="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/blog.xml">
   <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/blog/06-integrating-wpe.html">
   <meta property="og:title" content="Integrating WPE: URI Scheme Handlers and Script Messages">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/assets/twitter_Profile_WhiteBg_400px.png">
@@ -60,7 +61,6 @@
     })();
   </script>
   <!-- End Matomo Code -->
-  
 </head>
 
 
@@ -73,12 +73,12 @@
 			<a class="nav-link" href="/wpewebkit.org/bkardell-patch-3/">Home</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/bkardell-patch-3/about/">Learn & Discover</a>
-			</li><li>
+			</li><li class="currentPage">
 			<a class="nav-link" href="/wpewebkit.org/bkardell-patch-3/blog/">Blog</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/bkardell-patch-3/developers/">Developers</a>
 			</li><li>
-			<a class="btn cta" href="/wpewebkit.org/bkardell-patch-3/about/explore-wpe.html">Get Started</a>
+			<a class="btn cta" href="/wpewebkit.org/bkardell-patch-3/about/get-wpe.html">Get WPE</a>
 			</li></ul>
 		<a href="#" class="burger">Menu</a>
 	</div>
@@ -94,6 +94,10 @@ header.page h1 {
 header.page time {
 	font-size: 1.25em;
 	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
 }
 </style>
 <div itemscope="" itemtype="http://schema.org/TechArticle">
@@ -152,29 +156,7 @@ this are <a href="#uri-scheme-handlers">URI scheme handlers</a>, which are regis
 using <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.WebContext.register_uri_scheme.html">webkit_web_context_register_uri_scheme()</a>. This
 minimal browser includes an <code>on_create_view</code> function, which is the perfect
 place to do the configuration:</p>
-<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> WebKitWebView<span class="token operator">*</span>
-<span class="token function">on_create_view</span><span class="token punctuation">(</span>CogShell <span class="token operator">*</span>shell<span class="token punctuation">,</span> CogPlatform <span class="token operator">*</span>platform<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GError<span class="token punctuation">)</span> error <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    WebKitWebViewBackend <span class="token operator">*</span>view_backend <span class="token operator">=</span> <span class="token function">cog_platform_get_view_backend</span><span class="token punctuation">(</span>platform<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>view_backend<span class="token punctuation">)</span>
-        <span class="token function">g_error</span><span class="token punctuation">(</span><span class="token string">"Cannot obtain view backend: %s"</span><span class="token punctuation">,</span> error<span class="token operator">-></span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitUserContentManager<span class="token punctuation">)</span> content_manager <span class="token operator">=</span> <span class="token function">create_content_manager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/** NEW! **/</span>
-    <span class="token function">configure_web_context</span><span class="token punctuation">(</span><span class="token function">cog_shell_get_web_context</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment">/** NEW! **/</span>
- 
-    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitWebView<span class="token punctuation">)</span> web_view <span class="token operator">=</span>
-        <span class="token function">g_object_new</span><span class="token punctuation">(</span>WEBKIT_TYPE_WEB_VIEW<span class="token punctuation">,</span>
-                     <span class="token string">"user-content-manager"</span><span class="token punctuation">,</span> content_manager<span class="token punctuation">,</span>  <span class="token comment">/** NEW! **/</span>
-                     <span class="token string">"settings"</span><span class="token punctuation">,</span> <span class="token function">cog_shell_get_web_settings</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">,</span>
-                     <span class="token string">"web-context"</span><span class="token punctuation">,</span> <span class="token function">cog_shell_get_web_context</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">,</span>
-                     <span class="token string">"backend"</span><span class="token punctuation">,</span> view_backend<span class="token punctuation">,</span>
-                     <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">cog_platform_init_web_view</span><span class="token punctuation">(</span>platform<span class="token punctuation">,</span> web_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">webkit_web_view_load_uri</span><span class="token punctuation">(</span>web_view<span class="token punctuation">,</span> s_starturl<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token function">g_steal_pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>web_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> WebKitWebView<span class="token operator">*</span><br><span class="token function">on_create_view</span><span class="token punctuation">(</span>CogShell <span class="token operator">*</span>shell<span class="token punctuation">,</span> CogPlatform <span class="token operator">*</span>platform<span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GError<span class="token punctuation">)</span> error <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><br>    WebKitWebViewBackend <span class="token operator">*</span>view_backend <span class="token operator">=</span> <span class="token function">cog_platform_get_view_backend</span><span class="token punctuation">(</span>platform<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>view_backend<span class="token punctuation">)</span><br>        <span class="token function">g_error</span><span class="token punctuation">(</span><span class="token string">"Cannot obtain view backend: %s"</span><span class="token punctuation">,</span> error<span class="token operator">-></span>message<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitUserContentManager<span class="token punctuation">)</span> content_manager <span class="token operator">=</span> <span class="token function">create_content_manager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/** NEW! **/</span><br>    <span class="token function">configure_web_context</span><span class="token punctuation">(</span><span class="token function">cog_shell_get_web_context</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment">/** NEW! **/</span><br> <br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitWebView<span class="token punctuation">)</span> web_view <span class="token operator">=</span><br>        <span class="token function">g_object_new</span><span class="token punctuation">(</span>WEBKIT_TYPE_WEB_VIEW<span class="token punctuation">,</span><br>                     <span class="token string">"user-content-manager"</span><span class="token punctuation">,</span> content_manager<span class="token punctuation">,</span>  <span class="token comment">/** NEW! **/</span><br>                     <span class="token string">"settings"</span><span class="token punctuation">,</span> <span class="token function">cog_shell_get_web_settings</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">,</span><br>                     <span class="token string">"web-context"</span><span class="token punctuation">,</span> <span class="token function">cog_shell_get_web_context</span><span class="token punctuation">(</span>shell<span class="token punctuation">)</span><span class="token punctuation">,</span><br>                     <span class="token string">"backend"</span><span class="token punctuation">,</span> view_backend<span class="token punctuation">,</span><br>                     <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">cog_platform_init_web_view</span><span class="token punctuation">(</span>platform<span class="token punctuation">,</span> web_view<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">webkit_web_view_load_uri</span><span class="token punctuation">(</span>web_view<span class="token punctuation">,</span> s_starturl<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">return</span> <span class="token function">g_steal_pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>web_view<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 <details>
   <summary>What is <code>g_autoptr</code>?
     Does it relate to <code>g_steal_pointer</code>?
@@ -201,13 +183,10 @@ run on Wayland, X11, and even on a bare display using the <abbr title="Direct
 Rendering Manager">DRM<abbr>/<abbr title="Kernel Mode Setting">KMS</abbr>
 subsystem directly. Compiling and running it, assuming you already have the
 dependencies installed, should be as easy as running:</abbr></abbr></p>
-<pre class="language-sh"><code class="language-sh">cc <span class="token parameter variable">-o</span> minicog minicog.c <span class="token variable"><span class="token variable">$(</span>pkg-config cogcore <span class="token parameter variable">--libs</span> <span class="token parameter variable">--cflags</span><span class="token variable">)</span></span>
-./minicog wpewebkit.org
-</code></pre>
+<pre class="language-sh"><code class="language-sh">cc <span class="token parameter variable">-o</span> minicog minicog.c <span class="token variable"><span class="token variable">$(</span>pkg-config cogcore <span class="token parameter variable">--libs</span> <span class="token parameter variable">--cflags</span><span class="token variable">)</span></span><br>./minicog wpewebkit.org</code></pre>
 <p>If the current session kind is not automatically detected, a second parameter
 can be used to manually choose among <code>wl</code> (Wayland), <code>x11</code>, <code>drm</code>, and so on:</p>
-<pre class="language-sh"><code class="language-sh">./minicog wpewebkit.org x11
-</code></pre>
+<pre class="language-sh"><code class="language-sh">./minicog wpewebkit.org x11</code></pre>
 <p>The full, unmodified source for this minimal browser is included right below.</p>
 <details>
   <summary>Complete <code>minicog.c</code> source
@@ -312,16 +291,7 @@ MIME content type of the data in the stream.</li>
 <p>Let’s add an echo handler to our <a href="#intermission">minimal browser</a> that
 replies back with the requested URI. Registering the scheme is
 straightforward enough:</p>
-<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span>
-<span class="token function">configure_web_context</span><span class="token punctuation">(</span>WebKitWebContext <span class="token operator">*</span>context<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token function">webkit_web_context_register_uri_scheme</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>
-                                           <span class="token string">"echo"</span><span class="token punctuation">,</span>
-                                           handle_echo_request<span class="token punctuation">,</span>
-                                           <span class="token constant">NULL</span> <span class="token comment">/* userdata */</span><span class="token punctuation">,</span>
-                                           <span class="token constant">NULL</span> <span class="token comment">/* destroy_notify */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span><br><span class="token function">configure_web_context</span><span class="token punctuation">(</span>WebKitWebContext <span class="token operator">*</span>context<span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    <span class="token function">webkit_web_context_register_uri_scheme</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span><br>                                           <span class="token string">"echo"</span><span class="token punctuation">,</span><br>                                           handle_echo_request<span class="token punctuation">,</span><br>                                           <span class="token constant">NULL</span> <span class="token comment">/* userdata */</span><span class="token punctuation">,</span><br>                                           <span class="token constant">NULL</span> <span class="token comment">/* destroy_notify */</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 <details>
   <summary>What are “user data” and “destroy notify”?</summary><div>
 <p>The <code>userdata</code> parameter above is a convention used in many C libraries, and
@@ -342,18 +312,7 @@ URI, which is part of the <code>WebKitURISchemeRequest</code> parameter to the h
 stash it into a <a href="https://docs.gtk.org/glib/struct.Bytes.html">GBytes</a>
 container, and <a href="https://docs.gtk.org/gio/ctor.MemoryInputStream.new_from_bytes.html">create an input stream to read back its
 contents</a>:</p>
-<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span>
-<span class="token function">handle_echo_request</span><span class="token punctuation">(</span>WebKitURISchemeRequest <span class="token operator">*</span>request<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>userdata<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>request_uri <span class="token operator">=</span> <span class="token function">webkit_uri_scheme_request_get_uri</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">g_print</span><span class="token punctuation">(</span><span class="token string">"Request URI: %s\n"</span><span class="token punctuation">,</span> request_uri<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GBytes<span class="token punctuation">)</span> data <span class="token operator">=</span> <span class="token function">g_bytes_new</span><span class="token punctuation">(</span>request_uri<span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>request_uri<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GInputStream<span class="token punctuation">)</span> stream <span class="token operator">=</span> <span class="token function">g_memory_input_stream_new_from_bytes</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token function">webkit_uri_scheme_request_finish</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> stream<span class="token punctuation">,</span> <span class="token function">g_bytes_get_size</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"text/plain"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span><br><span class="token function">handle_echo_request</span><span class="token punctuation">(</span>WebKitURISchemeRequest <span class="token operator">*</span>request<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>userdata<span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>request_uri <span class="token operator">=</span> <span class="token function">webkit_uri_scheme_request_get_uri</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">g_print</span><span class="token punctuation">(</span><span class="token string">"Request URI: %s\n"</span><span class="token punctuation">,</span> request_uri<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GBytes<span class="token punctuation">)</span> data <span class="token operator">=</span> <span class="token function">g_bytes_new</span><span class="token punctuation">(</span>request_uri<span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>request_uri<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GInputStream<span class="token punctuation">)</span> stream <span class="token operator">=</span> <span class="token function">g_memory_input_stream_new_from_bytes</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token function">webkit_uri_scheme_request_finish</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> stream<span class="token punctuation">,</span> <span class="token function">g_bytes_get_size</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"text/plain"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 <p>Note how we need to tell WebKit how to <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish.html">finish the load
 request</a>,
 in this case only with the data stream, but it is possible to have <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/method.URISchemeRequest.finish_with_response.html">more
@@ -456,46 +415,13 @@ user interface.</p>
 </figure>
 <p>First, create a <code>WebKitUserContentManager</code>, register the message handler,
 and connect a callback to its associated signal:</p>
-<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> WebKitUserContentManager<span class="token operator">*</span>
-<span class="token function">create_content_manager</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitUserContentManager<span class="token punctuation">)</span> content_manager <span class="token operator">=</span> <span class="token function">webkit_user_content_manager_new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">webkit_user_content_manager_register_script_message_handler</span><span class="token punctuation">(</span>content_manager<span class="token punctuation">,</span> <span class="token string">"powerControl"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">g_signal_connect</span><span class="token punctuation">(</span>content_manager<span class="token punctuation">,</span> <span class="token string">"script-message-received::powerControl"</span><span class="token punctuation">,</span>
-                     <span class="token function">G_CALLBACK</span><span class="token punctuation">(</span>handle_power_control_message<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token function">g_steal_pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>content_manager<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> WebKitUserContentManager<span class="token operator">*</span><br><span class="token function">create_content_manager</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitUserContentManager<span class="token punctuation">)</span> content_manager <span class="token operator">=</span> <span class="token function">webkit_user_content_manager_new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">webkit_user_content_manager_register_script_message_handler</span><span class="token punctuation">(</span>content_manager<span class="token punctuation">,</span> <span class="token string">"powerControl"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">g_signal_connect</span><span class="token punctuation">(</span>content_manager<span class="token punctuation">,</span> <span class="token string">"script-message-received::powerControl"</span><span class="token punctuation">,</span><br>                     <span class="token function">G_CALLBACK</span><span class="token punctuation">(</span>handle_power_control_message<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">return</span> <span class="token function">g_steal_pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>content_manager<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 <p>The callback receives a <a href="https://people.igalia.com/aperez/Documentation/wpe-webkit-1.1/struct.JavascriptResult.html">WebKitJavascriptResult</a>, from which we
 can get the <a href="https://people.igalia.com/aperez/Documentation/wpe-javascriptcore-1.1/class.Value.html">JSCValue</a> with the contents of the parameter
 passed to the <code>postMessage()</code> function. The <code>JSCValue</code> can now be inspected
 to check for malformed messages and determine the action to take, and
 then arrange to call <code>reboot()</code>:</p>
-<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span>
-<span class="token function">handle_power_control_message</span><span class="token punctuation">(</span>WebKitUserContentManager <span class="token operator">*</span>content_manager<span class="token punctuation">,</span>
-                             WebKitJavascriptResult <span class="token operator">*</span>js_result<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>userdata<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    JSCValue <span class="token operator">*</span>value <span class="token operator">=</span> <span class="token function">webkit_javascript_result_get_js_value</span><span class="token punctuation">(</span>js_result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">jsc_value_is_string</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">g_warning</span><span class="token punctuation">(</span><span class="token string">"Invalid powerControl message: argument is not a string"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    g_autofree <span class="token keyword">char</span> <span class="token operator">*</span>value_as_string <span class="token operator">=</span> <span class="token function">jsc_value_to_string</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> action<span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>value_as_string<span class="token punctuation">,</span> <span class="token string">"poweroff"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        action <span class="token operator">=</span> RB_POWER_OFF<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>value_as_string<span class="token punctuation">,</span> <span class="token string">"reboot"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        action <span class="token operator">=</span> RB_AUTOBOOT<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        <span class="token function">g_warning</span><span class="token punctuation">(</span><span class="token string">"Invalid powerControl message: '%s'"</span><span class="token punctuation">,</span> value_as_string<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token function">g_message</span><span class="token punctuation">(</span><span class="token string">"Device will %s now!"</span><span class="token punctuation">,</span> value_as_string<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">sync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">reboot</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span><br><span class="token function">handle_power_control_message</span><span class="token punctuation">(</span>WebKitUserContentManager <span class="token operator">*</span>content_manager<span class="token punctuation">,</span><br>                             WebKitJavascriptResult <span class="token operator">*</span>js_result<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>userdata<span class="token punctuation">)</span><br><span class="token punctuation">{</span><br>    JSCValue <span class="token operator">*</span>value <span class="token operator">=</span> <span class="token function">webkit_javascript_result_get_js_value</span><span class="token punctuation">(</span>js_result<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">jsc_value_is_string</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        <span class="token function">g_warning</span><span class="token punctuation">(</span><span class="token string">"Invalid powerControl message: argument is not a string"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">return</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    g_autofree <span class="token keyword">char</span> <span class="token operator">*</span>value_as_string <span class="token operator">=</span> <span class="token function">jsc_value_to_string</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token keyword">int</span> action<span class="token punctuation">;</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>value_as_string<span class="token punctuation">,</span> <span class="token string">"poweroff"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        action <span class="token operator">=</span> RB_POWER_OFF<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>value_as_string<span class="token punctuation">,</span> <span class="token string">"reboot"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        action <span class="token operator">=</span> RB_AUTOBOOT<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span><br>        <span class="token function">g_warning</span><span class="token punctuation">(</span><span class="token string">"Invalid powerControl message: '%s'"</span><span class="token punctuation">,</span> value_as_string<span class="token punctuation">)</span><span class="token punctuation">;</span><br>        <span class="token keyword">return</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br><br>    <span class="token function">g_message</span><span class="token punctuation">(</span><span class="token string">"Device will %s now!"</span><span class="token punctuation">,</span> value_as_string<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token function">sync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">reboot</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 <p>Note that the <code>reboot()</code> system call above will most likely fail because it
 needs administrative privileges. While the browser process could run as <code>root</code>
 to sidestep this issue—definitely <em>not</em> recommended!—it would be
@@ -505,27 +431,7 @@ using <a href="https://systemd.io/">systemd</a> a good option is to call the <co
 and <code>.Reboot()</code> methods of its <code>org.freedesktop.systemd1</code> interface.</p>
 <p>Now we can write a small HTML document with some JavaScript sprinkled on top
 to arrange sending the messages:</p>
-<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Device Power Control<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reboot<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Reboot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>poweroff<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Power Off<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-      <span class="token keyword">function</span> <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-          window<span class="token punctuation">.</span>webkit<span class="token punctuation">.</span>messageHandlers<span class="token punctuation">.</span>powerControl<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token string">"reboot"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token string">"poweroff"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
-</code></pre>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Device Power Control<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reboot<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Reboot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>poweroff<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Power Off<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>      <span class="token keyword">function</span> <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>          window<span class="token punctuation">.</span>webkit<span class="token punctuation">.</span>messageHandlers<span class="token punctuation">.</span>powerControl<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span><br>          <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span><br>        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>      <span class="token punctuation">}</span><br>      <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token string">"reboot"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>      <span class="token function">addHandler</span><span class="token punctuation">(</span><span class="token string">"poweroff"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <p>The complete source code for this example can be found
 <a href="https://gist.github.com/aperezdc/621c1ec6bb78923e27fc035fa0689522">in this Gist</a>.</p>
 <h3 id="going-in-the-other-direction" tabindex="-1">Going In The Other Direction</h3>
@@ -620,9 +526,65 @@ solution that can tightly integrate web content in your device, feel free to
 
 </div>
 
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
     </div></main>
 
-    <footer class="global">
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
 	<b></b>
 	<div>
 		<a href="/wpewebkit.org/bkardell-patch-3/" class="igalia logo home"><img src="/wpewebkit.org/bkardell-patch-3/assets/img/logo-white.svg" alt="WPE"></a>
@@ -633,11 +595,91 @@ solution that can tightly integrate web content in your device, feel free to
 			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
 		</ul>
 		<ul>
-			<li>Copyright &copy; 2018-2023 The WPE WebKit Team</li>
+			<li>Copyright &copy; 2018-2024 The WPE WebKit Team</li>
 			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
 		</ul>
 	</div>
 </footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
 
 
   </body>
