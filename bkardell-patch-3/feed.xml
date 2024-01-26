@@ -4,8 +4,50 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2023-12-14T00:00:00Z</updated>
+  <updated>2024-01-25T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>libwpe 1.15.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/libwpe-1.15.2.html"/>
+    <updated>2024-01-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/libwpe-1.15.2.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 1.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.15.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.15.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Allow resetting the fullscreen client to a null pointer.&lt;/li&gt;
+&lt;li&gt;Fix usage of the &lt;code&gt;_wpe_loader_interface&lt;/code&gt; with the static loader.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.15.2.tar.xz (62.0 KiB)
+   md5sum: af8b981f8c620eca9a5672cab0cdd9d4
+   sha1sum: 4a1712dbf331ecc70e6e82ebce2e4602fcef35c1
+   sha256sum: 6d769f64cee0fb1b5069c3b250b0f91e5cd90564cd2efdf633442bab96e5dbe8
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.14.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/libwpe-1.14.2.html"/>
+    <updated>2024-01-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/libwpe-1.14.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.14.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.14.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Allow resetting the fullscreen client to a null pointer.&lt;/li&gt;
+&lt;li&gt;Fix usage of the &lt;code&gt;_wpe_loader_interface&lt;/code&gt; with the static loader.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.14.2.tar.xz (61.6 KiB)
+   md5sum: 61840e24ba0a0f5828194dff28db92ee
+   sha1sum: 70a2b894af2b50d7082260158a89524974a480f3
+   sha256sum: 8ae38022c50cb340c96fdbee1217f1e46ab57fbc1c8ba98142565abbedbe22ef
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.42.4 released</title>
@@ -270,49 +312,6 @@ wpewebkit-2.42.1.tar.xz (35.1 MiB)
    md5sum: 82b6c35797d3e640ed3c5e354d030dea
    sha1sum: 6cb97b1d261ca47185f49a3b016586b825a5c750
    sha256sum: 18a2cf547a503420f4cb8f523a2f4c24b4dc2773abbe74c7d585e6d23cb27bac
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.42.0 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.42.0.html"/>
-    <updated>2023-09-20T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.42.0.html</id>
-    <content type="html">&lt;p&gt;This is the first stable release in the 2.42 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.0%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.0?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;GBM is no longer required for WebGL implementation.&lt;/li&gt;
-&lt;li&gt;Add API to configure experimental features at runtime.&lt;/li&gt;
-&lt;li&gt;Add API to set the percentage of volume space that can be used for data storage.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.42.0.tar.xz (35.1 MiB)
-   md5sum: 8bc18620afafc5b5087d529cd47c0721
-   sha1sum: 125333c9bf4efa85f780ad422f3fb9fc39d43636
-   sha256sum: acda4be341c6021e092b36612c88d596dae4dd7f41e6ac47425d645dffdfe5ed
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.40.5 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.40.5.html"/>
-    <updated>2023-08-01T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.40.5.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.40 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.40.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.40.5?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.40.5.tar.xz (36.3 MiB)
-   md5sum: 03a4628755bcd2edea12d1975587fd18
-   sha1sum: 40405f973c882ada48a759f06f00922fa727caeb
-   sha256sum: 4c658d3049c50e98b12fd6623ec42772f25a99cc1c05b5347a10a8633c266733
 &lt;/pre&gt;
 </content>
   </entry>

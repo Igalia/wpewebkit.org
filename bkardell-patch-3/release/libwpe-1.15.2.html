@@ -9,12 +9,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Verifying Releases</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/release/verify/">
+  <title>libwpe 1.15.2 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/release/libwpe-1.15.2.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="WPE blog" href="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/blog.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/release/verify/">
-  <meta property="og:title" content="Verifying Releases">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/release/libwpe-1.15.2.html">
+  <meta property="og:title" content="libwpe 1.15.2 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -22,8 +22,10 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2024-01-26T16:27:36.014Z">
+  <meta property="article:published_time" content="2024-01-25T00:00:00.000Z">
   <meta property="article:tag" content="release">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="unstable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -105,97 +107,34 @@ header.page .btn-xl {
 <meta itemprop="isAccessibleForFree" content="True">
 <meta itemprop="publisher" content="WPE Team">
 <meta itemprop="author" content="WPE Team">
-<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/release/verify/">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/bkardell-patch-3/release/libwpe-1.15.2.html">
 
 <header class="page full-bleed">
- <h1 itemprop="headline">Verifying Releases</h1>
+ <h1 itemprop="headline">libwpe 1.15.2 released</h1>
  
+   <meta itemprop="datePublished" content="Thu Jan 25 2024">
+   <time itemprop="dateCreated">25 January 2024</time>
+ 
+  
+  <a class="btn btn-xl btn-secondary mt-3" href="https://wpewebkit.org/releases//libwpe-1.15.2.tar.xz">Download</a>
   
 </header>
 
 <div itemprop="articleBody">
 
-<p>WPE release tarballs are cryptographically signed and can be verified
-using <a href="#pgp-signatures">PGP signatures</a> (in an <code>.asc</code> file) and their
-<a href="#checksums">checksums</a> (in a <code>.sums</code> file). Everybody is encouraged to verify
-the integrity of downloaded files using them.</p>
-<h2 id="pgp-signatures" tabindex="-1">PGP Signatures</h2>
-<p>Every release is accompanied by a cryptographic signature produced by the
-person in charge of publishing the release. This signature allows anyone to
-check whether the files have been tampered with after they have been signed.
-Forging a signature is practically impossible without gaining access to the
-private key used. If that were to happen, the compromised key would be revoked
-and all files re-signed with new keys.</p>
-<h3 id="keys" tabindex="-1">Keys</h3>
-<p>The following PGP keys are currently in use for signing releases:</p>
-<table>
-  <thead>
-    <tr><th>Developer</th><th>Fingerprint</th></tr>
-  </thead>
-    <tr>
-      <td>Adrián Pérez de Castro (<a href="/wpewebkit.org/bkardell-patch-3/release/verify/aperez.key">key</a>)</td>
-      <td><tt>5AA3 BC33 4FD7 E336 9E7C  77B2 91C5 59DB E4C9 123B</tt></td>
-    </tr>
-    <tr>
-      <td>Carlos García Campos (<a href="/wpewebkit.org/bkardell-patch-3/release/verify/cgarcia.key">key</a>)</td>
-      <td><tt>D7FC F61C F9A2 DEAB 31D8  1BD3 F3D3 22D0 EC45 82C3</tt></td>
-    </tr>
-  <tbody>
-  </tbody>
-</table>
-<h3 id="importing-keys" tabindex="-1">Importing keys</h3>
-<p>Once downloaded, keys need to be imported in the PGP keyring, for example with
-GnuPG:</p>
-<pre><code>% gpg --import aperez.key
-gpg: key 91C559DBE4C9123B: 1 signature not checked due to a missing key
-gpg: key 91C559DBE4C9123B: public key &quot;Adrián Pérez de Castro &lt;aperez@igalia.com&gt;&quot; imported
-gpg: key 56736249E4C9123B: 11 signatures not checked due to missing keys
-gpg: key 56736249E4C9123B: public key &quot;Adrián Pérez de Castro &lt;aperez@igalia.com&gt;&quot; imported
-gpg: Total number processed: 2
-gpg:               imported: 2
-gpg: no ultimately trusted keys found
-</code></pre>
-<h3 id="checking" tabindex="-1">Checking</h3>
-<p>The signature file for each release has the same name plus the <code>.asc</code> suffix.
-Given a download URL, the following illustrates the process:</p>
-<pre><code>% curl -sLO https://wpewebkit.org/releases/wpewebkit-2.34.3.tar.xz
-% curl -sLO https://wpewebkit.org/releases/wpewebkit-2.34.3.tar.xz.asc
-</code></pre>
-<p>Now it is possible to verify the <code>.tar.xz</code> file against its signature:</p>
-<pre><code>% gpg --verify wpewebkit-2.34.3.tar.xz.asc
-gpg: assuming signed data in 'wpewebkit-2.34.3.tar.xz'
-gpg: Signature made lun 20 dic 2021 00:05:24 EET
-gpg:                using DSA key 5AA3BC334FD7E3369E7C77B291C559DBE4C9123B
-gpg: Good signature from &quot;Adrián Pérez de Castro &lt;aperez@igalia.com&gt;&quot; [ultimate]
-gpg:                 aka &quot;Adrián Pérez de Castro (personal) &lt;adrian@perezdecastro.org&gt;&quot; [ultimate]
-Primary key fingerprint: 5AA3 BC33 4FD7 E336 9E7C  77B2 91C5 59DB E4C9 123B
-</code></pre>
-<h2 id="checksums" tabindex="-1">Checksums</h2>
-<p>Checksums for release tarballs are also published along releases. While
-suitable to check file integrity, using <a href="#pgp-signatures">PGP signatures</a>
-provide a stronger guarantee.</p>
-<h3 id="checking-1" tabindex="-1">Checking</h3>
-<p>The checksums file for each release has the same name plus the <code>.sums</code> suffix.
-Given a download URL, the following illustrates how to calculate the SHA-256
-checksum on your end:</p>
-<pre><code>% curl -sLO https://wpewebkit.org/releases/wpewebkit-2.34.3.tar.xz
-% curl -sLO https://wpewebkit.org/releases/wpewebkit-2.34.3.tar.xz.sums
-% sha256sum wpewebkit-2.34.3.tar.xz | cut -f1 -d' '
-c35de4bfce35c81cbd6c1da27879b4ea33e20bd51d750ce296a4d100d45f40fc
-</code></pre>
-<p>This can be compared with the value of the last line of the <code>.sums</code> file:</p>
-<pre><code>% cat wpewebkit-2.34.3.tar.xz.sums
-wpewebkit-2.34.3.tar.xz (22.5 MiB)
-   md5sum: f8eb92825bf6477fb04ca017926c2458
-   sha1sum: a72f507dfd6d4d579b2e6c939d7c171c2cfb1d92
-   sha256sum: c35de4bfce35c81cbd6c1da27879b4ea33e20bd51d750ce296a4d100d45f40fc
-</code></pre>
-<p>Or, programmatically:</p>
-<pre><code>% expected=$(tail -1 wpewebkit-2.34.3.tar.xz.sums | cut -f5 -d' ')
-% calculated=$(sha256sum wpewebkit-2.34.3.tar.xz | cut -f1 -d' ')
-% if [ &quot;$expected&quot; = &quot;$calculated&quot; ]; then echo ok ; else echo failed ; fi
-ok
-</code></pre>
+<p>This is a development release leading towards the 1.16 series.</p>
+<h3 id="what%E2%80%99s-new-in-libwpe-1.15.2%3F" tabindex="-1">What’s new in libwpe 1.15.2?</h3>
+<ul>
+<li>Allow resetting the fullscreen client to a null pointer.</li>
+<li>Fix usage of the <code>_wpe_loader_interface</code> with the static loader.</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+libwpe-1.15.2.tar.xz (62.0 KiB)
+   md5sum: af8b981f8c620eca9a5672cab0cdd9d4
+   sha1sum: 4a1712dbf331ecc70e6e82ebce2e4602fcef35c1
+   sha256sum: 6d769f64cee0fb1b5069c3b250b0f91e5cd90564cd2efdf633442bab96e5dbe8
+</pre>
 
 
 
