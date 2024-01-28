@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /reference/
-Disallow: /releases/
-Sitemap: https://igalia.github.io/wpewebkit.org/csaavedra/get-wpe.md/sitemap.xml
