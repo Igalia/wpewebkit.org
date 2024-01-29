@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2024-01-29T06:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>A New WPE Backend Using EGLStream</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/blog/07-creating-wpe-backends.html"/>
+    <updated>2024-01-29T06:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/blog/07-creating-wpe-backends.html</id>
+    <content type="html">&lt;h2 id=&quot;what-is-a-wpe-backend%3F&quot; tabindex=&quot;-1&quot;&gt;What is a WPE Backend?&lt;/h2&gt;
+&lt;div class=&quot;sidebar&quot;&gt;
+&lt;p&gt;This article is a mashup of &lt;a href=&quot;https://blogs.igalia.com/llepage/the-process-of-creating-a-new-wpe-backend/&quot;&gt;The process of creating a new WPE
+backend&lt;/a&gt;
+and &lt;a href=&quot;https://blogs.igalia.com/llepage/use-eglstreams-in-a-wpe-webkit-backend/&quot;&gt;Use EGLStreams in a WPE WebKit
+backend&lt;/a&gt;,
+originally published at Loïc’s blog.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Depending on the target hardware WPE may need to use different techniques and
+technologies to ensure correct graphical rendering. To be independent of any
+user-interface toolkit and windowing system, WPE WebKit delegates the rendering
+to a third-party API defined in the
+&lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe&quot;&gt;libwpe&lt;/a&gt; library. A concrete
+implementation of this API is a “WPE backend”.&lt;/p&gt;
+&lt;p&gt;WPE WebKit is a multiprocess application, the end-user starts and controls the
+web widgets in the application process (which we often call “the &lt;abbr title=&quot;User Interface&quot;&gt;UI&lt;/abbr&gt; process” while the web engine itself uses
+different subprocesses: &lt;code&gt;WPENetworkProcess&lt;/code&gt; is in charge of managing network
+connections and &lt;code&gt;WPEWebProcess&lt;/code&gt; (or “web process”) in charge of the HTML and
+JavaScript parsing, execution and rendering. The WPE backend is at a crossroads
+between the UI process and one or more web process instances.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://wpewebkit.org/assets/svg/part1-basics.md-1.svg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://wpewebkit.org/assets/svg/part1-basics.md-1.svg&quot; alt=&quot;Diagram showing a box for the WPE backend in between the UI process and WPEWebProcess&quot; /&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+&lt;p&gt;The WPE backend is a shared library that is loaded at runtime by the web
+process and by the UI process. It is used to render the visual aspect of a web
+page and transfer the resulting video buffer from the web process to the
+application process.&lt;/p&gt;
+&lt;h2 id=&quot;backend-interfaces&quot; tabindex=&quot;-1&quot;&gt;Backend Interfaces&lt;/h2&gt;
+&lt;p&gt;The WPE backend shared library must export at least one symbol called
+&lt;code&gt;_wpe_loader_interface&lt;/code&gt; of type &lt;code&gt;struct wpe_loader_interface&lt;/code&gt; as defined &lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/loader.h#L57&quot;&gt;in
+the &lt;em&gt;libwpe&lt;/em&gt;
+API&lt;/a&gt;.
+Presently its only member is &lt;code&gt;load_object&lt;/code&gt;, a callback function that receives a
+string with an interface name and returns concrete implementations of the
+following interfaces:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/renderer-host.h#L48&quot;&gt;struct wpe_renderer_host_interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/renderer-backend-egl.h#L75&quot;&gt;struct wpe_renderer_backend_egl_interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/renderer-backend-egl.h#L93&quot;&gt;struct wpe_renderer_backend_egl_target_interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/renderer-backend-egl.h#L115&quot;&gt;struct wpe_renderer_backend_egl_offscreen_target_interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/view-backend.h#L63&quot;&gt;struct wpe_view_backend_interface&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The names passed to the &lt;code&gt;.load_object()&lt;/code&gt; function are the same as those of the
+interface types, prefixed with an underscore. For example, a
+&lt;code&gt;.load_object(&amp;quot;_wpe_renderer_host_interface&amp;quot;)&lt;/code&gt; call must return a pointer to a
+&lt;code&gt;struct wpe_renderer_host_interface&lt;/code&gt; object.&lt;/p&gt;
+&lt;details&gt;
+  &lt;summary&gt;Example C code for a &lt;code&gt;load_object&lt;/code&gt; callback.&lt;/summary&gt;
+&lt;!-- load_object example &lt;&lt;&lt;1 --&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;wpe_renderer_host_interface&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;/* ... */&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;wpe_renderer_backend_egl_interface&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;/* ... */&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;my_backend_load_object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;_wpe_renderer_host_interface&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;my_renderer_host&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;_wpe_renderer_backend_egl_interface&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;my_renderer_backend_egl&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token comment&quot;&gt;/* ... */&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;&lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;wpe_loader_interface&lt;/span&gt; _wpe_loader_interface &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;load_object &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; my_backend_load_object&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- 1&gt;&gt;&gt; --&gt;
+&lt;/details&gt;
+&lt;p&gt;Each of these interfaces follow the same base structure: the &lt;code&gt;struct&lt;/code&gt; members
+are callback functions, all interfaces have &lt;code&gt;create&lt;/code&gt; and &lt;code&gt;destroy&lt;/code&gt; members which
+act as instance constructor and destructor, plus any additional “methods”.
+The pointer returned by the &lt;code&gt;create&lt;/code&gt; callback will be passed as the &lt;code&gt;object&lt;/code&gt;
+“instance” of the other methods:&lt;/p&gt;
+&lt;pre class=&quot;language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;wpe_renderer_host_interface&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;create&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;  &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;destroy&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;object&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token comment&quot;&gt;/* ... */&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the &lt;strong&gt;UI process&lt;/strong&gt; side WPE WebKit will create:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One “renderer host” instance, using &lt;code&gt;wpe_renderer_host_interface.create()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Multiple “renderer host client” instances, using &lt;code&gt;wpe_renderer_host_interface.create_client()&lt;/code&gt;.
+These are mainly used for IPC communication, one instance gets created for
+each web process launched by WebKit.&lt;/li&gt;
+&lt;li&gt;Multiple “view backend” instances, using &lt;code&gt;wpe_view_backend_interface.create()&lt;/code&gt;.
+One instance is created for each rendering target in the web process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In each &lt;strong&gt;web process&lt;/strong&gt;—there can be more than one—WPE WebKit
+will create:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One “renderer backend EGL” instance, using &lt;code&gt;wpe_renderer_backend_egl_interface.create()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Multiple “renderer backend EGL target” instances, using
+&lt;code&gt;wpe_renderer_backend_egl_target_interface.create()&lt;/code&gt;. An instance is created
+for each new rendering target needed by the application.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;details&gt;
+  &lt;summary&gt;How about &lt;code&gt;wpe_renderer_backend_egl_offscreen_target_interface&lt;/code&gt;?&lt;/summary&gt;
+    &lt;div&gt;
+&lt;p&gt;The &lt;code&gt;rendererBackendEGLTarget&lt;/code&gt; instances may be created by the &lt;code&gt;wpe_renderer_backend_egl_target_interface&lt;/code&gt;, or
+the &lt;code&gt;wpe_renderer_backend_egl_offscreen_target_interface&lt;/code&gt; depending on the interfaces implemented in the backend.&lt;/p&gt;
+&lt;p&gt;Here we are only focusing on the &lt;code&gt;wpe_renderer_backend_egl_target_interface&lt;/code&gt; that is relying on a classical EGL
+display (defined in the &lt;code&gt;rendererBackendEGL&lt;/code&gt; instance). The &lt;code&gt;wpe_renderer_backend_egl_offscreen_target_interface&lt;/code&gt; may
+be used in very specific use-cases that are out of the scope of this post. You can check its usage in the WPE WebKit
+&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/f32cd0f7cb7961420ce08ae78b8f01f287bec199/Source/WebCore/platform/graphics/egl/GLContextLibWPE.cpp#L61&quot;&gt;source code&lt;/a&gt;
+for more information.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;These instances typically communicate with each others using Unix sockets for
+&lt;abbr title=&quot;Inter-Process Communication&quot;&gt;IPC&lt;/abbr&gt;. The IPC layer must be
+implemented in the WPE backend itself because the &lt;em&gt;libwpe&lt;/em&gt; interfaces only pass
+around the file descriptors to be used as communication endpoints.&lt;/p&gt;
+&lt;p&gt;From a topological point of view, all those instances are organized as follows:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://wpewebkit.org/assets/svg/part1-basics.md-2.svg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://wpewebkit.org/assets/svg/part1-basics.md-2.svg&quot; /&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+&lt;p&gt;From an usage point of view:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;rendererHost&lt;/code&gt; and &lt;code&gt;rendererHostClient&lt;/code&gt; instances are only used to manage
+IPC endpoints on the UI process side that are connected to each running
+web process. They are not used by the graphical rendering system.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;rendererBackendEGL&lt;/code&gt; instance (one per web process) is only used to
+connect to the native display for a specific platform. For example, on a
+desktop Linux, the platform may be X11 where the native display would be the
+result of calling &lt;code&gt;XOpenDisplay()&lt;/code&gt;; or the platform may be Wayland and in
+this case the native display would be the result of calling
+&lt;code&gt;wl_display_connect()&lt;/code&gt;; and so on.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;rendererBackendEGLTarget&lt;/code&gt; (on the web process side) and &lt;code&gt;viewBackend&lt;/code&gt;
+(on the UI process side) instances are the ones truly managing the web page
+graphical rendering.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;graphics-rendering&quot; tabindex=&quot;-1&quot;&gt;Graphics Rendering&lt;/h2&gt;
+&lt;p&gt;As seen above, the interfaces in charge of the rendering are
+&lt;code&gt;wpe_renderer_backend_egl_target_interface&lt;/code&gt; and &lt;code&gt;wpe_view_backend_interface&lt;/code&gt;.
+During their creation, WPE WebKit exchanges the file descriptors used to
+establish a direct IPC connection between a &lt;code&gt;rendererBackendEGL&lt;/code&gt; (in the
+web process), and a &lt;code&gt;viewBackend&lt;/code&gt; (in the UI process).&lt;/p&gt;
+&lt;p&gt;During the EGL initialization phase, when a new web process is launched, WebKit
+will use the native display and platform provided by the
+&lt;code&gt;wpe_renderer_backend_egl_interface.get_native_display()&lt;/code&gt; and &lt;code&gt;.get_platform()&lt;/code&gt;
+functions to create a suitable OpenGL ES context.&lt;/p&gt;
+&lt;p&gt;When WebKit’s
+&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/c22f641da18b8c4eee23b8021b37aeec69268675/Source/WebKit/Shared/CoordinatedGraphics/threadedcompositor/ThreadedCompositor.cpp#L220&quot;&gt;ThreadedCompositor&lt;/a&gt;
+is ready to render a new frame (in the web process), it calls the
+&lt;code&gt;wpe_renderer_backend_egl_target_interface.frame_will_render()&lt;/code&gt; function to let
+the WPE backend know that rendering is about to start. At this moment, the
+previously created OpenGL ES context is made current to be used as the target
+for GL drawing commands.&lt;/p&gt;
+&lt;p&gt;Once the threaded compositor has finished drawing, it will swap the front and
+back EGL buffers and call the
+&lt;code&gt;wpe_renderer_backend_egl_target_interface.frame_rendered()&lt;/code&gt; function to signal
+that the frame is ready. The compositor will then wait until the WPE backend
+calls &lt;code&gt;wpe_renderer_backend_egl_target_dispatch_frame_complete()&lt;/code&gt; to indicate
+that the compositor may produce a new frame.&lt;/p&gt;
+&lt;p&gt;What happens inside the &lt;code&gt;.frame_will_render()&lt;/code&gt; and &lt;code&gt;.frame_rendered()&lt;/code&gt;
+implementations is up to the WPE backend. As en example, it could
+set up a &lt;a href=&quot;https://www.khronos.org/opengl/wiki/Framebuffer_Object&quot;&gt;Frame Buffer Object&lt;/a&gt;
+to have the web content draw offscreen, in a texture that can be passed
+back to the UI process for further processing, or use extensions like
+&lt;a href=&quot;https://registry.khronos.org/EGL/extensions/KHR/EGL_KHR_stream.txt&quot;&gt;EGLStream&lt;/a&gt;,
+or &lt;a href=&quot;https://registry.khronos.org/EGL/extensions/MESA/EGL_MESA_image_dma_buf_export.txt&quot;&gt;DMA-BUF exports&lt;/a&gt;
+to transfer the frame to the UI process without copying the pixel data.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://wpewebkit.org/assets/svg/part1-basics.md-3.svg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://wpewebkit.org/assets/svg/part1-basics.md-3.svg&quot; /&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+&lt;p&gt;Typically the backend sends each new frame to the corresponding view backend in
+in its &lt;code&gt;.frame_rendered()&lt;/code&gt; function. The application can use the frame until it
+sends back an &lt;abbr&gt;IPC&lt;/abbr&gt; message to the renderer target (in the web
+process) to indicate that the frame is not in use anymore and may be be freed
+or recycled. Although it is not a requirement to do it at this exact point,
+usually when a renderer backend receives this message it calls the
+&lt;code&gt;wpe_renderer_backend_egl_target_dispatch_frame_complete()&lt;/code&gt; function to trigger
+the rendering of a new frame. As a side effect, this mechanism also allows
+controlling the pace at which new frames are produced.&lt;/p&gt;
+&lt;h2 id=&quot;using-eglstream&quot; tabindex=&quot;-1&quot;&gt;Using EGLStream&lt;/h2&gt;
+&lt;p&gt;EGLStream is an EGL extension that defines a mechanism to transfer hardware
+video buffers from one process to another efficiently, without getting them
+out of GPU memory. Although the extension is supported only in Nvidia
+hardware, it makes for a good example as it transparently handles some
+complexities involved, like buffers with multiple planes.&lt;/p&gt;
+&lt;p&gt;This backend uses the EGLStream extension to transfer graphics buffers from the
+web process, which acts as a producer, to the UI process acting as a consumer.
+The producer extension
+&lt;a href=&quot;https://registry.khronos.org/EGL/extensions/KHR/EGL_KHR_stream_producer_eglsurface.txt&quot;&gt;EGL_KHR_stream_producer_eglsurface&lt;/a&gt;
+allows creating a surface that may be used as target for rendering, then using
+&lt;a href=&quot;https://registry.khronos.org/EGL/sdk/docs/man/html/eglSwapBuffers.xhtml&quot;&gt;eglSwapBuffers()&lt;/a&gt;
+finishes drawing and sends the result to the consumer. Meanwhile, in the
+consumer side, the
+&lt;a href=&quot;https://registry.khronos.org/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage.txt&quot;&gt;EGL_NV_stream_consumer_eglimage&lt;/a&gt;
+extension is used to turn each buffer into an &lt;code&gt;EGLImage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The reference source code for this WPE backend is available in the
+&lt;a href=&quot;https://github.com/Igalia/WPEBackend-offscreen-nvidia&quot;&gt;WPEBackend-offscreen-nvidia&lt;/a&gt;
+repository, which has been tested with WPE WebKit 2.38.x or 2.40.x, and
+&lt;em&gt;libwpe&lt;/em&gt; version 1.14.x.&lt;/p&gt;
+&lt;details&gt;
+  &lt;summary&gt;Behold, the Future Belongs to DMA-BUF!&lt;/summary&gt;
+  &lt;div&gt;
+&lt;p&gt;With the growing adoption of
+&lt;a href=&quot;https://docs.kernel.org/driver-api/dma-buf.html&quot;&gt;DMA-BUF&lt;/a&gt; for sharing memory
+buffers on modern Linux platforms, the WPE WebKit architecture will be
+evolving and, in the future, the need for a WPE Backend should disappear in
+most cases.&lt;/p&gt;
+&lt;p&gt;Ongoing work on WPE WebKit removes the need to provide a WPE backend
+implementation for most hardware platforms, with a generic implementation
+using DMA-BUF provided as an integral, built-in feature of WebKit. It will
+still be possible to provide external implementations for platforms that
+might need to use custom buffer sharing mechanisms.&lt;/p&gt;
+&lt;p&gt;From the application developer point of view, in most cases writing
+programs that use the WPE WebKit API will be simpler, with the complexity
+of the communication among multiple processes handled by WebKit.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+&lt;h3 id=&quot;stream-setup&quot; tabindex=&quot;-1&quot;&gt;Stream Setup&lt;/h3&gt;
+&lt;p&gt;The steps needed to set up EGLStream endpoints need to be done in a particular
+order:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create the consumer.&lt;/li&gt;
+&lt;li&gt;Get the stream file descriptor for the consumer.&lt;/li&gt;
+&lt;li&gt;Send the stream file descriptor to the producer.&lt;/li&gt;
+&lt;li&gt;Create the producer.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;First&lt;/strong&gt;, the consumer needs to be created:&lt;/p&gt;
+&lt;pre class=&quot;language-cpp&quot;&gt;&lt;code class=&quot;language-cpp&quot;&gt;EGLStream &lt;span class=&quot;token function&quot;&gt;createConsumerStream&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;EGLDisplay eglDisplay&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; EGLint s_streamAttribs&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;        EGL_STREAM_FIFO_LENGTH_KHR&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;        EGL_CONSUMER_ACQUIRE_TIMEOUT_USEC_KHR&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;        EGL_NONE&lt;br /&gt;    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;eglCreateStreamKHR&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;eglDisplay&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; s_streamAttribs&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;EGL_STREAM_FIFO_LENGTH_KHR&lt;/code&gt; parameter defines the length of the EGLStream
+queue. If set to zero, the stream will work in “mailbox” mode and each time the
+producer has a new frame it will empty the stream content and replace the frame
+by the new one. If non-zero, the stream works work in “&lt;abbr title=&quot;First-In,
+First-Out&quot;&gt;FIFO&lt;/abbr&gt;” mode, which means that the stream queue can contain up
+to &lt;code&gt;EGL_STREAM_FIFO_LENGTH_KHR&lt;/code&gt; frames.&lt;/p&gt;
+&lt;p&gt;Here we configure a queue for one frame because in this case the specification
+of &lt;code&gt;EGL_KHR_stream_producer_eglsurface&lt;/code&gt; guarantees that calling
+&lt;code&gt;eglSwapBuffers()&lt;/code&gt; on the producer the call will block until the consumer
+retires the previous frame from queue. This is used as implicit synchronization
+between the UI process side and the web process side without needing to rely on
+custom IPC, which would add a small delay between frames.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;EGL_CONSUMER_ACQUIRE_TIMEOUT_USEC_KHR&lt;/code&gt; parameter defines the maximum
+timeout in microseconds to wait on the consumer side to acquire a frame when
+calling &lt;code&gt;eglStreamConsumerAcquireKHR()&lt;/code&gt;. It is only used with the
+&lt;code&gt;EGL_KHR_stream_consumer_gltexture&lt;/code&gt; extension because the
+&lt;code&gt;EGL_NV_stream_consumer_eglimage&lt;/code&gt; extension allows setting a timeout on each
+call to &lt;code&gt;eglQueryStreamConsumerEventNV()&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, to initialize the consumer using the &lt;code&gt;EGL_NV_stream_consumer_eglimage&lt;/code&gt;
+extension it is enough to call the &lt;code&gt;eglStreamImageConsumerConnectNV()&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Once the consumer has been initialized&lt;/strong&gt;, you need to send the EGLStream
+file descriptor to the producer process. The usual way of achieving this would
+be using IPC between the two processes, sending the file descriptor in a
+&lt;code&gt;SCM_RIGHTS&lt;/code&gt; message through an Unix socket—although with recent kernels
+using &lt;a href=&quot;https://lwn.net/Articles/808997/&quot;&gt;pidfd_getfd()&lt;/a&gt; may be an option if
+both processes are related.&lt;/p&gt;
+&lt;p&gt;When the file descriptor is &lt;strong&gt;finally&lt;/strong&gt; received, the producer endpoint can be
+created using the &lt;code&gt;EGL_KHR_stream_producer_eglsurface&lt;/code&gt; extension:&lt;/p&gt;
+&lt;pre class=&quot;language-cpp&quot;&gt;&lt;code class=&quot;language-cpp&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; EGLint surfaceAttribs&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    EGL_WIDTH&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; width&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;    EGL_HEIGHT&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; height&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;    EGL_NONE&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;EGLStream eglStream &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;eglCreateStreamFromFileDescriptorKHR&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;eglDisplay&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; consumerFD&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;EGLSurface eglSurface &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;eglCreateStreamProducerSurfaceKHR&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;eglDisplay&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; config&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eglStream&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; surfaceAttribs&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As with &lt;abbr title=&quot;Pixel Buffer&quot;&gt;pbuffer&lt;/abbr&gt; surfaces, the dimensions
+need to be specified as surface attributes. When picking a frame buffer
+configuration with &lt;code&gt;eglChooseConfig()&lt;/code&gt; the &lt;code&gt;EGL_SURFACE_TYPE&lt;/code&gt; attribute must
+be set to &lt;code&gt;EGL_STREAM_BIT_KHR&lt;/code&gt;. From this point onwards, rendering proceeds as
+usual: the EGL surface and context are made active, and once the painting is
+done a call to &lt;code&gt;eglSwapBuffers()&lt;/code&gt; will “present” the frame, which in this case
+means sending the buffer with the pixel data down the EGLStream to the
+consumer.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://wpewebkit.org/assets/svg/part2-eglstream.md-1.svg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://wpewebkit.org/assets/svg/part2-eglstream.md-1.svg&quot; /&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+&lt;h3 id=&quot;consuming-frames&quot; tabindex=&quot;-1&quot;&gt;Consuming Frames&lt;/h3&gt;
+&lt;p&gt;While on the producer side rendering treats the EGLStream surface like any
+other, on the consumer some more work is needed to manager the lifetime of
+the data received: frames have to be manually acquired and released once
+they are not needed anymore.&lt;/p&gt;
+&lt;p&gt;The producer calls &lt;code&gt;eglQueryStreamConsumerEventNV()&lt;/code&gt; repeatedly to retire the
+next event from the stream:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;EGL_STREAM_IMAGE_ADD_NV&lt;/code&gt; indicates that there is a buffer in the stream
+that has not yet been bound to an &lt;code&gt;EGLImage&lt;/code&gt;, and the application needs to
+create a new one to which the actual data will be bound later.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EGL_STREAM_IMAGE_AVAILABLE_NV&lt;/code&gt; indicates that a new frame is available
+and that it can be bound to the previously created &lt;code&gt;EGLImage&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EGL_STREAM_IMAGE_REMOVE_NV&lt;/code&gt; indicates that a buffer has been retired from
+the stream, and that its associated &lt;code&gt;EGLImage&lt;/code&gt; may be released once the
+application has finished using it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This translates roughly to the following code:&lt;/p&gt;
+&lt;pre class=&quot;language-cpp&quot;&gt;&lt;code class=&quot;language-cpp&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;constexpr&lt;/span&gt; EGLTime MAX_TIMEOUT_USEC &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;EGLImage eglImage &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; EGL_NO_IMAGE&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;&lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    EGLenum event &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;    EGLAttrib data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token comment&quot;&gt;// WARNING: The specification states that the timeout is in nanoseconds&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token comment&quot;&gt;// (see: https://registry.khronos.org/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage.txt)&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token comment&quot;&gt;// but in reality it is in microseconds, at least with the version 535.113.01 of the NVidia drivers.&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;eglQueryStreamConsumerEventNV&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;display&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eglStream&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; MAX_TIMEOUT_USEC&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;event&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;        &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token keyword&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;event&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;      &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; EGL_STREAM_IMAGE_ADD_NV&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Bind an incoming buffer to an EGLImage.&lt;/span&gt;&lt;br /&gt;          &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;eglImage&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;eglDestroyImage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;display&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eglImage&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;          eglImage &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;eglCreateImage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;display&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; EGL_NO_CONTEXT&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; EGL_STREAM_CONSUMER_IMAGE_NV&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;                                    &lt;span class=&quot;token generic-function&quot;&gt;&lt;span class=&quot;token function&quot;&gt;static_cast&lt;/span&gt;&lt;span class=&quot;token generic class-name&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;EGLClientBuffer&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;eglStream&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;nullptr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;          &lt;span class=&quot;token keyword&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Handle the next event.&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;      &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; EGL_STREAM_IMAGE_REMOVE_NV&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Buffer removed, EGLImage may be disposed.&lt;/span&gt;&lt;br /&gt;          &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;              EGLImage image &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token generic-function&quot;&gt;&lt;span class=&quot;token function&quot;&gt;reinterpret_cast&lt;/span&gt;&lt;span class=&quot;token generic class-name&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;EGLImage&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;              &lt;span class=&quot;token function&quot;&gt;eglDestroyImage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;display&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; image&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;              &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;image &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; eglImage&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;                  eglImage &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; EGL_NO_IMAGE&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;          &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br /&gt;          &lt;span class=&quot;token keyword&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Handle the next event.&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;      &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; EGL_STREAM_IMAGE_AVAILABLE_NV&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// New frame available.&lt;/span&gt;&lt;br /&gt;          &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;eglStreamAcquireImageNV&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;display&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eglStream&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;eglImage&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; EGL_NO_SYNC&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;br /&gt;              &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;      &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;br /&gt;          &lt;span class=&quot;token keyword&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Handle the next event.&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token comment&quot;&gt;/*** Use the EGLImage here ***/&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;    &lt;span class=&quot;token function&quot;&gt;eglStreamReleaseImageNV&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;display&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eglStream&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eglImage&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; EGL_NO_SYNC&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The application is free to use each &lt;code&gt;EGLImage&lt;/code&gt; as it sees fit. An obvious
+example would be to use it as the contents for a texture, which then gets
+painted in the “content” area of a web browser; or as the contents of the
+screen for an in-game computer that the player can interact with, enabling
+display of real, live web content as part of the gaming experience—now
+&lt;em&gt;that&lt;/em&gt; would be a deeply embedded browser!&lt;/p&gt;
+&lt;h3 id=&quot;one-last-thing&quot; tabindex=&quot;-1&quot;&gt;One Last Thing&lt;/h3&gt;
+&lt;p&gt;There is a small showstopper to have EGLStream support working:
+&lt;a href=&quot;https://github.com/WebKit/WebKit/blob/cb07c70c253a35b0e09e46e6100e1cdcebab26e2/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp#L135&quot;&gt;currently&lt;/a&gt;
+when WPE WebKit uses surfaceless EGL contexts it sets the surface type to
+&lt;code&gt;EGL_WINDOW_BIT&lt;/code&gt; attribute, while &lt;code&gt;EGL_STREAM_BIT_KHR&lt;/code&gt; would be needed
+instead. &lt;a href=&quot;https://github.com/Igalia/WPEBackend-offscreen-nvidia/blob/main/wpewebkit-patches/005-fix-surfaceless-egl-context-creation.patch&quot;&gt;A small
+patch&lt;/a&gt;
+is enough to apply this tweak:&lt;/p&gt;
+&lt;pre class=&quot;language-diff&quot;&gt;&lt;code class=&quot;language-diff&quot;&gt;diff --git a/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp b/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp&lt;br /&gt;index d5efa070..5f200edc 100644&lt;br /&gt;&lt;span class=&quot;token coord&quot;&gt;--- a/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token coord&quot;&gt;+++ b/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp&lt;/span&gt;&lt;br /&gt;@@ -122,9 +122,11 @@ bool GLContextEGL::getEGLConfig(EGLDisplay display, EGLConfig* config, EGLSurfac&lt;br /&gt;&lt;span class=&quot;token unchanged&quot;&gt;&lt;span class=&quot;token prefix unchanged&quot;&gt; &lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;        attributeList[13] = EGL_PIXMAP_BIT;&lt;br /&gt;&lt;/span&gt;&lt;span class=&quot;token prefix unchanged&quot;&gt; &lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;        break;&lt;br /&gt;&lt;/span&gt;&lt;span class=&quot;token prefix unchanged&quot;&gt; &lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;    case GLContextEGL::WindowSurface:&lt;br /&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token deleted-sign deleted&quot;&gt;&lt;span class=&quot;token prefix deleted&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;    case GLContextEGL::Surfaceless:&lt;br /&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token unchanged&quot;&gt;&lt;span class=&quot;token prefix unchanged&quot;&gt; &lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;        attributeList[13] = EGL_WINDOW_BIT;&lt;br /&gt;&lt;/span&gt;&lt;span class=&quot;token prefix unchanged&quot;&gt; &lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;        break;&lt;br /&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token inserted-sign inserted&quot;&gt;&lt;span class=&quot;token prefix inserted&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;    case GLContextEGL::Surfaceless:&lt;br /&gt;&lt;/span&gt;&lt;span class=&quot;token prefix inserted&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;        attributeList[13] = EGL_STREAM_BIT_KHR;&lt;br /&gt;&lt;/span&gt;&lt;span class=&quot;token prefix inserted&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;        break;&lt;br /&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token unchanged&quot;&gt;&lt;span class=&quot;token prefix unchanged&quot;&gt; &lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;    }&lt;br /&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token unchanged&quot;&gt;&lt;span class=&quot;token prefix unchanged&quot;&gt; &lt;/span&gt;&lt;span class=&quot;token line&quot;&gt;    EGLint count;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- vim:set foldmethod=marker foldmarker=&lt;&lt;&lt;,&gt;&gt;&gt;: --&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.15.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/libwpe-1.15.2.html"/>
+    <updated>2024-01-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/libwpe-1.15.2.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 1.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.15.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.15.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Allow resetting the fullscreen client to a null pointer.&lt;/li&gt;
+&lt;li&gt;Fix usage of the &lt;code&gt;_wpe_loader_interface&lt;/code&gt; with the static loader.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.15.2.tar.xz (62.0 KiB)
+   md5sum: af8b981f8c620eca9a5672cab0cdd9d4
+   sha1sum: 4a1712dbf331ecc70e6e82ebce2e4602fcef35c1
+   sha256sum: 6d769f64cee0fb1b5069c3b250b0f91e5cd90564cd2efdf633442bab96e5dbe8
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.14.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/libwpe-1.14.2.html"/>
+    <updated>2024-01-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/libwpe-1.14.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.14.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.14.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Allow resetting the fullscreen client to a null pointer.&lt;/li&gt;
+&lt;li&gt;Fix usage of the &lt;code&gt;_wpe_loader_interface&lt;/code&gt; with the static loader.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.14.2.tar.xz (61.6 KiB)
+   md5sum: 61840e24ba0a0f5828194dff28db92ee
+   sha1sum: 70a2b894af2b50d7082260158a89524974a480f3
+   sha256sum: 8ae38022c50cb340c96fdbee1217f1e46ab57fbc1c8ba98142565abbedbe22ef
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.42.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.42.4.html"/>
+    <updated>2023-12-14T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.42.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix incorrect random images incorrectly displayed as backgrounds
+of &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; elements.&lt;/li&gt;
+&lt;li&gt;Fix videos displayed aliased after being resized e.g. on YouTube.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.4.tar.xz (30.9 MiB)
+   md5sum: 154dd24d1811bd51d2dd6bb22120d283
+   sha1sum: 34da38e9554586154c83fdbb5c20e353b6d97277
+   sha256sum: 8836040a3687581970b47a232b713e7023c080d5613427f52db619c29fb253a4
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.18.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/cog-0.18.2.html"/>
+    <updated>2023-12-13T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/cog-0.18.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.18 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;drm: Fix crash on iMX.6 (and possibly others) by improving how the CRTC
+and encoder combination is chosen.&lt;/li&gt;
+&lt;li&gt;wl: Add support for Weston protocols version 13.&lt;/li&gt;
+&lt;li&gt;launcher: Handle &lt;code&gt;GApplication&lt;/code&gt; activation to avoid a warning.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.18.2.tar.xz (123.1 KiB)
+   md5sum: 7fbfc2e19304132be0d73f5e5512151c
+   sha1sum: 045294f7fa878db86e4b8a617ee4ac056a71cb75
+   sha256sum: 3c4237cff6323b8c3eaf52c6f3f6415b898a22c0127c6c396c1eaa6eef46c279
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.42.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.42.3.html"/>
+    <updated>2023-12-04T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.42.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix flickering in videos when using VA-API with DMA-BUF for rendering.&lt;/li&gt;
+&lt;li&gt;Fix color picker being triggered in the inspector when typing &lt;code&gt;tan&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix wrong choice of font fallback in some cases when using &lt;code&gt;sans&lt;/code&gt; as
+the font family.&lt;/li&gt;
+&lt;li&gt;Fix build failure with &lt;code&gt;libxml2&lt;/code&gt; version 2.12.0 due to an API change.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.3.tar.xz (30.9 MiB)
+   md5sum: 44b7b60d439d917d8e9b97639e7d7509
+   sha1sum: 0523887944137206faca1080ab3f9e8b4cad6413
+   sha256sum: 499969acf25a56b4abd3f3e68324069f579ccb34e441259a5e04031b1f564daa
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.19.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/cog-0.19.1.html"/>
+    <updated>2023-11-30T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/cog-0.19.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 0.20 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.19.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.19.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support multiple web views, using the new
+&lt;a href=&quot;https://igalia.github.io/cog/class.View.html&quot;&gt;CogView&lt;/a&gt; and
+&lt;a href=&quot;https://igalia.github.io/cog/class.Viewport.html&quot;&gt;CogViewport&lt;/a&gt; APIs.
+Each viewport may display one from a set of web views, and using many
+viewports is supported as well. Typically platform plug-ins map a
+viewport to some kind of “window” that can be displayed on screen.
+Most of the changes in this release are related to this new feature.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;launcher&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Add command line flag to disable the built-in key bindings.&lt;/li&gt;
+&lt;li&gt;Add command line flag to control media auto-play behaviour.&lt;/li&gt;
+&lt;li&gt;Handle &lt;code&gt;GApplication&lt;/code&gt; activation to avoid a warning.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;core&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Moved most of the key binding handling from the Wayland platform
+into &lt;code&gt;CogView&lt;/code&gt;, making it common code for all platforms.&lt;/li&gt;
+&lt;li&gt;Moved platform plug-in selection logic into the library, along
+with an always-built “fallback” implementation, which simplifies API
+usage.&lt;/li&gt;
+&lt;li&gt;Avoid leaking web views due to &lt;code&gt;CogShell&lt;/code&gt; holding one reference
+too much on them.&lt;/li&gt;
+&lt;li&gt;The library now takes advantage of symbol visibility, and only
+the public symbols marked with the &lt;code&gt;COG_API&lt;/code&gt; macro will be available for
+linking from the shared library.&lt;/li&gt;
+&lt;li&gt;Avoid loading the same platform plug-in more than once.&lt;/li&gt;
+&lt;li&gt;Automatically scan the default module path without needing
+programs to call
+&lt;a href=&quot;https://igalia.github.io/cog/func.modules_add_directory.html&quot;&gt;cog_modules_add_directory()&lt;/a&gt;
+by themselves.&lt;/li&gt;
+&lt;li&gt;Remove the &lt;code&gt;cog_platform_configure()&lt;/code&gt; function, in favor of
+a new &lt;a href=&quot;https://igalia.github.io/cog/func.init.html&quot;&gt;cog_init()&lt;/a&gt; function
+which is optional to call, and reorganized setup code to make API
+usage simpler.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;meson&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Fix configuration error when only the Wayland platform plug-in
+is selected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;drm&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Fix touch region dimensions when the output is rotated by 90
+or 270 degrees.&lt;/li&gt;
+&lt;li&gt;Fix crash on iMX.6 (and possibly others) by improving how the
+CRTC and encoder combination is chosen.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;x11&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Add support for using the &lt;code&gt;xcb-keysyms&lt;/code&gt; library for handling key
+input events when the XKB extension is unavailable, either because
+its usage was disabled at build time, or the extension is missing at
+runtime.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;wl&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Add support for Weston protocols version 13.&lt;/li&gt;
+&lt;li&gt;Fix blurry rendering in some compositors.&lt;/li&gt;
+&lt;li&gt;Add a check for &lt;code&gt;memfd_create()&lt;/code&gt; to avoid the need to have write
+permission in &lt;code&gt;XDG_RUNTIME_DIR&lt;/code&gt;, which is the case in some systems.&lt;/li&gt;
+&lt;li&gt;Set the opaque region also for non-fullscreen surfaces, resulting
+in a small performance improvement in some cases.&lt;/li&gt;
+&lt;li&gt;Add support for multiple seats.&lt;/li&gt;
+&lt;li&gt;Remove limit of 16 maximum outputs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;gtk4&lt;/em&gt;, &lt;em&gt;x11&lt;/em&gt;, &lt;em&gt;wl&lt;/em&gt;:
+&lt;ul&gt;
+&lt;li&gt;Add support for file choosers using the XDG Desktop
+Portal through &lt;code&gt;libportal&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Add support for changing mouse cursors when hovering
+links (hand) and text (I-beam).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.19.1.tar.xz (140.6 KiB)
+   md5sum: ec4566bd63ad570a9c7654ed79e46c3f
+   sha1sum: a226fedec99d2c92c2d8b6247ec57f4587c8041d
+   sha256sum: 633760ba69e36e4fbc24757c927f46fa1fdb3c526d0a6ac6ab35a21d35ad57b3
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.43.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.43.1.html"/>
+    <updated>2023-11-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.43.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.44 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.43.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.43.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve V-Blank synchronization when rendering.&lt;/li&gt;
+&lt;li&gt;Improve DMA-BUF buffers handling for video frames.&lt;/li&gt;
+&lt;li&gt;Use the buffer format preferred by the driver in DMA-BUF renderer.&lt;/li&gt;
+&lt;li&gt;Do not block the compositing thread waiting for rendering threads.&lt;/li&gt;
+&lt;li&gt;Improve performance when scaling images in a canvas.&lt;/li&gt;
+&lt;li&gt;Allow disabling WebGL support using the API.&lt;/li&gt;
+&lt;li&gt;Enable usage of &lt;code&gt;libbacktrace&lt;/code&gt; by default.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.43.1.tar.xz (31.0 MiB)
+   md5sum: 9bdfd5e91254b348119dd41e256e3900
+   sha1sum: 776183823cb090b1c0c9646407fa22ed751370cb
+   sha256sum: 1713ede3016d5b027cc28779399873f2d9e8bd976291895d8085ba668e3a22f1
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.42.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.42.2.html"/>
+    <updated>2023-11-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/wpewebkit-2.42.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Bump Safari version in &lt;code&gt;User-Agent&lt;/code&gt; header.&lt;/li&gt;
+&lt;li&gt;Fix CSP regression that broke Unity WebGL applications.&lt;/li&gt;
+&lt;li&gt;Fix the build with GBM disabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.2.tar.xz (30.9 MiB)
+   md5sum: 4cc2472bce41a376cc3b82b1d76834fa
+   sha1sum: 2de79928a1742076226470b821239db88aaaa9a1
+   sha256sum: df99bbc7007df60d77821e4c169312464f145c8aa6e34398a43da36a857285e8
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.18.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/cog-0.18.1.html"/>
+    <updated>2023-11-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/bkardell-patch-3/release/cog-0.18.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 0.18 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;core: Avoid leaking web views due to &lt;code&gt;CogShell&lt;/code&gt; holding one reference
+too much on them.&lt;/li&gt;
+&lt;li&gt;drm: Fix touch region dimensions when the output is rotated by 90 or
+270 degrees.&lt;/li&gt;
+&lt;li&gt;meson: Fix configuration error when only the Wayland platform plug-in
+is selected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.18.1.tar.xz (122.7 KiB)
+   md5sum: 204ae9353ed828e4ac39b1dd4c5c35dd
+   sha1sum: f0f0ebcd279170f427be0ad57fd356faff1a2732
+   sha256sum: 72e3a84052b459e2d53d0e8b947f20e27bf5d8049766c4c1594eb9c6b6cf7ab3
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
