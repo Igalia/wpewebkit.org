@@ -18,6 +18,7 @@ pagination:
 redirects:
   - {"from": "/about/get-started.html", "to": "/about/get-wpe.html"}
   - {"from": "/about/explore-wpe.html", "to": "/about/get-wpe.html"}
+  - {"from": "/blog/2023-success-digital-signage.html.html", "to": "/blog/2023-use-case-digital-signage.html"}
   - {"from": "/code/", "to": "/about/get-wpe.html"}
 
 # The "permalink" attribute determines where the output page will be located.

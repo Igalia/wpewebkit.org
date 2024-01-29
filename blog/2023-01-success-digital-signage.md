@@ -1,8 +1,8 @@
 ---
-title: "Success Story: WPE in digital signage"
+title: "Use Case: WPE in digital signage"
 date: 2023-01-06
-tags: [success]
-permalink: /blog/2023-success-digital-signage.html
+tags: [usecase]
+permalink: /blog/2023-use-case-digital-signage.html
 preview: Digital signage web rendering players have many advantages and are a trend nowadays.
 thumbnail: /assets/img/logo-digital-signage.png
 ---
