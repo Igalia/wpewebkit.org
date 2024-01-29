@@ -32,7 +32,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
-          keep_files: false
+          keep_files: true
       - name: Add deploy link
         uses: actions/github-script@v6
         with:
