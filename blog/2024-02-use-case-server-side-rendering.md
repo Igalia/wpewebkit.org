@@ -9,7 +9,6 @@ thumbnail: /assets/img/logo-server-side-rendering.png
 
 <div class="success-top">
 <img alt="WPE and server-side headless rendering" align="center" src="/assets/img/logo-server-side-rendering.png" srcset="/assets/img/logo-server-side-rendering@2x.png 2x">
-<img alt="WPE" align="center" src="/assets/img/logo-blue.svg">
 </div>
 
 In many distributed applications, it can be useful to run a light web browser on the server side to render some HTML content or process images, video and/or audio using javascript.
