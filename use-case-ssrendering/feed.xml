@@ -4,8 +4,29 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2024-01-29T06:00:00Z</updated>
+  <updated>2024-02-01T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>Use Case: Server-side headless rendering</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/use-case-ssrendering/blog/2024-use-case-server-side-rendering.html"/>
+    <updated>2024-02-01T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/use-case-ssrendering/blog/2024-use-case-server-side-rendering.html</id>
+    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
+&lt;img alt=&quot;WPE and server-side headless rendering&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-server-side-rendering.png&quot; srcset=&quot;https://wpewebkit.org/assets/img/logo-server-side-rendering@2x.png 2x&quot; /&gt;
+&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-blue.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;In many distributed applications, it can be useful to run a light web browser on the server side to render some HTML content or process images, video and/or audio using javascript.&lt;/p&gt;
+&lt;p&gt;Some concrete use-cases can be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Video post-production using HTML overlays.&lt;/li&gt;
+&lt;li&gt;Easy 3D rendering with WebGL that can be broadcasted as a video stream.&lt;/li&gt;
+&lt;li&gt;Reusing the same javascript code between a frontend web application and the backend processing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;WPE WebKit is the perfect solution for all those use cases as it offers a lightweight solution which can run on low-end hardware or even within a container. It provides a lot of flexibility at the moment of choosing the backend infrastructure as WPE WebKit can, for instance, run from within a container with a very minimal Linux configuration (no need for any windowing system) and with full hardware acceleration and zero-copy of the video buffers between the GPU and the CPU.&lt;/p&gt;
+&lt;p&gt;Additionally, the fact that WPE WebKit is optimized for lower-powered devices, makes it also the perfect option for server-side rendering when scaling commercial deployments while keeping cost under control, which is yet another important factor to take into account when considering cloud rendering.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>A New WPE Backend Using EGLStream</title>
@@ -553,31 +574,6 @@ wpewebkit-2.42.2.tar.xz (30.9 MiB)
    md5sum: 4cc2472bce41a376cc3b82b1d76834fa
    sha1sum: 2de79928a1742076226470b821239db88aaaa9a1
    sha256sum: df99bbc7007df60d77821e4c169312464f145c8aa6e34398a43da36a857285e8
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.18.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/use-case-ssrendering/release/cog-0.18.1.html"/>
-    <updated>2023-11-15T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/use-case-ssrendering/release/cog-0.18.1.html</id>
-    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 0.18 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;core: Avoid leaking web views due to &lt;code&gt;CogShell&lt;/code&gt; holding one reference
-too much on them.&lt;/li&gt;
-&lt;li&gt;drm: Fix touch region dimensions when the output is rotated by 90 or
-270 degrees.&lt;/li&gt;
-&lt;li&gt;meson: Fix configuration error when only the Wayland platform plug-in
-is selected.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.18.1.tar.xz (122.7 KiB)
-   md5sum: 204ae9353ed828e4ac39b1dd4c5c35dd
-   sha1sum: f0f0ebcd279170f427be0ad57fd356faff1a2732
-   sha256sum: 72e3a84052b459e2d53d0e8b947f20e27bf5d8049766c4c1594eb9c6b6cf7ab3
 &lt;/pre&gt;
 </content>
   </entry>
