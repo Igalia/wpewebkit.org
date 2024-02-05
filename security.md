@@ -6,6 +6,7 @@ pagination:
   data: collections.WSA
   size: 50
   alias: posts
+  reverse: true
 ---
 <style>
 main section ol {
@@ -88,7 +89,7 @@ main section ol > li:first-child a[href]:is(:hover, :focus) {
 
 <section>
 <ol reversed>
-{%- for post in posts reversed -%}
+{%- for post in posts -%}
 <li {% if forloop.first %}class="first"{% endif %}>
 <a href="{{ post.url }}">
 <time>{{ post.date | date: "%Y-%m-%d" }}</time>
@@ -103,3 +104,13 @@ main section ol > li:first-child a[href]:is(:hover, :focus) {
 {%- endfor -%}
 </ol>
 </section>
+
+<nav class="pagination">
+  <ol>
+    <li>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" title="Previous">«</a>{% else %}<span>«</span>{% endif %}</li>
+    {%- for pageEntry in pagination.pages %}
+    <li><a href="{{ pagination.hrefs[ forloop.index0 ] }}"{% if page.url == pagination.hrefs[ forloop.index0 ] %} aria-current="page"{% endif %}>{{ forloop.index }}</a></li>
+    {%- endfor %}
+    <li>{% if pagination.href.next %}<a href="{{ pagination.href.next }}" title="Next">»</a>{% else %}<span>»</span>{% endif %}</li>
+  </ol>
+</nav>
