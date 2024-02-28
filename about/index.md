@@ -9,7 +9,7 @@ sitemapPriority: 0.9
 --- 
 <style>
 @media (min-width: 30rem) {
-	#wpe-in-action {
+	#wpe-in-action-table {
 		display:grid;
 		grid-template-columns: 1fr 1fr;
 		justify-items:center;
@@ -18,7 +18,7 @@ sitemapPriority: 0.9
 	}
 }
 @media (min-width: 60rem) {
-	#wpe-in-action {
+	#wpe-in-action-table {
 		grid-template-columns: 1fr 1fr 1fr;
 	}
 }
@@ -167,41 +167,45 @@ lazy-youtube a > span {
 
 <header class="page">
 
-# Explore Embedded Browsers
+# Learn & Discover
 
-We understand that WPE is interesting from many perspectives, and to people of potentially vastly different backgrounds. Let's help you find what you're looking for.
-
-## Maybe you're…
+You might be wondering how a web browser may be used in an embedded device, or
+why WPE could be a good choice for your product. If you are an engineer, you
+might want to know if your target architecture is supported. Read below to
+answer these and more questions.
 
 </header>
 <section class="full-bleed c2">
 
-<div>
+<div class="arrow-lists">
 
-### New to WPE
+### WPE as a Solution
 
-<ul class="arrows">
-<li>Interested in seeing <a href="#wpe-in-action">WPE in action</a></li>
-<li>A web developer who is looking to understand <a href="what-is-embedded.html">the basics about what an embedded browser is?</a></li>
-</ul>
+* [What is an embedded browser?](/about/what-is-embedded.html)
+* [Why choose WPE?](#why-choose-wpe%3F)
+* [Success stories](/#success-stories)
+* [See WPE in action](#wpe-in-action)
+
 </div>
-<div>
 
-### An embedded developer
+<div class="arrow-lists">
 
-<ul class="arrows">
-<li>Wondering if WPE is <a href="/about/supported-hardware.html">currently available for your device?</a></li>
-<li>Wondering <a href="/about/a-good-choice.html">what makes WPE a good choice</a></li>
-<li>Interested in learning more about <a href="/about/architecture.html">the architecture of WPE</a></li>
-<li>Ready to explore the different ways to <a href="get-wpe.html">get WPE</a></li>
-</ul>
+### WPE For Developers
+
+* [Supported Hardware](/about/supported-hardware.html)
+* [Architecture](/about/architecture.html)
+* [Release Schedule](/release/schedule)
+* [Frequently Asked Questions](/about/faq.html)
 
 </div>
 </section>
 
-<div>
-<h3><a href="/about/supported-hardware.html">Supported Hardware</a></h3>
-<p>WPE is currently running on a wide range of hardware, including devices made by:</p>
+<div class="dotsep">
+
+### Supported Hardware
+
+WPE runs on [a wide range of hardware](/about/supported-hardware.html), including devices made by Broadcom, Nvidia, NXP, Qualcomm, or Rockchip.
+
 <ul class="gallery c4">
 <li><img src="/assets/img/logo-rockchip@2x.png" alt=""></li>
 <li><img src="/assets/img/logo-nvidia@2x.png" alt=""></li>
@@ -211,15 +215,23 @@ We understand that WPE is interesting from many perspectives, and to people of p
 </div>
 
 <div class="dotsep">
-<h3><a href="/about/a-good-choice.html">Why Choose WPE?</a></h3>
-<p>WPE WebKit is widely adopted by many industries, including digital signage, professional audio, home appliances, set-top-boxes, automotive, and inflight infotainment. Countless devices deployed around the globe are already using WPE WebKit as their web runtime platform, and use is growing rapidly.</p>
+
+### Why Choose WPE?
+
+WPE WebKit is widely adopted by many industries, including digital signage,
+professional audio, home appliances, set-top-boxes, automotive, and inflight
+infotainment. Countless devices deployed around the globe are already using
+WPE WebKit as their web runtime platform, and use is growing rapidly. [Read
+more about why you should choose WPE](/about/a-good-choice.html).
+
 <img src="/assets/img/WhyChooseWPE-ExploreLand.png" alt="">
 </div>
 
 <div class="dotsep">
 
-## See WPE In Action…
-<div class="container text-center my-auto" id="wpe-in-action">
+### WPE In Action
+
+<div class="container text-center my-auto" id="wpe-in-action-table">
 	<div class="item">
   		<lazy-youtube hash="bg6yCx7VdPY" title="WPE WebGL performance demos">
 			<div>
