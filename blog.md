@@ -3,6 +3,7 @@ layout: page
 title: "Blog"
 tags: [blog]
 data: { dateless: "true" }
+htmlSitemapOrder: -1
 sitemapChangeFrequency: weekly
 sitemapPriority: 0.9
 pagination:

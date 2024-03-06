@@ -4,6 +4,7 @@ title: "Supported Hardware"
 tags: [about] 
 data: { dateless: "true" }
 permalink: /about/supported-hardware.html 
+htmlSitemapOrder: -1
 sitemapChangeFrequency: monthly
 sitemapPriority: 0.7
 resources: [
