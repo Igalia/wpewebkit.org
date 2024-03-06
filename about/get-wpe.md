@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Get WPE WebKit"
+title: "Get WPE"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/get-wpe.html

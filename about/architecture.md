@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "The Architecture of WPE"
+title: WPE Architecture
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/architecture.html
@@ -23,7 +23,7 @@ main > *, .dotsep {
 
 <header class="page">
 
-# WPE Design
+# {{ title }}
 
 WPE is the official [WebKit](https://webkit.org) port for embedded platforms. WPE is uniquely designed
 for embedded systems in that it doesn't depend on any user-interface toolkit
