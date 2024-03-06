@@ -128,6 +128,8 @@ h3 {font-size: 1.6em; line-height: 1.2;}
 p > big, p.leadin {
 	font-size: 1.67em;
 }
+
+nav.sitemap ul,
 div.arrow-lists > ul {
 	font-size: 130%;
 	margin: 0;
@@ -135,9 +137,11 @@ div.arrow-lists > ul {
 	list-style: none;
 	padding-inline-start: 3em;
 }
+nav.sitemap ul li,
 div.arrow-lists > ul > li {
 	text-indent: -2em;
 }
+nav.sitemap > ul li:before,
 div.arrow-lists > ul > li::before {
 	display: inline-block;
 	content: url(../assets/img/list-arrow.svg);
@@ -145,6 +149,16 @@ div.arrow-lists > ul > li::before {
 	text-indent: 0;
 	margin-inline-end: 1em;
 }
+
+/* Sitemap specific styles */
+nav.sitemap ul li {
+	font-size: 1.15rem;
+	line-height: 2rem;
+}
+nav.sitemap > ul {
+	margin: 0.5em 1.5em;
+}
+
 
 .cta.btn {
 	display: inline-block;

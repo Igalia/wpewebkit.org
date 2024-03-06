@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Release Schedule
+skipHtmlSitemap: false
 sitemapChangeFrequency: yearly
 sitemapPriority: 0.4
 ---
