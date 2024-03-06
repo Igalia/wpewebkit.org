@@ -31,7 +31,7 @@ function findSitemapEntries(collection, curPath = "/") {
         pages.push({
           key: itemPath,
           url: item.url,
-          title: item.data.title,
+          title: item.data.htmlSitemapTitle || item.data.title,
           order: item.data.htmlSitemapOrder || 0,
           children: (curPath === itemPath) ? [] : findSitemapEntries(collection, itemPath),
           pluginType: "eleventy-navigation",
