@@ -26,13 +26,14 @@ function findSitemapEntries(collection, curPath = "/") {
   for (let item of collection) {
     if (item.data && !item.data.skipHtmlSitemap && item.data.title) {
       const itemPath = (new URL(item.url, "http://example.com")).pathname;
-      const itemParent = PosixPath.dirname(itemPath);
+      const itemParent = item.data.htmlSitemapParent || PosixPath.dirname(itemPath);
       if (curPath == itemParent) {
         pages.push({
           key: itemPath,
           url: item.url,
           title: item.data.htmlSitemapTitle || item.data.title,
           order: item.data.htmlSitemapOrder || 0,
+          parent: itemParent,
           children: (curPath === itemPath) ? [] : findSitemapEntries(collection, itemPath),
           pluginType: "eleventy-navigation",
         })
