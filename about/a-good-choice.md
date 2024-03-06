@@ -5,6 +5,7 @@ tags: [about]
 data: { dateless: "true" }
 permalink: /about/a-good-choice.html
 sitemapChangeFrequency: yearly
+htmlSitemapOrder: -5
 ---
 <style>
 :not(header) > h2 {

@@ -4,6 +4,7 @@ title: "What is an Embedded Browser?"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/what-is-embedded.html
+htmlSitemapOrder: -10
 sitemapChangeFrequency: yearly
 --- 
 

@@ -4,6 +4,7 @@ title: "Learn & Discover"
 tags: [learn]
 data: { dateless: "true" }
 permalink: /about/
+htmlSitemapOrder: -5
 sitemapChangeFrequency: yearly
 sitemapPriority: 0.9
 --- 
