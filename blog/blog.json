@@ -2,5 +2,6 @@
 	"layout": "post",
 	"tags": ["blogpost"],
 	"sitemapChangeFrequency": "yearly",
-	"sitemapPriority": 0.75
+	"sitemapPriority": 0.75,
+	"skipHtmlSitemap": true
 }
