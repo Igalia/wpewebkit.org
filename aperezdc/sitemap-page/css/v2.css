@@ -128,21 +128,22 @@ h3 {font-size: 1.6em; line-height: 1.2;}
 p > big, p.leadin {
 	font-size: 1.67em;
 }
-ul.arrows {
+div.arrow-lists > ul {
+	font-size: 130%;
 	margin: 0;
 	padding: 0;
-	padding-inline-start: 2em;
 	list-style: none;
+	padding-inline-start: 3em;
 }
-ul.arrows li {
+div.arrow-lists > ul > li {
 	text-indent: -2em;
 }
-ul.arrows li::before {
+div.arrow-lists > ul > li::before {
 	display: inline-block;
 	content: url(../assets/img/list-arrow.svg);
 	width: 1em;
-	margin-inline-end: 1em;
 	text-indent: 0;
+	margin-inline-end: 1em;
 }
 
 .cta.btn {
