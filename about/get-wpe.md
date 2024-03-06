@@ -4,6 +4,8 @@ title: "Get WPE"
 tags: [about]
 data: { dateless: "true" }
 permalink: /about/get-wpe.html
+htmlSitemapParent: /
+htmlSitemapOrder: -1
 sitemapChangeFrequency: yearly
 resources: [
 	{
