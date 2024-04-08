@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /reference/
+Disallow: /releases/
+Sitemap: https://igalia.github.io/wpewebkit.org/wpewebkit-2.44-release-notes/sitemap.xml
