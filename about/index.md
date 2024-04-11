@@ -195,6 +195,7 @@ answer these and more questions.
 
 * [Supported Hardware](/about/supported-hardware.html)
 * [Architecture](/about/architecture.html)
+* [API Documentation](/developers/#api-documentation)
 * [Release Schedule](/release/schedule)
 * [Frequently Asked Questions](/about/faq.html)
 

@@ -31,6 +31,23 @@ h2 {
 
 <div>
 
+## [API Documentation](#)
+
+API documentation for the **latest stable release** is available here:
+
+<ul class="arrows">
+<li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-2.0/">WPEWebKit 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-javascriptcore-2.0/">WPEJavaScriptCore 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-2.0/">WPEWebExtension 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-1.1/">WPEWebKit 1.1 API documentation (deprecated)</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-javascriptcore-1.1/">WPEJavaScriptCore 1.1 API documentation (deprecated)</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-1.1/">WPEWebExtension 1.1 API documentation (deprecated)</a></li>
+</ul>
+
+</div>
+
+<div class="dotsep">
+
 ## [WPE Builds](/about/builds.html)
 
 While there are several simple ways for developers to experiment with and explore WPE, none are tuned for performance. Generally, shipping products for embedded systems are performance-tuned custom builds. To make this easier, there is also [meta-webkit](https://github.com/Igalia/meta-webkit), which provides build recipes, WebKit based runtimes, and browsers for use with OpenEmbedded and/or Yocto.
