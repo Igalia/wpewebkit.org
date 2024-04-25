@@ -56,20 +56,6 @@ table {
 	border-bottom: 2px solid black;
 	margin: 0;
 }
-@media (min-width: 45rem) {
-	table thead tr :nth-child(1) {
-		width: 18ch;
-	}
-	table thead tr :nth-child(2) {
-		width: 21ch;
-	}
-	table thead tr :nth-child(4) {
-		width: 35ch;
-	}
-	table thead tr :nth-child(5) {
-		width: 13ch;
-	}
-}
 table :is(thead, tbody) tr > * {
 	padding-left: 0;
 	vertical-align: top;
