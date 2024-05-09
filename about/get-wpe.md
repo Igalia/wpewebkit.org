@@ -163,8 +163,15 @@ a good way to track down any bug you might find and to fix it.
 * [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo).
 * [Cog](https://github.com/Igalia/cog).
 
-Instead of downloading each of these components on their own, a good way to start is to fetch the WebKit repository
-and use its build system to fetch all the dependencies. Check the [instructions for building WebKit](https://trac.webkit.org/wiki/WPE#BuildingWPEWebKitfromgit).
+Instead of downloading each of these components on their own, the recommended
+procedure is cloning Git repositories for WebKit and the [WebKit Container
+SDK](https://github.com/Igalia/webkit-container-sdk). Follow the SDK
+instructions to prepare the container and open a shell inside it; then
+running `Tools/Scripts/build-webkit --wpe` in the WebKit source directory
+will produce a developer build&mdash;all the [other development
+tools](https://docs.webkit.org/Getting%20Started/ContributingCode.html) can
+be run directly in the container as well.
+
 
 If you find any problem or want to know more about optimizing WPE for your hardware or use cases, please [contact us](mailto:info@wpewebkit.org).
 
