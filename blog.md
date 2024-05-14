@@ -9,7 +9,7 @@ sitemapPriority: 0.9
 pagination:
   data: collections.blogpost
   reverse: true
-  size: 6
+  size: 7
 permalink: /blog/{% if pagination.pageNumber > 0 %}{{ (pagination.pageNumber + 1) }}/{% endif %}
 ---
 <style>
