@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2024-05-14T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.45.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.45.2.html"/>
+    <updated>2024-05-14T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.45.2.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.46 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.45.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.45.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Use Cairo on big-endian platforms for now, since Skia does not support them.&lt;/li&gt;
+&lt;li&gt;Fix a crash in GIF image decoder.&lt;/li&gt;
+&lt;li&gt;Revert the text scaling fix, since it caused several issues in some sites.&lt;/li&gt;
+&lt;li&gt;Add new API to load settings from a configuration file.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.45.2.tar.xz (37.7 MiB)
+   md5sum: 96b069cf351995ec23e25ef07bb09b4d
+   sha1sum: 68a3ba068b921974dd65b561ca6354ba7795533e
+   sha256sum: f6d5bf7a8bc381b71a86761a9517bf596e13b1719c7b56e8e7c5efcac9227645
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.45.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.45.1.html"/>
+    <updated>2024-05-11T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.45.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.46 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.45.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.45.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Use Skia by default instead of Cairo for rendering. Cairo support may still be built passing &lt;code&gt;-DUSE_SKIA=OFF&lt;/code&gt; to CMake.&lt;/li&gt;
+&lt;li&gt;Synchronize WebGL content using fences, where available.&lt;/li&gt;
+&lt;li&gt;Disable the &lt;code&gt;gst-libav&lt;/code&gt; AAC decoder.&lt;/li&gt;
+&lt;li&gt;Support &lt;code&gt;AXActiveElement&lt;/code&gt; and &lt;code&gt;AXSelectedChildren&lt;/code&gt; for combo boxes, lists and list boxes.&lt;/li&gt;
+&lt;li&gt;Decrease input notifications for gamepad inputs.&lt;/li&gt;
+&lt;li&gt;Make gamepads visible on axis movements, and not only on button presses.&lt;/li&gt;
+&lt;li&gt;Improve DMA-BUF format negotiation and buffer allocation to facilitate faster code paths in buffer handling.&lt;/li&gt;
+&lt;li&gt;Make user scripts and style sheets visible in the Web Inspector.&lt;/li&gt;
+&lt;li&gt;Make hole-punch media playback support video elements with rounded corners.&lt;/li&gt;
+&lt;li&gt;Enable by default building support for the MediaSession and WebCodecs APIs.&lt;/li&gt;
+&lt;li&gt;Allow WebDriver connections to already running browsers.&lt;/li&gt;
+&lt;li&gt;Support downloading files from the Web Inspector when using HTTP remote connections.&lt;/li&gt;
+&lt;li&gt;Replace build-time per-platform multimedia support option with quirks
+applied at runtime. Automatic quirk detection is used by default, and
+quirks may be overriden using the &lt;code&gt;WEBKIT_GST_QUIRKS&lt;/code&gt; and
+&lt;code&gt;WEBKIT_GST_HOLE_PUNCH&lt;/code&gt; environment variables.&lt;/li&gt;
+&lt;li&gt;Deprecate the &lt;code&gt;WebKitWebView::insecure-content-detected&lt;/code&gt; signal.&lt;/li&gt;
+&lt;li&gt;Fix mouse location in WebDriver when output device scaling is in effect.&lt;/li&gt;
+&lt;li&gt;Fix touch input event propagation.&lt;/li&gt;
+&lt;li&gt;Fix missing mouse cursor in the WPE Wayland platform support.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.45.1.tar.xz (37.7 MiB)
+   md5sum: b5399a7fe2dbd5a380caed9da7f3bfa3
+   sha1sum: 255c1ee50d311c9135b898e0da4876555af6df6a
+   sha256sum: c985a11fd70d5e0190adee2556bd5f2be9f860d628c71ae7cb35b6875b73a507
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.44.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.44.1.html"/>
+    <updated>2024-04-09T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.44.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 2.44 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.44.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.44.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Do not schedule layer flushes when drawing area size is empty.&lt;/li&gt;
+&lt;li&gt;Fix videos with alpha when using the DMA-BUF sink.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_WEB_AUDIO=OFF&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_VIDEO=OFF&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;USE_GBM=OFF&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build in 32-bit platforms&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.44.1.tar.xz (33.5 MiB)
+   md5sum: 51290d5cf1e032145f2a30971393b006
+   sha1sum: b4d61467f0fb27bb45919ae160efe71d40fda6a0
+   sha256sum: 2c9fbf4fcf8884d34102283e2b008ce0b0bc2cf07de78f564a8b34347e7bc19b
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.44 highlights</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/blog/2024-wpewebkit-2.44.html"/>
+    <updated>2024-04-08T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/blog/2024-wpewebkit-2.44.html</id>
+    <content type="html">&lt;p&gt;The WPE team released WPE WebKit 2.44 a few weeks ago. Let’s have a look at the most significant changes to the port for this release cycle.&lt;/p&gt;
+&lt;h2 id=&quot;webkit%E2%80%99s-displaylink-support&quot; tabindex=&quot;-1&quot;&gt;WebKit’s DisplayLink support&lt;/h2&gt;
+&lt;p&gt;DisplayLink is a WebCore feature that improves resource utilization and improves synchronization with vertical screen retrace. 2.44 adds an implementation of this feature for the WPE port that improves rendering performance.&lt;/p&gt;
+&lt;h2 id=&quot;improved-hardware-acceleration-video-decoding-and-rendering&quot; tabindex=&quot;-1&quot;&gt;Improved hardware-acceleration video decoding and rendering&lt;/h2&gt;
+&lt;p&gt;When WebKit is using GStreamer 1.24 or newer, video playback can use the new support for DRM modifiers in the DMA-BUF sink. This improves video decoding and rendering, as it allows for zero-copy negotiation with the video decoders.&lt;/p&gt;
+&lt;h2 id=&quot;webcodec-api-supported&quot; tabindex=&quot;-1&quot;&gt;WebCodec API supported&lt;/h2&gt;
+&lt;p&gt;WPE now supports the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API&quot;&gt;WebCodecs API&lt;/a&gt;, which allows web developers low-level access to video frames and audio chunks, a feature of importance for multimedia applications that need finer grain control over what gets played on the browser.&lt;/p&gt;
+&lt;h2 id=&quot;other-noteworthy-changes&quot; tabindex=&quot;-1&quot;&gt;Other noteworthy changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for the JPEG2000 image format has been removed. WebKit was the only major engine still supporting the format, which these days is rarely used. As a consequence, OpenJPEG is no longer a dependency. JPEG2000 should not be confused with JPEG-XL, which is still supported.&lt;/li&gt;
+&lt;li&gt;Support usage of libbacktrace, enabled by default at build time. This library provides quality stacktraces that can help developers and deployers more efficiently debug crashes in WPE-powered browsers.&lt;/li&gt;
+&lt;li&gt;Many memory and stability improvements, particularly on the multimedia backends.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For a complete list of changes, please check the &lt;a href=&quot;https://wpewebkit.org/release/&quot;&gt;releases page&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2024-0002</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html"/>
+    <updated>2024-03-26T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;March 26, 2024&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2024-0002&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html#CVE-2024-23252&quot;&gt;CVE-2024-23252&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html#CVE-2024-23254&quot;&gt;CVE-2024-23254&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html#CVE-2024-23263&quot;&gt;CVE-2024-23263&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html#CVE-2024-23280&quot;&gt;CVE-2024-23280&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html#CVE-2024-23284&quot;&gt;CVE-2024-23284&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html#CVE-2023-42950&quot;&gt;CVE-2023-42950&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html#CVE-2023-42956&quot;&gt;CVE-2023-42956&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0002.html#CVE-2023-42843&quot;&gt;CVE-2023-42843&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23252&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23252&quot;&gt;CVE-2024-23252&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to anbu1024 of SecANT.&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to a denial-of-service.
+Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263758&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23254&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23254&quot;&gt;CVE-2024-23254&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to James Lee (@Windowsrcer).&lt;/li&gt;
+&lt;li&gt;Impact: A malicious website may exfiltrate audio data cross-origin.
+Description: The issue was addressed with improved UI handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263795&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23263&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23263&quot;&gt;CVE-2024-23263&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to Johan Carlsson (joaxcar).&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may prevent
+Content Security Policy from being enforced. Description: A logic
+issue was addressed with improved validation.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 264811&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23280&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23280&quot;&gt;CVE-2024-23280&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to An anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: A maliciously crafted webpage may be able to fingerprint the
+user. Description: An injection issue was addressed with improved
+validation.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 266703&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23284&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23284&quot;&gt;CVE-2024-23284&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to Georg Felber and Marco Squarcina.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may prevent
+Content Security Policy from being enforced. Description: A logic
+issue was addressed with improved state management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 267241&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42950&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42950&quot;&gt;CVE-2023-42950&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to Nan Wang (@eternalsakura13) of 360 Vulnerability Research
+Institute and rushikesh nandedkar.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263682&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42956&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42956&quot;&gt;CVE-2023-42956&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to SungKwon Lee (Demon.Team).&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to a denial-of-service.
+Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263989&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42843&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42843&quot;&gt;CVE-2023-42843&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to Kacper Kwapisz (@KKKas_).&lt;/li&gt;
+&lt;li&gt;Impact: Visiting a malicious website may lead to address bar
+spoofing. Description: An inconsistent user interface issue was
+addressed with improved state management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 260046&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.16.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/libwpe-1.16.0.html"/>
+    <updated>2024-03-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/libwpe-1.16.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 1.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-libwpe-1.16.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the libwpe 1.16.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New API to override the default to override the default implementation
+for subprocess launch and termination.&lt;/li&gt;
+&lt;li&gt;New API for handling pointer lock events.&lt;/li&gt;
+&lt;li&gt;Properly handle the EGL library when available without a &lt;code&gt;pkg-config&lt;/code&gt;
+module file present.&lt;/li&gt;
+&lt;li&gt;Allow resetting the full screen client to a null pointer.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.16.0.tar.xz (62.0 KiB)
+   md5sum: 9779115aaa7e67abe642777394e7bfa2
+   sha1sum: ea574e09b5d47461a5579a24006488419474d136
+   sha256sum: c7f3a3c6b3d006790d486dc7cceda2b6d2e329de07f33bc47dfc53f00f334b2a
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.44.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.44.0.html"/>
+    <updated>2024-03-20T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.44.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.44 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.44.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.44.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Allow disabling WebGL support using the API.&lt;/li&gt;
+&lt;li&gt;Improve V-Blank synchronization when rendering.&lt;/li&gt;
+&lt;li&gt;Use the buffer format preferred by the driver in DMA-BUF renderer.&lt;/li&gt;
+&lt;li&gt;Do not block the compositing thread waiting for rendering threads.&lt;/li&gt;
+&lt;li&gt;Improve performance when scaling images in &lt;code&gt;&amp;lt;canvas&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Support usage of &lt;code&gt;libbacktrace&lt;/code&gt;, enabled by default at build time.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;ENABLE_ACCESSIBILITY&lt;/code&gt; build option has been removed. Alternatively,
+a new &lt;code&gt;USE_ATK&lt;/code&gt; option may be used to disable accessibility.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.44.0.tar.xz (33.6 MiB)
+   md5sum: fd82ff4f25456630fecef0e8cd0f0a22
+   sha1sum: 6fbcb192e40f3d86952778995d34e0cbb63a44db
+   sha256sum: 0741862b559da0cbbf8e0bccb057361f8a1c6a96178ba10aa0375030b01f05d4
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.18.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/cog-0.18.3.html"/>
+    <updated>2024-02-26T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/cog-0.18.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.18 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;drm: Fix handling of the scaling factor setting.&lt;/li&gt;
+&lt;li&gt;gtk4: Take scaling factor into account for pointer events.&lt;/li&gt;
+&lt;li&gt;launcher: Support toggling WebKit features with a new &lt;code&gt;--features&lt;/code&gt;/&lt;code&gt;-F&lt;/code&gt; command
+line option, when built against WebKit 2.42.0 or newer.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.18.3.tar.xz (123.9 KiB)
+   md5sum: e457de5b5ac8994ae9971c0a5a22b8a2
+   sha1sum: 21df2a84c651b45e78d08e45e71631250a0078c3
+   sha256sum: cd4ec937175a290ccd7c8ec398e4569aec04084cd94b11b2d83518778ba9d055
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2024-0001</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html"/>
+    <updated>2024-02-05T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 05, 2024&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2024-0001&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2024-23222&quot;&gt;CVE-2024-23222&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2024-23206&quot;&gt;CVE-2024-23206&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2024-23213&quot;&gt;CVE-2024-23213&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2023-40414&quot;&gt;CVE-2023-40414&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2023-42833&quot;&gt;CVE-2023-42833&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2014-1745&quot;&gt;CVE-2014-1745&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23222&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23222&quot;&gt;CVE-2024-23222&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.5.&lt;/li&gt;
+&lt;li&gt;Credit to Apple.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Apple is aware of a report that this issue
+may have been exploited. Description: A type confusion issue was
+addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 267134&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23206&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23206&quot;&gt;CVE-2024-23206&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.5.&lt;/li&gt;
+&lt;li&gt;Credit to An anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: A maliciously crafted webpage may be able to fingerprint the
+user. Description: An access issue was addressed with improved
+access restrictions.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 262699&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23213&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23213&quot;&gt;CVE-2024-23213&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.5.&lt;/li&gt;
+&lt;li&gt;Credit to Wangtaiyu of Zhongfu info.&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to arbitrary code execution.
+Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 266619&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-40414&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-40414&quot;&gt;CVE-2023-40414&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.1.&lt;/li&gt;
+&lt;li&gt;Credit to Francisco Alonso (@revskills).&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to arbitrary code execution.
+Description: A use-after-free issue was addressed with improved
+memory management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 258992&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42833&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42833&quot;&gt;CVE-2023-42833&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.0.&lt;/li&gt;
+&lt;li&gt;Credit to Dong Jun Kim (@smlijun) and Jong Seong Kim (@nevul37) of
+AbyssLab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to arbitrary code execution.
+Description: A correctness issue was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 258592&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2014-1745&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1745&quot;&gt;CVE-2014-1745&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.0.&lt;/li&gt;
+&lt;li&gt;Credit to An anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing a file may lead to a denial-of-service or
+potentially disclose memory contents. Description: The issue was
+addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 249434&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.42.5 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.42.5.html"/>
+    <updated>2024-02-05T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.42.5.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.42 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.5?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix &lt;code&gt;webkit_web_context_allow_tls_certificate_for_host()&lt;/code&gt; to handle IPv6
+URIs produced by &lt;code&gt;SoupURI&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Ignore stops with offset zero before last one when rendering gradients
+with Cairo.&lt;/li&gt;
+&lt;li&gt;Write &lt;code&gt;bwrapinfo.json&lt;/code&gt; to disk for &lt;code&gt;xdg-desktop-portal&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Support gamepad button sixteen (center button in center cluster).&lt;/li&gt;
+&lt;li&gt;Update quirks to fix compatibility issues in a number of websites,
+including &lt;code&gt;bing.com&lt;/code&gt;, &lt;code&gt;nfl.com&lt;/code&gt;, &lt;code&gt;msn.com&lt;/code&gt;, &lt;code&gt;bankofamerica.com&lt;/code&gt;,
+&lt;code&gt;outlook.live.com&lt;/code&gt;, &lt;code&gt;hulu.com&lt;/code&gt;, &lt;code&gt;jsfiddle.net&lt;/code&gt;, &lt;code&gt;vote.gov&lt;/code&gt;,
+&lt;code&gt;youtube.com&lt;/code&gt;, &lt;code&gt;airtable.com&lt;/code&gt;, &lt;code&gt;gizmodo.com&lt;/code&gt;, and &lt;code&gt;ceac.state.gov&lt;/code&gt;
+among others.&lt;/li&gt;
+&lt;li&gt;Fix incorrect periodic deletion of LocalStorage and IndexedDB databases
+for all websites.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.42.5.tar.xz (31.0 MiB)
+   md5sum: d4bfd427199ded5a6fd91d7080290751
+   sha1sum: 50a18f43452520e9f34f84c04bc0166af655ffff
+   sha256sum: 4dbab6c5e6dc0c65a3d7dffc1c2390be5f9abd423faf983fe3a55fe081df0532
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
