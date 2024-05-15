@@ -4,8 +4,61 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2024-05-14T00:00:00Z</updated>
+  <updated>2024-05-15T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.44.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.44.2.html"/>
+    <updated>2024-05-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.44.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.44 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.44.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.44.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Decrease input notifications for gamepad inputs.&lt;/li&gt;
+&lt;li&gt;Disable the &lt;code&gt;gst-libav&lt;/code&gt; AAC decoder.&lt;/li&gt;
+&lt;li&gt;Make gamepads visible on axis movements, and not only on button presses.&lt;/li&gt;
+&lt;li&gt;Make user scripts and style sheets visible in the Web Inspector.&lt;/li&gt;
+&lt;li&gt;Use the geolocation portal where available, with the existing Geoclue
+as fallback if the portal is not usable.&lt;/li&gt;
+&lt;li&gt;Use optimized assembler BoringSSL modules with &lt;code&gt;USE_LIBWEBRTC&lt;/code&gt; enabled.&lt;/li&gt;
+&lt;li&gt;Fix mouse location in WebDriver when output device scaling is in effect.&lt;/li&gt;
+&lt;li&gt;Fix touch input event propagation.&lt;/li&gt;
+&lt;li&gt;Fix the build on 32-bit ARM with &lt;code&gt;USE_LIBWEBRTC&lt;/code&gt; enabled.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_WEBAUDIO&lt;/code&gt; disabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.44.2.tar.xz (33.6 MiB)
+   md5sum: 0e2a6d05b000e79c51c537ab3261b171
+   sha1sum: 5bded217fab25aea776e41158fcdbd72d69a612e
+   sha256sum: 2a3d23cb4fb071ca0db3a09c5a85f27b8bcc6094a2026d3b7407bed4f99218f7
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.18.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/cog-0.18.4.html"/>
+    <updated>2024-05-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/cog-0.18.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.18 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;meson: Fix the build in systems where the &lt;code&gt;ln&lt;/code&gt; command cannot calculate relative symlink target paths.&lt;/li&gt;
+&lt;li&gt;wl: Fix some items in popup menus not being rendered.&lt;/li&gt;
+&lt;li&gt;wl: Add support for &lt;code&gt;weston-protocols&lt;/code&gt; version 14.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.18.4.tar.xz (124.0 KiB)
+   md5sum: 0566ab6676b499ebcff372fbe39e24fc
+   sha1sum: 2d6f88cfb07eaac1be2bf9954832f19f8a856631
+   sha256sum: 31d7079db2eeed790899d2f1f824dd6a54bf30d072d196d737be572f105d99b1
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.45.2 released</title>
@@ -307,135 +360,6 @@ cog-0.18.3.tar.xz (123.9 KiB)
    md5sum: e457de5b5ac8994ae9971c0a5a22b8a2
    sha1sum: 21df2a84c651b45e78d08e45e71631250a0078c3
    sha256sum: cd4ec937175a290ccd7c8ec398e4569aec04084cd94b11b2d83518778ba9d055
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2024-0001</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html"/>
-    <updated>2024-02-05T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html</id>
-    <content type="html">&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Date Reported: &lt;strong&gt;February 05, 2024&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2024-0001&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2024-23222&quot;&gt;CVE-2024-23222&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2024-23206&quot;&gt;CVE-2024-23206&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2024-23213&quot;&gt;CVE-2024-23213&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2023-40414&quot;&gt;CVE-2023-40414&lt;/a&gt;,
-&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2023-42833&quot;&gt;CVE-2023-42833&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0001.html#CVE-2014-1745&quot;&gt;CVE-2014-1745&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2024-23222&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23222&quot;&gt;CVE-2024-23222&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.5.&lt;/li&gt;
-&lt;li&gt;Credit to Apple.&lt;/li&gt;
-&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
-arbitrary code execution. Apple is aware of a report that this issue
-may have been exploited. Description: A type confusion issue was
-addressed with improved checks.&lt;/li&gt;
-&lt;li&gt;WebKit Bugzilla: 267134&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2024-23206&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23206&quot;&gt;CVE-2024-23206&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.5.&lt;/li&gt;
-&lt;li&gt;Credit to An anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: A maliciously crafted webpage may be able to fingerprint the
-user. Description: An access issue was addressed with improved
-access restrictions.&lt;/li&gt;
-&lt;li&gt;WebKit Bugzilla: 262699&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2024-23213&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23213&quot;&gt;CVE-2024-23213&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.5.&lt;/li&gt;
-&lt;li&gt;Credit to Wangtaiyu of Zhongfu info.&lt;/li&gt;
-&lt;li&gt;Impact: Processing web content may lead to arbitrary code execution.
-Description: The issue was addressed with improved memory handling.&lt;/li&gt;
-&lt;li&gt;WebKit Bugzilla: 266619&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2023-40414&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-40414&quot;&gt;CVE-2023-40414&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.1.&lt;/li&gt;
-&lt;li&gt;Credit to Francisco Alonso (@revskills).&lt;/li&gt;
-&lt;li&gt;Impact: Processing web content may lead to arbitrary code execution.
-Description: A use-after-free issue was addressed with improved
-memory management.&lt;/li&gt;
-&lt;li&gt;WebKit Bugzilla: 258992&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2023-42833&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42833&quot;&gt;CVE-2023-42833&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.38.0.&lt;/li&gt;
-&lt;li&gt;Credit to Dong Jun Kim (@smlijun) and Jong Seong Kim (@nevul37) of
-AbyssLab.&lt;/li&gt;
-&lt;li&gt;Impact: Processing web content may lead to arbitrary code execution.
-Description: A correctness issue was addressed with improved checks.&lt;/li&gt;
-&lt;li&gt;WebKit Bugzilla: 258592&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a name=&quot;CVE-2014-1745&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1745&quot;&gt;CVE-2014-1745&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.0.&lt;/li&gt;
-&lt;li&gt;Credit to An anonymous researcher.&lt;/li&gt;
-&lt;li&gt;Impact: Processing a file may lead to a denial-of-service or
-potentially disclose memory contents. Description: The issue was
-addressed with improved checks.&lt;/li&gt;
-&lt;li&gt;WebKit Bugzilla: 249434&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
-WebKit. It is the best way to ensure that you are running safe versions
-of WebKit. Please check our websites for information about the latest
-stable releases.&lt;/p&gt;
-&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
-&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.42.5 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.42.5.html"/>
-    <updated>2024-02-05T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/wpewebkit-2.42.5.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.42 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.42.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.42.5?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix &lt;code&gt;webkit_web_context_allow_tls_certificate_for_host()&lt;/code&gt; to handle IPv6
-URIs produced by &lt;code&gt;SoupURI&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Ignore stops with offset zero before last one when rendering gradients
-with Cairo.&lt;/li&gt;
-&lt;li&gt;Write &lt;code&gt;bwrapinfo.json&lt;/code&gt; to disk for &lt;code&gt;xdg-desktop-portal&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Support gamepad button sixteen (center button in center cluster).&lt;/li&gt;
-&lt;li&gt;Update quirks to fix compatibility issues in a number of websites,
-including &lt;code&gt;bing.com&lt;/code&gt;, &lt;code&gt;nfl.com&lt;/code&gt;, &lt;code&gt;msn.com&lt;/code&gt;, &lt;code&gt;bankofamerica.com&lt;/code&gt;,
-&lt;code&gt;outlook.live.com&lt;/code&gt;, &lt;code&gt;hulu.com&lt;/code&gt;, &lt;code&gt;jsfiddle.net&lt;/code&gt;, &lt;code&gt;vote.gov&lt;/code&gt;,
-&lt;code&gt;youtube.com&lt;/code&gt;, &lt;code&gt;airtable.com&lt;/code&gt;, &lt;code&gt;gizmodo.com&lt;/code&gt;, and &lt;code&gt;ceac.state.gov&lt;/code&gt;
-among others.&lt;/li&gt;
-&lt;li&gt;Fix incorrect periodic deletion of LocalStorage and IndexedDB databases
-for all websites.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.42.5.tar.xz (31.0 MiB)
-   md5sum: d4bfd427199ded5a6fd91d7080290751
-   sha1sum: 50a18f43452520e9f34f84c04bc0166af655ffff
-   sha256sum: 4dbab6c5e6dc0c65a3d7dffc1c2390be5f9abd423faf983fe3a55fe081df0532
 &lt;/pre&gt;
 </content>
   </entry>
