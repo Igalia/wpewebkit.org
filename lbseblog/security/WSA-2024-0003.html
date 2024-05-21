@@ -9,12 +9,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Blog</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/lbseblog/blog/1/">
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2024-0003</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/lbseblog/security/WSA-2024-0003.html">
   <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/lbseblog/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="WPE blog" href="https://igalia.github.io/wpewebkit.org/lbseblog/blog.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/lbseblog/blog/1/">
-  <meta property="og:title" content="Blog">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/lbseblog/security/WSA-2024-0003.html">
+  <meta property="og:title" content="WebKitGTK and WPE WebKit Security Advisory WSA-2024-0003">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/lbseblog/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/lbseblog/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -22,8 +22,8 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2024-05-21T15:47:00.834Z">
-  <meta property="article:tag" content="blog">
+  <meta property="article:published_time" content="2024-05-21T00:00:00.000Z">
+  <meta property="article:tag" content="WSA">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -69,11 +69,11 @@
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/lbseblog/"><img src="/wpewebkit.org/lbseblog/assets/img/logo-blue.svg" alt="WPE"></a>
-		<ul class="blog off"><li>
+		<ul class="security off"><li>
 			<a class="nav-link" href="/wpewebkit.org/lbseblog/">Home</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/lbseblog/about/">Learn & Discover</a>
-			</li><li class="currentPage">
+			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/lbseblog/blog/">Blog</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/lbseblog/developers/">Developers</a>
@@ -87,73 +87,70 @@
 
     <main>
     <style>
-.card ol {
-	padding: 1.5em;
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
 }
-@media (min-width: 60em) {
-	.card ol {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 3em 5em;
-	}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
 }
-.card ol img {
-	width: 100%;
-	height: 9em;
-	margin-block: 0 1em;
-	object-fit: cover;
-	object-position: top center;
-	mask: linear-gradient(0deg, #FFF0, 0.5em, #FFFF 1.5em);
-}
-.card ol p, .card ol time {
-	font-size: 90%;
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
 }
 </style>
-<header class="page">
-<h1>Blog</h1>
-<p>Don’t miss any news related to WPE – our blog aims to share information regarding WPE: explainers, how-to articles and general information regarding WPE, WebKit
-and the Web platform. Also check out <a href="https://webkit.org/blog/">the official WebKit blog</a> regarding news on the engine itself.</p>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/lbseblog/security/WSA-2024-0003.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WebKitGTK and WPE WebKit Security Advisory WSA-2024-0003</h1>
+ 
+   <meta itemprop="datePublished" content="Tue May 21 2024">
+   <time itemprop="dateCreated">21 May 2024</time>
+ 
+  
 </header>
-<div class="card">
-	<ol reversed="" role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;"><li class="listitem">
-			<img src="/wpewebkit.org/lbseblog/assets/img/logo-metrological@2x.png" alt="">
-			<time>Oct 15, 2022</time>
-			<h3><a href="/wpewebkit.org/lbseblog/blog/2022-success-metrological.html">Success Story: Metrological</a></h3>
-			<p>WPE WebKit brought RDK (Reference Design Kit), a modern, performant web browser, to millions of screens.</p>
-		</li><li class="listitem">
-			<img src="/wpewebkit.org/lbseblog/assets/networking-layers.svg" alt="">
-			<time>Sep 29, 2022</time>
-			<h3><a href="/wpewebkit.org/lbseblog/blog/04-wpe-networking-overview.html">WPE Networking Overview</a></h3>
-			<p>In this post we'll cover the many layers of the networking stack that WPE uses including libsoup and glib.</p>
-		</li><li class="listitem">
-			<img src="/wpewebkit.org/lbseblog/assets/build-webkit-org-screenshot.png" alt="">
-			<time>Jul 28, 2022</time>
-			<h3><a href="/wpewebkit.org/lbseblog/blog/04-wpe-qa-tooling.html">WPE QA and tooling</a></h3>
-			<p>In the previous posts, my colleagues Claudio and Miguel wrote respectively about the major components of the project and, specifically, the graphics architecture of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it.</p>
-		</li><li class="listitem">
-			<img src="/wpewebkit.org/lbseblog/assets/graphics-attachment.png" alt="">
-			<time>Jul 15, 2022</time>
-			<h3><a href="/wpewebkit.org/lbseblog/blog/03-wpe-graphics-architecture.html">WPE Graphics architecture</a></h3>
-			<p>Following the previous post in the series about WPE where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display.</p>
-		</li><li class="listitem">
-			<img src="/wpewebkit.org/lbseblog/assets/wpe-architecture-diagram.png" alt="">
-			<time>Jul 1, 2022</time>
-			<h3><a href="/wpewebkit.org/lbseblog/blog/02-overview-of-wpe.html">An overview of the WPE WebKit project</a></h3>
-			<p>In the previous post in this series, we explained that WPE is a WebKit port optimized for embedded devices. In this post, we'll dive into a more technical overview of the different components of WPE, WebKit, and how they all fit together.</p>
-		</li><li class="listitem">
-			<img src="/wpewebkit.org/lbseblog/assets/svg/wpe-birthday-cake-5-years.svg" alt="">
-			<time>Apr 21, 2022</time>
-			<h3><a href="/wpewebkit.org/lbseblog/blog/01-happy-birthday-wpe.html">Happy birthday WPE!</a></h3>
-			<p>Welcome to the new Blog section on wpewebkit.org! Let's take some time to celebrate and recap how WPE evolved from the early prototyping days to the product empowering hundreds of millions of devices worldwide today.</p>
-		</li></ol>
-  <nav class="pagination">
-    <ol>
-      <li><a href="/wpewebkit.org/lbseblog/blog/" title="Previous">«</a></li>
-      <li><a href="/wpewebkit.org/lbseblog/blog/">1</a></li>
-      <li><a href="/wpewebkit.org/lbseblog/blog/1/" aria-current="page">2</a></li>
-      <li><span>»</span></li>
-    </ol>
-  </nav>
+
+<div itemprop="articleBody">
+
+<ul>
+<li>
+<p>Date Reported: <strong>May 21, 2024</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2024-0003</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2024-27834">CVE-2024-27834</a></p>
+</li>
+</ul>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+<ul>
+<li><a name="CVE-2024-27834" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-27834">CVE-2024-27834</a>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.44.2.</li>
+<li>Credit to Manfred Paul working with Trend Micro’s Zero Day Initiative.</li>
+<li>Impact: An attacker with arbitrary read and write capability may be able to bypass
+Pointer Authentication. Description: The issue was addressed with improved checks.</li>
+<li>WebKit Bugzilla: 272750</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">webkitgtk.org/security.html</a> or
+<a href="https://wpewebkit.org/security">wpewebkit.org/security</a>.</p>
+
+
+
+
 </div>
 
     <div class="survey">
@@ -190,7 +187,7 @@ and the Web platform. Also check out <a href="https://webkit.org/blog/">the offi
     }
     </style>
 
-    </main>
+    </div></main>
 
     <dialog id="splash">
 <p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>

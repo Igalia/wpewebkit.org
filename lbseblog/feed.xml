@@ -4,8 +4,45 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2024-05-15T00:00:00Z</updated>
+  <updated>2024-05-21T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2024-0003</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0003.html"/>
+    <updated>2024-05-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0003.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;May 21, 2024&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2024-0003&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/lbseblog/security/WSA-2024-0003.html#CVE-2024-27834&quot;&gt;CVE-2024-27834&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2024-27834&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-27834&quot;&gt;CVE-2024-27834&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.2.&lt;/li&gt;
+&lt;li&gt;Credit to Manfred Paul working with Trend Micro’s Zero Day Initiative.&lt;/li&gt;
+&lt;li&gt;Impact: An attacker with arbitrary read and write capability may be able to bypass
+Pointer Authentication. Description: The issue was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 272750&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.44.2 released</title>
@@ -337,29 +374,6 @@ wpewebkit-2.44.0.tar.xz (33.6 MiB)
    md5sum: fd82ff4f25456630fecef0e8cd0f0a22
    sha1sum: 6fbcb192e40f3d86952778995d34e0cbb63a44db
    sha256sum: 0741862b559da0cbbf8e0bccb057361f8a1c6a96178ba10aa0375030b01f05d4
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Cog 0.18.3 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/lbseblog/release/cog-0.18.3.html"/>
-    <updated>2024-02-26T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/lbseblog/release/cog-0.18.3.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.18 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.3?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;drm: Fix handling of the scaling factor setting.&lt;/li&gt;
-&lt;li&gt;gtk4: Take scaling factor into account for pointer events.&lt;/li&gt;
-&lt;li&gt;launcher: Support toggling WebKit features with a new &lt;code&gt;--features&lt;/code&gt;/&lt;code&gt;-F&lt;/code&gt; command
-line option, when built against WebKit 2.42.0 or newer.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-cog-0.18.3.tar.xz (123.9 KiB)
-   md5sum: e457de5b5ac8994ae9971c0a5a22b8a2
-   sha1sum: 21df2a84c651b45e78d08e45e71631250a0078c3
-   sha256sum: cd4ec937175a290ccd7c8ec398e4569aec04084cd94b11b2d83518778ba9d055
 &lt;/pre&gt;
 </content>
   </entry>
