@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2024-05-21T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2024-0003</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0003.html"/>
+    <updated>2024-05-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0003.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;May 21, 2024&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2024-0003&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0003.html#CVE-2024-27834&quot;&gt;CVE-2024-27834&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2024-27834&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-27834&quot;&gt;CVE-2024-27834&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.2.&lt;/li&gt;
+&lt;li&gt;Credit to Manfred Paul working with Trend Micro’s Zero Day Initiative.&lt;/li&gt;
+&lt;li&gt;Impact: An attacker with arbitrary read and write capability may be able to bypass
+Pointer Authentication. Description: The issue was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 272750&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Update on the Layer Based SVG Engine (LBSE) in WebKit</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/blog/status-of-lbse-in-webkit.html"/>
+    <updated>2024-05-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/blog/status-of-lbse-in-webkit.html</id>
+    <content type="html">&lt;p&gt;This blog entry gives an update we at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt; did on upstreaming and development of LBSE in WebKit in the last 7 months. For an explanation of
+what LBSE is and how it is related to WPE see this previous &lt;a href=&quot;https://wpewebkit.org/blog/05-new-svg-engine.html&quot;&gt;entry&lt;/a&gt; as a refresher.&lt;/p&gt;
+&lt;div style=&quot;float: right&quot;&gt;
+&lt;figure&gt;
+  &lt;a class=&quot;btn&quot; href=&quot;https://www.igalia.com/&quot; target=&quot;_blank&quot;&gt;&lt;img style=&quot;display: block; height: 100px;&quot; src=&quot;https://wpewebkit.org/assets/svg/igalia-tagline.svg&quot; alt=&quot;The Igalia logo&quot; /&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+&lt;figure&gt;
+  &lt;a class=&quot;btn&quot; href=&quot;https://wix.com/&quot; target=&quot;_blank&quot;&gt;&lt;img style=&quot;display: block; height: 60px;&quot; src=&quot;https://wpewebkit.org/assets/svg/wix-logo.svg&quot; alt=&quot;The Wix logo&quot; /&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
+&lt;p&gt;Thanks to the generous funding by &lt;a href=&quot;https://www.wix.com/&quot; alt=&quot;Wix homepage&quot;&gt;&lt;b&gt;Wix&lt;/b&gt;&lt;/a&gt;, which extensively uses SVG in their products and has a broad
+knowledge of the SVG peculiarities across browser engines, LBSE made great progress in the past 7 months. During this period, several advanced SVG painting
+features were implemented (e.g. clip-paths, masks, gradients, patterns), along with important performance improvements that expanded the new engine’s capabilities
+and stability. And all this was possible thanks to Wix’s decision of addressing their problems by funding upstream work at the core of WebKit, instead of accepting
+the status-quo and implementing case-by-case fixes and workarounds on their end. As a result, WebKit-based browsers now benefit of the results of this fruitful
+collaboration, which we’ll try to explain in more detail in this blog post.&lt;/p&gt;
+&lt;h2 id=&quot;project-kick-off-and-webkit-contributors-meeting&quot; tabindex=&quot;-1&quot;&gt;Project kick off and WebKit Contributors Meeting&lt;/h2&gt;
+&lt;p&gt;In &lt;strong&gt;October 2023&lt;/strong&gt; we started the project, mostly by thinking of the design and roadmap. Also we did some general SVG bug fixing. First, visual overflow computation for SVG renderers was &lt;a href=&quot;https://commits.webkit.org/268981@main&quot;&gt;corrected&lt;/a&gt;, which fixed quite some SVG pixel tests. Various visual bugs were also fixed like &lt;a href=&quot;https://commits.webkit.org/269034@main&quot;&gt;unnecessary repainting when viewBox is used on &amp;lt;svg&amp;gt; elements&lt;/a&gt; and &lt;a href=&quot;https://commits.webkit.org/269360@main&quot;&gt;incorrect clipping for outermost &amp;lt;svg&amp;gt; elements&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Also in the same month, we attended the &lt;a href=&quot;https://docs.webkit.org/Other/Contributor%20Meetings/ContributorMeeting2023.html&quot;&gt;WebKit Contributors&lt;/a&gt; meeting, where we presented a talk on the LBSE (slides are &lt;a href=&quot;https://www.slideshare.net/igalia/integrating-the-new-layerbased-svg-engine&quot;&gt;here&lt;/a&gt;) and the feedback on LBSE at the meeting was very positive. Giving the talk early on actually helped us since we needed to have a good design in place.&lt;/p&gt;
+&lt;h2 id=&quot;supporting-svg-resources&quot; tabindex=&quot;-1&quot;&gt;Supporting SVG resources&lt;/h2&gt;
+&lt;p&gt;The main focus in &lt;strong&gt;October 2023&lt;/strong&gt; was introducing the SVG resource concept, as already outlined in the WebKit Contributors Meeting &lt;a href=&quot;https://teams.pages.igalia.com/webkit/contributors-meeting-presentations/2023/igalia-slides/integrating-the-new-LBSE.html&quot;&gt;talk&lt;/a&gt;. Thus we started with &lt;a href=&quot;https://commits.webkit.org/269522@main&quot;&gt;adding the base SVG resource class&lt;/a&gt;. The base class &lt;code&gt;RenderSVGResourceContainer&lt;/code&gt; was kept as simple as possible with no support for resource invalidation or repainting logic. The main task of &lt;code&gt;RenderSVGResourceContainer&lt;/code&gt; was to take care of registration so that the resource can be looked up by its clients.&lt;/p&gt;
+&lt;p&gt;As the first SVG resource to implement we chose the SVG &amp;lt;clip-path&amp;gt;, so we landed &lt;a href=&quot;https://commits.webkit.org/269635@main&quot;&gt;&lt;code&gt;RenderSVGResourceClipper&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To comply with the specification, the &lt;code&gt;RenderSVGResourceClipper&lt;/code&gt; implementation produces 1-bit masks and uses a special rendering mode:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;fill-opacity/stroke-opacity/opacity set to 1&lt;/li&gt;
+&lt;li&gt;masker/filter not applied when rendering the children&lt;/li&gt;
+&lt;li&gt;fill set to solid black and stroke set to none&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The initial implementation did not use caching of ImageBuffers for clipping, but relied on Porter-Duff DestinationIn/SourceOver compositing operations, to achieve the same effect, but faster. By integrating &lt;code&gt;RenderSVGResourceClipper&lt;/code&gt; properly into &lt;code&gt;RenderLayer&lt;/code&gt;, it aligned SVG clipping with HTML/CSS clipping.&lt;/p&gt;
+&lt;p&gt;Finally, internally the implementation (like in legacy), prefers a pure clipping solution, but for more complicated clip-path’s (for example when the clip-path involves text content) a fallback to a mask is done.&lt;/p&gt;
+&lt;h2 id=&quot;resource-invalidation-handling&quot; tabindex=&quot;-1&quot;&gt;Resource invalidation handling&lt;/h2&gt;
+&lt;p&gt;After introducing the first SVG resource (&lt;code&gt;RenderSVGResourceClipper&lt;/code&gt;) we noticed some issues with handling invalidations (for example adding to clip-path contents) for it. In the legacy engine, invalidations have been handled through layouting. This caused various problems, for one it could cause calling the setNeedsLayout method from within layout and the invalidation chain depended on the DOM order.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;November 2023&lt;/strong&gt; an &lt;a href=&quot;https://commits.webkit.org/271017@main&quot;&gt;implementation&lt;/a&gt; landed that avoided using layout for resource invalidation. Instead, on dynamic updates the style system is used to determine the appropriate action:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For non resources, changes that cause renderer geometry changes, like changing the x value of a &amp;lt;rect&amp;gt; element still require a relayout. For visual changes not affecting geometry, like changing fill color on a &amp;lt;rect&amp;gt;, a repaint action is enough.&lt;/li&gt;
+&lt;li&gt;For resources, the resource is invalidated/updated with the change and any of its clients are repainted using the new resource.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;support-for-masks&quot; tabindex=&quot;-1&quot;&gt;Support for masks&lt;/h2&gt;
+&lt;p&gt;With improved support for SVG resource invalidation, in &lt;strong&gt;late November 2023&lt;/strong&gt; we were ready to upstream support for the next SVG resource, &lt;a href=&quot;https://commits.webkit.org/271153@main&quot;&gt;RenderSVGResourceMasker&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Like the support for clip-path, it started out without caching image buffers and relied on creating temporary image buffers at rendering time.&lt;/p&gt;
+&lt;p&gt;Mask content invalidations/changes were supported out of the box since we had improved resource invalidation handling (see above).&lt;/p&gt;
+&lt;h2 id=&quot;support-for-gradients&quot; tabindex=&quot;-1&quot;&gt;Support for gradients&lt;/h2&gt;
+&lt;p&gt;In early &lt;strong&gt;January 2024&lt;/strong&gt; support for SVG gradients was &lt;a href=&quot;https://commits.webkit.org/272653@main&quot;&gt;upstreamed&lt;/a&gt;. This is a kind of SVG resource that is a bit different to the previously implemented clipping paths/masks because it is a &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/blog/status-of-lbse-in-webkit.html&quot;&gt;paint server&lt;/a&gt;, so a helper class for that called &lt;code&gt;SVGPaintServerHandling&lt;/code&gt; and a base class &lt;code&gt;RenderSVGResourcePaintServer&lt;/code&gt; were introduced. The main difference is in invalidation, paint servers simply need a repaint of all its clients on invalidation, whereas clipping paths/masks may need to do more work, i.e. for masks underlying image buffers need to be updated, before its clients can be repainted.&lt;/p&gt;
+&lt;h2 id=&quot;support-for-patterns&quot; tabindex=&quot;-1&quot;&gt;Support for patterns&lt;/h2&gt;
+&lt;p&gt;End of &lt;strong&gt;January 2024&lt;/strong&gt; support for SVG patterns was  &lt;a href=&quot;https://commits.webkit.org/273757@main&quot;&gt;upstreamed&lt;/a&gt;. In the first implementation, no image buffer caching was implemented to keep things clean and simple. The implementation is different from the legacy implementation because the pattern contents are being rendered through the pattern content layers (See &lt;a href=&quot;https://github.com/WebKit/WebKit/blob/main/Source/WebCore/rendering/RenderLayer.cpp#L2846&quot;&gt;&lt;code&gt;RenderLayer::paintSVGResourceLayer&lt;/code&gt;&lt;/a&gt;). To make this work, &lt;code&gt;RenderSVGResourcePattern&lt;/code&gt; has to setup the graphics context matrix correctly before calling &lt;code&gt;paintSVGResourceLayer&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;support-for-markers&quot; tabindex=&quot;-1&quot;&gt;Support for markers&lt;/h2&gt;
+&lt;p&gt;Also in end of &lt;strong&gt;January 2024&lt;/strong&gt;, we implemented the next to last SVG resource on our TODO list, namely &lt;a href=&quot;https://commits.webkit.org/273820@main&quot;&gt;markers&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;svg-filters&quot; tabindex=&quot;-1&quot;&gt;SVG filters&lt;/h2&gt;
+&lt;p&gt;In &lt;strong&gt;February 2024&lt;/strong&gt; Apple started work on &lt;a href=&quot;https://github.com/WebKit/WebKit/pull/25087&quot;&gt;supporting SVG filters&lt;/a&gt; in LBSE. A first iteration managed to fix a lot of the official SVG filter tests, however it turned out a &lt;a href=&quot;https://github.com/WebKit/WebKit/pull/25512&quot;&gt;filter regression&lt;/a&gt; had to be fixed first. Moreover the initial work uncovered issues with the HTML/CSS filters implementation that need to be fixed in general. Finally another reason why this support takes more time than some other features is that there is a strong requirement to make the support is efficient in both memory usage and overall (re)painting speed. Still, the early results are very promising!&lt;/p&gt;
+&lt;h2 id=&quot;cycle-detection&quot; tabindex=&quot;-1&quot;&gt;Cycle detection&lt;/h2&gt;
+&lt;p&gt;It is quite easy in SVG to cause direct circular references:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;svg&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;defs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;pattern&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;&lt;span class=&quot;token namespace&quot;&gt;xlink:&lt;/span&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#p&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;defs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    ...
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;svg&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is also possible to cause indirect circular references:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;svg&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;defs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;mask&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;z&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+            &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;rect&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;url(#z)&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;mask&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;defs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;ellipse&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;url(#z)&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;svg&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have in the past solved this in the legacy engine in an ad-hoc way in various places in the engine; it tried to break cycles before rendering, but still needed cycle protections in various places, since the solution was never unified or complete.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;February 2024&lt;/strong&gt; we provided a unified solution for LBSE by introducing &lt;code&gt;SVGVisitedRendererTracking&lt;/code&gt;, see this &lt;a href=&quot;https://commits.webkit.org/274392@main&quot;&gt;commit&lt;/a&gt;. In the new approach, we don’t attempt to remove cycles, but detect them everywhere upon usage and stop processing in well-defined ways, all centralized in &lt;code&gt;SVGVisitedRendererTracking&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;nested-mask%2Fpattern-slowness&quot; tabindex=&quot;-1&quot;&gt;Nested mask/pattern slowness&lt;/h2&gt;
+&lt;p&gt;In &lt;strong&gt;April 2024&lt;/strong&gt; we addressed slowness problems with nested masks/patterns. As an example, consider this for nested masks:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;svg&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;defs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;mask&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;z&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+            &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;rect&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;1&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;url(#y)&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+            &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;rect&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;2&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;url(#y)&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+            ...
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;mask&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;mask&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;y&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+            &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;rect&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;1&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;url(#x)&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+            &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;rect&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;2&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;url(#x)&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+            ...
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;mask&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        ...
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;defs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;ellipse&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;url(#z)&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;svg&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For above example, the complexity can be increased at will by adding more masks and contents per mask.&lt;/p&gt;
+&lt;p&gt;The solution was twofold:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;for masks, we realized bounding box calculations for a mask were not affected by masks used in the mask contents, so we could cut off bounding box calculations for nested masks.&lt;/li&gt;
+&lt;li&gt;for both masks and patterns, we added caching of image buffers per resource client so nested masks/patterns that are already encountered can reuse the image buffer cache.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See optimizations here for nested &lt;a href=&quot;https://commits.webkit.org/273820@main&quot;&gt;masks&lt;/a&gt; and &lt;a href=&quot;https://commits.webkit.org/277306@main&quot;&gt;patterns&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;next-steps&quot; tabindex=&quot;-1&quot;&gt;Next steps&lt;/h2&gt;
+&lt;p&gt;For the short and mid-term, the plan is to make LBSE at least as good as legacy in regards to test coverage, i.e. no test should pass in legacy but not in LBSE. We have made a lot of progress over the
+last 7 months just because of the amount of SVG resources that were implemented, but for example we will need to have SVG filters in place to pass this goal.&lt;/p&gt;
+&lt;p&gt;Another goal is to make sure LBSE qualifies for all security requirements, as that would be a blocker otherwise before the current engine can be replaced. Fortunately, we are already taking this into account in several ways to support this, such as adopting a lot of good &lt;a href=&quot;https://github.com/WebKit/WebKit/wiki/Smart-Pointer-Usage-Guidelines&quot;&gt;smart pointer practices&lt;/a&gt;, for instance.&lt;/p&gt;
+&lt;p&gt;Finally, a big goal will be for LBSE to perform well on certain benchmarks like MotionMark since WebKit has a golden rule to never ship a performance regression. So far there has been no explicit focus
+on performance, however we know there are likely optimizations possible in &lt;code&gt;RenderLayer&lt;/code&gt; usage, both in reducing the number of &lt;code&gt;RenderLayer&lt;/code&gt; objects we create in certain situations as well as a possible reduction
+in complexity of &lt;code&gt;RenderLayer&lt;/code&gt; for LBSE usage.&lt;/p&gt;
+&lt;p&gt;All in all, we are very pleased with the results and the progress we made in the last 7 months regarding SVG in WebKit. We at &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalia&lt;/a&gt; look forward to finish the work to get the new engine in a shippable state in the near future!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.44.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/wpewebkit-2.44.2.html"/>
+    <updated>2024-05-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/wpewebkit-2.44.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.44 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.44.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.44.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Decrease input notifications for gamepad inputs.&lt;/li&gt;
+&lt;li&gt;Disable the &lt;code&gt;gst-libav&lt;/code&gt; AAC decoder.&lt;/li&gt;
+&lt;li&gt;Make gamepads visible on axis movements, and not only on button presses.&lt;/li&gt;
+&lt;li&gt;Make user scripts and style sheets visible in the Web Inspector.&lt;/li&gt;
+&lt;li&gt;Use the geolocation portal where available, with the existing Geoclue
+as fallback if the portal is not usable.&lt;/li&gt;
+&lt;li&gt;Use optimized assembler BoringSSL modules with &lt;code&gt;USE_LIBWEBRTC&lt;/code&gt; enabled.&lt;/li&gt;
+&lt;li&gt;Fix mouse location in WebDriver when output device scaling is in effect.&lt;/li&gt;
+&lt;li&gt;Fix touch input event propagation.&lt;/li&gt;
+&lt;li&gt;Fix the build on 32-bit ARM with &lt;code&gt;USE_LIBWEBRTC&lt;/code&gt; enabled.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_WEBAUDIO&lt;/code&gt; disabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.44.2.tar.xz (33.6 MiB)
+   md5sum: 0e2a6d05b000e79c51c537ab3261b171
+   sha1sum: 5bded217fab25aea776e41158fcdbd72d69a612e
+   sha256sum: 2a3d23cb4fb071ca0db3a09c5a85f27b8bcc6094a2026d3b7407bed4f99218f7
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Cog 0.18.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/cog-0.18.4.html"/>
+    <updated>2024-05-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/cog-0.18.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 0.18 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-cog-0.18.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in Cog 0.18.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;meson: Fix the build in systems where the &lt;code&gt;ln&lt;/code&gt; command cannot calculate relative symlink target paths.&lt;/li&gt;
+&lt;li&gt;wl: Fix some items in popup menus not being rendered.&lt;/li&gt;
+&lt;li&gt;wl: Add support for &lt;code&gt;weston-protocols&lt;/code&gt; version 14.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+cog-0.18.4.tar.xz (124.0 KiB)
+   md5sum: 0566ab6676b499ebcff372fbe39e24fc
+   sha1sum: 2d6f88cfb07eaac1be2bf9954832f19f8a856631
+   sha256sum: 31d7079db2eeed790899d2f1f824dd6a54bf30d072d196d737be572f105d99b1
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.45.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/wpewebkit-2.45.2.html"/>
+    <updated>2024-05-14T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/wpewebkit-2.45.2.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.46 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.45.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.45.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Use Cairo on big-endian platforms for now, since Skia does not support them.&lt;/li&gt;
+&lt;li&gt;Fix a crash in GIF image decoder.&lt;/li&gt;
+&lt;li&gt;Revert the text scaling fix, since it caused several issues in some sites.&lt;/li&gt;
+&lt;li&gt;Add new API to load settings from a configuration file.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.45.2.tar.xz (37.7 MiB)
+   md5sum: 96b069cf351995ec23e25ef07bb09b4d
+   sha1sum: 68a3ba068b921974dd65b561ca6354ba7795533e
+   sha256sum: f6d5bf7a8bc381b71a86761a9517bf596e13b1719c7b56e8e7c5efcac9227645
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.45.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/wpewebkit-2.45.1.html"/>
+    <updated>2024-05-11T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/wpewebkit-2.45.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.46 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.45.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.45.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Use Skia by default instead of Cairo for rendering. Cairo support may still be built passing &lt;code&gt;-DUSE_SKIA=OFF&lt;/code&gt; to CMake.&lt;/li&gt;
+&lt;li&gt;Synchronize WebGL content using fences, where available.&lt;/li&gt;
+&lt;li&gt;Disable the &lt;code&gt;gst-libav&lt;/code&gt; AAC decoder.&lt;/li&gt;
+&lt;li&gt;Support &lt;code&gt;AXActiveElement&lt;/code&gt; and &lt;code&gt;AXSelectedChildren&lt;/code&gt; for combo boxes, lists and list boxes.&lt;/li&gt;
+&lt;li&gt;Decrease input notifications for gamepad inputs.&lt;/li&gt;
+&lt;li&gt;Make gamepads visible on axis movements, and not only on button presses.&lt;/li&gt;
+&lt;li&gt;Improve DMA-BUF format negotiation and buffer allocation to facilitate faster code paths in buffer handling.&lt;/li&gt;
+&lt;li&gt;Make user scripts and style sheets visible in the Web Inspector.&lt;/li&gt;
+&lt;li&gt;Make hole-punch media playback support video elements with rounded corners.&lt;/li&gt;
+&lt;li&gt;Enable by default building support for the MediaSession and WebCodecs APIs.&lt;/li&gt;
+&lt;li&gt;Allow WebDriver connections to already running browsers.&lt;/li&gt;
+&lt;li&gt;Support downloading files from the Web Inspector when using HTTP remote connections.&lt;/li&gt;
+&lt;li&gt;Replace build-time per-platform multimedia support option with quirks
+applied at runtime. Automatic quirk detection is used by default, and
+quirks may be overriden using the &lt;code&gt;WEBKIT_GST_QUIRKS&lt;/code&gt; and
+&lt;code&gt;WEBKIT_GST_HOLE_PUNCH&lt;/code&gt; environment variables.&lt;/li&gt;
+&lt;li&gt;Deprecate the &lt;code&gt;WebKitWebView::insecure-content-detected&lt;/code&gt; signal.&lt;/li&gt;
+&lt;li&gt;Fix mouse location in WebDriver when output device scaling is in effect.&lt;/li&gt;
+&lt;li&gt;Fix touch input event propagation.&lt;/li&gt;
+&lt;li&gt;Fix missing mouse cursor in the WPE Wayland platform support.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.45.1.tar.xz (37.7 MiB)
+   md5sum: b5399a7fe2dbd5a380caed9da7f3bfa3
+   sha1sum: 255c1ee50d311c9135b898e0da4876555af6df6a
+   sha256sum: c985a11fd70d5e0190adee2556bd5f2be9f860d628c71ae7cb35b6875b73a507
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.44.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/wpewebkit-2.44.1.html"/>
+    <updated>2024-04-09T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/wpewebkit-2.44.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 2.44 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.44.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.44.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Do not schedule layer flushes when drawing area size is empty.&lt;/li&gt;
+&lt;li&gt;Fix videos with alpha when using the DMA-BUF sink.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_WEB_AUDIO=OFF&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_VIDEO=OFF&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;USE_GBM=OFF&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build in 32-bit platforms&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.44.1.tar.xz (33.5 MiB)
+   md5sum: 51290d5cf1e032145f2a30971393b006
+   sha1sum: b4d61467f0fb27bb45919ae160efe71d40fda6a0
+   sha256sum: 2c9fbf4fcf8884d34102283e2b008ce0b0bc2cf07de78f564a8b34347e7bc19b
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.44 highlights</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/blog/2024-wpewebkit-2.44.html"/>
+    <updated>2024-04-08T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/blog/2024-wpewebkit-2.44.html</id>
+    <content type="html">&lt;p&gt;The WPE team released WPE WebKit 2.44 a few weeks ago. Let’s have a look at the most significant changes to the port for this release cycle.&lt;/p&gt;
+&lt;h2 id=&quot;webkit%E2%80%99s-displaylink-support&quot; tabindex=&quot;-1&quot;&gt;WebKit’s DisplayLink support&lt;/h2&gt;
+&lt;p&gt;DisplayLink is a WebCore feature that improves resource utilization and improves synchronization with vertical screen retrace. 2.44 adds an implementation of this feature for the WPE port that improves rendering performance.&lt;/p&gt;
+&lt;h2 id=&quot;improved-hardware-acceleration-video-decoding-and-rendering&quot; tabindex=&quot;-1&quot;&gt;Improved hardware-acceleration video decoding and rendering&lt;/h2&gt;
+&lt;p&gt;When WebKit is using GStreamer 1.24 or newer, video playback can use the new support for DRM modifiers in the DMA-BUF sink. This improves video decoding and rendering, as it allows for zero-copy negotiation with the video decoders.&lt;/p&gt;
+&lt;h2 id=&quot;webcodec-api-supported&quot; tabindex=&quot;-1&quot;&gt;WebCodec API supported&lt;/h2&gt;
+&lt;p&gt;WPE now supports the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API&quot;&gt;WebCodecs API&lt;/a&gt;, which allows web developers low-level access to video frames and audio chunks, a feature of importance for multimedia applications that need finer grain control over what gets played on the browser.&lt;/p&gt;
+&lt;h2 id=&quot;other-noteworthy-changes&quot; tabindex=&quot;-1&quot;&gt;Other noteworthy changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for the JPEG2000 image format has been removed. WebKit was the only major engine still supporting the format, which these days is rarely used. As a consequence, OpenJPEG is no longer a dependency. JPEG2000 should not be confused with JPEG-XL, which is still supported.&lt;/li&gt;
+&lt;li&gt;Support usage of libbacktrace, enabled by default at build time. This library provides quality stacktraces that can help developers and deployers more efficiently debug crashes in WPE-powered browsers.&lt;/li&gt;
+&lt;li&gt;Many memory and stability improvements, particularly on the multimedia backends.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For a complete list of changes, please check the &lt;a href=&quot;https://wpewebkit.org/release/&quot;&gt;releases page&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2024-0002</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html"/>
+    <updated>2024-03-26T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;March 26, 2024&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2024-0002&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html#CVE-2024-23252&quot;&gt;CVE-2024-23252&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html#CVE-2024-23254&quot;&gt;CVE-2024-23254&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html#CVE-2024-23263&quot;&gt;CVE-2024-23263&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html#CVE-2024-23280&quot;&gt;CVE-2024-23280&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html#CVE-2024-23284&quot;&gt;CVE-2024-23284&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html#CVE-2023-42950&quot;&gt;CVE-2023-42950&lt;/a&gt;,
+&lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html#CVE-2023-42956&quot;&gt;CVE-2023-42956&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/update-wix-logo/security/WSA-2024-0002.html#CVE-2023-42843&quot;&gt;CVE-2023-42843&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23252&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23252&quot;&gt;CVE-2024-23252&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to anbu1024 of SecANT.&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to a denial-of-service.
+Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263758&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23254&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23254&quot;&gt;CVE-2024-23254&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to James Lee (@Windowsrcer).&lt;/li&gt;
+&lt;li&gt;Impact: A malicious website may exfiltrate audio data cross-origin.
+Description: The issue was addressed with improved UI handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263795&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23263&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23263&quot;&gt;CVE-2024-23263&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to Johan Carlsson (joaxcar).&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may prevent
+Content Security Policy from being enforced. Description: A logic
+issue was addressed with improved validation.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 264811&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23280&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23280&quot;&gt;CVE-2024-23280&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to An anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: A maliciously crafted webpage may be able to fingerprint the
+user. Description: An injection issue was addressed with improved
+validation.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 266703&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-23284&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-23284&quot;&gt;CVE-2024-23284&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to Georg Felber and Marco Squarcina.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may prevent
+Content Security Policy from being enforced. Description: A logic
+issue was addressed with improved state management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 267241&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42950&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42950&quot;&gt;CVE-2023-42950&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to Nan Wang (@eternalsakura13) of 360 Vulnerability Research
+Institute and rushikesh nandedkar.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to
+arbitrary code execution. Description: A use after free issue was
+addressed with improved memory management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263682&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42956&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42956&quot;&gt;CVE-2023-42956&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to SungKwon Lee (Demon.Team).&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to a denial-of-service.
+Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263989&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42843&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42843&quot;&gt;CVE-2023-42843&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to Kacper Kwapisz (@KKKas_).&lt;/li&gt;
+&lt;li&gt;Impact: Visiting a malicious website may lead to address bar
+spoofing. Description: An inconsistent user interface issue was
+addressed with improved state management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 260046&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE
+WebKit. It is the best way to ensure that you are running safe versions
+of WebKit. Please check our websites for information about the latest
+stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;https://webkitgtk.org/security.html&lt;/a&gt; or &lt;a href=&quot;https://wpewebkit.org/security/&quot;&gt;https://wpewebkit.org/security/&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.16.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/libwpe-1.16.0.html"/>
+    <updated>2024-03-21T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/update-wix-logo/release/libwpe-1.16.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 1.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-libwpe-1.16.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the libwpe 1.16.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New API to override the default to override the default implementation
+for subprocess launch and termination.&lt;/li&gt;
+&lt;li&gt;New API for handling pointer lock events.&lt;/li&gt;
+&lt;li&gt;Properly handle the EGL library when available without a &lt;code&gt;pkg-config&lt;/code&gt;
+module file present.&lt;/li&gt;
+&lt;li&gt;Allow resetting the full screen client to a null pointer.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.16.0.tar.xz (62.0 KiB)
+   md5sum: 9779115aaa7e67abe642777394e7bfa2
+   sha1sum: ea574e09b5d47461a5579a24006488419474d136
+   sha256sum: c7f3a3c6b3d006790d486dc7cceda2b6d2e329de07f33bc47dfc53f00f334b2a
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
