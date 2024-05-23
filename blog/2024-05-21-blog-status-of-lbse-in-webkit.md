@@ -6,7 +6,7 @@ thumbnail: /assets/lbse-logo-wide.png
 preview: A look back at the last seven months of development on the Layer Based SVG Engine (LBSE) in WebKit.
 ---
 
-This blog entry gives an update on we at <a href="https://www.igalia.com">Igalia</a> have done on upstreaming and development of LBSE in WebKit in the last seven months. For an explanation of
+This blog entry gives an update on what we at <a href="https://www.igalia.com">Igalia</a> have done on upstreaming and development of LBSE in WebKit in the last seven months. For an explanation of
 what LBSE is and how it is related to WPE, see this <a href="https://wpewebkit.org/blog/05-new-svg-engine.html">previous entry</a> as a refresher.
 
 <div style="float: right">
