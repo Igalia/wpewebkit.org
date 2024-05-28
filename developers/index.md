@@ -44,6 +44,8 @@ API documentation for the **latest stable release** is available here:
 <li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-1.1/">WPEWebExtension 1.1 API documentation</a> (deprecated)</li>
 </ul>
 
+Documentation is also available for a number of [other releases](/reference).
+
 </div>
 
 <div class="dotsep">
