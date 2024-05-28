@@ -159,6 +159,10 @@ nav.sitemap > ul {
 	margin: 0.5em 1.5em;
 }
 
+.btn-l {
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+}
 
 .cta.btn {
 	display: inline-block;
@@ -469,6 +473,10 @@ header.page h1 {
 }
 header.page p {
 	font-size: 1.6em;
+}
+header.page > time {
+	margin: 1rem 0;
+	display: block;
 }
 
 pre, code {
