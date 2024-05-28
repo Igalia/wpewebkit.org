@@ -29,9 +29,12 @@ header.page .btn-xl {
    <time itemprop="dateCreated">{{ page.date | date: "%e %B %Y" }}</time>
  {% endif %}
   {% if download %}
-  <a class="btn btn-xl btn-secondary mt-3" href="{{ download }}">Download</a>
+  <a class="btn btn-l btn-secondary mt-3" href="{{ download }}">Download</a>
   {% elsif package and version %}
-  <a class="btn btn-xl btn-secondary mt-3" href="{{ site.release_dir | append:'/' | append: package | append: '-' | append: version | append: '.tar.xz' }}">Download</a>
+  <a class="btn btn-l btn-secondary mt-3" href="{{ site.release_dir | append:'/' | append: package | append: '-' | append: version | append: '.tar.xz' }}">Download</a>
+    {%- if hasDocumentation and not hideDocumentation %}
+	<a class="btn btn-l btn-secondary mt-3" href="{{ site.api_ref_dir }}/{{ version }}/">Documentation</a>
+	{%- endif %}
   {% endif %}
 </header>
 
