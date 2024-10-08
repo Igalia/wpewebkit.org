@@ -4,8 +4,81 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2024-10-02T00:00:00Z</updated>
+  <updated>2024-10-07T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.46 highlights</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/compat-table-2.46/blog/2024-wpewebkit-2.46.html"/>
+    <updated>2024-10-07T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/compat-table-2.46/blog/2024-wpewebkit-2.46.html</id>
+    <content type="html">&lt;p&gt;A couple of weeks ago, the WPE WebKit team released version 2.46. This is an important milestone for the project as, for the first time in a stable series, the Skia backend takes over rendering. Skia brings significant improvements to the graphics stack, so we are very happy for this release. The list of changes goes beyond graphics, and it’s not short of awesome, so let’s have a look to what’s new!&lt;/p&gt;
+&lt;h3 id=&quot;cairo-is-out%2C-skia-is-in&quot; tabindex=&quot;-1&quot;&gt;Cairo is out, Skia is in&lt;/h3&gt;
+&lt;p&gt;We &lt;a href=&quot;https://blogs.igalia.com/carlosgc/2024/02/19/webkit-switching-to-skia-for-2d-graphics-rendering/&quot;&gt;announced&lt;/a&gt; some time ago that a new rendering backend with &lt;a href=&quot;https://skia.org/&quot;&gt;Skia&lt;/a&gt; was on the works and that it would eventually replace Cairo. 2.46 the first release series where Skia is used, bringing important improvements in rendering and performance.&lt;/p&gt;
+&lt;p&gt;While Skia can use a GPU for rendering, our testing with common embedded SoCs has shown that the way WPE WebKit works may result in slightly worse performance in some cases than letting Skia use the CPU. Hence, for the 2.46 releases the latter is the default, while development continues to improve GPU usage on low-powered devices with the ultimate goal of making accelerated rendering the default choice in all cases.&lt;/p&gt;
+&lt;p&gt;The Cairo backend is still present and will be selected automatically at build time for big-endian architectures, where Skia is not yet supported. We plan to remove support for Cairo in the near future, and this approach allows us to ship the new renderer while solving the remaining issues. At any rate, the Cairo renderer is no longer receiving active development.&lt;/p&gt;
+&lt;p&gt;It is important to notice that it is recommended to build WPE with Clang instead of GCC. This comes from upstream Skia; see their &lt;a href=&quot;https://skia.org/docs/user/build/#supported-and-preferred-compilers&quot;&gt;supported and preferred compilers page&lt;/a&gt; for details.&lt;/p&gt;
+&lt;h3 id=&quot;graphics-stack-revamped&quot; tabindex=&quot;-1&quot;&gt;Graphics stack revamped&lt;/h3&gt;
+&lt;p&gt;Tha switch to Skia has made possible a significant number of changes and improvements in the WebKit graphics stack. These changes relate to accelerated canvas, accelerated CSS filters, color spaces, and more. &lt;a href=&quot;https://blogs.igalia.com/carlosgc/2024/09/27/graphics-improvements-in-webkitgtk-and-wpewebkit-2-46/&quot;&gt;Carlos García has written extensively about these changes&lt;/a&gt; in his blog, we recommend reading his article for more details.&lt;/p&gt;
+&lt;h3 id=&quot;trace-point-profiling-with-sysprof&quot; tabindex=&quot;-1&quot;&gt;Trace point profiling with sysprof&lt;/h3&gt;
+&lt;p&gt;Sysprof is a profiling and performance analysis tool for Linux. Thanks to integration with &lt;code&gt;libsysprof-capture&lt;/code&gt;, it is now possible to use Sysprof to record trace points to do profiling and performance analysis of WebKit internals. This is a major improvement that will allow us to more effectively analyze the code paths that are more performance-sensitive and find ways to optimize them. It will also allow vendors to profile their specific hardware configurations and specific use-cases as well.&lt;/p&gt;
+&lt;p&gt;For a more in-depth presentation of the integration with Sysprof, please read &lt;a href=&quot;https://feaneron.com/2024/07/12/profiling-a-web-engine/&quot;&gt;Georges Stavacras’ blog post on the topic&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;api-changes&quot; tabindex=&quot;-1&quot;&gt;API changes&lt;/h3&gt;
+&lt;h4 id=&quot;additions&quot; tabindex=&quot;-1&quot;&gt;Additions&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://webkitgtk.org/reference/webkitgtk/unstable/method.Settings.apply_from_key_file.html&quot;&gt;&lt;code&gt;webkit_settings_apply_from_key_file()&lt;/code&gt;&lt;/a&gt; allows applying WebKit settings directly from a key file&lt;/li&gt;
+&lt;li&gt;The console message API, which had been previously deprecated, has been brought to the current API&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://webkitgtk.org/reference/webkitgtk/2.46.0/signal.AutomationSession.will-close.html&quot;&gt;&lt;code&gt;WebKitAutomationSession::will-close&lt;/code&gt;&lt;/a&gt; signal, which allows clients to perform cleanup tasks before an automation session is closed&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://webkitgtk.org/reference/webkitgtk/2.46.0/property.Settings.enable-2d-canvas-acceleration.html&quot;&gt;&lt;code&gt;enable-2d-canvas-acceleration&lt;/code&gt;&lt;/a&gt; WebSetting can be used to control 2D-canvas acceleration in Skia-enabled builds&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;webkit_web_view_toggle_inspector()&lt;/code&gt; shows or hides the web inspector for a given webview (only available with the WPE platform API)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;deprecations&quot; tabindex=&quot;-1&quot;&gt;Deprecations&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;WebKitWebView::insecure-content-detected&lt;/code&gt; signal.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;WebKitWebContext:use-system-appearance-for-scrollbars&lt;/code&gt; property.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;webkit_web_context_set_use_system_appearance_for_scrollbars()&lt;/code&gt; and &lt;code&gt;webkit_web_context_get_use_system_appearance_for_scrollbars()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;gstreamer-customizations&quot; tabindex=&quot;-1&quot;&gt;GStreamer customizations&lt;/h3&gt;
+&lt;p&gt;Compile-time platform-specific GStreamer customizations are now done at runtime, using the &lt;code&gt;WEBKIT_GST_QUIRKS&lt;/code&gt; and &lt;code&gt;WEBKIT_GST_HOLE_PUNCH_QUIRK&lt;/code&gt; environment variables. Setting their value to &lt;code&gt;help&lt;/code&gt; will return a help message with the possible values to &lt;code&gt;stderr&lt;/code&gt;. A list of the removed CMake defines:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;USE_GSTREAMER_NATIVE_VIDEO&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_GSTREAMER_NATIVE_AUDIO&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_GSTREAMER_TEXT_SINK&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_GSTREAMER_HOLEPUNCH&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_WPEWEBKIT_PLATFORM_WESTEROS&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_WPEWEBKIT_PLATFORM_BCM_NEXUS&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_WPEWEBKIT_PLATFORM_AMLOGIC&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_WPEWEBKIT_PLATFORM_RPI&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_WPEWEBKIT_PLATFORM_BROADCOM&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USE_WESTEROS_SINK&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;web-platform-changes&quot; tabindex=&quot;-1&quot;&gt;Web Platform changes&lt;/h3&gt;
+&lt;p&gt;The changes to supported Web Platform features between releases of WebKit are always substantial, and for that reason listing all of those changes here would be a major endeavour. The following is an incomplete list of some of the features that have been enabled, removed, and marked in preview state since 2.44, in no particular order:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CSS Container/Style Queries&lt;/li&gt;
+&lt;li&gt;CSS &lt;code&gt;text-wrap-style&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;CSS &lt;code&gt;background-clip: border-area&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;CSS &lt;code&gt;text-underline-position: left|right&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;CSS &lt;code&gt;scrollbar-width&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;CSS View Transitions&lt;/li&gt;
+&lt;li&gt;CSS Grid Masonry layout (preview)&lt;/li&gt;
+&lt;li&gt;CSS &lt;code&gt;::target-text&lt;/code&gt; pseudo element&lt;/li&gt;
+&lt;li&gt;WebCrypto X25519 algorithm (preview)&lt;/li&gt;
+&lt;li&gt;AppCache support has been removed&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;Promise.try()&lt;/code&gt; method&lt;/li&gt;
+&lt;li&gt;New &lt;code&gt;Observable&lt;/code&gt; methods, like &lt;code&gt;.map()&lt;/code&gt; and &lt;code&gt;.filter()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;other-noteworthy-changes&quot; tabindex=&quot;-1&quot;&gt;Other noteworthy changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Suport for the WebP image format is now always enabled.&lt;/li&gt;
+&lt;li&gt;WebDriver clients may now connect to an already running process, instead of always needing to spawn a new one.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;gst-libav&lt;/code&gt; AAC decoders are now disabled due to outstanding bugs. Distributors are encouraged to use the GStreamer FDK AAC decoder (part of &lt;code&gt;gst-plugins-bad&lt;/code&gt;) instead.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;and-much-more!&quot; tabindex=&quot;-1&quot;&gt;And much more!&lt;/h3&gt;
+&lt;p&gt;WebKit evolves and changes a lot between major stable releases. Listing all changes would not be possible. There are countless bug fixes, performance improvements, new web features supported, and so on. We recommend checking the &lt;a href=&quot;https://wpewebkit.org/release/&quot;&gt;release notes&lt;/a&gt; and the git log for more details.&lt;/p&gt;
+&lt;p&gt;The WPE WebKit team is already working on the 2.48 release, schedule for early next year. Until then!&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.46.1 released</title>
@@ -418,32 +491,6 @@ wpewebkit-2.44.3.tar.xz (33.6 MiB)
    md5sum: f37e7e2f63538cf0eca3982256573174
    sha1sum: 01643344c4780a0494a921b7b25929678b88648b
    sha256sum: 55c639879eaa5f070fb1c11fccb968cd85ca21680cc8cd0cd638135ca24433bb
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.45.3 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/compat-table-2.46/release/wpewebkit-2.45.3.html"/>
-    <updated>2024-05-30T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/compat-table-2.46/release/wpewebkit-2.45.3.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 2.46 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.45.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.45.3?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Enable offscreen canvas by default.&lt;/li&gt;
-&lt;li&gt;Enable &lt;code&gt;ImageBitmap&lt;/code&gt; acceleration.&lt;/li&gt;
-&lt;li&gt;Add support for accelerated offscreen canvas.&lt;/li&gt;
-&lt;li&gt;Do not display WebGL front buffer before it has been initialized.&lt;/li&gt;
-&lt;li&gt;Add a new setting to enable or disable the 2D canvas acceleration (enabled by default).&lt;/li&gt;
-&lt;li&gt;Add support for building QtWPE with Qt6.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.45.3.tar.xz (37.8 MiB)
-   md5sum: 9393ecc73bb3772ae899b4c0191f291b
-   sha1sum: 477fe05c19153476aed1de659f4e1bf15de62e0b
-   sha256sum: 7c95fb4cfdb514e7369cc9836cff3948728af353a34ad50575322161b7c43b62
 &lt;/pre&gt;
 </content>
   </entry>

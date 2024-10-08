@@ -2074,1086 +2074,1093 @@
 	</url>
 
 	<url>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/blog/2024-wpewebkit-2.46.html</loc>
+		<lastmod>2024-10-07T00:00:00.000Z</lastmod>
+		<changefreq>yearly</changefreq>
+		<priority>0.75</priority>
+	</url>
+
+	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/README/</loc>
-		<lastmod>2024-10-08T07:18:04.218Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/_authors/aperez/</loc>
-		<lastmod>2024-10-08T07:18:04.218Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/_authors/csaavedra/</loc>
-		<lastmod>2024-10-08T07:18:04.218Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/_authors/llepage/</loc>
-		<lastmod>2024-10-08T07:18:04.218Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/_authors/lmoura/</loc>
-		<lastmod>2024-10-08T07:18:04.218Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/_authors/magomez/</loc>
-		<lastmod>2024-10-08T07:18:04.218Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/_authors/nzimmermann/</loc>
-		<lastmod>2024-10-08T07:18:04.218Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/_authors/pgriffis/</loc>
-		<lastmod>2024-10-08T07:18:04.218Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/_authors/rbuis/</loc>
-		<lastmod>2024-10-08T07:18:04.219Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.311Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/a-good-choice.html</loc>
-		<lastmod>2024-10-08T07:18:04.219Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.312Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/architecture.html</loc>
-		<lastmod>2024-10-08T07:18:04.219Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.312Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/builds.html</loc>
-		<lastmod>2024-10-08T07:18:04.219Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.312Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/faq.html</loc>
-		<lastmod>2024-10-08T07:18:04.219Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.312Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/get-wpe.html</loc>
-		<lastmod>2024-10-08T07:18:04.219Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.312Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/</loc>
-		<lastmod>2024-10-08T07:18:04.219Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.312Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.9</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/supported-hardware.html</loc>
-		<lastmod>2024-10-08T07:18:04.220Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.312Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.7</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/what-is-embedded.html</loc>
-		<lastmod>2024-10-08T07:18:04.220Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.312Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/blog/</loc>
-		<lastmod>2024-10-08T07:18:04.283Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.374Z</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/developers/</loc>
-		<lastmod>2024-10-08T07:18:04.285Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.376Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/</loc>
-		<lastmod>2024-10-08T07:18:04.285Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.376Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>1</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/about/get-started.html</loc>
-		<lastmod>2024-10-08T07:18:04.285Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.376Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitApplicationInfo/</loc>
-		<lastmod>2024-10-08T07:18:04.285Z</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-
-	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitApplicationInfo/</loc>
-		<lastmod>2024-10-08T07:18:04.285Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.377Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitAuthenticationRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.286Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.377Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitAutomationSession/</loc>
-		<lastmod>2024-10-08T07:18:04.286Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitApplicationInfo/</loc>
+		<lastmod>2024-10-08T10:54:45.377Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitAuthenticationRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.286Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.377Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitAutomationSession/</loc>
-		<lastmod>2024-10-08T07:18:04.286Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitAutomationSession/</loc>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitBackForwardList/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitBackForwardListItem/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitContextMenu/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitContextMenuItem/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitCookieManager/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitDownload/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitEditorState/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-
-	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitFaviconDatabase/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-
-	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitFileChooserRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitAutomationSession/</loc>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitBackForwardList/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitBackForwardListItem/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitContextMenu/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitContextMenuItem/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitCookieManager/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitDownload/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.378Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitEditorState/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitEditorState/</loc>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitFaviconDatabase/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitFaviconDatabase/</loc>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitFileChooserRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.287Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitFileChooserRequest/</loc>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitFindController/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitFormSubmissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitGeolocationPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitHitTestResult/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitInstallMissingMediaPluginsPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitNavigationAction/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitNavigationPolicyDecision/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitNetworkProxySettings/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitNotification/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitEditorState/</loc>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitNotificationPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitFaviconDatabase/</loc>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitFileChooserRequest/</loc>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitFindController/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitFormSubmissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitGeolocationPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitHitTestResult/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitInstallMissingMediaPluginsPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitNavigationAction/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitNavigationPolicyDecision/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitNetworkProxySettings/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.379Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitNotification/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitNotification/</loc>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitNotificationPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitNotificationPermissionRequest/</loc>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.288Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitPermissionRequest/</loc>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitPlugin/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitPolicyDecision/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitResponsePolicyDecision/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitSecurityManager/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitSecurityOrigin/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitSettings/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitURIRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitURIResponse/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitNotification/</loc>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitURISchemeRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitNotificationPermissionRequest/</loc>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitUserContentManager/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitPermissionRequest/</loc>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitPlugin/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitPolicyDecision/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitResponsePolicyDecision/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitSecurityManager/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitSecurityOrigin/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitSettings/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitURIRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.380Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitURIResponse/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitURIResponse/</loc>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitURISchemeRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitURISchemeRequest/</loc>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitUserContentManager/</loc>
-		<lastmod>2024-10-08T07:18:04.289Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitUserContentManager/</loc>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitUserMediaPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitWebContext/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitWebResource/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitWebView/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitWebViewBackend/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitWebsiteData/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitWebsiteDataManager/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitWindowProperties/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitURIResponse/</loc>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitURISchemeRequest/</loc>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitUserContentManager/</loc>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitUserMediaPermissionRequest/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitWebContext/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitWebResource/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitWebView/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitWebViewBackend/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitWebsiteData/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitWebsiteDataManager/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.381Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitWindowProperties/</loc>
-		<lastmod>2024-10-08T07:18:04.290Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/WebKitWindowProperties/</loc>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/annotation-glossary/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/ch01/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/ch02/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/index-all/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/wpe-0.1-WebKitError/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/WebKitWindowProperties/</loc>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/annotation-glossary/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/ch01/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/ch02/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/index-all/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.382Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/wpe-0.1-WebKitError/</loc>
-		<lastmod>2024-10-08T07:18:04.291Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/wpe-0.1-WebKitError/</loc>
+		<lastmod>2024-10-08T10:54:45.383Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/wpe-0.1-WebKitURIUtilities/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.383Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/2.23.90/wpe-0.1-WebKitUserContent/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.383Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/wpe-0.1-WebKitError/</loc>
+		<lastmod>2024-10-08T10:54:45.383Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/wpe-0.1-WebKitURIUtilities/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.383Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkit/unstable/wpe-0.1-WebKitUserContent/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.383Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitConsoleMessage/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-
-	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitDOMDocument/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-
-	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitDOMElement/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-
-	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitDOMNode/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.383Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitConsoleMessage/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.383Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitDOMDocument/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitDOMDocument/</loc>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitDOMElement/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitDOMElement/</loc>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
-		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitDOMNode/</loc>
-		<lastmod>2024-10-08T07:18:04.292Z</lastmod>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitDOMNode/</loc>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitDOMObject/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitFrame/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitScriptWorld/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitWebEditor/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitWebExtension/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitWebHitTestResult/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/WebKitWebPage/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/annotation-glossary/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/ch01/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/ch02/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/index-all/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/2.23.90/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitDOMDocument/</loc>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitDOMElement/</loc>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<url>
+		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitDOMNode/</loc>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitDOMObject/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitFrame/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitScriptWorld/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitWebEditor/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitWebExtension/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitWebHitTestResult/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/WebKitWebPage/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/annotation-glossary/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/ch01/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/ch02/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/index-all/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/reference/wpewebkitwebextensions/unstable/</loc>
-		<lastmod>2024-10-08T07:18:04.293Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.384Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/release/</loc>
-		<lastmod>2024-10-08T07:18:04.294Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.385Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/release/schedule/</loc>
-		<lastmod>2024-10-08T07:18:04.302Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.393Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.4</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/release/verify/</loc>
-		<lastmod>2024-10-08T07:18:04.302Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.393Z</lastmod>
 		<changefreq>yearly</changefreq>
 		<priority>0.4</priority>
 	</url>
 
 	<url>
 		<loc>https://igalia.github.io/wpewebkit.org/compat-table-2.46/security/</loc>
-		<lastmod>2024-10-08T07:18:04.302Z</lastmod>
+		<lastmod>2024-10-08T10:54:45.393Z</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
