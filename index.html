@@ -5,6 +5,7 @@ description: WebKit port optimized for embedded devices
 sitemapPriority: 1.0
 sitemapChangeFrequency: yearly
 ---
+<script type="module" src="./js/slide-show.js"></script>
 <style>
 
 /* specific to home page */
@@ -154,20 +155,12 @@ header.page div h1 {
 
 /* SPICY!  */
 
-.success-stories spicy-sections {
-	--const-mq-affordances:
-		[screen and (max-width: 40em) ] collapse |
-		[screen and (min-width: 60em) ] tab-bar
-	;
-	--tabActive: #1593ed;
-	--tabInactive: hsl(230deg 5% 60% / 0.85);
+.success-stories slide-show {
+  overflow: auto;
 	display: block;
 	padding: 1em;
+	height: 10rem;
 	grid-column: 2 / -2;
-}
-.success-stories spicy-sections::part(tab-list) {
-	display: flex;
-	justify-content: space-evenly;
 }
 
 .success-stories {
@@ -177,13 +170,13 @@ header.page div h1 {
 	background: radial-gradient(13rem at 45% 55%, #FFF, transparent),
 		#F1F1F1;
 }
-.success-stories spicy-sections > div {
+.success-stories section > div {
 	padding-block: 2em;
 }
-.success-stories spicy-sections > * + ::before {
+.success-stories section > * + ::before {
 	content: none;
 }
-.success-stories spicy-sections h2 {
+.success-stories section h2 {
 	margin: 0;
 	border-block-end: 1em solid #DDD;
 	padding-block: 0.2em 0.25em;
@@ -194,15 +187,7 @@ header.page div h1 {
 	opacity: 0.5;
 	transition-duration: var(--transTime);
 }
-.success-stories spicy-sections h2[aria-selected="true"] {
-	border-block-end: 1em solid var(--tabActive);
-	cursor: default;
-	pointer-events: none;
-	opacity: 1;
-}
-.success-stories spicy-sections h2:focus-within {
-	outline: 0;
-}
+
 .success-stories h2::before {
 	content: '';
 	display: block;
@@ -239,7 +224,7 @@ header.page div h1 {
 }
 
 @media (min-width: 45rem) {
-	.success-stories spicy-sections > div {
+	.use-cases section > div {
 		grid-column: main / -2;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -248,21 +233,21 @@ header.page div h1 {
 		gap: 4rem;
 		transition-duration: var(--transTime);
 	}
-	.success-stories spicy-sections > div:nth-of-type(even) {
+	.use-cases section > div:nth-of-type(even) {
 		grid-template-columns: 2fr 1fr;
 	}
-	.success-stories spicy-sections > div:nth-of-type(even) .spotlight {
+	.use-cases section > div:nth-of-type(even) .spotlight {
 		padding-inline-end: 0;
 	}
-	.success-stories spicy-sections > * {
+	.use-cases section > * {
 		margin: 0;
 		padding: 0;
 	}
-	.success-stories spicy-sections div + img {
+	.use-cases section div + img {
 		max-height: 100%;
 		margin-inline: 0;
 	}
-	.success-stories spicy-sections img.hero {
+	.use-cases section img.hero {
 		max-width: 100%;
 		height: auto;
 		max-height: 30rem;
@@ -271,7 +256,7 @@ header.page div h1 {
 			justify-self: end;
 			margin-inline: 0 -4rem;
 	}
-	.success-stories spicy-sections .spotlight {
+	.use-cases section .spotlight {
 		padding-inline: 6rem;
 		padding-block: 2rem;
 	}
@@ -392,94 +377,92 @@ Open standards with great longevity allows lots more things to benefit from the 
 </div>
 
 </section>
-
-
 <section class="success-stories full-width dotsep">
-
-<spicy-sections>
-<h2 class="successstory">Metrological</h2>
-<div>
-<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
-<div class="spotlight">
-<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
-<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read Success Story</a></p>
-</div>
-</div>
-
-<h2 class="usecase">Digital Signage</h2>
-<div>
-<div class="spotlight">
-<h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
-<p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
-<p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
-</div>
-<img src="/assets/img/use_case-digital_signage.png" alt="">
-</div>
-
-<h2 class="successstory">Sony Playstation</h2>
-<div>
-<div class="spotlight">
-<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>Something something Sony something.</p>
-<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
-</div>
-</div>
-
-<h2 class="successstory">Metrological</h2>
-<div>
-<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
-<div class="spotlight">
-<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
-<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
-</div>
-</div>
-
-<h2 class="usecase">Digital Signage</h2>
-<div>
-<div class="spotlight">
-<h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
-<p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
-<p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
-</div>
-<img src="/assets/img/use_case-digital_signage.png" alt="">
-</div>
-
-<h2 class="successstory">Sony Playstation</h2>
-<div>
-<div class="spotlight">
-<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-<p>Something something Sony something.</p>
-<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
-</div>
-</div>
-
-</spicy-sections>
-
+  <div>
+    <img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
+    <div class="spotlight">
+      <h2 id="success-stories">Success Story</h2>
+      <h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+      <p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
+      <p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
+    </div>
+  </div>
 </section>
-
-
+<h2>Use Cases</h2>
+<slide-show controls="navigation" class="use-cases">
+  <section>
+    <div>
+      <div class="spotlight">
+        <h3><a href="/blog/2023-success-digital-signage.html">Digital Signage</a></h3>
+        <p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
+        <p><a href="/blog/2023-success-digital-signage.html" class="cta btn large">Learn More</a></p>
+      </div>
+      <img height="250" src="/assets/img/use_case-digital_signage.png" alt="">
+    </div>
+  </section>
+  <section>
+    <div>
+      <div class="spotlight">
+        <h3>Point of Sale</h3>
+        <p>Just as the web helps billions of online users make purchases every day, embedded browsers can serve as the basis for building the point of sale systems used by brick and mortar merchants.</p>
+      </div>
+      <img height="250" src="https://images.unsplash.com/photo-1556742517-fde6c2abbe11?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    </div>
+    </div>
+  </section>
+  <section>
+    <div>
+      <div class="spotlight">
+        <h3>Infotainment Systems</h3>
+        <p>The web’s ability to create interactive interfaces and stream media make embedded browsers an excellent choice for building the infotainment systems in automobiles, airplanes and trains.</p>
+      </div>
+      <img height="400" src="https://images.unsplash.com/photo-1700934509422-075b6e2830bb?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    </div>
+  </section>
+  <section>
+    <div>
+      <div class="spotlight">
+      	<h3>Smart TVs and set-top-boxes</h3>
+        <p>Television has long used embedded browsers in many ways, from video playback to creating the guides and interactive menus. The Web, with its natural multimedia-related capabilities, is a natural fit for consuming both traditional TV-based content as well as on demand content from industry-leading streaming services.</p>
+      </div>
+      <img height="250" src="https://www.igalia.com/assets/i/pe-industries/mini-tv.jpg" alt="">
+    </div>
+  </section>
+  <section>
+    <div>
+      <div class="spotlight">
+    		<h3 class="usecase">Home appliances</h3>
+        <p>Embedded browsers are increasingly used in home appliances of all kinds: From providing temperature information and settings for climate control systems, to browsing recipes and engaging programs on your favorite cooking machine, to controlling the distribution of sound across smart speakers around your home.</p>
+      </div>
+      <img height="250" src="https://plus.unsplash.com/premium_photo-1729431432431-fabe5caa7078?q=80&w=2168&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    </div>
+  </section>
+  <section>
+    <div>
+      <div class="spotlight">
+        <h3 class="usecase">Professional video and broadcasting</h3>
+        <p>Graphics overlays are everywhere nowadays in the live video broadcasting industry. Embedded browsers can be used to deliver low-latency, web-augmented video broadcasts which provides with expands the capabilities of traditional systems with and added value.</p>
+      </div>
+      <img height="250" src="https://plus.unsplash.com/premium_photo-1688700437975-0ea63cfa59e1?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    </div>
+  </section>
+</slide-show>
 <section class="developers embedded dotsep">
-<div>
-
-<header class="full-bleed">
-<h2><a href="/developers">Developers</a></h2>
-<img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
-</header>
-
-<div class="c2 dotsep">
-<h3><a href="/about/architecture.html">WPE Design</a></h3>
-<p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
-<img src="/assets/img/diagram-WPE-design.svg" alt="" class="decoration">
-</div>
-
-<div class="c2 dotsep text">
-<h3><a href="/about/faq.html">WPE’s Frequently Asked Questions</a></h3>
-<p>We’ve been collecting answers to lots of common questions we’ve been asked. If you have questions, you might find a ready answer in the FAQ.</p>
-</div>
-
-</div>
+  <div>
+    <header class="full-bleed">
+      <h2><a href="/developers">Developers</a></h2>
+      <img src="/assets/img/illustration-resources.svg" alt="" class="decoration">
+    </header>
+    <div class="c2 dotsep">
+      <h3><a href="/about/architecture.html">WPE Design</a></h3>
+      <p>WPE is the official WebKit port for embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
+      <img src="/assets/img/diagram-WPE-design.svg" alt="" class="decoration">
+    </div>
+    <div class="c2 dotsep text">
+      <h3><a href="/about/faq.html">WPE’s Frequently Asked Questions</a></h3>
+      <p>We’ve been collecting answers to lots of common questions we’ve been asked. If you have questions, you might find a ready answer in the FAQ.</p>
+    </div>
+  </div>
 </section>
 
 <section class="igalia full-width">
@@ -519,88 +502,4 @@ window.onload = function() {
 		ppbutton.innerHTML = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><rect x="33" y="30" width="12" height="40" /><rect x="55" y="30" width="12" height="40" /></svg>';
 	}
 }
-</script>
-<script type="module" src="/js/SpicySections.js"></script>
-<script type="module">
-const tabs = document.querySelectorAll('spicy-sections h2');
-const carousel = document.querySelector('spicy-sections');
-let loop;
-const listlength = tabs.length;
-function tabswitch() {
-	for (let i = 0; i < listlength; i++) {
-		if (tabs[i].ariaSelected == "true") {
-			let next = (i + 1) % listlength;
-			tabs[next].affordanceState.activate();
-			i = listlength;
-		}
-	}
-}
-
-carousel.addEventListener('pointerenter', (e) => {
-	stopCarousel();
-});
-carousel.addEventListener('pointerleave', (e) => {
-	startCarousel();
-	tabswitch();
-});
-
-document.addEventListener('keydown', (e) => {
-	if (e.key == 'Escape') {
-		stopCarousel();
-	}
-});
-
-function startCarousel(interval = 5000) {
-	if (!loop) {
-		console.log('starting');
-		loop = setInterval(tabswitch,interval);
-	}
-}
-function stopCarousel() {
-	if (loop) {
-		console.log('stopping');
-		clearInterval(loop);
-		loop = null;
-	}
-}
-
-function intersectionCallback(entries) {
-	entries.forEach((entry) => {
-		const box = entry.target;
-		if (entry.isIntersecting) {
-			if (entry.intersectionRatio >= 0.1) {
-				box.classList.add('visible');
-				startCarousel();
-			}
-		} else {
-			box.classList.remove('visible');
-			stopCarousel();
-		}
-	});
-}
-
-function handleVisibilityChange() {
-	if (document.hidden) {
-		stopCarousel();
-	} else {
-		startCarousel();
-	}
-}
-
-window.addEventListener("load", startup, false);
-let carouselObserver;
-let carouselsection = document.querySelector('.success-stories');
-function startup() {
-	document.addEventListener("visibilitychange", handleVisibilityChange, false);
-
-	const observerOptions = {
-		root: null,
-		rootMargin: "0px",
-		threshold: [0.0, 1.0],
-	};
-
-	carouselObserver = new IntersectionObserver(intersectionCallback, observerOptions);
-	carouselObserver.observe(carouselsection);
-}
-
 </script>
