@@ -18,6 +18,17 @@ main, main > .full-width {
 	grid-template-columns: 1fr [dash] 1px [main] auto 1px 1fr;
 	grid-template-rows: repeat(10,auto);
 }
+
+::part(prev-button),::part(next-button){
+	top:0%;
+	height:100%;
+	background-image:linear-gradient(42deg,hsl(0 80 0 / 0),40%,hsl(0 100 0 / 0.1),60%,hsl(0 80 0 / 0));
+}
+
+:is(::part(prev-button),::part(next-button):hover{
+	background-image:none;
+}
+
 @media (min-width: 45rem) {
 	main, main > .full-width {
 		grid-template-columns: 1fr [dash] 1px [main] minmax(30rem,var(--mainColMax)) 1px 1fr;
