@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Release Schedule
+skipHtmlSitemap: false
 sitemapChangeFrequency: yearly
 sitemapPriority: 0.4
 ---
@@ -51,11 +52,13 @@ version number stays the same:
 
 The following table summarizes which *stable* releases of libwpe, WPE WebKit,
 WPEBackend-fdo, and Cog are compatible and tested with each other (updated
-April 2023). Distributors and packagers are strongly advised to use the
+October 2024). Distributors and packagers are strongly advised to use the
 versions listed below.
 
 | **WPE WebKit** | **libwpe**   | **WPEBackend-fdo** | **Cog**      |
 |:--------------:|:------------:|:------------------:|:------------:|
+| 2.46.x         | 1.16.x       |  1.16.x, 1.14.x    | 0.18.x       |
+| 2.44.x         | 1.16.x, 1.14.x | 1.14.x           | 0.18.x       |
 | 2.42.x         | 1.14.x       | 1.14.x             | 0.18.x       |
 | 2.40.x         | 1.14.x, 1.12.x | 1.14.x, 1.12.x | 0.16.x |
 | 2.38.x         | 1.14.x, 1.12.x | 1.14.x, 1.12.x, 1.10.x | 0.16.x, 0.14.x, 0.12.x |

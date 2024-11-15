@@ -1,4 +1,6 @@
 {
 	"layout": "post",
-	"tags": ["release"]
+	"tags": ["release"],
+	"skipHtmlSitemap": true,
+	"hideDocumentation": false
 }

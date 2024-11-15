@@ -2,6 +2,7 @@
 title: Verifying Releases
 layout: post
 data: { dateless: "true" }
+skipHtmlSitemap: false
 sitemapChangeFrequency: yearly
 sitemapPriority: 0.4
 ---

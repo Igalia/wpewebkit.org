@@ -9,6 +9,40 @@
 
     <main>
     {{ content }}
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
     </main>
 
     {% include footer.html %}

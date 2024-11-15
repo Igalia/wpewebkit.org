@@ -1,4 +1,5 @@
 {
-	"release_dir": "https://wpewebkit.org/releases/",
+	"release_dir": "https://wpewebkit.org/releases",
+	"api_ref_dir": "https://wpewebkit.org/reference",
 	"base_url": "https://wpewebkit.org"
 }

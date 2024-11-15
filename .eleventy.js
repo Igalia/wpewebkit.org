@@ -1,9 +1,11 @@
 const MarkdownIt = require("markdown-it");
 const MarkdownItAnchor = require("markdown-it-anchor");
 const MarkdownItTOC = require("markdown-it-toc-done-right");
+const EleventyNavigation = require("@11ty/eleventy-navigation");
 const EleventySyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const { DateTime } = require("luxon");
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+const PosixPath = require("node:path").posix;
 
 class DefaultDict {
   constructor(defaultValue) {
@@ -14,6 +16,32 @@ class DefaultDict {
 }
 
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const endSlashRe = /\/$/;
+
+function findSitemapEntries(collection, curPath = "/") {
+  if (curPath !== "/" && curPath.match(endSlashRe))
+    curPath = curPath.replace(endSlashRe, "");
+
+  let pages = [];
+  for (let item of collection) {
+    if (item.data && !item.data.skipHtmlSitemap && item.data.title) {
+      const itemPath = (new URL(item.url, "http://example.com")).pathname;
+      const itemParent = item.data.htmlSitemapParent || PosixPath.dirname(itemPath);
+      if (curPath == itemParent) {
+        pages.push({
+          key: itemPath,
+          url: item.url,
+          title: item.data.htmlSitemapTitle || item.data.title,
+          order: item.data.htmlSitemapOrder || 0,
+          parent: itemParent,
+          children: (curPath === itemPath) ? [] : findSitemapEntries(collection, itemPath),
+          pluginType: "eleventy-navigation",
+        })
+      }
+    }
+  }
+  return pages.sort((a, b) => (a.order || 0) - (b.order || 0));
+}
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css')
@@ -22,6 +50,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('assets')
   eleventyConfig.addPassthroughCopy('release/verify/*.key')
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+  eleventyConfig.addPlugin(EleventyNavigation);
   eleventyConfig.addPlugin(EleventySyntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);
   
@@ -46,6 +75,7 @@ module.exports = function(eleventyConfig) {
     if (path == "/") return "/";
     return path.match(/^(.+?\/)/)[1];
   });
+  eleventyConfig.addFilter("htmlSitemap", findSitemapEntries);
 
   eleventyConfig.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
 

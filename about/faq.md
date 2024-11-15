@@ -9,6 +9,16 @@ sitemapChangeFrequency: monthly
 
 [[toc]]
 
+## What licenses WPE and its related components are published under?
+
+WPE is an Open Source project developed upstream as part of [the WebKit project](https://webkit.org), with all its code being pushed to [WebKit's upstream repository](https://github.com/WebKit/WebKit). Therefore, **WPE is published under a mix of LGPLv2 and BSD licenses**, which are the ones applying to the WebKit project as a whole. You can [find a copy of such licenses in the webkit.org website](https://webkit.org/licensing-webkit).
+
+There are also [three related components developed alongside with WPEWebKit](https://wpewebkit.org/release), which are externally maintained and have their own Open Source licenses:
+
+* libwpe: [BSD-2-Clause license](https://github.com/WebPlatformForEmbedded/libwpe/blob/master/COPYING) (also known as _“Simplified BSD License”_).
+* WPEBackend-fdo: [BSD-2-Clause license](https://github.com/Igalia/WPEBackend-fdo/blob/master/COPYING).
+* Cog: [MIT license](https://github.com/Igalia/cog/blob/master/COPYING).
+
 ## What is the difference between WebPlatformForEmbedded's WPE and WPEWebKit?
 
 Historically, the [WebPlatformForEmbedded flavor of WPE](https://github.com/WebPlatformForEmbedded/WPEWebKit) came first. It included several adaptations for the Reference Design Kit (RDK) platform, as well as different fixes for its supported devices. Quoting the [RDK](https://rdkcentral.com/) website:

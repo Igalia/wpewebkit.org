@@ -2,6 +2,8 @@
 layout: home.html
 title: WPE
 description: WebKit port optimized for embedded devices
+htmlSitemapOrder: -10
+htmlSitemapTitle: Home
 sitemapPriority: 1.0
 sitemapChangeFrequency: yearly
 ---
@@ -238,7 +240,7 @@ header.page div h1 {
 	.use-cases section > div {
 		grid-column: main / -2;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 2fr;
 		grid-template-rows: min-content;
 		align-items: center;
 		gap: 4rem;
@@ -345,7 +347,7 @@ section.igalia > div > div > img {
 Create simple and performant systems based on <strong>Web platform technologies.</strong>
 </h1>
 <p>
-A WebKit port for Linux-based embedded devices designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best performance.
+An Open Source WebKit port for Linux-based embedded devices designed with flexibility and hardware acceleration in mind, leveraging common 3D graphics APIs for best performance.
 </p>
 <a class="cta btn large" href="/about/get-wpe.html">Get WPE</a>
 <button id="bannerControl" aria-label="Play/Pause silent background video"><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke="#FFF" fill="#FFF"><circle cx="50" cy="50" r="45" stroke-width="9" fill="none" /><path d="M 35,30 l 40,20 -40,20 z" /></svg></button></div>
@@ -389,15 +391,25 @@ Open standards with great longevity allows lots more things to benefit from the 
 
 </section>
 <section class="success-stories full-width dotsep">
-  <div>
-    <img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
-    <div class="spotlight">
-      <h2 id="success-stories">Success Story</h2>
-      <h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
-      <p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
-      <p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
-    </div>
-  </div>
+<div>
+<img src="/assets/img/Metrological-hero.jpg" alt="" class="hero">
+<div class="spotlight"><h2 id="success-stories">Success Story</h2>
+<h3><a href="/blog/2022-success-metrological.html"><img src="/assets/img/logo-metrological@2x.png" alt="Metrological"></a></h3>
+<p>WPE WebKit brought RDK, a modern, performant web browser, to millions of screens. It enables operators to manage devices and easily customize their UIs and apps and provides analytics to improve the customer experience and drive business results.</p>
+<p><a href="/blog/2022-success-metrological.html" class="cta btn large">Read More</a></p>
+</div>
+</div>
+
+<div>
+<div class="spotlight">
+<h2>Use Case</h2>
+<h3><a href="/blog/2023-use-case-digital-signage.html">Digital Signage</a></h3>
+<p>Digital signage web rendering players have many advantages and are a trend nowadays. They feature use of HTML for composing the user interface, simple and effortless provisioning and scheduling new contents to the screen from the cloud, a robust environment with an automatic crash recovery system, and more.</p>
+<p><a href="/blog/2023-use-case-digital-signage.html" class="cta btn large">Learn More</a></p>
+</div>
+<img src="/assets/img/use_case-digital_signage.png" alt="">
+</div>
+
 </section>
 <h2>Use Cases</h2>
 <slide-show controls="navigation" class="use-cases">
@@ -491,6 +503,38 @@ Open standards with great longevity allows lots more things to benefit from the 
 </div>
 </section>
 
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
 </main>
 <script>
 // https://www.codespeedy.com/play-pause-button-for-html5-video-in-javascript/
