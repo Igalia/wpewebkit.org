@@ -27,24 +27,46 @@ main, main > .full-width {
 	background-image: linear-gradient(42deg,hsl(0 80 0 / 0),40%,hsl(0 100 0 / 0.1),60%,hsl(0 80 0 / 0));
 }
 
-.use-cases > section {
-	padding-left: 4rem;
-	padding-right: 4rem;
+.use-cases {
+	--padding-left: 4rem;
+	--padding-right: 10rem;
 } 
-.use-cases > section .spotlight {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+
+.use-cases section {
+	padding: 2rem;
 }
 
-.use-cases > section .spotlight > * {
-	align-self: start;
+.use-cases  {
+	width: 50rem;
 }
 
 .use-cases > section .spotlight > img {
-	align-self: start;
-	grid-row: 1 / 3;
-	max-height: 300px;
+	display: block;
 }
+
+@media (min-width: 45rem) {
+	.use-cases { 
+		width: 100%; 
+		--padding-right: 0;
+	}
+	
+	.use-cases > section .spotlight {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		margin: 1rem;
+	}
+
+	.use-cases > section .spotlight > * {
+		align-self: start;
+	}
+
+	.use-cases > section .spotlight > img {
+		align-self: start;
+		grid-row: 1 / 3;
+		max-height: 300px;
+	}
+}
+
 
 
 @media (min-width: 45rem) {
@@ -401,7 +423,7 @@ Open standards with great longevity allows lots more things to benefit from the 
     <div class="spotlight">
       <h3>Point of Sale</h3>
       <p>Just as the web helps billions of online users make purchases every day, embedded browsers can serve as the basis for building the point of sale systems used by brick and mortar merchants.</p>
-    	<img height="250" src="https://images.unsplash.com/photo-1556742517-fde6c2abbe11?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    	<img height="250" src="/assets/img/pointofsale.jpg" alt="">
     </div>
   </div>
   </section>
@@ -409,7 +431,7 @@ Open standards with great longevity allows lots more things to benefit from the 
     <div class="spotlight">
       <h3>Infotainment Systems</h3>
       <p>The web’s ability to create interactive interfaces and stream media make embedded browsers an excellent choice for building the infotainment systems in automobiles, airplanes and trains.</p>
-    	<img height="400" src="https://images.unsplash.com/photo-1700934509422-075b6e2830bb?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    	<img height="400" src="/assets/img/infotainment.jpg" alt="">
     </div>
   </section>
   <section>
@@ -423,7 +445,7 @@ Open standards with great longevity allows lots more things to benefit from the 
     <div class="spotlight">
   		<h3 class="usecase">Home appliances</h3>
       <p>Embedded browsers are increasingly used in home appliances of all kinds: From providing temperature information and settings for climate control systems, to browsing recipes and engaging programs on your favorite cooking machine, to controlling the distribution of sound across smart speakers around your home.</p>
-    	<img height="250" src="https://plus.unsplash.com/premium_photo-1729431432431-fabe5caa7078?q=80&w=2168&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    	<img height="250" src="/assets/img/smart-appliance.jpg" alt="">
     </div>
 
   </section>
@@ -431,7 +453,8 @@ Open standards with great longevity allows lots more things to benefit from the 
     <div class="spotlight">
       <h3 class="usecase">Professional video and broadcasting</h3>
       <p>Graphics overlays are everywhere nowadays in the live video broadcasting industry. Embedded browsers can be used to deliver low-latency, web-augmented video broadcasts which provides with expands the capabilities of traditional systems with and added value.</p>
-    	<img height="250" src="https://plus.unsplash.com/premium_photo-1688700437975-0ea63cfa59e1?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    	<img height="250" src="/assets/img/av-production.jpg" alt="">
+    	<!-- Photo by <a href="https://unsplash.com/@kellysikkema?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Kelly Sikkema</a> on <a href="https://unsplash.com/photos/woman-in-black-long-sleeve-shirt-using-black-laptop-computer-X-etICbUKec?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> -->
     </div>
     
   </section>
