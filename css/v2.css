@@ -226,7 +226,7 @@ main::before {
 	height: 1px;
 	width: 100%;
 }
-.full-width::after, .dotsep::after {
+.full-width::after, .dotsep::after, h2:has(+slide-show)::after {
 	content: url(../assets/img/border-dot-black.svg);
 	position: absolute;
 	z-index: 1234;

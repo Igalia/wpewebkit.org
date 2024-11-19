@@ -28,7 +28,7 @@ main, main > .full-width {
 }
 
 .use-cases section {
-	padding: 2rem;
+	padding-inline: 3rem;
 }
 
 .use-cases  {
@@ -39,12 +39,23 @@ main, main > .full-width {
 	display: block;
 }
 
+h2:has(+ .use-cases) {
+	margin-block: 0;
+	padding-block: 1.5em 0.5em;
+	padding-inline: 1.5rem 0;
+}
+
 @media (min-width: 45rem) {
+	h2:has(+ .use-cases) {
+		padding-inline-start: 5rem;
+	}
 	.use-cases { 
-	--padding-left: 4rem;
+	--padding-left: 2rem;
 	--padding-right: 0;
 	}
-	
+	.use-cases section {
+		padding-inline: 2.5rem;
+	}
 	.use-cases > section .spotlight {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -82,7 +93,7 @@ main > .full-width > div {
 main {
 	padding-inline: 0;
 }
-main > section {
+main > * {
 	background: var(--dashV);
 }
 main > section > * {
