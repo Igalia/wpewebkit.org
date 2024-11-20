@@ -17,7 +17,7 @@ body {
 }
 main, main > .full-width {
 	display: grid;
-	grid-template-columns: 1fr [dash] 1px [main] auto 1px 1fr;
+	grid-template-columns: 1fr [dash] 1px [main] calc(100% - 4px) 1px 1fr;
 	grid-template-rows: repeat(10,auto);
 }
 
@@ -27,29 +27,35 @@ main, main > .full-width {
 	background-image: linear-gradient(42deg,hsl(0 80 0 / 0),40%,hsl(0 100 0 / 0.1),60%,hsl(0 80 0 / 0));
 }
 
-.use-cases {
-	--padding-left: 4rem;
-	--padding-right: 10rem;
-} 
-
 .use-cases section {
-	padding: 2rem;
+	padding-inline: 3rem;
 }
 
 .use-cases  {
-	width: 50rem;
+	width: 100%;
 }
 
 .use-cases > section .spotlight > img {
 	display: block;
 }
 
+h2:has(+ .use-cases) {
+	margin-block: 0;
+	padding-block: 1.5em 0.5em;
+	padding-inline: 1.5rem 0;
+}
+
 @media (min-width: 45rem) {
-	.use-cases { 
-		width: 100%; 
-		--padding-right: 0;
+	h2:has(+ .use-cases) {
+		padding-inline-start: 5rem;
 	}
-	
+	.use-cases { 
+	--padding-left: 2rem;
+	--padding-right: 0;
+	}
+	.use-cases section {
+		padding-inline: 2.5rem;
+	}
 	.use-cases > section .spotlight {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -87,7 +93,7 @@ main > .full-width > div {
 main {
 	padding-inline: 0;
 }
-main > section {
+main > * {
 	background: var(--dashV);
 }
 main > section > * {
