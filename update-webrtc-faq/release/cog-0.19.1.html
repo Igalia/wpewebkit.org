@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>Cog 0.19.1 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/release/cog-0.19.1.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE blog" href="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/blog.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/release/cog-0.19.1.html">
+  <meta property="og:title" content="Cog 0.19.1 released">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2023-11-30T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="unstable">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/update-webrtc-faq/"><img src="/wpewebkit.org/update-webrtc-faq/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="release off"><li>
+			<a class="nav-link" href="/wpewebkit.org/update-webrtc-faq/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/update-webrtc-faq/about/">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/update-webrtc-faq/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/update-webrtc-faq/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/update-webrtc-faq/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/release/cog-0.19.1.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">Cog 0.19.1 released</h1>
+ 
+   <meta itemprop="datePublished" content="Thu Nov 30 2023">
+   <time itemprop="dateCreated">30 November 2023</time>
+ 
+  
+  <a class="btn btn-l btn-primary mt-3" href="https://wpewebkit.org/releases/cog-0.19.1.tar.xz">Download</a>
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This is the first development release leading towards the 0.20 series.</p>
+<h3 id="what%E2%80%99s-new-in-cog-0.19.1%3F" tabindex="-1">What’s new in Cog 0.19.1?</h3>
+<ul>
+<li>Support multiple web views, using the new
+<a href="https://igalia.github.io/cog/class.View.html">CogView</a> and
+<a href="https://igalia.github.io/cog/class.Viewport.html">CogViewport</a> APIs.
+Each viewport may display one from a set of web views, and using many
+viewports is supported as well. Typically platform plug-ins map a
+viewport to some kind of “window” that can be displayed on screen.
+Most of the changes in this release are related to this new feature.</li>
+<li><em>launcher</em>:
+<ul>
+<li>Add command line flag to disable the built-in key bindings.</li>
+<li>Add command line flag to control media auto-play behaviour.</li>
+<li>Handle <code>GApplication</code> activation to avoid a warning.</li>
+</ul>
+</li>
+<li><em>core</em>:
+<ul>
+<li>Moved most of the key binding handling from the Wayland platform
+into <code>CogView</code>, making it common code for all platforms.</li>
+<li>Moved platform plug-in selection logic into the library, along
+with an always-built “fallback” implementation, which simplifies API
+usage.</li>
+<li>Avoid leaking web views due to <code>CogShell</code> holding one reference
+too much on them.</li>
+<li>The library now takes advantage of symbol visibility, and only
+the public symbols marked with the <code>COG_API</code> macro will be available for
+linking from the shared library.</li>
+<li>Avoid loading the same platform plug-in more than once.</li>
+<li>Automatically scan the default module path without needing
+programs to call
+<a href="https://igalia.github.io/cog/func.modules_add_directory.html">cog_modules_add_directory()</a>
+by themselves.</li>
+<li>Remove the <code>cog_platform_configure()</code> function, in favor of
+a new <a href="https://igalia.github.io/cog/func.init.html">cog_init()</a> function
+which is optional to call, and reorganized setup code to make API
+usage simpler.</li>
+</ul>
+</li>
+<li><em>meson</em>:
+<ul>
+<li>Fix configuration error when only the Wayland platform plug-in
+is selected.</li>
+</ul>
+</li>
+<li><em>drm</em>:
+<ul>
+<li>Fix touch region dimensions when the output is rotated by 90
+or 270 degrees.</li>
+<li>Fix crash on iMX.6 (and possibly others) by improving how the
+CRTC and encoder combination is chosen.</li>
+</ul>
+</li>
+<li><em>x11</em>:
+<ul>
+<li>Add support for using the <code>xcb-keysyms</code> library for handling key
+input events when the XKB extension is unavailable, either because
+its usage was disabled at build time, or the extension is missing at
+runtime.</li>
+</ul>
+</li>
+<li><em>wl</em>:
+<ul>
+<li>Add support for Weston protocols version 13.</li>
+<li>Fix blurry rendering in some compositors.</li>
+<li>Add a check for <code>memfd_create()</code> to avoid the need to have write
+permission in <code>XDG_RUNTIME_DIR</code>, which is the case in some systems.</li>
+<li>Set the opaque region also for non-fullscreen surfaces, resulting
+in a small performance improvement in some cases.</li>
+<li>Add support for multiple seats.</li>
+<li>Remove limit of 16 maximum outputs.</li>
+</ul>
+</li>
+<li><em>gtk4</em>, <em>x11</em>, <em>wl</em>:
+<ul>
+<li>Add support for file choosers using the XDG Desktop
+Portal through <code>libportal</code>.</li>
+<li>Add support for changing mouse cursors when hovering
+links (hand) and text (I-beam).</li>
+</ul>
+</li>
+</ul>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+cog-0.19.1.tar.xz (140.6 KiB)
+   md5sum: ec4566bd63ad570a9c7654ed79e46c3f
+   sha1sum: a226fedec99d2c92c2d8b6247ec57f4587c8041d
+   sha256sum: 633760ba69e36e4fbc24757c927f46fa1fdb3c526d0a6ac6ab35a21d35ad57b3
+</pre>
+
+
+
+
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </div></main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/update-webrtc-faq/" class="igalia logo home"><img src="/wpewebkit.org/update-webrtc-faq/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2024 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/update-webrtc-faq/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>

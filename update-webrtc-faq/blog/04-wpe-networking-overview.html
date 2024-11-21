@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE Networking Overview</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/blog/04-wpe-networking-overview.html">
+  <link rel="alternate" type="application/rss+xml" title="" href="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE blog" href="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/blog.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/blog/04-wpe-networking-overview.html">
+  <meta property="og:title" content="WPE Networking Overview">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-09-29T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/update-webrtc-faq/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/update-webrtc-faq/"><img src="/wpewebkit.org/update-webrtc-faq/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/update-webrtc-faq/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/update-webrtc-faq/about/">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/update-webrtc-faq/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/update-webrtc-faq/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/update-webrtc-faq/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/update-webrtc-faq/blog/04-wpe-networking-overview.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE Networking Overview</h1>
+ 
+   <meta itemprop="datePublished" content="Thu Sep 29 2022">
+   <time itemprop="dateCreated">29 September 2022</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>At the heart of any browser engine is networking: Connecting with services and other users.  Unlike other engines, WebKit approaches this more abstractly by leaving a large portion of the networking up to individual ports. This includes network protocols such as HTTP, WebSockets, and WebRTC. The upside to this approach is a higher level of integration with the system-provided libraries and features so WebKit will behave similarly to other software on the platform often with more centralized configuration.</p>
+<p>Due to this abstraction there are a few independent layers that make up the networking stack of WPE. In this post, I’ll break down what each layer accomplishes as well as give some insight into the codebase’s structure.</p>
+<h2 id="networking-layers" tabindex="-1">Networking Layers</h2>
+<div align="center">
+    <img alt="WebKit Network Layers" src="/wpewebkit.org/update-webrtc-faq/assets/networking-layers.svg">
+</div>
+<h3 id="webkit" tabindex="-1">WebKit</h3>
+<p>Before we get into the libraries used for WPE, let’s discuss WebKit itself. Despite abstracting out a lot of the protocol handling, WebKit itself still needs to understand a lot of fundamentals of HTTP.</p>
+<p>WebCore (discussed in <a href="/wpewebkit.org/update-webrtc-faq/blog/02-overview-of-wpe.html">WPE Overview</a>) understands HTTP requests, headers, and cookies, as they are required to implement many higher-level features. What it does not do is the network operations, most parsing, or on-disk storage. In the codebase, these are represented by <code>ResourceRequest</code> and <code>ResourceResponse</code> objects, which map to general HTTP functionality.</p>
+<h4 id="networkprocess" tabindex="-1">NetworkProcess</h4>
+<p>A core part of modern web engine security is the multi-process model.  In order to defend against exploits, each website runs in its own isolated process that does not have network access. In order to allow for network access, they must talk over IPC to a dedicated NetworkProcess, typically one per browser instance. The NetworkProcess receives a <code>ResourceRequest</code>, creates a <code>NetworkDataTask</code> with it to download the data, and responds with a <code>ResourceResponse</code> to the WebProcess which looks like this:</p>
+<div align="center">
+    <img alt="WebKit Network Flowchart" src="/wpewebkit.org/update-webrtc-faq/assets/networking-flow.svg">
+</div>
+<h3 id="wpe" tabindex="-1">WPE</h3>
+<p>WPE implements the platform-specific versions of the classes above as <code>ResourceRequestSoup</code> and <code>NetworkDataTaskSoup</code>, primarily using a library called libsoup.</p>
+<p>The <a href="https://libsoup.org">libsoup</a> library was originally created for the GNOME project’s email client and has since grown to be a very featureful HTTP implementation, now maintained by Igalia.</p>
+<p>At a high level, the main task that libsoup does is manage connections and queued requests to websites and then efficiently streams the responses back to WPE. Properly implementing HTTP is a fairly large task, and this is a non-exhaustive list of features it implements: HTTP/1.1, HTTP/2, WebSockets, cookies, decompression, multiple authentication standards, HSTS, and HTTP proxies.</p>
+<p>On its own, libsoup is really focused on the HTTP layer and uses the <a href="https://gitlab.gnome.org/GNOME/glib">GLib</a> library to implement many of its networking features in a portable way. This is where TCP, DNS, and TLS are handled. It is also directly used by WebKit for URI parsing and DNS pre-caching.</p>
+<p>Using GLib also helps standardize behavior across modern Linux systems. It allows configuration of a global proxy resolver that WebKit, along with other applications, can use.</p>
+<h4 id="tls" tabindex="-1">TLS</h4>
+<p>Another unique detail of our stack is that TLS is fully abstracted inside of GLib by a project called <a href="https://gitlab.gnome.org/GNOME/glib-networking">GLib-Networking</a>. This project provides multiple implementations of TLS that can be chosen at runtime, including OpenSSL and gnutls on Linux. The benefit here is that clients can choose the implementation they prefer—whether for licensing, certification, or technical reasons.</p>
+<h3 id="usage" tabindex="-1">Usage</h3>
+<p>Let’s go step by step to see some real world usage. If we call <code>webkit_web_view_load_uri()</code> for a new domain it will:</p>
+<ol>
+<li>Create a <code>ResourceRequest</code> in WebCore that represents an HTTP request with a few basic headers set.
+<ul>
+<li><code>ResourceRequestSoup</code> will create its own internal representation for the request using <code>soup_message_new_for_uri()</code>.</li>
+</ul>
+</li>
+<li>This is passed to the <code>NetworkProcess</code> to load this request as a <code>NetworkDataTask</code>.</li>
+<li><code>NetworkDataTaskSoup</code> will send/receive the request/response with <code>soup_session_send()</code> which queues the message to be sent.</li>
+<li>libsoup will connect to the host using <code>GSocketClient</code> which does a DNS lookup and TCP connection.
+<ul>
+<li>If this is a TLS connection <code>GTlsClientConnection</code> will use a library such as gnutls to do a TLS handshake.</li>
+</ul>
+</li>
+<li>libsoup will write the HTTP request and read from the socket parsing the HTTP responses eventually returning the data to WebKit.</li>
+<li>WebKit receives this data, along with periodic updates about the state of the request, and sends it out of the <code>NetworkProcess</code> back to the main process as a <code>ResourceResponse</code> eventually loading the data in the <code>WebProcess</code>.</li>
+</ol>
+<h2 id="summary" tabindex="-1">Summary</h2>
+<p>In conclusion, WebKit provides a very flexible abstraction for platforms, and WPE leverages mature system libraries to provide a portable implementation. It has many layers, but they are all well organized and suited to their tasks.</p>
+<p>If you are working with WPE and are interested in collaborating, feel free to <a href="https://www.igalia.com/contact/">contact us</a>. If you are interested in working with Igalia, you can <a href="https://www.igalia.com/jobs/browsers_webkit_position">apply here</a>.</p>
+
+
+
+<section class="content-section bg-light small-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+          <hr class="author-line">
+          <div class="card">
+            <span>
+              This article was written by <a href="https://www.igalia.com/team/pgriffis">Patrick Griffis</a>. <br><br>Patrick has been contributing to WebKit since 2018 and does work around networking, security, and the platform libraries WPE uses.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </div></main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/update-webrtc-faq/" class="igalia logo home"><img src="/wpewebkit.org/update-webrtc-faq/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2024 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/update-webrtc-faq/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>
