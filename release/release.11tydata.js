@@ -1,5 +1,5 @@
-const semverGreaterOrEqual = require("semver/functions/gte");
-module.exports = {
+import semverGreaterOrEqual from "semver/functions/gte.js";
+export default {
 	eleventyComputed: {
 		hasDocumentation: (data) => {
 			if (!Object.hasOwn(data, "package") || !Object.hasOwn(data, "version"))

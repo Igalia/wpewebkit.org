@@ -35,7 +35,7 @@ sitemapPriority: 0.7
 					{%- endfor -%}
 					</ol>
 					<details>
-					<summary>Older releases ({{ package.list | arrayLength }})</summary>
+					<summary>Older releases ({{ package.list.length }})</summary>
 					<ol>
 					{%- for entry in package.list -%}
 						<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
