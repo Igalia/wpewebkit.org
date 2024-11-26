@@ -1,4 +1,4 @@
-module.exports = [
+export default [
 	{ title: "Home", url: "/" },
 	{ title: "Learn & Discover", url: "/about/" },
 	{ title: "Blog", url: "/blog/" },

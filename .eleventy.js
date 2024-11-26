@@ -1,11 +1,14 @@
-const MarkdownIt = require("markdown-it");
-const MarkdownItAnchor = require("markdown-it-anchor");
-const MarkdownItTOC = require("markdown-it-toc-done-right");
-const EleventyNavigation = require("@11ty/eleventy-navigation");
-const EleventySyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const { DateTime } = require("luxon");
-const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
-const PosixPath = require("node:path").posix;
+import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
+import EleventyNavigation from "@11ty/eleventy-navigation";
+import EleventyRSS from "@11ty/eleventy-plugin-rss";
+import EleventySyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+
+import MarkdownIt from "markdown-it";
+import MarkdownItAnchor from "markdown-it-anchor";
+import MarkdownItTOC from "markdown-it-toc-done-right";
+
+import { DateTime } from "luxon";
+import { posix as PosixPath } from "node:path";
 
 class DefaultDict {
   constructor(defaultValue) {
@@ -15,7 +18,6 @@ class DefaultDict {
   }
 }
 
-const pluginRss = require("@11ty/eleventy-plugin-rss");
 const endSlashRe = /\/$/;
 
 function findSitemapEntries(collection, curPath = "/") {
@@ -43,7 +45,7 @@ function findSitemapEntries(collection, curPath = "/") {
   return pages.sort((a, b) => (a.order || 0) - (b.order || 0));
 }
 
-module.exports = function(eleventyConfig) {
+export default function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css')
   eleventyConfig.addPassthroughCopy('js')
   eleventyConfig.addPassthroughCopy('vendor')
@@ -51,9 +53,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('release/verify/*.key')
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(EleventyNavigation);
+  eleventyConfig.addPlugin(EleventyRSS);
   eleventyConfig.addPlugin(EleventySyntaxHighlight);
-  eleventyConfig.addPlugin(pluginRss);
-  
+
   eleventyConfig.setLiquidOptions({
     dynamicPartials: false,
     strictFilters: false, // renamed from `strict_filters` in Eleventy 1.0
@@ -67,9 +69,6 @@ module.exports = function(eleventyConfig) {
   });
   eleventyConfig.addFilter("isodate", (value) => {
     return new Date(value).toISOString();
-  });
-  eleventyConfig.addFilter("arrayLength", (value) => {
-    return value.length;
   });
   eleventyConfig.addFilter('topLevel', (path) => {
     if (path == "/") return "/";
@@ -93,13 +92,6 @@ module.exports = function(eleventyConfig) {
     });
   })
 
-  eleventyConfig.addCollection("recentReleaseNotes", (collectionApi) => {
-    let i =0;
-    return collectionApi.getFilteredByTag("release").reverse().filter((item) => {
-      return i++ < 5;
-    });
-  })
-
   eleventyConfig.addCollection("recentWSAs", (collectionApi) => {
     let i = 0;
     return collectionApi.getFilteredByTag("WSA").reverse().filter((item) => {
@@ -110,7 +102,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("pkgCatalog", collection => {
     let pkgCatalog = new Object;
     collection.getAll().forEach(item => {
-      let thisPkg = item.data.package;
+      let thisPkg = item.data["package"];
       if (!thisPkg) return;
       if (!pkgCatalog[thisPkg]) pkgCatalog[thisPkg] = {
         latestStable: new Object,
@@ -148,27 +140,27 @@ module.exports = function(eleventyConfig) {
     const makeFilter = function () {
       let seenPackages = new DefaultDict(false);
       return (item) => {
-        const package = item.data.package;
+        const pkg = item.data["package"];
 
-        if (seenPackages[package])
+        if (seenPackages[pkg])
           return false;
 
-        seenPackages[package] = true;
+        seenPackages[pkg] = true;
         return true;
       };
     };
 
     const gatherLatest = function (result, kind) {
       for (let item of collectionApi.getFilteredByTags("release", kind).reverse().filter(makeFilter())) {
-        const package = item.data.package;
-        if (package === undefined)
+        const pkg = item.data["package"];
+        if (pkg === undefined)
           continue;
-        if (result[package] === undefined)
-          result[package] = {};
-        result[package][kind] = {
+        if (result[pkg] === undefined)
+          result[pkg] = {};
+        result[pkg][kind] = {
           version: item.data.version,
           date: item.date,
-          package: package,
+          package: pkg,
           kind: kind,
           url: item.url,
         };
@@ -189,18 +181,18 @@ module.exports = function(eleventyConfig) {
   })
 
   eleventyConfig.setLibrary("md", MarkdownIt({
-    typographer: true,
-    linkify: false,
-    breaks: false,
-    html: true,
-  }).use(MarkdownItAnchor, {
-    level: 2,
-  }).use(MarkdownItTOC, {
-    level: [2, 3],
-  })
+      typographer: true,
+      linkify: false,
+      breaks: false,
+      html: true,
+    }).use(MarkdownItAnchor, {
+      level: 2,
+    }).use(MarkdownItTOC, {
+      level: [2, 3],
+    })
   );
 
   return {
     passthroughFileCopy: true,
   }
-}
+};
