@@ -30,8 +30,9 @@
   <meta name="description" content="{{ page_description | escape }}">
   {%- endif %}
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | htmlBaseUrl: site.base_url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | htmlBaseUrl: site.base_url  }}">
-  <link rel="alternate" type="application/rss+xml" title="WPE blog" href="{{ '/blog.xml' | htmlBaseUrl: site.base_url  }}">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="{{ '/blog.xml' | htmlBaseUrl: site.base_url  }}">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="{{ '/feed.xml' | htmlBaseUrl: site.base_url  }}">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="{{ '/security.xml' | htmlBaseUrl: site.base_url }}">
 
   {%- comment %}
   <!-- OpenGraph metadata, see https://ogp.me -->
