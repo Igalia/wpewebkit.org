@@ -100,6 +100,13 @@ module.exports = function(eleventyConfig) {
     });
   })
 
+  eleventyConfig.addCollection("recentWSAs", (collectionApi) => {
+    let i = 0;
+    return collectionApi.getFilteredByTag("WSA").reverse().filter((item) => {
+      return i++ < 6;
+    });
+  })
+
   eleventyConfig.addCollection("pkgCatalog", collection => {
     let pkgCatalog = new Object;
     collection.getAll().forEach(item => {
