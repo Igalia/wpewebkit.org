@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /reference/
+Disallow: /releases/
+Sitemap: https://igalia.github.io/wpewebkit.org/wsa-security-feed/sitemap.xml
