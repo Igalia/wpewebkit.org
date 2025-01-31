@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>Blog</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/aperezdc/bluesky-link/blog/1/">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="https://igalia.github.io/wpewebkit.org/aperezdc/bluesky-link/blog.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="https://igalia.github.io/wpewebkit.org/aperezdc/bluesky-link/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="https://igalia.github.io/wpewebkit.org/aperezdc/bluesky-link/security.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/aperezdc/bluesky-link/blog/1/">
+  <meta property="og:title" content="Blog">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/aperezdc/bluesky-link/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/aperezdc/bluesky-link/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2025-01-31T14:13:30.056Z">
+  <meta property="article:tag" content="blog">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/bluesky-link/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/bluesky-link/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/bluesky-link/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/bluesky-link/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/aperezdc/bluesky-link/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/aperezdc/bluesky-link/"><img src="/wpewebkit.org/aperezdc/bluesky-link/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/bluesky-link/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/bluesky-link/about/">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/bluesky-link/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/aperezdc/bluesky-link/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/aperezdc/bluesky-link/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+.card ol {
+	padding: 1.5em;
+}
+@media (min-width: 60em) {
+	.card ol {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 3em 5em;
+	}
+}
+.card ol img {
+	width: 100%;
+	height: 9em;
+	margin-block: 0 1em;
+	object-fit: cover;
+	object-position: top center;
+	mask: linear-gradient(0deg, #FFF0, 0.5em, #FFFF 1.5em);
+}
+.card ol p, .card ol time {
+	font-size: 90%;
+}
+</style>
+<header class="page">
+<h1>Blog</h1>
+<p>Don’t miss any news related to WPE – our blog aims to share information regarding WPE: explainers, how-to articles and general information regarding WPE, WebKit
+and the Web platform. Also check out <a href="https://webkit.org/blog/">the official WebKit blog</a> regarding news on the engine itself.</p>
+</header>
+<div class="card">
+	<ol reversed="" role="list" class="w-list-unstyled" style="margin: 1rem 0 1rem 0; list-style: none;"><li class="listitem">
+			<img src="/wpewebkit.org/aperezdc/bluesky-link/assets/img/logo-digital-signage.png" alt="">
+			<time>Jan 6, 2023</time>
+			<h3><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/2023-use-case-digital-signage.html">Use Case: WPE in digital signage</a></h3>
+			<p>Digital signage web rendering players have many advantages and are a trend nowadays.</p>
+		</li><li class="listitem">
+			<img src="/wpewebkit.org/aperezdc/bluesky-link/assets/img/logo-metrological@2x.png" alt="">
+			<time>Oct 15, 2022</time>
+			<h3><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/2022-success-metrological.html">Success Story: Metrological</a></h3>
+			<p>WPE WebKit brought RDK (Reference Design Kit), a modern, performant web browser, to millions of screens.</p>
+		</li><li class="listitem">
+			<img src="/wpewebkit.org/aperezdc/bluesky-link/assets/networking-layers.svg" alt="">
+			<time>Sep 29, 2022</time>
+			<h3><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/04-wpe-networking-overview.html">WPE Networking Overview</a></h3>
+			<p>In this post we'll cover the many layers of the networking stack that WPE uses including libsoup and glib.</p>
+		</li><li class="listitem">
+			<img src="/wpewebkit.org/aperezdc/bluesky-link/assets/build-webkit-org-screenshot.png" alt="">
+			<time>Jul 28, 2022</time>
+			<h3><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/04-wpe-qa-tooling.html">WPE QA and tooling</a></h3>
+			<p>In the previous posts, my colleagues Claudio and Miguel wrote respectively about the major components of the project and, specifically, the graphics architecture of WPE. Today, you'll see our efforts to improve the quality of both WPE and the experience of working and using it.</p>
+		</li><li class="listitem">
+			<img src="/wpewebkit.org/aperezdc/bluesky-link/assets/graphics-attachment.png" alt="">
+			<time>Jul 15, 2022</time>
+			<h3><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/03-wpe-graphics-architecture.html">WPE Graphics architecture</a></h3>
+			<p>Following the previous post in the series about WPE where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display.</p>
+		</li><li class="listitem">
+			<img src="/wpewebkit.org/aperezdc/bluesky-link/assets/wpe-architecture-diagram.png" alt="">
+			<time>Jul 1, 2022</time>
+			<h3><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/02-overview-of-wpe.html">An overview of the WPE WebKit project</a></h3>
+			<p>In the previous post in this series, we explained that WPE is a WebKit port optimized for embedded devices. In this post, we'll dive into a more technical overview of the different components of WPE, WebKit, and how they all fit together.</p>
+		</li><li class="listitem">
+			<img src="/wpewebkit.org/aperezdc/bluesky-link/assets/svg/wpe-birthday-cake-5-years.svg" alt="">
+			<time>Apr 21, 2022</time>
+			<h3><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/01-happy-birthday-wpe.html">Happy birthday WPE!</a></h3>
+			<p>Welcome to the new Blog section on wpewebkit.org! Let's take some time to celebrate and recap how WPE evolved from the early prototyping days to the product empowering hundreds of millions of devices worldwide today.</p>
+		</li></ol>
+  <nav class="pagination">
+    <ol>
+      <li><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/" title="Previous">«</a></li>
+      <li><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/">1</a></li>
+      <li><a href="/wpewebkit.org/aperezdc/bluesky-link/blog/1/" aria-current="page">2</a></li>
+      <li><span>»</span></li>
+    </ol>
+  </nav>
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/aperezdc/bluesky-link/" class="igalia logo home"><img src="/wpewebkit.org/aperezdc/bluesky-link/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://twitter.com/WPEWebKit">Twitter</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman/listinfo/webkit-wpe">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2025 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/aperezdc/bluesky-link/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>
