@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPE WebKit Security Advisories</title>
+  <description>WebKit Security Advisories from wpewebkit.org</description>
+  <link href="https://wpewebkit.org/security.xml" rel="self"/>
+  <link href="https://wpewebkit.org/security/"/>
+  <updated>2025-03-20T00:00:00Z</updated>
+  <id>https://wpewebkit.org/security/</id>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2025-0002</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0002.html"/>
+    <updated>2025-03-20T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0002.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;March 20, 2025&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2025-0002&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0002.html#CVE-2024-44192&quot;&gt;CVE-2024-44192&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0002.html#CVE-2024-54467&quot;&gt;CVE-2024-54467&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0002.html#CVE-2025-24201&quot;&gt;CVE-2025-24201&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-44192&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-44192&quot;&gt;CVE-2024-44192&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.0.&lt;/li&gt;
+&lt;li&gt;Credit to Tashita Software Security.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected process
+crash. Description: The issue was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 268770&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-54467&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-54467&quot;&gt;CVE-2024-54467&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.0.&lt;/li&gt;
+&lt;li&gt;Credit to Narendra Bhati, Manager of Cyber Security At Suma Soft Pvt. Ltd, Pune (India).&lt;/li&gt;
+&lt;li&gt;Impact: A malicious website may exfiltrate data cross-origin. Description: A cookie
+management issue was addressed with improved state management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 287874&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24201&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24201&quot;&gt;CVE-2025-24201&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.48.0 and WPE WebKit before 2.46.7.&lt;/li&gt;
+&lt;li&gt;Credit to Apple.&lt;/li&gt;
+&lt;li&gt;Impact: Maliciously crafted web content may be able to break out of Web Content
+sandbox. This is a supplementary fix for an attack that was blocked in iOS 17.2.
+(Apple is aware of a report that this issue may have been exploited in an extremely
+sophisticated attack against specific targeted individuals on versions of iOS before
+iOS 17.2.). Description: An out-of-bounds write issue was addressed with improved
+checks to prevent unauthorized actions.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 285858&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.48.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.48.0.html"/>
+    <updated>2025-03-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.48.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.48.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.48.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Move tile rendering to worker threads when rendering with the GPU.&lt;/li&gt;
+&lt;li&gt;Fix intersection and filter rendering for scenes with CSS &lt;code&gt;transform-tyle: preserve-3d&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Add new function for creating &lt;code&gt;Promise&lt;/code&gt; objects to the JavaScriptCore GLib API.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;MediaRecorder&lt;/code&gt; backend gained WebM support (requires at least GStreamer 1.24.9)
+and audio bitrate configuration support.&lt;/li&gt;
+&lt;li&gt;Fix invalid DPI-aware font size conversion.&lt;/li&gt;
+&lt;li&gt;Bring back support for OpenType-SVG fonts using the Skia SVG module.&lt;/li&gt;
+&lt;li&gt;Propagate the font’s computed locale to HarfBuzz.&lt;/li&gt;
+&lt;li&gt;The GPU process build is now enabled for WebGL, but the web process is still used by default.
+The runtime flag &lt;code&gt;UseGPUProcessForWebGL&lt;/code&gt; can be used to use the GPU process for WebGL.&lt;/li&gt;
+&lt;li&gt;Add new &lt;code&gt;WPESettings&lt;/code&gt; API in WPEPlatform for system settings.&lt;/li&gt;
+&lt;li&gt;Add experimental support for speech synthesis using &lt;code&gt;libspiel&lt;/code&gt;, which may be enabled at
+build time instead of Flite (with &lt;code&gt;USE_SPIEL=ON&lt;/code&gt; and &lt;code&gt;USE_FLITE=OFF&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Add support for building Skia when targeting Android.&lt;/li&gt;
+&lt;li&gt;Enable WebGL support when targeting Android.&lt;/li&gt;
+&lt;li&gt;Web Inspector resources are now shipped in a &lt;code&gt;GResource&lt;/code&gt; bundle file, instead of the
+&lt;code&gt;libWPEInspectorResources&lt;/code&gt; shared library. This should be friendlier to packagers.&lt;/li&gt;
+&lt;li&gt;Improve graphics buffers handling, mainly around DMA-BUF usage, and avoid copying
+or transforming pixel data in some of situations.&lt;/li&gt;
+&lt;li&gt;Remove support for GLib versions older than 2.70.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.48.0.tar.xz (40.2 MiB)
+   md5sum: a7eadfc0faf25ecc28ecffcdd30a8ccc
+   sha1sum: b23ffa65381a38a0afeb10eb56e3a0525c1f5386
+   sha256sum: 25bc557fd62f06ac8393a6f638ffceff3d9f367d6d35195315fa459c82f80850
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.46.7 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.46.7.html"/>
+    <updated>2025-03-14T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.46.7.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.46 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.46.7%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.46.7?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;USE_GSTREAMER_GL&lt;/code&gt; disabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.46.7.tar.xz (38.8 MiB)
+   md5sum: 3285695a0cefa4ecf1476b51859c2127
+   sha1sum: 63d15a6170ed7b9859ed6476ec771aba71a33edb
+   sha256sum: cf3e47638595d86de96abdb94db69a836c8aa509fc063be714f52c5a24bb5cd5
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPEBackend-fdo 1.16.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpebackend-fdo-1.16.0.html"/>
+    <updated>2025-03-13T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpebackend-fdo-1.16.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 1.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpebackend-fdo-1.16.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPEBackend-fdo 1.16.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Changed minimum Meson version to 0.52.1&lt;/li&gt;
+&lt;li&gt;Made it possible to use certain the proprietary NVidia drivers.&lt;/li&gt;
+&lt;li&gt;Fixed a number of build issues.&lt;/li&gt;
+&lt;li&gt;Fixed memory leaks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpebackend-fdo-1.16.0.tar.xz (43.4 KiB)
+   md5sum: 38f488aaa6d68252b593b65ba3e2d9d1
+   sha1sum: 8a06e51aeb2c94b4cf254d866c19eca587d3cd37
+   sha256sum: beddf321232d5bd08106c179dbc600f8ce88eb3620b4a59a6329063b78f64635
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPEBackend-fdo 1.14.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpebackend-fdo-1.14.4.html"/>
+    <updated>2025-03-13T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpebackend-fdo-1.14.4.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.14 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpebackend-fdo-1.14.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPEBackend-fdo 1.14.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix the build with GCC 15.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpebackend-fdo-1.14.4.tar.xz (42.4 KiB)
+   md5sum: 41abdcbcc0879cd40467cf077ba9a1c5
+   sha1sum: 8e49431dfe702abdda8558d1e815e0b3069770aa
+   sha256sum: d0edbd8f1850f5eb179bfa675db79d91b6f9ee8c8f94694a449e3cd975763410
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.47.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.47.90.html"/>
+    <updated>2025-03-01T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.47.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.47.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.47.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensure that the &lt;code&gt;WebKitCookieManager&lt;/code&gt; APIs keep the cookie cache updated.&lt;/li&gt;
+&lt;li&gt;Use two GPU rendering threads if the system has more than four CPU cores.&lt;/li&gt;
+&lt;li&gt;Fix web view contents not rendered in some cases.&lt;/li&gt;
+&lt;li&gt;Fix invalid DPI-aware font size conversion.&lt;/li&gt;
+&lt;li&gt;Reduce memory copies when rendering DMA-BUF video frames.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.47.90.tar.xz (40.2 MiB)
+   md5sum: f30d11f68909897c16999a07b8d98f29
+   sha1sum: 775661811a9918a1c5a6cf7d6faa264db79c8e5f
+   sha256sum: 2760b604e54c10aeaf64042343d952b1fcded1eef0ace05e2d400489c622b256
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.47.4 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.47.4.html"/>
+    <updated>2025-02-10T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.47.4.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.47.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.47.4?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add support for the Cookie Store API.&lt;/li&gt;
+&lt;li&gt;Add initial support for per-element audio output selection.&lt;/li&gt;
+&lt;li&gt;Add debuging aids to visualize damage rectangles.&lt;/li&gt;
+&lt;li&gt;Add documentation about how to use the remote web inspector.&lt;/li&gt;
+&lt;li&gt;Enable WebDriver BiDi as an experimental feature.&lt;/li&gt;
+&lt;li&gt;Remove support for GLib versions older than 2.70.&lt;/li&gt;
+&lt;li&gt;Fix a crash when enabling Skia CPU rendering.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.47.4.tar.xz (40.1 MiB)
+   md5sum: b6ed9c781796b54df4efd207b81300e8
+   sha1sum: 7852112ac63db5f5eaa17b583120110297b69b56
+   sha256sum: 00b33b6a3b97995de54af85be47d0b3c20a8ab267af131d99dca296536f271c0
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2025-0001</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html"/>
+    <updated>2025-02-09T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;February 09, 2025&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2025-0001&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html#CVE-2024-27856&quot;&gt;CVE-2024-27856&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html#CVE-2024-54543&quot;&gt;CVE-2024-54543&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html#CVE-2024-54658&quot;&gt;CVE-2024-54658&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html#CVE-2025-24143&quot;&gt;CVE-2025-24143&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html#CVE-2025-24150&quot;&gt;CVE-2025-24150&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html#CVE-2025-24158&quot;&gt;CVE-2025-24158&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/security/WSA-2025-0001.html#CVE-2025-24162&quot;&gt;CVE-2025-24162&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-27856&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-27856&quot;&gt;CVE-2024-27856&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.46.0.&lt;/li&gt;
+&lt;li&gt;Credit to Maksymilian Motyl of Immunity Systems, Junsung Lee working with Trend Micro Zero Day
+Initiative, and ajajfxhj.&lt;/li&gt;
+&lt;li&gt;Impact: Processing a file may lead to unexpected app termination or arbitrary code
+execution. Description: The issue was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 268765&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-54543&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-54543&quot;&gt;CVE-2024-54543&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.46.5.&lt;/li&gt;
+&lt;li&gt;Credit to Lukas Bernhard, Gary Kwong, and an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to memory corruption.
+Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 282450&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-54658&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-54658&quot;&gt;CVE-2024-54658&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.44.0.&lt;/li&gt;
+&lt;li&gt;Credit to anbu1024 of SecANT.&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to a denial-of-service. Description: The issue
+was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 263758&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24143&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24143&quot;&gt;CVE-2025-24143&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.46.6.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: A maliciously crafted webpage may be able to fingerprint the user.
+Description: The issue was addressed with improved access restrictions to the file
+system.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 283117&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24150&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24150&quot;&gt;CVE-2025-24150&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.46.6.&lt;/li&gt;
+&lt;li&gt;Credit to Johan Carlsson (joaxcar).&lt;/li&gt;
+&lt;li&gt;Impact: Copying a URL from Web Inspector may lead to command injection. Description: A
+privacy issue was addressed with improved handling of files.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 283718&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24158&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24158&quot;&gt;CVE-2025-24158&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.46.6.&lt;/li&gt;
+&lt;li&gt;Credit to Q1IQ (@q1iqF) of NUS CuriOSity and P1umer (@p1umer) of Imperial Global Singapore.&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to a denial-of-service. Description: The issue
+was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 283889&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24162&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24162&quot;&gt;CVE-2025-24162&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.46.6.&lt;/li&gt;
+&lt;li&gt;Credit to linjy of HKUS3Lab and chluo of WHUSecLab.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected process
+crash. Description: This issue was addressed through improved state management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 284159&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.46.6 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.46.6.html"/>
+    <updated>2025-02-09T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/wpewebkit-2.46.6.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.46 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.46.6%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.46.6?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support building against ICU 76.1&lt;/li&gt;
+&lt;li&gt;Fix lost initial audio samples played using WebAudio on 32-bit Raspberry Pi devices when using the OpenMAX GStreamer elements.&lt;/li&gt;
+&lt;li&gt;Fix rendering on GPUs with maximum texture size smaller than 2000x2000 pixels by querying the maximum size supported at runtime.&lt;/li&gt;
+&lt;li&gt;Fix a crash when enabling Skia CPU rendering.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.46.6.tar.xz (38.8 MiB)
+   md5sum: 7a649e1795e24dc7b0aaf2371b04f1d7
+   sha1sum: 0894c0b54b6712fd0b6e67969483b9ed622823ac
+   sha256sum: 2f8f8447b9c7b0578f7d751ca27c682a2c180b5abb91542af52a96e8a24a6262
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.16.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/libwpe-1.16.2.html"/>
+    <updated>2025-02-07T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/remove-dupe-developers-section/release/libwpe-1.16.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.16.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.16.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix ABI break accidentally introduced in the 1.16.2 release.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.16.2.tar.xz (62.3 KiB)
+   md5sum: 689306c9baf6f8d6844146a5c84fc932
+   sha1sum: 499b62ddd3c1becaffc3b344ff5131c37d527144
+   sha256sum: 960bdd11c3f2cf5bd91569603ed6d2aa42fd4000ed7cac930a804eac367888d7
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
