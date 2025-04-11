@@ -10,7 +10,7 @@ pagination:
   data: collections.blogpost
   reverse: true
   size: 7
-permalink: /blog/{% if pagination.pageNumber > 0 %}{{ (pagination.pageNumber + 1) }}/{% endif %}
+permalink: "/blog/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber | plus: 1 }}/{% endif %}"
 ---
 <style>
 .card ol {
