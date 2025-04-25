@@ -122,7 +122,7 @@ sitemapChangeFrequency: yearly
     const headers = [];
     headers.push(''); // Color
     if (showDebug) headers.push('WPT Directory');
-    headers.push('SPEC', 'Passrate');
+    headers.push('Specification', 'Passrate% (subtests)');
     if (showDebug) headers.push('Subtest info');
 
     const headRow = document.createElement('tr');
@@ -171,7 +171,12 @@ sitemapChangeFrequency: yearly
       row.appendChild(tdSpec);
 
       const tdRate = document.createElement('td');
-      tdRate.textContent = percent + '%';
+      tdRate.textContent = new Intl.NumberFormat({minimumFractionDigits: 1, maximumFractionDigits: 1}).format(percent) + '%' 
+      if (!showDebug) {
+      	let smallnote = document.createElement('small');
+      	smallnote.textContent = ` (of ${new Intl.NumberFormat().format(total)})`;
+      	tdRate.appendChild(smallnote);
+      }
       row.appendChild(tdRate);
 
       if (showDebug) {
@@ -207,18 +212,23 @@ sitemapChangeFrequency: yearly
     row.appendChild(tdSpec);
 
     const tdRate = document.createElement('td');
-    tdRate.textContent = totalPercent + '%';
+    tdRate.textContent = new Intl.NumberFormat().format(totalPercent) + '%';
+    if (!showDebug) {
+   	let smallnote = document.createElement('small');
+    	smallnote.textContent += ` (of ${new Intl.NumberFormat().format(overall_total)})`;
+    	tdRate.appendChild(smallnote);
+    }
     row.appendChild(tdRate);
 
     if (showDebug) {
       const tdInfo = document.createElement('td');
-      tdInfo.textContent = `${overall_pass} of ${overall_total} subtests pass from ${overall_tests} main tests (${overall_specs} specs)`;
+      tdInfo.textContent = `${new Intl.NumberFormat().format(overall_pass)} of ${new Intl.NumberFormat().format(overall_total)} subtests pass from ${new Intl.NumberFormat().format(overall_tests)} main tests (${overall_specs} specs)`;
       row.appendChild(tdInfo);
     }
 
     tableBody.appendChild(row);
-    let newrow = row.cloneNode(true);
-    tableBody.before(newrow);
+    let firstRow = document.querySelector('tbody tr:first-child');
+    firstRow.before(row.cloneNode(true));
   }
 
   init();
