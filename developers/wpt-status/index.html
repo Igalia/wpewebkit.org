@@ -1,0 +1,223 @@
+---
+title: "WPT Results Viewer"
+layout: page
+tags: [devs]
+data: { dateless: "true" }
+htmlSitemapOrder: -2
+sitemapChangeFrequency: yearly
+---
+
+<style>
+  body { font-family: sans-serif;}
+  table { border-collapse: collapse; width: 100%; margin-block: 1.25em 1em; }
+  th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }
+  th { background-color: #f4f4f4; }
+  #results-table th:first-child,
+  #results-table td:first-child {
+    width: 10%;
+  }
+  #meta-info { margin-block: 0 0.67em; }
+  .meta-debug { display: none; }
+  #header { display: flex; align-items: center; justify-content: space-between; }
+  #version-select { margin-inline: 0.67em 0; }
+</style>
+
+<div id="header">
+  <h1>WebPlatformTests Results Viewer</h1>
+</div>
+  <label><strong></strong>Please choose WPE version:
+    <select id="version-select"></select>
+  </label>
+
+<div><label><input type="checkbox" id="show-unknown"> Show Results for unknown specs</label></div>
+<div><label><input type="checkbox" id="show-debug"> Show WPT debug info</label></div>
+
+<div id="meta-info">
+  <div class="meta-debug"><br><center>Test run completed on <strong><span id="meta-run-date"></span></strong> (took <strong><span id="meta-run-time"></span></strong>) with browser <strong><span id="meta-browser-name"></span></strong> version <strong><span id="meta-browser-version"></span></strong> and WPT version <strong><a id="meta-wpt-version" href="" target="_blank"></a></strong> on distribution <strong><span id="meta-distro-name"></span></strong> running on a CPU <strong><span id="meta-processor-architecture"></span> (<span id="meta-processor-bits"></span> bits)</strong> </center></div>
+</div>
+
+<table id="results-table">
+  <thead></thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  const versionSelect = document.getElementById('version-select');
+  const debugCheckbox = document.getElementById('show-debug');
+  const unknownCheckbox = document.getElementById('show-unknown');
+  const tableHead = document.querySelector('#results-table thead');
+  const tableBody = document.querySelector('#results-table tbody');
+  const metaBrowserVersion = document.getElementById('meta-browser-version');
+  const metaBrowserName = document.getElementById('meta-browser-name');
+  const metaDistroNameVersion = document.getElementById('meta-distro-name');
+  const metaWPTVersion = document.getElementById('meta-wpt-version');
+  const metaRunDate = document.getElementById('meta-run-date');
+  const metaRunTime = document.getElementById('meta-run-time');
+  const metaProcessorArchitecture = document.getElementById('meta-processor-architecture');
+  const metaProcessorBits = document.getElementById('meta-processor-bits');
+  const metaDebugElems = document.querySelectorAll('.meta-debug');
+
+  debugCheckbox.addEventListener('change', () => {
+    metaDebugElems.forEach(el => {
+      el.style.display = debugCheckbox.checked ? 'block' : 'none';
+    });
+    renderTable();
+  });
+  unknownCheckbox.addEventListener('change', renderTable);
+  versionSelect.addEventListener('change', () => loadData(versionSelect.value));
+
+  let versionsAvailable = null;
+  let currentSpecUrl = '';
+  let currentResultsUrl = '';
+  let specsData = null;
+  let resultsData = null;
+
+  async function init() {
+    const versionRes = await fetch('versions_available.json');
+    versionsAvailable = await versionRes.json();
+
+    versionsAvailable.versions.forEach(v => {
+      const option = document.createElement('option');
+      option.value = v.version;
+      option.textContent = v.version;
+      versionSelect.appendChild(option);
+    });
+
+    versionSelect.value = versionsAvailable.metadata.default_version;
+    loadData(versionSelect.value);
+  }
+
+  async function loadData(version) {
+    const selected = versionsAvailable.versions.find(v => v.version === version);
+    currentSpecUrl = selected.specs;
+    currentResultsUrl = selected.results;
+
+    const [specsRes, resultsRes] = await Promise.all([
+      fetch(currentSpecUrl),
+      fetch(currentResultsUrl)
+    ]);
+    specsData = await specsRes.json();
+    resultsData = await resultsRes.json();
+
+    metaBrowserName.textContent = resultsData.metadata.browser || '—';
+    metaBrowserVersion.textContent = resultsData.metadata.browser_version || '—';
+    metaDistroNameVersion.textContent = resultsData.metadata.distro_version || '—';
+    metaProcessorArchitecture.textContent = resultsData.metadata.processor || '—';
+    metaProcessorBits.textContent = resultsData.metadata.bits || '—';
+    metaWPTVersion.textContent = resultsData.metadata.wpt_version || '—';
+    metaWPTVersion.href = `https://github.com/web-platform-tests/wpt/commit/${resultsData.metadata.wpt_version}`;
+    metaRunDate.textContent = new Date(resultsData.metadata.testrun_timestamp_end * 1000).toISOString().slice(0, 10) || '—';
+    metaRunTime.textContent = ((s) => `${Math.floor(s / 3600)} hours, ${Math.floor((s % 3600) / 60)} minutes, ${s % 60} seconds`)(resultsData.metadata.testrun_totalsecs_run) || '—';
+
+    renderTable();
+  }
+
+  function renderTable() {
+    const showDebug = debugCheckbox.checked;
+    const showUnknown = unknownCheckbox.checked;
+
+    tableHead.innerHTML = '';
+    tableBody.innerHTML = '';
+
+    const headers = [];
+    headers.push(''); // Color
+    if (showDebug) headers.push('WPT Directory');
+    headers.push('SPEC', 'Passrate');
+    if (showDebug) headers.push('Subtest info');
+
+    const headRow = document.createElement('tr');
+    headers.forEach(h => {
+      const th = document.createElement('th');
+      th.textContent = h;
+      headRow.appendChild(th);
+    });
+    tableHead.appendChild(headRow);
+
+    let overall_pass = 0, overall_total = 0, overall_tests = 0, overall_specs = 0;
+
+    for (const [dir, value] of Object.entries(resultsData.results)) {
+      const [subtestPart, mainTestsStr] = value.split(':');
+      const [passStr, totalStr] = subtestPart.split('/');
+
+      const pass = parseInt(passStr);
+      const total = parseInt(totalStr);
+      const mainTests = parseInt(mainTestsStr);
+
+      let percent = total > 0 ? Math.round((100 * pass / total) * 10) / 10 : 0;
+
+      let spec = specsData.specs.find(s => s.dirw === dir);
+      let specText = spec ? spec.text : undefined;
+      let specLink = spec ? spec.link : undefined;
+
+      if (!showUnknown && !specText) continue;
+
+      const row = document.createElement('tr');
+      const tdColor = document.createElement('td');
+      tdColor.style.backgroundColor = `rgb(${Math.trunc(75 * (1 - percent / 100))}% ${Math.trunc(75 * percent / 100)}% 0)`;
+      row.appendChild(tdColor);
+
+      if (showDebug) {
+        const tdDir = document.createElement('td');
+        tdDir.textContent = dir;
+        row.appendChild(tdDir);
+      }
+
+      const tdSpec = document.createElement('td');
+      if (specText) {
+        tdSpec.innerHTML = `<a href="${specLink}" target="_blank">${specText}</a>`;
+      } else {
+        tdSpec.textContent = dir;
+      }
+      row.appendChild(tdSpec);
+
+      const tdRate = document.createElement('td');
+      tdRate.textContent = percent + '%';
+      row.appendChild(tdRate);
+
+      if (showDebug) {
+        const tdInfo = document.createElement('td');
+        tdInfo.textContent = `${pass} of ${total} subtests pass from ${mainTests} main tests`;
+        row.appendChild(tdInfo);
+      }
+
+      tableBody.appendChild(row);
+
+      overall_pass += pass;
+      overall_total += total;
+      overall_tests += mainTests;
+      overall_specs += 1;
+    }
+
+    const totalPercent = overall_total > 0 ? Math.round((100 * overall_pass / overall_total) * 10) / 10 : 0;
+
+    const row = document.createElement('tr');
+    row.style.fontWeight = 'bold';
+    const tdColor = document.createElement('td');
+    tdColor.style.background = `rgb(${Math.trunc(75 * (1 - totalPercent / 100))}% ${Math.trunc(75 * totalPercent / 100)}% 0)`;
+    row.appendChild(tdColor);
+
+    if (showDebug) {
+      const tdDir = document.createElement('td');
+      tdDir.textContent = 'TOTAL';
+      row.appendChild(tdDir);
+    }
+
+    const tdSpec = document.createElement('td');
+    tdSpec.textContent = 'OVERALL TOTAL';
+    row.appendChild(tdSpec);
+
+    const tdRate = document.createElement('td');
+    tdRate.textContent = totalPercent + '%';
+    row.appendChild(tdRate);
+
+    if (showDebug) {
+      const tdInfo = document.createElement('td');
+      tdInfo.textContent = `${overall_pass} of ${overall_total} subtests pass from ${overall_tests} main tests (${overall_specs} specs)`;
+      row.appendChild(tdInfo);
+    }
+
+    tableBody.appendChild(row);
+  }
+
+  init();
+</script>

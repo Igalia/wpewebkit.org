@@ -1,0 +1,1618 @@
+{
+ "metadata": {
+  "last_date_updated": "2025-03-26",
+  "last_wpt_version": "7f0ec98dcf6b4eb737e50936eb3385a05e225896"
+ },
+ "specs": [
+  {
+   "dirw": "installedapp",
+   "link": "https://wicg.github.io/get-installed-related-apps/spec/",
+   "text": "Get Installed Related Apps API"
+  },
+  {
+   "dirw": "webnn",
+   "link": "https://www.w3.org/TR/webnn/",
+   "text": "Web Neural Network API"
+  },
+  {
+   "dirw": "mediacapture-record",
+   "link": "https://w3c.github.io/mediacapture-record/",
+   "text": "MediaStream Recording"
+  },
+  {
+   "dirw": "accname",
+   "link": "https://w3c.github.io/accname/",
+   "text": "Accessible Name and Description Computation 1.2"
+  },
+  {
+   "dirw": "clear-site-data",
+   "link": "https://w3c.github.io/webappsec-clear-site-data/",
+   "text": "Clear Site Data"
+  },
+  {
+   "dirw": "timing-entrytypes-registry",
+   "link": "https://w3c.github.io/timing-entrytypes-registry/",
+   "text": "Timing Entry Names Registry"
+  },
+  {
+   "dirw": "secure-contexts",
+   "link": "https://w3c.github.io/webappsec-secure-contexts/",
+   "text": "Secure Contexts"
+  },
+  {
+   "dirw": "ambient-light",
+   "link": "https://w3c.github.io/ambient-light/",
+   "text": "Ambient Light Sensor"
+  },
+  {
+   "dirw": "generic-sensor",
+   "link": "https://w3c.github.io/sensors/",
+   "text": "Generic Sensor API"
+  },
+  {
+   "dirw": "entries-api",
+   "link": "https://wicg.github.io/entries-api/",
+   "text": "File and Directory Entries API"
+  },
+  {
+   "dirw": "mst-content-hint",
+   "link": "https://w3c.github.io/mst-content-hint/",
+   "text": "MediaStreamTrack Content Hints"
+  },
+  {
+   "dirw": "orientation-event",
+   "link": "https://w3c.github.io/deviceorientation/",
+   "text": "Device Orientation and Motion"
+  },
+  {
+   "dirw": "storage-access-api",
+   "link": "https://privacycg.github.io/storage-access/",
+   "text": "The Storage Access API"
+  },
+  {
+   "dirw": "network-error-logging",
+   "link": "https://w3c.github.io/network-error-logging/",
+   "text": "Network Error Logging"
+  },
+  {
+   "dirw": "webvtt",
+   "link": "https://w3c.github.io/webvtt/",
+   "text": "WebVTT: The Web Video Text Tracks Format"
+  },
+  {
+   "dirw": "page-visibility",
+   "link": "https://w3c.github.io/page-visibility/",
+   "text": "Page Visibility Level 2"
+  },
+  {
+   "dirw": "websockets",
+   "link": "https://websockets.spec.whatwg.org/",
+   "text": "WebSockets Standard"
+  },
+  {
+   "dirw": "navigation-timing",
+   "link": "https://w3c.github.io/navigation-timing/",
+   "text": "Navigation Timing Level 2"
+  },
+  {
+   "dirw": "notifications",
+   "link": "https://notifications.spec.whatwg.org/",
+   "text": "Notifications API Standard"
+  },
+  {
+   "dirw": "screen-orientation",
+   "link": "https://w3c.github.io/screen-orientation/",
+   "text": "Screen Orientation"
+  },
+  {
+   "dirw": "geolocation-sensor",
+   "link": "https://w3c.github.io/geolocation-sensor/",
+   "text": "Geolocation Sensor"
+  },
+  {
+   "dirw": "orientation-sensor",
+   "link": "https://w3c.github.io/orientation-sensor/",
+   "text": "Orientation Sensor"
+  },
+  {
+   "dirw": "contacts",
+   "link": "https://wicg.github.io/contact-api/spec/",
+   "text": "Contact Picker API"
+  },
+  {
+   "dirw": "content-index",
+   "link": "https://wicg.github.io/content-index/spec/",
+   "text": "Content Index"
+  },
+  {
+   "dirw": "screen-wake-lock",
+   "link": "https://w3c.github.io/screen-wake-lock/",
+   "text": "Screen Wake Lock API"
+  },
+  {
+   "dirw": "scroll-to-text-fragment",
+   "link": "https://wicg.github.io/scroll-to-text-fragment/",
+   "text": "URL Fragment Text Directives"
+  },
+  {
+   "dirw": "imagebitmap-renderingcontext",
+   "link": "https://html.spec.whatwg.org/multipage/canvas.html#the-imagebitmap-rendering-context",
+   "text": "Canvas ImageBitmapRenderingContext interface"
+  },
+  {
+   "dirw": "server-timing",
+   "link": "https://w3c.github.io/server-timing/",
+   "text": "Server Timing"
+  },
+  {
+   "dirw": "hr-time",
+   "link": "https://w3c.github.io/hr-time/",
+   "text": "High Resolution Time"
+  },
+  {
+   "dirw": "touch-events",
+   "link": "https://w3c.github.io/touch-events/",
+   "text": "Touch Events - Level 2"
+  },
+  {
+   "dirw": "webauthn",
+   "link": "https://w3c.github.io/webauthn/",
+   "text": "Web Authentication: An API for accessing Public Key Credentials - Level 3"
+  },
+  {
+   "dirw": "web-otp",
+   "link": "https://wicg.github.io/web-otp/",
+   "text": "WebOTP API"
+  },
+  {
+   "dirw": "webidl",
+   "link": "https://webidl.spec.whatwg.org/",
+   "text": "Web IDL Standard"
+  },
+  {
+   "dirw": "web-bundle",
+   "link": "https://web.archive.org/web/20220906050115/https://wicg.github.io/webpackage/draft-yasskin-wpack-bundled-exchanges.html",
+   "text": "Web Bundles"
+  },
+  {
+   "dirw": "element-timing",
+   "link": "https://wicg.github.io/element-timing/",
+   "text": "Element Timing API"
+  },
+  {
+   "dirw": "accelerometer",
+   "link": "https://w3c.github.io/accelerometer/",
+   "text": "Accelerometer"
+  },
+  {
+   "dirw": "webgpu",
+   "link": "https://gpuweb.github.io/gpuweb/",
+   "text": "WebGPU"
+  },
+  {
+   "dirw": "custom-elements",
+   "link": "https://html.spec.whatwg.org/multipage/custom-elements.html",
+   "text": "Custom Elements"
+  },
+  {
+   "dirw": "custom-elements/state",
+   "link": "https://html.spec.whatwg.org/multipage/custom-elements.html#custom-state-pseudo-class",
+   "text": "Custom Elements Custom state pseudo-class"
+  },
+  {
+   "dirw": "magnetometer",
+   "link": "https://w3c.github.io/magnetometer/",
+   "text": "Magnetometer"
+  },
+  {
+   "dirw": "web-animations",
+   "link": "https://drafts.csswg.org/web-animations/",
+   "text": "Web Animations Level 2"
+  },
+  {
+   "dirw": "webmessaging",
+   "link": "https://html.spec.whatwg.org/multipage/web-messaging.html",
+   "text": "Cross-document messaging"
+  },
+  {
+   "dirw": "vibration",
+   "link": "https://w3c.github.io/vibration/",
+   "text": "Vibration API"
+  },
+  {
+   "dirw": "x-frame-options",
+   "link": "https://html.spec.whatwg.org/multipage/browsing-the-web.html#the-x-frame-options-header",
+   "text": "X-Frame-Options header"
+  },
+  {
+   "dirw": "device-posture",
+   "link": "https://w3c.github.io/device-posture/",
+   "text": "Device Posture API"
+  },
+  {
+   "dirw": "intersection-observer",
+   "link": "https://w3c.github.io/IntersectionObserver/",
+   "text": "Intersection Observer"
+  },
+  {
+   "dirw": "payment-method-basic-card",
+   "link": "https://w3c.github.io/payment-method-basic-card/",
+   "text": "Payment Method: Basic Card"
+  },
+  {
+   "dirw": "permissions",
+   "link": "https://w3c.github.io/permissions/",
+   "text": "Permissions"
+  },
+  {
+   "dirw": "storage",
+   "link": "https://storage.spec.whatwg.org/",
+   "text": "Storage Standard"
+  },
+  {
+   "dirw": "storage/buckets",
+   "link": "https://wicg.github.io/storage-buckets/",
+   "text": "Storage Buckets API"
+  },
+  {
+   "dirw": "battery-status",
+   "link": "https://w3c.github.io/battery/",
+   "text": "Battery Status API"
+  },
+  {
+   "dirw": "fullscreen",
+   "link": "https://fullscreen.spec.whatwg.org/",
+   "text": "Fullscreen API Standard"
+  },
+  {
+   "dirw": "paint-timing",
+   "link": "https://w3c.github.io/paint-timing/",
+   "text": "Paint Timing"
+  },
+  {
+   "dirw": "input-device-capabilities",
+   "link": "https://wicg.github.io/input-device-capabilities/",
+   "text": "Input Device Capabilities"
+  },
+  {
+   "dirw": "svg",
+   "link": "https://svgwg.org/svg2-draft/",
+   "text": "Scalable Vector Graphics (SVG) 2"
+  },
+  {
+   "dirw": "webusb",
+   "link": "https://wicg.github.io/webusb/",
+   "text": "WebUSB API"
+  },
+  {
+   "dirw": "encoding",
+   "link": "https://encoding.spec.whatwg.org/",
+   "text": "Encoding Standard"
+  },
+  {
+   "dirw": "document-policy",
+   "link": "https://wicg.github.io/document-policy/",
+   "text": "Document Policy"
+  },
+  {
+   "dirw": "visual-viewport",
+   "link": "https://wicg.github.io/visual-viewport/",
+   "text": "Visual Viewport API"
+  },
+  {
+   "dirw": "mediacapture-streams",
+   "link": "https://w3c.github.io/mediacapture-main/",
+   "text": "Media Capture and Streams"
+  },
+  {
+   "dirw": "webmidi",
+   "link": "https://webaudio.github.io/web-midi-api/",
+   "text": "Web MIDI API"
+  },
+  {
+   "dirw": "contenteditable",
+   "link": "https://w3c.github.io/contentEditable/",
+   "text": "ContentEditable"
+  },
+  {
+   "dirw": "scroll-animations",
+   "link": "https://drafts.csswg.org/scroll-animations/",
+   "text": "Scroll-driven Animations"
+  },
+  {
+   "dirw": "screen-capture",
+   "link": "https://w3c.github.io/mediacapture-screen-share/",
+   "text": "Screen Capture"
+  },
+  {
+   "dirw": "webhid",
+   "link": "https://wicg.github.io/webhid/",
+   "text": "WebHID API"
+  },
+  {
+   "dirw": "screen-details",
+   "link": "https://w3c.github.io/window-management/",
+   "text": "Window Management Screen Details"
+  },
+  {
+   "dirw": "sanitizer-api",
+   "link": "https://wicg.github.io/sanitizer-api/",
+   "text": "HTML Sanitizer API"
+  },
+  {
+   "dirw": "largest-contentful-paint",
+   "link": "https://w3c.github.io/largest-contentful-paint/",
+   "text": "Largest Contentful Paint"
+  },
+  {
+   "dirw": "gamepad",
+   "link": "https://w3c.github.io/gamepad/",
+   "text": "Gamepad"
+  },
+  {
+   "dirw": "navigation-api",
+   "link": "https://wicg.github.io/navigation-api/",
+   "text": "Navigation API"
+  },
+  {
+   "dirw": "mediasession",
+   "link": "https://w3c.github.io/mediasession/",
+   "text": "Media Session"
+  },
+  {
+   "dirw": "intervention-reporting",
+   "link": "https://wicg.github.io/intervention-reporting/",
+   "text": "Intervention Reporting"
+  },
+  {
+   "dirw": "payment-handler",
+   "link": "https://w3c.github.io/payment-handler/",
+   "text": "Payment Handler API"
+  },
+  {
+   "dirw": "service-workers",
+   "link": "https://w3c.github.io/ServiceWorker/",
+   "text": "Service Workers"
+  },
+  {
+   "dirw": "digital-credentials",
+   "link": "https://github.com/wicg/digital-credentials",
+   "text": "Digital Credentials"
+  },
+  {
+   "dirw": "audio-output",
+   "link": "https://w3c.github.io/mediacapture-output/",
+   "text": "Audio Output Devices API"
+  },
+  {
+   "dirw": "dom",
+   "link": "https://dom.spec.whatwg.org/",
+   "text": "DOM Standard"
+  },
+  {
+   "dirw": "compat",
+   "link": "https://compat.spec.whatwg.org/",
+   "text": "Compatibility Standard"
+  },
+  {
+   "dirw": "url",
+   "link": "https://url.spec.whatwg.org/",
+   "text": "URL Standard"
+  },
+  {
+   "dirw": "permissions-revoke",
+   "link": "https://wicg.github.io/permissions-revoke/",
+   "text": "Relinquishing Permissions"
+  },
+  {
+   "dirw": "longtask-timing",
+   "link": "https://w3c.github.io/longtasks/",
+   "text": "Long Tasks API"
+  },
+  {
+   "dirw": "mediacapture-insertable-streams",
+   "link": "https://w3c.github.io/mediacapture-transform/",
+   "text": "MediaStreamTrack Insertable Media Processing using Streams"
+  },
+  {
+   "dirw": "js-self-profiling",
+   "link": "https://wicg.github.io/js-self-profiling/",
+   "text": "JS Self-Profiling API"
+  },
+  {
+   "dirw": "domparsing",
+   "link": "https://w3c.github.io/DOM-Parsing/",
+   "text": "DOM Parsing and Serialization"
+  },
+  {
+   "dirw": "html-media-capture",
+   "link": "https://w3c.github.io/html-media-capture/",
+   "text": "HTML Media Capture"
+  },
+  {
+   "dirw": "webstorage",
+   "link": "https://html.spec.whatwg.org/multipage/webstorage.html",
+   "text": "Web Storage"
+  },
+  {
+   "dirw": "serial",
+   "link": "https://wicg.github.io/serial/",
+   "text": "Web Serial API"
+  },
+  {
+   "dirw": "beacon",
+   "link": "https://w3c.github.io/beacon/",
+   "text": "Beacon"
+  },
+  {
+   "dirw": "captured-mouse-events",
+   "link": "https://screen-share.github.io/captured-mouse-events/",
+   "text": "Captured Mouse Events"
+  },
+  {
+   "dirw": "scheduler",
+   "link": "https://wicg.github.io/scheduling-apis/",
+   "text": "Prioritized Task Scheduling"
+  },
+  {
+   "dirw": "idle-detection",
+   "link": "https://wicg.github.io/idle-detection/",
+   "text": "Idle Detection API"
+  },
+  {
+   "dirw": "keyboard-lock",
+   "link": "https://wicg.github.io/keyboard-lock/",
+   "text": "Keyboard Lock"
+  },
+  {
+   "dirw": "annotation-protocol",
+   "link": "https://www.w3.org/TR/annotation-protocol/",
+   "text": "Web Annotation Protocol"
+  },
+  {
+   "dirw": "preload",
+   "link": "https://w3c.github.io/preload/",
+   "text": "Link type preload"
+  },
+  {
+   "dirw": "webrtc-ice",
+   "link": "https://w3c.github.io/webrtc-ice/",
+   "text": "IceTransport Extensions for WebRTC"
+  },
+  {
+   "dirw": "html-longdesc",
+   "link": "https://www.w3.org/TR/html-longdesc/",
+   "text": "HTML5 Image Description Extension (longdesc)"
+  },
+  {
+   "dirw": "presentation-api",
+   "link": "https://w3c.github.io/presentation-api/",
+   "text": "Presentation API"
+  },
+  {
+   "dirw": "background-sync",
+   "link": "https://wicg.github.io/background-sync/spec/",
+   "text": "Web Background Synchronization"
+  },
+  {
+   "dirw": "referrer-policy",
+   "link": "https://w3c.github.io/webappsec-referrer-policy/",
+   "text": "Referrer Policy"
+  },
+  {
+   "dirw": "uievents",
+   "link": "https://w3c.github.io/uievents/",
+   "text": "UI Events"
+  },
+  {
+   "dirw": "webrtc-priority",
+   "link": "https://w3c.github.io/webrtc-priority/",
+   "text": "WebRTC Priority Control API"
+  },
+  {
+   "dirw": "fs",
+   "link": "https://fs.spec.whatwg.org/",
+   "text": "File System Standard"
+  },
+  {
+   "dirw": "urlpattern",
+   "link": "https://urlpattern.spec.whatwg.org/",
+   "text": "URL Pattern Standard"
+  },
+  {
+   "dirw": "workers",
+   "link": "https://html.spec.whatwg.org/multipage/workers.html",
+   "text": "Web workers"
+  },
+  {
+   "dirw": "console",
+   "link": "https://console.spec.whatwg.org/",
+   "text": "Console Standard"
+  },
+  {
+   "dirw": "js",
+   "link": "https://tc39.es/ecma262/",
+   "text": "ECMAScript 2025 Language Specification"
+  },
+  {
+   "dirw": "IndexedDB",
+   "link": "https://w3c.github.io/IndexedDB/",
+   "text": "Indexed Database API 3.0"
+  },
+  {
+   "dirw": "client-hints",
+   "link": "https://wicg.github.io/client-hints-infrastructure/",
+   "text": "Client Hints Infrastructure"
+  },
+  {
+   "dirw": "picture-in-picture",
+   "link": "https://w3c.github.io/picture-in-picture/",
+   "text": "Picture-in-Picture"
+  },
+  {
+   "dirw": "push-api",
+   "link": "https://w3c.github.io/push-api/",
+   "text": "Push API"
+  },
+  {
+   "dirw": "permissions-request",
+   "link": "https://wicg.github.io/permissions-request/",
+   "text": "Requesting Permissions"
+  },
+  {
+   "dirw": "user-timing",
+   "link": "https://w3c.github.io/user-timing/",
+   "text": "User Timing"
+  },
+  {
+   "dirw": "graphics-aam",
+   "link": "https://w3c.github.io/graphics-aam/",
+   "text": "Graphics Accessibility API Mappings"
+  },
+  {
+   "dirw": "resource-timing",
+   "link": "https://w3c.github.io/resource-timing/",
+   "text": "Resource Timing"
+  },
+  {
+   "dirw": "dpub-aria",
+   "link": "https://w3c.github.io/dpub-aria/",
+   "text": "Digital Publishing WAI-ARIA Module 1.1"
+  },
+  {
+   "dirw": "webaudio",
+   "link": "https://webaudio.github.io/web-audio-api/",
+   "text": "Web Audio API 1.1"
+  },
+  {
+   "dirw": "avif",
+   "link": "https://aomediacodec.github.io/av1-avif/",
+   "text": "AV1 Image File Format (AVIF)"
+  },
+  {
+   "dirw": "netinfo",
+   "link": "https://wicg.github.io/netinfo/",
+   "text": "Network Information API"
+  },
+  {
+   "dirw": "selection",
+   "link": "https://w3c.github.io/selection-api/",
+   "text": "Selection API"
+  },
+  {
+   "dirw": "shadow-dom",
+   "link": "https://dom.spec.whatwg.org/#shadow-trees",
+   "text": "Shadow DOM"
+  },
+  {
+   "dirw": "proximity",
+   "link": "https://w3c.github.io/proximity/",
+   "text": "Proximity Sensor"
+  },
+  {
+   "dirw": "html/canvas/offscreen",
+   "link": "https://html.spec.whatwg.org/multipage/canvas.html#the-offscreencanvas-interface",
+   "text": "Offscreen Canvas"
+  },
+  {
+   "dirw": "html/canvas",
+   "link": "https://html.spec.whatwg.org/multipage/canvas.html#2dcontext",
+   "text": "Canvas 2D Rendering Context"
+  },
+  {
+   "dirw": "html/cross-origin-embedder-policy/credentialless",
+   "link": "",
+   "text": "Cross-origin Embedder Policy Credentialless"
+  },
+  {
+   "dirw": "html/cross-origin-embedder-policy",
+   "link": "https://html.spec.whatwg.org/multipage/origin.html#coep",
+   "text": "Cross-origin Embedder Policy"
+  },
+  {
+   "dirw": "html",
+   "link": "https://html.spec.whatwg.org/multipage/",
+   "text": "HTML Standard"
+  },
+  {
+   "dirw": "html/user-activation",
+   "link": "https://html.spec.whatwg.org/multipage/interaction.html#tracking-user-activation",
+   "text": "Tracking User Activation"
+  },
+  {
+   "dirw": "html/browsers/origin/origin-keyed-agent-clusters",
+   "link": "https://html.spec.whatwg.org/multipage/#origin-keyed-agent-clusters",
+   "text": "Origin Keyed Agent Clusters"
+  },
+  {
+   "dirw": "html/cross-origin-opener-policy",
+   "link": "https://html.spec.whatwg.org/multipage/origin.html#cross-origin-opener-policies",
+   "text": "Cross-origin Opener Policies"
+  },
+  {
+   "dirw": "css/css-exclusions",
+   "link": "https://drafts.csswg.org/css-exclusions/",
+   "text": "CSS Exclusions Module Level 1"
+  },
+  {
+   "dirw": "css/css-images",
+   "link": "https://drafts.csswg.org/css-images/",
+   "text": "CSS Images Module Level 3"
+  },
+  {
+   "dirw": "css/css-lists",
+   "link": "https://drafts.csswg.org/css-lists/",
+   "text": "CSS Lists and Counters Module Level 3"
+  },
+  {
+   "dirw": "css/css-break",
+   "link": "https://drafts.csswg.org/css-break/",
+   "text": "CSS Fragmentation Module Level 3"
+  },
+  {
+   "dirw": "css/css-display",
+   "link": "https://drafts.csswg.org/css-display/",
+   "text": "CSS Display Module Level 3"
+  },
+  {
+   "dirw": "css/css-scrollbars",
+   "link": "https://drafts.csswg.org/css-scrollbars/",
+   "text": "CSS Scrollbars Styling Module Level 1"
+  },
+  {
+   "dirw": "css/css-overscroll-behavior",
+   "link": "https://drafts.csswg.org/css-overscroll/",
+   "text": "CSS Overscroll Behavior Module Level 1"
+  },
+  {
+   "dirw": "css/css-page",
+   "link": "https://drafts.csswg.org/css-page/",
+   "text": "CSS Paged Media Module Level 3"
+  },
+  {
+   "dirw": "css/css-tables",
+   "link": "https://drafts.csswg.org/css-tables/",
+   "text": "CSS Table Module Level 3"
+  },
+  {
+   "dirw": "css/css-device-adapt",
+   "link": "https://drafts.csswg.org/css-device-adapt/",
+   "text": "CSS Device Adapt (now CSS Viewport Module Level 1)"
+  },
+  {
+   "dirw": "css/css-animations",
+   "link": "https://drafts.csswg.org/css-animations/",
+   "text": "CSS Animations Level 1"
+  },
+  {
+   "dirw": "css/css-paint-api",
+   "link": "https://drafts.css-houdini.org/css-paint-api/",
+   "text": "CSS Painting API Level 1"
+  },
+  {
+   "dirw": "css/css-logical",
+   "link": "https://drafts.csswg.org/css-logical/",
+   "text": "CSS Logical Properties and Values Level 1"
+  },
+  {
+   "dirw": "css/css-conditional",
+   "link": "https://drafts.csswg.org/css-conditional/",
+   "text": "CSS Conditional Rules Module Level 5"
+  },
+  {
+   "dirw": "css/css-fonts",
+   "link": "https://drafts.csswg.org/css-fonts/",
+   "text": "CSS Fonts Module Level 4"
+  },
+  {
+   "dirw": "css/css-shapes",
+   "link": "https://drafts.csswg.org/css-shapes/",
+   "text": "CSS Shapes Module Level 1"
+  },
+  {
+   "dirw": "css/css-view-transitions",
+   "link": "https://drafts.csswg.org/css-view-transitions/",
+   "text": "CSS View Transitions Module Level 1"
+  },
+  {
+   "dirw": "css/motion",
+   "link": "https://drafts.fxtf.org/motion/",
+   "text": "Motion Path Module Level 1"
+  },
+  {
+   "dirw": "css/css-env",
+   "link": "https://drafts.csswg.org/css-env/",
+   "text": "CSS Environment Variables Module Level 1"
+  },
+  {
+   "dirw": "css/css-syntax",
+   "link": "https://drafts.csswg.org/css-syntax/",
+   "text": "CSS Syntax Module Level 3"
+  },
+  {
+   "dirw": "css/css-masking",
+   "link": "https://drafts.fxtf.org/css-masking/",
+   "text": "CSS Masking Module Level 1"
+  },
+  {
+   "dirw": "css/CSS2",
+   "link": "https://drafts.csswg.org/css2/",
+   "text": "Cascading Style Sheets (CSS) Level 2"
+  },
+  {
+   "dirw": "css/css-color",
+   "link": "https://drafts.csswg.org/css-color/",
+   "text": "CSS Color Module Level 4"
+  },
+  {
+   "dirw": "css/css-layout-api",
+   "link": "https://drafts.css-houdini.org/css-layout-api/",
+   "text": "CSS Layout API Level 1"
+  },
+  {
+   "dirw": "css/css-counter-styles",
+   "link": "https://drafts.csswg.org/css-counter-styles/",
+   "text": "CSS Counter Styles Level 3"
+  },
+  {
+   "dirw": "css/css-variables",
+   "link": "https://drafts.csswg.org/css-variables/",
+   "text": "CSS Custom Properties for Cascading Variables Module Level 1"
+  },
+  {
+   "dirw": "css/css-easing",
+   "link": "https://drafts.csswg.org/css-easing/",
+   "text": "CSS Easing Functions Level 2"
+  },
+  {
+   "dirw": "css/css-text",
+   "link": "https://drafts.csswg.org/css-text/",
+   "text": "CSS Text Module Level 3"
+  },
+  {
+   "dirw": "css/css-text-decor",
+   "link": "https://drafts.csswg.org/css-text-decor/",
+   "text": "CSS Text Decoration Module Level 3"
+  },
+  {
+   "dirw": "css/css-will-change",
+   "link": "https://drafts.csswg.org/css-will-change/",
+   "text": "CSS Will Change Module Level 1"
+  },
+  {
+   "dirw": "css/css-typed-om",
+   "link": "https://drafts.css-houdini.org/css-typed-om/",
+   "text": "CSS Typed OM Level 1"
+  },
+  {
+   "dirw": "css/css-flexbox",
+   "link": "https://drafts.csswg.org/css-flexbox/",
+   "text": "CSS Flexible Box Layout Module Level 1"
+  },
+  {
+   "dirw": "css/css-color-adjust",
+   "link": "https://drafts.csswg.org/css-color-adjust/",
+   "text": "CSS Color Adjustment Module Level 1"
+  },
+  {
+   "dirw": "css/css-box",
+   "link": "https://drafts.csswg.org/css-box/",
+   "text": "CSS Box Model Module Level 4"
+  },
+  {
+   "dirw": "css/css-values",
+   "link": "https://drafts.csswg.org/css-values/",
+   "text": "CSS Values and Units Module Level 4"
+  },
+  {
+   "dirw": "css/css-fill-stroke",
+   "link": "https://drafts.fxtf.org/fill-stroke/",
+   "text": "CSS Fill and Stroke Module Level 3"
+  },
+  {
+   "dirw": "css/css-content",
+   "link": "https://drafts.csswg.org/css-content/",
+   "text": "CSS Generated Content Module Level 3"
+  },
+  {
+   "dirw": "css/css-namespaces",
+   "link": "https://drafts.csswg.org/css-namespaces/",
+   "text": "CSS Namespaces Module Level 3"
+  },
+  {
+   "dirw": "css/cssom-view",
+   "link": "https://drafts.csswg.org/cssom-view/",
+   "text": "CSSOM View Module"
+  },
+  {
+   "dirw": "css/compositing",
+   "link": "https://drafts.fxtf.org/compositing/",
+   "text": "Compositing and Blending Level 2"
+  },
+  {
+   "dirw": "css/css-transitions",
+   "link": "https://drafts.csswg.org/css-transitions/",
+   "text": "CSS Transitions Level 1"
+  },
+  {
+   "dirw": "css/css-shadow-parts",
+   "link": "https://drafts.csswg.org/css-shadow-parts/",
+   "text": "CSS Shadow Parts"
+  },
+  {
+   "dirw": "css/CSS1",
+   "link": "https://www.w3.org/TR/CSS1/",
+   "text": "Cascading Style Sheets, level 1"
+  },
+  {
+   "dirw": "css/css-font-loading",
+   "link": "https://drafts.csswg.org/css-font-loading/",
+   "text": "CSS Font Loading Module Level 3"
+  },
+  {
+   "dirw": "css/css-speech",
+   "link": "https://drafts.csswg.org/css-speech/",
+   "text": "CSS Speech Module Level 1"
+  },
+  {
+   "dirw": "css/css-scroll-anchoring",
+   "link": "https://drafts.csswg.org/css-scroll-anchoring/",
+   "text": "CSS Scroll Anchoring Module Level 1"
+  },
+  {
+   "dirw": "css/css-backgrounds",
+   "link": "https://drafts.csswg.org/css-backgrounds/",
+   "text": "CSS Backgrounds and Borders Module Level 3"
+  },
+  {
+   "dirw": "css/css-borders",
+   "link": "https://drafts.csswg.org/css-borders/",
+   "text": "CSS Borders and Box Decorations Module Level 4"
+  },
+  {
+   "dirw": "css/css-multicol",
+   "link": "https://drafts.csswg.org/css-multicol/",
+   "text": "CSS Multi-column Layout Module Level 1"
+  },
+  {
+   "dirw": "css/mediaqueries",
+   "link": "https://drafts.csswg.org/mediaqueries/",
+   "text": "Media Queries Level 4"
+  },
+  {
+   "dirw": "css/css-viewport",
+   "link": "https://drafts.csswg.org/css-viewport/",
+   "text": "CSS Viewport Module Level 1"
+  },
+  {
+   "dirw": "css/css-inline",
+   "link": "https://drafts.csswg.org/css-inline/",
+   "text": "CSS Inline Layout Module Level 3"
+  },
+  {
+   "dirw": "css/css-grid",
+   "link": "https://drafts.csswg.org/css-grid/",
+   "text": "CSS Grid Layout Module Level 2"
+  },
+  {
+   "dirw": "css/css-size-adjust",
+   "link": "https://drafts.csswg.org/css-size-adjust/",
+   "text": "CSS Mobile Text Size Adjustment Module Level 1"
+  },
+  {
+   "dirw": "css/cssom",
+   "link": "https://drafts.csswg.org/cssom/",
+   "text": "CSS Object Model (CSSOM)"
+  },
+  {
+   "dirw": "css/css-ui",
+   "link": "https://drafts.csswg.org/css-ui/",
+   "text": "CSS Basic User Interface Module Level 4"
+  },
+  {
+   "dirw": "css/css-transforms",
+   "link": "https://drafts.csswg.org/css-transforms/",
+   "text": "CSS Transforms Module Level 1"
+  },
+  {
+   "dirw": "css/css-position",
+   "link": "https://drafts.csswg.org/css-position/",
+   "text": "CSS Positioned Layout Module Level 3"
+  },
+  {
+   "dirw": "css/css-align",
+   "link": "https://drafts.csswg.org/css-align/",
+   "text": "CSS Box Alignment Module Level 3"
+  },
+  {
+   "dirw": "css/css-properties-values-api",
+   "link": "https://drafts.css-houdini.org/css-properties-values-api/",
+   "text": "CSS Properties and Values API Level 1"
+  },
+  {
+   "dirw": "css/css-pseudo",
+   "link": "https://drafts.csswg.org/css-pseudo/",
+   "text": "CSS Pseudo-Elements Module Level 4"
+  },
+  {
+   "dirw": "css/css-overflow",
+   "link": "https://drafts.csswg.org/css-overflow/",
+   "text": "CSS Overflow Module Level 3"
+  },
+  {
+   "dirw": "css/css-writing-modes",
+   "link": "https://drafts.csswg.org/css-writing-modes/",
+   "text": "CSS Writing Modes Level 4"
+  },
+  {
+   "dirw": "css/geometry",
+   "link": "https://drafts.fxtf.org/geometry/",
+   "text": "Geometry Interfaces Module Level 1"
+  },
+  {
+   "dirw": "css/css-cascade",
+   "link": "https://drafts.csswg.org/css-cascade/",
+   "text": "CSS Cascading and Inheritance Level 4"
+  },
+  {
+   "dirw": "css/css-style-attr",
+   "link": "https://drafts.csswg.org/css-style-attr/",
+   "text": "CSS Style Attributes"
+  },
+  {
+   "dirw": "css/css-ruby",
+   "link": "https://drafts.csswg.org/css-ruby/",
+   "text": "CSS Ruby Annotation Layout Module Level 1"
+  },
+  {
+   "dirw": "css/WOFF2",
+   "link": "https://w3c.github.io/woff/woff2/",
+   "text": "WOFF File Format 2.0"
+  },
+  {
+   "dirw": "css/css-sizing",
+   "link": "https://drafts.csswg.org/css-sizing/",
+   "text": "CSS Box Sizing Module Level 3"
+  },
+  {
+   "dirw": "css/selectors",
+   "link": "https://drafts.csswg.org/selectors/",
+   "text": "Selectors Level 4"
+  },
+  {
+   "dirw": "css/css-scroll-snap",
+   "link": "https://drafts.csswg.org/css-scroll-snap/",
+   "text": "CSS Scroll Snap Module Level 1"
+  },
+  {
+   "dirw": "css/css-contain",
+   "link": "https://drafts.csswg.org/css-contain/",
+   "text": "CSS Containment Module Level 2"
+  },
+  {
+   "dirw": "css/css-scoping",
+   "link": "https://drafts.csswg.org/css-scoping/",
+   "text": "CSS Scoping Module Level 1"
+  },
+  {
+   "dirw": "css/filter-effects",
+   "link": "https://drafts.fxtf.org/filter-effects/",
+   "text": "Filter Effects Module Level 1"
+  },
+  {
+   "dirw": "css/css-gcpm",
+   "link": "https://drafts.csswg.org/css-gcpm/",
+   "text": "CSS Generated Content for Paged Media Module"
+  },
+  {
+   "dirw": "css/css-round-display",
+   "link": "https://drafts.csswg.org/css-round-display/",
+   "text": "CSS Round Display Level 1"
+  },
+  {
+   "dirw": "css/css-parser-api",
+   "link": "https://wicg.github.io/css-parser-api/",
+   "text": "CSS Parser API"
+  },
+  {
+   "dirw": "virtual-keyboard",
+   "link": "https://github.com/w3c/editing/blob/gh-pages/docs/virtualkeyboard/index.html",
+   "text": "VirtualKeyboard API"
+  },
+  {
+   "dirw": "core-aam",
+   "link": "https://w3c.github.io/core-aam/",
+   "text": "Core Accessibility API Mappings 1.2"
+  },
+  {
+   "dirw": "media-source",
+   "link": "https://w3c.github.io/media-source/",
+   "text": "Media Source Extensions"
+  },
+  {
+   "dirw": "lifecycle",
+   "link": "https://wicg.github.io/page-lifecycle/",
+   "text": "Page Lifecycle"
+  },
+  {
+   "dirw": "encrypted-media",
+   "link": "https://w3c.github.io/encrypted-media/",
+   "text": "Encrypted Media Extensions"
+  },
+  {
+   "dirw": "webrtc-stats",
+   "link": "https://w3c.github.io/webrtc-stats/",
+   "text": "Identifiers for WebRTC's Statistics API"
+  },
+  {
+   "dirw": "dpub-aam/manual",
+   "link": "https://w3c.github.io/dpub-aam/",
+   "text": "Digital Publishing Accessibility API Mappings 1.1 (manual tests)"
+  },
+  {
+   "dirw": "dpub-aam",
+   "link": "https://w3c.github.io/dpub-aam/",
+   "text": "Digital Publishing Accessibility API Mappings 1.1"
+  },
+  {
+   "dirw": "partitioned-popins",
+   "link": "https://explainers-by-googlers.github.io/partitioned-popins/",
+   "text": "Partitioned Popins"
+  },
+  {
+   "dirw": "window-management",
+   "link": "https://w3c.github.io/window-management/",
+   "text": "Window Management"
+  },
+  {
+   "dirw": "web-nfc",
+   "link": "https://w3c.github.io/web-nfc/",
+   "text": "Web NFC"
+  },
+  {
+   "dirw": "webdriver",
+   "link": "https://w3c.github.io/webdriver/",
+   "text": "WebDriver"
+  },
+  {
+   "dirw": "credential-management",
+   "link": "https://w3c.github.io/webappsec-credential-management/",
+   "text": "Credential Management Level 1"
+  },
+  {
+   "dirw": "pointerlock",
+   "link": "https://w3c.github.io/pointerlock/",
+   "text": "Pointer Lock 2.0"
+  },
+  {
+   "dirw": "page-lifecycle",
+   "link": "https://wicg.github.io/page-lifecycle/",
+   "text": "Page Lifecycle"
+  },
+  {
+   "dirw": "animation-worklet",
+   "link": "https://drafts.css-houdini.org/css-animation-worklet/",
+   "text": "CSS Animation Worklet API"
+  },
+  {
+   "dirw": "ua-client-hints",
+   "link": "https://wicg.github.io/ua-client-hints/",
+   "text": "User-Agent Client Hints"
+  },
+  {
+   "dirw": "streams",
+   "link": "https://streams.spec.whatwg.org/",
+   "text": "Streams Standard"
+  },
+  {
+   "dirw": "media-capabilities",
+   "link": "https://w3c.github.io/media-capabilities/",
+   "text": "Media Capabilities"
+  },
+  {
+   "dirw": "savedata",
+   "link": "https://wicg.github.io/savedata/",
+   "text": "Save Data API"
+  },
+  {
+   "dirw": "upgrade-insecure-requests",
+   "link": "https://w3c.github.io/webappsec-upgrade-insecure-requests/",
+   "text": "Upgrade Insecure Requests"
+  },
+  {
+   "dirw": "webvr",
+   "link": "https://immersive-web.github.io/webvr/spec/1.1/",
+   "text": "WebVR"
+  },
+  {
+   "dirw": "geolocation",
+   "link": "https://w3c.github.io/geolocation/",
+   "text": "Geolocation"
+  },
+  {
+   "dirw": "media-playback-quality",
+   "link": "https://w3c.github.io/media-playback-quality/",
+   "text": "Media Playback Quality"
+  },
+  {
+   "dirw": "badging",
+   "link": "https://w3c.github.io/badging/",
+   "text": "Badging API"
+  },
+  {
+   "dirw": "direct-sockets",
+   "link": "https://github.com/WICG/direct-sockets/blob/main/docs/explainer.md",
+   "text": "Direct Sockets"
+  },
+  {
+   "dirw": "appmanifest",
+   "link": "https://w3c.github.io/manifest/",
+   "text": "Web Application Manifest"
+  },
+  {
+   "dirw": "annotation-model",
+   "link": "https://www.w3.org/TR/annotation-model/",
+   "text": "Web Annotation Data Model"
+  },
+  {
+   "dirw": "viewport",
+   "link": "https://drafts.csswg.org/css-viewport-1/",
+   "text": "CSS Viewport Module Level 1"
+  },
+  {
+   "dirw": "shape-detection",
+   "link": "https://wicg.github.io/shape-detection-api/",
+   "text": "Accelerated Shape Detection in Images"
+  },
+  {
+   "dirw": "web-locks",
+   "link": "https://w3c.github.io/web-locks/",
+   "text": "Web Locks API"
+  },
+  {
+   "dirw": "mixed-content",
+   "link": "https://w3c.github.io/webappsec-mixed-content/",
+   "text": "Mixed Content"
+  },
+  {
+   "dirw": "merchant-validation",
+   "link": "https://w3c.github.io/merchant-validation/",
+   "text": "The MerchantValidationEvent interface"
+  },
+  {
+   "dirw": "webxr/anchors",
+   "link": "https://immersive-web.github.io/anchors/",
+   "text": "WebXR Anchors Module"
+  },
+  {
+   "dirw": "webxr/hand-input",
+   "link": "https://immersive-web.github.io/webxr-hand-input/",
+   "text": "WebXR Hand Input Module - Level 1"
+  },
+  {
+   "dirw": "webxr/hit-test",
+   "link": "https://immersive-web.github.io/hit-test/",
+   "text": "WebXR Hit Test Module"
+  },
+  {
+   "dirw": "webxr/dom-overlay",
+   "link": "https://immersive-web.github.io/dom-overlays/",
+   "text": "WebXR DOM Overlays Module"
+  },
+  {
+   "dirw": "webxr",
+   "link": "https://immersive-web.github.io/webxr/",
+   "text": "WebXR Device API"
+  },
+  {
+   "dirw": "webxr/layers",
+   "link": "https://immersive-web.github.io/layers/",
+   "text": "WebXR Layers API Level 1"
+  },
+  {
+   "dirw": "webxr/gamepads-module",
+   "link": "https://immersive-web.github.io/webxr-gamepads-module/",
+   "text": "WebXR Gamepads Module - Level 1"
+  },
+  {
+   "dirw": "webxr/ar-module",
+   "link": "https://immersive-web.github.io/webxr-ar-module/",
+   "text": "WebXR Augmented Reality Module - Level 1"
+  },
+  {
+   "dirw": "compression",
+   "link": "https://wicg.github.io/compression/",
+   "text": "Compression"
+  },
+  {
+   "dirw": "clipboard-apis",
+   "link": "https://w3c.github.io/clipboard-apis/",
+   "text": "Clipboard API and events"
+  },
+  {
+   "dirw": "layout-instability",
+   "link": "https://wicg.github.io/layout-instability/",
+   "text": "Layout Instability API"
+  },
+  {
+   "dirw": "webtransport",
+   "link": "https://w3c.github.io/webtransport/",
+   "text": "WebTransport"
+  },
+  {
+   "dirw": "periodic-background-sync",
+   "link": "https://wicg.github.io/periodic-background-sync/",
+   "text": "Web Periodic Background Synchronization"
+  },
+  {
+   "dirw": "quirks",
+   "link": "https://quirks.spec.whatwg.org/",
+   "text": "Quirks Mode Standard"
+  },
+  {
+   "dirw": "wai-aria",
+   "link": "https://w3c.github.io/aria/",
+   "text": "Accessible Rich Internet Applications (WAI-ARIA) 1.3"
+  },
+  {
+   "dirw": "bluetooth",
+   "link": "https://webbluetoothcg.github.io/web-bluetooth/",
+   "text": "Web Bluetooth"
+  },
+  {
+   "dirw": "html-aam",
+   "link": "https://w3c.github.io/html-aam/",
+   "text": "HTML Accessibility API Mappings 1.0"
+  },
+  {
+   "dirw": "apng",
+   "link": "https://wiki.mozilla.org/APNG_Specification",
+   "text": "APNG Specification"
+  },
+  {
+   "dirw": "png",
+   "link": "https://www.w3.org/TR/png/",
+   "text": "Portable Network Graphics (PNG) Specification (Third Edition)"
+  },
+  {
+   "dirw": "requestidlecallback",
+   "link": "https://w3c.github.io/requestidlecallback/",
+   "text": "requestIdleCallback()"
+  },
+  {
+   "dirw": "payment-request",
+   "link": "https://w3c.github.io/payment-request/",
+   "text": "Payment Request API"
+  },
+  {
+   "dirw": "webcodecs",
+   "link": "https://w3c.github.io/webcodecs/",
+   "text": "WebCodecs"
+  },
+  {
+   "dirw": "fetch/fetch-later",
+   "link": "https://whatpr.org/fetch/1647/094ea69...152d725.html#fetch-later-method",
+   "text": "Fetch Standard Pull Request #1647 Preview"
+  },
+  {
+   "dirw": "fetch",
+   "link": "https://fetch.spec.whatwg.org/",
+   "text": "Fetch Standard"
+  },
+  {
+   "dirw": "fetch/private-network-access",
+   "link": "https://wicg.github.io/private-network-access/",
+   "text": "Private Network Access"
+  },
+  {
+   "dirw": "fetch/metadata",
+   "link": "https://w3c.github.io/webappsec-fetch-metadata/",
+   "text": "Fetch Metadata Request Headers"
+  },
+  {
+   "dirw": "FileAPI",
+   "link": "https://w3c.github.io/FileAPI/",
+   "text": "File API"
+  },
+  {
+   "dirw": "domxpath",
+   "link": "https://www.w3.org/TR/DOM-Level-3-XPath/",
+   "text": "Document Object Model (DOM) Level 3 XPath Specification"
+  },
+  {
+   "dirw": "svg-aam",
+   "link": "https://w3c.github.io/svg-aam/",
+   "text": "SVG Accessibility API Mappings"
+  },
+  {
+   "dirw": "payment-method-id",
+   "link": "https://w3c.github.io/payment-method-id/",
+   "text": "Payment Method Identifiers"
+  },
+  {
+   "dirw": "measure-memory",
+   "link": "https://wicg.github.io/performance-measure-memory/",
+   "text": "Measure Memory API"
+  },
+  {
+   "dirw": "import-maps",
+   "link": "https://wicg.github.io/import-maps/",
+   "text": "Import maps"
+  },
+  {
+   "dirw": "speech-api",
+   "link": "https://wicg.github.io/speech-api/",
+   "text": "Web Speech API"
+  },
+  {
+   "dirw": "secure-payment-confirmation",
+   "link": "https://w3c.github.io/secure-payment-confirmation/",
+   "text": "Secure Payment Confirmation"
+  },
+  {
+   "dirw": "worklets",
+   "link": "https://html.spec.whatwg.org/multipage/worklets.html",
+   "text": "Worklets"
+  },
+  {
+   "dirw": "remote-playback",
+   "link": "https://w3c.github.io/remote-playback/",
+   "text": "Remote Playback API"
+  },
+  {
+   "dirw": "wasm/webapi",
+   "link": "https://webassembly.github.io/spec/web-api/",
+   "text": "WebAssembly Web API"
+  },
+  {
+   "dirw": "wasm/jsapi",
+   "link": "https://webassembly.github.io/spec/js-api/",
+   "text": "WebAssembly JavaScript Interface"
+  },
+  {
+   "dirw": "document-picture-in-picture",
+   "link": "https://wicg.github.io/document-picture-in-picture/",
+   "text": "Document Picture-in-Picture Specification"
+  },
+  {
+   "dirw": "graphics-aria",
+   "link": "https://w3c.github.io/graphics-aria/",
+   "text": "WAI-ARIA Graphics Module"
+  },
+  {
+   "dirw": "gyroscope",
+   "link": "https://w3c.github.io/gyroscope/",
+   "text": "Gyroscope"
+  },
+  {
+   "dirw": "web-share",
+   "link": "https://w3c.github.io/web-share/",
+   "text": "Web Share API"
+  },
+  {
+   "dirw": "video-rvfc",
+   "link": "https://wicg.github.io/video-rvfc/",
+   "text": "HTMLVideoElement.requestVideoFrameCallback()"
+  },
+  {
+   "dirw": "event-timing",
+   "link": "https://wicg.github.io/event-timing/",
+   "text": "Event Timing API"
+  },
+  {
+   "dirw": "deprecation-reporting",
+   "link": "https://wicg.github.io/deprecation-reporting/",
+   "text": "Deprecation Reporting"
+  },
+  {
+   "dirw": "managed",
+   "link": "https://wicg.github.io/WebApiDevice/managed_config/",
+   "text": "Managed Configuration API"
+  },
+  {
+   "dirw": "file-system-access",
+   "link": "https://wicg.github.io/file-system-access/",
+   "text": "File System Access"
+  },
+  {
+   "dirw": "cors",
+   "link": "https://fetch.spec.whatwg.org/#http-cors-protocol",
+   "text": "Fetch Standard"
+  },
+  {
+   "dirw": "WebCryptoAPI",
+   "link": "https://w3c.github.io/webcrypto/",
+   "text": "Web Cryptography API"
+  },
+  {
+   "dirw": "keyboard-map",
+   "link": "https://wicg.github.io/keyboard-map/",
+   "text": "Keyboard Map"
+  },
+  {
+   "dirw": "cookie-store",
+   "link": "https://wicg.github.io/cookie-store/",
+   "text": "Cookie Store API"
+  },
+  {
+   "dirw": "webrtc",
+   "link": "https://w3c.github.io/webrtc-pc/",
+   "text": "WebRTC: Real-Time Communication in Browsers"
+  },
+  {
+   "dirw": "annotation-vocab",
+   "link": "https://www.w3.org/TR/annotation-vocab/",
+   "text": "Web Annotation Vocabulary"
+  },
+  {
+   "dirw": "background-fetch",
+   "link": "https://wicg.github.io/background-fetch/",
+   "text": "Background Fetch"
+  },
+  {
+   "dirw": "performance-timeline",
+   "link": "https://w3c.github.io/performance-timeline/",
+   "text": "Performance Timeline"
+  },
+  {
+   "dirw": "input-events",
+   "link": "https://w3c.github.io/input-events/",
+   "text": "Input Events Level 2"
+  },
+  {
+   "dirw": "mathml",
+   "link": "https://w3c.github.io/mathml-core/",
+   "text": "MathML Core"
+  },
+  {
+   "dirw": "fedcm",
+   "link": "https://web.archive.org/web/20230922150344/https://fedidcg.github.io/FedCM/",
+   "text": "Federated Credential Management API"
+  },
+  {
+   "dirw": "reporting",
+   "link": "https://w3c.github.io/reporting/",
+   "text": "Reporting API"
+  },
+  {
+   "dirw": "webrtc-identity",
+   "link": "https://w3c.github.io/webrtc-identity/identity.html",
+   "text": "Identity for WebRTC 1.0"
+  },
+  {
+   "dirw": "permissions-policy",
+   "link": "https://w3c.github.io/webappsec-permissions-policy/",
+   "text": "Permissions Policy"
+  },
+  {
+   "dirw": "feature-policy",
+   "link": "https://wicg.github.io/feature-policy/",
+   "text": "Permissions Policy"
+  },
+  {
+   "dirw": "signed-exchange",
+   "link": "https://wicg.github.io/webpackage/draft-yasskin-http-origin-signed-responses.html",
+   "text": "Signed HTTP Exchanges"
+  },
+  {
+   "dirw": "close-watcher",
+   "link": "https://wicg.github.io/close-watcher/",
+   "text": "Close requests and close watchers"
+  },
+  {
+   "dirw": "webrtc-encoded-transform",
+   "link": "https://w3c.github.io/webrtc-encoded-transform/",
+   "text": "WebRTC Encoded Transform"
+  },
+  {
+   "dirw": "trusted-types",
+   "link": "https://w3c.github.io/trusted-types/dist/spec/",
+   "text": "Trusted Types"
+  },
+  {
+   "dirw": "content-security-policy/embedded-enforcement",
+   "link": "https://w3c.github.io/webappsec-cspee/",
+   "text": "Content Security Policy: Embedded Enforcement"
+  },
+  {
+   "dirw": "content-security-policy",
+   "link": "https://w3c.github.io/webappsec-csp/",
+   "text": "Content Security Policy Level 3"
+  },
+  {
+   "dirw": "eventsource",
+   "link": "https://html.spec.whatwg.org/multipage/server-sent-events.html",
+   "text": "Server-sent events"
+  },
+  {
+   "dirw": "device-memory",
+   "link": "https://www.w3.org/TR/device-memory/",
+   "text": "Device Memory"
+  },
+  {
+   "dirw": "jpegxl",
+   "link": "https://jpeg.org/jpegxl/workplan.html",
+   "text": "JPEG - JPEG XL"
+  },
+  {
+   "dirw": "nav-tracking-mitigations",
+   "link": "https://privacycg.github.io/nav-tracking-mitigations/",
+   "text": "Navigational-Tracking Mitigations"
+  },
+  {
+   "dirw": "webrtc-svc",
+   "link": "https://w3c.github.io/webrtc-svc/",
+   "text": "Scalable Video Coding (SVC) Extension for WebRTC"
+  },
+  {
+   "dirw": "mediacapture-fromelement",
+   "link": "https://w3c.github.io/mediacapture-fromelement/",
+   "text": "Media Capture from DOM Elements"
+  },
+  {
+   "dirw": "editing",
+   "link": "https://w3c.github.io/editing/docs/execCommand/",
+   "text": "execCommand"
+  },
+  {
+   "dirw": "pointerevents",
+   "link": "https://w3c.github.io/pointerevents/",
+   "text": "Pointer Events"
+  },
+  {
+   "dirw": "mimesniff",
+   "link": "https://mimesniff.spec.whatwg.org/",
+   "text": "MIME Sniffing Standard"
+  },
+  {
+   "dirw": "mediacapture-image",
+   "link": "https://w3c.github.io/mediacapture-image/",
+   "text": "MediaStream Image Capture"
+  },
+  {
+   "dirw": "is-input-pending",
+   "link": "https://wicg.github.io/is-input-pending/",
+   "text": "Early detection of input events"
+  },
+  {
+   "dirw": "resize-observer",
+   "link": "https://drafts.csswg.org/resize-observer/",
+   "text": "Resize Observer"
+  },
+  {
+   "dirw": "xhr",
+   "link": "https://xhr.spec.whatwg.org/",
+   "text": "XMLHttpRequest Standard"
+  },
+  {
+   "dirw": "subresource-integrity",
+   "link": "https://w3c.github.io/webappsec-subresource-integrity/",
+   "text": "Subresource Integrity"
+  },
+  {
+   "dirw": "webrtc-extensions",
+   "link": "https://w3c.github.io/webrtc-extensions/",
+   "text": "WebRTC Extensions"
+  }
+ ]
+}
