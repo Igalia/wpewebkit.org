@@ -14,12 +14,24 @@ sitemapChangeFrequency: yearly
   th { background-color: #f4f4f4; }
   #results-table th:first-child,
   #results-table td:first-child {
-    width: 10%;
+    width: 2em;
   }
   #meta-info { margin-block: 0 0.67em; }
   .meta-debug { display: none; }
   #header { display: flex; align-items: center; justify-content: space-between; }
   #version-select { margin-inline: 0.67em 0; }
+  tbody tr td.barred {
+    background-image: linear-gradient(90deg, hsl(calc(var(--dataHue) * 1.2) 40% 75%) 5040%, hsl(calc(var(--dataHue) * 1.2) 40% 75%));
+    background-size: var(--dataPct) 100%;
+    background-repeat: no-repeat;
+    text-shadow: 0 0 0.25em hsl(0, 0%, 93.7%), 0 0 0.25em hsl(0, 0%, 93.7%), 0 0 0.25em hsl(0, 0%, 93.7%);
+  }
+  tbody tr td.barred a[href] {
+  	background: linear-gradient(90deg, hsl(0 0% 93.7% / 0.9), hsl(0 0% 93.7% / 0.9) calc(100% - 0.75em), transparent 100%);
+  	padding-block: 0.2em;
+  	padding-inline: 0.75em 1.25em;
+  	margin-inline: -0.75em 0;
+  }
 </style>
 
 <div id="header">
@@ -163,6 +175,9 @@ sitemapChangeFrequency: yearly
       }
 
       const tdSpec = document.createElement('td');
+      tdSpec.classList.add('barred');
+      tdSpec.style.setProperty('--dataPct',percent+'%');
+      tdSpec.style.setProperty('--dataHue',percent+'deg');
       if (specText) {
         tdSpec.innerHTML = `<a href="${specLink}" target="_blank">${specText}</a>`;
       } else {
@@ -209,6 +224,9 @@ sitemapChangeFrequency: yearly
 
     const tdSpec = document.createElement('td');
     tdSpec.textContent = 'OVERALL TOTAL';
+    tdSpec.classList.add('barred');
+    tdSpec.style.setProperty('--dataPct',totalPercent+'%');
+    tdSpec.style.setProperty('--dataHue',totalPercent+'deg');
     row.appendChild(tdSpec);
 
     const tdRate = document.createElement('td');
