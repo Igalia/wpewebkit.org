@@ -9,15 +9,29 @@ sitemapChangeFrequency: yearly
 
 <style>
   body { font-family: sans-serif;}
-  table { border-collapse: collapse; width: 100%; margin-block: 1.25em 1em; table-layout: fixed;}
-  table :is(th, td) { border: 1px solid #ccc; padding-inline: 0.5em; padding-block: 0.4em 0.3em; text-align: left; }
-  th { background-color: #f4f4f4; }
+  h1 {
+  	margin-block-end: 0;
+  }
   #meta-info { margin-block: 0 0.67em; }
   .meta-debug { display: none; }
   #header { display: flex; align-items: center; justify-content: space-between; }
   #version-select {
     margin-inline: 0.67em 0;
   }
+  #stickyheader {
+  	position: sticky;
+  	top: 5em;
+  	padding-block: 1em;
+  	z-index: 1;
+  	background: #FFF;
+  }
+  #stickyheader + p {
+    margin-block-start: 0em;
+  }
+
+  table { border-collapse: collapse; width: 100%; margin-block: 1.25em 1em; table-layout: fixed;}
+  table :is(th, td) { border: 1px solid #ccc; padding-inline: 0.5em; padding-block: 0.4em 0.3em; text-align: left; }
+  th { background-color: #f4f4f4; }
   tbody a[href] {
   	text-decoration-color: color-mix(in hsl, currentColor 60%, transparent);
   	text-underline-offset: 0.15em;
@@ -46,6 +60,7 @@ sitemapChangeFrequency: yearly
 <div id="header">
   <h1>WebPlatformTests Results Viewer</h1>
 </div>
+<div id="stickyheader">
   <label><strong></strong>Please choose WPE version:
     <select id="version-select"></select>
   </label>
@@ -56,7 +71,7 @@ sitemapChangeFrequency: yearly
 <div id="meta-info">
   <div class="meta-debug"><br><center>Test run completed on <strong><span id="meta-run-date"></span></strong> (took <strong><span id="meta-run-time"></span></strong>) with browser <strong><span id="meta-browser-name"></span></strong> version <strong><span id="meta-browser-version"></span></strong> and WPT version <strong><a id="meta-wpt-version" href="" target="_blank"></a></strong> on distribution <strong><span id="meta-distro-name"></span></strong> running on a CPU <strong><span id="meta-processor-architecture"></span> (<span id="meta-processor-bits"></span> bits)</strong> </center></div>
 </div>
-
+</div>
 <p>
 The numbers given below are necessarily a crude measure of support: it’s possible to have what looks like a poor score while supporting the main body of a specification and missing a number of tiny edge cases, for example.  That said, in general, a specification with a score above 70% can be considered supported; any score between 30% and 70% can be considered partially supported; and any score below 30% indicates limited or almost no support.
 </p>
@@ -214,6 +229,7 @@ If you see a score drop over time, remember that this is most likely due to the 
         const tdDir = document.createElement('td');
         let testLink = document.createElement('a');
         testLink.href = `https://wpt.fyi/results/${dir}`;
+        testLink.target = '_blank';
         testLink.textContent = dir;
         tdDir.appendChild(testLink);
         row.appendChild(tdDir);
