@@ -9,30 +9,38 @@ sitemapChangeFrequency: yearly
 
 <style>
   body { font-family: sans-serif;}
-  table { border-collapse: collapse; width: 100%; margin-block: 1.25em 1em; }
-  th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }
+  table { border-collapse: collapse; width: 100%; margin-block: 1.25em 1em; table-layout: fixed;}
+  table :is(th, td) { border: 1px solid #ccc; padding-inline: 0.5em; padding-block: 0.4em 0.3em; text-align: left; }
   th { background-color: #f4f4f4; }
-  #results-table th:first-child,
-  #results-table td:first-child {
-    width: 2em;
-  }
   #meta-info { margin-block: 0 0.67em; }
   .meta-debug { display: none; }
   #header { display: flex; align-items: center; justify-content: space-between; }
-  #version-select { margin-inline: 0.67em 0; }
-  tbody tr td.barred {
-    background-image: linear-gradient(90deg, hsl(calc(var(--dataHue) * 1.2) 30% 75%) 0, hsl(calc(var(--dataHue) * 1.2) 70% 80%) 100%);
+  #version-select {
+    margin-inline: 0.67em 0;
+  }
+  tbody a[href] {
+  	text-decoration-color: color-mix(in hsl, currentColor 60%, transparent);
+  	text-underline-offset: 0.15em;
+  }
+  tbody td.barred {
+    background-image: linear-gradient(90deg, hsl(calc(var(--dataHue) * 1.2) 70% 90%) 0, hsl(calc(var(--dataHue) * 1.2) 70% 70%) 100%);
     background-size: var(--dataPct) 100%;
     background-repeat: no-repeat;
-    text-shadow: 0 0 0.25em hsl(0, 0%, 93.7%), 0 0 0.25em hsl(0, 0%, 93.7%), 0 0 0.25em hsl(0, 0%, 93.7%);
+    text-shadow:
+      0 0 0.25em hsl(0, 0%, 93.7%),
+      0 0 0.25em hsl(0, 0%, 93.7%),
+      0 0 0.25em hsl(0, 0%, 93.7%),
+      0 0 0.25em hsl(0, 0%, 93.7%),
+      0 0 0.25em hsl(0, 0%, 93.7%),
+      0 0 0.15em hsl(0, 0%, 93.7%),
+      0 0 0.15em hsl(0, 0%, 93.7%),
+      0 0 0.15em hsl(0, 0%, 93.7%),
+      0 0 0.15em hsl(0, 0%, 93.7%),
+      0 0 0.15em hsl(0, 0%, 93.7%);
   }
-  tbody tr td.barred a[href] {
-  	background: linear-gradient(90deg, hsl(0 0% 93.7% / 0.9), hsl(0 0% 93.7% / 0.9) calc(100% - 0.75em), transparent 100%);
-  	padding-block: 0.2em;
-  	padding-inline: 0.75em 1.25em;
-  	margin-inline: -0.75em 0;
+  tbody td small {
+    margin-inline: 0.33ch 0;
   }
-  tbody tr td small {margin-inline: 0.33ch 0;}
 </style>
 
 <div id="header">
@@ -140,10 +148,12 @@ If you see a score drop over time, remember that this is most likely due to the 
     tableBody.innerHTML = '';
 
     const headers = [];
-    headers.push(''); // Color
-    if (showDebug) headers.push('WPT Directory');
+//    headers.push(''); // Color
     headers.push('Specification', 'Passrate% (subtests)');
-    if (showDebug) headers.push('Subtest info');
+    if (showDebug) {
+      headers.push('Subtest info');
+      headers.push('WPT Directory');
+    }
 
     const headRow = document.createElement('tr');
     headers.forEach(h => {
@@ -172,20 +182,12 @@ If you see a score drop over time, remember that this is most likely due to the 
       if (!showUnknown && !specText) continue;
 
       const row = document.createElement('tr');
-      const tdColor = document.createElement('td');
-      tdColor.style.backgroundColor = `rgb(${Math.trunc(75 * (1 - percent / 100))}% ${Math.trunc(75 * percent / 100)}% 0)`;
-      row.appendChild(tdColor);
+//      const tdColor = document.createElement('td');
+//      tdColor.style.backgroundColor = `rgb(${Math.trunc(75 * (1 - percent / 100))}% ${Math.trunc(75 * percent / 100)}% 0)`;
+//      row.appendChild(tdColor);
 
-      if (showDebug) {
-        const tdDir = document.createElement('td');
-        tdDir.textContent = dir;
-        row.appendChild(tdDir);
-      }
 
       const tdSpec = document.createElement('td');
-      tdSpec.classList.add('barred');
-      tdSpec.style.setProperty('--dataPct',percent+'%');
-      tdSpec.style.setProperty('--dataHue',percent+'deg');
       if (specText) {
         tdSpec.innerHTML = `<a href="${specLink}" target="_blank">${specText}</a>`;
       } else {
@@ -200,12 +202,18 @@ If you see a score drop over time, remember that this is most likely due to the 
       	smallnote.textContent = ` (of ${new Intl.NumberFormat(navigator.language).format(total)})`;
       	tdRate.appendChild(smallnote);
       }
+      tdRate.classList.add('barred');
+      tdRate.style.setProperty('--dataPct',percent+'%');
+      tdRate.style.setProperty('--dataHue',percent+'deg');
       row.appendChild(tdRate);
 
       if (showDebug) {
         const tdInfo = document.createElement('td');
         tdInfo.textContent = `${pass} of ${total} subtests pass from ${mainTests} main tests`;
         row.appendChild(tdInfo);
+        const tdDir = document.createElement('td');
+        tdDir.textContent = dir;
+        row.appendChild(tdDir);
       }
 
       tableBody.appendChild(row);
@@ -220,19 +228,12 @@ If you see a score drop over time, remember that this is most likely due to the 
 
     const row = document.createElement('tr');
     row.style.fontWeight = 'bold';
-    const tdColor = document.createElement('td');
-    tdColor.style.background = `rgb(${Math.trunc(75 * (1 - totalPercent / 100))}% ${Math.trunc(75 * totalPercent / 100)}% 0)`;
-    row.appendChild(tdColor);
-
-    if (showDebug) {
-      const tdDir = document.createElement('td');
-      tdDir.textContent = 'TOTAL';
-      row.appendChild(tdDir);
-    }
+//    const tdColor = document.createElement('td');
+//    tdColor.style.background = `rgb(${Math.trunc(75 * (1 - totalPercent / 100))}% ${Math.trunc(75 * totalPercent / 100)}% 0)`;
+//    row.appendChild(tdColor);
 
     const tdSpec = document.createElement('td');
     tdSpec.textContent = 'OVERALL TOTAL';
-    tdSpec.classList.add('barred');
     tdSpec.style.setProperty('--dataPct',totalPercent+'%');
     tdSpec.style.setProperty('--dataHue',totalPercent+'deg');
     row.appendChild(tdSpec);
@@ -244,12 +245,18 @@ If you see a score drop over time, remember that this is most likely due to the 
     	smallnote.textContent += ` (of ${new Intl.NumberFormat(navigator.language).format(overall_total)})`;
     	tdRate.appendChild(smallnote);
     }
+    tdRate.classList.add('barred');
+    tdRate.style.setProperty('--dataPct',totalPercent+'%');
+    tdRate.style.setProperty('--dataHue',totalPercent+'deg');
     row.appendChild(tdRate);
 
     if (showDebug) {
       const tdInfo = document.createElement('td');
       tdInfo.textContent = `${new Intl.NumberFormat(navigator.language).format(overall_pass)} of ${new Intl.NumberFormat(navigator.language).format(overall_total)} subtests pass from ${new Intl.NumberFormat(navigator.language).format(overall_tests)} main tests (${overall_specs} specs)`;
       row.appendChild(tdInfo);
+      const tdDir = document.createElement('td');
+      tdDir.textContent = '';
+      row.appendChild(tdDir);
     }
 
     tableBody.appendChild(row);
