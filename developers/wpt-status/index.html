@@ -212,7 +212,10 @@ If you see a score drop over time, remember that this is most likely due to the 
         tdInfo.textContent = `${pass} of ${total} subtests pass from ${mainTests} main tests`;
         row.appendChild(tdInfo);
         const tdDir = document.createElement('td');
-        tdDir.textContent = dir;
+        let testLink = document.createElement('a');
+        testLink.href = `https://wpt.fyi/results/${dir}`;
+        testLink.textContent = dir;
+        tdDir.appendChild(testLink);
         row.appendChild(tdDir);
       }
 
