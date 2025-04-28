@@ -21,7 +21,7 @@ sitemapChangeFrequency: yearly
   #header { display: flex; align-items: center; justify-content: space-between; }
   #version-select { margin-inline: 0.67em 0; }
   tbody tr td.barred {
-    background-image: linear-gradient(90deg, hsl(calc(var(--dataHue) * 1.2) 40% 75%) 5040%, hsl(calc(var(--dataHue) * 1.2) 40% 75%));
+    background-image: linear-gradient(90deg, hsl(calc(var(--dataHue) * 1.2) 30% 75%) 0, hsl(calc(var(--dataHue) * 1.2) 70% 80%) 100%);
     background-size: var(--dataPct) 100%;
     background-repeat: no-repeat;
     text-shadow: 0 0 0.25em hsl(0, 0%, 93.7%), 0 0 0.25em hsl(0, 0%, 93.7%), 0 0 0.25em hsl(0, 0%, 93.7%);
@@ -32,6 +32,7 @@ sitemapChangeFrequency: yearly
   	padding-inline: 0.75em 1.25em;
   	margin-inline: -0.75em 0;
   }
+  tbody tr td small {margin-inline: 0.33ch 0;}
 </style>
 
 <div id="header">
@@ -47,6 +48,13 @@ sitemapChangeFrequency: yearly
 <div id="meta-info">
   <div class="meta-debug"><br><center>Test run completed on <strong><span id="meta-run-date"></span></strong> (took <strong><span id="meta-run-time"></span></strong>) with browser <strong><span id="meta-browser-name"></span></strong> version <strong><span id="meta-browser-version"></span></strong> and WPT version <strong><a id="meta-wpt-version" href="" target="_blank"></a></strong> on distribution <strong><span id="meta-distro-name"></span></strong> running on a CPU <strong><span id="meta-processor-architecture"></span> (<span id="meta-processor-bits"></span> bits)</strong> </center></div>
 </div>
+
+<p>
+The numbers given below are necessarily a crude measure of support: it’s possible to have what looks like a poor score while supporting the main body of a specification and missing a number of tiny edge cases, for example.  That said, in general, a specification with a score above 70% can be considered supported; any score between 30% and 70% can be considered partially supported; and any score below 30% indicates limited or almost no support.
+</p>
+<p>
+If you see a score drop over time, remember that this is most likely due to the addition of new tests, possibly due to new specification features, and not the removal of capabilities from WPE WebKit.
+</p>
 
 <table id="results-table">
   <thead></thead>
@@ -186,10 +194,10 @@ sitemapChangeFrequency: yearly
       row.appendChild(tdSpec);
 
       const tdRate = document.createElement('td');
-      tdRate.textContent = new Intl.NumberFormat({minimumFractionDigits: 1, maximumFractionDigits: 1}).format(percent) + '%' 
+      tdRate.textContent = new Intl.NumberFormat(navigator.language,{minimumFractionDigits: 1}).format(percent) + '%' 
       if (!showDebug) {
       	let smallnote = document.createElement('small');
-      	smallnote.textContent = ` (of ${new Intl.NumberFormat().format(total)})`;
+      	smallnote.textContent = ` (of ${new Intl.NumberFormat(navigator.language).format(total)})`;
       	tdRate.appendChild(smallnote);
       }
       row.appendChild(tdRate);
@@ -230,17 +238,17 @@ sitemapChangeFrequency: yearly
     row.appendChild(tdSpec);
 
     const tdRate = document.createElement('td');
-    tdRate.textContent = new Intl.NumberFormat().format(totalPercent) + '%';
+    tdRate.textContent = new Intl.NumberFormat(navigator.language,{minimumFractionDigits: 1}).format(totalPercent) + '%';
     if (!showDebug) {
    	let smallnote = document.createElement('small');
-    	smallnote.textContent += ` (of ${new Intl.NumberFormat().format(overall_total)})`;
+    	smallnote.textContent += ` (of ${new Intl.NumberFormat(navigator.language).format(overall_total)})`;
     	tdRate.appendChild(smallnote);
     }
     row.appendChild(tdRate);
 
     if (showDebug) {
       const tdInfo = document.createElement('td');
-      tdInfo.textContent = `${new Intl.NumberFormat().format(overall_pass)} of ${new Intl.NumberFormat().format(overall_total)} subtests pass from ${new Intl.NumberFormat().format(overall_tests)} main tests (${overall_specs} specs)`;
+      tdInfo.textContent = `${new Intl.NumberFormat(navigator.language).format(overall_pass)} of ${new Intl.NumberFormat(navigator.language).format(overall_total)} subtests pass from ${new Intl.NumberFormat(navigator.language).format(overall_tests)} main tests (${overall_specs} specs)`;
       row.appendChild(tdInfo);
     }
 
