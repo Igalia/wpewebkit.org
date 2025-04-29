@@ -182,9 +182,13 @@ header.page div::before {
 	width: 1px;
 	background: var(--dashV);
 }
-header.page div > * {
-	filter: drop-shadow(0 0 1px #0008) drop-shadow(0 0 2px #0008) drop-shadow(0 0 4px #0008) drop-shadow(0 0 8px #0008);
-}
+/* Temporarily disable this drop-shadow, it breaks on Chromium-based
+ * browsers on Linux in some cases when GPU acceleration is enabled
+ *
+ * header.page div > * { filter: drop-shadow(0 0 1px #0008) drop-shadow(0 0 2px
+ *     #0008) drop-shadow(0 0 4px #0008) drop-shadow(0 0 8px #0008);
+ * }
+ */
 header.page div h1 {
 	font-size: 3em;
 	font-weight: 400;
