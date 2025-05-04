@@ -3,7 +3,7 @@ title: "Success Story: GLANCR"
 date: 2025-04-04
 tags: success
 permalink: /blog/2025-success-glancr.html
-preview: TBD.
+preview: WPE WebKit empowers Glancr's mirror.OS with fast and lightweight Web rendering, ensuring a smooth and responsive smart mirror experience.
 thumbnail: /assets/img/logo-glancr@2x.png
 ---
 
