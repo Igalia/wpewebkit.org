@@ -1,0 +1,17 @@
+{
+ "metadata": {
+  "default_version": "2.46"
+ },
+ "versions": [
+  {
+   "version": "2.38",
+   "results": "results_2.38.json",
+   "specs": "wpt_specs.json"
+  },
+  {
+   "version": "2.46",
+   "results": "results_2.46.json",
+   "specs": "wpt_specs.json"
+  }
+ ]
+}

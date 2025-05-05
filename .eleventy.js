@@ -51,6 +51,7 @@ export default function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('vendor')
   eleventyConfig.addPassthroughCopy('assets')
   eleventyConfig.addPassthroughCopy('release/verify/*.key')
+  eleventyConfig.addPassthroughCopy('developers/wpt-status/*.json')
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(EleventyNavigation);
   eleventyConfig.addPlugin(EleventyRSS);
