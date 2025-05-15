@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2025-05-15T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2025-0004</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html"/>
+    <updated>2025-05-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;May 15, 2025&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2025-0004&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html#CVE-2023-42875&quot;&gt;CVE-2023-42875&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html#CVE-2023-42970&quot;&gt;CVE-2023-42970&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html#CVE-2025-24223&quot;&gt;CVE-2025-24223&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html#CVE-2025-31204&quot;&gt;CVE-2025-31204&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html#CVE-2025-31205&quot;&gt;CVE-2025-31205&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html#CVE-2025-31206&quot;&gt;CVE-2025-31206&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html#CVE-2025-31215&quot;&gt;CVE-2025-31215&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0004.html#CVE-2025-31257&quot;&gt;CVE-2025-31257&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42875&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42875&quot;&gt;CVE-2023-42875&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.0.&lt;/li&gt;
+&lt;li&gt;Credit to 이준성 (Junsung Lee).&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to arbitrary code execution. Description: The
+issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 259606&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2023-42970&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-42970&quot;&gt;CVE-2023-42970&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.42.0.&lt;/li&gt;
+&lt;li&gt;Credit to 이준성 (Junsung Lee) of Cross Republic.&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to arbitrary code execution. Description: A
+use-after-free issue was addressed with improved memory management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 259583&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24223&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24223&quot;&gt;CVE-2025-24223&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.2.&lt;/li&gt;
+&lt;li&gt;Credit to rheza (@ginggilBesel) and an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to memory corruption.
+Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 287577&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-31204&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-31204&quot;&gt;CVE-2025-31204&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.2.&lt;/li&gt;
+&lt;li&gt;Credit to Nan Wang (@eternalsakura13).&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to memory corruption.
+Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 291506&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-31205&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-31205&quot;&gt;CVE-2025-31205&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.2.&lt;/li&gt;
+&lt;li&gt;Credit to Ivan Fratric of Google Project Zero.&lt;/li&gt;
+&lt;li&gt;Impact: A malicious website may exfiltrate data cross-origin. Description: The issue
+was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 290992&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-31206&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-31206&quot;&gt;CVE-2025-31206&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.2.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected Safari
+crash. Description: A type confusion issue was addressed with improved state handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 290834&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-31215&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-31215&quot;&gt;CVE-2025-31215&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.2.&lt;/li&gt;
+&lt;li&gt;Credit to Jiming Wang and Jikai Ren.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected process
+crash. Description: The issue was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 288814&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-31257&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-31257&quot;&gt;CVE-2025-31257&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.2.&lt;/li&gt;
+&lt;li&gt;Credit to Juergen Schmied of Lynck GmbH.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected Safari
+crash. Description: This issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 290985&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.48.2 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.48.2.html"/>
+    <updated>2025-05-14T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.48.2.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.48.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.48.2?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Enable &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_overscroll_behavior&quot;&gt;CSS Overscroll Behavior&lt;/a&gt;
+by default.&lt;/li&gt;
+&lt;li&gt;Change threaded rendering implementation to use Skia API instead of
+WebCore display lists that were not thread safe.&lt;/li&gt;
+&lt;li&gt;Fix network process crash on exit.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE_RESOURCE_USAGE=OFF&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.48.2.tar.xz (40.3 MiB)
+   md5sum: b9ca03a59e1d3ee8b8e381c4488333f8
+   sha1sum: d69c124b4305279e9b48ff09e1d3c53e1a9d329b
+   sha256sum: 539c6c19b4be1630341a9e9582c25378a1e64eaab7818772ef6c09648ad9584c
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.48 highlights</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/blog/2025-04-11-wpewebkit-2.48.html"/>
+    <updated>2025-04-11T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/blog/2025-04-11-wpewebkit-2.48.html</id>
+    <content type="html">&lt;p&gt;The WPE WebKit team has been working hard during the past six months and has recently released version 2.48 of the WPE port of WebKit. As is now tradition, here is an overview of the most important changes in this new stable release series.&lt;/p&gt;
+&lt;h2 id=&quot;graphics-and-rendering&quot; tabindex=&quot;-1&quot;&gt;Graphics and Rendering&lt;/h2&gt;
+&lt;p&gt;The work on the graphics pipeline of WebKit continues, and a lot of improvements, refactorings, bug fixes, and optimizations have happened under the hood. These changes bring both performance and rendering improvements, and are too many to list individually. Nonetheless, there are a number of  interesting changes.&lt;/p&gt;
+&lt;h3 id=&quot;gpu-worker-threads&quot; tabindex=&quot;-1&quot;&gt;GPU Worker Threads&lt;/h3&gt;
+&lt;p&gt;When GPU rendering with Skia is in use, tiles will be rendered in worker threads, which has a positive impact on performance. Threads were already used when using the CPU for rendering. Note that GPU usage for rendering is not yet the default in the WPE port, but may be enabled setting &lt;code&gt;WEBKIT_SKIA_ENABLE_CPU_RENDERING=0&lt;/code&gt; in the environment before running programs that use WPE WebKit.&lt;/p&gt;
+&lt;h3 id=&quot;canvas-improvements&quot; tabindex=&quot;-1&quot;&gt;Canvas Improvements&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D&quot;&gt;CanvasRenderingContext2D&lt;/a&gt; &lt;code&gt;putImageData()&lt;/code&gt; and &lt;code&gt;getImageData()&lt;/code&gt; methods have been optimized by preventing unnecessary buffer copies, resulting in improved performance and reduced memory usage.&lt;/p&gt;
+&lt;h3 id=&quot;css-3d-transforms&quot; tabindex=&quot;-1&quot;&gt;CSS 3D Transforms&lt;/h3&gt;
+&lt;p&gt;There have been several improvements handling elements that use &lt;code&gt;preserve-3d&lt;/code&gt; &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/transform&quot;&gt;CSS transforms&lt;/a&gt;. On top of a modest performance improvement, the changes fixed rendering issues, making the implementation compliant with the specification.&lt;/p&gt;
+&lt;h3 id=&quot;damage-tracking&quot; tabindex=&quot;-1&quot;&gt;Damage Tracking&lt;/h3&gt;
+&lt;p&gt;This release gained experimental support for &lt;a href=&quot;https://blogs.igalia.com/plampe/introduction-to-damage-propagation-in-wpe-and-gtk-webkit-ports/&quot;&gt;collecting “damage” information&lt;/a&gt;, which tracks which parts of Web content produce visual changes in the displayed output. This information is then taken into account to reuse existing graphics buffers and repaint only those parts that need to be modified. This results better performance and less resource usage.&lt;/p&gt;
+&lt;p&gt;Note that this feature is disabled by default and may be previewed toggling the &lt;code&gt;PropagateDamagingInformation&lt;/code&gt; feature flag.&lt;/p&gt;
+&lt;h3 id=&quot;gpu-process-beginnings&quot; tabindex=&quot;-1&quot;&gt;GPU Process Beginnings&lt;/h3&gt;
+&lt;p&gt;A new “GPU process” is now always built, but its usage is disabled by default at runtime. This is an experimental feature that can be toggled via the &lt;code&gt;UseGPUProcessForWebGL&lt;/code&gt; feature flag, and as the name implies at the moment this new auxiliary process only supports handling WebGL content.&lt;/p&gt;
+&lt;p&gt;The GPU process is a new addition to WebKit’s multiprocess model, in which isolated processes are responsible for different tasks: the GPU process will eventually be in charge of most tasks that make use of the graphics processing unit, in order to improve security by separating graphics handling from Web content and data access. At the same time, graphics-intensive work does not interfere with Web content handling, which may bring potential performance improvements in the future.&lt;/p&gt;
+&lt;h2 id=&quot;multimedia&quot; tabindex=&quot;-1&quot;&gt;Multimedia&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder/MediaRecorder&quot;&gt;MediaRecorder&lt;/a&gt; backend gained support for the WebM format and audio bitrate configuration. WebM usage requires GStreamer 1.24.9 or newer.&lt;/p&gt;
+&lt;p&gt;Video handling using the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API&quot;&gt;WebCodecs API&lt;/a&gt; no longer ignores the &lt;code&gt;prefer-hardware&lt;/code&gt; option. It is used as a hint to attempt using hardware-accelerated GStreamer components. If that fails, software based codecs will be used as fallback.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API&quot;&gt;Web Speech API&lt;/a&gt; gained a new synthesis backend, using &lt;a href=&quot;https://project-spiel.org/&quot;&gt;libspiel&lt;/a&gt;. The existing &lt;a href=&quot;http://www.festvox.org/flite/&quot;&gt;FLite&lt;/a&gt;-based backend is still chosen by default because the dependency is readily available in most distributions, but setting &lt;code&gt;USE_SPIEL=ON&lt;/code&gt; at build time is recommended where &lt;code&gt;libspiel&lt;/code&gt; may be available.&lt;/p&gt;
+&lt;p&gt;The GStreamer-GL sink can now handle DMA-BUF memory buffers, replacing the DMA-BUF sink in this way.&lt;/p&gt;
+&lt;h2 id=&quot;api-changes&quot; tabindex=&quot;-1&quot;&gt;API Changes&lt;/h2&gt;
+&lt;p&gt;The JavaScriptCore GLib API has a new &lt;a href=&quot;https://wpewebkit.org/reference/2.48.0/wpe-javascriptcore-2.0/ctor.Value.new_promise.html&quot;&gt;jsc_value_new_promise()&lt;/a&gt; function to create &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promise&lt;/a&gt; objects from native code.&lt;/p&gt;
+&lt;h3 id=&quot;wpe-platform-library&quot; tabindex=&quot;-1&quot;&gt;WPE Platform library&lt;/h3&gt;
+&lt;p&gt;The WPEPlatform library is a completely new API which changes how WPE embedding API works. The aim is to make &lt;em&gt;both&lt;/em&gt; developing WPE backends and user applications more approachable and idiomatic using GLib and GObject conventions. Inspiration has been drawn from the &lt;a href=&quot;https://github.com/Igalia/cog&quot;&gt;Cog&lt;/a&gt; API. A preview version is shipped along in 2.48, and as such it needs to be explicitly enabled at build time with &lt;code&gt;ENABLE_WPE_PLATFORM=ON&lt;/code&gt;. The API may still change and applications developed using WPEPlatform are likely to need changes with future WPE WebKit releases.&lt;/p&gt;
+&lt;h2 id=&quot;web-platform&quot; tabindex=&quot;-1&quot;&gt;Web Platform&lt;/h2&gt;
+&lt;p&gt;The list of Web Platform features that are newly available in 2.48 is considerably long, and includes the following highlights:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JavaScript &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions#advanced_searching_with_flags&quot;&gt;regular expression modifier flags&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Compression_Streams_API&quot;&gt;Compression Streams API&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/URLPattern&quot;&gt;URLPattern API&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Cross-document &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API&quot;&gt;view transitions&lt;/a&gt;, and many improvements overall to the View Transitions support.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Web_components&quot;&gt;Web Components API&lt;/a&gt; gained support for &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry&quot;&gt;CustomElementRegistry&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/basic-shape/shape&quot;&gt;shape()&lt;/a&gt; CSS function.&lt;/li&gt;
+&lt;li&gt;Support CSS &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; properties on MathML elements.&lt;/li&gt;
+&lt;li&gt;Support CSS &lt;code&gt;writing-mode: sideways-lr&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Support scroll-to-&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/URI/Fragment/Text_fragments&quot;&gt;text-fragment&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some new functionality may disabled by default, but testable after toggling the corresponding feature flag.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/FileSystemWritableFileStream&quot;&gt;FileSystemWritableFileStream&lt;/a&gt; is available behind the flag of the same name.&lt;/li&gt;
+&lt;li&gt;Support for CSS &lt;code&gt;progress()&lt;/code&gt;, &lt;code&gt;media-progress()&lt;/code&gt; and &lt;code&gt;container-progress()&lt;/code&gt; functions—all part of the CSS, behind runtime flags &lt;code&gt;CSSMediaProgressFunction&lt;/code&gt; and &lt;code&gt;CSSContainerProgressFunction&lt;/code&gt;, respectively.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;packaging&quot; tabindex=&quot;-1&quot;&gt;Packaging&lt;/h2&gt;
+&lt;p&gt;The Web Inspector resources are no longer built into a shared library, but as a &lt;a href=&quot;https://docs.gtk.org/gio/struct.Resource.html&quot;&gt;GResource&lt;/a&gt; bundle file. This avoids usage of the dynamic linker and allows mapping the file in memory, which brings improved resource usage.&lt;/p&gt;
+&lt;p&gt;Packagers and distributors might need some adaptation of their build infrastructure in cases where the Web Inspector resources have some ad-hoc handling. Typical cases are avoiding installation in production builds for embedded devices, or as an optional component for development builds.&lt;/p&gt;
+&lt;p&gt;For example, using the default build configuration, the file with the resources inside the installation prefix will be &lt;code&gt;share/wpe-webkit-2.0/inspector.gresource&lt;/code&gt;, instead of the old &lt;code&gt;lib/wpe-webkit-2.0/libWPEWebInspectorResources.so&lt;/code&gt; library.&lt;/p&gt;
+&lt;h2 id=&quot;other-noteworthy-changes&quot; tabindex=&quot;-1&quot;&gt;Other Noteworthy Changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The minimum required ICU version is now 70.1.&lt;/li&gt;
+&lt;li&gt;Reading of Remote Web Inspector protocol messages was optimized, resulting in a considerable speed-up for large messages.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The WPE WebKit team is already working on the 2.50 release, which is planned for September. In the meantime, you can expect stable updates for the 2.48 series through the usual channels.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2025-0003</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html"/>
+    <updated>2025-04-07T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;April 07, 2025&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2025-0003&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html#CVE-2024-54551&quot;&gt;CVE-2024-54551&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html#CVE-2025-24208&quot;&gt;CVE-2025-24208&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html#CVE-2025-24209&quot;&gt;CVE-2025-24209&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html#CVE-2025-24213&quot;&gt;CVE-2025-24213&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html#CVE-2025-24216&quot;&gt;CVE-2025-24216&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html#CVE-2025-24264&quot;&gt;CVE-2025-24264&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0003.html#CVE-2025-30427&quot;&gt;CVE-2025-30427&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-54551&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-54551&quot;&gt;CVE-2024-54551&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.1.&lt;/li&gt;
+&lt;li&gt;Credit to ajajfxhj.&lt;/li&gt;
+&lt;li&gt;Impact: Processing web content may lead to a denial-of-service. Description: The issue
+was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 275117&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24208&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24208&quot;&gt;CVE-2025-24208&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.1.&lt;/li&gt;
+&lt;li&gt;Credit to Muhammad Zaid Ghifari (Mr.ZheeV) and Kalimantan Utara.&lt;/li&gt;
+&lt;li&gt;Impact: Loading a malicious iframe may lead to a cross-site scripting attack.
+Description: A permissions issue was addressed with additional restrictions.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 286381&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24209&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24209&quot;&gt;CVE-2025-24209&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.1.&lt;/li&gt;
+&lt;li&gt;Credit to Francisco Alonso (@revskills), and an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected process
+crash. Description: A buffer overflow issue was addressed with improved memory
+handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 286462&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24213&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24213&quot;&gt;CVE-2025-24213&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.1.&lt;/li&gt;
+&lt;li&gt;Credit to Google V8 Security Team.&lt;/li&gt;
+&lt;li&gt;Impact: A type confusion issue could lead to memory corruption. Description: This
+issue was addressed with improved handling of floats. Note that this CVE is fixed only
+on ARM architectures. x86_64 is not vulnerable, x86 is not vulnerable when the SSE2
+instruction set is enabled; but other architectures remain vulnerable.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 286694&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24216&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24216&quot;&gt;CVE-2025-24216&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.1.&lt;/li&gt;
+&lt;li&gt;Credit to Paul Bakker of ParagonERP.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected Safari
+crash. Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 284055&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24264&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24264&quot;&gt;CVE-2025-24264&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.1.&lt;/li&gt;
+&lt;li&gt;Credit to Gary Kwong, and an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected Safari
+crash. Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 285892&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-30427&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30427&quot;&gt;CVE-2025-30427&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.1.&lt;/li&gt;
+&lt;li&gt;Credit to rheza (@ginggilBesel).&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected Safari
+crash. Description: A use-after-free issue was addressed with improved memory
+management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 285643&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Success Story: GLANCR</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/blog/2025-success-glancr.html"/>
+    <updated>2025-04-04T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/blog/2025-success-glancr.html</id>
+    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
+&lt;img alt=&quot;GLANCR: the smart mirror for your digital home&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-glancr@2x.png&quot; /&gt;
+&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-blue.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;From SmartTVs to light bulbs and cameras, smart devices are not hard to find in homes these days. &lt;a href=&quot;https://glancr.net/&quot;&gt;Glancr&lt;/a&gt;’s smart mirror is a device that seamlessly integrates digital functionality into everyday life. Powered by its custom operating system &lt;a href=&quot;https://gitlab.com/glancr/mirr-os&quot;&gt;mirr.OS&lt;/a&gt;, Glancr puts the Web at the forefront, allowing users to see all the information that matters to them in a customizable interface, right on a mirror. Besides being useful in smart home scenarios, Glancr can also expand the possibilities in other use cases in the industry, such as digital signage, point-of-sale devices, or even the healthcare industry.&lt;/p&gt;
+&lt;p&gt;WPE WebKit empowers mirr.OS to efficiently run and render interactive widgets and applications, ensuring a fluid and responsive user experience at the same time that enables mirr.OS to leverage the power of the Web Platform. This allows developers to create rich, web-based interfaces tailored to the smart mirror’s unique requirements, in order to deliver a seamless and visually compelling interaction layer for users at the same time it bridges the gap between digital functionality and aesthetic appeal.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.49.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.49.1.html"/>
+    <updated>2025-04-03T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.49.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.50 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.49.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.49.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Change threaded rendering implementation to use Skia API instead of WebCore display
+lists that are not thread safe. This also allowed to improve performance by recording
+layers once and replaying every dirty region in different worker threads.&lt;/li&gt;
+&lt;li&gt;Added hybrid rendering mode that tries to use the GPU worker threads, but if they
+are all busy the CPU worker threads are used if possible.&lt;/li&gt;
+&lt;li&gt;Add volume locking support to media player.&lt;/li&gt;
+&lt;li&gt;Add support for tracing counters with Sysprof.&lt;/li&gt;
+&lt;li&gt;Add a default accessibility implementation using ATK to WPEPlatform.&lt;/li&gt;
+&lt;li&gt;Add new API in WPEPlatform that allows attaching user data to &lt;code&gt;WPEEvent&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Add new API in WPEPlatform to get/set the input purpose and hints for
+the current input through &lt;code&gt;WPEInputMethodContext&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.49.1.tar.xz (40.3 MiB)
+   md5sum: 2a3814213b70447d32615b980584c280
+   sha1sum: 5b326755a18824e26e6c8a620095a79d9a6ac244
+   sha256sum: 0104387a334b0adb93107ca145b2a9702f49772d87564c383b5db9b63171193e
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.48.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.48.1.html"/>
+    <updated>2025-04-03T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.48.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.48.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.48.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Limit the data stored in session state.&lt;/li&gt;
+&lt;li&gt;Remove the empty area below the title bar in Web Inspector when not docked.&lt;/li&gt;
+&lt;li&gt;Improve the robustness of WebAudio and WebCodecs multimedia support.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;GST_DISABLE_GST_DEBUG&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with GStreamer versions older than 1.20.&lt;/li&gt;
+&lt;li&gt;Fix the build with libc++ version 19 or newer.&lt;/li&gt;
+&lt;li&gt;Fix the build with video support disabled (&lt;code&gt;ENABLE_VIDEO=OFF&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Fix the build with Clang 20.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.48.1.tar.xz (40.3 MiB)
+   md5sum: ec281adecf623944647443296eff30fd
+   sha1sum: 791e6acb41349d53bec4f54771ce161a0e3b2a22
+   sha256sum: 2f411b692bb4c2a924d9bddf0c794fd69a24931ad836d6a93c9a65f5adb0357f
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2025-0002</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0002.html"/>
+    <updated>2025-03-20T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0002.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;March 20, 2025&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2025-0002&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0002.html#CVE-2024-44192&quot;&gt;CVE-2024-44192&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0002.html#CVE-2024-54467&quot;&gt;CVE-2024-54467&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/security/WSA-2025-0002.html#CVE-2025-24201&quot;&gt;CVE-2025-24201&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-44192&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-44192&quot;&gt;CVE-2024-44192&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.0.&lt;/li&gt;
+&lt;li&gt;Credit to Tashita Software Security.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected process
+crash. Description: The issue was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 268770&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2024-54467&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-54467&quot;&gt;CVE-2024-54467&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.0.&lt;/li&gt;
+&lt;li&gt;Credit to Narendra Bhati, Manager of Cyber Security At Suma Soft Pvt. Ltd, Pune (India).&lt;/li&gt;
+&lt;li&gt;Impact: A malicious website may exfiltrate data cross-origin. Description: A cookie
+management issue was addressed with improved state management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 287874&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-24201&quot; href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24201&quot;&gt;CVE-2025-24201&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK before 2.48.0 and WPE WebKit before 2.46.7.&lt;/li&gt;
+&lt;li&gt;Credit to Apple.&lt;/li&gt;
+&lt;li&gt;Impact: Maliciously crafted web content may be able to break out of Web Content
+sandbox. This is a supplementary fix for an attack that was blocked in iOS 17.2.
+(Apple is aware of a report that this issue may have been exploited in an extremely
+sophisticated attack against specific targeted individuals on versions of iOS before
+iOS 17.2.). Description: An out-of-bounds write issue was addressed with improved
+checks to prevent unauthorized actions.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 285858&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.48.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.48.0.html"/>
+    <updated>2025-03-15T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.48.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.48.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.48.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Move tile rendering to worker threads when rendering with the GPU.&lt;/li&gt;
+&lt;li&gt;Fix intersection and filter rendering for scenes with CSS &lt;code&gt;transform-tyle: preserve-3d&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Add new function for creating &lt;code&gt;Promise&lt;/code&gt; objects to the JavaScriptCore GLib API.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;MediaRecorder&lt;/code&gt; backend gained WebM support (requires at least GStreamer 1.24.9)
+and audio bitrate configuration support.&lt;/li&gt;
+&lt;li&gt;Fix invalid DPI-aware font size conversion.&lt;/li&gt;
+&lt;li&gt;Bring back support for OpenType-SVG fonts using the Skia SVG module.&lt;/li&gt;
+&lt;li&gt;Propagate the font’s computed locale to HarfBuzz.&lt;/li&gt;
+&lt;li&gt;The GPU process build is now enabled for WebGL, but the web process is still used by default.
+The runtime flag &lt;code&gt;UseGPUProcessForWebGL&lt;/code&gt; can be used to use the GPU process for WebGL.&lt;/li&gt;
+&lt;li&gt;Add new &lt;code&gt;WPESettings&lt;/code&gt; API in WPEPlatform for system settings.&lt;/li&gt;
+&lt;li&gt;Add experimental support for speech synthesis using &lt;code&gt;libspiel&lt;/code&gt;, which may be enabled at
+build time instead of Flite (with &lt;code&gt;USE_SPIEL=ON&lt;/code&gt; and &lt;code&gt;USE_FLITE=OFF&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Add support for building Skia when targeting Android.&lt;/li&gt;
+&lt;li&gt;Enable WebGL support when targeting Android.&lt;/li&gt;
+&lt;li&gt;Web Inspector resources are now shipped in a &lt;code&gt;GResource&lt;/code&gt; bundle file, instead of the
+&lt;code&gt;libWPEInspectorResources&lt;/code&gt; shared library. This should be friendlier to packagers.&lt;/li&gt;
+&lt;li&gt;Improve graphics buffers handling, mainly around DMA-BUF usage, and avoid copying
+or transforming pixel data in some of situations.&lt;/li&gt;
+&lt;li&gt;Remove support for GLib versions older than 2.70.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.48.0.tar.xz (40.2 MiB)
+   md5sum: a7eadfc0faf25ecc28ecffcdd30a8ccc
+   sha1sum: b23ffa65381a38a0afeb10eb56e3a0525c1f5386
+   sha256sum: 25bc557fd62f06ac8393a6f638ffceff3d9f367d6d35195315fa459c82f80850
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.46.7 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.46.7.html"/>
+    <updated>2025-03-14T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr_add_universal_bundle_info/release/wpewebkit-2.46.7.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.46 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.46.7%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.46.7?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;USE_GSTREAMER_GL&lt;/code&gt; disabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.46.7.tar.xz (38.8 MiB)
+   md5sum: 3285695a0cefa4ecf1476b51859c2127
+   sha1sum: 63d15a6170ed7b9859ed6476ec771aba71a33edb
+   sha256sum: cf3e47638595d86de96abdb94db69a836c8aa509fc063be714f52c5a24bb5cd5
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
