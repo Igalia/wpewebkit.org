@@ -56,6 +56,8 @@ While there are several simple ways for developers to experiment with and explor
 
 There are also pre-built packages available for many <a href="/about/get-wpe.html">Linux distributions</a>.
 
+Nightly builds of the WPE MiniBrowser (a minimal browser used by WPE developers for testing) are [available for quick experimentation](https://wpewebkit.org/built-products/x86_64/release/nightly/MiniBrowser/). Intended exclusively for testing purposes and not for production use, these builds should run on any x86_64 Linux system with Mesa graphics drivers and a Wayland environment.
+
 </div>
 
 <div class="dotsep">
