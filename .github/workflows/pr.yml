@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+      - name: Dump GitHub event
+        run: cat "$GITHUB_EVENT_PATH"
       - name: Install Node modules
         run: npm install
       - name: Eleventy
