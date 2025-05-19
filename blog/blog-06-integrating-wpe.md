@@ -106,7 +106,7 @@ resets it to `NULL`, thus preventing cleanup functions from running.
 The size has been kept small thanks to reusing code from the [Cog
 core](https://github.com/Igalia/cog#cog) library. As a bonus, it should
 run on Wayland, X11, and even on a bare display using the <abbr title="Direct
-Rendering Manager">DRM<abbr>/<abbr title="Kernel Mode Setting">KMS</abbr>
+Rendering Manager">DRM</abbr>/<abbr title="Kernel Mode Setting">KMS</abbr>
 subsystem directly. Compiling and running it, assuming you already have the
 dependencies installed, should be as easy as running:
 
