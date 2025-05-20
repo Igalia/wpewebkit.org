@@ -180,7 +180,7 @@ If you see a score drop over time, remember that this is most likely
 Notes:
 <ul>
 <li>Detailed results of the automated WPT tests for WPE are available at
- <a href="https://wpt.fyi/results/?product=wpewebkit" target="_blank">wpt.fyi</a></li>
+ <a id="wpt-link" href="https://wpt.fyi/results/?product=wpewebkit" target="_blank">wpt.fyi</a></li>
 <li>JavaScript specifications are barely covered here.
  To explore those, see the results for <i>JavaScriptCore</i> at
  <a href="https://test262.fyi/#|jsc" target="_blank">test262.fyi</a></li>
@@ -198,6 +198,7 @@ Notes:
 // IMPORTANT: WPTReportDistilledBaseURL should be either empty '' or end in slash '/'
 const WPTReportDistilledBaseURL = 'https://wpewebkit.org/wptreport-distilled-data/'
 const WPTReportVersionsFile = 'versions_available.json'
+const WPTLink = document.getElementById('wpt-link');
 const versionSelect = document.getElementById('version-select');
 const detailsWPTCheckbox = document.getElementById('show-wpt-details');
 const unknownCheckbox = document.getElementById('show-unknown');
@@ -216,6 +217,7 @@ versionSelect.addEventListener('change', () => loadData(versionSelect.value));
 let versionsAvailable = null;
 let specsData = null;
 let resultsData = null;
+let productVersionQueryString = null;
 
 async function init() {
     const versionRes = await fetch(WPTReportDistilledBaseURL + WPTReportVersionsFile);
@@ -247,6 +249,14 @@ async function loadData(version) {
     metaBrowserVersion.textContent = resultsData.metadata.browser_version || '—';
     metaWPTVersion.textContent = resultsData.metadata.wpt_version || '—';
     metaWPTVersion.href = `https://github.com/web-platform-tests/wpt/commit/${resultsData.metadata.wpt_version}`;
+    if (version === "nightly") {
+        // We can't pass the version for the nightlies until https://github.com/web-platform-tests/wpt.fyi/pull/4398 gets fixed
+        // But it should work fine anyway because is not expected to find more than one nightly/experimental run per WPT commit.
+        productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=experimental&product=wpewebkit`;
+    } else {
+        productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=stable&product=wpewebkit-${resultsData.metadata.browser_version}`;
+    }
+    WPTLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
     metaRunDate.textContent = new Date(resultsData.metadata.testrun_timestamp_end * 1000).toISOString().slice(0, 10) || '—';
     renderTable();
 }
@@ -369,7 +379,7 @@ function renderTable() {
             row.appendChild(tdInfo);
             const tdDir = document.createElement('td');
             let testLink = document.createElement('a');
-            testLink.href = `https://wpt.fyi/results/${dir}?product=wpewebkit`;
+            testLink.href = `https://wpt.fyi/results/${dir}?${productVersionQueryString}`;
             testLink.target = '_blank';
             testLink.textContent = dir;
             tdDir.appendChild(testLink);
