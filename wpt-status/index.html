@@ -143,7 +143,7 @@ fieldset.smaller label {
 </div>
 
 <div id="stickyheader">
-<span><label>WPE version:<select id="version-select"></select><strong> <span id="meta-browser-version"></span></strong></label></span><span>WPT version: <strong><a id="meta-wpt-version" href="" target="_blank"></a></strong> (Date: <strong><span id="meta-run-date"></span></strong>)</span>
+<span><label>WPE version:<select id="version-select"></select><strong> <span id="meta-browser-version"></span></strong></label></span><span>Results from <strong><a id="meta-wpt-runlink" href="" target="_blank"></a></strong> (Date: <strong><span id="meta-run-date"></span></strong>)</span>
 </div>
 
 <details>
@@ -206,7 +206,7 @@ const interoperableCheckbox = document.getElementById('show-interoperable');
 const tableHead = document.querySelector('#results-table thead');
 const tableBody = document.querySelector('#results-table tbody');
 const metaBrowserVersion = document.getElementById('meta-browser-version');
-const metaWPTVersion = document.getElementById('meta-wpt-version');
+const metaWPTRunLink = document.getElementById('meta-wpt-runlink');
 const metaRunDate = document.getElementById('meta-run-date');
 
 unknownCheckbox.addEventListener('change', renderTable);
@@ -247,8 +247,6 @@ async function loadData(version) {
     resultsData = await resultsRes.json();
     resultsEnginesData = await resultsEnginesRes.json();
     metaBrowserVersion.textContent = resultsData.metadata.browser_version || '—';
-    metaWPTVersion.textContent = resultsData.metadata.wpt_version || '—';
-    metaWPTVersion.href = `https://github.com/web-platform-tests/wpt/commit/${resultsData.metadata.wpt_version}`;
     if (version === "nightly") {
         // We can't pass the version for the nightlies until https://github.com/web-platform-tests/wpt.fyi/pull/4398 gets fixed
         // But it should work fine anyway because is not expected to find more than one nightly/experimental run per WPT commit.
@@ -257,6 +255,10 @@ async function loadData(version) {
         productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=stable&product=wpewebkit-${resultsData.metadata.browser_version}`;
     }
     WPTLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
+    // short to 7 chars because its the same short-sha length used on wpt.fyi
+    const wptShaShort = resultsData.metadata.wpt_version.slice(0, 7) || '—';
+    metaWPTRunLink.textContent = `test run using WPT ${wptShaShort}`;
+    metaWPTRunLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
     metaRunDate.textContent = new Date(resultsData.metadata.testrun_timestamp_end * 1000).toISOString().slice(0, 10) || '—';
     renderTable();
 }
