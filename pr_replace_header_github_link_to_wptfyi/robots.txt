@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /reference/
+Disallow: /releases/
+Sitemap: https://igalia.github.io/wpewebkit.org/pr_replace_header_github_link_to_wptfyi/sitemap.xml
