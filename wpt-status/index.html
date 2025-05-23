@@ -1,0 +1,405 @@
+---
+title: "WPE Specification Support"
+layout: page
+tags: [devs]
+data: { dateless: "true" }
+htmlSitemapOrder: -2
+sitemapChangeFrequency: weekly
+---
+
+<style>
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    margin-block-end: 0;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#stickyheader {
+    position: sticky;
+    top: 4.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0 2em;
+    padding-block: 1em;
+    z-index: 1;
+    background: #FFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#stickyheader>label {
+    line-height: 1.6;
+}
+
+#stickyheader+p {
+    margin-block-start: 0em;
+}
+
+#version-select {
+    margin-inline: 0.67em 0;
+}
+
+#results-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-block: 1.25em 1em;
+    table-layout: fixed;
+}
+
+#results-table :is(th, td) {
+    border: 1px solid #ccc;
+    padding-inline: 0.5em;
+    padding-block: 0.5em 0.4em;
+    text-align: left;
+}
+
+#results-table thead th {
+    background-color: #f4f4f4;
+    background-repeat: no-repeat;
+    background-position: 0 0, 100% 100%;
+    background-size: 100% 1px;
+    background-image: linear-gradient(90deg, #0003, #0003), linear-gradient(90deg, #0005, #0005);
+}
+
+#results-table thead {
+    position: sticky;
+    top: 7.5em;
+    z-index: 1;
+}
+
+#results-table tbody a[href] {
+    text-decoration-color: color-mix(in hsl, currentColor 60%, transparent);
+    text-underline-offset: 0.15em;
+}
+
+#results-table tbody td.barred {
+    background-image: linear-gradient(90deg, hsl(calc(var(--dataHue) * 1.2) 70% 90%) 0, hsl(calc(var(--dataHue) * 1.2) 70% 70%) 100%);
+    background-size: var(--dataPct) 100%;
+    background-repeat: no-repeat;
+    text-shadow:
+        0 0 0.25em hsl(0, 0%, 93.7%),
+        0 0 0.25em hsl(0, 0%, 93.7%),
+        0 0 0.25em hsl(0, 0%, 93.7%),
+        0 0 0.25em hsl(0, 0%, 93.7%),
+        0 0 0.25em hsl(0, 0%, 93.7%),
+        0 0 0.15em hsl(0, 0%, 93.7%),
+        0 0 0.15em hsl(0, 0%, 93.7%),
+        0 0 0.15em hsl(0, 0%, 93.7%),
+        0 0 0.15em hsl(0, 0%, 93.7%),
+        0 0 0.15em hsl(0, 0%, 93.7%);
+}
+
+#results-table tbody td small {
+    margin-inline: 0.33ch 0;
+}
+
+#support-combo-filter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em 1em;
+    background: inherit;
+}
+
+#support-combo-filter legend {
+    grid-column: span 2;
+}
+
+details {
+    padding-block-end: 1px;
+}
+
+fieldset.smaller {
+    font-size: 0.85em;
+    padding: 0.5em 1em;
+    margin: 0.5em 0;
+    border: 1px solid #ccc;
+}
+
+fieldset.smaller label {
+    margin: 0.2em 0;
+    display: block;
+}
+
+.help-text {
+    font-size: 0.8em;
+    color: #666;
+    margin-left: 1.5em;
+    margin-top: 0.2em;
+}
+</style>
+
+<div id="header">
+  <h1>WPE Specification Support</h1>
+</div>
+
+<div id="stickyheader">
+<span><label>WPE version:<select id="version-select"></select><strong> <span id="meta-browser-version"></span></strong></label></span><span>Results from <strong><a id="meta-wpt-runlink" href="" target="_blank"></a></strong> (Date: <strong><span id="meta-run-date"></span></strong>)</span>
+</div>
+
+<details>
+<summary>Advanced options</summary>
+<div id="support-combo-filter">
+<label><input type="checkbox" id="show-unknown">Show not yet named or linked<div class="help-text">Include results for WPT dirs we haven't yet linked to their specification.</div></label>
+<label><input type="checkbox" id="show-wpt-details">Show WPT directories and test counts<div class="help-text">Show columns with WPT dirs info along with test and subtest counts.</div></label>
+<label><input type="checkbox" id="show-interoperable">Include specs with low support but high interoperability<div class="help-text">Include results with ≥70% pass rate in at least two major Web engines, even if WPE scores &lt;30%</div></label>
+</div>
+</details>
+
+<details open>
+  <summary>Explanation</summary>
+<p>
+This data is automatically obtained by running <a href="https://web-platform-tests.org" target="_blank">Web Platform Tests (WPT)</a> with WPE.
+ It shows all Web specifications supported or partially supported by WPE
+ <i>(≥30% WPT pass rate)</i>.
+</p>
+<p>
+The numbers given below are necessarily a crude measure of support: it's
+ possible to have what looks like a poor score while supporting the main
+ body of a specification and missing a number of tiny edge cases, for
+ example.  That said, in general, a specification with a score above 70%
+ can be considered supported; any score between 30% and 70% can be
+ considered partially supported; and any score below 30% indicates
+ limited or almost no support.
+</p>
+<p>
+If you see a score drop over time, remember that this is most likely
+ because flaky tests that fail intermitently or because the addition
+ of new tests in WPT, possibly due to new specification
+ features, and not the removal of capabilities from WPE WebKit.
+</p>
+Notes:
+<ul>
+<li>Detailed results of the automated WPT tests for WPE are available at
+ <a id="wpt-link" href="https://wpt.fyi/results/?product=wpewebkit" target="_blank">wpt.fyi</a></li>
+<li>JavaScript specifications are barely covered here.
+ To explore those, see the results for <i>JavaScriptCore</i> at
+ <a href="https://test262.fyi/#|jsc" target="_blank">test262.fyi</a></li>
+</ul>
+</details>
+
+<table id="results-table">
+  <thead><tr><th>Specification</th><th>Passrate% (subtests)</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<script>
+// The json data on wpewebkit.org/wptreport-distilled-data is automatically updated
+// by a cronjob on the server running wptreport-distiller
+// IMPORTANT: WPTReportDistilledBaseURL should be either empty '' or end in slash '/'
+const WPTReportDistilledBaseURL = 'https://wpewebkit.org/wptreport-distilled-data/'
+const WPTReportVersionsFile = 'versions_available.json'
+const WPTLink = document.getElementById('wpt-link');
+const versionSelect = document.getElementById('version-select');
+const detailsWPTCheckbox = document.getElementById('show-wpt-details');
+const unknownCheckbox = document.getElementById('show-unknown');
+const interoperableCheckbox = document.getElementById('show-interoperable');
+const tableHead = document.querySelector('#results-table thead');
+const tableBody = document.querySelector('#results-table tbody');
+const metaBrowserVersion = document.getElementById('meta-browser-version');
+const metaWPTRunLink = document.getElementById('meta-wpt-runlink');
+const metaRunDate = document.getElementById('meta-run-date');
+
+unknownCheckbox.addEventListener('change', renderTable);
+detailsWPTCheckbox.addEventListener('change', renderTable);
+interoperableCheckbox.addEventListener('change', renderTable);
+versionSelect.addEventListener('change', () => loadData(versionSelect.value));
+
+let versionsAvailable = null;
+let specsData = null;
+let resultsData = null;
+let productVersionQueryString = null;
+
+async function init() {
+    const versionRes = await fetch(WPTReportDistilledBaseURL + WPTReportVersionsFile);
+    versionsAvailable = await versionRes.json();
+
+    versionsAvailable.versions.forEach(v => {
+        const option = document.createElement('option');
+        option.value = v.version;
+        option.textContent = v.version;
+        versionSelect.appendChild(option);
+    });
+    versionSelect.value = versionsAvailable.metadata.default_version;
+    loadData(versionSelect.value);
+}
+
+async function loadData(version) {
+    const selected = versionsAvailable.versions.find(v => v.version === version);
+    const currentSpecUrl = WPTReportDistilledBaseURL + selected.specs;
+    const currentResultsUrl = WPTReportDistilledBaseURL + selected.results;
+    const currentResultsEnginesUrl = WPTReportDistilledBaseURL + selected.results_engines;
+    const [specsRes, resultsRes, resultsEnginesRes] = await Promise.all([
+        fetch(currentSpecUrl),
+        fetch(currentResultsUrl),
+        fetch(currentResultsEnginesUrl)
+    ]);
+    specsData = await specsRes.json();
+    resultsData = await resultsRes.json();
+    resultsEnginesData = await resultsEnginesRes.json();
+    metaBrowserVersion.textContent = resultsData.metadata.browser_version || '—';
+    if (version === "nightly") {
+        // We can't pass the version for the nightlies until https://github.com/web-platform-tests/wpt.fyi/pull/4398 gets fixed
+        // But it should work fine anyway because is not expected to find more than one nightly/experimental run per WPT commit.
+        productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=experimental&product=wpewebkit`;
+    } else {
+        productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=stable&product=wpewebkit-${resultsData.metadata.browser_version}`;
+    }
+    WPTLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
+    // short to 7 chars because its the same short-sha length used on wpt.fyi
+    const wptShaShort = resultsData.metadata.wpt_version.slice(0, 7) || '—';
+    metaWPTRunLink.textContent = `test run using WPT ${wptShaShort}`;
+    metaWPTRunLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
+    metaRunDate.textContent = new Date(resultsData.metadata.testrun_timestamp_end * 1000).toISOString().slice(0, 10) || '—';
+    renderTable();
+}
+
+function calculatePercentage(pass, total) {
+    return total > 0 ? Math.round(1000 * pass / total) / 10 : 0;
+}
+
+function renderTable() {
+    const showDetailsWPT = detailsWPTCheckbox.checked;
+    const showUnknown = unknownCheckbox.checked;
+    const showInteroperable = interoperableCheckbox.checked;
+    let total_specs = 0;
+
+    tableHead.innerHTML = '';
+    tableBody.innerHTML = '';
+
+    const headers = [];
+    headers.push('Specifications', 'Passrate% (subtests)');
+    if (showDetailsWPT) {
+        headers.push('Subtest counts');
+        headers.push('WPT Directory');
+    }
+
+    const headRow = document.createElement('tr');
+    headers.forEach(h => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        headRow.appendChild(th);
+    });
+    tableHead.appendChild(headRow);
+
+    // start for-loop drawing the rows
+    for (const [dir, value] of Object.entries(resultsData.results)) {
+        const [subtestPart, mainTestsStr] = value.split(':');
+        const [passStr, totalStr] = subtestPart.split('/');
+        const pass = parseInt(passStr);
+        const total = parseInt(totalStr);
+        const mainTests = parseInt(mainTestsStr);
+
+        let percent = calculatePercentage(pass, total);
+        let spec = specsData.specs.find(s => s.dirw === dir);
+        let specText = spec ? spec.text : undefined;
+        let specLink = spec ? spec.link : undefined;
+
+        if (!showUnknown && !specText)
+            continue;
+
+        // calculate interoperable specs and skip non-interoperable unless the selected browser supports them
+        let engines;
+        let enginePassrateList;
+
+        engines = resultsEnginesData.results_engines || {};
+        enginePassrateList = Object.entries(engines).map(([engine, engineResults]) => {
+            const str = engineResults[dir];
+            if (!str) return null;
+            const [subtests] = str.split(':');
+            const [p, t] = subtests.split('/');
+            const pass = parseInt(p);
+            const total = parseInt(t);
+            const rate = calculatePercentage(pass, total);
+            // console.log(`ENGINE: ${engine}, DIR: ${dir}, STRING: ${str}, RATE: ${rate}`);
+            return {
+                engine,
+                rate
+            };
+        }).filter(r => r !== null);
+
+        // for clarity only render specs supported or interoperable
+        const numberSupportedEngines = enginePassrateList.filter(r => r.rate >= 70).length;
+        if (enginePassrateList.length === 3) {
+            if (numberSupportedEngines < 2) {
+                // non-interoperable: render only if browser supports it
+                if (percent < 30) {
+                    // console.log(`SKIP non-interoperable: ${specText}`);
+                    continue;
+                }
+            } else {
+                // interoperable: render if browser supports it, or if showInteroperable button checked
+                if (percent < 30 && !showInteroperable) {
+                    // console.log(`SKIP interoperable: ${specText}`);
+                    continue;
+                }
+            }
+        } else if (enginePassrateList.length === 0) {
+            console.log(`WARNING: We have no data of web-engines pass-rate for spec ${dir}. Likely new spec. Ignoring it`)
+            continue;
+        } else {
+            console.error(`ERROR: Number of engines is not 3 but ${enginePassrateList.length} for spec ${dir}!!!`);
+            throw new Error("Number of Web engines is not 3!!!");
+        }
+
+        const row = document.createElement('tr');
+        const tdSpec = document.createElement('td');
+        if (specText) {
+            const a = document.createElement('a');
+            a.href = specLink;
+            a.target = '_blank';
+            a.textContent = specText;
+            tdSpec.appendChild(a);
+        } else {
+            tdSpec.textContent = dir;
+        }
+        row.appendChild(tdSpec);
+        const tdRate = document.createElement('td');
+        tdRate.textContent = new Intl.NumberFormat(navigator.language).format(percent) + '%'
+        if (!showDetailsWPT) {
+            let smallnote = document.createElement('small');
+            smallnote.textContent = ` (of ${new Intl.NumberFormat(navigator.language).format(total)})`;
+            tdRate.appendChild(smallnote);
+        }
+        tdRate.classList.add('barred');
+        tdRate.style.setProperty('--dataPct', percent + '%');
+        tdRate.style.setProperty('--dataHue', percent + 'deg');
+        row.appendChild(tdRate);
+
+        if (showDetailsWPT) {
+            const tdInfo = document.createElement('td');
+            tdInfo.textContent = `${pass}/${total} pass (${mainTests} tests)`;
+            row.appendChild(tdInfo);
+            const tdDir = document.createElement('td');
+            let testLink = document.createElement('a');
+            testLink.href = `https://wpt.fyi/results/${dir}?${productVersionQueryString}`;
+            testLink.target = '_blank';
+            testLink.textContent = dir;
+            tdDir.appendChild(testLink);
+            row.appendChild(tdDir);
+        }
+
+        tableBody.appendChild(row);
+        total_specs += 1;
+    } // end for-loop drawing the rows
+
+    // update table header
+    if (showDetailsWPT) {
+        tableHead.querySelectorAll('th')[1].textContent = 'Passrate%';
+    } else {
+        tableHead.querySelectorAll('th')[1].textContent = 'Passrate% (subtests)';
+    }
+    tableHead.querySelectorAll('th')[0].textContent = `Specifications (${total_specs})`;
+} // end renderTable()
+
+init();
+</script>
