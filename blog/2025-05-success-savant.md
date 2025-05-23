@@ -9,7 +9,9 @@ thumbnail: /assets/img/logo-savant@2x.png
 ---
 
 <div class="success-top">
-<img alt="Savant logo" align="center" src="/assets/img/logo-savant@2x.png">
+<img alt="Savant logo" align="center"
+    src="/assets/img/logo-savant.png"
+    srcset="/assets/img/logo-savant@2x.png 2x">
 <img alt="WPE" align="center" src="/assets/img/logo-blue.svg">
 </div>
 
