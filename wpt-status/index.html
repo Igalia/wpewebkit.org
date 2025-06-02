@@ -172,13 +172,15 @@ The numbers given below are necessarily a crude measure of support: it's
  limited or almost no support.
 </p>
 <p>
-If you see a score drop over time, remember that this is most likely
- because flaky tests that fail intermitently or because the addition
- of new tests in WPT, possibly due to new specification
- features, and not the removal of capabilities from WPE WebKit.
+If a score drop over time is observed, then the most likely cause is either
+ flaky tests that fail intermittently, or the addition of new tests in WPT,
+ often reflecting new specification features, rather than a removal of
+ capabilities from WPE WebKit.
 </p>
 Notes:
 <ul>
+<li>These results were obtained using a developer build with experimental features enabled.
+ Feature availability depends on the build configuration, so some of these features may not be present in other builds.</li>
 <li>Detailed results of the automated WPT tests for WPE are available at
  <a id="wpt-link" href="https://wpt.fyi/results/?product=wpewebkit" target="_blank">wpt.fyi</a></li>
 <li>JavaScript specifications are barely covered here.
@@ -246,12 +248,13 @@ async function loadData(version) {
     specsData = await specsRes.json();
     resultsData = await resultsRes.json();
     resultsEnginesData = await resultsEnginesRes.json();
-    metaBrowserVersion.textContent = resultsData.metadata.browser_version || '—';
     if (version === "nightly") {
+        metaBrowserVersion.textContent = resultsData.metadata.browser_version || version;
         // We can't pass the version for the nightlies until https://github.com/web-platform-tests/wpt.fyi/pull/4398 gets fixed
         // But it should work fine anyway because is not expected to find more than one nightly/experimental run per WPT commit.
         productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=experimental&product=wpewebkit`;
     } else {
+        metaBrowserVersion.textContent = resultsData.metadata.browser_version?.split('.').slice(0, 2).join('.') || version;
         productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=stable&product=wpewebkit-${resultsData.metadata.browser_version}`;
     }
     WPTLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
@@ -266,6 +269,19 @@ async function loadData(version) {
 function calculatePercentage(pass, total) {
     return total > 0 ? Math.round(1000 * pass / total) / 10 : 0;
 }
+
+function getSubtestsMaintests(testStr) {
+    const [subtestsStr, maintestsStr] = testStr.split(':');
+    const [subtestPass, subtestTotal] = subtestsStr.split('/');
+    const [maintestsPass, maintestsTotal] = maintestsStr.split('/');
+    return [
+        parseInt(subtestPass, 10),
+        parseInt(subtestTotal, 10),
+        parseFloat(maintestsPass),
+        parseInt(maintestsTotal, 10)
+    ];
+}
+
 
 function renderTable() {
     const showDetailsWPT = detailsWPTCheckbox.checked;
@@ -293,13 +309,9 @@ function renderTable() {
 
     // start for-loop drawing the rows
     for (const [dir, value] of Object.entries(resultsData.results)) {
-        const [subtestPart, mainTestsStr] = value.split(':');
-        const [passStr, totalStr] = subtestPart.split('/');
-        const pass = parseInt(passStr);
-        const total = parseInt(totalStr);
-        const mainTests = parseInt(mainTestsStr);
 
-        let percent = calculatePercentage(pass, total);
+        const [subTestsPass, subTestsTotal, mainTestsPass, mainTestsTotal] = getSubtestsMaintests(value);
+        let percent = calculatePercentage(subTestsPass, subTestsTotal);
         let spec = specsData.specs.find(s => s.dirw === dir);
         let specText = spec ? spec.text : undefined;
         let specLink = spec ? spec.link : undefined;
@@ -315,11 +327,8 @@ function renderTable() {
         enginePassrateList = Object.entries(engines).map(([engine, engineResults]) => {
             const str = engineResults[dir];
             if (!str) return null;
-            const [subtests] = str.split(':');
-            const [p, t] = subtests.split('/');
-            const pass = parseInt(p);
-            const total = parseInt(t);
-            const rate = calculatePercentage(pass, total);
+            const [engineSubTestsPass, engineSubTestsTotal, engineMainTestsPass, engineMainTestsTotal] = getSubtestsMaintests(str);
+            const rate = calculatePercentage(engineSubTestsPass, engineSubTestsTotal);
             // console.log(`ENGINE: ${engine}, DIR: ${dir}, STRING: ${str}, RATE: ${rate}`);
             return {
                 engine,
@@ -367,7 +376,7 @@ function renderTable() {
         tdRate.textContent = new Intl.NumberFormat(navigator.language).format(percent) + '%'
         if (!showDetailsWPT) {
             let smallnote = document.createElement('small');
-            smallnote.textContent = ` (of ${new Intl.NumberFormat(navigator.language).format(total)})`;
+            smallnote.textContent = ` (of ${new Intl.NumberFormat(navigator.language).format(subTestsTotal)})`;
             tdRate.appendChild(smallnote);
         }
         tdRate.classList.add('barred');
@@ -377,7 +386,7 @@ function renderTable() {
 
         if (showDetailsWPT) {
             const tdInfo = document.createElement('td');
-            tdInfo.textContent = `${pass}/${total} pass (${mainTests} tests)`;
+            tdInfo.textContent = `${subTestsPass}/${subTestsTotal} pass (${mainTestsTotal} tests)`;
             row.appendChild(tdInfo);
             const tdDir = document.createElement('td');
             let testLink = document.createElement('a');
