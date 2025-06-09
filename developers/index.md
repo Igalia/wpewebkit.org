@@ -84,8 +84,8 @@ WPE WebKit and [WebKitGTK](https://webkitgtk.org/) share a fair amount of code. 
 
 <div class="dotsep">
 
-## [Web Specifications Support (WPT Status)](/wpt-status)
+## [Web Features and Specifications Support (BCD/WPT Status)](/wpt-status)
 
-WPE is built on the WebKit Web engine and, as such, offers broad support for modern Web features. More information about the specific features it supports is available in the [specifications support dashboard](/wpt-status), which presents data automatically collected by running Web Platform Tests (WPT) with WPE.
+WPE is built on the WebKit Web engine and, as such, offers broad support for modern Web features. More information about the specific features and specifications it supports is available in the [WPE Web Support Status](/wpt-status) page, which presents data automatically collected by running Browser Compatibility Data (BCD) and Web Platform Tests (WPT) with WPE.
 
 </div>

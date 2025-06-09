@@ -26,6 +26,7 @@ h1 {
     position: sticky;
     top: 4.5em;
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: baseline;
     gap: 0 2em;
@@ -103,6 +104,10 @@ h1 {
     margin-inline: 0.33ch 0;
 }
 
+#results-table tbody td {
+    word-break: break-word;
+}
+
 #support-combo-filter {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -136,27 +141,141 @@ fieldset.smaller label {
     margin-left: 1.5em;
     margin-top: 0.2em;
 }
+
+
+#controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+}
+
+.view-toggle {
+    display: inline-flex;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-btn {
+    appearance: none;
+    border: none;
+    background: #f5f5f5;
+    padding: 0.25em 0.6em;
+    font-size: 0.9em;
+    cursor: pointer;
+    color: #333;
+    transition: background 0.2s, color 0.2s;
+}
+
+.toggle-btn:hover {
+    background: #eaeaea;
+}
+
+.toggle-btn.active {
+    background: #0066cc;
+    color: white;
+}
+
+#controls label,
+#controls span {
+    white-space: nowrap;
+}
+
+.info-run {
+    flex: 0 1 auto;
+    min-width: 0;
+    font-family: monospace;
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 0.3em 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 0.9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+}
+
+.tight-label {
+    margin-right: -0.5em; /* pulls WPE closer to the select */
+}
+
+.filter-input-notfound {
+    background-color: #62293c;
+    color: white;
+}
+
 </style>
 
 <div id="header">
-  <h1>WPE Specification Support</h1>
+  <h1>WPE Web Support Status</h1>
 </div>
 
 <div id="stickyheader">
-<span><label>WPE version:<select id="version-select"></select><strong> <span id="meta-browser-version"></span></strong></label></span><span>Results from <strong><a id="meta-wpt-runlink" href="" target="_blank"></a></strong> (Date: <strong><span id="meta-run-date"></span></strong>)</span>
+  <div id="controls">
+    <span title="Result source">&#x1F4CA;</span>
+
+    <div class="view-toggle">
+      <button class="toggle-btn" data-view="BCD" title="BCD Results" >BCD</button>
+      <button class="toggle-btn" data-view="WPT" title="WPT Results">WPT</button>
+    </div>
+&nbsp;
+    <label for="version-select">
+      <span class="tight-label" title="WPE Version">&#x2699;WPE</span>
+      <select id="version-select" title="WPE Version"></select>
+    </label>
+  </div>
+
+  <div class="info-run">
+    Results from
+    <strong><a id="meta-run-link" href="" target="_blank"></a></strong>
+    (Date: <strong><span id="meta-run-date"></span></strong>)
+  </div>
 </div>
 
-<details>
+<details id="advanced-options">
 <summary>Advanced options</summary>
 <div id="support-combo-filter">
-<label><input type="checkbox" id="show-unknown">Show not yet named or linked<div class="help-text">Include results for WPT dirs we haven't yet linked to their specification.</div></label>
-<label><input type="checkbox" id="show-wpt-details">Show WPT directories and test counts<div class="help-text">Show columns with WPT dirs info along with test and subtest counts.</div></label>
-<label><input type="checkbox" id="show-interoperable">Include specs with low support but high interoperability<div class="help-text">Include results with ≥70% pass rate in at least two major Web engines, even if WPE scores &lt;30%</div></label>
+        <label class="wpt-advanced-option">
+            <input type="checkbox" id="show-unknown">Show not yet named or linked
+            <div class="help-text">Include results for WPT dirs we haven't yet linked to their specification.</div>
+        </label>
+        <label class="wpt-advanced-option">
+            <input type="checkbox" id="show-wpt-details">Show WPT directories and test counts
+            <div class="help-text">Show columns with WPT dirs info along with test and subtest counts.</div>
+        </label>
+        <label class="wpt-advanced-option">
+            <input type="checkbox" id="show-interoperable">Include specs with low support but high interoperability
+            <div class="help-text">Include results with ≥70% pass rate in at least two major Web engines, even if WPE scores &lt;30%</div>
+        </label>
+        <label class="bcd-advanced-option">
+            <input type="checkbox" id="show-bcd-supported-in">Show supported-in column
+            <div class="help-text">Show column with info about where a feature is supported.</div>
+        </label>
+        <label class="bcd-advanced-option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show features supported in
+            <select id="bcd-support-selector" title="Show features supported in">
+                <option value="Any" selected>Any</option>
+                <option value="ServiceWorker">ServiceWorker</option>
+                <option value="SharedWorker">SharedWorker</option>
+                <option value="Window">Window</option>
+                <option value="Worker">Worker</option>
+                <option value="WebAssembly">WebAssembly</option>
+            </select>
+            <div class="help-text">Filter the features shown by where those are supported.</div>
+        </label>
 </div>
 </details>
 
-<details open>
+<details id="explanation-text" open>
   <summary>Explanation</summary>
+</details>
+
+<template id="wpt-explanation-template">
 <p>
 This data is automatically obtained by running <a href="https://web-platform-tests.org" target="_blank">Web Platform Tests (WPT)</a> with WPE.
  It shows all Web specifications supported or partially supported by WPE
@@ -177,6 +296,10 @@ If a score drop over time is observed, then the most likely cause is either
  often reflecting new specification features, rather than a removal of
  capabilities from WPE WebKit.
 </p>
+<p>
+For an alternative view that includes a more detailed list of supported
+ Web APIs, JavaScript features and CSS properties, check the <a href="#" id="bcd-view-link">BCD test results</a>.
+</p>
 Notes:
 <ul>
 <li>These results were obtained using a WPE build with experimental features enabled.
@@ -187,10 +310,25 @@ Notes:
  To explore those, see the results for <i>JavaScriptCore</i> at
  <a href="https://test262.fyi/#|jsc" target="_blank">test262.fyi</a></li>
 </ul>
-</details>
+</template>
+<template id="bcd-explanation-template">
+<p>
+This data is automatically obtained by running <a href="https://mdn-bcd-collector.gooborg.com/" target="_blank">mdn-bcd-collector</a> tests with WPE.
+It presents Browser Compatibility Data (BCD) for different WPE versions, covering Web technologies, such as Web APIs, JavaScript features, CSS properties and more.
+</p>
+<p>
+The list below shows features available in the selected WPE version. It indicates only the presence of each feature, not the level of support. For an alternative view that includes specifications and support scores, refer to <a href="#" id="wpt-view-link">the WPT test results</a>.
+</p>
+Notes:
+<ul>
+<li>These results were obtained using a WPE build with experimental features enabled.
+ Because feature availability can vary by build configuration, certain features shown here may not be present in other WPE builds.</li>
+</ul>
+</template>
+
 
 <table id="results-table">
-  <thead><tr><th>Specification</th><th>Passrate% (subtests)</th></tr></thead>
+  <thead></thead>
   <tbody></tbody>
 </table>
 
@@ -199,72 +337,306 @@ Notes:
 // by a cronjob on the server running wptreport-distiller
 // IMPORTANT: WPTReportDistilledBaseURL should be either empty '' or end in slash '/'
 const WPTReportDistilledBaseURL = 'https://wpewebkit.org/wptreport-distilled-data/'
-const WPTReportVersionsFile = 'versions_available.json'
-const WPTLink = document.getElementById('wpt-link');
+const versionsFile = 'versions_available.json'
 const versionSelect = document.getElementById('version-select');
 const detailsWPTCheckbox = document.getElementById('show-wpt-details');
 const unknownCheckbox = document.getElementById('show-unknown');
+const BCDSupportSelector = document.getElementById('bcd-support-selector');
+const showBCDSupportColumn = document.getElementById('show-bcd-supported-in');
 const interoperableCheckbox = document.getElementById('show-interoperable');
 const tableHead = document.querySelector('#results-table thead');
 const tableBody = document.querySelector('#results-table tbody');
-const metaBrowserVersion = document.getElementById('meta-browser-version');
-const metaWPTRunLink = document.getElementById('meta-wpt-runlink');
 const metaRunDate = document.getElementById('meta-run-date');
+const metaRunLink = document.getElementById('meta-run-link');
+const detailsExplanation = document.getElementById("explanation-text");
+const detailsAdvancedOptions = document.getElementById("advanced-options");
+const jsonCache = Object.create(null);
+let tableSourceResults;
+let paramsURL;
+let tableSearch;
+let tableCounter;
+let tableRows;
 
-unknownCheckbox.addEventListener('change', renderTable);
-detailsWPTCheckbox.addEventListener('change', renderTable);
-interoperableCheckbox.addEventListener('change', renderTable);
-versionSelect.addEventListener('change', () => loadData(versionSelect.value));
+function clearTable() {
+    tableSearch = null;
+    tableCounter = null;
+    tableRows = null;
+    tableHead.innerHTML = '';
+    tableBody.innerHTML = '';
+}
+
+function refreshURLWithParams(queryStringName, queryStringValue, queryStringDefault) {
+    if (queryStringValue === queryStringDefault)
+        paramsURL.delete(queryStringName);
+    else
+        paramsURL.set(queryStringName, queryStringValue);
+    // Update URL without reloading
+    const queryStringFull = paramsURL.toString();
+    if (queryStringFull)
+        history.pushState(null, '', `${window.location.pathname}?${queryStringFull}`);
+    else
+        history.pushState(null, '', `${window.location.pathname}`);
+}
+
+unknownCheckbox.addEventListener('change', (e) => {
+    clearTable();
+    renderTableWPT();
+    refreshURLWithParams('wu', unknownCheckbox.checked? 1 : 0, 0);
+});
+detailsWPTCheckbox.addEventListener('change', (e) => {
+    clearTable();
+    renderTableWPT();
+    refreshURLWithParams('wd', detailsWPTCheckbox.checked? 1 : 0, 0);
+});
+interoperableCheckbox.addEventListener('change', (e) => {
+    clearTable();
+    renderTableWPT();
+    refreshURLWithParams('wi', interoperableCheckbox.checked? 1 : 0, 0);
+});
+BCDSupportSelector.addEventListener('change', (e) => {
+    clearTable();
+    renderTableBCD();
+    refreshURLWithParams('bs', BCDSupportSelector.value);
+});
+showBCDSupportColumn.addEventListener('change', (e) => {
+    clearTable();
+    renderTableBCD();
+    refreshURLWithParams('bc', showBCDSupportColumn.checked? 1 : 0, 0);
+});
+versionSelect.addEventListener('change', (e) => {
+    clearTable();
+    loadData();
+    refreshURLWithParams('ver', versionSelect.value);
+});
+
+document.querySelectorAll('.toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    tableSourceResults = btn.getAttribute('data-view');
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    clearTable();
+    updateTableSourceResultsView();
+    refreshURLWithParams('src', tableSourceResults);
+  });
+});
+
+detailsExplanation.addEventListener('toggle', () => {
+    refreshURLWithParams('de', detailsExplanation.open? 1 : 0, 1);
+});
+detailsAdvancedOptions.addEventListener('toggle', () => {
+    refreshURLWithParams('da', detailsAdvancedOptions.open? 1 : 0, 0);
+});
+
+// update things also when the back button is pressed
+window.addEventListener('popstate', () => { loadAndRenderView(false); });
+
+function updateExplanationText() {
+    const summary = detailsExplanation.querySelector("summary");
+    const isOpen = detailsExplanation.open;
+    detailsExplanation.innerHTML = "";
+    detailsExplanation.appendChild(summary);
+    if (isOpen)
+        detailsExplanation.open = true;
+    const tmpl = tableSourceResults === "WPT" ? document.getElementById("wpt-explanation-template") : document.getElementById("bcd-explanation-template");
+    detailsExplanation.appendChild(tmpl.content.cloneNode(true));
+    // simulate clicking the button with this link
+    const toggleViewLinkID = tableSourceResults === "WPT" ? 'bcd-view-link' : 'wpt-view-link';
+    const toggleViewValue = tableSourceResults === "WPT" ? 'BCD' : 'WPT';
+    document.getElementById(toggleViewLinkID).addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector(`.toggle-btn[data-view="${toggleViewValue}"]`).click();
+    });
+}
+
+
+function updateAdvancedOptions() {
+  if (tableSourceResults === "WPT") {
+      document.querySelectorAll('.wpt-advanced-option').forEach(el => el.style.removeProperty("display"));
+      document.querySelectorAll('.bcd-advanced-option').forEach(el => el.style.display = 'none');
+    } else {
+      document.querySelectorAll('.bcd-advanced-option').forEach(el => el.style.removeProperty("display"));
+      document.querySelectorAll('.wpt-advanced-option').forEach(el => el.style.display = 'none')
+    }
+}
+
+function maybeUpdateCheckboxDefValue(checkBoxObject, queryStringName) {
+    const valueFromQS = paramsURL.get(queryStringName);
+    checkBoxObject.checked = valueFromQS === '1';
+
+}
+
+function maybeUpdateSelectDefValue(selectObject, queryStringName) {
+    const valueFromQS = paramsURL.get(queryStringName);
+    if (valueFromQS) {
+        const optionExists = Array.from(selectObject.options).some(opt => opt.value === valueFromQS);
+        if (optionExists)
+            selectObject.value = valueFromQS;
+    } else {
+        // if no value passed, default to select the first option
+        selectObject.selectedIndex = 0;
+    }
+}
+
+function maybeUpdateDetailsOpenValue(detailsObject, queryStringName, defValue) {
+    const valueFromQS = paramsURL.get(queryStringName);
+    detailsObject.open = valueFromQS? valueFromQS === '1' : defValue;
+}
+
+
+function updateOptionsDefaultValues() {
+    maybeUpdateCheckboxDefValue(unknownCheckbox, 'wu');
+    maybeUpdateCheckboxDefValue(detailsWPTCheckbox, 'wd');
+    maybeUpdateCheckboxDefValue(interoperableCheckbox, 'wi');
+    maybeUpdateCheckboxDefValue(showBCDSupportColumn, 'bc');
+    maybeUpdateSelectDefValue(BCDSupportSelector, 'bs');
+    maybeUpdateDetailsOpenValue(detailsExplanation, 'de', true);
+    maybeUpdateDetailsOpenValue(detailsAdvancedOptions, 'da', false);
+    tableSourceResults = paramsURL.get('src') === 'BCD' ? 'BCD' : 'WPT'; // default view
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.toggle-btn[data-view="${tableSourceResults}"]`).classList.add('active');
+}
+
+
+// Preloading all the jsons makes the UI much faster when changing views and needs <5MB of RAM
+async function lazyPreloadAllJsons() {
+    const shouldAvoidPreload = (navigator.connection && (navigator.connection.saveData || ['slow-2g', '2g', '3g'].includes(navigator.connection.effectiveType)));
+    if (shouldAvoidPreload)
+        return;
+    // preload them in per-version-sets instead all at the same time to minimize network load
+    for (const v of versionsAvailable.versions) {
+        const fileList = [v.bcd_results, v.wpt_interoperability, v.wpt_results, v.wpt_specs];
+        const uniqueJsonURLs = [...new Set(fileList.filter(Boolean).map(filename => WPTReportDistilledBaseURL + filename))];
+        await jsonFetchCache(uniqueJsonURLs);
+    }
+}
+
+async function loadAndRenderView(firstLoad) {
+    clearTable();
+    paramsURL = new URLSearchParams(window.location.search);
+    updateOptionsDefaultValues();
+    if (firstLoad)
+        await loadVersionsAvailable();
+    maybeUpdateSelectDefValue(versionSelect, 'ver');
+    await updateTableSourceResultsView();
+    if (firstLoad) {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => lazyPreloadAllJsons());
+        } else {
+            if (document.readyState === 'complete')
+                lazyPreloadAllJsons();
+            else
+                window.addEventListener('load', () => lazyPreloadAllJsons());
+        }
+    }
+}
+
+
+async function updateTableSourceResultsView() {
+    updateExplanationText();
+    updateAdvancedOptions();
+    return await loadData();
+}
 
 let versionsAvailable = null;
 let specsData = null;
 let resultsData = null;
 let productVersionQueryString = null;
 
-async function init() {
-    const versionRes = await fetch(WPTReportDistilledBaseURL + WPTReportVersionsFile);
-    versionsAvailable = await versionRes.json();
-
-    versionsAvailable.versions.forEach(v => {
-        const option = document.createElement('option');
-        option.value = v.version;
-        option.textContent = v.version;
-        versionSelect.appendChild(option);
-    });
-    versionSelect.value = versionsAvailable.metadata.default_version;
-    loadData(versionSelect.value);
-}
-
-async function loadData(version) {
-    const selected = versionsAvailable.versions.find(v => v.version === version);
-    const currentSpecUrl = WPTReportDistilledBaseURL + selected.specs;
-    const currentResultsUrl = WPTReportDistilledBaseURL + selected.results;
-    const currentResultsEnginesUrl = WPTReportDistilledBaseURL + selected.results_engines;
-    const [specsRes, resultsRes, resultsEnginesRes] = await Promise.all([
-        fetch(currentSpecUrl),
-        fetch(currentResultsUrl),
-        fetch(currentResultsEnginesUrl)
-    ]);
-    specsData = await specsRes.json();
-    resultsData = await resultsRes.json();
-    resultsEnginesData = await resultsEnginesRes.json();
-    if (version === "nightly") {
-        metaBrowserVersion.textContent = resultsData.metadata.browser_version || version;
-        // We can't pass the version for the nightlies until https://github.com/web-platform-tests/wpt.fyi/pull/4398 gets fixed
-        // But it should work fine anyway because is not expected to find more than one nightly/experimental run per WPT commit.
-        productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=experimental&product=wpewebkit`;
+async function loadVersionsAvailable() {
+    [versionsAvailable] = await jsonFetchCache([WPTReportDistilledBaseURL + versionsFile])
+    const defVersion = versionSelect.value || versionsAvailable.metadata.default_version;
+    versionSelect.innerHTML = "";
+    if (versionsAvailable && versionsAvailable.versions) {
+        versionsAvailable.versions.forEach(v => {
+            const option = document.createElement('option');
+            option.value = v.version;
+            option.textContent = v.version;
+            versionSelect.appendChild(option);
+        });
+        const existsVersion = Array.from(versionSelect.options).some(opt => opt.value === defVersion);
+        if (existsVersion)
+            versionSelect.value = defVersion;
     } else {
-        metaBrowserVersion.textContent = resultsData.metadata.browser_version?.split('.').slice(0, 2).join('.') || version;
-        productVersionQueryString = `sha=${resultsData.metadata.wpt_version}&label=stable&product=wpewebkit-${resultsData.metadata.browser_version}`;
+        const option = document.createElement('option');
+        option.disabled = true;
+        option.textContent = "Error loading versions";
+        versionSelect.appendChild(option);
     }
-    WPTLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
-    // short to 7 chars because its the same short-sha length used on wpt.fyi
-    const wptShaShort = resultsData.metadata.wpt_version.slice(0, 7) || '—';
-    metaWPTRunLink.textContent = `test run using WPT ${wptShaShort}`;
-    metaWPTRunLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
-    metaRunDate.textContent = new Date(resultsData.metadata.testrun_timestamp_end * 1000).toISOString().slice(0, 10) || '—';
-    renderTable();
 }
+
+async function loadData() {
+    if (!versionsAvailable)
+        return;
+    if (tableSourceResults === "WPT")
+        return await loadWPTData();
+    return await loadBCDData();
+}
+
+
+function updateRunInfo(resultsData, version) {
+    let browserVersion;
+    browserVersion = version === "nightly" ? (resultsData.metadata.browser_version || version) : (resultsData.metadata.browser_version?.split('.').slice(0, 2).join('.') || version);
+    if (tableSourceResults === "WPT") {
+        // We can't pass the version for the nightlies until https://github.com/web-platform-tests/wpt.fyi/pull/4398 gets fixed
+        // But it should work fine anyway because is not expected to find more than one nightly/experimental run per WPT commit
+        productVersionQueryString = version === "nightly" ? `sha=${resultsData.metadata.wpt_version}&label=experimental&product=wpewebkit` : `sha=${resultsData.metadata.wpt_version}&label=stable&product=wpewebkit-${resultsData.metadata.browser_version}`;
+        document.getElementById('wpt-link').href = `https://wpt.fyi/results/?${productVersionQueryString}`;
+        // short to 7 chars because its the same short-sha length used on wpt.fyi
+        const wptShaShort = resultsData.metadata.wpt_version.slice(0, 7) || '—';
+        metaRunLink.textContent = `test run using WPT ${wptShaShort} and WPE ${browserVersion}`;
+        metaRunLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
+    } else {
+        metaRunLink.textContent = `test run using BCD v${resultsData.metadata.mdn_bcd_collector_version} and WPE ${browserVersion}`;
+        metaRunLink.href = `https://mdn-bcd-collector.gooborg.com/changelog`;
+    }
+    metaRunDate.textContent = new Date(resultsData.metadata.testrun_timestamp_end * 1000).toISOString().slice(0, 10) || '—';
+}
+
+
+async function jsonFetchCache(urls) {
+    const results = await Promise.all(urls.map(async (url) => {
+        const cached = jsonCache[url];
+        if (cached)
+            return cached;
+        const fetchPromise = fetch(url)
+            .then(res => {
+                if (!res.ok)
+                    throw new Error(`Failed to fetch ${url}: ${res.status}`);
+                return res.json();
+            })
+            .catch(err => {
+                delete jsonCache[url]; // allow retry
+                throw err;
+            });
+        jsonCache[url] = fetchPromise;
+        const data = await fetchPromise;
+        jsonCache[url] = data;
+        return data;
+  }));
+  return results;
+}
+
+
+async function loadBCDData() {
+    const version = versionSelect.value;
+    const selected = versionsAvailable.versions.find(v => v.version === version);
+    const currentResultsUrl = WPTReportDistilledBaseURL + selected.bcd_results;
+    [resultsData] = await jsonFetchCache([currentResultsUrl]);
+    updateRunInfo(resultsData, version);
+    renderTableBCD();
+}
+
+async function loadWPTData() {
+    const version = versionSelect.value;
+    const selected = versionsAvailable.versions.find(v => v.version === version);
+    const currentSpecUrl = WPTReportDistilledBaseURL + selected.wpt_specs;
+    const currentResultsUrl = WPTReportDistilledBaseURL + selected.wpt_results;
+    const currentResultsEnginesUrl = WPTReportDistilledBaseURL + selected.wpt_interoperability;
+    [specsData, resultsData, resultsEnginesData] = await jsonFetchCache([currentSpecUrl, currentResultsUrl, currentResultsEnginesUrl])
+    updateRunInfo(resultsData, version);
+    renderTableWPT();
+}
+
 
 function calculatePercentage(pass, total) {
     return total > 0 ? Math.round(1000 * pass / total) / 10 : 0;
@@ -283,23 +655,150 @@ function getSubtestsMaintests(testStr) {
 }
 
 
-function renderTable() {
+function runSearchFilter() {
+    if (!tableSearch)
+        return;
+    const inputFilter = tableSearch.value.trim();
+    if (!inputFilter) {
+        for (const row of tableRows) {
+            const firstCell = row.cells[0];
+            if (!firstCell)
+                continue;
+            firstCell.querySelectorAll('mark').forEach(m =>
+                m.replaceWith(document.createTextNode(m.textContent))
+            );
+            row.hidden = false;
+        }
+        tableSearch.classList.remove('filter-input-notfound');
+        tableCounter.textContent = ` (${tableRows.length})`;
+        return;
+    }
+    // sort by substring length, so with "he" and "hello" in "hello word" it matches "hello".
+    const filterWords = [...new Set(inputFilter.toLowerCase().split(/\s+/).filter(Boolean))].sort((a, b) => b.length - a.length);
+    const regexPattern = filterWords.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+    const regex = new RegExp(regexPattern, 'gi');
+    let visibleRows = 0;
+    for (const row of tableRows) {
+        const firstCell = row.cells[0];
+        if (!firstCell)
+            continue;
+        const originalText = firstCell.textContent;
+        const originalTextLower = originalText.toLowerCase();
+        const allFilterWordsMatch = filterWords.every(w => originalTextLower.includes(w));
+        if (!allFilterWordsMatch) {
+            row.hidden = true;
+            continue;
+        }
+        visibleRows++;
+        row.hidden = false;
+        const targetElement = firstCell.querySelector('a') || firstCell;
+        targetElement.innerHTML = originalText.replace(regex, '<mark>$&</mark>');
+    }
+    tableSearch.classList.toggle("filter-input-notfound", !visibleRows);
+    tableCounter.textContent = ` (${visibleRows})`;
+}
+
+
+function createThWithSearch(thText) {
+    const th = document.createElement("th");
+    const thWrapper = document.createElement("div");
+    thWrapper.style.display = "flex";
+    thWrapper.style.justifyContent = "space-between";
+    thWrapper.style.alignItems = "center";
+    thWrapper.style.width = "100%";
+
+    const labelWrapper = document.createElement("span");
+    const label = document.createElement("span");
+    label.id = "th-search-text-content";
+    label.textContent = thText;
+    tableCounter = document.createElement("span");
+    tableCounter.id = "th-search-counter";
+    tableCounter.textContent = '(0)';
+    labelWrapper.appendChild(label);
+    labelWrapper.appendChild(tableCounter);
+
+    tableSearch = document.createElement("input");
+    tableSearch.type = "text";
+    tableSearch.id = "tableSearch";
+    tableSearch.placeholder = "Filter...";
+    tableSearch.style.maxWidth = "15ch";
+
+    let searchTimeout;
+    tableSearch.addEventListener("input", function () {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(runSearchFilter, 250);
+    });
+
+    thWrapper.appendChild(labelWrapper);
+    thWrapper.appendChild(tableSearch);
+    th.appendChild(thWrapper);
+    return th;
+}
+
+
+function renderTableBCD() {
+    let total_specs = 0;
+    const headRow = document.createElement('tr');
+    const thSearch = createThWithSearch('Features');
+    headRow.appendChild(thSearch);
+    const showSupportColumn = showBCDSupportColumn.checked;
+    if (showSupportColumn) {
+        const thSupport = document.createElement('th');
+        thSupport.textContent = 'Supported in';
+        headRow.appendChild(thSupport);
+    }
+    tableHead.appendChild(headRow);
+
+    const selectorValue = BCDSupportSelector.value;
+    const isAnySelector = selectorValue === "Any";
+
+    // Process test results
+    for (const testName in resultsData.results) {
+        const { link: linkUrl, pass: passList = [] } = resultsData.results[testName];
+        if (isAnySelector || passList.includes(selectorValue)) {
+            const row = document.createElement('tr');
+            const tdSpec = document.createElement('td');
+            if (linkUrl) {
+                const a = document.createElement('a');
+                a.href = linkUrl;
+                a.target = '_blank';
+                a.textContent = testName;
+                tdSpec.appendChild(a);
+            } else {
+                tdSpec.textContent = testName;
+            }
+            row.appendChild(tdSpec);
+            if (showSupportColumn) {
+                const tdSupport = document.createElement('td');
+                tdSupport.textContent = passList.sort().join(', ');
+                row.appendChild(tdSupport);
+            }
+
+            tableBody.appendChild(row);
+            total_specs++;
+        }
+    }
+    document.getElementById('th-search-text-content').textContent = 'Features';
+    tableCounter.textContent = ` (${total_specs})`;
+    tableRows = document.querySelectorAll("#results-table tbody tr");
+} // end renderTableBCD()
+
+
+function renderTableWPT() {
     const showDetailsWPT = detailsWPTCheckbox.checked;
     const showUnknown = unknownCheckbox.checked;
     const showInteroperable = interoperableCheckbox.checked;
     let total_specs = 0;
 
-    tableHead.innerHTML = '';
-    tableBody.innerHTML = '';
-
     const headers = [];
-    headers.push('Specifications', 'Passrate% (subtests)');
+    const headRow = document.createElement('tr');
+    const thSearch = createThWithSearch('Specifications');
+    headRow.appendChild(thSearch);
+    headers.push('Passrate% (subtests)');
     if (showDetailsWPT) {
         headers.push('Subtest counts');
         headers.push('WPT Directory');
     }
-
-    const headRow = document.createElement('tr');
     headers.forEach(h => {
         const th = document.createElement('th');
         th.textContent = h;
@@ -401,14 +900,11 @@ function renderTable() {
         total_specs += 1;
     } // end for-loop drawing the rows
 
-    // update table header
-    if (showDetailsWPT) {
-        tableHead.querySelectorAll('th')[1].textContent = 'Passrate%';
-    } else {
-        tableHead.querySelectorAll('th')[1].textContent = 'Passrate% (subtests)';
-    }
-    tableHead.querySelectorAll('th')[0].textContent = `Specifications (${total_specs})`;
+    tableHead.querySelectorAll('th')[1].textContent = showDetailsWPT? 'Passrate%' : 'Passrate% (subtests)';
+    document.getElementById('th-search-text-content').textContent = 'Specifications';
+    tableCounter.textContent = ` (${total_specs})`;
+    tableRows = document.querySelectorAll("#results-table tbody tr");
 } // end renderTable()
 
-init();
+loadAndRenderView(true);
 </script>
