@@ -151,7 +151,7 @@ fieldset.smaller label {
     flex-shrink: 0;
 }
 
-.view-toggle {
+.source-tab {
     display: inline-flex;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -220,9 +220,9 @@ fieldset.smaller label {
   <div id="controls">
     <span title="Result source">&#x1F4CA;</span>
 
-    <div class="view-toggle">
-      <button class="toggle-btn" data-view="BCD" title="BCD Results" >BCD</button>
-      <button class="toggle-btn" data-view="WPT" title="WPT Results">WPT</button>
+    <div class="source-tab" role="tablist" aria-label="Source results">
+      <button class="toggle-btn" role="tab" aria-selected="false" id="tab-BCD" aria-controls="bcd-explanation-panel" data-view="BCD" title="BCD Results">BCD</button>
+      <button class="toggle-btn active" role="tab" aria-selected="true" id="tab-WPT" aria-controls="wpt-explanation-panel" data-view="WPT" title="WPT Results">WPT</button>
     </div>
 &nbsp;
     <label for="version-select">
@@ -273,9 +273,8 @@ fieldset.smaller label {
 
 <details id="explanation-text" open>
   <summary>Explanation</summary>
-</details>
 
-<template id="wpt-explanation-template">
+<section id="wpt-explanation-panel" role="tabpanel" aria-labelledby="tab-WPT">
 <p>
 This data is automatically obtained by running <a href="https://web-platform-tests.org" target="_blank">Web Platform Tests (WPT)</a> with WPE.
  It shows all Web specifications supported or partially supported by WPE
@@ -310,8 +309,9 @@ Notes:
  To explore those, see the results for <i>JavaScriptCore</i> at
  <a href="https://test262.fyi/#|jsc" target="_blank">test262.fyi</a></li>
 </ul>
-</template>
-<template id="bcd-explanation-template">
+</section>
+
+<section id="bcd-explanation-panel" role="tabpanel" aria-labelledby="tab-BCD" hidden>
 <p>
 This data is automatically obtained by running <a href="https://mdn-bcd-collector.gooborg.com/" target="_blank">mdn-bcd-collector</a> tests with WPE.
 It presents Browser Compatibility Data (BCD) for different WPE versions, covering Web technologies, such as Web APIs, JavaScript features, CSS properties and more.
@@ -324,8 +324,9 @@ Notes:
 <li>These results were obtained using a WPE build with experimental features enabled.
  Because feature availability can vary by build configuration, certain features shown here may not be present in other WPE builds.</li>
 </ul>
-</template>
+</section>
 
+</details>
 
 <table id="results-table">
   <thead></thead>
@@ -350,6 +351,8 @@ const metaRunDate = document.getElementById('meta-run-date');
 const metaRunLink = document.getElementById('meta-run-link');
 const detailsExplanation = document.getElementById("explanation-text");
 const detailsAdvancedOptions = document.getElementById("advanced-options");
+const explanationsPanelWPT = document.getElementById('wpt-explanation-panel');
+const explanationsPanelBCD = document.getElementById('bcd-explanation-panel');
 const jsonCache = Object.create(null);
 let tableSourceResults;
 let paramsURL;
@@ -409,11 +412,26 @@ versionSelect.addEventListener('change', (e) => {
     refreshURLWithParams('ver', versionSelect.value);
 });
 
-document.querySelectorAll('.toggle-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    tableSourceResults = btn.getAttribute('data-view');
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+document.getElementById('bcd-view-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.querySelector('.toggle-btn[data-view="BCD"]').click();
+});
+
+document.getElementById('wpt-view-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.querySelector('.toggle-btn[data-view="WPT"]').click();
+});
+
+document.querySelectorAll('[role="tab"]').forEach(tab => {
+  tab.addEventListener('click', (e) => {
+    const target = e.currentTarget;
+    target.closest('[role="tablist"]').querySelectorAll('[role="tab"]').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    target.classList.add('active');
+    target.setAttribute('aria-selected', 'true');
+    tableSourceResults = target.getAttribute('data-view');
     clearTable();
     updateTableSourceResultsView();
     refreshURLWithParams('src', tableSourceResults);
@@ -430,22 +448,10 @@ detailsAdvancedOptions.addEventListener('toggle', () => {
 // update things also when the back button is pressed
 window.addEventListener('popstate', () => { loadAndRenderView(false); });
 
-function updateExplanationText() {
-    const summary = detailsExplanation.querySelector("summary");
-    const isOpen = detailsExplanation.open;
-    detailsExplanation.innerHTML = "";
-    detailsExplanation.appendChild(summary);
-    if (isOpen)
-        detailsExplanation.open = true;
-    const tmpl = tableSourceResults === "WPT" ? document.getElementById("wpt-explanation-template") : document.getElementById("bcd-explanation-template");
-    detailsExplanation.appendChild(tmpl.content.cloneNode(true));
-    // simulate clicking the button with this link
-    const toggleViewLinkID = tableSourceResults === "WPT" ? 'bcd-view-link' : 'wpt-view-link';
-    const toggleViewValue = tableSourceResults === "WPT" ? 'BCD' : 'WPT';
-    document.getElementById(toggleViewLinkID).addEventListener('click', function(event) {
-        event.preventDefault();
-        document.querySelector(`.toggle-btn[data-view="${toggleViewValue}"]`).click();
-    });
+
+function toggleExplanationSection() {
+    explanationsPanelWPT.hidden = (tableSourceResults !== 'WPT');
+    explanationsPanelBCD.hidden = (tableSourceResults !== 'BCD');
 }
 
 
@@ -532,7 +538,7 @@ async function loadAndRenderView(firstLoad) {
 
 
 async function updateTableSourceResultsView() {
-    updateExplanationText();
+    toggleExplanationSection();
     updateAdvancedOptions();
     return await loadData();
 }
