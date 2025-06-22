@@ -202,9 +202,9 @@ resets it to <code>NULL</code>, thus preventing cleanup functions from running.<
 <p>The size has been kept small thanks to reusing code from the <a href="https://github.com/Igalia/cog#cog">Cog
 core</a> library. As a bonus, it should
 run on Wayland, X11, and even on a bare display using the <abbr title="Direct
-Rendering Manager">DRM<abbr>/<abbr title="Kernel Mode Setting">KMS</abbr>
+Rendering Manager">DRM</abbr>/<abbr title="Kernel Mode Setting">KMS</abbr>
 subsystem directly. Compiling and running it, assuming you already have the
-dependencies installed, should be as easy as running:</abbr></abbr></p>
+dependencies installed, should be as easy as running:</p>
 <pre class="language-sh"><code class="language-sh">cc <span class="token parameter variable">-o</span> minicog minicog.c <span class="token variable"><span class="token variable">$(</span>pkg-config cogcore <span class="token parameter variable">--libs</span> <span class="token parameter variable">--cflags</span><span class="token variable">)</span></span>
 ./minicog wpewebkit.org</code></pre>
 <p>If the current session kind is not automatically detected, a second parameter

@@ -4,8 +4,23 @@
   <description>News related to WPE WebKit.</description>
   <link href="https://wpewebkit.org/blog.xml" rel="self"/>
   <link href="https://wpewebkit.org/blog/"/>
-  <updated>2025-04-11T00:00:00Z</updated>
+  <updated>2025-05-22T00:00:00Z</updated>
   <id>https://wpewebkit.org/blog/</id>
+  
+  <entry>
+    <title>Success Story: Savant</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/patch-1/blog/2025-success-savant.html"/>
+    <updated>2025-05-22T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/patch-1/blog/2025-success-savant.html</id>
+    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
+&lt;img alt=&quot;Savant logo&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-savant.png&quot; srcset=&quot;https://wpewebkit.org/assets/img/logo-savant@2x.png 2x&quot; /&gt;
+&lt;img alt=&quot;WPE&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-blue.svg&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;Igalia worked with Savant Systems to bring a seamless, high-performance music experience to its smart home ecosystem. By enhancing WPE WebKit with critical backported patches, developing a custom Widevine CDM, and engineering a JavaScript D-Bus bridge, WPE WebKit was adapted to ensure robust and secure media playback directly within Savant’s platform.&lt;/p&gt;
+&lt;p&gt;Delivering a tightly integrated music experience in a smart home environment required overcoming significant technical challenges. To achieve this, WPE WebKit’s capabilities were streamlined to enable a fluid interface and reliable communication between the browser and the music process that powers a third-party music integration.&lt;/p&gt;
+&lt;p&gt;With deep expertise in browser technology and embedded systems, Igalia was able to help Savant implement a tailored WPE WebKit integration, optimizing performance while maintaining security and responsiveness. The result is a cutting-edge solution that enhances user experience and supports Savant’s commitment to innovation in smart home entertainment.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.48 highlights</title>
@@ -22,7 +37,7 @@
 &lt;h3 id=&quot;css-3d-transforms&quot; tabindex=&quot;-1&quot;&gt;CSS 3D Transforms&lt;/h3&gt;
 &lt;p&gt;There have been several improvements handling elements that use &lt;code&gt;preserve-3d&lt;/code&gt; &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/transform&quot;&gt;CSS transforms&lt;/a&gt;. On top of a modest performance improvement, the changes fixed rendering issues, making the implementation compliant with the specification.&lt;/p&gt;
 &lt;h3 id=&quot;damage-tracking&quot; tabindex=&quot;-1&quot;&gt;Damage Tracking&lt;/h3&gt;
-&lt;p&gt;This release gained experimental support for collecting “damage” information, which tracks which parts of Web content produce visual changes in the displayed output. This information is then taken into account to reuse existing graphics buffers and repaint only those parts that need to be modified. This results better performance and less resource usage.&lt;/p&gt;
+&lt;p&gt;This release gained experimental support for &lt;a href=&quot;https://blogs.igalia.com/plampe/introduction-to-damage-propagation-in-wpe-and-gtk-webkit-ports/&quot;&gt;collecting “damage” information&lt;/a&gt;, which tracks which parts of Web content produce visual changes in the displayed output. This information is then taken into account to reuse existing graphics buffers and repaint only those parts that need to be modified. This results better performance and less resource usage.&lt;/p&gt;
 &lt;p&gt;Note that this feature is disabled by default and may be previewed toggling the &lt;code&gt;PropagateDamagingInformation&lt;/code&gt; feature flag.&lt;/p&gt;
 &lt;h3 id=&quot;gpu-process-beginnings&quot; tabindex=&quot;-1&quot;&gt;GPU Process Beginnings&lt;/h3&gt;
 &lt;p&gt;A new “GPU process” is now always built, but its usage is disabled by default at runtime. This is an experimental feature that can be toggled via the &lt;code&gt;UseGPUProcessForWebGL&lt;/code&gt; feature flag, and as the name implies at the moment this new auxiliary process only supports handling WebGL content.&lt;/p&gt;
@@ -280,26 +295,6 @@ on performance, and we know there are likely optimizations possible in &lt;code&
 &lt;li&gt;Many memory and stability improvements, particularly on the multimedia backends.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For a complete list of changes, please check the &lt;a href=&quot;https://wpewebkit.org/release/&quot;&gt;releases page&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Use Case: Server-side headless rendering</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/patch-1/blog/2024-use-case-server-side-rendering.html"/>
-    <updated>2024-02-01T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/patch-1/blog/2024-use-case-server-side-rendering.html</id>
-    <content type="html">&lt;div class=&quot;success-top&quot;&gt;
-&lt;img alt=&quot;WPE and server-side headless rendering&quot; align=&quot;center&quot; src=&quot;https://wpewebkit.org/assets/img/logo-server-side-rendering.png&quot; srcset=&quot;https://wpewebkit.org/assets/img/logo-server-side-rendering@2x.png 2x&quot; /&gt;
-&lt;/div&gt;
-&lt;p&gt;In many distributed applications, it can be useful to run a light web browser on the server side to render some HTML content or process images, video and/or audio using JavaScript.&lt;/p&gt;
-&lt;p&gt;Some concrete use-cases can be:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Video post-production using HTML overlays.&lt;/li&gt;
-&lt;li&gt;Easy 3D rendering with WebGL that can be broadcasted as a video stream.&lt;/li&gt;
-&lt;li&gt;Reusing the same JavaScript code between a frontend web application and the backend processing.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;WPE WebKit is the perfect solution for all those use cases as it offers a lightweight solution which can run on low-end hardware or even within a container. It provides a lot of flexibility at the moment of choosing the backend infrastructure as WPE WebKit can, for instance, run from within a container with a very minimal Linux configuration (no need for any windowing system) and with full hardware acceleration and zero-copy of the video buffers between the GPU and the CPU.&lt;/p&gt;
-&lt;p&gt;Additionally, the fact that WPE WebKit is optimized for lower-powered devices, makes it also the perfect option for server-side rendering when scaling commercial deployments while keeping cost under control, which is yet another important factor to take into account when considering cloud rendering.&lt;/p&gt;
 </content>
   </entry>
 </feed>
