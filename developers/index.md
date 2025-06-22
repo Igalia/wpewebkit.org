@@ -38,7 +38,7 @@ API documentation for the **latest stable release** is available here:
 <ul class="arrows">
 <li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-2.0/">WPEWebKit 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-javascriptcore-2.0/">WPEJavaScriptCore 2.0 API documentation</a></li>
-<li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-2.0/">WPEWebExtension 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-web-process-extension-2.0/">WPEWebExtension 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-1.1/">WPEWebKit 1.1 API documentation</a> (deprecated)</li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-javascriptcore-1.1/">WPEJavaScriptCore 1.1 API documentation</a> (deprecated)</li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-1.1/">WPEWebExtension 1.1 API documentation</a> (deprecated)</li>
