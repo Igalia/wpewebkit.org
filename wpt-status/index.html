@@ -237,6 +237,7 @@ fieldset.smaller label {
     <strong><a id="meta-run-link" href="" target="_blank"></a></strong>
     (Date: <strong><span id="meta-run-date"></span></strong>)
   </div>
+
 </div>
 
 <details id="advanced-options">
@@ -436,24 +437,6 @@ function updateView() {
 }
 
 viewType.onchange = updateView
-
-//updateView()
-/*
-document.querySelectorAll('[role="tab"]').forEach(tab => {
-  tab.addEventListener('click', (e) => {
-    const target = e.currentTarget;
-    target.closest('[role="tablist"]').querySelectorAll('[role="tab"]').forEach(t => {
-      t.classList.remove('active');
-      t.setAttribute('aria-selected', 'false');
-    });
-    target.classList.add('active');
-    target.setAttribute('aria-selected', 'true');
-    tableSourceResults = target.getAttribute('data-view');
-    clearTable();
-    updateTableSourceResultsView();
-    refreshURLWithParams('src', tableSourceResults);
-  });
-});*/
 
 detailsExplanation.addEventListener('toggle', () => {
     refreshURLWithParams('de', detailsExplanation.open? 1 : 0, 1);
