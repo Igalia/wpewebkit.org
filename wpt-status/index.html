@@ -16,11 +16,12 @@ h1 {
     margin-block-end: 0;
 }
 
+/*
 #header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
+}*/
 
 #stickyheader {
     position: sticky;
@@ -214,6 +215,7 @@ fieldset.smaller label {
 
 <div id="header">
   <h1>WPE Web Support Status</h1>
+  <p>Change the result source, the WPE version or advanced options. The view will update live and provide a stable, sharable URL.</p>
 </div>
 
 <div id="stickyheader">
@@ -498,7 +500,6 @@ function updateOptionsDefaultValues() {
     maybeUpdateDetailsOpenValue(detailsExplanation, 'de', true);
     maybeUpdateDetailsOpenValue(detailsAdvancedOptions, 'da', false);
     tableSourceResults = paramsURL.get('src') === 'BCD' ? 'BCD' : 'WPT'; // default view
-//    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
     document.querySelector(`option[data-view="${tableSourceResults}"]`).selected = true;
 }
 
