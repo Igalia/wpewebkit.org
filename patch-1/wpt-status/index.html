@@ -23,7 +23,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2025-06-22T11:57:51.565Z">
+  <meta property="article:published_time" content="2025-06-30T12:25:43.722Z">
   <meta property="article:tag" content="devs">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -95,12 +95,6 @@ body {
 
 h1 {
     margin-block-end: 0;
-}
-
-#header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 #stickyheader {
@@ -265,7 +259,7 @@ fieldset.smaller label {
     white-space: nowrap;
 }
 
-.info-run {
+[id="info-run"] {
     flex: 0 1 auto;
     min-width: 0;
     font-family: monospace;
@@ -295,28 +289,31 @@ fieldset.smaller label {
 
 <div id="header">
   <h1>WPE Web Support Status</h1>
+  <p>Change the result source, the WPE version or advanced options. The view will update live and provide a stable, sharable URL.</p>
 </div>
 
 <div id="stickyheader">
   <div id="controls">
     <span title="Result source">&#x1F4CA;</span>
-
-    <div class="source-tab" role="tablist" aria-label="Source results">
-      <button class="toggle-btn" role="tab" aria-selected="false" id="tab-BCD" aria-controls="bcd-explanation-panel" data-view="BCD" title="BCD Results">BCD</button>
-      <button class="toggle-btn active" role="tab" aria-selected="true" id="tab-WPT" aria-controls="wpt-explanation-panel" data-view="WPT" title="WPT Results">WPT</button>
-    </div>
+    <label>Source 
+      <select id="viewType" aria-controls="results-table">
+        <option selected="" data-view="BCD">BCD</option>
+        <option data-view="WPT">WPT</option>
+      </select>
+    </label>
 &nbsp;
     <label for="version-select">
-      <span class="tight-label" title="WPE Version">&#x2699;WPE</span>
-      <select id="version-select" title="WPE Version"></select>
+      <span class="tight-label">&#x2699;Version</span>
+      <select id="version-select"></select>
     </label>
   </div>
 
-  <div class="info-run">
+  <div id="info-run">
     Results from
     <strong><a id="meta-run-link" href="." target="_blank"></a></strong>
     (Date: <strong><span id="meta-run-date"></span></strong>)
   </div>
+
 </div>
 
 <details id="advanced-options">
@@ -355,7 +352,7 @@ fieldset.smaller label {
 <details id="explanation-text" open="">
   <summary>Explanation</summary>
 
-<section id="wpt-explanation-panel" role="tabpanel" aria-labelledby="tab-WPT">
+<section id="wpt-explanation-panel">
 <p>
 This data is automatically obtained by running <a href="https://web-platform-tests.org" target="_blank">Web Platform Tests (WPT)</a> with WPE.
  It shows all Web specifications supported or partially supported by WPE
@@ -392,7 +389,7 @@ Notes:
 </ul>
 </section>
 
-<section id="bcd-explanation-panel" role="tabpanel" aria-labelledby="tab-BCD" hidden="">
+<section id="bcd-explanation-panel" hidden="">
 <p>
 This data is automatically obtained by running <a href="https://mdn-bcd-collector.gooborg.com/" target="_blank">mdn-bcd-collector</a> tests with WPE.
 It presents Browser Compatibility Data (BCD) for different WPE versions, covering Web technologies, such as Web APIs, JavaScript features, CSS properties and more.
@@ -409,7 +406,7 @@ Notes:
 
 </details>
 
-<table id="results-table">
+<table id="results-table" aria-describedby="info-run">
   <thead></thead>
   <tbody></tbody>
 </table>
@@ -503,21 +500,19 @@ document.getElementById('wpt-view-link').addEventListener('click', function(even
     document.querySelector('.toggle-btn[data-view="WPT"]').click();
 });
 
-document.querySelectorAll('[role="tab"]').forEach(tab => {
-  tab.addEventListener('click', (e) => {
-    const target = e.currentTarget;
-    target.closest('[role="tablist"]').querySelectorAll('[role="tab"]').forEach(t => {
-      t.classList.remove('active');
-      t.setAttribute('aria-selected', 'false');
-    });
-    target.classList.add('active');
-    target.setAttribute('aria-selected', 'true');
-    tableSourceResults = target.getAttribute('data-view');
+
+function getViewName() {
+  return viewType[viewType.selectedIndex].dataset.view
+}
+
+function updateView() {
+    tableSourceResults = getViewName()
     clearTable();
     updateTableSourceResultsView();
     refreshURLWithParams('src', tableSourceResults);
-  });
-});
+}
+
+viewType.onchange = updateView
 
 detailsExplanation.addEventListener('toggle', () => {
     refreshURLWithParams('de', detailsExplanation.open? 1 : 0, 1);
@@ -579,8 +574,7 @@ function updateOptionsDefaultValues() {
     maybeUpdateDetailsOpenValue(detailsExplanation, 'de', true);
     maybeUpdateDetailsOpenValue(detailsAdvancedOptions, 'da', false);
     tableSourceResults = paramsURL.get('src') === 'BCD' ? 'BCD' : 'WPT'; // default view
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.toggle-btn[data-view="${tableSourceResults}"]`).classList.add('active');
+    document.querySelector(`option[data-view="${tableSourceResults}"]`).selected = true;
 }
 
 

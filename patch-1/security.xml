@@ -8,6 +8,34 @@
   <id>https://wpewebkit.org/security/</id>
   
   <entry>
+    <title>WPE WebKit 2.49.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/patch-1/release/wpewebkit-2.49.3.html"/>
+    <updated>2025-06-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/patch-1/release/wpewebkit-2.49.3.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.50 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.49.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.49.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add new API to get the theme color of a &lt;code&gt;WebKitWebView&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Add new WPEPlatform API to allow providing rendering synchronization information.&lt;/li&gt;
+&lt;li&gt;Add support for gamepad analog button events.&lt;/li&gt;
+&lt;li&gt;Notify automation session on abnormal disconnections.&lt;/li&gt;
+&lt;li&gt;Fix a crash by ensuring SkiaRecordingResult is destroyed on the main thread.&lt;/li&gt;
+&lt;li&gt;Fix the build on s390x.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;USE_EXTERNAL_HOLEPUNCH=ON&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;USE_LIBWEBRTC=ON&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.49.3.tar.xz (41.1 MiB)
+   md5sum: 3a254344411ca8ea36fbb03d6c478e91
+   sha1sum: a8168e03f48bdddda6be48fc26ecb9aac63eeb79
+   sha256sum: 52bfc6f424fd8728d71b0226f47b8cadba3d84f3fff218bb9e14c2e94ea89817
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
     <title>WPE WebKit 2.49.2 released</title>
     <link href="https://wpewebkit.org/wpewebkit.org/patch-1/release/wpewebkit-2.49.2.html"/>
     <updated>2025-05-30T00:00:00Z</updated>
@@ -416,37 +444,6 @@ for information about the latest stable releases.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;From SmartTVs to light bulbs and cameras, smart devices are not hard to find in homes these days. &lt;a href=&quot;https://glancr.net/&quot;&gt;Glancr&lt;/a&gt;’s smart mirror is a device that seamlessly integrates digital functionality into everyday life. Powered by its custom operating system &lt;a href=&quot;https://gitlab.com/glancr/mirr-os&quot;&gt;mirr.OS&lt;/a&gt;, Glancr puts the Web at the forefront, allowing users to see all the information that matters to them in a customizable interface, right on a mirror. Besides being useful in smart home scenarios, Glancr can also expand the possibilities in other use cases in the industry, such as digital signage, point-of-sale devices, or even the healthcare industry.&lt;/p&gt;
 &lt;p&gt;WPE WebKit empowers mirr.OS to efficiently run and render interactive widgets and applications, ensuring a fluid and responsive user experience at the same time that enables mirr.OS to leverage the power of the Web Platform. This allows developers to create rich, web-based interfaces tailored to the smart mirror’s unique requirements, in order to deliver a seamless and visually compelling interaction layer for users at the same time it bridges the gap between digital functionality and aesthetic appeal.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.49.1 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/patch-1/release/wpewebkit-2.49.1.html"/>
-    <updated>2025-04-03T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/patch-1/release/wpewebkit-2.49.1.html</id>
-    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.50 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.49.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.49.1?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Change threaded rendering implementation to use Skia API instead of WebCore display
-lists that are not thread safe. This also allowed to improve performance by recording
-layers once and replaying every dirty region in different worker threads.&lt;/li&gt;
-&lt;li&gt;Added hybrid rendering mode that tries to use the GPU worker threads, but if they
-are all busy the CPU worker threads are used if possible.&lt;/li&gt;
-&lt;li&gt;Add volume locking support to media player.&lt;/li&gt;
-&lt;li&gt;Add support for tracing counters with Sysprof.&lt;/li&gt;
-&lt;li&gt;Add a default accessibility implementation using ATK to WPEPlatform.&lt;/li&gt;
-&lt;li&gt;Add new API in WPEPlatform that allows attaching user data to &lt;code&gt;WPEEvent&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Add new API in WPEPlatform to get/set the input purpose and hints for
-the current input through &lt;code&gt;WPEInputMethodContext&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.49.1.tar.xz (40.3 MiB)
-   md5sum: 2a3814213b70447d32615b980584c280
-   sha1sum: 5b326755a18824e26e6c8a620095a79d9a6ac244
-   sha256sum: 0104387a334b0adb93107ca145b2a9702f49772d87564c383b5db9b63171193e
-&lt;/pre&gt;
 </content>
   </entry>
 </feed>
