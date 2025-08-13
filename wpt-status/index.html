@@ -336,6 +336,7 @@ Notes:
 // IMPORTANT: WPTReportDistilledBaseURL should be either empty '' or end in slash '/'
 const WPTReportDistilledBaseURL = 'https://wpewebkit.org/wptreport-distilled-data/'
 const versionsFile = 'versions_available.json'
+const viewType = document.getElementById('viewType');
 const versionSelect = document.getElementById('version-select');
 const detailsWPTCheckbox = document.getElementById('show-wpt-details');
 const unknownCheckbox = document.getElementById('show-unknown');
@@ -411,12 +412,14 @@ versionSelect.addEventListener('change', (e) => {
 
 document.getElementById('bcd-view-link').addEventListener('click', function(event) {
     event.preventDefault();
-    document.querySelector('.toggle-btn[data-view="BCD"]').click();
+    document.querySelector('option[data-view="BCD"]').selected = true;
+    viewType.dispatchEvent(new Event('change'));
 });
 
 document.getElementById('wpt-view-link').addEventListener('click', function(event) {
     event.preventDefault();
-    document.querySelector('.toggle-btn[data-view="WPT"]').click();
+    document.querySelector('option[data-view="WPT"]').selected = true;
+    viewType.dispatchEvent(new Event('change'));
 });
 
 
