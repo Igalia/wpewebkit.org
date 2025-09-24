@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /reference/
+Disallow: /releases/
+Sitemap: https://igalia.github.io/wpewebkit.org/aperezdc/compat-table-add-2.48-2.50/sitemap.xml
