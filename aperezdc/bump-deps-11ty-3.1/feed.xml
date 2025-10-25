@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WPEwebkit.org</title>
+  <description>Release announcements and security advisories from WPEwebkit.org.</description>
+  <link href="https://wpewebkit.org/feed.xml" rel="self"/>
+  <link href="https://wpewebkit.org/"/>
+  <updated>2025-10-25T00:00:00Z</updated>
+  <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.51.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.51.1.html"/>
+    <updated>2025-10-25T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.51.1.html</id>
+    <content type="html">&lt;p&gt;This is the first development release leading towards the 2.52 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.51.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.51.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Use the GPU process for WebGL by default.&lt;/li&gt;
+&lt;li&gt;Add initial API for WebExtensions.&lt;/li&gt;
+&lt;li&gt;Add API to handle WebXR permission requests.&lt;/li&gt;
+&lt;li&gt;Add new API to query the WebXR immersive session status.&lt;/li&gt;
+&lt;li&gt;Improve text rendering performance.&lt;/li&gt;
+&lt;li&gt;Compute the layers tile size, using a different strategy depending on whether
+GPU rendering is enabled.&lt;/li&gt;
+&lt;li&gt;Add support for run loop observers that are now used to replace the layer flush
+timer and properly implement the opportunistic task scheduler.&lt;/li&gt;
+&lt;li&gt;Add initial support for WebXR on Android.&lt;/li&gt;
+&lt;li&gt;Improve &lt;code&gt;WPEBufferDMABuf&lt;/code&gt; to allow importing more kinds of buffers as into pixel
+buffers using &lt;code&gt;wpe_buffer_import_to_pixels()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix speaker enumeration for ALSA PCM sinks.&lt;/li&gt;
+&lt;li&gt;Fix rendering for gradients with hue interpolation method.&lt;/li&gt;
+&lt;li&gt;Fix rendering of layers with fractional transforms.&lt;/li&gt;
+&lt;li&gt;Fix pasting image data (like &lt;code&gt;image/png&lt;/code&gt;) from the clipboard.&lt;/li&gt;
+&lt;li&gt;Fix importing a &lt;code&gt;WPEBufferAndroid&lt;/code&gt; as an &lt;code&gt;EGLImage&lt;/code&gt; when using EGL 1.4 or older.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.51.1.tar.xz (42.0 MiB)
+   md5sum: 365865a73d5f5b6c76d745f2d76e1788
+   sha1sum: c24801b9d862f87f016a5f83a02b2a3a7d29f340
+   sha256sum: 983a25b20d79863e7b08b0519bb3216d7655b9eeb4af46cfe641a540ca0ce1a7
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2025-0007</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0007.html"/>
+    <updated>2025-10-13T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0007.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;October 13, 2025&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2025-0007&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0007.html#CVE-2025-43343&quot;&gt;CVE-2025-43343&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&quot;CVE-2025-43343&quot; href=&quot;https://www.cve.org/CVERecord?id=CVE-2025-43343&quot;&gt;CVE-2025-43343&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.50.1.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected process
+crash. Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 296490&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.50.1 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.50.1.html"/>
+    <updated>2025-10-13T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.50.1.html</id>
+    <content type="html">&lt;p&gt;This is the first bug fix release in the stable 2.50 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.50.1%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.50.1?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve text rendering performance.&lt;/li&gt;
+&lt;li&gt;On Android, the built library no longer includes versioning
+information in its name.&lt;/li&gt;
+&lt;li&gt;Fix audio playback broken on Instagram.&lt;/li&gt;
+&lt;li&gt;Fix blurry rendering of SVG patterns when zoomed.&lt;/li&gt;
+&lt;li&gt;Fix rendering of layers with fractional transforms.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;ENABLE(VIDEO)&lt;/code&gt; disabled.&lt;/li&gt;
+&lt;li&gt;Fix the build in s390x.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.50.1.tar.xz (41.2 MiB)
+   md5sum: 574a56386680d9732b40a05b1f4adef1
+   sha1sum: da0083ea88619bdce502fa58f036b87646bd0579
+   sha256sum: 305437a4ba869e4106c1d4a8cb2a7be3f43b75d9d026e9b97c6f6debc04a673b
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>libwpe 1.16.3 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/libwpe-1.16.3.html"/>
+    <updated>2025-09-24T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/libwpe-1.16.3.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 1.16 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-libwpe-1.16.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in libwpe 1.16.3?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Log messages to the logd service on Android, instead of using
+the standard error stream.&lt;/li&gt;
+&lt;li&gt;Fix the build with CMake 4.0 and newer.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+libwpe-1.16.3.tar.xz (62.8 KiB)
+   md5sum: a26e3703d2a35ba3e57436cd6b76a656
+   sha1sum: 969897ea9b908f92ef0b4f6feaaec74f23425c39
+   sha256sum: c880fa8d607b2aa6eadde7d6d6302b1396ebc38368fe2332fa20e193c7ee1420
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WebKitGTK and WPE WebKit Security Advisory WSA-2025-0006</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0006.html"/>
+    <updated>2025-09-23T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0006.html</id>
+    <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Date Reported: &lt;strong&gt;September 23, 2025&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advisory ID: &lt;strong&gt;WSA-2025-0006&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CVE identifiers: &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0006.html#CVE-2025-43272&quot;&gt;CVE-2025-43272&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0006.html#CVE-2025-43342&quot;&gt;CVE-2025-43342&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0006.html#CVE-2025-43356&quot;&gt;CVE-2025-43356&lt;/a&gt;, &lt;a href=&quot;https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/security/WSA-2025-0006.html#CVE-2025-43368&quot;&gt;CVE-2025-43368&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-43272&quot; href=&quot;https://www.cve.org/CVERecord?id=CVE-2025-43272&quot;&gt;CVE-2025-43272&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.7.&lt;/li&gt;
+&lt;li&gt;Credit to Big Bear.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected Safari
+crash. Description: The issue was addressed with improved memory handling.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 294550&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-43342&quot; href=&quot;https://www.cve.org/CVERecord?id=CVE-2025-43342&quot;&gt;CVE-2025-43342&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.7.&lt;/li&gt;
+&lt;li&gt;Credit to an anonymous researcher.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected process
+crash. Description: A correctness issue was addressed with improved checks.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 296042&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-43356&quot; href=&quot;https://www.cve.org/CVERecord?id=CVE-2025-43356&quot;&gt;CVE-2025-43356&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.7.&lt;/li&gt;
+&lt;li&gt;Credit to Jaydev Ahire.&lt;/li&gt;
+&lt;li&gt;Impact: A website may be able to access sensor information without user consent.
+Description: The issue was addressed with improved handling of caches.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 296153&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a name=&quot;CVE-2025-43368&quot; href=&quot;https://www.cve.org/CVERecord?id=CVE-2025-43368&quot;&gt;CVE-2025-43368&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Versions affected: WebKitGTK and WPE WebKit before 2.48.7.&lt;/li&gt;
+&lt;li&gt;Credit to Pawel Wylecial of REDTEAM.PL working with Trend Micro Zero Day Initiative.&lt;/li&gt;
+&lt;li&gt;Impact: Processing maliciously crafted web content may lead to an unexpected Safari
+crash. Description: A use-after-free issue was addressed with improved memory
+management.&lt;/li&gt;
+&lt;li&gt;WebKit Bugzilla: 296276&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.&lt;/p&gt;
+&lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+&lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
+&lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.50.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.50.0.html"/>
+    <updated>2025-09-20T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.50.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.50 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.50.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.50.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Improved rendering performance by recording each layer once and replaying
+every dirty region in different worker threads.&lt;/li&gt;
+&lt;li&gt;Enable damage propagation to the UI process by default.&lt;/li&gt;
+&lt;li&gt;The CSS property &lt;code&gt;font-variant-emoji&lt;/code&gt; is now supported and enabled by
+default.&lt;/li&gt;
+&lt;li&gt;Font synthesis properties (bold/italic) are now properly handled.&lt;/li&gt;
+&lt;li&gt;Added new API to get the theme color of a &lt;code&gt;WebKitWebView&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Support for video capture using PipeWire through the camera portal.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;WebKitSettings:enable-hyperlink-auditing&lt;/code&gt; option has been deprecated,
+and the setting is always considered to be enabled.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;USE_GSTREAMER_TRANSCODER&lt;/code&gt; build option has been removed, and
+the implementation replaced with stock GStreamer functionality.&lt;/li&gt;
+&lt;li&gt;The lowest GCC version that can be used to build WebKit is now 12.2.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more details about all the changes included in WPE WebKit 2.50 see the
+&lt;code&gt;NEWS&lt;/code&gt; file that is included in the tarball.&lt;/p&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.50.0.tar.xz (41.2 MiB)
+   md5sum: 85a535b3c88c6ae435aad271347312cb
+   sha1sum: 1c10f89fe1abcfadfa1b4b3934461e0202ce09d5
+   sha256sum: a9af62c5e18551b7386b7db864e8ba8156f219b8e6c639934bf6f3a567969922
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.48.7 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.48.7.html"/>
+    <updated>2025-09-19T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.48.7.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.48.7%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.48.7?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;When using WPEPlatform, the &lt;code&gt;WPE_SETTING_TOPLEVEL_DEFAULT_SIZE&lt;/code&gt; is
+now applied to every toplevel.&lt;/li&gt;
+&lt;li&gt;Fix a number of GStreamer memory leaks.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.48.7.tar.xz (40.3 MiB)
+   md5sum: 973140518e4fdc21038fec12d7723209
+   sha1sum: 08bb6dba187f316261ccf2dc6c3ed2dc936fe829
+   sha256sum: cecf49844dfba7ccf53d64b32cb8cf2cbd69eb5ec9080b1c6e52f9d1ee87b690
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.48.6 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.48.6.html"/>
+    <updated>2025-09-03T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.48.6.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.48.6%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.48.6?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix emoji incorrectly rendered in their text variant.&lt;/li&gt;
+&lt;li&gt;Add support for font collection/fragment identifiers.&lt;/li&gt;
+&lt;li&gt;Allow using a system-wide PulseAudio daemon from the Bubblewrap sandbox.&lt;/li&gt;
+&lt;li&gt;Disable the &lt;code&gt;MediaSession&lt;/code&gt; API on Android.&lt;/li&gt;
+&lt;li&gt;Fix web process deadlock on exit.&lt;/li&gt;
+&lt;li&gt;Fix stuttering when playing WebP animations.&lt;/li&gt;
+&lt;li&gt;Fix CSS animations with cubic-bezier timing function.&lt;/li&gt;
+&lt;li&gt;Do not start the &lt;code&gt;MemoryPressureMonitor&lt;/code&gt; if it’s disabled.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.48.6.tar.xz (40.3 MiB)
+   md5sum: cb5b733da093d52de9f61c2736a99bce
+   sha1sum: 9cd8b38f7d6bef51b0a3d34296e16b1e63d2ffca
+   sha256sum: e29b76002c5fb9c9883586dddfa9957da1782b01af66decb10669e6f2b2142aa
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.49.90 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.49.90.html"/>
+    <updated>2025-09-02T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.49.90.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.50 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.49.90%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.49.90?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add support for font collection/fragment identifiers.&lt;/li&gt;
+&lt;li&gt;Add basic undo-redo support for input elements.&lt;/li&gt;
+&lt;li&gt;Do not start the &lt;code&gt;MemoryPressureMonitor&lt;/code&gt; when it is disabled.&lt;/li&gt;
+&lt;li&gt;Allow using a system-wide PulseAudio daemon from the Bubblewrap sandbox.&lt;/li&gt;
+&lt;li&gt;Disable the &lt;code&gt;MediaSession&lt;/code&gt; API on Android.&lt;/li&gt;
+&lt;li&gt;Fix building with &lt;code&gt;USE_EXTERNAL_HOLEPUNCH&lt;/code&gt; enabled.&lt;/li&gt;
+&lt;li&gt;Fix Web process deadlock on exit.&lt;/li&gt;
+&lt;li&gt;Fix stuttering when playing WebP animations&lt;/li&gt;
+&lt;li&gt;Fix CSS animations with cubic-bezier timing function.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.49.90.tar.xz (41.2 MiB)
+   md5sum: e29298b7828b26a5669e01ae4e59a52d
+   sha1sum: 4fc132699b4a48153621e5cb3a0233aecaadd2ba
+   sha256sum: 08532a5b1c3eb90d5fdec60d5bbe7b5f52a830a00cb7ecb1636f9f1df1319257
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.48.5 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.48.5.html"/>
+    <updated>2025-08-02T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/aperezdc/bump-deps-11ty-3.1/release/wpewebkit-2.48.5.html</id>
+    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.48 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.48.5%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.48.5?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix several crashes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.48.5.tar.xz (40.3 MiB)
+   md5sum: bb19e004adff16a94b71e48dd2fbcdd8
+   sha1sum: 1ced074b6829c7b27013c1b082db31ca1ab744fa
+   sha256sum: 01f36010705adb14404c56baf033147f7927cc7c6badec81bb141266fcdd8d0b
+&lt;/pre&gt;
+</content>
+  </entry>
+</feed>
