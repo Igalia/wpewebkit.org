@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE Graphics architecture</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/simon/typos/blog/03-wpe-graphics-architecture.html">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="https://igalia.github.io/wpewebkit.org/simon/typos/blog.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="https://igalia.github.io/wpewebkit.org/simon/typos/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="https://igalia.github.io/wpewebkit.org/simon/typos/security.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/simon/typos/blog/03-wpe-graphics-architecture.html">
+  <meta property="og:title" content="WPE Graphics architecture">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/simon/typos/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/simon/typos/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-07-15T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/simon/typos/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/simon/typos/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/simon/typos/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/simon/typos/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/simon/typos/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/simon/typos/"><img src="/wpewebkit.org/simon/typos/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/simon/typos/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/simon/typos/about/">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/simon/typos/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/simon/typos/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/simon/typos/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/simon/typos/blog/03-wpe-graphics-architecture.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE Graphics architecture</h1>
+ 
+   <meta itemprop="datePublished" content="Fri Jul 15 2022">
+   <time itemprop="dateCreated">15 July 2022</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>Following <a href="/wpewebkit.org/simon/typos/blog/02-overview-of-wpe.html">the previous post in the series</a> about <a href="/wpewebkit.org/simon/typos/">WPE</a> where we talked about the WPE components, this post will explain briefly the WPE graphics architecture, and how the engine is able to render HTML content into the display. If you haven’t read the previous entries in this blog post series about WPE, we recommend you to start with the <a href="/wpewebkit.org/simon/typos/blog/01-happy-birthday-wpe.html">first post in the series</a> for an introduction, and then come back to this.</p>
+<h2 id="dom-%2B-css-%3D-rendertree" tabindex="-1">DOM + CSS = RenderTree</h2>
+<p>As the document is parsed, it will begin building the DOM tree and load-blocking CSS resources.  At some point, possibly before the entire DOM tree is built, it’s time to draw things on the screen. The first step to render the content of a page is to perform what’s called the <em>attachment</em>, which is merging the DOM tree with the CSS rules, in order to create the RenderTree. This RenderTree is a collection of <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a>, structured into a tree, and each of these <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> represent the elements in the DOM tree that have visual output. <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> have the capability to render the associated DOM tree node into a surface by using the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h">GraphicsContext</a> class (in the case of WPE, this <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h">GraphicsContext</a> uses <a href="https://www.cairographics.org/">Cairo</a> to perform the rendering).</p>
+<p>Once the RenderTree is created, the layout is performed, ensuring that each of the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> have their proper size and position set.</p>
+<p><img style="display: block; margin: 1em auto;" alt="Going from source content to displayed content" src="/wpewebkit.org/simon/typos/assets/graphics-attachment.png"></p>
+<p>It would be possible to render the content of the web page just traversing this RenderTree and painting each of the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a>, but there would be problems when rendering elements that overlap each other, because the order of the elements in the RenderTree doesn’t necessarily match the order in which they must be painted in order to get the appropriate result. For example, an element with a big <code>z-index</code> value should be painted last, no matter its position in the RenderTree.</p>
+<p>This is an example of how some HTML content is translated into the RenderTree (there are some <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> missing here that are not relevant for the explanation).</p>
+<p><img style="display: block; margin: 1em auto;" alt="RenderTree generated from example HTML" src="/wpewebkit.org/simon/typos/assets/graphics-rendertree.png"></p>
+<h2 id="renderlayers" tabindex="-1">RenderLayers</h2>
+<p>In order to ensure that the elements of the RenderTree are rendered in the appropriate order, the concept of <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> is added. A <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> represents a layer in the document containing some elements that have to be rendered at the same depth (even though this is not exactly the case, you can think of each <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> as a group of <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> that are at a certain <code>z-index</code>). Each <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObject</a> is associated to a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> either directly or indirectly via an ancestor <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObject</a>.</p>
+<p><a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> are grouped into a tree, which is called the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> tree, and <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> children are sorted into two lists: those that are below the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a>, and those that are above. With this we have a structure that has grouped all the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> that have to be rendered together: they will be on top of the content that has been rendered by the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> below this one, and below the content rendered by the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> over this one.</p>
+<p>There are several conditions that can decide whether a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> is needed for some element, it doesn’t necessarily needs to be due to the usage of <code>z-index</code>. It can be required due to transparency, CSS filters, overflow, transformations, and so on.</p>
+<p>Continuing with the example, these are <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> that we would get for that HTML code:</p>
+<p><img style="display: block; margin: 1em auto;" alt="RenderLayer tree generated from example HTML" src="/wpewebkit.org/simon/typos/assets/graphics-renderlayertree.png"></p>
+<p>We can see that there are four <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a>:</p>
+<ul>
+<li>The root one, corresponding to the RenderView element. This is mandatory.</li>
+<li>Another one corresponding to the first RenderBlock.</li>
+<li>One corresponding to the RenderVideo element, because video elements always get their own <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a>.</li>
+<li>One corresponding to the transformed RenderBlock.</li>
+</ul>
+<p><a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> have a paint method that is able to paint all the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderObject.h">RenderObjects</a> associated to the layer into a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsContext.h">GraphicsContext</a> (as mentioned, WPE uses <a href="https://www.cairographics.org/">Cairo</a> for this). As in the previous case, it’s possible to paint the content of the page at this point just by traversing the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> tree and requesting the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> to paint their content, but in this case the result will be the correct one. Actually this is what <a href="https://webkitgtk.org/">WebKitGTK</a> does when it’s run with accelerated compositing disabled.</p>
+<h2 id="layer-composition" tabindex="-1">Layer composition</h2>
+<p>While with the previous step we are already able to render the page contents, this approach is not very efficient, especially when the page contains animations, elements with transparency, etc. This is because in order to paint a single pixel, all the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> need to be traversed, and those that are contributing to that pixel need to be repainted (totally or partially), even if the content of those <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> hasn’t changed. For example, think about an animation that’s moving an element. For each frame of that animation, the animated element needs to be repainted, but the area that was covered by the animated element in the last frame needs to be repainted as well. The same happens if there’s a translucent element on top of other content. If the translucent element changes, it needs to be repainted, but the content below the translucent element needs to be repainted as well because the blend needs to be performed again.</p>
+<p>This would be much more efficient if the content that <em>doesn’t</em> change was somehow separated from the content that’s changing, and we could render those two types of content separately. This is where the composition stage comes into action.</p>
+<p>The idea here is that we’re going to paint the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> contents into intermediate buffers, and then compose those buffers one on top of the other to get the final result. This last step is what we call <em>composition</em>. And it fixes the problems we mentioned with animations of transparency: animations don’t require repainting several <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a>. Actually moving an element just means painting one buffer with an offset during the composition. And for transparency, we just need to perform the new blending of the two buffers during the composition, but the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> of the content below the translucent element don’t need to be repainted.</p>
+<p>Once we have the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> tree, we could just paint each <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> in its own buffer in order to perform the composition. But this would be a waste of memory, as not every <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> needs a buffer. We introduce here a new component, the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a>.</p>
+<p><a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a> are a structure used to group those <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayers</a> that will render into the same buffer, and it will also contain all the information required to perform the composition of these buffers. A <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/rendering/RenderLayer.h">RenderLayer</a> may have a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a> associated to it if it requires its own buffer to render. Otherwise, it will render into an ancestor’s buffer (specifically, the first ancestor that has a <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a>). As usual, <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a> are structured into a tree.</p>
+<p>This is how the example code would be translated into <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a>.</p>
+<p><img style="display: block; margin: 1em auto;" alt="GraphicsLayer tree generated from example HTML" src="/wpewebkit.org/simon/typos/assets/graphics-graphicslayertree.png"></p>
+<p>We can see that we have now three <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a>:</p>
+<ul>
+<li>The root one, which is mandatory. It belongs to the RenderView element, but the first RenderBlock will render into this <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a>'s buffer as well.</li>
+<li>The one for the RenderVideo element, as videos are updated independently from the rest of the content.</li>
+<li>The one for the transformed element, as the transformed elements are updated independently from the rest of the content.</li>
+</ul>
+<p>With this structure, now we can render the intermediate buffers of the RenderView and the transformed RenderBlock, and we don’t need to update them any more. For each frame, those buffers will be composited together with the RenderVideo buffer. This RenderVideo will be updating its buffer whenever a new video frame arrives, but it won’t affect the content of the other <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayers</a>.</p>
+<p>So now we have successfully separated the content that is changing and needs to be updated from the content that remains constant and doesn’t need to be repainted anymore, just composited.</p>
+<h2 id="accelerated-compositing-and-threaded-accelerated-compositing" tabindex="-1">Accelerated compositing and threaded accelerated compositing</h2>
+<p>There’s something else that be done in order to increase the rendering performance, and it’s using the GPU to perform the composition. The GPU is highly optimized to perform operations like the buffer composition that we need to do, as well as handle 3D transforms, blending, etc. We just need to upload the buffers into textures and let the GPU handle the required operations. WPE does this though the usage of the <a href="https://www.khronos.org/egl">EGL</a> and <a href="https://www.khronos.org/opengles/">GLES2</a> graphics APIs. In order to perform the composition, <a href="https://www.khronos.org/egl">EGL</a> is used to create a <a href="https://www.khronos.org/opengles/">GLES2</a> <code>EGLContext</code>. Using that context, the intermediate buffers are uploaded to textures, and then those textures are positioned and composited according to their appropriate positions. This leverages the GPU for the composition work, leaving the CPU free to perform other tasks.</p>
+<p>This is why this step is called accelerated compositing.</p>
+<p>But there’s more.</p>
+<p>Until this point, all the steps that are needed to render the content of the page are performed in the main <a href="https://en.wikipedia.org/wiki/Thread_(computing)">thread</a>. This means that while the main thread is rendering and compositing, it’s not able to perform other tasks, like run JS code.</p>
+<p>WPE improves this by using a parallel thread whose only mission is to perform the composition. You can think of it as a thread that runs a loop that composites the incoming buffers using the GPU when there’s content to render. This is what we call <em>threaded accelerated compositing</em>.</p>
+<p>This is specially useful when there’s a video or an animation running on the page:</p>
+<ul>
+<li>
+<p>If there’s a video running in the page, in the non-threaded case, for each video frame the main thread would need to get the frame and perform the composition with the rest of the page content. In the threaded case, the video element delivers the frames directly to the compositor thread, and requests a composition to be done, without the main thread being involved at all.</p>
+</li>
+<li>
+<p>If there’s an animation, in the non-threaded case, for each frame of the animation the main thread would need to calculate the animation step and then perform the composition of the animated element with the rest of the page content. In the threaded case, the animation is passed to the compositor thread, and the animation steps are calculated on that thread, triggering a composition when needed. The main thread doesn’t need to do anything besides starting the animation.</p>
+</li>
+</ul>
+<p>It would take another post to explain in detail how the threaded accelerated composition is implemented on WPE, but if you’re curious about it, know that WPE uses an specialization of the <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/GraphicsLayer.h">GraphicsLayer</a> called <a href="https://github.com/WebKit/WebKit/blob/webkitgtk/2.36/Source/WebCore/platform/graphics/texmap/coordinated/CoordinatedGraphicsLayer.h">CoordinatedGraphicsLayer</a> in order to implement this. You can use that as an starting point.</p>
+<p>So this is the whole process that’s performed in WPE in order to display the content of a page. We hope it’s useful!</p>
+<h2 id="future" tabindex="-1">Future</h2>
+<p>At <a href="https://www.igalia.com/">Igalia</a> we’re constantly evolving and improving WPE, and have ongoing efforts to improve the graphics architecture as well. Besides small optimizations and refactors here and there, the most important goals that we have are:</p>
+<ul>
+<li>
+<p><strong>Add a GPU process.</strong> Currently the <a href="https://www.khronos.org/egl">EGL</a> and <a href="https://www.khronos.org/opengles/">GLES2</a> operations are performed in the web process. As there can be several web processes running when several pages are open, this means the browser can be using a lot of EGL contexts in total, which is a waste of memory. Also, all these processes could potentially be affected by errors, leaks, etc., in the code that handles the GPU operations. The idea is to centralize all the GPU operations into a single process, the GPU one, so all the web processes will issue paint requests to the GPU process instead of painting their content themselves. This will reduce the memory usage and improve the software’s robustness.</p>
+</li>
+<li>
+<p><strong>Remove CPU rasterization and paint all the content with <a href="https://www.khronos.org/opengles/">GLES2</a>.</strong> Using the CPU to paint the layer contents with <a href="https://www.cairographics.org/">cairo</a> is expensive, especially in platforms with slow CPUs, as embedded devices sometimes do. Our goal here is to completely remove the <a href="https://www.cairographics.org/">cairo</a> rasterization and use <a href="https://www.khronos.org/opengles/">GLES2</a> calls to render the 2D primitives. This will greatly improve the rendering performance.</p>
+</li>
+<li>
+<p><strong>Use <a href="https://github.com/google/angle">ANGLE</a> to perform <a href="https://www.khronos.org/webgl/">WebGL</a> operations.</strong> WPE currently implements the <a href="https://www.khronos.org/registry/webgl/specs/latest/1.0/">WebGL 1.0 specification</a> through direct calls to <a href="https://www.khronos.org/opengles/">GLES2</a> methods. We are changing this in order to perform the operations using <a href="https://github.com/google/angle">ANGLE</a>, which will allow WPE to support the <a href="https://www.khronos.org/registry/webgl/specs/latest/2.0/">WebGL 2.0 specification</a> as well.</p>
+</li>
+</ul>
+<h2 id="but-what-about-the-backends%3F" tabindex="-1">But what about the backends?</h2>
+<p>In <a href="/wpewebkit.org/simon/typos/blog/02-overview-of-wpe.html">the previous post</a> there was a mention of backends that are used to integrate with the underlying platform. How is this relevant to the graphics architecture?</p>
+<p>Backends have several missions when it comes to communicate with the platform, but regarding graphics, they have two functions to achieve:</p>
+<ul>
+<li>
+<p>Provide a platform dependent surface that WPE will render to. This can be a normal buffer, a <a href="https://wayland.freedesktop.org/">Wayland</a> buffer, a native window, or whatever, as long as the system <a href="https://www.khronos.org/egl">EGL</a> implementation allows creating an <code>EGLContext</code> to render to it.</p>
+</li>
+<li>
+<p>Process WPE indications that a new frame has been rendered, performing whatever tasks are necessary to take that frame to the display. Also notify WPE when that frame was been displayed.</p>
+</li>
+</ul>
+<p>The most common example of this is a <a href="https://wayland.freedesktop.org/">Wayland</a> backend, which provides a buffer to WPE for rendering. When WPE has finished rendering the content, it notifies the backend, which sends the buffer to the Wayland compositor, and notifies back to WPE when the frame has been displayed.</p>
+<p>So, whatever platform you want to run WPE on, you need to have a backend providing at least these capabilities.</p>
+<h2 id="final-thoughts" tabindex="-1">Final thoughts</h2>
+<p>This was a brief overview of how WPE rendering works, and also what are the major improvements we’re trying to achieve at <a href="https://www.igalia.com/">Igalia</a>. We’re constantly putting in a lot of work to keep WPE the best web engine available for embedded devices.</p>
+<p>If this post got you interested in collaborating with WPE development, or you are in need of a web engine to run on your embedded device, feel free to <a href="https://www.igalia.com/contact/">contact us</a>. We’ll be pleased to help!</p>
+<p>We also have open positions at the WebKit team at <a href="https://www.igalia.com/">Igalia</a>. If you’re motivated by this field and you’re interested in developing your career around it, you can apply <a href="https://www.igalia.com/jobs/browsers_webkit_position">here</a>!</p>
+
+
+
+<section class="content-section bg-light small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+        <hr class="author-line">
+        <div class="card">
+          <span>
+            This article was written by <a href="https://www.igalia.com/team/magomez">Miguel Gómez</a>. <br><br>Miguel has been contributing to WebKit and WPE for almost ten years now, focusing specially on the graphics part of the code.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </div></main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/simon/typos/" class="igalia logo home"><img src="/wpewebkit.org/simon/typos/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://bsky.app/profile/wpewebkit.org">Bluesky</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman3/lists/webkit-wpe.lists.webkit.org/">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2025 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/simon/typos/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>
