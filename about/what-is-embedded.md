@@ -19,11 +19,11 @@ Long ago, it might have been reasonable to imagine browsers only in the realm of
 The Web Platform is a frequently chosen foundational technology for _many reasons_, including:
 
 * Because Web Platform technologies are built on standards, they have great longevity 
-* Because these standards are open, embedded systems can incorporate them without licensing fees or other worries.  
+* Because these standards are open, embedded systems can incorporate them without licensing fees or other worries
 * Open standards with great longevity allows lots more things to benefit from the same investments
 * The number of people with the basic skills to build things with web technologies is massive 
 
-The fact that over the past few years, _billions_ of new devices have come online, and the implications of this are still under-discussed.  We believe developers need to be able explore and understand this space, and that lessons learned here are potentially helpful to the larger web ecosystem as well. However, this can be challenging, because embedded browsers are a little different...
+The fact that over the past few years, _billions_ of new devices have come online, and the implications of this are still under-discussed.  We believe developers need to be able to explore and understand this space, and that lessons learned here are potentially helpful to the larger web ecosystem as well. However, this can be challenging, because embedded browsers are a little different...
 
 ## Why embedded browsers are different
 For many of us, a browser is an application like the one you're probably using now.  You click an icon on your graphical operating system (OS), navigate somewhere with a URL bar, search, and so on.  You have bookmarks and tabs that you can drag around, and lots of other features.

@@ -221,9 +221,9 @@ WPE runs on [a wide range of hardware](/about/supported-hardware.html), includin
 ### Why Choose WPE?
 
 WPE WebKit is widely adopted by many industries, including digital signage,
-professional audio, home appliances, set-top-boxes, automotive, and inflight
+professional audio, home appliances, set-top-boxes, automotive, and in-flight
 infotainment. Countless devices deployed around the globe are already using
-WPE WebKit as their web runtime platform, and use is growing rapidly. [Read
+WPE WebKit as their web runtime platform, and usage is growing rapidly. [Read
 more about why you should choose WPE](/about/a-good-choice.html).
 
 <img src="/assets/img/WhyChooseWPE-ExploreLand.png" alt="">
@@ -243,18 +243,18 @@ more about why you should choose WPE](/about/a-good-choice.html).
 		</lazy-youtube>
 	</div>
 	<div class="item">
-		<lazy-youtube hash="Nz2Y8HGdZDE" title="WPE SVG Transformations and Hardware Acceleration">
+		<lazy-youtube hash="Nz2Y8HGdZDE" title="WPE SVG transformations and hardware acceleration">
 	  		<div>
-	  			<a href="https://www.youtube-nocookie.com/embed/Nz2Y8HGdZDE?autoplay=1"><img src="https://img.youtube.com/vi/Nz2Y8HGdZDE/hqdefault.jpg" alt="Video: WPE SVG Transformations and Hardware Acceleration"><span>▶</span></a>
-				<div>WPE SVG Transformations and Hardware Acceleration</div>
+	  			<a href="https://www.youtube-nocookie.com/embed/Nz2Y8HGdZDE?autoplay=1"><img src="https://img.youtube.com/vi/Nz2Y8HGdZDE/hqdefault.jpg" alt="Video: WPE SVG transformations and hardware acceleration"><span>▶</span></a>
+				<div>WPE SVG transformations and hardware acceleration</div>
 			</div>
 		</lazy-youtube>
 	</div>
 	<div class="item">
-  		<lazy-youtube hash="_X_23cb8l6o" title="WPE 2d canvas and video performance on low end-hardware">
+  		<lazy-youtube hash="_X_23cb8l6o" title="WPE 2D canvas and video performance on low-end hardware">
   			<div>
-  				<a href="https://www.youtube-nocookie.com/embed/_X_23cb8l6o?autoplay=1"><img src="https://img.youtube.com/vi/_X_23cb8l6o/hqdefault.jpg" alt="Video: WPE 2d canvas and video performance on low end-hardware"><span>▶</span></a>
-  				<div>WPE 2d canvas and video performance on low end-hardware</div>
+  				<a href="https://www.youtube-nocookie.com/embed/_X_23cb8l6o?autoplay=1"><img src="https://img.youtube.com/vi/_X_23cb8l6o/hqdefault.jpg" alt="Video: WPE 2D canvas and video performance on low-end hardware"><span>▶</span></a>
+  				<div>WPE 2D canvas and video performance on low-end hardware</div>
 			</div>
 		</lazy-youtube>
 	</div>
@@ -267,10 +267,10 @@ more about why you should choose WPE](/about/a-good-choice.html).
 		</lazy-youtube>
 	</div>
 	<div class="item">
-  		<lazy-youtube hash="0L8Fv7sswSk" title="WPE CSS Transforms and Performance">
+  		<lazy-youtube hash="0L8Fv7sswSk" title="WPE CSS transforms and performance">
 			<div>
-				<a href="https://www.youtube-nocookie.com/embed/0L8Fv7sswSk?autoplay=1"><img src="https://img.youtube.com/vi/0L8Fv7sswSk/hqdefault.jpg" alt="Video: WPE CSS Transforms and Performance"><span>▶</span></a>
-				<div>WPE CSS Transforms and Performance</div>
+				<a href="https://www.youtube-nocookie.com/embed/0L8Fv7sswSk?autoplay=1"><img src="https://img.youtube.com/vi/0L8Fv7sswSk/hqdefault.jpg" alt="Video: WPE CSS transforms and performance"><span>▶</span></a>
+				<div>WPE CSS transforms and performance</div>
 			</div>
 		</lazy-youtube>
 	</div>
