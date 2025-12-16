@@ -70,7 +70,7 @@ of the distributions that already have built packages for WPE are:
   * [Arch Linux](https://archlinux.org/packages/extra/x86_64/wpewebkit/)
   * [Fedora](https://copr.fedorainfracloud.org/coprs/philn/wpewebkit/)
 
-This list is not exhaustive, so if you use a different distributions,
+This list is not exhaustive, so if you use a different distribution,
 there might be packages for it already. Refer to the official
 documentation of your distribution for information on how to install packages.
 
