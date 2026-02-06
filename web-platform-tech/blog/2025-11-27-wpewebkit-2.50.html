@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>Highlights of the WPE WebKit 2.50 release series</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/web-platform-tech/blog/2025-11-27-wpewebkit-2.50.html">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="https://igalia.github.io/wpewebkit.org/web-platform-tech/blog.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="https://igalia.github.io/wpewebkit.org/web-platform-tech/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="https://igalia.github.io/wpewebkit.org/web-platform-tech/security.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/web-platform-tech/blog/2025-11-27-wpewebkit-2.50.html">
+  <meta property="og:title" content="Highlights of the WPE WebKit 2.50 release series">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/web-platform-tech/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/web-platform-tech/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2025-11-27T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/web-platform-tech/"><img src="/wpewebkit.org/web-platform-tech/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/web-platform-tech/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/web-platform-tech/about/">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/web-platform-tech/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/web-platform-tech/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/web-platform-tech/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/web-platform-tech/blog/2025-11-27-wpewebkit-2.50.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">Highlights of the WPE WebKit 2.50 release series</h1>
+ 
+   <meta itemprop="datePublished" content="Thu Nov 27 2025">
+   <time itemprop="dateCreated">27 November 2025</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This fall, the WPE WebKit team has released the 2.50 series of the Web engine after six months of hard work. Let’s have a deeper look at some of the most interesting changes in this release series!</p>
+<h2 id="improved-rendering-performance" tabindex="-1">Improved rendering performance</h2>
+<p>For this series, the threaded rendering implementation has been switched to use the Skia API. What has changed is the way we record the painting commands for each layer. Previously we used WebCore’s built-in mechanism (<code>DisplayList</code>) which is not thread-safe, and led to obscure rendering issues in release builds and/or sporadic assertions in debug builds when replaying the display lists in threads other than the main one. The <code>DisplayList</code> usage was replaced with <code>SkPictureRecorder</code>, Skia’s built-in facility, that provides similar functionality but in a thread-safe manner. Using the Skia API, we can leverage multithreading in a reliable way to replay recorded drawing commands in different worker threads, improving rendering performance.</p>
+<p>An experimental hybrid rendering mode has also been added. In this mode, WPE WebKit will attempt to use GPU worker threads for rendering but, if these are busy, CPU worker threads will be used whenever possible. This rendering mode is still under investigation, as it is unclear whether the improvements are substantial enough to justify the extra complexity.</p>
+<p>Damage propagation to the system compositor, which was added during the 2.48 cycle but remained disabled by default, has now been enabled. The system compositor may now leverage the damage information for further optimization.</p>
+<p>Vertical writing-mode rendering has also received improvements for this release series.</p>
+<h2 id="changes-in-multimedia-support" tabindex="-1">Changes in Multimedia support</h2>
+<p>When available in the system, WebKit can now leverage the XDG desktop portal for accessing capture devices (like cameras) so that no specific sandbox exception is required. This provides secure access to capture devices in browser applications that use WPE WebKit.</p>
+<p>Managed Media Source support has been enabled. This potentially improves multimedia playback, for example in mobile devices, by allowing the user agent to react to changes in memory and CPU availability.</p>
+<p>Transcoding is now using the GStreamer built-in <code>uritranscodebin</code> element instead of GstTranscoder, which improves stability of the media recording that needs transcoding.</p>
+<p>SVT-AV1 encoder support has been added to the media backend.</p>
+<h2 id="webxr-support" tabindex="-1">WebXR support</h2>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API/Fundamentals">WebXR</a> implementation had been stagnating since it was first introduced, and had a number of shortcomings. This was removed in favor of a new implementation, also built using <a href="https://www.khronos.org/openxr/">OpenXR</a>, that better adapts to the multiprocess architecture of WebKit.</p>
+<p>This feature is considered experimental in 2.50, and while it is complete enough to load and display a number of immersive experiences, a number of improvements and optional features continue to be actively developed. Therefore, WebXR support needs to be enabled at build time with the <code>ENABLE_WEBXR=ON</code> CMake option.</p>
+<h2 id="android-support" tabindex="-1">Android support</h2>
+<p>Support for Android targets has been greatly improved. It is now possible to build WPE WebKit without the need for additional patches when using the libwpe-based <a href="https://github.com/Igalia/WPEBackend-android">WPEBackend-android</a>. This was achieved by incorporating changes that make WebKit use more appropriate defaults (like disabling <code>MediaSession</code>) or using platform-specific features (like <a href="https://developer.android.com/ndk/reference/group/memory">ASharedMemory</a> and <a href="https://developer.android.com/ndk/reference/group/a-hardware-buffer">AHardwareBuffer</a>) when targeting Android.</p>
+<p>The WebKit logging system has gained support to use <a href="https://wpewebkit.org/reference/2.50.0/wpe-webkit-2.0/android.html">the Android <code>logd</code> service</a>. This is particularly useful for both WebKit and application developers, allowing to configure logging channels at runtime in <em>any</em> WPE WebKit build. For example, the following commands may be used before launching an application to debug WebGL setup and multimedia playback errors:</p>
+<pre class="language-sh"><code class="language-sh">adb setprop log.tag.WPEWebKit VERBOSE   <span class="token comment"># Global logging filter</span>
+adb setprop debug.WPEWebKit.log <span class="token string">'WebGL,Media=error'</span>  <span class="token comment"># Channels</span>
+adb logcat <span class="token parameter variable">-s</span> WPEWebKit                   <span class="token comment"># Follow log messages</span></code></pre>
+<p>There is an ongoing effort to enable the WPEPlatform API on Android, and while it builds now, rendering is not yet working.</p>
+<h2 id="web-platform-support" tabindex="-1">Web Platform support</h2>
+<p>As usual, changes in this area are extensive as WebKit constantly adopts, improves, and supports new Web Platform features. However, some interesting additions in this release cycle include:</p>
+<ul>
+<li>The new <a href="https://developer.mozilla.org/en-US/docs/Web/API/CookieStore">CookieStore API</a>.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/ManagedMediaSource">ManagedMediaSource</a>.</li>
+<li>CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/container-progress">container-progress()</a>.</li>
+<li>CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap-style">text-wrap-style: pretty</a>.</li>
+<li>CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family">font-family: math</a>.</li>
+<li>CSS Animation: support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Animation/overallProgress">overallProgress property</a>.</li>
+<li>HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#creating_an_auto-expanding_details_element">auto-expanding &lt;details&gt;</a>.</li>
+<li>CSS <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden">hidden=“until-found”</a>.</li>
+</ul>
+<h2 id="api-changes" tabindex="-1">API changes</h2>
+<ul>
+<li>The <a href="https://wpewebkit.org/reference/2.50.0/wpe-webkit-2.0/property.Settings.enable-hyperlink-auditing.html">WebKitSettings:enable-hyperlink-auditing</a> option has been deprecated. This feature is now always enabled.</li>
+<li>The <a href="https://wpewebkit.org/reference/2.50.0/wpe-webkit-2.0/method.WebView.get_theme_color.html"><code>webkit_web_view_get_theme_color()</code></a> function has been added to allow querying the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color">theme color</a> declared by the content loaded in a web view. The corresponding <a href="https://wpewebkit.org/reference/2.50.0/wpe-webkit-2.0/property.WebView.theme-color.html">WebKitWebView:theme-color</a> property is available as well, which allows using the <a href="https://docs.gtk.org/gobject/vfunc.Object.notify.html"><code>notify</code> signal</a> to watch for theme color changes.</li>
+</ul>
+<h3 id="wpeplatform" tabindex="-1">WPEPlatform</h3>
+<p>Work continues on the new WPEPlatform API, which is still shipped as a preview feature in the 2.50 and needs to be explicitly enabled at build time with the <code>ENABLE_WPE_PLATFORM=ON</code> CMake option. The API may still change and applications developed using WPEPlatform are likely to need changes with future WPE WebKit releases; but not for long: the current goal is to have it ready and enabled by default for the upcoming 2.52 series.</p>
+<p>One of the main changes is that WPEPlatform now gets built into <code>libWPEWebKit</code>. The rationale for this change is avoiding shipping two copies of shared code from the Web Template Framework (WTF), which saves both disk and memory space usage. The <code>wpe-platform-2.0</code> pkg-config module is still shipped, which allows application developers to know whether WPEPlatform support has been built into WPE WebKit.</p>
+<p>The abstract base class <code>WPEScreenSyncObserver</code> has been introduced, and allows platform implementations to notify on display synchronization, allowing WebKit to better pace rendering.</p>
+<p>WPEPlatform has gained support for controllers like gamepads and joysticks through the new <code>WPEGamepadManager</code> and <code>WPEGamepad</code> classes. When building with the <code>ENABLE_MANETTE=ON</code> CMake option a built-in implementation based on <a href="https://gnome.pages.gitlab.gnome.org/libmanette/">libmanette</a> is used by default, if a custom one is not specified.</p>
+<p>WPEPlatform now includes a new <code>WPEBufferAndroid</code> class, used to represent graphics buffers backed by <a href="https://developer.android.com/ndk/reference/group/a-hardware-buffer">AHardwareBuffer</a>. These buffers support being imported into an <code>EGLImage</code> using <code>wpe_buffer_import_to_egl_image()</code>.</p>
+<p>As part of the work to improve Android support, the buffer rendering and release fences have been moved from <code>WPEBufferDMABuf</code> to the base class, <code>WPEBuffer</code>. This is leveraged by <code>WPEBufferAndroid</code>, and should be helpful if more buffer types are introduced in the future.</p>
+<p>Other additions include clipboard support, <a href="https://www.w3.org/TR/mediaqueries-4/#mf-interaction">Interaction Media Features</a>, and an accessibility implementation using <a href="https://gitlab.gnome.org/Archive/atk">ATK</a>.</p>
+<h2 id="what%E2%80%99s-new-for-webkit-developers%3F" tabindex="-1">What’s new for WebKit developers?</h2>
+<p>WebKit now supports sending tracing marks and counters to <a href="https://gitlab.gnome.org/GNOME/sysprof/">Sysprof</a>. Marks indicate when certain events occur and their duration; while counters track variables over time. Together, these allow developers to find performance bottlenecks and monitor internal WebKit performance metrics like frame rates, memory usage, and more. This integration enables developers to analyze the performance of applications, including data for WebKit alongside system-level metrics, in a unified view. For more details see <a href="https://feaneron.com/2025/09/08/marks-and-counters-in-sysprof/">this article</a>, which also details how Sysprof was improved to handle the massive amounts of data produced by WebKit.</p>
+<p>Finally, GCC 12.2 is now the minimum required version to build WPE WebKit. Increasing the minimum compiler version allows us to remove obsolete code and focus on improving code quality, while taking advantage of new C++ and compiler features.</p>
+<h2 id="looking-forward-to-2.52" tabindex="-1">Looking forward to 2.52</h2>
+<p>The 2.52 release series will bring even more improvements, and we expect it to be released during the spring of 2026. Until then!</p>
+
+
+
+<section class="content-section bg-light small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+        <hr class="author-line">
+        <div class="card">
+          <span>
+            This article was written by <a href="https://www.igalia.com/team/csaavedra">Claudio Saavedra</a>. <br><br>Claudio is long-time WebKit contributor from Igalia, working in different areas of WebKit, WPE, and the stack around it.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </div></main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/web-platform-tech/" class="igalia logo home"><img src="/wpewebkit.org/web-platform-tech/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://bsky.app/profile/wpewebkit.org">Bluesky</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman3/lists/webkit-wpe.lists.webkit.org/">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2026 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/web-platform-tech/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>

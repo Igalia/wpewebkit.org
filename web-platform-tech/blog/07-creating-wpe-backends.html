@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>A New WPE Backend Using EGLStream</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/web-platform-tech/blog/07-creating-wpe-backends.html">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="https://igalia.github.io/wpewebkit.org/web-platform-tech/blog.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="https://igalia.github.io/wpewebkit.org/web-platform-tech/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="https://igalia.github.io/wpewebkit.org/web-platform-tech/security.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/web-platform-tech/blog/07-creating-wpe-backends.html">
+  <meta property="og:title" content="A New WPE Backend Using EGLStream">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/web-platform-tech/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/web-platform-tech/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2024-01-29T06:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/web-platform-tech/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/web-platform-tech/"><img src="/wpewebkit.org/web-platform-tech/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/web-platform-tech/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/web-platform-tech/about/">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/web-platform-tech/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/web-platform-tech/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/web-platform-tech/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/web-platform-tech/blog/07-creating-wpe-backends.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">A New WPE Backend Using EGLStream</h1>
+ 
+   <meta itemprop="datePublished" content="Mon Jan 29 2024">
+   <time itemprop="dateCreated">29 January 2024</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<h2 id="what-is-a-wpe-backend%3F" tabindex="-1">What is a WPE Backend?</h2>
+<div class="sidebar">
+<p>This article is a mashup of <a href="https://blogs.igalia.com/llepage/the-process-of-creating-a-new-wpe-backend/">The process of creating a new WPE
+backend</a>
+and <a href="https://blogs.igalia.com/llepage/use-eglstreams-in-a-wpe-webkit-backend/">Use EGLStreams in a WPE WebKit
+backend</a>,
+originally published at Loïc’s blog.</p>
+</div>
+<p>Depending on the target hardware WPE may need to use different techniques and
+technologies to ensure correct graphical rendering. To be independent of any
+user-interface toolkit and windowing system, WPE WebKit delegates the rendering
+to a third-party API defined in the
+<a href="https://github.com/WebPlatformForEmbedded/libwpe">libwpe</a> library. A concrete
+implementation of this API is a “WPE backend”.</p>
+<p>WPE WebKit is a multiprocess application, the end-user starts and controls the
+web widgets in the application process (which we often call “the <abbr title="User Interface">UI</abbr> process” while the web engine itself uses
+different subprocesses: <code>WPENetworkProcess</code> is in charge of managing network
+connections and <code>WPEWebProcess</code> (or “web process”) in charge of the HTML and
+JavaScript parsing, execution and rendering. The WPE backend is at a crossroads
+between the UI process and one or more web process instances.</p>
+<figure>
+  <a href="/wpewebkit.org/web-platform-tech/assets/svg/part1-basics.md-1.svg" target="_blank"><img src="/wpewebkit.org/web-platform-tech/assets/svg/part1-basics.md-1.svg" alt="Diagram showing a box for the WPE backend in between the UI process and WPEWebProcess">
+  </a>
+</figure>
+<p>The WPE backend is a shared library that is loaded at runtime by the web
+process and by the UI process. It is used to render the visual aspect of a web
+page and transfer the resulting video buffer from the web process to the
+application process.</p>
+<h2 id="backend-interfaces" tabindex="-1">Backend Interfaces</h2>
+<p>The WPE backend shared library must export at least one symbol called
+<code>_wpe_loader_interface</code> of type <code>struct wpe_loader_interface</code> as defined <a href="https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/loader.h#L57">in
+the <em>libwpe</em>
+API</a>.
+Presently its only member is <code>load_object</code>, a callback function that receives a
+string with an interface name and returns concrete implementations of the
+following interfaces:</p>
+<ul>
+<li><a href="https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/renderer-host.h#L48">struct wpe_renderer_host_interface</a></li>
+<li><a href="https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/renderer-backend-egl.h#L75">struct wpe_renderer_backend_egl_interface</a></li>
+<li><a href="https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/renderer-backend-egl.h#L93">struct wpe_renderer_backend_egl_target_interface</a></li>
+<li><a href="https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/renderer-backend-egl.h#L115">struct wpe_renderer_backend_egl_offscreen_target_interface</a></li>
+<li><a href="https://github.com/WebPlatformForEmbedded/libwpe/blob/d7c669ca6f5ec0d544c264016d270669b336c931/include/wpe/view-backend.h#L63">struct wpe_view_backend_interface</a></li>
+</ul>
+<p>The names passed to the <code>.load_object()</code> function are the same as those of the
+interface types, prefixed with an underscore. For example, a
+<code>.load_object(&quot;_wpe_renderer_host_interface&quot;)</code> call must return a pointer to a
+<code>struct wpe_renderer_host_interface</code> object.</p>
+<details>
+  <summary>Example C code for a <code>load_object</code> callback.</summary>
+<!-- load_object example <<<1 -->
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">struct</span> <span class="token class-name">wpe_renderer_host_interface</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token comment">/* ... */</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">struct</span> <span class="token class-name">wpe_renderer_backend_egl_interface</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token comment">/* ... */</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span><span class="token operator">*</span>
+<span class="token function">my_backend_load_object</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">strcmp</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">"_wpe_renderer_host_interface"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">&amp;</span>my_renderer_host<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">strcmp</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">"_wpe_renderer_backend_egl_interface"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">&amp;</span>my_renderer_backend_egl<span class="token punctuation">;</span>
+
+    <span class="token comment">/* ... */</span>
+
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">wpe_loader_interface</span> _wpe_loader_interface <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span>load_object <span class="token operator">=</span> my_backend_load_object<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<!-- 1>>> -->
+</details>
+<p>Each of these interfaces follow the same base structure: the <code>struct</code> members
+are callback functions, all interfaces have <code>create</code> and <code>destroy</code> members which
+act as instance constructor and destructor, plus any additional “methods”.
+The pointer returned by the <code>create</code> callback will be passed as the <code>object</code>
+“instance” of the other methods:</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">wpe_renderer_host_interface</span> <span class="token punctuation">{</span>
+  <span class="token keyword">void</span><span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">*</span>create<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">void</span>  <span class="token punctuation">(</span><span class="token operator">*</span>destroy<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">/* ... */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>In the <strong>UI process</strong> side WPE WebKit will create:</p>
+<ul>
+<li>One “renderer host” instance, using <code>wpe_renderer_host_interface.create()</code>.</li>
+<li>Multiple “renderer host client” instances, using <code>wpe_renderer_host_interface.create_client()</code>.
+These are mainly used for IPC communication, one instance gets created for
+each web process launched by WebKit.</li>
+<li>Multiple “view backend” instances, using <code>wpe_view_backend_interface.create()</code>.
+One instance is created for each rendering target in the web process.</li>
+</ul>
+<p>In each <strong>web process</strong>—there can be more than one—WPE WebKit
+will create:</p>
+<ul>
+<li>One “renderer backend EGL” instance, using <code>wpe_renderer_backend_egl_interface.create()</code>.</li>
+<li>Multiple “renderer backend EGL target” instances, using
+<code>wpe_renderer_backend_egl_target_interface.create()</code>. An instance is created
+for each new rendering target needed by the application.</li>
+</ul>
+<details>
+  <summary>How about <code>wpe_renderer_backend_egl_offscreen_target_interface</code>?</summary>
+    <div>
+<p>The <code>rendererBackendEGLTarget</code> instances may be created by the <code>wpe_renderer_backend_egl_target_interface</code>, or
+the <code>wpe_renderer_backend_egl_offscreen_target_interface</code> depending on the interfaces implemented in the backend.</p>
+<p>Here we are only focusing on the <code>wpe_renderer_backend_egl_target_interface</code> that is relying on a classical EGL
+display (defined in the <code>rendererBackendEGL</code> instance). The <code>wpe_renderer_backend_egl_offscreen_target_interface</code> may
+be used in very specific use-cases that are out of the scope of this post. You can check its usage in the WPE WebKit
+<a href="https://github.com/WebKit/WebKit/blob/f32cd0f7cb7961420ce08ae78b8f01f287bec199/Source/WebCore/platform/graphics/egl/GLContextLibWPE.cpp#L61">source code</a>
+for more information.</p>
+  </div>
+</details>
+<p>These instances typically communicate with each others using Unix sockets for
+<abbr title="Inter-Process Communication">IPC</abbr>. The IPC layer must be
+implemented in the WPE backend itself because the <em>libwpe</em> interfaces only pass
+around the file descriptors to be used as communication endpoints.</p>
+<p>From a topological point of view, all those instances are organized as follows:</p>
+<figure>
+  <a href="/wpewebkit.org/web-platform-tech/assets/svg/part1-basics.md-2.svg" target="_blank"><img src="/wpewebkit.org/web-platform-tech/assets/svg/part1-basics.md-2.svg">
+  </a>
+</figure>
+<p>From an usage point of view:</p>
+<ul>
+<li>The <code>rendererHost</code> and <code>rendererHostClient</code> instances are only used to manage
+IPC endpoints on the UI process side that are connected to each running
+web process. They are not used by the graphical rendering system.</li>
+<li>The <code>rendererBackendEGL</code> instance (one per web process) is only used to
+connect to the native display for a specific platform. For example, on a
+desktop Linux, the platform may be X11 where the native display would be the
+result of calling <code>XOpenDisplay()</code>; or the platform may be Wayland and in
+this case the native display would be the result of calling
+<code>wl_display_connect()</code>; and so on.</li>
+<li>The <code>rendererBackendEGLTarget</code> (on the web process side) and <code>viewBackend</code>
+(on the UI process side) instances are the ones truly managing the web page
+graphical rendering.</li>
+</ul>
+<h2 id="graphics-rendering" tabindex="-1">Graphics Rendering</h2>
+<p>As seen above, the interfaces in charge of the rendering are
+<code>wpe_renderer_backend_egl_target_interface</code> and <code>wpe_view_backend_interface</code>.
+During their creation, WPE WebKit exchanges the file descriptors used to
+establish a direct IPC connection between a <code>rendererBackendEGL</code> (in the
+web process), and a <code>viewBackend</code> (in the UI process).</p>
+<p>During the EGL initialization phase, when a new web process is launched, WebKit
+will use the native display and platform provided by the
+<code>wpe_renderer_backend_egl_interface.get_native_display()</code> and <code>.get_platform()</code>
+functions to create a suitable OpenGL ES context.</p>
+<p>When WebKit’s
+<a href="https://github.com/WebKit/WebKit/blob/c22f641da18b8c4eee23b8021b37aeec69268675/Source/WebKit/Shared/CoordinatedGraphics/threadedcompositor/ThreadedCompositor.cpp#L220">ThreadedCompositor</a>
+is ready to render a new frame (in the web process), it calls the
+<code>wpe_renderer_backend_egl_target_interface.frame_will_render()</code> function to let
+the WPE backend know that rendering is about to start. At this moment, the
+previously created OpenGL ES context is made current to be used as the target
+for GL drawing commands.</p>
+<p>Once the threaded compositor has finished drawing, it will swap the front and
+back EGL buffers and call the
+<code>wpe_renderer_backend_egl_target_interface.frame_rendered()</code> function to signal
+that the frame is ready. The compositor will then wait until the WPE backend
+calls <code>wpe_renderer_backend_egl_target_dispatch_frame_complete()</code> to indicate
+that the compositor may produce a new frame.</p>
+<p>What happens inside the <code>.frame_will_render()</code> and <code>.frame_rendered()</code>
+implementations is up to the WPE backend. As en example, it could
+set up a <a href="https://www.khronos.org/opengl/wiki/Framebuffer_Object">Frame Buffer Object</a>
+to have the web content draw offscreen, in a texture that can be passed
+back to the UI process for further processing, or use extensions like
+<a href="https://registry.khronos.org/EGL/extensions/KHR/EGL_KHR_stream.txt">EGLStream</a>,
+or <a href="https://registry.khronos.org/EGL/extensions/MESA/EGL_MESA_image_dma_buf_export.txt">DMA-BUF exports</a>
+to transfer the frame to the UI process without copying the pixel data.</p>
+<figure>
+  <a href="/wpewebkit.org/web-platform-tech/assets/svg/part1-basics.md-3.svg" target="_blank"><img src="/wpewebkit.org/web-platform-tech/assets/svg/part1-basics.md-3.svg">
+  </a>
+</figure>
+<p>Typically the backend sends each new frame to the corresponding view backend in
+in its <code>.frame_rendered()</code> function. The application can use the frame until it
+sends back an <abbr>IPC</abbr> message to the renderer target (in the web
+process) to indicate that the frame is not in use anymore and may be be freed
+or recycled. Although it is not a requirement to do it at this exact point,
+usually when a renderer backend receives this message it calls the
+<code>wpe_renderer_backend_egl_target_dispatch_frame_complete()</code> function to trigger
+the rendering of a new frame. As a side effect, this mechanism also allows
+controlling the pace at which new frames are produced.</p>
+<h2 id="using-eglstream" tabindex="-1">Using EGLStream</h2>
+<p>EGLStream is an EGL extension that defines a mechanism to transfer hardware
+video buffers from one process to another efficiently, without getting them
+out of GPU memory. Although the extension is supported only in Nvidia
+hardware, it makes for a good example as it transparently handles some
+complexities involved, like buffers with multiple planes.</p>
+<p>This backend uses the EGLStream extension to transfer graphics buffers from the
+web process, which acts as a producer, to the UI process acting as a consumer.
+The producer extension
+<a href="https://registry.khronos.org/EGL/extensions/KHR/EGL_KHR_stream_producer_eglsurface.txt">EGL_KHR_stream_producer_eglsurface</a>
+allows creating a surface that may be used as target for rendering, then using
+<a href="https://registry.khronos.org/EGL/sdk/docs/man/html/eglSwapBuffers.xhtml">eglSwapBuffers()</a>
+finishes drawing and sends the result to the consumer. Meanwhile, in the
+consumer side, the
+<a href="https://registry.khronos.org/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage.txt">EGL_NV_stream_consumer_eglimage</a>
+extension is used to turn each buffer into an <code>EGLImage</code>.</p>
+<p>The reference source code for this WPE backend is available in the
+<a href="https://github.com/Igalia/WPEBackend-offscreen-nvidia">WPEBackend-offscreen-nvidia</a>
+repository, which has been tested with WPE WebKit 2.38.x or 2.40.x, and
+<em>libwpe</em> version 1.14.x.</p>
+<details>
+  <summary>Behold, the Future Belongs to DMA-BUF!</summary>
+  <div>
+<p>With the growing adoption of
+<a href="https://docs.kernel.org/driver-api/dma-buf.html">DMA-BUF</a> for sharing memory
+buffers on modern Linux platforms, the WPE WebKit architecture will be
+evolving and, in the future, the need for a WPE Backend should disappear in
+most cases.</p>
+<p>Ongoing work on WPE WebKit removes the need to provide a WPE backend
+implementation for most hardware platforms, with a generic implementation
+using DMA-BUF provided as an integral, built-in feature of WebKit. It will
+still be possible to provide external implementations for platforms that
+might need to use custom buffer sharing mechanisms.</p>
+<p>From the application developer point of view, in most cases writing
+programs that use the WPE WebKit API will be simpler, with the complexity
+of the communication among multiple processes handled by WebKit.</p>
+  </div>
+</details>
+<h3 id="stream-setup" tabindex="-1">Stream Setup</h3>
+<p>The steps needed to set up EGLStream endpoints need to be done in a particular
+order:</p>
+<ol>
+<li>Create the consumer.</li>
+<li>Get the stream file descriptor for the consumer.</li>
+<li>Send the stream file descriptor to the producer.</li>
+<li>Create the producer.</li>
+</ol>
+<p><strong>First</strong>, the consumer needs to be created:</p>
+<pre class="language-cpp"><code class="language-cpp">EGLStream <span class="token function">createConsumerStream</span><span class="token punctuation">(</span>EGLDisplay eglDisplay<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">const</span> EGLint s_streamAttribs<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        EGL_STREAM_FIFO_LENGTH_KHR<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        EGL_CONSUMER_ACQUIRE_TIMEOUT_USEC_KHR<span class="token punctuation">,</span> <span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+        EGL_NONE
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">eglCreateStreamKHR</span><span class="token punctuation">(</span>eglDisplay<span class="token punctuation">,</span> s_streamAttribs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>The <code>EGL_STREAM_FIFO_LENGTH_KHR</code> parameter defines the length of the EGLStream
+queue. If set to zero, the stream will work in “mailbox” mode and each time the
+producer has a new frame it will empty the stream content and replace the frame
+by the new one. If non-zero, the stream works work in “<abbr title="First-In,
+First-Out">FIFO</abbr>” mode, which means that the stream queue can contain up
+to <code>EGL_STREAM_FIFO_LENGTH_KHR</code> frames.</p>
+<p>Here we configure a queue for one frame because in this case the specification
+of <code>EGL_KHR_stream_producer_eglsurface</code> guarantees that calling
+<code>eglSwapBuffers()</code> on the producer the call will block until the consumer
+retires the previous frame from queue. This is used as implicit synchronization
+between the UI process side and the web process side without needing to rely on
+custom IPC, which would add a small delay between frames.</p>
+<p>The <code>EGL_CONSUMER_ACQUIRE_TIMEOUT_USEC_KHR</code> parameter defines the maximum
+timeout in microseconds to wait on the consumer side to acquire a frame when
+calling <code>eglStreamConsumerAcquireKHR()</code>. It is only used with the
+<code>EGL_KHR_stream_consumer_gltexture</code> extension because the
+<code>EGL_NV_stream_consumer_eglimage</code> extension allows setting a timeout on each
+call to <code>eglQueryStreamConsumerEventNV()</code> function.</p>
+<p><strong>Second</strong>, to initialize the consumer using the <code>EGL_NV_stream_consumer_eglimage</code>
+extension it is enough to call the <code>eglStreamImageConsumerConnectNV()</code> function.</p>
+<p><strong>Once the consumer has been initialized</strong>, you need to send the EGLStream
+file descriptor to the producer process. The usual way of achieving this would
+be using IPC between the two processes, sending the file descriptor in a
+<code>SCM_RIGHTS</code> message through an Unix socket—although with recent kernels
+using <a href="https://lwn.net/Articles/808997/">pidfd_getfd()</a> may be an option if
+both processes are related.</p>
+<p>When the file descriptor is <strong>finally</strong> received, the producer endpoint can be
+created using the <code>EGL_KHR_stream_producer_eglsurface</code> extension:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">const</span> EGLint surfaceAttribs<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+    EGL_WIDTH<span class="token punctuation">,</span> width<span class="token punctuation">,</span>
+    EGL_HEIGHT<span class="token punctuation">,</span> height<span class="token punctuation">,</span>
+    EGL_NONE
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+EGLStream eglStream <span class="token operator">=</span> <span class="token function">eglCreateStreamFromFileDescriptorKHR</span><span class="token punctuation">(</span>eglDisplay<span class="token punctuation">,</span> consumerFD<span class="token punctuation">)</span><span class="token punctuation">;</span>
+EGLSurface eglSurface <span class="token operator">=</span> <span class="token function">eglCreateStreamProducerSurfaceKHR</span><span class="token punctuation">(</span>eglDisplay<span class="token punctuation">,</span> config<span class="token punctuation">,</span> eglStream<span class="token punctuation">,</span> surfaceAttribs<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>As with <abbr title="Pixel Buffer">pbuffer</abbr> surfaces, the dimensions
+need to be specified as surface attributes. When picking a frame buffer
+configuration with <code>eglChooseConfig()</code> the <code>EGL_SURFACE_TYPE</code> attribute must
+be set to <code>EGL_STREAM_BIT_KHR</code>. From this point onwards, rendering proceeds as
+usual: the EGL surface and context are made active, and once the painting is
+done a call to <code>eglSwapBuffers()</code> will “present” the frame, which in this case
+means sending the buffer with the pixel data down the EGLStream to the
+consumer.</p>
+<figure>
+  <a href="/wpewebkit.org/web-platform-tech/assets/svg/part2-eglstream.md-1.svg" target="_blank"><img src="/wpewebkit.org/web-platform-tech/assets/svg/part2-eglstream.md-1.svg">
+  </a>
+</figure>
+<h3 id="consuming-frames" tabindex="-1">Consuming Frames</h3>
+<p>While on the producer side rendering treats the EGLStream surface like any
+other, on the consumer some more work is needed to manager the lifetime of
+the data received: frames have to be manually acquired and released once
+they are not needed anymore.</p>
+<p>The producer calls <code>eglQueryStreamConsumerEventNV()</code> repeatedly to retire the
+next event from the stream:</p>
+<ul>
+<li><code>EGL_STREAM_IMAGE_ADD_NV</code> indicates that there is a buffer in the stream
+that has not yet been bound to an <code>EGLImage</code>, and the application needs to
+create a new one to which the actual data will be bound later.</li>
+<li><code>EGL_STREAM_IMAGE_AVAILABLE_NV</code> indicates that a new frame is available
+and that it can be bound to the previously created <code>EGLImage</code>.</li>
+<li><code>EGL_STREAM_IMAGE_REMOVE_NV</code> indicates that a buffer has been retired from
+the stream, and that its associated <code>EGLImage</code> may be released once the
+application has finished using it.</li>
+</ul>
+<p>This translates roughly to the following code:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">static</span> <span class="token keyword">constexpr</span> EGLTime MAX_TIMEOUT_USEC <span class="token operator">=</span> <span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">;</span>
+EGLImage eglImage <span class="token operator">=</span> EGL_NO_IMAGE<span class="token punctuation">;</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    EGLenum event <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    EGLAttrib data <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// WARNING: The specification states that the timeout is in nanoseconds</span>
+    <span class="token comment">// (see: https://registry.khronos.org/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage.txt)</span>
+    <span class="token comment">// but in reality it is in microseconds, at least with the version 535.113.01 of the NVidia drivers.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">eglQueryStreamConsumerEventNV</span><span class="token punctuation">(</span>display<span class="token punctuation">,</span> eglStream<span class="token punctuation">,</span> MAX_TIMEOUT_USEC<span class="token punctuation">,</span> <span class="token operator">&amp;</span>event<span class="token punctuation">,</span> <span class="token operator">&amp;</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> EGL_STREAM_IMAGE_ADD_NV<span class="token operator">:</span> <span class="token comment">// Bind an incoming buffer to an EGLImage.</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>eglImage<span class="token punctuation">)</span> <span class="token function">eglDestroyImage</span><span class="token punctuation">(</span>display<span class="token punctuation">,</span> eglImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          eglImage <span class="token operator">=</span> <span class="token function">eglCreateImage</span><span class="token punctuation">(</span>display<span class="token punctuation">,</span> EGL_NO_CONTEXT<span class="token punctuation">,</span> EGL_STREAM_CONSUMER_IMAGE_NV<span class="token punctuation">,</span>
+                                    <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>EGLClientBuffer<span class="token operator">></span></span></span><span class="token punctuation">(</span>eglStream<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">continue</span><span class="token punctuation">;</span> <span class="token comment">// Handle the next event.</span>
+
+      <span class="token keyword">case</span> EGL_STREAM_IMAGE_REMOVE_NV<span class="token operator">:</span> <span class="token comment">// Buffer removed, EGLImage may be disposed.</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              EGLImage image <span class="token operator">=</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>EGLImage<span class="token operator">></span></span></span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token function">eglDestroyImage</span><span class="token punctuation">(</span>display<span class="token punctuation">,</span> image<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token keyword">if</span> <span class="token punctuation">(</span>image <span class="token operator">==</span> eglImage<span class="token punctuation">)</span>
+                  eglImage <span class="token operator">=</span> EGL_NO_IMAGE<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token keyword">continue</span><span class="token punctuation">;</span> <span class="token comment">// Handle the next event.</span>
+
+      <span class="token keyword">case</span> EGL_STREAM_IMAGE_AVAILABLE_NV<span class="token operator">:</span> <span class="token comment">// New frame available.</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">eglStreamAcquireImageNV</span><span class="token punctuation">(</span>display<span class="token punctuation">,</span> eglStream<span class="token punctuation">,</span> <span class="token operator">&amp;</span>eglImage<span class="token punctuation">,</span> EGL_NO_SYNC<span class="token punctuation">)</span><span class="token punctuation">)</span>
+              <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">default</span><span class="token operator">:</span>
+          <span class="token keyword">continue</span><span class="token punctuation">;</span> <span class="token comment">// Handle the next event.</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/*** Use the EGLImage here ***/</span>
+
+    <span class="token function">eglStreamReleaseImageNV</span><span class="token punctuation">(</span>display<span class="token punctuation">,</span> eglStream<span class="token punctuation">,</span> eglImage<span class="token punctuation">,</span> EGL_NO_SYNC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>The application is free to use each <code>EGLImage</code> as it sees fit. An obvious
+example would be to use it as the contents for a texture, which then gets
+painted in the “content” area of a web browser; or as the contents of the
+screen for an in-game computer that the player can interact with, enabling
+display of real, live web content as part of the gaming experience—now
+<em>that</em> would be a deeply embedded browser!</p>
+<h3 id="one-last-thing" tabindex="-1">One Last Thing</h3>
+<p>There is a small showstopper to have EGLStream support working:
+<a href="https://github.com/WebKit/WebKit/blob/cb07c70c253a35b0e09e46e6100e1cdcebab26e2/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp#L135">currently</a>
+when WPE WebKit uses surfaceless EGL contexts it sets the surface type to
+<code>EGL_WINDOW_BIT</code> attribute, while <code>EGL_STREAM_BIT_KHR</code> would be needed
+instead. <a href="https://github.com/Igalia/WPEBackend-offscreen-nvidia/blob/main/wpewebkit-patches/005-fix-surfaceless-egl-context-creation.patch">A small
+patch</a>
+is enough to apply this tweak:</p>
+<pre class="language-diff"><code class="language-diff">diff --git a/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp b/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp
+index d5efa070..5f200edc 100644
+<span class="token coord">--- a/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp</span>
+<span class="token coord">+++ b/Source/WebCore/platform/graphics/egl/GLContextEGL.cpp</span>
+@@ -122,9 +122,11 @@ bool GLContextEGL::getEGLConfig(EGLDisplay display, EGLConfig* config, EGLSurfac
+<span class="token unchanged"><span class="token prefix unchanged"> </span>        attributeList[13] = EGL_PIXMAP_BIT;
+<span class="token prefix unchanged"> </span>        break;
+<span class="token prefix unchanged"> </span>    case GLContextEGL::WindowSurface:
+</span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>    case GLContextEGL::Surfaceless:
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>        attributeList[13] = EGL_WINDOW_BIT;
+<span class="token prefix unchanged"> </span>        break;
+</span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>    case GLContextEGL::Surfaceless:
+<span class="token prefix inserted">+</span>        attributeList[13] = EGL_STREAM_BIT_KHR;
+<span class="token prefix inserted">+</span>        break;
+</span><span class="token unchanged"><span class="token prefix unchanged"> </span>    }
+</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span>    EGLint count;
+</span></code></pre>
+<!-- vim:set foldmethod=marker foldmarker=<<<,>>>: -->
+
+
+
+<section class="content-section bg-light small-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+				<hr class="author-line">
+				<div class="card">
+					<img class="circle-mask" width="128" height="128" loading="lazy" alt="Head shot of Loïc Le Page" src="/wpewebkit.org/web-platform-tech/assets/author-llepage@1x.png" srcset="/wpewebkit.org/web-platform-tech/assets/author-llepage@2x.png 2x">
+					This article was written by <a href="https://igalia.com/team/llepage">Loïc Le Page</a>.
+					<br>
+					I have worked in different industries like video games,
+					cinema, and multimedia&mdash;the latter being where my
+					focus lies at the moment. Did anyone say Web engines need
+					that, too?
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </div></main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/web-platform-tech/" class="igalia logo home"><img src="/wpewebkit.org/web-platform-tech/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://bsky.app/profile/wpewebkit.org">Bluesky</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman3/lists/webkit-wpe.lists.webkit.org/">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2026 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/web-platform-tech/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>
