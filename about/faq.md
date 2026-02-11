@@ -45,9 +45,12 @@ WPE currently only works on Linux-based operating systems. We are currently work
 
 ## What Web features does WPE support?
 
-The WebKit project provides a [features status page](https://webkit.org/status/) to which you can refer. However, that information should be taken with a grain of salt. The multi-platform nature of WebKit implies that ports have different build-time and runtime configurations.
-
-The WPE project currently does not have an official list of the Web features it supports. It might provide one in the future, but for the time being, we recommend users check for specific features by testing WPE through the Cog browser.
+The [Web Platform Tests (WPT) and Browser Compatibility Data (BCD) results
+page](https://wpewebkit.org/wpt-status/) may be used to check which features
+are supported. However, the provided information is for a stock build with most
+features enables: the customizable nature of WPE WebKit means that a custom
+deployment may have different build and runtime configurations, which can
+alter the results.
 
 
 ## What's the status regarding WebRTC?
