@@ -8,6 +8,49 @@
   <id>https://wpewebkit.org/security/</id>
   
   <entry>
+    <title>WPE WebKit 2.52.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/wpewebkit-2.52-blog/release/wpewebkit-2.52.0.html"/>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/wpewebkit-2.52-blog/release/wpewebkit-2.52.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.52 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.52.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.52.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Make text look like in other browsers by blending in linear color space.&lt;/li&gt;
+&lt;li&gt;Improved rendering performance by using a different tile size depending on
+whether GPU rendering is enabled or not.&lt;/li&gt;
+&lt;li&gt;Improved composition scheduling to avoid blocking waiting for tile painting.&lt;/li&gt;
+&lt;li&gt;Improved performance of accelerated 2D canvas by recording operations for
+batched replay.&lt;/li&gt;
+&lt;li&gt;Improved asynchronous scrolling when main thread is busy by avoiding locks
+and rendering the scroll bars from the scrolling thread.&lt;/li&gt;
+&lt;li&gt;Enabled dynamic MSAA for accelerated 2D canvas rendering.&lt;/li&gt;
+&lt;li&gt;Improved text rendering performance.&lt;/li&gt;
+&lt;li&gt;Videos with BT2100-PQ color space are now tone-mapped to SDR, ensuring colours
+do not appear washed out.&lt;/li&gt;
+&lt;li&gt;Improved behaviour of context menus and added some missing functionality.&lt;/li&gt;
+&lt;li&gt;Improved the WPEPlatform API all around, and added support for building
+exclusively using with it, making &lt;code&gt;libwpe&lt;/code&gt; unnecessary in that case.&lt;/li&gt;
+&lt;li&gt;Removed the WPE Qt5 API binding. The Qt6 API is still available.&lt;/li&gt;
+&lt;li&gt;Improved support for targeting Android, taking advantage of a number of
+Android-specific technologies (logging, hardware buffers, etc.)&lt;/li&gt;
+&lt;li&gt;Added support to use the WPEPlatform API on Android.&lt;/li&gt;
+&lt;li&gt;Added support for the Audio Output Devices API.&lt;/li&gt;
+&lt;li&gt;Added API to take image snapshots of web views.&lt;/li&gt;
+&lt;li&gt;Added API to handle WebXR permission requests.&lt;/li&gt;
+&lt;li&gt;Added API to query the immersive session status.&lt;/li&gt;
+&lt;li&gt;Added initial API for web extensions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.52.0.tar.xz (61.8 MiB)
+   md5sum: ebb298f5657412cae93bfe5ccf6c8476
+   sha1sum: a3f3ae35cf57037975433249a31f7d1c18a43c1c
+   sha256sum: 3adbf9eebec9b7535febb75aca5afa1ea586eaf9b0cdfd3eb56de850fe39ff43
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
     <title>WPE WebKit 2.50.6 released</title>
     <link href="https://wpewebkit.org/wpewebkit.org/wpewebkit-2.52-blog/release/wpewebkit-2.50.6.html"/>
     <updated>2026-03-12T00:00:00Z</updated>
@@ -347,47 +390,6 @@ wpewebkit-2.50.4.tar.xz (41.3 MiB)
    md5sum: b6464338ca78bbc1a9d6b07ae280072f
    sha1sum: 28135d2a20f27c01177b13fb10489e2b1e4dde9f
    sha256sum: d204e405b0975508748c0273c18090304a979e1170ffa2a0a528fad90191ef87
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.51.3 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/wpewebkit-2.52-blog/release/wpewebkit-2.51.3.html"/>
-    <updated>2025-12-09T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/wpewebkit-2.52-blog/release/wpewebkit-2.51.3.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 2.52 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.51.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.51.3?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Add API to take image snapshots of web views, using &lt;code&gt;webkit_web_view_get_snapshot()&lt;/code&gt;
-and &lt;code&gt;webkit_web_view_get_snapshot_finish()&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Add WPEPlatform API to obtain the contents of the clipboard, using
-&lt;code&gt;wpe_clipboard_content_get_text()&lt;/code&gt; and &lt;code&gt;wpe_clipboard_content_get_bytes()&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Improve composition scheduling to avoid blocking waiting for tile painting.&lt;/li&gt;
-&lt;li&gt;Moved WebRTC network access to the NetworkProcess, when using GstWebRTC.
-This requires &lt;a href=&quot;https://github.com/ystreet/librice&quot;&gt;librice&lt;/a&gt;, and building with
-the CMake &lt;code&gt;USE_LIBRICE&lt;/code&gt; option. When enabled, it is still possible to choose
-the older libnice-based implementation at runtime by setting the variable
-&lt;code&gt;WEBKIT_GST_DISABLE_WEBRTC_NETWORK_SANDBOX=1&lt;/code&gt; in the environment.&lt;/li&gt;
-&lt;li&gt;Add support the
-&lt;a href=&quot;https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_ANDROID_raycast&quot;&gt;&lt;code&gt;XR_ANDROID_raycast&lt;/code&gt; OpenXR extension&lt;/a&gt;
-for &lt;a href=&quot;https://immersive-web.github.io/hit-test/&quot;&gt;WebXR Hit Testing&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Add support to use super-tiled graphics buffers when running on Vivante GPUs.
-Currently setting &lt;code&gt;WEBKIT_SKIA_USE_VIVANTE_SUPER_TILED_TILE_TEXTURES=1&lt;/code&gt; in the
-environment is needed to opt-in into using those.&lt;/li&gt;
-&lt;li&gt;Ensure that GStreamer is properly initialized before applying any multimedia
-handling quirks.&lt;/li&gt;
-&lt;li&gt;Fix pointer event processing no longer working after a mouse right button press.&lt;/li&gt;
-&lt;li&gt;Fix &lt;code&gt;PointerEvent&lt;/code&gt; behaviour for mouse events synthesized from touch inputs.&lt;/li&gt;
-&lt;li&gt;Fix seeking and looping of media elements that set the “loop” property.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.51.3.tar.xz (61.1 MiB)
-   md5sum: 7af7dc1cb51a3ff09236cdac07bfe047
-   sha1sum: 8ee59478963f1e89d9c9db623ff4399a820d2d76
-   sha256sum: ab0d5f66e7de41e345aa82b93ed2f18de19063f95c7e427296ef86079ec5ba11
 &lt;/pre&gt;
 </content>
   </entry>
