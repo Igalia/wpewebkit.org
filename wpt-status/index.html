@@ -310,7 +310,7 @@ Notes:
 
 <section id="bcd-explanation-panel" hidden>
 <p>
-This data is automatically obtained by running <a href="https://mdn-bcd-collector.gooborg.com/" target="_blank">mdn-bcd-collector</a> tests with WPE.
+This data is automatically obtained by running <a href="https://collector.openwebdocs.org/" target="_blank">mdn-bcd-collector</a> tests with WPE.
 It presents Browser Compatibility Data (BCD) for different WPE versions, covering Web technologies, such as Web APIs, JavaScript features, CSS properties and more.
 </p>
 <p>
@@ -590,7 +590,7 @@ function updateRunInfo(resultsData, version) {
         metaRunLink.href = `https://wpt.fyi/results/?${productVersionQueryString}`;
     } else {
         metaRunLink.textContent = `test run using BCD v${resultsData.metadata.mdn_bcd_collector_version} and WPE ${browserVersion}`;
-        metaRunLink.href = `https://mdn-bcd-collector.gooborg.com/changelog`;
+        metaRunLink.href = `https://collector.openwebdocs.org/changelog`;
     }
     metaRunDate.textContent = new Date(resultsData.metadata.testrun_timestamp_end * 1000).toISOString().slice(0, 10) || '—';
 }
