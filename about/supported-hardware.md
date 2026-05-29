@@ -129,13 +129,6 @@ Note that this list is not exhaustive. Reports of unlisted configurations are we
 | APQ8017 | Adreno 306 | Proprietary | Custom  | n/a |
 
 
-## Nvidia
-
-| Device | GPU | Driver | WPE Backend | Cog Platforms |
-|--------|-----|--------|-------------|---------------|
-| Jetson TK1 | Tegra K1 | | |
-
-
 ## RockChip
 
 | Device | GPU          | Driver | WPE Backend | Cog Platforms |
