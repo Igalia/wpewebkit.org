@@ -48,12 +48,15 @@ version number stays the same:
   well, because we actively avoid breaking it unless strictly needed.
 
 
-## Compatible Components
+## Compatible Components (legacy API)
 
-The following table summarizes which *stable* releases of libwpe, WPE WebKit,
-WPEBackend-fdo, and Cog are compatible and tested with each other (updated
-March 2026). Distributors and packagers are strongly advised to use the
-versions listed below.
+**Since 2.54**, WPE WebKit has a [new WPEPlatform API](/about/faq.html#what-is-the-wpeplatform-api%3F),
+and [libwpe and an external rendering backend are no longer required](/about/faq.html#do-i-still-need-libwpe-and-a-wpe-backend%3F).
+Therefore, the table below is only relevant to *legacy-API* deployments, summarizing
+which *stable* releases of libwpe, WPE WebKit, WPEBackend-fdo, and Cog are compatible
+and tested with each other (updated March 2026). Distributors and packagers targeting
+the legacy API are strongly advised to use the versions listed here.
+
 
 | **WPE WebKit** | **libwpe**   | **WPEBackend-fdo** | **Cog**      |
 |:--------------:|:------------:|:------------------:|:------------:|
