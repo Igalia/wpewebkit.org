@@ -15,9 +15,48 @@ sitemapPriority: 0.7
 		<div class="row">
 			<div class="col-lg-10 mx-auto lead text-left">
 			{%- for pkg in collections.pkgCatalog -%}
+			{%- if pkg[0] == "wpewebkit" -%}
 				<article>
 					<h2>{{ pkg[0] }}</h2>
 					{%- assign package = pkg[1] -%}
+					<header>
+						<p>
+						<strong>Stable</strong>
+						<a href="{{ package.latestStable.url }}">{{ package.latestStable.version }}</a>
+						</p>
+						<p>
+						<strong>Development</strong>
+						<a href="{{ package.latestDev.url }}">{{ package.latestDev.version }}</a>
+						</p>
+					</header>
+					<h3>Recent releases</h3>
+					<ol>
+					{%- for entry in package.recent -%}
+						<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
+					{%- endfor -%}
+					</ol>
+					<details>
+					<summary>Older releases ({{ package.list.length }})</summary>
+					<ol>
+					{%- for entry in package.list -%}
+						<li class="{{ entry.type }}"><a href="{{ entry.url }}">{{ entry.version }}</a> <time datetime="{{ entry.date }}">{{ entry.date | dateString }}</time></li>
+					{%- endfor -%}
+					</ol>
+					</details>
+				</article>
+			{%- endif -%}
+			{%- endfor -%}
+
+			<div class="legacy-components">
+			<h2>Legacy components</h2>
+			<p>These components are tied to the legacy API (pre-2.54) and are provided for existing deployments. They are still released as needed.</p>
+			</div>
+
+			{%- assign legacyOrder = "cog,libwpe,wpebackend-fdo" | split: "," -%}
+			{%- for key in legacyOrder -%}
+				{%- assign package = collections.pkgCatalog[key] -%}
+				<article>
+					<h2>{{ key }}</h2>
 					<header>
 						<p>
 						<strong>Stable</strong>
@@ -147,5 +186,20 @@ sitemapPriority: 0.7
 .row article details summary {
 	font-style: italic;
 	font-weight: 400;
+}
+.legacy-components {
+	width: 100%;
+	margin-top: 1.5em;
+}
+.legacy-components h2 {
+	font-size: 1.6em;
+	margin: 0 0 0.25em;
+	padding-bottom: 0.15em;
+	border-bottom: 2px solid #1593ED;
+}
+.legacy-components p {
+	margin: 0 0 1em;
+	font-style: italic;
+	color: #555;
 }
 </style>
