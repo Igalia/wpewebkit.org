@@ -39,6 +39,18 @@ API documentation for the **latest stable release** is available here:
 <li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-2.0/">WPEWebKit 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-javascriptcore-2.0/">WPEJavaScriptCore 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-2.0/">WPEWebExtension 2.0 API documentation</a></li>
+</ul>
+
+API documentation for the **new WPEPlatform API** (under development):
+<ul>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-platform-2.0/">WPEPlatform 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-platform-wayland-2.0/">WPEPlatform Wayland 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-platform-drm-2.0/">WPEPlatform DRM 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-platform-headless-2.0/">WPEPlatform Headless 2.0 API documentation</a></li>
+</ul>
+
+API documentation for **deprecated APIs**:
+<ul>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-1.1/">WPEWebKit 1.1 API documentation</a> (deprecated)</li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-javascriptcore-1.1/">WPEJavaScriptCore 1.1 API documentation</a> (deprecated)</li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-1.1/">WPEWebExtension 1.1 API documentation</a> (deprecated)</li>
