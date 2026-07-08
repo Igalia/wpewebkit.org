@@ -50,12 +50,19 @@ get your hands on WPE, depending on what you need.
 ### Before starting
 
 Before getting the code, it's a good idea to be familiar with what you
-will need. The different components that are needed to run WPE are:
+will need. Since 2.54, WPE WebKit bundles the WPEPlatform API, which provides
+built-in Wayland, DRM/KMS, and headless integration, so the only component you
+need to run WPE on the common targets is:
 
-* [WebKit](https://webkit.org): as WPE is an official WebKit port, you will need the source code for the WebKit project.
-* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe): A general-purpose library for WPE, that enables integration between WebKit and different platforms, through backends.
-* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A reference FreeDesktop.org backend for WPE, that relies on different FreeDesktop.org projects and can serve as a starting point to either customize or create a completely new backend for specific configurations.
-* [Cog](https://github.com/Igalia/cog): A simple and minimalistic browser using WPE, with no user interface, suitable to be used as a Web application container or as a starting point to develop more complex browser applications based on WPE.
+* [WebKit](https://webkit.org): as WPE is an official WebKit port, you will need the source code for the WebKit project. WPE WebKit includes the WPEPlatform API, so it can drive Wayland, DRM/KMS, and headless output on its own.
+
+#### Optional and legacy components
+
+The following components are only needed for the legacy API (pre-2.54), or for existing deployments built on it. They are still released as needed, but new projects do not require them:
+
+* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe): A general-purpose library for the legacy API, that enables integration between WebKit and different platforms, through external backends.
+* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A reference FreeDesktop.org backend for the legacy API, that relies on different FreeDesktop.org projects and can serve as a starting point to either customize or create a completely new backend for specific configurations.
+* [Cog](https://github.com/Igalia/cog): A simple and minimalistic launcher built on the legacy API, with no user interface, suitable to be used as a Web application container. With WPEPlatform, a launcher is only a few lines of code, so Cog is no longer required for new projects.
 
 ## __Install it from your Linux distribution__
 
@@ -159,9 +166,12 @@ that is not yet available in WPE. Additionally, this can be also be
 a good way to track down any bug you might find and to fix it.
 
 * [WebKit](https://github.com/webKit/WebKit/)
-* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe).
-* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo).
-* [Cog](https://github.com/Igalia/cog).
+
+The following repositories are only needed for the legacy API (pre-2.54) or existing deployments built on it:
+
+* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe) (legacy).
+* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo) (legacy).
+* [Cog](https://github.com/Igalia/cog) (legacy).
 
 Instead of downloading each of these components on their own, the recommended
 procedure is cloning Git repositories for WebKit and the [WebKit Container
