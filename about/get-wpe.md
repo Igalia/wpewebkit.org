@@ -109,12 +109,13 @@ and its components:
 
 <h3 class="sr-only">Releases</h3>
 
-<div class="container" style="border-block: medium solid hsl(205,86%,70%);padding-block:1em;padding-inline:0.5em;">
+<div class="container" style="border-block: medium solid hsl(205,86%,70%);padding-block:1em;padding-inline:0.5em;margin: 2em;">
   <div class="card-deck" style="display:flex;">
     <div class="card">
       <h4 class="card-header text-center" style="margin-top: 0;">Stable</h4>
       <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
+        {%- if item[0] == "wpewebkit" -%}
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           {{ item[0] }}<span class="sr-only">:</span>
           <span>
@@ -127,6 +128,7 @@ and its components:
              href="{{ item[1].stable.url }}"><span class="sr-only">Release notes for v{{ item[1].stable.version }}</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div>
+        {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
@@ -135,6 +137,7 @@ and its components:
       <h4 class="card-header text-center" style="margin-top: 0;">Unstable</h4>
       <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
+        {%- if item[0] == "wpewebkit" -%}
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           {{ item[0] }}<span class="sr-only">:</span>
           <span>
@@ -147,6 +150,7 @@ and its components:
              href="{{ item[1].unstable.url }}"><span class="sr-only">Release notes for v{{ item[1].unstable.version }}</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div>
+        {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
@@ -154,6 +158,58 @@ and its components:
       <a class="btn btn-light btn-sm" style="font-weight: normal" href="https://wpewebkit.org/release/">
         <i class="icon-cloud-download align-text-bottom" style="margin-right: 0.3em"></i>See all released tarballs…</a>
     </p>
+  </div>
+</div>
+
+### Legacy components
+
+These components are tied to the legacy API (pre-2.54) and are provided for existing deployments. They are still released as needed.
+
+<div class="container" style="border-block: medium solid hsl(205,20%,80%);padding-block:1em;padding-inline:0.5em;margin: 2em;">
+  <div class="card-deck" style="display:flex;">
+    <div class="card">
+      <h4 class="card-header text-center" style="margin-top: 0;">Stable</h4>
+      <div class="list-group list-group-flush">
+        {%- for item in collections.latestReleases -%}
+        {%- unless item[0] == "wpewebkit" -%}
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          {{ item[0] }}<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary"
+             title="Download {{ item[0] }} {{ item[1].stable.version }}"
+             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].stable.version | append: '.tar.xz' }}"><span class="sr-only">Download v</span>{{ item[1].stable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary"
+             title="Release notes for {{ item[0] }} {{ item[1].stable.version }}"
+             href="{{ item[1].stable.url }}"><span class="sr-only">Release notes for v{{ item[1].stable.version }}</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div>
+        {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+   <div class="card">
+      <h4 class="card-header text-center" style="margin-top: 0;">Unstable</h4>
+      <div class="list-group list-group-flush">
+        {%- for item in collections.latestReleases -%}
+        {%- unless item[0] == "wpewebkit" -%}
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          {{ item[0] }}<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary"
+             title="Download {{ item[0] }} {{ item[1].unstable.version }}"
+             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].unstable.version | append: '.tar.xz' }}"><span class="sr-only">Download v</span>{{ item[1].unstable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary"
+             title="Release notes for {{ item[0] }} {{ item[1].unstable.version }}"
+             href="{{ item[1].unstable.url }}"><span class="sr-only">Release notes for v{{ item[1].unstable.version }}</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div>
+        {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
   </div>
 </div>
 
