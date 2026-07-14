@@ -82,6 +82,48 @@ There is code in WebKit to support Encrypted Media Extensions (EME), but in any 
 - Write a new CDM backend for WebKit using your DRM system.
 
 
+## What is the WPEPlatform API?
+
+WPEPlatform is the new platform integration layer inside WPE WebKit, which will replace the libwpe API in WPE WebKit 2.54. It handles rendering and input for the target environment: a `WPEDisplay` manages the `WPEView`s that display web content, buffers are exchanged through `WPEBuffer` (DMA-BUF or shared memory), and WPE WebKit provides built-in implementations for Wayland, DRM/KMS, and headless output. The right implementation is chosen at runtime through the `WPE_DISPLAY` environment variable, or automatically.
+
+WPEPlatform is already available in WPE WebKit 2.52 and in the current unstable releases, but it is not part of the stable API yet, so for now it is optional and not built by default. It is expected to be enabled by default and become the recommended API with the upcoming 2.54 release. If you are starting a new project, we encourage you to try it out now instead of building on the libwpe API, that will soon become legacy. See the [WPEPlatform API reference](/reference/stable/wpe-platform-2.0/) for the details.
+
+## How do I build a launcher with the WPEPlatform API?
+
+This uses [the WPEPlatform API described above](#what-is-the-wpeplatform-api%3F), which you can already try today with WPE WebKit 2.52 or the unstable releases, as long as they are built with `-DENABLE_WPE_PLATFORM=ON` (not by default [except for "developer mode" builds](https://github.com/WebKit/WebKit/blob/6ea58a42a90953702692b60e2347b63075394968/Source/cmake/OptionsWPE.cmake#L106)). With WPEPlatform there is no separate launcher to install: writing one is only a few lines of code, because WPE WebKit provides the platform integration itself. A minimal launcher looks like this:
+
+```cpp
+#include <wpe/webkit.h>
+
+int main(int argc, const char *argv[]) {
+    g_autoptr(GMainLoop) loop = g_main_loop_new(nullptr, false);
+    g_autoptr(WebKitWebView) view = WEBKIT_WEB_VIEW(g_object_new(WEBKIT_TYPE_WEB_VIEW, nullptr));
+    webkit_web_view_load_uri(view, (argc > 1) ? argv[1] : "https://wpewebkit.org");
+    g_main_loop_run(loop);
+    return EXIT_SUCCESS;
+}
+```
+
+Build it against the `wpe-webkit-2.0` and `wpe-platform-2.0` pkg-config modules, then choose the platform at runtime with the `WPE_DISPLAY` environment variable:
+
+```sh
+# Wayland (needs a compositor, e.g. Weston)
+WPE_DISPLAY=wpe-display-wayland ./my-launcher https://wpewebkit.org/
+
+# DRM/KMS (no compositor)
+WPE_DISPLAY=wpe-display-drm ./my-launcher https://wpewebkit.org/
+
+# Headless (no output, for testing and CI)
+WPE_DISPLAY=wpe-display-headless ./my-launcher https://wpewebkit.org/
+```
+
+## Do I still need libwpe and a WPE backend?
+
+For now, by default, yes. Until the 2.54 release builds the WPEPlatform by default, any application built on top of WPE WebKit will use the current API, which relies on libwpe together with an external rendering backend such as WPEBackend-fdo.
+
+If you explicitly opt into the WPEPlatform API (available since 2.52), you no longer need either of them: for the common targets (Wayland, DRM/KMS, and headless) WPE WebKit provides everything through its built-in WPEPlatform implementations. Since the current API is expected to become legacy once 2.54 makes WPEPlatform the default, we encourage new projects to adopt WPEPlatform now rather than build on an API that will soon be legacy.
+
+
 ## What is (and isn't) Cog?
 
 From [Cog's README](https://github.com/igalia/cog):
