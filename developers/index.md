@@ -41,7 +41,7 @@ API documentation for the **latest stable release** is available here:
 <li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-2.0/">WPEWebExtension 2.0 API documentation</a></li>
 </ul>
 
-API documentation for the **new WPEPlatform API** (under development):
+API documentation for the **[new WPEPlatform API](/about/faq.html#what-is-the-wpeplatform-api%3F)** (under development):
 <ul>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-platform-2.0/">WPEPlatform 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-platform-wayland-2.0/">WPEPlatform Wayland 2.0 API documentation</a></li>
