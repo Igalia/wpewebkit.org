@@ -13,7 +13,7 @@ sitemapChangeFrequency: monthly
 
 WPE is an Open Source project developed upstream as part of [the WebKit project](https://webkit.org), with all its code being pushed to [WebKit's upstream repository](https://github.com/WebKit/WebKit). Therefore, **WPE is published under a mix of LGPLv2 and BSD licenses**, which are the ones applying to the WebKit project as a whole. You can [find a copy of such licenses in the webkit.org website](https://webkit.org/licensing-webkit).
 
-There are also [three related components developed alongside with WPEWebKit](https://wpewebkit.org/release), which are externally maintained and have their own Open Source licenses:
+There are also [three related components developed alongside WPE WebKit](https://wpewebkit.org/release), tied to the legacy API (pre-2.54) and kept for existing deployments. They are externally maintained and have their own Open Source licenses:
 
 * libwpe: [BSD-2-Clause license](https://github.com/WebPlatformForEmbedded/libwpe/blob/master/COPYING) (also known as _“Simplified BSD License”_).
 * WPEBackend-fdo: [BSD-2-Clause license](https://github.com/Igalia/WPEBackend-fdo/blob/master/COPYING).
@@ -84,13 +84,13 @@ There is code in WebKit to support Encrypted Media Extensions (EME), but in any 
 
 ## What is the WPEPlatform API?
 
-WPEPlatform is the new platform integration layer inside WPE WebKit, which will replace the libwpe API in WPE WebKit 2.54. It handles rendering and input for the target environment: a `WPEDisplay` manages the `WPEView`s that display web content, buffers are exchanged through `WPEBuffer` (DMA-BUF or shared memory), and WPE WebKit provides built-in implementations for Wayland, DRM/KMS, and headless output. The right implementation is chosen at runtime through the `WPE_DISPLAY` environment variable, or automatically.
+WPEPlatform is the platform integration layer that ships inside WPE WebKit. It handles rendering and input for the target environment: a `WPEDisplay` manages the `WPEView`s that display web content, buffers are exchanged through `WPEBuffer` (e.g. `WPEBufferDMABuf`, `WPEBufferAndroid`, shared memory), and WPE WebKit provides built-in implementations for Wayland, DRM/KMS, and headless output. The right implementation can be chosen at runtime through the `WPE_DISPLAY` environment variable, or automatically.
 
-WPEPlatform is already available in WPE WebKit 2.52 and in the current unstable releases, but it is not part of the stable API yet, so for now it is optional and not built by default. It is expected to be enabled by default and become the recommended API with the upcoming 2.54 release. If you are starting a new project, we encourage you to try it out now instead of building on the libwpe API, that will soon become legacy. See the [WPEPlatform API reference](/reference/stable/wpe-platform-2.0/) for the details.
+Since 2.54, WPEPlatform is the default and recommended API. See the [architecture page](/about/architecture.html) for the full picture, and the [WPEPlatform API reference](/reference/stable/wpe-platform-2.0/) for the details.
 
 ## How do I build a launcher with the WPEPlatform API?
 
-This uses [the WPEPlatform API described above](#what-is-the-wpeplatform-api%3F), which you can already try today with WPE WebKit 2.52 or the unstable releases, as long as they are built with `-DENABLE_WPE_PLATFORM=ON` (not by default [except for "developer mode" builds](https://github.com/WebKit/WebKit/blob/6ea58a42a90953702692b60e2347b63075394968/Source/cmake/OptionsWPE.cmake#L106)). With WPEPlatform there is no separate launcher to install: writing one is only a few lines of code, because WPE WebKit provides the platform integration itself. A minimal launcher looks like this:
+With WPEPlatform there is no separate launcher to install: writing one is only a few lines of code, because WPE WebKit provides the platform integration itself. A minimal launcher looks like this:
 
 ```cpp
 #include <wpe/webkit.h>
@@ -119,12 +119,14 @@ WPE_DISPLAY=wpe-display-headless ./my-launcher https://wpewebkit.org/
 
 ## Do I still need libwpe and a WPE backend?
 
-For now, by default, yes. Until the 2.54 release builds the WPEPlatform by default, any application built on top of WPE WebKit will use the current API, which relies on libwpe together with an external rendering backend such as WPEBackend-fdo.
+No. For the common targets (Wayland, DRM/KMS, and headless), WPE WebKit provides everything through its built-in WPEPlatform implementations, so neither libwpe nor an external rendering backend is required.
 
-If you explicitly opt into the WPEPlatform API (available since 2.52), you no longer need either of them: for the common targets (Wayland, DRM/KMS, and headless) WPE WebKit provides everything through its built-in WPEPlatform implementations. Since the current API is expected to become legacy once 2.54 makes WPEPlatform the default, we encourage new projects to adopt WPEPlatform now rather than build on an API that will soon be legacy.
+libwpe, WPEBackend-fdo, and similar backends belong to the legacy API used before 2.54. They are kept for existing deployments and still built as needed, but new projects should target WPEPlatform.
 
 
-## What is (and isn't) Cog?
+## What is (and isn't) Cog? (legacy)
+
+Cog is the launcher built on the legacy API (pre-2.54). It is kept for existing deployments, but new projects do not need it: with WPEPlatform, [a launcher is only a few lines of code](#how-do-i-build-a-launcher-with-the-wpeplatform-api%3F).
 
 From [Cog's README](https://github.com/igalia/cog):
 
@@ -137,74 +139,85 @@ Cog's usage scenarios span from a MiniBrowser application to a full web-app cont
 
 Although it can run on Linux-based desktop environments, Cog is not a full-blown Web Browser to be compared with Google Chrome or Safari. Cog's primary environment is on embedded platforms, and it can run within a Wayland compositor such as Weston. Additionally, if the platform supports KMS/DRM, Cog can run as a full-screen standalone browser, this use-case is very common on kiosk products for instance.
 
-If you are a developer aiming to enable WPE on a certain embedded platform, Cog combined with WPEBackend-FDO provides the most flexible solution for agile tinkering and to test WPE's features.
+For legacy deployments, Cog combined with WPEBackend-FDO provided a flexible solution for agile tinkering and for testing WPE's features. For new projects, prefer [writing a small launcher against the WPEPlatform API](#how-do-i-build-a-launcher-with-the-wpeplatform-api%3F) instead.
 
 
 ## Is Wayland required to run WPE?
 
 As we say in Galicia, "it depends".
 
-[WPE's architecture](/about/architecture.html) was designed in order to
-decouple rendering out of the Web engine and delegate this task to rendering
-backends and to the application running the Web engine—it does not strictly
-*require* usage of Wayland.
+Since 2.54, WPE WebKit integrates with the target platform through its built-in
+WPEPlatform implementations, and Wayland is just one of several supported outputs:
 
-Typically when talking about Wayland we tend to conflate many things:
+* **Wayland** (`WPEDisplayWayland`) renders as a client of a Wayland compositor, so
+  a compositor (such as Weston) is required.
+* **DRM/KMS** (`WPEDisplayDRM`) renders web content directly on screen through the
+  display controller, with no compositor at all. This is very common on kiosk and
+  appliance products.
+* **Headless** (`WPEDisplayHeadless`) produces no on-screen output, and is meant for
+  testing and CI.
+
+The implementation can be chosen at runtime with the `WPE_DISPLAY` environment
+variable, or by manually creating a `WPEDisplay`, so Wayland is required only if
+you select the Wayland output.
+
+It also helps to remember that "Wayland" tends to conflate several things:
 
 * Wayland *itself* is an <abbr title="Inter-Process Communication">IPC</abbr>
-  **protocol** which happens to be designed to move buffers containing pixel
-  data and input events from one process to another.
+  **protocol**, designed to move buffers containing pixel data and input events from
+  one process to another.
 
-* The Wayland *package* typically contains the **reference implementation**
-  of the protocol, `libwayland`. Other implementations are theoretically
-  possible.
+* The Wayland *package* typically contains the **reference implementation** of the
+  protocol, `libwayland`. Other implementations are theoretically possible.
 
-* By extension we may refer to **a compositor**, which is a program that
-  implements the server–side of the Wayland
-  protocol—possibly with the aid of `libwayland`.
+* By extension we may refer to **a compositor**, a program that implements the server
+  side of the Wayland protocol, possibly with the aid of `libwayland`.
 
-If you use [WPEBackend-fdo][fdo-backend], it internally uses the Wayland
+<details>
+<summary>Legacy note: Wayland and the pre-2.54 backends</summary>
+
+With the legacy API, [WPEBackend-fdo][fdo-backend] internally used the Wayland
 *protocol* (via `libwayland`) to pass rendered frames from the `WPEWebProcess`
-program to the application that embeds the web view—that we call “the UI
-process”. As this is an implementation detail of the backend, the fact that
-Wayland is used as IPC protocol does not need to be known by the application.
-A *compositor* may be required or not depending on how the UI process displays
-the web content.
+program to the application that embedded the web view (the "UI process"). As that
+was an implementation detail of the backend, the application did not need to know the
+Wayland protocol was involved. A *compositor* might or might not be required,
+depending on how the UI process displayed the web content.
 
-For example, [Cog][cog-github] can act as a Wayland *client* using its <abbr
-title="FreeDesktop.Org">FDO</abbr> platform plug-in, and in that case a
-Wayland *compositor* is required. On the other hand, using Cog's <abbr
-title="Direct Rendering Manager">DRM</abbr> platform plug-in it will display
-rendered web content directly on screen (without a running Wayland
-*compositor*). Note that in both cases WPEBackend-fdo is used as backend,
-which means that the Wayland *protocol* is still in use.
-
-Some WPE backends may not require Wayland at all. Such is the case
-of [WPEBackend-rdk][rdk-backend] in some configurations
-(`USE_BACKEND_BCM_RPI`, `USE_BACKEND_BCM_NEXUS`, etc.)
+For example, [Cog][cog-github] could act as a Wayland *client* through its <abbr
+title="FreeDesktop.Org">FDO</abbr> platform plug-in, in which case a Wayland
+*compositor* was required. Using Cog's <abbr title="Direct Rendering Manager">DRM</abbr>
+platform plug-in, it displayed rendered web content directly on screen, without a
+running Wayland *compositor*. In both cases WPEBackend-fdo was used as the backend, so
+the Wayland *protocol* was still in use. Some WPE backends did not require Wayland at
+all, such as [WPEBackend-rdk][rdk-backend] in some configurations
+(`USE_BACKEND_BCM_RPI`, `USE_BACKEND_BCM_NEXUS`, etc.).
 
 [cog-github]: https://github.com/Igalia/cog
 [fdo-backend]: https://github.com/Igalia/WPEBackend-fdo
 [rdk-backend]: https://github.com/WebPlatformForEmbedded/WPEBackend-rdk
 
+</details>
+
 ## Are open dialogs/popups menus supported?
 
-The application embedding WPE is responsible for rendering popups and dialogs. The reference WPE Browser, Cog, has limited support for these features (as of 2021, it supports option menus).
+The application embedding WPE is responsible for rendering popups and dialogs. For instance, the legacy launcher Cog has limited support for these features (e.g. Cog supported option menus as of 2021).
 
 
-## What is the wayland-protocols build dependency about in Cog?
+## What is the wayland-protocols build dependency about in Cog (legacy)?
+
+*This applies to the legacy Cog launcher and its FDO/Wayland plug-in.*
 
 Depending on which platform rendering plugin is enabled at build time, the Cog browser might depend on the [wayland-protocols](https://github.com/wayland-project/wayland-protocols) project to generate source files needed in order to act as a Wayland client to the compositor (server) implementing those protocols.
 
 So for instance, if you enable the [FDO platform plugin](https://github.com/Igalia/cog/blob/master/CMakeLists.txt#L57) and want to use it at runtime to have Cog running as a Wayland application, then the plugin will try to consume some Wayland protocols from the server, such as `xdg-shell`, `fullscreen-shell-unstable-v1`, `presentation-time` and `linux-dmabuf-unstable-v1`. Those protocols can't be used without first generating source files derived from each protocol XML spec definition. This is all part of the Wayland design.
 
 
-## Why does the browser/launcher (e.g. Cog) crash at startup?
+## Why does the launcher crash at startup?
 
 If you are building an embedded system image yourself, make sure there is at least one font installed that can be used as fallback by [Fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/). You can use the `fc-list` program to print the list of known fonts.
 
 
-## Why does the browser/launcher (e.g. Cog) crash when trying to play audio?
+## Why does the launcher crash when trying to play audio?
 
 If you are building an embedded system image yourself, make sure that the
 GStreamer elements `autoaudiosink` and `alsasink` are installed. Even if your
@@ -213,7 +226,7 @@ ALSA is always tried as the last fallback if all the other available sinks
 fail.
 
 
-## Why does the browser/launcher (e.g. Cog) not load local files?
+## Why does the launcher not load local files?
 
 If you are building an embedded system image yourself, make sure to install
 the [shared MIME database][shared-mime-db] is installed—in most distributions
