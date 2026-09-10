@@ -55,23 +55,26 @@ alter the results.
 
 ## What's the status regarding WebRTC?
 
-As of March 2022 the facts are:
+The initial goal was to ship a WebRTC backend based on GstWebRTC. After several
+years of experimentation in that direction, the maintainers decided to use
+LibWebRTC instead. The current LibWebRTC backend supports the GStreamer
+hardware-accelerated video encoders and decoders. LibWebRTC also provides a
+mature implementation of the many specs and RFCs required for browsing websites
+making use of WebRTC.
 
-1. [WPEWebKit upstream has support for WebRTC](https://blogs.gnome.org/tsaunier/2018/07/31/webkitgtk-and-wpe-gains-webrtc-support-back/), by relying on [LibWebRTC](https://webrtc.googlesource.com/src/).
-2. LibWebRTC is bundled as third-party library in WebKit's upstream repository.
-3. The LibWebRTC backend supports hardware-acceleration only for decoding. Encoding is supported only via software encoders.
-4. LibWebRTC bundles [BoringSSL](https://boringssl.googlesource.com/boringssl/), which is a fork of OpenSSL started while OpenSSL
-   was still under the dual OpenSSL and SSLeay licences.
+The GstWebRTC backend remains usable, although disabled by default and
+incomplete in terms of features in the 2.52 and 2.54 releases. It can be enabled
+by passing `-DUSE_GSTREAMER_WEBRTC=ON` to CMake at build time. Due to its
+experimental nature we do not provide support for it. In those releases
+LibWebRTC cannot be enabled because the tarballs do not include the LibWebRTC
+source files.
 
-Taking these facts into account, the WPEWebKit maintainers have decided to leave WebRTC support disabled in the default build configuration of the official release tarballs because:
-
-- Bundling LibWebRTC in tarballs significantly increases the archive size.
-- The dependency on BoringSSL prevents LibWebRTC usage in GPL applications.
-- The lack of hardware-accelerated support in LibWebRTC would incur a bad
-  performance impact on the embedded platforms that WPE targets.
-
-In order to solve these issues, an alternative WebRTC backend based on [GstWebRTC](http://blog.nirbheek.in/2018/02/gstreamer-webrtc.html) will be enabled by default in the WPE upstream CMake build, hopefully soon; bug [#235885](https://bugs.webkit.org/show_bug.cgi?id=235885) is being used to track progress. This new backend will seamlessly integrate with hardware-accelerated encoders and decoders on most embedded platforms. GstWebRTC depends on [OpenSSL](https://www.openssl.org/), which is released under an Apache-style license, so it doesn't have limitations regarding redistribution in binary form.
-
+Looking forward to the 2.56 release, scheduled around March 2027, we plan to
+enable LibWebRTC by default. Until then, we welcome testing either using [GNOME
+Web Canary](https://gitlab.gnome.org/GNOME/epiphany#download-and-install) which
+uses WebKitGTK builds from git main, or
+[Wig](https://github.com/igalia/wig#installing-the-flatpak) which relies on
+nightly WPEWebKit builds.
 
 ## What's up with EME? How can I support this feature in my WPE-based product?
 
