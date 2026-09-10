@@ -703,7 +703,7 @@ nav.pagination > ol > li > a[aria-current="page"] {
 
 @media (min-width: 50rem) {
 	footer.global div {
-		grid-template-columns: minmax(125px, auto) repeat(2,max-content);
+		grid-template-columns: minmax(125px, auto) repeat(3,max-content);
 		max-width: var(--mainColMax);
 		margin: 0 auto;
 	}
@@ -716,7 +716,7 @@ nav.pagination > ol > li > a[aria-current="page"] {
 }
 @media (min-width: 65rem) {
 	footer.global div {
-		grid-template-columns: repeat(2,1fr) max-content;
+		grid-template-columns: 1fr repeat(3,max-content);
 	}
 }
 
