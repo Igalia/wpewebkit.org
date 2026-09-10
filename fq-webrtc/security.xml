@@ -8,6 +8,33 @@
   <id>https://wpewebkit.org/security/</id>
   
   <entry>
+    <title>WPE WebKit 2.53.92 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.53.92.html"/>
+    <updated>2026-09-03T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.53.92.html</id>
+    <content type="html">&lt;p&gt;This is a development release leading towards the 2.54 series.&lt;/p&gt;
+&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.53.92%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.53.92?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix opacity animation not damaging descendant layers.&lt;/li&gt;
+&lt;li&gt;Fix expiration date of favicons in the icon database.&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;webkit_web_view_get_tls_info()&lt;/code&gt; that sometimes returned &lt;code&gt;FALSE&lt;/code&gt; for valid HTTPS connections.&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;Ctrl-C&lt;/code&gt; failure to copy non-editable content to the clipboard.&lt;/li&gt;
+&lt;li&gt;Fix documentation of &lt;code&gt;webkit_web_view_call_async_javascript_function()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Use a Chrome &lt;code&gt;User-Agent&lt;/code&gt; for Prime Video.&lt;/li&gt;
+&lt;li&gt;Fix the build with &lt;code&gt;USE_SPIEL=ON&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.53.92.tar.xz (44.2 MiB)
+   md5sum: ddd0b23f1d3137227a9fec04c7f07ddd
+   sha1sum: dfcfcab775b043a99e62f8cafc7af66f3b2d703f
+   sha256sum: 173b1b0b0f39bcf138eb4334874e3dec4e0409cf90fcac75dc6cca893bd1c065
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
     <title>WPE WebKit 2.53.91 released</title>
     <link href="https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.53.91.html"/>
     <updated>2026-08-21T00:00:00Z</updated>
@@ -773,34 +800,6 @@ wpewebkit-2.53.3.tar.xz (40.8 MiB)
    md5sum: 2b1f3e6401cf1a4bd1a9c14dba7fca28
    sha1sum: e4568b7b2c700d79ec6e8a929c57849b42cf8115
    sha256sum: 645babbc04b408b3ce3b026f1990e6307668aa41bf2fb860f387de72a18feb33
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.53.2 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.53.2.html"/>
-    <updated>2026-05-07T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.53.2.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 2.54 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.53.2%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.53.2?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Only use DMA-BUF mapping for writing to the GPU atlas when possible.&lt;/li&gt;
-&lt;li&gt;Do not resolve the &lt;code&gt;-apple-system&lt;/code&gt; font name to the default system font.&lt;/li&gt;
-&lt;li&gt;Set real time limits when not using the portal.&lt;/li&gt;
-&lt;li&gt;Report support for supported non-AAC mp4a codecs.&lt;/li&gt;
-&lt;li&gt;Add cursor shape support in the WPE Qt platform implementation.&lt;/li&gt;
-&lt;li&gt;Fix toplevel state handling in the WPE Qt platform implementation.&lt;/li&gt;
-&lt;li&gt;Fix wheel event handling in the WPE Qt platform implementation.&lt;/li&gt;
-&lt;li&gt;Fix the build when targeting Android.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.53.2.tar.xz (40.5 MiB)
-   md5sum: 0ef8ed9cae2474f575d93a2b3d759b7e
-   sha1sum: c56ff5197a40accc08f7fa02bceda3ebad28f8b2
-   sha256sum: 176d7e4859bd8b4f245ae778eab3c097998d32aa3a62b50f57941be2b71a334c
 &lt;/pre&gt;
 </content>
   </entry>
