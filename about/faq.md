@@ -104,17 +104,17 @@ int main(int argc, const char *argv[]) {
 }
 ```
 
-Build it against the `wpe-webkit-2.0` and `wpe-platform-2.0` pkg-config modules, then choose the platform at runtime with the `WPE_DISPLAY` environment variable:
+Build it against the `wpe-webkit-2.0` and `wpe-platform-2.0` pkg-config modules, then choose the platform at runtime with the `WPE_PLATFORM` environment variable:
 
 ```sh
 # Wayland (needs a compositor, e.g. Weston)
-WPE_DISPLAY=wpe-display-wayland ./my-launcher https://wpewebkit.org/
+WPE_PLATFORM=wayland ./my-launcher https://wpewebkit.org/
 
 # DRM/KMS (no compositor)
-WPE_DISPLAY=wpe-display-drm ./my-launcher https://wpewebkit.org/
+WPE_PLATFORM=drm ./my-launcher https://wpewebkit.org/
 
 # Headless (no output, for testing and CI)
-WPE_DISPLAY=wpe-display-headless ./my-launcher https://wpewebkit.org/
+WPE_PLATFORM=headless ./my-launcher https://wpewebkit.org/
 ```
 
 ## Do I still need libwpe and a WPE backend?
