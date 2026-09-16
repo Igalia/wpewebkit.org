@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="302" viewBox="0 0 760 302" font-family="'Source Sans Pro','Source Sans 3',-apple-system,sans-serif" role="img" aria-label="GPU load while running the same benchmarks">
+<rect width="760" height="302" fill="#ffffff"/>
+<text x="20" y="30" font-size="17" font-weight="600" fill="#333333">GPU load while running the same benchmarks</text>
+<text x="20" y="50" font-size="13" fill="#555555">WPE MiniBrowser on a Raspberry Pi 4 (GPU rendering) — lower is better</text>
+<rect x="20" y="59" width="12" height="12" rx="2" fill="#6b7280"/>
+<text x="37" y="70" font-size="13" fill="#333333">TextureMapper</text>
+<rect x="145" y="59" width="12" height="12" rx="2" fill="#0D71B9"/>
+<text x="162" y="70" font-size="13" fill="#333333">Skia compositor</text>
+<line x1="196.0" y1="92" x2="196.0" y2="226" stroke="#e4e4e8" stroke-width="1"/>
+<text x="196.0" y="244" font-size="12" fill="#555555" text-anchor="middle">0%</text>
+<line x1="333.1" y1="92" x2="333.1" y2="226" stroke="#e4e4e8" stroke-width="1"/>
+<text x="333.1" y="244" font-size="12" fill="#555555" text-anchor="middle">20%</text>
+<line x1="470.3" y1="92" x2="470.3" y2="226" stroke="#e4e4e8" stroke-width="1"/>
+<text x="470.3" y="244" font-size="12" fill="#555555" text-anchor="middle">40%</text>
+<line x1="607.4" y1="92" x2="607.4" y2="226" stroke="#e4e4e8" stroke-width="1"/>
+<text x="607.4" y="244" font-size="12" fill="#555555" text-anchor="middle">60%</text>
+<text x="184" y="113.0" font-size="13.5" fill="#333333" text-anchor="end">MotionMark 1.3.1</text>
+<text x="184" y="129.0" font-size="13.5" fill="#333333" text-anchor="end">@ 30 FPS</text>
+<path d="M 196 92 h 378.4 a 4 4 0 0 1 4 4 v 16 a 4 4 0 0 1 -4 4 h -378.4 z" fill="#6b7280"/>
+<text x="586.4" y="108.5" font-size="13" fill="#333333">56%</text>
+<path d="M 196 118 h 260.6 a 4 4 0 0 1 4 4 v 16 a 4 4 0 0 1 -4 4 h -260.6 z" fill="#0D71B9"/>
+<text x="468.6" y="134.5" font-size="13" fill="#333333">39%  (−31%)</text>
+<text x="184" y="197.0" font-size="13.5" fill="#333333" text-anchor="end">MotionMark Composition</text>
+<text x="184" y="213.0" font-size="13.5" fill="#333333" text-anchor="end">1.3.1 @ 30 FPS</text>
+<path d="M 196 176 h 321.0 a 4 4 0 0 1 4 4 v 16 a 4 4 0 0 1 -4 4 h -321.0 z" fill="#6b7280"/>
+<text x="529.0" y="192.5" font-size="13" fill="#333333">47%</text>
+<path d="M 196 202 h 172.7 a 4 4 0 0 1 4 4 v 16 a 4 4 0 0 1 -4 4 h -172.7 z" fill="#0D71B9"/>
+<text x="380.7" y="218.5" font-size="13" fill="#333333">26%  (−46%)</text>
+<line x1="196" y1="92" x2="196" y2="226" stroke="#555555" stroke-width="1"/>
+<text x="20" y="272" font-size="11.5" fill="#555555">Median GPU load over the same runs. MotionMark ramps up scene complexity with the score,</text>
+<text x="20" y="288" font-size="11.5" fill="#555555">so the Skia compositor is drawing more while loading the GPU less.</text>
+</svg>
