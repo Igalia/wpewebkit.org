@@ -23,7 +23,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2026-09-16T11:01:13.262Z">
+  <meta property="article:published_time" content="2026-09-16T11:25:46.182Z">
   <meta property="article:tag" content="about">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -89,7 +89,9 @@
     <main>
     <style>
 main > *, .dotsep {
-	padding: 2em 0 3em;
+	/* Block padding only: the horizontal 1rem from v2.css must survive,
+	   otherwise the text runs into both screen edges on a phone. */
+	padding-block: 2em 3em;
 }
 .masthead-img {
 	padding: 0;
@@ -112,7 +114,7 @@ such as the traditional Cocoa, GTK, etc toolkits.</p>
 </div>
 <section>
 <h2 id="web-page-rendering" tabindex="-1">Web page rendering</h2>
-<p class="leadin">WPE integrates with the target platform through the WPEPlatform
+<p>WPE integrates with the target platform through the WPEPlatform
 API, which ships as part of WPE WebKit itself. Because WPE provides no user-interface
 toolkit widget, this layer is what turns the rendered web page into pixels on screen
 and feeds input back to the engine.</p>
@@ -141,7 +143,7 @@ view and toplevel types).</p>
 </section>
 <section class="dotsep">
 <h2 id="input-events-handling" tabindex="-1">Input events handling</h2>
-<p class="leadin">In a traditional WebKit port, the provided widget usually also handles input
+<p>In a traditional WebKit port, the provided widget usually also handles input
 (keyboard, mouse, touch) events and is in charge of relaying them to the
 internal WebKit input handling components.</p>
 <p>As WPE doesn’t provide a widget, input is handled by the active WPEPlatform
@@ -153,7 +155,7 @@ provide input events in any way that better suits them.</p>
 </section>
 <section class="dotsep">
 <h2 id="legacy-architecture-(libwpe-and-wpe-backends)" tabindex="-1">Legacy architecture (libwpe and WPE backends)</h2>
-<p class="leadin">Before 2.54, WPE integrated with the platform through libwpe and a
+<p>Before 2.54, WPE integrated with the platform through libwpe and a
 separate, external rendering backend. This model is legacy as of 2.54: it is kept for
 existing deployments and still built as needed, but new projects should use the
 WPEPlatform API described above.</p>

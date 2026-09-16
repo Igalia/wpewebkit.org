@@ -41,12 +41,22 @@ details {
 	border: 2px solid #f1f1f1;
 	background: #f1f1f1;
 	border-radius: 0.5em;
+	/*
+	 * Markdown written inside <details> comes through as bare <p>/<ul>/<ol>
+	 * children rather than wrapped in a <div>, so the padding on the rules
+	 * below never reached it and the text sat flush against the box edge,
+	 * misaligned with the indented summary just above it. Padding the box
+	 * itself covers every child; summary and the <div> panel are pulled back
+	 * out so they keep spanning the full width as before.
+	 */
+	padding-inline: 1rem;
 }
 details > summary {
 	color: #555;
 }
 details > summary, details > div {
 	padding: 0.5rem 1rem;
+	margin-inline: -1rem;
 }
 details > div {
 	background: #fff;
@@ -87,7 +97,7 @@ main > * {
 	}
 }
 
-img {
+img, video, iframe {
 	box-sizing: border-box;
 	max-width: 100%;
 }
@@ -122,11 +132,50 @@ figure > figcaption {
 	color: #555;
 }
 
-h1 {font-size: 3em; line-height: 1.2;}
-h2 {font-size: 2.5em; line-height: 1.1;}
-h3 {font-size: 1.6em; line-height: 1.2;}
+/*
+ * Fluid type scale. The upper bound of every clamp() is the size the design
+ * has always used on wide viewports, so desktop rendering is unchanged; the
+ * sizes only scale down on narrow screens, where fixed em headings used to
+ * leave a handful of words per line next to unchanged 1rem body copy.
+ */
+h1 {font-size: clamp(2rem, 1.25rem + 2.4vw, 3em); line-height: 1.2;}
+h2 {font-size: clamp(1.625rem, 1.15rem + 1.9vw, 2.5em); line-height: 1.1;}
+h3 {font-size: clamp(1.25rem, 1.09rem + 0.65vw, 1.6em); line-height: 1.2;}
 p > big, p.leadin {
-	font-size: 1.67em;
+	font-size: clamp(1.15rem, 1.02rem + 0.8vw, 1.67em);
+}
+
+/*
+ * Long C++ symbols, API names and bare URLs turn up throughout this site's
+ * prose, headings and link text, and none of them offer a break opportunity
+ * of their own, so on a phone they used to push the whole page sideways.
+ * break-word only acts on a word that would otherwise overflow its line, so
+ * ordinary text is unaffected.
+ */
+main {
+	overflow-wrap: break-word;
+}
+
+/*
+ * stylish-portfolio.css sets `ul { padding-left: 4rem }` but says nothing about
+ * <ol>, which therefore falls back to the UA default of 40px -- about/faq and
+ * blog/06-integrating-wpe show both on one page at different indents. Give the
+ * two the same indent. Lists with a layout of their own (.gallery, the
+ * arrow-lists below, Bootstrap's .list-unstyled/.list-group) carry a class and
+ * win on specificity, so they are unaffected.
+ */
+main :is(ul, ol) {
+	padding-inline-start: 4rem;
+}
+/*
+ * A list that is a direct child of <main> does not pick up the 1rem of side
+ * padding `main > *` gives its sibling paragraphs, because the rule above
+ * overrides that shorthand's padding-left. Add it back, so a list indents the
+ * same amount from its prose whether it sits directly in <main> or inside a
+ * <div>/<section>.
+ */
+main > :is(ul, ol) {
+	padding-inline-start: 5rem;
 }
 
 nav.sitemap ul,
@@ -468,11 +517,14 @@ header.page {
 }
 header.page h1 {
 	padding-bottom: 0.5em;
-	font-size: 4.5em;
+	/* 3.375rem is 4.5em of the 0.75em header.page context, i.e. the size
+	   this title has always had on wide viewports. */
+	font-size: clamp(2.125rem, 1.3rem + 3.4vw, 3.375rem);
 	background: url(../assets/img/graphic-title-blue.svg) 0 100% / 7rem auto no-repeat;
 }
 header.page p {
-	font-size: 1.6em;
+	/* 1.2rem == the previous 1.6em of the 0.75em header.page context. */
+	font-size: clamp(1.05rem, 0.98rem + 0.38vw, 1.2rem);
 }
 header.page > time {
 	margin: 1rem 0;
@@ -481,6 +533,19 @@ header.page > time {
 
 pre, code {
 	background: var(--colorCodeBg);
+	/*
+	 * Naming a concrete stack instead of leaving the bare `monospace` keyword
+	 * from the UA stylesheet avoids the browser's separate default monospace
+	 * size (13px in Chrome), which left inline code visibly smaller than the
+	 * prose around it. An em keeps code in proportion wherever it appears,
+	 * including inside a heading or a .leadin.
+	 */
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+	font-size: 0.9em;
+}
+/* <code> inside <pre> must not compound the 0.9em. */
+pre code {
+	font-size: 1em;
 }
 
 pre {
@@ -488,6 +553,9 @@ pre {
 	border-radius: 0.5em;
 	padding-block: 1em;
 	padding-inline: 1.5em;
+	/* Prism code blocks set white-space:pre and would otherwise widen the
+	   page; let them scroll inside their own box instead. */
+	overflow-x: auto;
 }
 
 code {
@@ -770,4 +838,28 @@ div.warning {
 	background: rgba(255, 0, 0, 0.1);
 	border-top: 1px solid rgba(255, 0, 0, 0.25);
 	border-bottom: 1px solid rgba(255, 0, 0, 0.25);
+}
+
+/*
+ * Narrow-viewport adjustments.
+ *
+ * A 4rem list indent is a quarter of a phone's width before any text starts,
+ * and Bootstrap lays .card-deck children out with flex: 1 0 0%, so they never
+ * wrap and simply overflow the screen instead of stacking.
+ */
+@media (max-width: 45rem) {
+	main :is(ul, ol) {
+		padding-inline-start: 1.5rem;
+	}
+	main > :is(ul, ol) {
+		padding-inline-start: 2.5rem;
+	}
+	.card-deck {
+		flex-direction: column;
+	}
+	.card-deck .card {
+		min-width: 0;
+		margin-inline: 0;
+		margin-block-end: 1rem;
+	}
 }
