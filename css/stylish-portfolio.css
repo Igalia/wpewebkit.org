@@ -469,6 +469,11 @@ ul ol {
 
 blockquote {
     background-color: rgba(230, 230, 230, 0.7);
+    /* The tint makes this read as a boxed quote, but with no padding the text
+       sat flush against all four edges of the box. The UA's 40px side margins
+       are also a lot of a phone's width, so trade some of them for padding. */
+    padding: 0.75rem 1rem;
+    margin-inline: 1rem;
 }
 
 .author-line {
