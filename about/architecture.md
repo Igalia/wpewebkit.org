@@ -8,7 +8,9 @@ sitemapChangeFrequency: yearly
 ---
 <style>
 main > *, .dotsep {
-	padding: 2em 0 3em;
+	/* Block padding only: the horizontal 1rem from v2.css must survive,
+	   otherwise the text runs into both screen edges on a phone. */
+	padding-block: 2em 3em;
 }
 .masthead-img {
 	padding: 0;
