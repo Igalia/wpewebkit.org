@@ -9,13 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
 
-  <title>Supported Hardware</title>
-  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/about/supported-hardware.html">
+  <title>WPE WebKit 2.54.0 released</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/release/wpewebkit-2.54.0.html">
   <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/blog.xml">
   <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/security.xml">
-  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/about/supported-hardware.html">
-  <meta property="og:title" content="Supported Hardware">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/release/wpewebkit-2.54.0.html">
+  <meta property="og:title" content="WPE WebKit 2.54.0 released">
   <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/assets/twitter_Profile_WhiteBg_400px.png">
   <meta property="og:image:alt" content="WPE logo">
@@ -23,8 +23,10 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2026-09-16T11:01:13.263Z">
-  <meta property="article:tag" content="about">
+  <meta property="article:published_time" content="2026-09-16T00:00:00.000Z">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="release">
+  <meta property="article:tag" content="stable">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
 
@@ -70,9 +72,9 @@
     <nav class="global">
 	<div>
 		<a class="igalia logo home" href="/wpewebkit.org/wpewebkit-2.54-blog/"><img src="/wpewebkit.org/wpewebkit-2.54-blog/assets/img/logo-blue.svg" alt="WPE"></a>
-		<ul class="about off"><li>
+		<ul class="release off"><li>
 			<a class="nav-link" href="/wpewebkit.org/wpewebkit-2.54-blog/">Home</a>
-			</li><li class="currentPage">
+			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/wpewebkit-2.54-blog/about/">Learn & Discover</a>
 			</li><li>
 			<a class="nav-link" href="/wpewebkit.org/wpewebkit-2.54-blog/blog/">Blog</a>
@@ -87,312 +89,86 @@
 
 
     <main>
-    <style type="text/css">
-.tables {
-	padding-bottom: 8em;
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
 }
-
-.tables h2 {
-	font-size: 1.5em;
-	margin-block: 2em 0.125em;
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
 }
-.tables code {
-	color: #C00;
-}
-@media (max-width: 450px) {
-	.tables code {
-		word-break: break-all;
-	}
-}
-
-table, table thead, table th, table tbody tr:nth-child(n) {
-	background: transparent;
-	border: none;
-}
-table {
-	width: 100%;
-	table-layout: fixed;
-	border-collapse: separate;
-	border-spacing: 0;
-	font-size: 90%;
-	border-bottom: 2px solid black;
-	margin: 0;
-}
-table :is(thead, tbody) tr > * {
-	padding-left: 0;
-	vertical-align: top;
-}
-table thead tr > * {
-	padding-block: 0.25em 1px;
-	border-top: 1px solid silver;
-	border-bottom: 2px solid black;
-	font-size: smaller;
-	font-weight: 400;
-	text-transform: uppercase;
-	text-align: left;
-	color: #444;
-}
-table thead tr > th:first-child {
-	font-weight: 700;
-}
-table tbody tr:nth-child(n + 2) > * {
-	border-top: 1px solid silver;
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
 }
 </style>
-<nav class="sidebar">
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/wpewebkit-2.54-blog/release/wpewebkit-2.54.0.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE WebKit 2.54.0 released</h1>
+ 
+   <meta itemprop="datePublished" content="Wed Sep 16 2026">
+   <time itemprop="dateCreated">16 September 2026</time>
+ 
+  
+  <a class="btn btn-l btn-primary mt-3" href="https://wpewebkit.org/releases/wpewebkit-2.54.0.tar.xz">Download</a>
+	<a class="btn btn-l btn-primary mt-3" href="https://wpewebkit.org/reference/2.54.0/">Documentation</a>
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>This is the first stable release in the 2.54 series.</p>
+<h3 id="highlights-of-the-wpe-webkit-2.54.0-release" tabindex="-1">Highlights of the WPE WebKit 2.54.0 release</h3>
 <ul>
-<li class="currentPage"><a href="/wpewebkit.org/wpewebkit-2.54-blog/about/supported-hardware.html">Supported Hardware</a></li>
-<li><a href="/wpewebkit.org/wpewebkit-2.54-blog/about/a-good-choice.html">Why Choose WPE?</a></li>
-<li><a href="/wpewebkit.org/wpewebkit-2.54-blog/about/#wpe-in-action">WPE in Action</a></li>
+<li>The <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/">WPEPlatform</a>
+embedding API is now considered stable and enabled by default at build
+configuration time. The legacy <code>libwpe</code>-based API is still available, and
+may be deprecated in the future.</li>
+<li>Add new API for page favicons, using
+<a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0//class.FaviconDatabase.html">WebKitFaviconDatabase</a>
+and the <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0//property.WebView.page-icons.html">WebKitWebView:page-icons</a>
+property.</li>
+<li>Add the <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebView.magnification.html">WebKitWebView:magnification</a>
+property, to handle visual scaling.</li>
+<li>Add new API to allow setting a per-navigation custom <code>User-Agent</code> to
+<a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/class.WebsitePolicies.html">WebKitWebsitePolicies</a>.</li>
+<li>Add support for gamepad rumble effects.</li>
+<li>Add support for spell checking using the <a href="https://rrthomas.github.io/enchant/">Enchant</a>
+library.</li>
+<li>Add initial support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API">Pointer
+Lock</a> API.</li>
+<li>Switch Web Process compositor to use Skia instead of TextureMapper.</li>
+<li>Improved WebXR implementation, which now includes support for the
+<a href="https://www.w3.org/TR/webxrlayers-1/">Layers API</a>.</li>
+<li>Improved damage handling that is now also used during the composition to
+limit the composited areas.</li>
+<li>Implement GPU atlas creation and replay substitution for batched raster
+image uploads.</li>
+<li>Media capability reporting is more accurate.</li>
+<li>Video decoding limits are now respected in media capabilities queries.</li>
+<li>Remove the option to use Cairo for 2D rendering.</li>
 </ul>
-</nav>
-<header class="page">
-<h1>Supported Hardware</h1>
-<p>WPE is currently running on a wide range of hardware. This page lists configurations which are known to work, sorted by manufacturer.</p>
-</header>
-<section class="tables">
-<p><strong>Note</strong>: Since 2.54, WPE WebKit provides Wayland, DRM/KMS, and headless output directly through <a href="/wpewebkit.org/wpewebkit-2.54-blog/about/faq.html#what-is-the-wpeplatform-api%3F">the built-in WPEPlatform implementations</a>, which run on standard Mesa-based graphics stacks without libwpe or an external backend. The tables below record validated configurations in pre-2.54 releases, where the <strong>Legacy backend</strong> and <strong>Legacy Cog platforms</strong> columns describe the pre-2.54 stack, and are kept for reference.</p>
-<p>This list is not exhaustive. Reports of unlisted configurations are welcome.</p>
-<h2 id="nxp" tabindex="-1">NXP</h2>
-<table>
-<thead>
-<tr>
-<th>Series</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>Legacy backend</th>
-<th>Legacy Cog platforms</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>i.MX 51</td>
-<td>Imageon Z460</td>
-<td>freedreno (reverse-engineered)</td>
-<td>fdo</td>
-<td>wl, drm</td>
-</tr>
-<tr>
-<td>i.MX 53</td>
-<td>Imageon Z460</td>
-<td>freedreno (reverse-engineered)</td>
-<td>fdo</td>
-<td>wl, drm</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC880</td>
-<td>Vivante (Proprietary)</td>
-<td>fdo</td>
-<td>wl, drm</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>etnaviv (reverse-engineered)</td>
-<td>fdo</td>
-<td>wl, drm</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>Vivante (Proprietary)</td>
-<td>fdo</td>
-<td>wl</td>
-</tr>
-<tr>
-<td>i.MX 6</td>
-<td>Vivante GC2000</td>
-<td>Vivante (Proprietary)</td>
-<td>rdk, <code>VIV_IMX6_EGL</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>i.MX 8M</td>
-<td>Vivante GC7000</td>
-<td>etnaviv (reverse-engineered)</td>
-<td>fdo</td>
-<td>wl, drm</td>
-</tr>
-<tr>
-<td>i.MX 8M</td>
-<td>Vivante GC7000</td>
-<td>Vivante (Proprietary)</td>
-<td>fdo</td>
-<td>wl</td>
-</tr>
-</tbody>
-</table>
-<h2 id="broadcom" tabindex="-1">Broadcom</h2>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>Legacy backend</th>
-<th>Legacy Cog platforms</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Arris VIP5202W</td>
-<td>VideoCore IV</td>
-<td>Proprietary</td>
-<td>rdk, <code>BCM_NEXUS</code> or <code>USE_BACKEND_BCM_NEXUS_WAYLAND</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Raspberry Pi 3</td>
-<td>VideoCore IV</td>
-<td>Proprietary</td>
-<td>rdk, <code>BCM_RPI</code></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Raspberry Pi 3</td>
-<td>VideoCore IV</td>
-<td>Mesa vc4</td>
-<td>fdo</td>
-<td>wl, drm, headless</td>
-</tr>
-<tr>
-<td>Raspberry Pi 4</td>
-<td>VideoCore V</td>
-<td>Mesa v3d</td>
-<td>fdo</td>
-<td>wl</td>
-</tr>
-</tbody>
-</table>
-<h2 id="qualcomm" tabindex="-1">Qualcomm</h2>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>Legacy backend</th>
-<th>Legacy Cog platforms</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>APQ8017</td>
-<td>Adreno 306</td>
-<td>Proprietary</td>
-<td>Custom</td>
-<td>n/a</td>
-</tr>
-</tbody>
-</table>
-<h2 id="rockchip" tabindex="-1">RockChip</h2>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>Legacy backend</th>
-<th>Legacy Cog platforms</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RK3399</td>
-<td>Mali T860MP4</td>
-<td>panfrost (reverse-engineered)</td>
-<td>fdo</td>
-<td>wl</td>
-</tr>
-<tr>
-<td>RK3399</td>
-<td>Mali T860MP4</td>
-<td>Mali (Proprietary)</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="pc-style-hardware" tabindex="-1">PC-style Hardware</h2>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>Legacy backend</th>
-<th>Legacy Cog platforms</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Any</td>
-<td>AMD</td>
-<td>Mesa amdgpu</td>
-<td>fdo</td>
-<td>wl, x11, gtk4, headless</td>
-</tr>
-<tr>
-<td>Any</td>
-<td>Intel</td>
-<td>Mesa i965</td>
-<td>fdo</td>
-<td>wl, x11, gtk4, headless, drm</td>
-</tr>
-<tr>
-<td>Any</td>
-<td>Intel</td>
-<td>Mesa iris</td>
-<td>fdo</td>
-<td>wl, x11, gtk4, headless, drm</td>
-</tr>
-</tbody>
-</table>
-<h2 id="other" tabindex="-1">Other</h2>
-<table>
-<thead>
-<tr>
-<th>Device</th>
-<th>GPU</th>
-<th>Driver</th>
-<th>Legacy backend</th>
-<th>Legacy Cog platforms</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Beaglebone</td>
-<td>PowerVR SGX530</td>
-<td>Proprietary</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section class="resources">
-<header class="full-bleed">
-<h2><a href=".">Resources</a></h2>
-<img src="/wpewebkit.org/wpewebkit-2.54-blog/assets/img/illustration-resources.svg" alt="" class="decoration">
-</header>
-<div class="dotsep">
-<ul class="gallery c3">
-<li>
-<h3><a href="/wpewebkit.org/wpewebkit-2.54-blog/about/a-good-choice.html">Why Choose WPE?</a></h3>
-<p>WPE WebKit is widely adopted in many industries, including digital signage, home appliances, set-top boxes, and automative and in-flight infotainment systems.</p>
-</li>
-<li>
-<h3><a href="/wpewebkit.org/wpewebkit-2.54-blog/about/get-wpe.html">Get WPE</a></h3>
-<p>Explore the different methods to get the source code and/or binaries for WPE</p>
-</li>
-<li>
-<h3><a href="https://igalia.com">Igalia</a></h3>
-<p>The maintainer and sponsor of WPEwebkit, Igalia is an open-source and web standards consultancy spanning the globe.</p>
-</li>
-</ul>
+<p>For more details about all the changes included in WPE WebKit 2.54 see the
+<code>NEWS</code> file that is included in the tarball.</p>
+<h4 id="checksums" tabindex="-1">Checksums</h4>
+<pre>
+wpewebkit-2.54.0.tar.xz (44.1 MiB)
+   md5sum: 32f6eceb21afbf620bfd756bdde856cc
+   sha1sum: 9ff8fce3919fd563e2759e2e5c9b87327cfc507e
+   sha256sum: efa9bcc3cb891c2d88f50eec710d9ccee71cbdf1040420361eb98c17355eb452
+</pre>
+
+
+
+
 </div>
-</section>
 
     <div class="survey">
     <p>
@@ -428,7 +204,7 @@ table tbody tr:nth-child(n + 2) > * {
     }
     </style>
 
-    </main>
+    </div></main>
 
     <dialog id="splash">
 <p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
