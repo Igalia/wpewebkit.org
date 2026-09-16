@@ -35,18 +35,14 @@ h2 {
 
 API documentation for the **latest stable release** is available here:
 
-<ul class="arrows">
-<li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-2.0/">WPEWebKit 2.0 API documentation</a></li>
-<li><a href="https://wpewebkit.org/reference/stable/wpe-javascriptcore-2.0/">WPEJavaScriptCore 2.0 API documentation</a></li>
-<li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-2.0/">WPEWebExtension 2.0 API documentation</a></li>
-</ul>
-
-API documentation for the **[new WPEPlatform API](/about/faq.html#what-is-the-wpeplatform-api%3F)** (under development):
 <ul>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-2.0/">WPEWebKit 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-platform-2.0/">WPEPlatform 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-platform-wayland-2.0/">WPEPlatform Wayland 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-platform-drm-2.0/">WPEPlatform DRM 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-platform-headless-2.0/">WPEPlatform Headless 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-javascriptcore-2.0/">WPEJavaScriptCore 2.0 API documentation</a></li>
+<li><a href="https://wpewebkit.org/reference/stable/wpe-web-extension-2.0/">WPEWebExtension 2.0 API documentation</a></li>
 </ul>
 
 API documentation for **deprecated APIs**:
@@ -76,7 +72,7 @@ There are also pre-built packages available for many <a href="/about/get-wpe.htm
 
 WPE WebKit follows a **6-month development cycle**:
 
-<ul class="arrows">
+<ul>
 <li>There are two feature releases every year, typically in March and September.</li>
 <li>Within feature releases, there may be any number of bug-fixes.</li>
 <li>Development releases are the base for the feature releases that follow them.  They do not follow a fixed schedule in the release cycle.</li>
@@ -89,7 +85,7 @@ WPE WebKit and [WebKitGTK](https://webkitgtk.org/) share a fair amount of code. 
 <div class="dotsep">
 <div>
 <h2><a href="/about/architecture.html">WPE Design</a></h2>
-<p>WPE is the official port of the WebKit Web rendering engine for Linux-based embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits.</p>
+<p>WPE is the official port of the WebKit Web rendering engine for Linux-based embedded platforms. WPE is uniquely designed for embedded systems in that it doesn’t depend on any user-interface toolkits such as the traditional Cocoa, GTK, etc toolkits. Since 2.54, its built-in WPEPlatform API provides Wayland, DRM/KMS, and headless integration out of the box.</p>
 </div>
 <img src="/assets/img/diagram-WPE-design.svg" alt="">
 </div>

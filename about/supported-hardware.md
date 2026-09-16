@@ -97,60 +97,62 @@ WPE is currently running on a wide range of hardware. This page lists configurat
 
 <section class="tables">
 
-Note that this list is not exhaustive. Reports of unlisted configurations are welcome.
+**Note**: Since 2.54, WPE WebKit provides Wayland, DRM/KMS, and headless output directly through [the built-in WPEPlatform implementations](/about/faq.html#what-is-the-wpeplatform-api%3F), which run on standard Mesa-based graphics stacks without libwpe or an external backend. The tables below record validated configurations in pre-2.54 releases, where the **Legacy backend** and **Legacy Cog platforms** columns describe the pre-2.54 stack, and are kept for reference.
+
+This list is not exhaustive. Reports of unlisted configurations are welcome.
 
 ## NXP
 
-| Series  | GPU            | Driver      | WPE Backend | Cog Platforms |
-|---------|----------------|-------------|-------------|---------------|
-| i&period;MX 51 | Imageon Z460   | freedreno (reverse-engineered) | fdo | wl, drm |
-| i&period;MX 53 | Imageon Z460   | freedreno (reverse-engineered) | fdo | wl, drm |
-| i&period;MX 6  | Vivante GC880  | Vivante (Proprietary) | fdo | wl, drm |
-| i&period;MX 6  | Vivante GC2000 | etnaviv (reverse-engineered) | fdo | wl, drm |
-| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | fdo | wl |
-| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary) | rdk, `VIV_IMX6_EGL` | n/a |
-| i&period;MX 8M | Vivante GC7000 | etnaviv (reverse-engineered) | fdo | wl, drm |
-| i&period;MX 8M | Vivante GC7000 | Vivante (Proprietary) | fdo | wl |
+| Series         | GPU            | Driver                         | Legacy backend      | Legacy Cog platforms |
+|----------------|----------------|--------------------------------|---------------------|----------------------|
+| i&period;MX 51 | Imageon Z460   | freedreno (reverse-engineered) | fdo                 | wl, drm              |
+| i&period;MX 53 | Imageon Z460   | freedreno (reverse-engineered) | fdo                 | wl, drm              |
+| i&period;MX 6  | Vivante GC880  | Vivante (Proprietary)          | fdo                 | wl, drm              |
+| i&period;MX 6  | Vivante GC2000 | etnaviv (reverse-engineered)   | fdo                 | wl, drm              |
+| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary)          | fdo                 | wl                   |
+| i&period;MX 6  | Vivante GC2000 | Vivante (Proprietary)          | rdk, `VIV_IMX6_EGL` | n/a                  |
+| i&period;MX 8M | Vivante GC7000 | etnaviv (reverse-engineered)   | fdo                 | wl, drm              |
+| i&period;MX 8M | Vivante GC7000 | Vivante (Proprietary)          | fdo                 | wl                   |
 
 ## Broadcom
 
-| Device         | GPU | Driver | WPE Backend | Cog Platforms |
-|----------------|-----|--------|-------------|---------------|
-| Arris VIP5202W | VideoCore IV | Proprietary | rdk, `BCM_NEXUS` or `USE_BACKEND_BCM_NEXUS_WAYLAND` | n/a |
-| Raspberry Pi 3 | VideoCore IV | Proprietary | rdk, `BCM_RPI` | n/a |
-| Raspberry Pi 3 | VideoCore IV | Mesa vc4    | fdo | wl, drm, headless |
-| Raspberry Pi 4 | VideoCore V  | Mesa v3d    | fdo | wl |
+| Device         | GPU          | Driver      | Legacy backend                                      | Legacy Cog platforms |
+|----------------|--------------|-------------|-----------------------------------------------------|----------------------|
+| Arris VIP5202W | VideoCore IV | Proprietary | rdk, `BCM_NEXUS` or `USE_BACKEND_BCM_NEXUS_WAYLAND` | n/a                  |
+| Raspberry Pi 3 | VideoCore IV | Proprietary | rdk, `BCM_RPI`                                      | n/a                  |
+| Raspberry Pi 3 | VideoCore IV | Mesa vc4    | fdo                                                 | wl, drm, headless    |
+| Raspberry Pi 4 | VideoCore V  | Mesa v3d    | fdo                                                 | wl                   |
 
 
 ## Qualcomm
 
-| Device  | GPU | Driver | WPE Backend | Cog Platforms |
-|---------|-----|--------|-------------|---------------|
-| APQ8017 | Adreno 306 | Proprietary | Custom  | n/a |
+| Device  | GPU        | Driver      | Legacy backend | Legacy Cog platforms |
+|---------|------------|-------------|----------------|----------------------|
+| APQ8017 | Adreno 306 | Proprietary | Custom         | n/a                  |
 
 
 ## RockChip
 
-| Device | GPU          | Driver | WPE Backend | Cog Platforms |
-|--------|--------------|--------|-------------|---------------|
-| RK3399 | Mali T860MP4 | panfrost (reverse-engineered) | fdo | wl |
-| RK3399 | Mali T860MP4 | Mali (Proprietary) | | |
+| Device | GPU          | Driver                        | Legacy backend | Legacy Cog platforms |
+|--------|--------------|-------------------------------|----------------|----------------------|
+| RK3399 | Mali T860MP4 | panfrost (reverse-engineered) | fdo            | wl                   |
+| RK3399 | Mali T860MP4 | Mali (Proprietary)            |                |                      |
 
 
 ## PC-style Hardware
 
-| Device | GPU | Driver | WPE Backend | Cog Platforms          |
-|--------|-----|--------|-------------|------------------------|
-| Any | AMD | Mesa amdgpu | fdo | wl, x11, gtk4, headless      |
-| Any | Intel | Mesa i965 | fdo | wl, x11, gtk4, headless, drm |
-| Any | Intel | Mesa iris | fdo | wl, x11, gtk4, headless, drm |
+| Device | GPU   | Driver      | Legacy backend | Legacy Cog platforms         |
+|--------|-------|-------------|----------------|------------------------------|
+| Any    | AMD   | Mesa amdgpu | fdo            | wl, x11, gtk4, headless      |
+| Any    | Intel | Mesa i965   | fdo            | wl, x11, gtk4, headless, drm |
+| Any    | Intel | Mesa iris   | fdo            | wl, x11, gtk4, headless, drm |
 
 
 ## Other
 
-| Device | GPU | Driver | WPE Backend | Cog Platforms |
-|--------|-----|--------|-------------|---------------|
-| Beaglebone | PowerVR SGX530 | Proprietary | | |
+| Device     | GPU            | Driver      | Legacy backend | Legacy Cog platforms |
+|------------|----------------|-------------|----------------|----------------------|
+| Beaglebone | PowerVR SGX530 | Proprietary |                |                      |
 
 </section>
 

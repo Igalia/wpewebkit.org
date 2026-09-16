@@ -50,12 +50,19 @@ get your hands on WPE, depending on what you need.
 ### Before starting
 
 Before getting the code, it's a good idea to be familiar with what you
-will need. The different components that are needed to run WPE are:
+will need. Since 2.54, WPE WebKit bundles the WPEPlatform API, which provides
+built-in Wayland, DRM/KMS, and headless integration, so the only component you
+need to run WPE on the common targets is:
 
-* [WebKit](https://webkit.org): as WPE is an official WebKit port, you will need the source code for the WebKit project.
-* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe): A general-purpose library for WPE, that enables integration between WebKit and different platforms, through backends.
-* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A reference FreeDesktop.org backend for WPE, that relies on different FreeDesktop.org projects and can serve as a starting point to either customize or create a completely new backend for specific configurations.
-* [Cog](https://github.com/Igalia/cog): A simple and minimalistic browser using WPE, with no user interface, suitable to be used as a Web application container or as a starting point to develop more complex browser applications based on WPE.
+* [WebKit](https://webkit.org): as WPE is an official WebKit port, you will need the source code for the WebKit project. WPE WebKit includes the WPEPlatform API, so it can drive Wayland, DRM/KMS, and headless output on its own.
+
+#### Optional and legacy components
+
+The following components are only needed for the legacy API (pre-2.54), or for existing deployments built on it. They are still released as needed, but new projects do not require them:
+
+* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe): A general-purpose library for the legacy API, that enables integration between WebKit and different platforms, through external backends.
+* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo): A reference FreeDesktop.org backend for the legacy API, that relies on different FreeDesktop.org projects and can serve as a starting point to either customize or create a completely new backend for specific configurations.
+* [Cog](https://github.com/Igalia/cog): A simple and minimalistic launcher built on the legacy API, with no user interface, suitable to be used as a Web application container. With WPEPlatform, a launcher is only a few lines of code, so Cog is no longer required for new projects.
 
 ## __Install it from your Linux distribution__
 
@@ -102,12 +109,13 @@ and its components:
 
 <h3 class="sr-only">Releases</h3>
 
-<div class="container" style="border-block: medium solid hsl(205,86%,70%);padding-block:1em;padding-inline:0.5em;">
+<div class="container" style="border-block: medium solid hsl(205,86%,70%);padding-block:1em;padding-inline:0.5em;margin: 2em;">
   <div class="card-deck" style="display:flex;">
     <div class="card">
       <h4 class="card-header text-center" style="margin-top: 0;">Stable</h4>
       <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
+        {%- if item[0] == "wpewebkit" -%}
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           {{ item[0] }}<span class="sr-only">:</span>
           <span>
@@ -120,6 +128,7 @@ and its components:
              href="{{ item[1].stable.url }}"><span class="sr-only">Release notes for v{{ item[1].stable.version }}</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div>
+        {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
@@ -128,6 +137,7 @@ and its components:
       <h4 class="card-header text-center" style="margin-top: 0;">Unstable</h4>
       <div class="list-group list-group-flush">
         {%- for item in collections.latestReleases -%}
+        {%- if item[0] == "wpewebkit" -%}
         <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           {{ item[0] }}<span class="sr-only">:</span>
           <span>
@@ -140,6 +150,7 @@ and its components:
              href="{{ item[1].unstable.url }}"><span class="sr-only">Release notes for v{{ item[1].unstable.version }}</span><i class="icon-info align-text-bottom"></i></a>
           </span>
         </div>
+        {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
@@ -147,6 +158,58 @@ and its components:
       <a class="btn btn-light btn-sm" style="font-weight: normal" href="https://wpewebkit.org/release/">
         <i class="icon-cloud-download align-text-bottom" style="margin-right: 0.3em"></i>See all released tarballs…</a>
     </p>
+  </div>
+</div>
+
+### Legacy components
+
+These components are tied to the legacy API (pre-2.54) and are provided for existing deployments. They are still released as needed.
+
+<div class="container" style="border-block: medium solid hsl(205,20%,80%);padding-block:1em;padding-inline:0.5em;margin: 2em;">
+  <div class="card-deck" style="display:flex;">
+    <div class="card">
+      <h4 class="card-header text-center" style="margin-top: 0;">Stable</h4>
+      <div class="list-group list-group-flush">
+        {%- for item in collections.latestReleases -%}
+        {%- unless item[0] == "wpewebkit" -%}
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          {{ item[0] }}<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary"
+             title="Download {{ item[0] }} {{ item[1].stable.version }}"
+             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].stable.version | append: '.tar.xz' }}"><span class="sr-only">Download v</span>{{ item[1].stable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary"
+             title="Release notes for {{ item[0] }} {{ item[1].stable.version }}"
+             href="{{ item[1].stable.url }}"><span class="sr-only">Release notes for v{{ item[1].stable.version }}</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div>
+        {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+   <div class="card">
+      <h4 class="card-header text-center" style="margin-top: 0;">Unstable</h4>
+      <div class="list-group list-group-flush">
+        {%- for item in collections.latestReleases -%}
+        {%- unless item[0] == "wpewebkit" -%}
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          {{ item[0] }}<span class="sr-only">:</span>
+          <span>
+          <a class="badge badge-primary"
+             title="Download {{ item[0] }} {{ item[1].unstable.version }}"
+             href="{{ site.release_dir | append:'/' | append: item[0] | append: '-' | append: item[1].unstable.version | append: '.tar.xz' }}"><span class="sr-only">Download v</span>{{ item[1].unstable.version }}<i style="margin-left:0.3em" class="icon-arrow-down-circle align-text-bottom"></i></a>
+          <span class="sr-only">-</span>
+          <a class="badge badge-secondary"
+             title="Release notes for {{ item[0] }} {{ item[1].unstable.version }}"
+             href="{{ item[1].unstable.url }}"><span class="sr-only">Release notes for v{{ item[1].unstable.version }}</span><i class="icon-info align-text-bottom"></i></a>
+          </span>
+        </div>
+        {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -159,9 +222,12 @@ that is not yet available in WPE. Additionally, this can be also be
 a good way to track down any bug you might find and to fix it.
 
 * [WebKit](https://github.com/webKit/WebKit/)
-* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe).
-* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo).
-* [Cog](https://github.com/Igalia/cog).
+
+The following repositories are only needed for the legacy API (pre-2.54) or existing deployments built on it:
+
+* [libwpe](https://github.com/WebPlatformForEmbedded/libwpe) (legacy).
+* [WPEBackend-fdo](https://github.com/Igalia/WPEBackend-fdo) (legacy).
+* [Cog](https://github.com/Igalia/cog) (legacy).
 
 Instead of downloading each of these components on their own, the recommended
 procedure is cloning Git repositories for WebKit and the [WebKit Container
