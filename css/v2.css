@@ -167,6 +167,16 @@ main {
 main :is(ul, ol) {
 	padding-inline-start: 4rem;
 }
+/*
+ * A list that is a direct child of <main> does not pick up the 1rem of side
+ * padding `main > *` gives its sibling paragraphs, because the rule above
+ * overrides that shorthand's padding-left. Add it back, so a list indents the
+ * same amount from its prose whether it sits directly in <main> or inside a
+ * <div>/<section>.
+ */
+main > :is(ul, ol) {
+	padding-inline-start: 5rem;
+}
 
 nav.sitemap ul,
 div.arrow-lists > ul {
@@ -840,6 +850,9 @@ div.warning {
 @media (max-width: 45rem) {
 	main :is(ul, ol) {
 		padding-inline-start: 1.5rem;
+	}
+	main > :is(ul, ol) {
+		padding-inline-start: 2.5rem;
 	}
 	.card-deck {
 		flex-direction: column;
