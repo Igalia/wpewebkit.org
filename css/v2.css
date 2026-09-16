@@ -829,3 +829,24 @@ div.warning {
 	border-top: 1px solid rgba(255, 0, 0, 0.25);
 	border-bottom: 1px solid rgba(255, 0, 0, 0.25);
 }
+
+/*
+ * Narrow-viewport adjustments.
+ *
+ * A 4rem list indent is a quarter of a phone's width before any text starts,
+ * and Bootstrap lays .card-deck children out with flex: 1 0 0%, so they never
+ * wrap and simply overflow the screen instead of stacking.
+ */
+@media (max-width: 45rem) {
+	main :is(ul, ol) {
+		padding-inline-start: 1.5rem;
+	}
+	.card-deck {
+		flex-direction: column;
+	}
+	.card-deck .card {
+		min-width: 0;
+		margin-inline: 0;
+		margin-block-end: 1rem;
+	}
+}
