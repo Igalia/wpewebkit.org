@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPE WebKit 2.54 highlights</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/fq-webrtc/blog/2026-09-16-wpewebkit-2.54.html">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="https://igalia.github.io/wpewebkit.org/fq-webrtc/blog.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="https://igalia.github.io/wpewebkit.org/fq-webrtc/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="https://igalia.github.io/wpewebkit.org/fq-webrtc/security.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/fq-webrtc/blog/2026-09-16-wpewebkit-2.54.html">
+  <meta property="og:title" content="WPE WebKit 2.54 highlights">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/fq-webrtc/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/fq-webrtc/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-09-16T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/fq-webrtc/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/fq-webrtc/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/fq-webrtc/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/fq-webrtc/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/fq-webrtc/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/fq-webrtc/"><img src="/wpewebkit.org/fq-webrtc/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/fq-webrtc/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/fq-webrtc/about/">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/fq-webrtc/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/fq-webrtc/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/fq-webrtc/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/fq-webrtc/blog/2026-09-16-wpewebkit-2.54.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPE WebKit 2.54 highlights</h1>
+ 
+   <meta itemprop="datePublished" content="Wed Sep 16 2026">
+   <time itemprop="dateCreated">16 September 2026</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>The WebKit team at Igalia is happy to announce a new release series of WPE WebKit. This release has two main highlights: the new WPEPlatform API, now stable and enabled by default, and a web process compositor built on the <a href="https://skia.org">Skia</a> graphics library, replacing the TextureMapper-based one. Read on for the details on both, along with a summary of the other most noteworthy changes from the latest release cycle.</p>
+<h2 id="wpeplatform%3A-the-new-wpe-api" tabindex="-1">WPEPlatform: the new WPE API</h2>
+<p>WPEPlatform, the API that has been in the works for the past several release cycles, takes center stage in 2.54: it is now enabled by default and its API is considered stable, so applications can build on it without expecting breaking changes in future releases. Consequently, the traditional <a href="https://github.com/WebKit/libwpe"><code>libwpe</code></a>-based API is officially deprecated: it remains available and maintained, but new code should target WPEPlatform, and existing embedders are encouraged to plan their migration. This also applies to <a href="https://github.com/Igalia/cog">Cog</a>, which will not have stable releases beyond the 0.18.x series.</p>
+<p>The best part of the new API is how much simpler it is. Under <code>libwpe</code>, an application had to create a view backend (usually through <a href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a>’s “exportable” backend) and drive rendering, buffer management, and input dispatch itself through its callbacks. WPEPlatform moves all of that into WebKit and the platform implementation, so migrating an application is mostly a matter of deleting code: in the common case, the application constructs its <code>WebKitWebView</code> without a backend, WebKit selects a suitable platform automatically, and everything built on top of the web view carries over unchanged. The platform API only surfaces when an application wants more than the defaults: pinning to a particular platform, handling raw input events, or driving the toplevel window. Each of those is a few lines against a small GObject API rather than a set of C callbacks to implement.</p>
+<p>To help embedders make the move, WPEPlatform is now extensively documented. The reference documentation includes an <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/overview.html">overview of the platform API</a> (covering its relationship to <code>libwpe</code> and what is intentionally not part of the new API), a <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/compiling.html">guide on compiling against it</a>, a <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/tutorial-browser.html">tutorial on writing a browser</a>, and a <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/tutorial-platform.html">tutorial on writing a WPE platform implementation</a>. A <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/migrating-from-libwpe.html">guide on migrating from libwpe</a>, with a symbol-by-symbol <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/migration-mapping.html">mapping table</a>, walks embedders through the process step by step.</p>
+<p>Since WPEPlatform is now built by default, the <code>wpe-platform-2.0</code> pkg-config module is available in regular builds. Conversely, the legacy API can be disabled at build time with <code>ENABLE_WPE_LEGACY_API=OFF</code> when it is not needed.</p>
+<h3 id="additions-and-final-adjustments" tabindex="-1">Additions and final adjustments</h3>
+<p>New platform APIs added this cycle include:</p>
+<ul>
+<li><code>WPEProcessManager</code> and <code>WPEProcessLaunchOptions</code>, which allow the embedder to control how the auxiliary WebKit processes are launched and terminated. This is particularly important on Android, where each process is a service that must be started with <code>bindService()</code>, and it removes the last reason a WPEPlatform-only build could not work there. Note that, unlike the rest of WPEPlatform, the process management API is only built when targeting Android and remains experimental: it is not yet generic enough to be enabled everywhere, and it may still change in future releases.</li>
+<li>Gamepad rumble support, through <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/method.Gamepad.has_rumble.html"><code>wpe_gamepad_has_rumble()</code></a> and <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/method.Gamepad.rumble.html"><code>wpe_gamepad_rumble()</code></a>, with a built-in implementation based on <a href="https://gnome.pages.gitlab.gnome.org/libmanette/">libmanette</a>. This enables the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Gamepad/vibrationActuator">Gamepad API <code>vibrationActuator</code></a> for web content.</li>
+<li>A new <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/const.SETTING_OVERLAY_SCROLLBARS.html"><code>WPE_SETTING_OVERLAY_SCROLLBARS</code></a> setting, enabled by default, which may be disabled by applications to opt into classic, always-visible scrollbars.</li>
+<li>A new <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/enum.InputPurpose.html"><code>WPE_INPUT_PURPOSE_SEARCH</code></a> input purpose, allowing input methods to detect when the values of an input field are expected to be search terms.</li>
+</ul>
+<p>A few final adjustments were made to the API before declaring it stable, which may require updates to platform implementations and applications developed against the earlier previews:</p>
+<ul>
+<li>The <code>WPE_SETTING_DISABLE_ANIMATIONS</code> setting has been replaced by <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/const.SETTING_REDUCED_MOTION.html"><code>WPE_SETTING_REDUCED_MOTION</code></a>, matching the dedicated reduced-motion setting introduced in <a href="https://release.gnome.org/50/">GNOME 50</a>, and a new tri-state <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/const.SETTING_INTERFACE_CONTRAST.html"><code>WPE_SETTING_INTERFACE_CONTRAST</code></a> setting has been added. Together with the existing <code>WPE_SETTING_DARK_MODE</code> setting, these make the <code>prefers-reduced-motion</code>, <code>prefers-contrast</code>, and <code>prefers-color-scheme</code> media queries follow the platform settings.</li>
+<li><a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/method.GestureController.handle_event.html"><code>wpe_gesture_controller_handle_event()</code></a> now returns a boolean indicating whether the event was consumed.</li>
+<li>The <code>WPE_DMABUF_BUFFER_FORMAT</code> environment variable has been renamed to <code>WPE_BUFFER_FORMAT</code>.</li>
+</ul>
+<h3 id="beyond-linux%3A-android" tabindex="-1">Beyond Linux: Android</h3>
+<p>A good measure of the new API’s maturity is <a href="https://github.com/Igalia/wpe-android">wpe-android</a>, which has been rebuilt this year as a WPEPlatform platform implementation living entirely outside the WebKit tree: Android’s display system now looks to the engine like any other WPE platform, and applications get a convenience Java API modeled after <a href="https://developer.android.com/reference/android/webkit/WebView"><code>android.webkit.WebView</code></a>. The new <code>WPEProcessManager</code> API removed the last dependency on <code>libwpe</code> there. You can read more about it in <a href="https://blogs.igalia.com/alex/2026/09/11/wpe-webkit-on-android-now-with-wpeplatform/">this post</a>.</p>
+<h3 id="on-the-webkit-api-side" tabindex="-1">On the WebKit API side</h3>
+<p>The shared WebKit API has also seen additions this cycle:</p>
+<ul>
+<li>A new API for page icons: <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/method.FaviconDatabase.get_page_icons.html"><code>webkit_favicon_database_get_page_icons()</code></a> retrieves all the icons declared by a page as a list of <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/class.Image.html"><code>WebKitImage</code></a> objects, and the <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebView.page-icons.html"><code>WebKitWebView:page-icons</code></a> property exposes the icons of the currently loaded page. Each icon implements <a href="https://docs.gtk.org/gio/iface.LoadableIcon.html"><code>GLoadableIcon</code></a>, so applications can pick the size that best fits their needs. With this, the favicon database is available in WPE for the first time; it can be enabled with <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/method.WebsiteDataManager.set_favicons_enabled.html"><code>webkit_website_data_manager_set_favicons_enabled()</code></a>.</li>
+<li>A new <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebView.magnification.html"><code>WebKitWebView:magnification</code></a> property to handle visual scaling of the page, independent of the zoom level.</li>
+<li><a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebsitePolicies.custom-user-agent.html"><code>WebKitWebsitePolicies:custom-user-agent</code></a> allows setting a custom User-Agent for a single navigation, by passing the policies to <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/method.PolicyDecision.use_with_policies.html"><code>webkit_policy_decision_use_with_policies()</code></a>.</li>
+<li><a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/method.FeatureList.find.html"><code>webkit_feature_list_find()</code></a> is a convenience function to look up a feature by identifier in a feature list.</li>
+</ul>
+<h2 id="graphics-improvements" tabindex="-1">Graphics improvements</h2>
+<h3 id="a-new-skia-based-compositor" tabindex="-1">A new Skia-based compositor</h3>
+<p>This cycle brings the largest overhaul of the rendering architecture since the adoption of <a href="https://skia.org">Skia</a> for 2D rendering: the web process compositor now uses the Skia API instead of the venerable TextureMapper. Layers are composed into the final frame using Skia, which allows sharing a single rendering infrastructure across the whole graphics stack and enables several optimizations:</p>
+<ul>
+<li>Tile contents are recorded into deferred display lists and replayed on the compositor thread, so painting worker threads no longer need to touch the GPU at all.</li>
+<li>Batched painting groups the drawing of many layers into a single Skia call, which improves performance on pages with many layers that can be painted in the same operation.</li>
+<li>Unnecessary clip operations are avoided whenever possible, keeping the batched paths effective.</li>
+</ul>
+<p>Beyond raw performance, expressing compositing as Skia draw calls made several features simpler and faster: filters and masks no longer require intermediate offscreen surfaces in most cases, and CSS blend modes, which TextureMapper never implemented, now work in composited layers. And since Skia can target both OpenGL and Vulkan, the compositor no longer stands in the way of Vulkan-based rendering in the future.</p>
+<p>The new compositor also works when using the legacy <code>libwpe</code>-based API.</p>
+<p>The consolidation on Skia goes beyond compositing: <strong>the option to use <a href="https://www.cairographics.org">Cairo</a> for 2D rendering has been removed</strong>, making Skia the only 2D rendering implementation. Rendering tiles in the main thread is no longer supported either, so threaded rendering is now the only tile painting path.</p>
+<h3 id="damage-aware-compositing" tabindex="-1">Damage-aware compositing</h3>
+<p>Damage tracking has seen substantial work this cycle. The damage is the region of the view that changed since the previous frame and therefore requires repainting; <a href="https://blogs.igalia.com/plampe/introduction-to-damage-propagation-in-wpe-and-gtk-webkit-ports/">Paweł Lampe’s introduction to damage propagation</a> covers the concept in depth. Compositing itself now uses this information: each draw the compositor issues is restricted to the damaged rectangles, in a way that preserves the batched painting described above, and damage propagation to the platform is now enabled by default. A new <code>DamageRectangleThreshold</code> preference allows embedders to tune the balance between damage precision and bookkeeping cost.</p>
+<!-- FIXME: link Nikolas's damage post when it is published -->
+<h3 id="the-performance-impact" tabindex="-1">The performance impact</h3>
+<p>What drove the compositor rewrite was making it simpler and easier to maintain, as <a href="https://www.youtube.com/watch?v=qVc0I1Z1ZKU">Carlos García Campos explained at the Web Engines Hackfest 2026</a>; performance came later, since TextureMapper started out ahead after more than a decade of tuning. By now the optimization work has more than closed that gap. The public <a href="https://wpe-perf-dashboard.igalia.com/">WPE performance dashboard</a>, which continuously runs benchmarks on Raspberry Pi 4 devices, tells the story: comparing the last TextureMapper-based revisions against the current ones, and thus measuring the cumulative effect of the graphics work described in this section, the MotionMark score is up by around 36%. On the composition-focused variant of the benchmark, where the compositor dominates the workload, the score is up by around 45%.</p>
+<figure>
+  <a href="/wpewebkit.org/fq-webrtc/assets/svg/wpe-2.54-motionmark-scores.svg" target="_blank"><img src="/wpewebkit.org/fq-webrtc/assets/svg/wpe-2.54-motionmark-scores.svg" alt="Bar chart comparing MotionMark scores on a Raspberry Pi 4: MotionMark 1.3.1 at 30 FPS goes from 246 with TextureMapper to 334 with the Skia compositor (+36%), and the Composition variant from 131 to 189 (+45%)">
+  </a>
+</figure>
+<p>The dashboard also records the GPU load during each run, and there the difference is even more telling. MotionMark increases scene complexity until the browser can no longer sustain the target frame rate, so a higher score already means more work per frame; the Skia compositor delivers that while keeping the GPU markedly less busy. On embedded devices, where the GPU is typically the scarcest resource, this headroom translates directly into smoother pages.</p>
+<figure>
+  <a href="/wpewebkit.org/fq-webrtc/assets/svg/wpe-2.54-motionmark-gpu-load.svg" target="_blank"><img src="/wpewebkit.org/fq-webrtc/assets/svg/wpe-2.54-motionmark-gpu-load.svg" alt="Bar chart comparing GPU load during the same benchmark runs: 56% with TextureMapper against 39% with the Skia compositor on MotionMark 1.3.1, and 47% against 26% on the Composition variant">
+  </a>
+</figure>
+<p>One part of the work goes largely unmeasured here, though. MotionMark animates nearly the entire viewport, so there is hardly anything for damage tracking to save. Real-world content behaves differently: usually a small area of the page is changing while everything else stays still, and skipping all of that quiet area cuts the per-frame GPU work to a fraction.</p>
+<h3 id="other-rendering-improvements" tabindex="-1">Other rendering improvements</h3>
+<p>A GPU atlas is now used for batched raster image uploads, regardless of the compositor in use, and it is reused across frames when the image set does not change, avoiding needless texture allocation and pixel uploads.</p>
+<p>Asynchronous scrolling is smoother: several synchronization issues between the main, scrolling, and compositing threads that caused glitches while scrolling have been fixed, and the scrolling thread no longer blocks the compositor to flush its state, removing input-latency stalls on pages with many layers.</p>
+<p>Finally, more animations can now run on the compositing thread: CSS animations using the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function/steps"><code>steps()</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function/linear"><code>linear()</code></a> timing functions no longer force main-thread animation.</p>
+<h2 id="better-multimedia-on-embedded-hardware%2C-and-a-webrtc-transition" tabindex="-1">Better multimedia on embedded hardware, and a WebRTC transition</h2>
+<p>Let’s start with the transition: the GStreamer-based WebRTC backend is being replaced with a LibWebRTC-based implementation, which is expected to be available in the next release cycle. As a consequence, WebRTC support, which in previous releases required building with experimental features enabled, is disabled in 2.54.</p>
+<p>The rest of the multimedia work moved forward at full speed, with a strong focus on embedded hardware:</p>
+<ul>
+<li>Hardware video decoding and encoding for platforms with a Qualcomm GPU has been added, leveraging the <code>qtic2vdec</code> and <code>qtic2venc</code> GStreamer elements.</li>
+<li>Video decoding limits are now respected in <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaCapabilities">MediaCapabilities</a> queries, and can be overridden with the <code>WEBKIT_GST_VIDEO_DECODING_LIMIT</code> environment variable, so a single build can serve devices with different capabilities.</li>
+<li>Resource usage on pages containing many videos has been improved, by stopping the pipelines of muted, invisible video elements.</li>
+<li>A new feature flag, enabled by default, allows low-end devices to skip caching pages with multimedia content in the back-forward cache, so that a suspended pipeline cannot hold a scarce hardware decoder hostage.</li>
+<li>Media capability reporting is more accurate: non-AAC <code>mp4a</code> codecs (MP3, AC-3, E-AC-3) are correctly reported as supported when decoders are present, xHE-AAC support is auto-detected, and Dolby AC-4 is advertised for MSE on systems that support it.</li>
+<li>Experimental support for <a href="https://developer.mozilla.org/en-US/docs/Web/API/SourceBuffer/changeType"><code>SourceBuffer.changeType()</code></a> has been added to the MSE backend, along with a fix for playback stalling at ad transitions on Twitch.</li>
+<li>Persistent licenses are now supported in the Thunder CDM for encrypted media.</li>
+</ul>
+<p>On top of this, the GStreamer backend has received a substantial amount of memory-safety and lifetime-correctness work that translates into a more stable multimedia experience.</p>
+<h2 id="webxr" tabindex="-1">WebXR</h2>
+<p>The <a href="https://www.khronos.org/openxr/">OpenXR</a>-based WebXR implementation continues to progress. The main highlight is support for the <a href="https://www.w3.org/TR/webxrlayers-1/">WebXR Layers API</a>: quad, cylinder, equirect, and cube layers are now implemented, in addition to the already supported projection layers. Layers can be backed by texture arrays, and <code>XRSession.maxRenderLayers</code> lets content query the compositor’s layer budget.</p>
+<p>The backend has also been decoupled from OpenGL ES through an abstract graphics binding, paving the way for a future Vulkan-based binding.</p>
+<p>WebXR support remains a build-time option, enabled with the <code>ENABLE_WEBXR=ON</code> CMake option; the Layers support additionally requires <code>ENABLE_WEBXR_LAYERS=ON</code>.</p>
+<h2 id="other-improvements-to-the-wpe-port" tabindex="-1">Other improvements to the WPE port</h2>
+<p>Several long-standing gaps in the WPE port have been closed this cycle:</p>
+<ul>
+<li>A built-in popup menu is now used as the default implementation for <code>&lt;select&gt;</code> elements when the <a href="https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/signal.WebView.show-option-menu.html"><code>WebKitWebView::show-option-menu</code></a> signal is left unhandled, so option menus work out of the box.</li>
+<li>Initial drag-and-drop support has been added: web views now handle drags driven by the mouse events they already receive.</li>
+<li>Spell checking is now supported using the <a href="https://rrthomas.github.io/enchant/">Enchant</a> library, enabled by default, and can be toggled at build time with the <code>ENABLE_SPELLCHECKING</code> CMake option.</li>
+<li>The on-screen keyboard is no longer shown when an element is focused programmatically; it only appears as a result of user interaction.</li>
+<li>Initial support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API">Pointer Lock API</a> can be enabled at build time with the <code>ENABLE_POINTER_LOCK</code> CMake option.</li>
+<li>Saving files from the Web Inspector now works in WPE.</li>
+</ul>
+<h2 id="web-platform-support" tabindex="-1">Web Platform support</h2>
+<p>As usual, this list is not exhaustive as WebKit continuously progresses in its support for new standards. Some of the highlights for this release are:</p>
+<ul>
+<li>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">Temporal API</a>, a modern replacement for <code>Date</code>, is now enabled.</li>
+<li><a href="https://github.com/WebAssembly/js-promise-integration">WebAssembly JavaScript Promise Integration</a> (JSPI) is now enabled, along with the WebAssembly <a href="https://github.com/WebAssembly/multi-memory">Multi-Memory</a> and <a href="https://github.com/WebAssembly/relaxed-simd">Relaxed SIMD</a> proposals.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select">Customizable select elements</a> (<code>appearance: base-select</code>) are now supported.</li>
+<li>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcher">CloseWatcher API</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog#closedby"><code>closedby</code></a> attribute for <code>&lt;dialog&gt;</code> are now enabled.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_anchoring">CSS scroll anchoring</a> is now enabled.</li>
+<li>The CSS <a href="https://drafts.csswg.org/css-mixins-1/">@function</a> rule and the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/if">if()</a> function are now available.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/attr">Advanced attr()</a> substitution is now available.</li>
+<li>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Origin-Agent-Cluster">Origin-Agent-Cluster</a> header is now supported.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Transferable_objects">Transferable streams</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/from_static"><code>ReadableStream.from()</code></a> are now enabled.</li>
+<li>IndexedDB <a href="https://w3c.github.io/IndexedDB/#dom-idbobjectstore-getallrecords">getAllRecords()</a> is now supported.</li>
+<li>Time zone changes in the host system are now picked up at runtime by <code>Date</code> and <code>Intl</code>.</li>
+</ul>
+<h2 id="what%E2%80%99s-new-for-webkit-developers%3F" tabindex="-1">What’s new for WebKit developers?</h2>
+<p>WebKit can now use <a href="https://github.com/microsoft/mimalloc">mimalloc</a> as its memory allocator, as an alternative to its own bmalloc. For now it is the default only on some architectures (32-bit ARM, MIPS, RISC-V, and builds supporting 64 KB memory pages); everywhere else bmalloc remains the default, and mimalloc can be enabled with the <code>USE_MIMALLOC</code> build option.</p>
+<p>Logging now falls back to the standard error output when journald is not reachable, which is common in minimal containers, and the new <code>WEBKIT_DEBUG_OUTPUT</code> environment variable allows choosing the log destination explicitly.</p>
+<p>Profile-guided optimization is now supported in regular CMake builds with Clang, through the <code>ENABLE_LLVM_PROFILE_GENERATION</code> and <code>USE_PGO_PROFILE</code> options.</p>
+<p>Finally, a note for packagers: building WPE WebKit now requires <a href="https://ninja-build.org">Ninja</a>, as the CMake Makefile generator is no longer supported.</p>
+<h2 id="looking-forward-to-2.56" tabindex="-1">Looking forward to 2.56</h2>
+<p>The 2.56 release series will bring even more improvements, and we expect it to be released during the spring of 2027. Until then!</p>
+
+
+
+<section class="content-section bg-light small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+        <hr class="author-line">
+        <div class="card">
+          <span>
+            This article was written by <a href="https://www.igalia.com/team/csaavedra">Claudio Saavedra</a>. <br><br>Claudio is long-time WebKit contributor from Igalia, working in different areas of WebKit, WPE, and the stack around it.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </div></main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/fq-webrtc/" class="igalia logo home"><img src="/wpewebkit.org/fq-webrtc/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://bsky.app/profile/wpewebkit.org">Bluesky</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman3/lists/webkit-wpe.lists.webkit.org/">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2026 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/fq-webrtc/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>

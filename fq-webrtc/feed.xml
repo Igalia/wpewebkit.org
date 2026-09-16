@@ -4,8 +4,173 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2026-09-03T00:00:00Z</updated>
+  <updated>2026-09-16T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.54.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.54.0.html"/>
+    <updated>2026-09-16T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.54.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.54 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.54.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.54.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/&quot;&gt;WPEPlatform&lt;/a&gt;
+embedding API is now considered stable and enabled by default at build
+configuration time. The legacy &lt;code&gt;libwpe&lt;/code&gt;-based API is still available, and
+may be deprecated in the future.&lt;/li&gt;
+&lt;li&gt;Add new API for page favicons, using
+&lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0//class.FaviconDatabase.html&quot;&gt;WebKitFaviconDatabase&lt;/a&gt;
+and the &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0//property.WebView.page-icons.html&quot;&gt;WebKitWebView:page-icons&lt;/a&gt;
+property.&lt;/li&gt;
+&lt;li&gt;Add the &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebView.magnification.html&quot;&gt;WebKitWebView:magnification&lt;/a&gt;
+property, to handle visual scaling.&lt;/li&gt;
+&lt;li&gt;Add new API to allow setting a per-navigation custom &lt;code&gt;User-Agent&lt;/code&gt; to
+&lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/class.WebsitePolicies.html&quot;&gt;WebKitWebsitePolicies&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Add support for gamepad rumble effects.&lt;/li&gt;
+&lt;li&gt;Add support for spell checking using the &lt;a href=&quot;https://rrthomas.github.io/enchant/&quot;&gt;Enchant&lt;/a&gt;
+library.&lt;/li&gt;
+&lt;li&gt;Add initial support for the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API&quot;&gt;Pointer
+Lock&lt;/a&gt; API.&lt;/li&gt;
+&lt;li&gt;Switch Web Process compositor to use Skia instead of TextureMapper.&lt;/li&gt;
+&lt;li&gt;Improved WebXR implementation, which now includes support for the
+&lt;a href=&quot;https://www.w3.org/TR/webxrlayers-1/&quot;&gt;Layers API&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Improved damage handling that is now also used during the composition to
+limit the composited areas.&lt;/li&gt;
+&lt;li&gt;Implement GPU atlas creation and replay substitution for batched raster
+image uploads.&lt;/li&gt;
+&lt;li&gt;Media capability reporting is more accurate.&lt;/li&gt;
+&lt;li&gt;Video decoding limits are now respected in media capabilities queries.&lt;/li&gt;
+&lt;li&gt;Remove the option to use Cairo for 2D rendering.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more details about all the changes included in WPE WebKit 2.54 see the
+&lt;code&gt;NEWS&lt;/code&gt; file that is included in the tarball.&lt;/p&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.54.0.tar.xz (44.1 MiB)
+   md5sum: 32f6eceb21afbf620bfd756bdde856cc
+   sha1sum: 9ff8fce3919fd563e2759e2e5c9b87327cfc507e
+   sha256sum: efa9bcc3cb891c2d88f50eec710d9ccee71cbdf1040420361eb98c17355eb452
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>WPE WebKit 2.54 highlights</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/fq-webrtc/blog/2026-09-16-wpewebkit-2.54.html"/>
+    <updated>2026-09-16T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/fq-webrtc/blog/2026-09-16-wpewebkit-2.54.html</id>
+    <content type="html">&lt;p&gt;The WebKit team at Igalia is happy to announce a new release series of WPE WebKit. This release has two main highlights: the new WPEPlatform API, now stable and enabled by default, and a web process compositor built on the &lt;a href=&quot;https://skia.org/&quot;&gt;Skia&lt;/a&gt; graphics library, replacing the TextureMapper-based one. Read on for the details on both, along with a summary of the other most noteworthy changes from the latest release cycle.&lt;/p&gt;
+&lt;h2 id=&quot;wpeplatform%3A-the-new-wpe-api&quot; tabindex=&quot;-1&quot;&gt;WPEPlatform: the new WPE API&lt;/h2&gt;
+&lt;p&gt;WPEPlatform, the API that has been in the works for the past several release cycles, takes center stage in 2.54: it is now enabled by default and its API is considered stable, so applications can build on it without expecting breaking changes in future releases. Consequently, the traditional &lt;a href=&quot;https://github.com/WebKit/libwpe&quot;&gt;&lt;code&gt;libwpe&lt;/code&gt;&lt;/a&gt;-based API is officially deprecated: it remains available and maintained, but new code should target WPEPlatform, and existing embedders are encouraged to plan their migration. This also applies to &lt;a href=&quot;https://github.com/Igalia/cog&quot;&gt;Cog&lt;/a&gt;, which will not have stable releases beyond the 0.18.x series.&lt;/p&gt;
+&lt;p&gt;The best part of the new API is how much simpler it is. Under &lt;code&gt;libwpe&lt;/code&gt;, an application had to create a view backend (usually through &lt;a href=&quot;https://github.com/Igalia/WPEBackend-fdo&quot;&gt;WPEBackend-fdo&lt;/a&gt;’s “exportable” backend) and drive rendering, buffer management, and input dispatch itself through its callbacks. WPEPlatform moves all of that into WebKit and the platform implementation, so migrating an application is mostly a matter of deleting code: in the common case, the application constructs its &lt;code&gt;WebKitWebView&lt;/code&gt; without a backend, WebKit selects a suitable platform automatically, and everything built on top of the web view carries over unchanged. The platform API only surfaces when an application wants more than the defaults: pinning to a particular platform, handling raw input events, or driving the toplevel window. Each of those is a few lines against a small GObject API rather than a set of C callbacks to implement.&lt;/p&gt;
+&lt;p&gt;To help embedders make the move, WPEPlatform is now extensively documented. The reference documentation includes an &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/overview.html&quot;&gt;overview of the platform API&lt;/a&gt; (covering its relationship to &lt;code&gt;libwpe&lt;/code&gt; and what is intentionally not part of the new API), a &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/compiling.html&quot;&gt;guide on compiling against it&lt;/a&gt;, a &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/tutorial-browser.html&quot;&gt;tutorial on writing a browser&lt;/a&gt;, and a &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/tutorial-platform.html&quot;&gt;tutorial on writing a WPE platform implementation&lt;/a&gt;. A &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/migrating-from-libwpe.html&quot;&gt;guide on migrating from libwpe&lt;/a&gt;, with a symbol-by-symbol &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/migration-mapping.html&quot;&gt;mapping table&lt;/a&gt;, walks embedders through the process step by step.&lt;/p&gt;
+&lt;p&gt;Since WPEPlatform is now built by default, the &lt;code&gt;wpe-platform-2.0&lt;/code&gt; pkg-config module is available in regular builds. Conversely, the legacy API can be disabled at build time with &lt;code&gt;ENABLE_WPE_LEGACY_API=OFF&lt;/code&gt; when it is not needed.&lt;/p&gt;
+&lt;h3 id=&quot;additions-and-final-adjustments&quot; tabindex=&quot;-1&quot;&gt;Additions and final adjustments&lt;/h3&gt;
+&lt;p&gt;New platform APIs added this cycle include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;WPEProcessManager&lt;/code&gt; and &lt;code&gt;WPEProcessLaunchOptions&lt;/code&gt;, which allow the embedder to control how the auxiliary WebKit processes are launched and terminated. This is particularly important on Android, where each process is a service that must be started with &lt;code&gt;bindService()&lt;/code&gt;, and it removes the last reason a WPEPlatform-only build could not work there. Note that, unlike the rest of WPEPlatform, the process management API is only built when targeting Android and remains experimental: it is not yet generic enough to be enabled everywhere, and it may still change in future releases.&lt;/li&gt;
+&lt;li&gt;Gamepad rumble support, through &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/method.Gamepad.has_rumble.html&quot;&gt;&lt;code&gt;wpe_gamepad_has_rumble()&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/method.Gamepad.rumble.html&quot;&gt;&lt;code&gt;wpe_gamepad_rumble()&lt;/code&gt;&lt;/a&gt;, with a built-in implementation based on &lt;a href=&quot;https://gnome.pages.gitlab.gnome.org/libmanette/&quot;&gt;libmanette&lt;/a&gt;. This enables the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Gamepad/vibrationActuator&quot;&gt;Gamepad API &lt;code&gt;vibrationActuator&lt;/code&gt;&lt;/a&gt; for web content.&lt;/li&gt;
+&lt;li&gt;A new &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/const.SETTING_OVERLAY_SCROLLBARS.html&quot;&gt;&lt;code&gt;WPE_SETTING_OVERLAY_SCROLLBARS&lt;/code&gt;&lt;/a&gt; setting, enabled by default, which may be disabled by applications to opt into classic, always-visible scrollbars.&lt;/li&gt;
+&lt;li&gt;A new &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/enum.InputPurpose.html&quot;&gt;&lt;code&gt;WPE_INPUT_PURPOSE_SEARCH&lt;/code&gt;&lt;/a&gt; input purpose, allowing input methods to detect when the values of an input field are expected to be search terms.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A few final adjustments were made to the API before declaring it stable, which may require updates to platform implementations and applications developed against the earlier previews:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;WPE_SETTING_DISABLE_ANIMATIONS&lt;/code&gt; setting has been replaced by &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/const.SETTING_REDUCED_MOTION.html&quot;&gt;&lt;code&gt;WPE_SETTING_REDUCED_MOTION&lt;/code&gt;&lt;/a&gt;, matching the dedicated reduced-motion setting introduced in &lt;a href=&quot;https://release.gnome.org/50/&quot;&gt;GNOME 50&lt;/a&gt;, and a new tri-state &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/const.SETTING_INTERFACE_CONTRAST.html&quot;&gt;&lt;code&gt;WPE_SETTING_INTERFACE_CONTRAST&lt;/code&gt;&lt;/a&gt; setting has been added. Together with the existing &lt;code&gt;WPE_SETTING_DARK_MODE&lt;/code&gt; setting, these make the &lt;code&gt;prefers-reduced-motion&lt;/code&gt;, &lt;code&gt;prefers-contrast&lt;/code&gt;, and &lt;code&gt;prefers-color-scheme&lt;/code&gt; media queries follow the platform settings.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/method.GestureController.handle_event.html&quot;&gt;&lt;code&gt;wpe_gesture_controller_handle_event()&lt;/code&gt;&lt;/a&gt; now returns a boolean indicating whether the event was consumed.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;WPE_DMABUF_BUFFER_FORMAT&lt;/code&gt; environment variable has been renamed to &lt;code&gt;WPE_BUFFER_FORMAT&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;beyond-linux%3A-android&quot; tabindex=&quot;-1&quot;&gt;Beyond Linux: Android&lt;/h3&gt;
+&lt;p&gt;A good measure of the new API’s maturity is &lt;a href=&quot;https://github.com/Igalia/wpe-android&quot;&gt;wpe-android&lt;/a&gt;, which has been rebuilt this year as a WPEPlatform platform implementation living entirely outside the WebKit tree: Android’s display system now looks to the engine like any other WPE platform, and applications get a convenience Java API modeled after &lt;a href=&quot;https://developer.android.com/reference/android/webkit/WebView&quot;&gt;&lt;code&gt;android.webkit.WebView&lt;/code&gt;&lt;/a&gt;. The new &lt;code&gt;WPEProcessManager&lt;/code&gt; API removed the last dependency on &lt;code&gt;libwpe&lt;/code&gt; there. You can read more about it in &lt;a href=&quot;https://blogs.igalia.com/alex/2026/09/11/wpe-webkit-on-android-now-with-wpeplatform/&quot;&gt;this post&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;on-the-webkit-api-side&quot; tabindex=&quot;-1&quot;&gt;On the WebKit API side&lt;/h3&gt;
+&lt;p&gt;The shared WebKit API has also seen additions this cycle:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A new API for page icons: &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/method.FaviconDatabase.get_page_icons.html&quot;&gt;&lt;code&gt;webkit_favicon_database_get_page_icons()&lt;/code&gt;&lt;/a&gt; retrieves all the icons declared by a page as a list of &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/class.Image.html&quot;&gt;&lt;code&gt;WebKitImage&lt;/code&gt;&lt;/a&gt; objects, and the &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebView.page-icons.html&quot;&gt;&lt;code&gt;WebKitWebView:page-icons&lt;/code&gt;&lt;/a&gt; property exposes the icons of the currently loaded page. Each icon implements &lt;a href=&quot;https://docs.gtk.org/gio/iface.LoadableIcon.html&quot;&gt;&lt;code&gt;GLoadableIcon&lt;/code&gt;&lt;/a&gt;, so applications can pick the size that best fits their needs. With this, the favicon database is available in WPE for the first time; it can be enabled with &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/method.WebsiteDataManager.set_favicons_enabled.html&quot;&gt;&lt;code&gt;webkit_website_data_manager_set_favicons_enabled()&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;A new &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebView.magnification.html&quot;&gt;&lt;code&gt;WebKitWebView:magnification&lt;/code&gt;&lt;/a&gt; property to handle visual scaling of the page, independent of the zoom level.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebsitePolicies.custom-user-agent.html&quot;&gt;&lt;code&gt;WebKitWebsitePolicies:custom-user-agent&lt;/code&gt;&lt;/a&gt; allows setting a custom User-Agent for a single navigation, by passing the policies to &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/method.PolicyDecision.use_with_policies.html&quot;&gt;&lt;code&gt;webkit_policy_decision_use_with_policies()&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/method.FeatureList.find.html&quot;&gt;&lt;code&gt;webkit_feature_list_find()&lt;/code&gt;&lt;/a&gt; is a convenience function to look up a feature by identifier in a feature list.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;graphics-improvements&quot; tabindex=&quot;-1&quot;&gt;Graphics improvements&lt;/h2&gt;
+&lt;h3 id=&quot;a-new-skia-based-compositor&quot; tabindex=&quot;-1&quot;&gt;A new Skia-based compositor&lt;/h3&gt;
+&lt;p&gt;This cycle brings the largest overhaul of the rendering architecture since the adoption of &lt;a href=&quot;https://skia.org/&quot;&gt;Skia&lt;/a&gt; for 2D rendering: the web process compositor now uses the Skia API instead of the venerable TextureMapper. Layers are composed into the final frame using Skia, which allows sharing a single rendering infrastructure across the whole graphics stack and enables several optimizations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tile contents are recorded into deferred display lists and replayed on the compositor thread, so painting worker threads no longer need to touch the GPU at all.&lt;/li&gt;
+&lt;li&gt;Batched painting groups the drawing of many layers into a single Skia call, which improves performance on pages with many layers that can be painted in the same operation.&lt;/li&gt;
+&lt;li&gt;Unnecessary clip operations are avoided whenever possible, keeping the batched paths effective.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Beyond raw performance, expressing compositing as Skia draw calls made several features simpler and faster: filters and masks no longer require intermediate offscreen surfaces in most cases, and CSS blend modes, which TextureMapper never implemented, now work in composited layers. And since Skia can target both OpenGL and Vulkan, the compositor no longer stands in the way of Vulkan-based rendering in the future.&lt;/p&gt;
+&lt;p&gt;The new compositor also works when using the legacy &lt;code&gt;libwpe&lt;/code&gt;-based API.&lt;/p&gt;
+&lt;p&gt;The consolidation on Skia goes beyond compositing: &lt;strong&gt;the option to use &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;Cairo&lt;/a&gt; for 2D rendering has been removed&lt;/strong&gt;, making Skia the only 2D rendering implementation. Rendering tiles in the main thread is no longer supported either, so threaded rendering is now the only tile painting path.&lt;/p&gt;
+&lt;h3 id=&quot;damage-aware-compositing&quot; tabindex=&quot;-1&quot;&gt;Damage-aware compositing&lt;/h3&gt;
+&lt;p&gt;Damage tracking has seen substantial work this cycle. The damage is the region of the view that changed since the previous frame and therefore requires repainting; &lt;a href=&quot;https://blogs.igalia.com/plampe/introduction-to-damage-propagation-in-wpe-and-gtk-webkit-ports/&quot;&gt;Paweł Lampe’s introduction to damage propagation&lt;/a&gt; covers the concept in depth. Compositing itself now uses this information: each draw the compositor issues is restricted to the damaged rectangles, in a way that preserves the batched painting described above, and damage propagation to the platform is now enabled by default. A new &lt;code&gt;DamageRectangleThreshold&lt;/code&gt; preference allows embedders to tune the balance between damage precision and bookkeeping cost.&lt;/p&gt;
+&lt;!-- FIXME: link Nikolas&#39;s damage post when it is published --&gt;
+&lt;h3 id=&quot;the-performance-impact&quot; tabindex=&quot;-1&quot;&gt;The performance impact&lt;/h3&gt;
+&lt;p&gt;What drove the compositor rewrite was making it simpler and easier to maintain, as &lt;a href=&quot;https://www.youtube.com/watch?v=qVc0I1Z1ZKU&quot;&gt;Carlos García Campos explained at the Web Engines Hackfest 2026&lt;/a&gt;; performance came later, since TextureMapper started out ahead after more than a decade of tuning. By now the optimization work has more than closed that gap. The public &lt;a href=&quot;https://wpe-perf-dashboard.igalia.com/&quot;&gt;WPE performance dashboard&lt;/a&gt;, which continuously runs benchmarks on Raspberry Pi 4 devices, tells the story: comparing the last TextureMapper-based revisions against the current ones, and thus measuring the cumulative effect of the graphics work described in this section, the MotionMark score is up by around 36%. On the composition-focused variant of the benchmark, where the compositor dominates the workload, the score is up by around 45%.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://wpewebkit.org/assets/svg/wpe-2.54-motionmark-scores.svg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://wpewebkit.org/assets/svg/wpe-2.54-motionmark-scores.svg&quot; alt=&quot;Bar chart comparing MotionMark scores on a Raspberry Pi 4: MotionMark 1.3.1 at 30 FPS goes from 246 with TextureMapper to 334 with the Skia compositor (+36%), and the Composition variant from 131 to 189 (+45%)&quot; /&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+&lt;p&gt;The dashboard also records the GPU load during each run, and there the difference is even more telling. MotionMark increases scene complexity until the browser can no longer sustain the target frame rate, so a higher score already means more work per frame; the Skia compositor delivers that while keeping the GPU markedly less busy. On embedded devices, where the GPU is typically the scarcest resource, this headroom translates directly into smoother pages.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://wpewebkit.org/assets/svg/wpe-2.54-motionmark-gpu-load.svg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://wpewebkit.org/assets/svg/wpe-2.54-motionmark-gpu-load.svg&quot; alt=&quot;Bar chart comparing GPU load during the same benchmark runs: 56% with TextureMapper against 39% with the Skia compositor on MotionMark 1.3.1, and 47% against 26% on the Composition variant&quot; /&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+&lt;p&gt;One part of the work goes largely unmeasured here, though. MotionMark animates nearly the entire viewport, so there is hardly anything for damage tracking to save. Real-world content behaves differently: usually a small area of the page is changing while everything else stays still, and skipping all of that quiet area cuts the per-frame GPU work to a fraction.&lt;/p&gt;
+&lt;h3 id=&quot;other-rendering-improvements&quot; tabindex=&quot;-1&quot;&gt;Other rendering improvements&lt;/h3&gt;
+&lt;p&gt;A GPU atlas is now used for batched raster image uploads, regardless of the compositor in use, and it is reused across frames when the image set does not change, avoiding needless texture allocation and pixel uploads.&lt;/p&gt;
+&lt;p&gt;Asynchronous scrolling is smoother: several synchronization issues between the main, scrolling, and compositing threads that caused glitches while scrolling have been fixed, and the scrolling thread no longer blocks the compositor to flush its state, removing input-latency stalls on pages with many layers.&lt;/p&gt;
+&lt;p&gt;Finally, more animations can now run on the compositing thread: CSS animations using the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function/steps&quot;&gt;&lt;code&gt;steps()&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function/linear&quot;&gt;&lt;code&gt;linear()&lt;/code&gt;&lt;/a&gt; timing functions no longer force main-thread animation.&lt;/p&gt;
+&lt;h2 id=&quot;better-multimedia-on-embedded-hardware%2C-and-a-webrtc-transition&quot; tabindex=&quot;-1&quot;&gt;Better multimedia on embedded hardware, and a WebRTC transition&lt;/h2&gt;
+&lt;p&gt;Let’s start with the transition: the GStreamer-based WebRTC backend is being replaced with a LibWebRTC-based implementation, which is expected to be available in the next release cycle. As a consequence, WebRTC support, which in previous releases required building with experimental features enabled, is disabled in 2.54.&lt;/p&gt;
+&lt;p&gt;The rest of the multimedia work moved forward at full speed, with a strong focus on embedded hardware:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hardware video decoding and encoding for platforms with a Qualcomm GPU has been added, leveraging the &lt;code&gt;qtic2vdec&lt;/code&gt; and &lt;code&gt;qtic2venc&lt;/code&gt; GStreamer elements.&lt;/li&gt;
+&lt;li&gt;Video decoding limits are now respected in &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/MediaCapabilities&quot;&gt;MediaCapabilities&lt;/a&gt; queries, and can be overridden with the &lt;code&gt;WEBKIT_GST_VIDEO_DECODING_LIMIT&lt;/code&gt; environment variable, so a single build can serve devices with different capabilities.&lt;/li&gt;
+&lt;li&gt;Resource usage on pages containing many videos has been improved, by stopping the pipelines of muted, invisible video elements.&lt;/li&gt;
+&lt;li&gt;A new feature flag, enabled by default, allows low-end devices to skip caching pages with multimedia content in the back-forward cache, so that a suspended pipeline cannot hold a scarce hardware decoder hostage.&lt;/li&gt;
+&lt;li&gt;Media capability reporting is more accurate: non-AAC &lt;code&gt;mp4a&lt;/code&gt; codecs (MP3, AC-3, E-AC-3) are correctly reported as supported when decoders are present, xHE-AAC support is auto-detected, and Dolby AC-4 is advertised for MSE on systems that support it.&lt;/li&gt;
+&lt;li&gt;Experimental support for &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/SourceBuffer/changeType&quot;&gt;&lt;code&gt;SourceBuffer.changeType()&lt;/code&gt;&lt;/a&gt; has been added to the MSE backend, along with a fix for playback stalling at ad transitions on Twitch.&lt;/li&gt;
+&lt;li&gt;Persistent licenses are now supported in the Thunder CDM for encrypted media.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On top of this, the GStreamer backend has received a substantial amount of memory-safety and lifetime-correctness work that translates into a more stable multimedia experience.&lt;/p&gt;
+&lt;h2 id=&quot;webxr&quot; tabindex=&quot;-1&quot;&gt;WebXR&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&quot;https://www.khronos.org/openxr/&quot;&gt;OpenXR&lt;/a&gt;-based WebXR implementation continues to progress. The main highlight is support for the &lt;a href=&quot;https://www.w3.org/TR/webxrlayers-1/&quot;&gt;WebXR Layers API&lt;/a&gt;: quad, cylinder, equirect, and cube layers are now implemented, in addition to the already supported projection layers. Layers can be backed by texture arrays, and &lt;code&gt;XRSession.maxRenderLayers&lt;/code&gt; lets content query the compositor’s layer budget.&lt;/p&gt;
+&lt;p&gt;The backend has also been decoupled from OpenGL ES through an abstract graphics binding, paving the way for a future Vulkan-based binding.&lt;/p&gt;
+&lt;p&gt;WebXR support remains a build-time option, enabled with the &lt;code&gt;ENABLE_WEBXR=ON&lt;/code&gt; CMake option; the Layers support additionally requires &lt;code&gt;ENABLE_WEBXR_LAYERS=ON&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;other-improvements-to-the-wpe-port&quot; tabindex=&quot;-1&quot;&gt;Other improvements to the WPE port&lt;/h2&gt;
+&lt;p&gt;Several long-standing gaps in the WPE port have been closed this cycle:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A built-in popup menu is now used as the default implementation for &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; elements when the &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/signal.WebView.show-option-menu.html&quot;&gt;&lt;code&gt;WebKitWebView::show-option-menu&lt;/code&gt;&lt;/a&gt; signal is left unhandled, so option menus work out of the box.&lt;/li&gt;
+&lt;li&gt;Initial drag-and-drop support has been added: web views now handle drags driven by the mouse events they already receive.&lt;/li&gt;
+&lt;li&gt;Spell checking is now supported using the &lt;a href=&quot;https://rrthomas.github.io/enchant/&quot;&gt;Enchant&lt;/a&gt; library, enabled by default, and can be toggled at build time with the &lt;code&gt;ENABLE_SPELLCHECKING&lt;/code&gt; CMake option.&lt;/li&gt;
+&lt;li&gt;The on-screen keyboard is no longer shown when an element is focused programmatically; it only appears as a result of user interaction.&lt;/li&gt;
+&lt;li&gt;Initial support for the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API&quot;&gt;Pointer Lock API&lt;/a&gt; can be enabled at build time with the &lt;code&gt;ENABLE_POINTER_LOCK&lt;/code&gt; CMake option.&lt;/li&gt;
+&lt;li&gt;Saving files from the Web Inspector now works in WPE.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;web-platform-support&quot; tabindex=&quot;-1&quot;&gt;Web Platform support&lt;/h2&gt;
+&lt;p&gt;As usual, this list is not exhaustive as WebKit continuously progresses in its support for new standards. Some of the highlights for this release are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal&quot;&gt;Temporal API&lt;/a&gt;, a modern replacement for &lt;code&gt;Date&lt;/code&gt;, is now enabled.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/WebAssembly/js-promise-integration&quot;&gt;WebAssembly JavaScript Promise Integration&lt;/a&gt; (JSPI) is now enabled, along with the WebAssembly &lt;a href=&quot;https://github.com/WebAssembly/multi-memory&quot;&gt;Multi-Memory&lt;/a&gt; and &lt;a href=&quot;https://github.com/WebAssembly/relaxed-simd&quot;&gt;Relaxed SIMD&lt;/a&gt; proposals.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select&quot;&gt;Customizable select elements&lt;/a&gt; (&lt;code&gt;appearance: base-select&lt;/code&gt;) are now supported.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/CloseWatcher&quot;&gt;CloseWatcher API&lt;/a&gt; and the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog#closedby&quot;&gt;&lt;code&gt;closedby&lt;/code&gt;&lt;/a&gt; attribute for &lt;code&gt;&amp;lt;dialog&amp;gt;&lt;/code&gt; are now enabled.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_anchoring&quot;&gt;CSS scroll anchoring&lt;/a&gt; is now enabled.&lt;/li&gt;
+&lt;li&gt;The CSS &lt;a href=&quot;https://drafts.csswg.org/css-mixins-1/&quot;&gt;@function&lt;/a&gt; rule and the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/if&quot;&gt;if()&lt;/a&gt; function are now available.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/attr&quot;&gt;Advanced attr()&lt;/a&gt; substitution is now available.&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Origin-Agent-Cluster&quot;&gt;Origin-Agent-Cluster&lt;/a&gt; header is now supported.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Transferable_objects&quot;&gt;Transferable streams&lt;/a&gt; and &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/from_static&quot;&gt;&lt;code&gt;ReadableStream.from()&lt;/code&gt;&lt;/a&gt; are now enabled.&lt;/li&gt;
+&lt;li&gt;IndexedDB &lt;a href=&quot;https://w3c.github.io/IndexedDB/#dom-idbobjectstore-getallrecords&quot;&gt;getAllRecords()&lt;/a&gt; is now supported.&lt;/li&gt;
+&lt;li&gt;Time zone changes in the host system are now picked up at runtime by &lt;code&gt;Date&lt;/code&gt; and &lt;code&gt;Intl&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;what%E2%80%99s-new-for-webkit-developers%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new for WebKit developers?&lt;/h2&gt;
+&lt;p&gt;WebKit can now use &lt;a href=&quot;https://github.com/microsoft/mimalloc&quot;&gt;mimalloc&lt;/a&gt; as its memory allocator, as an alternative to its own bmalloc. For now it is the default only on some architectures (32-bit ARM, MIPS, RISC-V, and builds supporting 64 KB memory pages); everywhere else bmalloc remains the default, and mimalloc can be enabled with the &lt;code&gt;USE_MIMALLOC&lt;/code&gt; build option.&lt;/p&gt;
+&lt;p&gt;Logging now falls back to the standard error output when journald is not reachable, which is common in minimal containers, and the new &lt;code&gt;WEBKIT_DEBUG_OUTPUT&lt;/code&gt; environment variable allows choosing the log destination explicitly.&lt;/p&gt;
+&lt;p&gt;Profile-guided optimization is now supported in regular CMake builds with Clang, through the &lt;code&gt;ENABLE_LLVM_PROFILE_GENERATION&lt;/code&gt; and &lt;code&gt;USE_PGO_PROFILE&lt;/code&gt; options.&lt;/p&gt;
+&lt;p&gt;Finally, a note for packagers: building WPE WebKit now requires &lt;a href=&quot;https://ninja-build.org/&quot;&gt;Ninja&lt;/a&gt;, as the CMake Makefile generator is no longer supported.&lt;/p&gt;
+&lt;h2 id=&quot;looking-forward-to-2.56&quot; tabindex=&quot;-1&quot;&gt;Looking forward to 2.56&lt;/h2&gt;
+&lt;p&gt;The 2.56 release series will bring even more improvements, and we expect it to be released during the spring of 2027. Until then!&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.53.92 released</title>
@@ -741,66 +906,6 @@ for information about the latest stable releases.&lt;/p&gt;
 &lt;p&gt;Further information about WebKitGTK and WPE WebKit security advisories can be found at:
 &lt;a href=&quot;https://webkitgtk.org/security.html&quot;&gt;webkitgtk.org/security.html&lt;/a&gt; or
 &lt;a href=&quot;https://wpewebkit.org/security&quot;&gt;wpewebkit.org/security&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.52.4 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.52.4.html"/>
-    <updated>2026-06-01T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.52.4.html</id>
-    <content type="html">&lt;p&gt;This is a bug fix release in the stable 2.52 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.52.4%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.52.4?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Add support for half-width fonts.&lt;/li&gt;
-&lt;li&gt;Add initial pointer shape support to the WPE Qt API bindings.&lt;/li&gt;
-&lt;li&gt;Improve content filter compilation by avoiding file copies.&lt;/li&gt;
-&lt;li&gt;Improve handling of out of disk space conditions when the NetworkProcess tried to write data in caches.&lt;/li&gt;
-&lt;li&gt;Improve how the CMake build system checks whether &lt;code&gt;libatomic&lt;/code&gt; is required.&lt;/li&gt;
-&lt;li&gt;Fix wheel input event handling  in the WPE Qt API bindings for devices that do not report precise deltas.&lt;/li&gt;
-&lt;li&gt;Fix toplevel state handling in the WPE Qt API bindings.&lt;/li&gt;
-&lt;li&gt;Fix painting scrollbars when their width changes.&lt;/li&gt;
-&lt;li&gt;Fix cancellation of touch input events when touch devices are no longer available.&lt;/li&gt;
-&lt;li&gt;Fix playback of certain YouTube videos with low frame rates.&lt;/li&gt;
-&lt;li&gt;Fix webkit://gpu not working in systems where neither &lt;code&gt;libGL.so.1&lt;/code&gt; nor &lt;code&gt;libOpenGL.so.0&lt;/code&gt; are available.&lt;/li&gt;
-&lt;li&gt;Fix the build with librice 0.4 or newer when the GStreamer WebRTC backend is enabled at build configuration time.&lt;/li&gt;
-&lt;li&gt;Fix the build with &lt;code&gt;USE_GBM=OFF&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.52.4.tar.xz (61.9 MiB)
-   md5sum: 77e544c3578000456de199fd4fa1c493
-   sha1sum: 81ff656cb0585a9c001deb38a6d9c6cbd4d48951
-   sha256sum: 01ca34cd7af880c038d35aa94482fee785a77db37b614c584475d7d43b3a2dc0
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.53.3 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.53.3.html"/>
-    <updated>2026-05-29T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/fq-webrtc/release/wpewebkit-2.53.3.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 2.54 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.53.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.53.3?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Switch web process compositor to use Skia instead of TextureMapper.&lt;/li&gt;
-&lt;li&gt;Fix missing glyph before ZWJ/ZWNJ if no font is found for the cluster.&lt;/li&gt;
-&lt;li&gt;Improve memory usage by reducing the size of the style matcher cache.&lt;/li&gt;
-&lt;li&gt;Add support for half width fonts.&lt;/li&gt;
-&lt;li&gt;Add spell checking support using the Enchant library, which can be toggled
-at build configuration time using the &lt;code&gt;ENABLE_SPELLCHECKING&lt;/code&gt; CMake option.&lt;/li&gt;
-&lt;li&gt;Support time zone change notifications on Linux.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.53.3.tar.xz (40.8 MiB)
-   md5sum: 2b1f3e6401cf1a4bd1a9c14dba7fca28
-   sha1sum: e4568b7b2c700d79ec6e8a929c57849b42cf8115
-   sha256sum: 645babbc04b408b3ce3b026f1990e6307668aa41bf2fb860f387de72a18feb33
-&lt;/pre&gt;
 </content>
   </entry>
 </feed>

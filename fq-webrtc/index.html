@@ -181,6 +181,19 @@ main > section > * {
 	padding-left: 5px;
 	margin-left: 1rem;
 }
+/*
+ * The inset above is left-only, to clear the dashed rule down the side of each
+ * section. From 45rem up the .c2 grid supplies the right-hand side, but below
+ * that the grid collapses to block flow, so content sat 21px right of centre
+ * with nothing on the right and images ran flush into the screen edge. Mirror
+ * the inset so blocks are centred at phone widths.
+ */
+@media (max-width: 45rem) {
+	main > section > * {
+		padding-right: 5px;
+		margin-right: 1rem;
+	}
+}
 
 header.page {
 	background: linear-gradient(155deg,#5A5A5A,#A4A8A7,#443468 80%);
@@ -456,7 +469,7 @@ An Open Source Web engine for Linux-based embedded devices designed with flexibi
 <h2>Explore Embedded Browsers</h2> 
 <div><!-- placeholder for grid, whee -->
 <p><big>The Web Platform is a frequently chosen foundational technology for many reasons, including:</big></p>
-<ul class="arrows"> 
+<ul> 
   <li>Web Platform technologies are built on standards, they have great longevity</li>
   <li>The standards are open, embedded systems can incorporate them without licensing fees or other worries.
 Open standards with great longevity allows lots more things to benefit from the same investments</li>

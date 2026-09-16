@@ -23,7 +23,7 @@
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2026-09-10T16:54:29.409Z">
+  <meta property="article:published_time" content="2026-09-16T13:06:35.720Z">
   <meta property="article:tag" content="release">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@WPEWebKit">
@@ -111,8 +111,8 @@ header.page .btn-xl {
 <header class="page full-bleed">
  <h1 itemprop="headline">Release Schedule</h1>
  
-   <meta itemprop="datePublished" content="Thu Sep 10 2026">
-   <time itemprop="dateCreated">10 September 2026</time>
+   <meta itemprop="datePublished" content="Wed Sep 16 2026">
+   <time itemprop="dateCreated">16 September 2026</time>
  
   
 </header>
@@ -174,11 +174,13 @@ at the <abbr title="Application Program Interface">API</abbr> and <abbr title="A
 changes in the public API. In general, the ABI will remain compatible as
 well, because we actively avoid breaking it unless strictly needed.</li>
 </ul>
-<h2 id="compatible-components" tabindex="-1">Compatible Components</h2>
-<p>The following table summarizes which <em>stable</em> releases of libwpe, WPE WebKit,
-WPEBackend-fdo, and Cog are compatible and tested with each other (updated
-March 2026). Distributors and packagers are strongly advised to use the
-versions listed below.</p>
+<h2 id="compatible-components-(legacy-api)" tabindex="-1">Compatible Components (legacy API)</h2>
+<p><strong>Since 2.54</strong>, WPE WebKit has a <a href="/wpewebkit.org/fq-webrtc/about/faq.html#what-is-the-wpeplatform-api%3F">new WPEPlatform API</a>,
+and <a href="/wpewebkit.org/fq-webrtc/about/faq.html#do-i-still-need-libwpe-and-a-wpe-backend%3F">libwpe and an external rendering backend are no longer required</a>.
+Therefore, the table below is only relevant to <em>legacy-API</em> deployments, summarizing
+which <em>stable</em> releases of libwpe, WPE WebKit, WPEBackend-fdo, and Cog are compatible
+and tested with each other (updated March 2026). Distributors and packagers targeting
+the legacy API are strongly advised to use the versions listed here.</p>
 <table>
 <thead>
 <tr>
