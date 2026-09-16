@@ -35,7 +35,7 @@ h2 {
 
 API documentation for the **latest stable release** is available here:
 
-<ul class="arrows">
+<ul>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-webkit-2.0/">WPEWebKit 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-platform-2.0/">WPEPlatform 2.0 API documentation</a></li>
 <li><a href="https://wpewebkit.org/reference/stable/wpe-platform-wayland-2.0/">WPEPlatform Wayland 2.0 API documentation</a></li>
@@ -72,7 +72,7 @@ There are also pre-built packages available for many <a href="/about/get-wpe.htm
 
 WPE WebKit follows a **6-month development cycle**:
 
-<ul class="arrows">
+<ul>
 <li>There are two feature releases every year, typically in March and September.</li>
 <li>Within feature releases, there may be any number of bug-fixes.</li>
 <li>Development releases are the base for the feature releases that follow them.  They do not follow a fixed schedule in the release cycle.</li>
