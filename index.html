@@ -101,6 +101,19 @@ main > section > * {
 	padding-left: 5px;
 	margin-left: 1rem;
 }
+/*
+ * The inset above is left-only, to clear the dashed rule down the side of each
+ * section. From 45rem up the .c2 grid supplies the right-hand side, but below
+ * that the grid collapses to block flow, so content sat 21px right of centre
+ * with nothing on the right and images ran flush into the screen edge. Mirror
+ * the inset so blocks are centred at phone widths.
+ */
+@media (max-width: 45rem) {
+	main > section > * {
+		padding-right: 5px;
+		margin-right: 1rem;
+	}
+}
 
 header.page {
 	background: linear-gradient(155deg,#5A5A5A,#A4A8A7,#443468 80%);
