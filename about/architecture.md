@@ -41,7 +41,7 @@ such as the traditional Cocoa, GTK, etc toolkits.
 
 ## Web page rendering
 
-<p class="leadin">WPE integrates with the target platform through the WPEPlatform
+<p>WPE integrates with the target platform through the WPEPlatform
 API, which ships as part of WPE WebKit itself. Because WPE provides no user-interface
 toolkit widget, this layer is what turns the rendered web page into pixels on screen
 and feeds input back to the engine.</p>
@@ -77,7 +77,7 @@ view and toplevel types).
 
 ## Input events handling
 
-<p class="leadin">In a traditional WebKit port, the provided widget usually also handles input
+<p>In a traditional WebKit port, the provided widget usually also handles input
 (keyboard, mouse, touch) events and is in charge of relaying them to the
 internal WebKit input handling components.</p>
 
@@ -94,7 +94,7 @@ internal input handling components. This flexible design enables applications to
 
 ## Legacy architecture (libwpe and WPE backends)
 
-<p class="leadin">Before 2.54, WPE integrated with the platform through libwpe and a
+<p>Before 2.54, WPE integrated with the platform through libwpe and a
 separate, external rendering backend. This model is legacy as of 2.54: it is kept for
 existing deployments and still built as needed, but new projects should use the
 WPEPlatform API described above.</p>
