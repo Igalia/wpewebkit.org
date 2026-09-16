@@ -145,6 +145,18 @@ p > big, p.leadin {
 	font-size: clamp(1.15rem, 1.02rem + 0.8vw, 1.67em);
 }
 
+/*
+ * stylish-portfolio.css sets `ul { padding-left: 4rem }` but says nothing about
+ * <ol>, which therefore falls back to the UA default of 40px -- about/faq and
+ * blog/06-integrating-wpe show both on one page at different indents. Give the
+ * two the same indent. Lists with a layout of their own (.gallery, the
+ * arrow-lists below, Bootstrap's .list-unstyled/.list-group) carry a class and
+ * win on specificity, so they are unaffected.
+ */
+main :is(ul, ol) {
+	padding-inline-start: 4rem;
+}
+
 nav.sitemap ul,
 div.arrow-lists > ul {
 	font-size: 130%;
