@@ -54,13 +54,13 @@ version number stays the same:
 and [libwpe and an external rendering backend are no longer required](/about/faq.html#do-i-still-need-libwpe-and-a-wpe-backend%3F).
 Therefore, the table below is only relevant to *legacy-API* deployments, summarizing
 which *stable* releases of libwpe, WPE WebKit, WPEBackend-fdo, and Cog are compatible
-and tested with each other (updated March 2026). Distributors and packagers targeting
+and tested with each other (updated September 2026). Distributors and packagers targeting
 the legacy API are strongly advised to use the versions listed here.
 
 
 | **WPE WebKit** | **libwpe**   | **WPEBackend-fdo** | **Cog**      |
 |:--------------:|:------------:|:------------------:|:------------:|
-| 2.48.x - 2.52.x| 1.16.x       | 1.16.x             | 0.18.x       |
+| 2.48.x - 2.54.x| 1.16.x       | 1.16.x             | 0.18.x       |
 | 2.46.x         | 1.16.x       | 1.16.x, 1.14.x     | 0.18.x       |
 | 2.44.x         | 1.16.x, 1.14.x | 1.14.x           | 0.18.x       |
 | 2.42.x         | 1.14.x       | 1.14.x             | 0.18.x       |
