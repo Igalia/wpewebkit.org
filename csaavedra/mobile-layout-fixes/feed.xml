@@ -4,8 +4,56 @@
   <description>Release announcements and security advisories from WPEwebkit.org.</description>
   <link href="https://wpewebkit.org/feed.xml" rel="self"/>
   <link href="https://wpewebkit.org/"/>
-  <updated>2026-09-03T00:00:00Z</updated>
+  <updated>2026-09-16T00:00:00Z</updated>
   <id>https://wpewebkit.org/</id>
+  
+  <entry>
+    <title>WPE WebKit 2.54.0 released</title>
+    <link href="https://wpewebkit.org/wpewebkit.org/csaavedra/mobile-layout-fixes/release/wpewebkit-2.54.0.html"/>
+    <updated>2026-09-16T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/csaavedra/mobile-layout-fixes/release/wpewebkit-2.54.0.html</id>
+    <content type="html">&lt;p&gt;This is the first stable release in the 2.54 series.&lt;/p&gt;
+&lt;h3 id=&quot;highlights-of-the-wpe-webkit-2.54.0-release&quot; tabindex=&quot;-1&quot;&gt;Highlights of the WPE WebKit 2.54.0 release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/&quot;&gt;WPEPlatform&lt;/a&gt;
+embedding API is now considered stable and enabled by default at build
+configuration time. The legacy &lt;code&gt;libwpe&lt;/code&gt;-based API is still available, and
+may be deprecated in the future.&lt;/li&gt;
+&lt;li&gt;Add new API for page favicons, using
+&lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0//class.FaviconDatabase.html&quot;&gt;WebKitFaviconDatabase&lt;/a&gt;
+and the &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0//property.WebView.page-icons.html&quot;&gt;WebKitWebView:page-icons&lt;/a&gt;
+property.&lt;/li&gt;
+&lt;li&gt;Add the &lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/property.WebView.magnification.html&quot;&gt;WebKitWebView:magnification&lt;/a&gt;
+property, to handle visual scaling.&lt;/li&gt;
+&lt;li&gt;Add new API to allow setting a per-navigation custom &lt;code&gt;User-Agent&lt;/code&gt; to
+&lt;a href=&quot;https://wpewebkit.org/reference/2.54.0/wpe-webkit-2.0/class.WebsitePolicies.html&quot;&gt;WebKitWebsitePolicies&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Add support for gamepad rumble effects.&lt;/li&gt;
+&lt;li&gt;Add support for spell checking using the &lt;a href=&quot;https://rrthomas.github.io/enchant/&quot;&gt;Enchant&lt;/a&gt;
+library.&lt;/li&gt;
+&lt;li&gt;Add initial support for the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API&quot;&gt;Pointer
+Lock&lt;/a&gt; API.&lt;/li&gt;
+&lt;li&gt;Switch Web Process compositor to use Skia instead of TextureMapper.&lt;/li&gt;
+&lt;li&gt;Improved WebXR implementation, which now includes support for the
+&lt;a href=&quot;https://www.w3.org/TR/webxrlayers-1/&quot;&gt;Layers API&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Improved damage handling that is now also used during the composition to
+limit the composited areas.&lt;/li&gt;
+&lt;li&gt;Implement GPU atlas creation and replay substitution for batched raster
+image uploads.&lt;/li&gt;
+&lt;li&gt;Media capability reporting is more accurate.&lt;/li&gt;
+&lt;li&gt;Video decoding limits are now respected in media capabilities queries.&lt;/li&gt;
+&lt;li&gt;Remove the option to use Cairo for 2D rendering.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more details about all the changes included in WPE WebKit 2.54 see the
+&lt;code&gt;NEWS&lt;/code&gt; file that is included in the tarball.&lt;/p&gt;
+&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
+&lt;pre&gt;
+wpewebkit-2.54.0.tar.xz (44.1 MiB)
+   md5sum: 32f6eceb21afbf620bfd756bdde856cc
+   sha1sum: 9ff8fce3919fd563e2759e2e5c9b87327cfc507e
+   sha256sum: efa9bcc3cb891c2d88f50eec710d9ccee71cbdf1040420361eb98c17355eb452
+&lt;/pre&gt;
+</content>
+  </entry>
   
   <entry>
     <title>WPE WebKit 2.53.92 released</title>
@@ -773,33 +821,6 @@ wpewebkit-2.52.4.tar.xz (61.9 MiB)
    md5sum: 77e544c3578000456de199fd4fa1c493
    sha1sum: 81ff656cb0585a9c001deb38a6d9c6cbd4d48951
    sha256sum: 01ca34cd7af880c038d35aa94482fee785a77db37b614c584475d7d43b3a2dc0
-&lt;/pre&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>WPE WebKit 2.53.3 released</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/csaavedra/mobile-layout-fixes/release/wpewebkit-2.53.3.html"/>
-    <updated>2026-05-29T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/csaavedra/mobile-layout-fixes/release/wpewebkit-2.53.3.html</id>
-    <content type="html">&lt;p&gt;This is a development release leading towards the 2.54 series.&lt;/p&gt;
-&lt;h3 id=&quot;what%E2%80%99s-new-in-wpe-webkit-2.53.3%3F&quot; tabindex=&quot;-1&quot;&gt;What’s new in WPE WebKit 2.53.3?&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Switch web process compositor to use Skia instead of TextureMapper.&lt;/li&gt;
-&lt;li&gt;Fix missing glyph before ZWJ/ZWNJ if no font is found for the cluster.&lt;/li&gt;
-&lt;li&gt;Improve memory usage by reducing the size of the style matcher cache.&lt;/li&gt;
-&lt;li&gt;Add support for half width fonts.&lt;/li&gt;
-&lt;li&gt;Add spell checking support using the Enchant library, which can be toggled
-at build configuration time using the &lt;code&gt;ENABLE_SPELLCHECKING&lt;/code&gt; CMake option.&lt;/li&gt;
-&lt;li&gt;Support time zone change notifications on Linux.&lt;/li&gt;
-&lt;li&gt;Fix several crashes and rendering issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;checksums&quot; tabindex=&quot;-1&quot;&gt;Checksums&lt;/h4&gt;
-&lt;pre&gt;
-wpewebkit-2.53.3.tar.xz (40.8 MiB)
-   md5sum: 2b1f3e6401cf1a4bd1a9c14dba7fca28
-   sha1sum: e4568b7b2c700d79ec6e8a929c57849b42cf8115
-   sha256sum: 645babbc04b408b3ce3b026f1990e6307668aa41bf2fb860f387de72a18feb33
 &lt;/pre&gt;
 </content>
   </entry>
