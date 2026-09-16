@@ -490,6 +490,19 @@ header.page > time {
 
 pre, code {
 	background: var(--colorCodeBg);
+	/*
+	 * Naming a concrete stack instead of leaving the bare `monospace` keyword
+	 * from the UA stylesheet avoids the browser's separate default monospace
+	 * size (13px in Chrome), which left inline code visibly smaller than the
+	 * prose around it. An em keeps code in proportion wherever it appears,
+	 * including inside a heading or a .leadin.
+	 */
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+	font-size: 0.9em;
+}
+/* <code> inside <pre> must not compound the 0.9em. */
+pre code {
+	font-size: 1em;
 }
 
 pre {
