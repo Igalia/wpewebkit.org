@@ -41,12 +41,22 @@ details {
 	border: 2px solid #f1f1f1;
 	background: #f1f1f1;
 	border-radius: 0.5em;
+	/*
+	 * Markdown written inside <details> comes through as bare <p>/<ul>/<ol>
+	 * children rather than wrapped in a <div>, so the padding on the rules
+	 * below never reached it and the text sat flush against the box edge,
+	 * misaligned with the indented summary just above it. Padding the box
+	 * itself covers every child; summary and the <div> panel are pulled back
+	 * out so they keep spanning the full width as before.
+	 */
+	padding-inline: 1rem;
 }
 details > summary {
 	color: #555;
 }
 details > summary, details > div {
 	padding: 0.5rem 1rem;
+	margin-inline: -1rem;
 }
 details > div {
 	background: #fff;
