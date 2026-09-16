@@ -97,7 +97,7 @@ main > * {
 	}
 }
 
-img {
+img, video, iframe {
 	box-sizing: border-box;
 	max-width: 100%;
 }
@@ -143,6 +143,17 @@ h2 {font-size: clamp(1.625rem, 1.15rem + 1.9vw, 2.5em); line-height: 1.1;}
 h3 {font-size: clamp(1.25rem, 1.09rem + 0.65vw, 1.6em); line-height: 1.2;}
 p > big, p.leadin {
 	font-size: clamp(1.15rem, 1.02rem + 0.8vw, 1.67em);
+}
+
+/*
+ * Long C++ symbols, API names and bare URLs turn up throughout this site's
+ * prose, headings and link text, and none of them offer a break opportunity
+ * of their own, so on a phone they used to push the whole page sideways.
+ * break-word only acts on a word that would otherwise overflow its line, so
+ * ordinary text is unaffected.
+ */
+main {
+	overflow-wrap: break-word;
 }
 
 /*
@@ -532,6 +543,9 @@ pre {
 	border-radius: 0.5em;
 	padding-block: 1em;
 	padding-inline: 1.5em;
+	/* Prism code blocks set white-space:pre and would otherwise widen the
+	   page; let them scroll inside their own box instead. */
+	overflow-x: auto;
 }
 
 code {
