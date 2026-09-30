@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 900 500"
+   font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+   version="1.1"
+   id="svg30"
+   sodipodi:docname="diagram-WPE-design.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview30"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.28"
+     inkscape:cx="450"
+     inkscape:cy="250"
+     inkscape:window-width="2560"
+     inkscape:window-height="1371"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg30" />
+  <defs
+     id="defs2">
+    <marker
+       id="arrow"
+       viewBox="0 0 10 10"
+       refX="8"
+       refY="5"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <path
+         d="M0,0 L10,5 L0,10 z"
+         fill="#7C8B9A"
+         id="path1" />
+    </marker>
+    <marker
+       id="arrowMuted"
+       viewBox="0 0 10 10"
+       refX="8"
+       refY="5"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <path
+         d="M0,0 L10,5 L0,10 z"
+         fill="#A6B4C2"
+         id="path2" />
+    </marker>
+  </defs>
+  <!-- ============ Application / Launcher ============ -->
+  <rect
+     x="200"
+     y="40"
+     width="300"
+     height="50"
+     rx="9"
+     fill="#FFFFFF"
+     stroke="#CBD5E0"
+     stroke-width="1.4"
+     id="rect2" />
+  <text
+     x="350"
+     y="63"
+     text-anchor="middle"
+     font-size="15"
+     font-weight="600"
+     fill="#22303C"
+     id="text2">Application / Launcher</text>
+  <text
+     x="350"
+     y="79"
+     text-anchor="middle"
+     font-size="10.5"
+     fill="#5E6E7E"
+     id="text3">your embedded app, MiniBrowser, etc.</text>
+  <!-- connector app -> WPE WebKit -->
+  <line
+     x1="350"
+     y1="90"
+     x2="350"
+     y2="103"
+     stroke="#7C8B9A"
+     stroke-width="1.6"
+     marker-end="url(#arrow)"
+     id="line3" />
+  <!-- ============ WPE WebKit container ============ -->
+  <rect
+     x="40"
+     y="104"
+     width="620"
+     height="228"
+     rx="12"
+     fill="#F7FAFD"
+     stroke="#BBD3E8"
+     stroke-width="1.6"
+     id="rect3" />
+  <text
+     x="302.10529"
+     y="129"
+     font-size="16px"
+     font-weight="700"
+     fill="#14568f"
+     id="text4">WPE WebKit</text>
+  <!-- key-message pill -->
+  <!-- WebKit engine box -->
+  <rect
+     x="60"
+     y="146"
+     width="580"
+     height="38"
+     rx="7"
+     fill="#FFFFFF"
+     stroke="#C9D4E0"
+     stroke-width="1.2"
+     id="rect5" />
+  <text
+     x="350"
+     y="170"
+     text-anchor="middle"
+     font-size="12.5"
+     fill="#22303C"
+     id="text6">WebKit engine and public API (WebKitWebView, JavaScriptCore, Web Platform)</text>
+  <!-- WPEPlatform API box (highlighted) -->
+  <rect
+     x="60"
+     y="192"
+     width="580"
+     height="46"
+     rx="7"
+     fill="#1D6FB8"
+     stroke="#14568F"
+     stroke-width="1.2"
+     id="rect6" />
+  <text
+     x="350"
+     y="211"
+     text-anchor="middle"
+     font-size="14"
+     font-weight="700"
+     fill="#FFFFFF"
+     id="text7">WPEPlatform API</text>
+  <text
+     x="350"
+     y="228"
+     text-anchor="middle"
+     font-size="10.5"
+     fill="#DCEBFA"
+     id="text8">WPEDisplay · WPEView · WPEToplevel · WPEBuffer  (rendering and input)</text>
+  <!-- built-in label -->
+  <text
+     x="60"
+     y="253"
+     font-size="10.5"
+     font-weight="600"
+     fill="#5E6E7E"
+     letter-spacing="0.3"
+     id="text9">BUILT-IN PLATFORM IMPLEMENTATIONS</text>
+  <!-- connectors WPEPlatform -> built-in impls -->
+  <line
+     x1="152"
+     y1="238"
+     x2="152"
+     y2="257"
+     stroke="#7C8B9A"
+     stroke-width="1.5"
+     marker-end="url(#arrow)"
+     id="line9" />
+  <line
+     x1="350"
+     y1="238"
+     x2="350"
+     y2="257"
+     stroke="#7C8B9A"
+     stroke-width="1.5"
+     marker-end="url(#arrow)"
+     id="line10" />
+  <line
+     x1="548"
+     y1="238"
+     x2="548"
+     y2="257"
+     stroke="#7C8B9A"
+     stroke-width="1.5"
+     marker-end="url(#arrow)"
+     id="line11" />
+  <!-- built-in impl: Wayland -->
+  <rect
+     x="60"
+     y="258"
+     width="184"
+     height="56"
+     rx="7"
+     fill="#FFFFFF"
+     stroke="#C9D4E0"
+     stroke-width="1.2"
+     id="rect11" />
+  <text
+     x="152"
+     y="283"
+     text-anchor="middle"
+     font-size="13.5"
+     font-weight="600"
+     fill="#22303C"
+     id="text11">Wayland</text>
+  <text
+     x="152"
+     y="300"
+     text-anchor="middle"
+     font-size="10"
+     fill="#5E6E7E"
+     font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+     id="text12">WPEDisplayWayland</text>
+  <!-- built-in impl: DRM/KMS -->
+  <rect
+     x="258"
+     y="258"
+     width="184"
+     height="56"
+     rx="7"
+     fill="#FFFFFF"
+     stroke="#C9D4E0"
+     stroke-width="1.2"
+     id="rect12" />
+  <text
+     x="350"
+     y="283"
+     text-anchor="middle"
+     font-size="13.5"
+     font-weight="600"
+     fill="#22303C"
+     id="text13">DRM / KMS</text>
+  <text
+     x="350"
+     y="300"
+     text-anchor="middle"
+     font-size="10"
+     fill="#5E6E7E"
+     font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+     id="text14">WPEDisplayDRM</text>
+  <!-- built-in impl: Headless -->
+  <rect
+     x="456"
+     y="258"
+     width="184"
+     height="56"
+     rx="7"
+     fill="#FFFFFF"
+     stroke="#C9D4E0"
+     stroke-width="1.2"
+     id="rect14" />
+  <text
+     x="548"
+     y="283"
+     text-anchor="middle"
+     font-size="13.5"
+     font-weight="600"
+     fill="#22303C"
+     id="text15">Headless</text>
+  <text
+     x="548"
+     y="300"
+     text-anchor="middle"
+     font-size="10"
+     fill="#5E6E7E"
+     font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+     id="text16">WPEDisplayHeadless</text>
+  <!-- ============ Custom implementation (optional, external) ============ -->
+  <!-- dashed connector WPEPlatform -> custom -->
+  <path
+     d="M640,213 L668,213 L668,244 L775,244 L775,257"
+     fill="none"
+     stroke="#A6B4C2"
+     stroke-width="1.5"
+     stroke-dasharray="5 4"
+     marker-end="url(#arrowMuted)"
+     id="path16" />
+  <rect
+     x="690"
+     y="258"
+     width="170"
+     height="56"
+     rx="7"
+     fill="#FBFBFC"
+     stroke="#9FB0BF"
+     stroke-width="1.3"
+     stroke-dasharray="5 4"
+     id="rect16" />
+  <text
+     x="775"
+     y="280"
+     text-anchor="middle"
+     font-size="13"
+     font-weight="600"
+     fill="#4A5866"
+     id="text17">Custom implementation</text>
+  <text
+     x="775"
+     y="296"
+     text-anchor="middle"
+     font-size="9.5"
+     fill="#7C8B9A"
+     id="text18">optional, for other environments</text>
+  <text
+     x="775"
+     y="308"
+     text-anchor="middle"
+     font-size="9.5"
+     fill="#7C8B9A"
+     font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+     id="text19">your WPEDisplay subclass</text>
+  <!-- connectors impls -> targets -->
+  <line
+     x1="152"
+     y1="314"
+     x2="152"
+     y2="395"
+     stroke="#7C8B9A"
+     stroke-width="1.5"
+     marker-end="url(#arrow)"
+     id="line19" />
+  <line
+     x1="350"
+     y1="314"
+     x2="350"
+     y2="395"
+     stroke="#7C8B9A"
+     stroke-width="1.5"
+     marker-end="url(#arrow)"
+     id="line20" />
+  <line
+     x1="548"
+     y1="314"
+     x2="548"
+     y2="395"
+     stroke="#7C8B9A"
+     stroke-width="1.5"
+     marker-end="url(#arrow)"
+     id="line21" />
+  <line
+     x1="775"
+     y1="314"
+     x2="775"
+     y2="395"
+     stroke="#A6B4C2"
+     stroke-width="1.5"
+     stroke-dasharray="5 4"
+     marker-end="url(#arrowMuted)"
+     id="line22" />
+  <!-- ============ Target output row ============ -->
+  <rect
+     x="60"
+     y="396"
+     width="184"
+     height="54"
+     rx="7"
+     fill="#EEF2F6"
+     stroke="#CBD5E0"
+     stroke-width="1.2"
+     id="rect22" />
+  <text
+     x="152"
+     y="419"
+     text-anchor="middle"
+     font-size="11.5"
+     font-weight="600"
+     fill="#22303C"
+     id="text22">Wayland compositor</text>
+  <text
+     x="152"
+     y="435"
+     text-anchor="middle"
+     font-size="10"
+     fill="#5E6E7E"
+     id="text23">e.g. Weston</text>
+  <rect
+     x="258"
+     y="396"
+     width="184"
+     height="54"
+     rx="7"
+     fill="#EEF2F6"
+     stroke="#CBD5E0"
+     stroke-width="1.2"
+     id="rect23" />
+  <text
+     x="350"
+     y="419"
+     text-anchor="middle"
+     font-size="11.5"
+     font-weight="600"
+     fill="#22303C"
+     id="text24">Display via DRM / KMS</text>
+  <text
+     x="350"
+     y="435"
+     text-anchor="middle"
+     font-size="10"
+     fill="#5E6E7E"
+     id="text25">no compositor</text>
+  <rect
+     x="456"
+     y="396"
+     width="184"
+     height="54"
+     rx="7"
+     fill="#EEF2F6"
+     stroke="#CBD5E0"
+     stroke-width="1.2"
+     id="rect25" />
+  <text
+     x="548"
+     y="419"
+     text-anchor="middle"
+     font-size="11.5"
+     font-weight="600"
+     fill="#22303C"
+     id="text26">Offscreen output</text>
+  <text
+     x="548"
+     y="435"
+     text-anchor="middle"
+     font-size="10"
+     fill="#5E6E7E"
+     id="text27">testing and CI</text>
+  <rect
+     x="690"
+     y="396"
+     width="170"
+     height="54"
+     rx="7"
+     fill="#F4F6F9"
+     stroke="#CBD5E0"
+     stroke-width="1.2"
+     stroke-dasharray="5 4"
+     id="rect27" />
+  <text
+     x="775"
+     y="419"
+     text-anchor="middle"
+     font-size="11.5"
+     font-weight="600"
+     fill="#4A5866"
+     id="text28">Your platform</text>
+  <text
+     x="775"
+     y="435"
+     text-anchor="middle"
+     font-size="10"
+     fill="#7C8B9A"
+     id="text29">custom integration</text>
+  <!-- ============ Legacy footnote (text pointer only) ============ -->
+  <text
+     x="40"
+     y="480"
+     font-size="10"
+     fill="#8A97A4"
+     id="text30">Legacy deployments (pre-2.54) use libwpe with an external backend such as WPEBackend-fdo and the Cog launcher; that path is documented separately.</text>
+</svg>
