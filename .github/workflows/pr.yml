@@ -24,11 +24,11 @@ jobs:
       PR_NUMBER: ${{ github.event.number }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v7
         with:
           node-version: 18
           cache: 'npm'
@@ -44,13 +44,13 @@ jobs:
             --pathprefix="/wpewebkit.org/pr-${PR_NUMBER}"
           LC_TIME=C date > "_site/pr-${PR_NUMBER}/.stamp"
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           keep_files: true
       - name: Add deploy link
-        uses: actions/github-script@v6
+        uses: actions/github-script@v9
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
