@@ -1,0 +1,114 @@
+/* Normal */
+@font-face {
+	font-family: 'Source Sans Pro';
+	font-style: normal;
+	font-variant: common-ligatures;
+	font-weight: 400;
+	src:
+		local('Source Sans Variable'),
+		local('Source Sans 3 VF'),
+		local('Source Sans Pro'),
+		local('Source Sans Pro Regular'),
+	    local('SourceSansPro-Regular'),
+		local('Source Sans 3'),
+		local('SourceSans3-Regular'),
+		url('../assets/SourceSans3VF-Roman.ttf.woff2') format('woff2'),
+		url('../assets/SourceSans3VF-Roman.ttf.woff') format('woff'),
+		url('../assets/SourceSans3VF-Roman.ttf') format('truetype'),
+		url('../assets/SourceSans3VF-Roman.otf') format('opentype');
+}
+
+/* Bold */
+@font-face {
+	font-family: 'Source Sans Pro';
+	font-style: normal;
+	font-variant: common-ligatures;
+	font-weight: 700;
+	src:
+		local('Source Sans Variable'),
+		local('Source Sans 3 VF'),
+		local('Source Sans Pro Bold'),
+	    local('SourceSansPro-Bold'),
+		local('Source Sans 3'),
+		local('SourceSans3-Bold'),
+		url('../assets/SourceSans3VF-Roman.ttf.woff2') format('woff2'),
+		url('../assets/SourceSans3VF-Roman.ttf.woff') format('woff'),
+		url('../assets/SourceSans3VF-Roman.ttf') format('truetype'),
+		url('../assets/SourceSans3VF-Roman.otf') format('opentype');
+}
+
+/* Light */
+@font-face {
+	font-family: 'Source Sans Pro';
+	font-style: normal;
+	font-variant: common-ligatures;
+	font-weight: 100;
+	src:
+		local('Source Sans Variable'),
+		local('Source Sans 3 VF'),
+		local('Source Sans Pro Light'),
+	    local('SourceSansPro-Light'),
+		local('Source Sans 3'),
+		local('SourceSans3-Light'),
+		url('../assets/SourceSans3VF-Roman.ttf.woff2') format('woff2'),
+		url('../assets/SourceSans3VF-Roman.ttf.woff') format('woff'),
+		url('../assets/SourceSans3VF-Roman.ttf') format('truetype'),
+		url('../assets/SourceSans3VF-Roman.otf') format('opentype');
+}
+
+/* Italic */
+@font-face {
+	font-family: 'Source Sans Pro';
+	font-style: italic;
+	font-variant: common-ligatures;
+	font-weight: 400;
+	src:
+		local('Source Sans Variable'),
+		local('Source Sans 3 VF'),
+		local('Source Sans Pro Italic'),
+	    local('SourceSansPro-Italic'),
+		local('Source Sans 3'),
+		local('SourceSans3-Italic'),
+		url('../assets/SourceSans3VF-Italic.ttf.woff2') format('woff2'),
+		url('../assets/SourceSans3VF-Italic.ttf.woff') format('woff'),
+		url('../assets/SourceSans3VF-Italic.ttf') format('truetype'),
+		url('../assets/SourceSans3VF-Italic.otf') format('opentype');
+}
+
+/* Bold Italic */
+@font-face {
+	font-family: 'Source Sans Pro';
+	font-style: italic;
+	font-variant: common-ligatures;
+	font-weight: 700;
+	src:
+		local('Source Sans Variable'),
+		local('Source Sans 3 VF'),
+		local('Source Sans Pro Bold Italic'),
+	    local('SourceSansPro-BoldItalic'),
+		local('Source Sans 3'),
+		local('SourceSans3-BoldItalic'),
+		url('../assets/SourceSans3VF-Italic.ttf.woff2') format('woff2'),
+		url('../assets/SourceSans3VF-Italic.ttf.woff') format('woff'),
+		url('../assets/SourceSans3VF-Italic.ttf') format('truetype'),
+		url('../assets/SourceSans3VF-Italic.otf') format('opentype');
+}
+
+/* Light Italic */
+@font-face {
+	font-family: 'Source Sans Pro';
+	font-style: italic;
+	font-variant: common-ligatures;
+	font-weight: 100;
+	src:
+		local('Source Sans Variable'),
+		local('Source Sans 3 VF'),
+		local('Source Sans Pro Light Italic'),
+	    local('SourceSansPro-LightItalic'),
+		local('Source Sans 3'),
+		local('SourceSans3-LightItalic'),
+		url('../assets/SourceSans3VF-Italic.ttf.woff2') format('woff2'),
+		url('../assets/SourceSans3VF-Italic.ttf.woff') format('woff'),
+		url('../assets/SourceSans3VF-Italic.ttf') format('truetype'),
+		url('../assets/SourceSans3VF-Italic.otf') format('opentype');
+}
