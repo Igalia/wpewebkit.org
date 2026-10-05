@@ -1,0 +1,59 @@
+name: cleanup-previews
+
+# Removes PR previews from gh-pages when they were last deployed more than
+# two months ago, to keep the site under the GitHub Pages size limit.
+
+on:
+  schedule:
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  queue: max
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: gh-pages
+      - name: Remove old previews
+        run: |
+          shopt -s globstar nullglob
+          cutoff=$(date -u -d '2 months ago' +%s)
+          # Each preview has a .stamp file with the date it was deployed.
+          for stamp in **/.stamp ; do
+            dir=${stamp%/.stamp}
+            if [[ $dir == . ]] ; then
+              continue
+            fi
+            if ! [[ -f $stamp && -s $stamp ]]; then
+              echo "Skipping $dir: $stamp is not a file or is empty" >&2
+              continue
+            fi
+            stamp_content=$(< "$stamp")
+            if ! deployed=$(date -u -d "$stamp_content" +%s); then
+              echo "Skipping $dir: cannot parse $stamp" >&2
+              continue
+            fi
+            if [[ $deployed -lt $cutoff ]]; then
+              echo "Removing $dir (deployed $stamp_content)"
+              git rm -r -q -- "$dir"
+            fi
+          done
+      - name: Push
+        run: |
+          if git diff --cached --quiet; then
+            echo "No previews to remove"
+            exit 0
+          fi
+          git config user.name 'GitHub Automation'
+          git config user.email 'noreply@wpewebkit.org'
+          git commit -q -m 'Remove previews deployed more than two months ago'
+          git push origin HEAD:gh-pages
