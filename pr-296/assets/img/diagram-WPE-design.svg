@@ -19,9 +19,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.4988889"
+     inkscape:zoom="1.44"
      inkscape:cx="450"
-     inkscape:cy="250.18532"
+     inkscape:cy="250"
      inkscape:window-width="1920"
      inkscape:window-height="1131"
      inkscape:window-x="0"
@@ -305,21 +305,13 @@
      stroke-dasharray="5 4"
      id="rect16" />
   <text
-     x="775"
+     x="775.00049"
      y="282.79099"
      text-anchor="middle"
      font-size="13px"
      font-weight="600"
      fill="#4a5866"
      id="text17">Custom implementation</text>
-  <text
-     x="775"
-     y="300.61679"
-     text-anchor="middle"
-     font-size="9.5px"
-     fill="#7c8b9a"
-     font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
-     id="text19">your WPEDisplay subclass</text>
   <!-- connectors impls -> targets -->
   <line
      x1="152"
@@ -467,4 +459,14 @@
      font-size="10"
      fill="#8A97A4"
      id="text30">Legacy deployments (pre-2.54) use libwpe with an external backend such as WPEBackend-fdo and the Cog launcher; that path is documented separately.</text>
+  <text
+     x="774.96899"
+     y="300.99936"
+     text-anchor="middle"
+     font-size="10.5px"
+     fill="#5e6e7e"
+     id="text3-6"
+     style="font-size:10px;fill:#7c8b9a;fill-opacity:1">your <tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:ui-monospace, 'SF Mono', Menlo, Consolas, monospace;-inkscape-font-specification:'ui-monospace, SF Mono, Menlo, Consolas, monospace';fill:#7c8b9a;fill-opacity:1"
+   id="tspan5">WPEDisplay</tspan> subclass</text>
 </svg>
