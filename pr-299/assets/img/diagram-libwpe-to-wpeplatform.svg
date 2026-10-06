@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 900 400"
+   font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <title>Application integration before and after WPEPlatform</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C8B9A" />
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#A6B4C2" />
+    </marker>
+  </defs>
+
+  <!-- ==================== Before: libwpe ==================== -->
+  <text x="40" y="32" font-size="11" font-weight="600" fill="#5E6E7E" letter-spacing="0.3">BEFORE: LIBWPE AND WPEBACKEND-FDO</text>
+
+  <!-- Application -->
+  <rect x="130" y="50" width="200" height="50" rx="9" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="1.4" />
+  <text x="230" y="73" text-anchor="middle" font-size="15" font-weight="600" fill="#22303C">Application</text>
+  <text x="230" y="89" text-anchor="middle" font-size="10.5" fill="#5E6E7E">often through Cog</text>
+
+  <!-- Application -> three components -->
+  <line x1="185" y1="100" x2="100" y2="139" stroke="#7C8B9A" stroke-width="1.5" marker-end="url(#arrow)" />
+  <line x1="230" y1="100" x2="225" y2="139" stroke="#7C8B9A" stroke-width="1.5" marker-end="url(#arrow)" />
+  <line x1="275" y1="100" x2="355" y2="139" stroke="#7C8B9A" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- WPE WebKit -->
+  <rect x="40" y="140" width="115" height="50" rx="7" fill="#F7FAFD" stroke="#BBD3E8" stroke-width="1.4" />
+  <text x="97.5" y="162" text-anchor="middle" font-size="13" font-weight="700" fill="#14568F">WPE WebKit</text>
+  <text x="97.5" y="178" text-anchor="middle" font-size="10" font-family="monospace" fill="#5E6E7E">WebKitWebView</text>
+
+  <!-- libwpe -->
+  <rect x="175" y="140" width="100" height="50" rx="7" fill="#FFFFFF" stroke="#C9D4E0" stroke-width="1.2" />
+  <text x="225" y="162" text-anchor="middle" font-size="13" font-weight="600" fill="#22303C">libwpe</text>
+  <text x="225" y="178" text-anchor="middle" font-size="10" fill="#5E6E7E">view backend</text>
+
+  <!-- WPEBackend-fdo -->
+  <rect x="295" y="140" width="125" height="50" rx="7" fill="#FFFFFF" stroke="#C9D4E0" stroke-width="1.2" />
+  <text x="357.5" y="162" text-anchor="middle" font-size="13" font-weight="600" fill="#22303C">WPEBackend-fdo</text>
+  <text x="357.5" y="178" text-anchor="middle" font-size="10" fill="#5E6E7E">exportable backend</text>
+
+  <!-- links between components -->
+  <line x1="157" y1="165" x2="173" y2="165" stroke="#A6B4C2" stroke-width="1.4" marker-start="url(#arrowMuted)" marker-end="url(#arrowMuted)" />
+  <line x1="277" y1="165" x2="293" y2="165" stroke="#A6B4C2" stroke-width="1.4" marker-start="url(#arrowMuted)" marker-end="url(#arrowMuted)" />
+
+  <!-- what the application had to do -->
+  <text x="40" y="222" font-size="11" font-weight="600" fill="#5E6E7E">The application also takes care of:</text>
+  <text x="40" y="240" font-size="11" fill="#5E6E7E">· loading a libwpe backend and creating the view backend</text>
+  <text x="40" y="256" font-size="11" fill="#5E6E7E">· exported buffers, their release, and frame completion</text>
+  <text x="40" y="272" font-size="11" fill="#5E6E7E">· dispatching input events into WebKit</text>
+
+  <!-- backend -> platform -->
+  <line x1="357.5" y1="190" x2="357.5" y2="309" stroke="#7C8B9A" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- Platform -->
+  <rect x="40" y="310" width="380" height="44" rx="7" fill="#EEF2F6" stroke="#CBD5E0" stroke-width="1.2" />
+  <text x="230" y="330" text-anchor="middle" font-size="12" font-weight="600" fill="#22303C">Platform</text>
+  <text x="230" y="345" text-anchor="middle" font-size="10.5" fill="#5E6E7E">Wayland compositor, EGL, input devices</text>
+
+  <!-- separator -->
+  <line x1="450" y1="30" x2="450" y2="360" stroke="#DCE3EA" stroke-width="1.2" stroke-dasharray="4 4" />
+
+  <!-- ==================== After: WPEPlatform ==================== -->
+  <text x="480" y="32" font-size="11" font-weight="600" fill="#5E6E7E" letter-spacing="0.3">AFTER: WPEPLATFORM</text>
+
+  <!-- Application -->
+  <rect x="570" y="50" width="200" height="50" rx="9" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="1.4" />
+  <text x="670" y="73" text-anchor="middle" font-size="15" font-weight="600" fill="#22303C">Application</text>
+  <text x="670" y="89" text-anchor="middle" font-size="10.5" fill="#5E6E7E">uses the WebKit API</text>
+
+  <!-- Application -> WPE WebKit -->
+  <line x1="670" y1="100" x2="670" y2="139" stroke="#7C8B9A" stroke-width="1.6" marker-end="url(#arrow)" />
+
+  <!-- optional access to WPEPlatform -->
+  <path d="M770,75 L875,75 L875,240 L862,240" fill="none" stroke="#A6B4C2" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arrowMuted)" />
+  <text x="782" y="68" font-size="10" fill="#7C8B9A">optional</text>
+
+  <!-- WPE WebKit container -->
+  <rect x="480" y="140" width="380" height="140" rx="12" fill="#F7FAFD" stroke="#BBD3E8" stroke-width="1.6" />
+  <text x="670" y="162" text-anchor="middle" font-size="15" font-weight="700" fill="#14568F">WPE WebKit</text>
+
+  <rect x="495" y="172" width="350" height="34" rx="7" fill="#FFFFFF" stroke="#C9D4E0" stroke-width="1.2" />
+  <text x="670" y="194" text-anchor="middle" font-size="12" fill="#22303C">WebKit engine and API (<tspan font-family="monospace" font-size="11">WebKitWebView</tspan>)</text>
+
+  <rect x="495" y="214" width="350" height="52" rx="7" fill="#1D6FB8" stroke="#14568F" stroke-width="1.2" />
+  <text x="670" y="234" text-anchor="middle" font-size="13.5" font-weight="700" fill="#FFFFFF">WPEPlatform</text>
+  <text x="670" y="252" text-anchor="middle" font-size="10.5" fill="#DCEBFA">rendering and input · Wayland, DRM, headless built in</text>
+
+  <!-- WPE WebKit -> platform -->
+  <line x1="670" y1="280" x2="670" y2="309" stroke="#7C8B9A" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- Platform -->
+  <rect x="480" y="310" width="380" height="44" rx="7" fill="#EEF2F6" stroke="#CBD5E0" stroke-width="1.2" />
+  <text x="670" y="330" text-anchor="middle" font-size="12" font-weight="600" fill="#22303C">Platform</text>
+  <text x="670" y="345" text-anchor="middle" font-size="10.5" fill="#5E6E7E">Wayland compositor, DRM/KMS, offscreen</text>
+
+  <text x="40" y="388" font-size="10.5" fill="#7C8B9A">With WPEPlatform, the application only reaches into the platform layer for input handling, window control, or choosing a platform.</text>
+</svg>
