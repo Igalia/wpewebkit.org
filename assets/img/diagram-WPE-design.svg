@@ -19,11 +19,11 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="2.28"
+     inkscape:zoom="1.44"
      inkscape:cx="450"
      inkscape:cy="250"
-     inkscape:window-width="2560"
-     inkscape:window-height="1371"
+     inkscape:window-width="1920"
+     inkscape:window-height="1131"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -158,13 +158,21 @@
      id="text8">WPEDisplay · WPEView · WPEToplevel · WPEBuffer  (rendering and input)</text>
   <!-- built-in label -->
   <text
-     x="60"
+     x="99.035088"
      y="253"
-     font-size="10.5"
+     font-size="10.5px"
      font-weight="600"
-     fill="#5E6E7E"
+     fill="#5e6e7e"
      letter-spacing="0.3"
-     id="text9">BUILT-IN PLATFORM IMPLEMENTATIONS</text>
+     id="text9">BUILT-IN</text>
+  <text
+     x="159.21289"
+     y="252.9995"
+     font-size="10.5px"
+     font-weight="600"
+     fill="#5e6e7e"
+     letter-spacing="0.3"
+     id="text9-6">PLATFORM IMPLEMENTATIONS</text>
   <!-- connectors WPEPlatform -> built-in impls -->
   <line
      x1="152"
@@ -214,10 +222,10 @@
      id="text11">Wayland</text>
   <text
      x="152"
-     y="300"
+     y="300.99969"
      text-anchor="middle"
-     font-size="10"
-     fill="#5E6E7E"
+     font-size="10px"
+     fill="#5e6e7e"
      font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
      id="text12">WPEDisplayWayland</text>
   <!-- built-in impl: DRM/KMS -->
@@ -241,10 +249,10 @@
      id="text13">DRM / KMS</text>
   <text
      x="350"
-     y="300"
+     y="300.99969"
      text-anchor="middle"
-     font-size="10"
-     fill="#5E6E7E"
+     font-size="10px"
+     fill="#5e6e7e"
      font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
      id="text14">WPEDisplayDRM</text>
   <!-- built-in impl: Headless -->
@@ -268,22 +276,23 @@
      id="text15">Headless</text>
   <text
      x="548"
-     y="300"
+     y="300.99969"
      text-anchor="middle"
-     font-size="10"
-     fill="#5E6E7E"
+     font-size="10px"
+     fill="#5e6e7e"
      font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
      id="text16">WPEDisplayHeadless</text>
   <!-- ============ Custom implementation (optional, external) ============ -->
   <!-- dashed connector WPEPlatform -> custom -->
   <path
-     d="M640,213 L668,213 L668,244 L775,244 L775,257"
+     d="m 640,213 h 135 v 31 13"
      fill="none"
-     stroke="#A6B4C2"
+     stroke="#a6b4c2"
      stroke-width="1.5"
-     stroke-dasharray="5 4"
+     stroke-dasharray="5, 4"
      marker-end="url(#arrowMuted)"
-     id="path16" />
+     id="path16"
+     sodipodi:nodetypes="cccc" />
   <rect
      x="690"
      y="258"
@@ -296,28 +305,13 @@
      stroke-dasharray="5 4"
      id="rect16" />
   <text
-     x="775"
-     y="280"
+     x="775.00049"
+     y="282.79099"
      text-anchor="middle"
-     font-size="13"
+     font-size="13px"
      font-weight="600"
-     fill="#4A5866"
+     fill="#4a5866"
      id="text17">Custom implementation</text>
-  <text
-     x="775"
-     y="296"
-     text-anchor="middle"
-     font-size="9.5"
-     fill="#7C8B9A"
-     id="text18">optional, for other environments</text>
-  <text
-     x="775"
-     y="308"
-     text-anchor="middle"
-     font-size="9.5"
-     fill="#7C8B9A"
-     font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
-     id="text19">your WPEDisplay subclass</text>
   <!-- connectors impls -> targets -->
   <line
      x1="152"
@@ -465,4 +459,14 @@
      font-size="10"
      fill="#8A97A4"
      id="text30">Legacy deployments (pre-2.54) use libwpe with an external backend such as WPEBackend-fdo and the Cog launcher; that path is documented separately.</text>
+  <text
+     x="774.96899"
+     y="300.99936"
+     text-anchor="middle"
+     font-size="10.5px"
+     fill="#5e6e7e"
+     id="text3-6"
+     style="font-size:10px;fill:#7c8b9a;fill-opacity:1">your <tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:ui-monospace, 'SF Mono', Menlo, Consolas, monospace;-inkscape-font-specification:'ui-monospace, SF Mono, Menlo, Consolas, monospace';fill:#7c8b9a;fill-opacity:1"
+   id="tspan5">WPEDisplay</tspan> subclass</text>
 </svg>
