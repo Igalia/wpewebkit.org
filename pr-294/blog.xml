@@ -4,14 +4,14 @@
   <description>News related to WPE WebKit.</description>
   <link href="https://wpewebkit.org/blog.xml" rel="self"/>
   <link href="https://wpewebkit.org/blog/"/>
-  <updated>2026-10-05T00:00:00Z</updated>
+  <updated>2026-10-06T00:00:00Z</updated>
   <id>https://wpewebkit.org/blog/</id>
   
   <entry>
     <title>WPEPlatform: the new WPE embedding API</title>
-    <link href="https://wpewebkit.org/wpewebkit.org/pr-294/blog/2026-10-05-wpe-platform.html"/>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <id>https://wpewebkit.org/wpewebkit.org/pr-294/blog/2026-10-05-wpe-platform.html</id>
+    <link href="https://wpewebkit.org/wpewebkit.org/pr-294/blog/2026-10-06-wpe-platform.html"/>
+    <updated>2026-10-06T00:00:00Z</updated>
+    <id>https://wpewebkit.org/wpewebkit.org/pr-294/blog/2026-10-06-wpe-platform.html</id>
     <content type="html">&lt;p&gt;With the &lt;a href=&quot;https://wpewebkit.org/blog/2026-09-16-wpewebkit-2.54.html&quot;&gt;2.54 release&lt;/a&gt;, WPEPlatform
 became the default way of integrating WPE WebKit with the underlying
 platform, and its API is now considered stable. At the same time, the
@@ -27,7 +27,7 @@ connects to the platform has changed considerably since then, so this is
 a good moment to revisit that part of the picture.&lt;/p&gt;
 &lt;h2 id=&quot;how-wpe-used-to-integrate-with-the-platform&quot; tabindex=&quot;-1&quot;&gt;How WPE used to integrate with the platform&lt;/h2&gt;
 &lt;p&gt;Since its beginnings, WPE has delegated graphics and input to code that
-lives outside of WebKit. &lt;a href=&quot;https://github.com/WebKit/libwpe&quot;&gt;libwpe&lt;/a&gt;
+lives outside of WebKit. &lt;a href=&quot;https://github.com/WebPlatformForEmbedded/libwpe&quot;&gt;libwpe&lt;/a&gt;
 defined a generic interface for these, and a &lt;em&gt;backend&lt;/em&gt;, loaded at
 runtime, implemented that interface for a given platform.
 &lt;a href=&quot;https://github.com/Igalia/WPEBackend-fdo&quot;&gt;WPEBackend-fdo&lt;/a&gt;, based on
@@ -121,10 +121,12 @@ following program is a complete, if minimal, browser:&lt;/p&gt;
 
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It only needs the &lt;code&gt;wpe-webkit-2.0&lt;/code&gt; and &lt;code&gt;wpe-platform-2.0&lt;/code&gt; pkg-config
-modules to build. Note that the &lt;code&gt;closed&lt;/code&gt; signal is emitted when the user
-closes the window, which only happens on Wayland. On DRM and headless the
-application decides by itself when to exit.&lt;/p&gt;
+&lt;p&gt;It only needs the &lt;code&gt;wpe-webkit-2.0&lt;/code&gt; pkg-config module to build, which
+pulls in &lt;code&gt;wpe-platform-2.0&lt;/code&gt; when WPE WebKit is built with WPEPlatform
+support (the default since 2.54). Note that the &lt;code&gt;closed&lt;/code&gt; signal is
+emitted when the user closes the window, and of the built-in platforms,
+only Wayland emits it. On DRM and headless the application decides by
+itself when to exit.&lt;/p&gt;
 &lt;p&gt;The platform API comes into play when an application needs more than
 these defaults. The most common cases are the following.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Choosing a platform.&lt;/strong&gt; The &lt;code&gt;WPE_PLATFORM&lt;/code&gt; environment variable
@@ -141,10 +143,12 @@ platform can also create the display itself and pass it to the web view:&lt;/p&g
 WebKitWebView &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;web_view &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;g_object_new&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;WEBKIT_TYPE_WEB_VIEW&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
                                         &lt;span class=&quot;token string&quot;&gt;&quot;display&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; display&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
                                         &lt;span class=&quot;token constant&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This requires the corresponding pkg-config module, in this case
-&lt;code&gt;wpe-platform-wayland-2.0&lt;/code&gt;, which is only installed when WPE WebKit is
-built with that platform enabled. The DRM and headless implementations work the
-same way, with &lt;code&gt;wpe_display_drm_new()&lt;/code&gt; and &lt;code&gt;wpe_display_headless_new()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The Wayland-specific API is available with the same &lt;code&gt;wpe-webkit-2.0&lt;/code&gt;
+module, but an application that depends on it can check for the
+&lt;code&gt;wpe-platform-wayland-2.0&lt;/code&gt; pkg-config module, which is only installed
+when WPE WebKit is built with the Wayland platform enabled. The DRM and
+headless implementations work the same way, with &lt;code&gt;wpe_display_drm_new()&lt;/code&gt;
+and &lt;code&gt;wpe_display_headless_new()&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Handling input.&lt;/strong&gt; Input events are delivered to the &lt;code&gt;WPEView&lt;/code&gt; through
 the &lt;code&gt;event&lt;/code&gt; signal before they reach the web page. An application can
 connect to it to implement keyboard shortcuts, returning &lt;code&gt;TRUE&lt;/code&gt; to stop
