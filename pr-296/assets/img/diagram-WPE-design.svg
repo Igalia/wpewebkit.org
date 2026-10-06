@@ -19,9 +19,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="2.28"
-     inkscape:cx="628.94737"
-     inkscape:cy="250.4386"
+     inkscape:zoom="1.4988889"
+     inkscape:cx="450"
+     inkscape:cy="250.18532"
      inkscape:window-width="1920"
      inkscape:window-height="1131"
      inkscape:window-x="0"
@@ -158,13 +158,21 @@
      id="text8">WPEDisplay · WPEView · WPEToplevel · WPEBuffer  (rendering and input)</text>
   <!-- built-in label -->
   <text
-     x="60"
+     x="99.035088"
      y="253"
-     font-size="10.5"
+     font-size="10.5px"
      font-weight="600"
-     fill="#5E6E7E"
+     fill="#5e6e7e"
      letter-spacing="0.3"
-     id="text9">BUILT-IN PLATFORM IMPLEMENTATIONS</text>
+     id="text9">BUILT-IN</text>
+  <text
+     x="159.21289"
+     y="252.9995"
+     font-size="10.5px"
+     font-weight="600"
+     fill="#5e6e7e"
+     letter-spacing="0.3"
+     id="text9-6">PLATFORM IMPLEMENTATIONS</text>
   <!-- connectors WPEPlatform -> built-in impls -->
   <line
      x1="152"
@@ -214,10 +222,10 @@
      id="text11">Wayland</text>
   <text
      x="152"
-     y="300"
+     y="300.99969"
      text-anchor="middle"
-     font-size="10"
-     fill="#5E6E7E"
+     font-size="10px"
+     fill="#5e6e7e"
      font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
      id="text12">WPEDisplayWayland</text>
   <!-- built-in impl: DRM/KMS -->
@@ -241,10 +249,10 @@
      id="text13">DRM / KMS</text>
   <text
      x="350"
-     y="300"
+     y="300.99969"
      text-anchor="middle"
-     font-size="10"
-     fill="#5E6E7E"
+     font-size="10px"
+     fill="#5e6e7e"
      font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
      id="text14">WPEDisplayDRM</text>
   <!-- built-in impl: Headless -->
@@ -268,10 +276,10 @@
      id="text15">Headless</text>
   <text
      x="548"
-     y="300"
+     y="300.99969"
      text-anchor="middle"
-     font-size="10"
-     fill="#5E6E7E"
+     font-size="10px"
+     fill="#5e6e7e"
      font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
      id="text16">WPEDisplayHeadless</text>
   <!-- ============ Custom implementation (optional, external) ============ -->
@@ -298,25 +306,18 @@
      id="rect16" />
   <text
      x="775"
-     y="280"
+     y="282.79099"
      text-anchor="middle"
-     font-size="13"
+     font-size="13px"
      font-weight="600"
-     fill="#4A5866"
+     fill="#4a5866"
      id="text17">Custom implementation</text>
   <text
      x="775"
-     y="296"
+     y="300.61679"
      text-anchor="middle"
-     font-size="9.5"
-     fill="#7C8B9A"
-     id="text18">optional, for other environments</text>
-  <text
-     x="775"
-     y="308"
-     text-anchor="middle"
-     font-size="9.5"
-     fill="#7C8B9A"
+     font-size="9.5px"
+     fill="#7c8b9a"
      font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
      id="text19">your WPEDisplay subclass</text>
   <!-- connectors impls -> targets -->
