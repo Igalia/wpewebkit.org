@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WPEPlatform: the new WPE API</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/pr-297/blog/2026-10-06-wpe-platform.html">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="https://igalia.github.io/wpewebkit.org/pr-297/blog.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="https://igalia.github.io/wpewebkit.org/pr-297/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="https://igalia.github.io/wpewebkit.org/pr-297/security.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/pr-297/blog/2026-10-06-wpe-platform.html">
+  <meta property="og:title" content="WPEPlatform: the new WPE API">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/pr-297/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/pr-297/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-10-06T00:00:00.000Z">
+  <meta property="article:tag" content="blogpost">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/pr-297/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/pr-297/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/pr-297/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/pr-297/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/pr-297/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/pr-297/"><img src="/wpewebkit.org/pr-297/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="blog off"><li>
+			<a class="nav-link" href="/wpewebkit.org/pr-297/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/pr-297/about/">Learn & Discover</a>
+			</li><li class="currentPage">
+			<a class="nav-link" href="/wpewebkit.org/pr-297/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/pr-297/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/pr-297/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/pr-297/blog/2026-10-06-wpe-platform.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WPEPlatform: the new WPE API</h1>
+ 
+   <meta itemprop="datePublished" content="Tue Oct 06 2026">
+   <time itemprop="dateCreated"> 6 October 2026</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<p>With the <a href="/wpewebkit.org/pr-297/blog/2026-09-16-wpewebkit-2.54.html">2.54 release</a>, WPEPlatform
+became the default way of integrating WPE WebKit with the underlying
+platform, and its API is now considered stable. At the same time, the
+libwpe-based API that WPE has relied on since its beginnings is now
+deprecated. In this article we explain why this change was made, how
+applications use the new API, and what is involved in migrating an
+existing application from libwpe.</p>
+<p>Back in 2022 we published <a href="/wpewebkit.org/pr-297/blog/02-overview-of-wpe.html">an overview of the WPE WebKit
+project</a>, describing the different
+components of WPE and how they fit together. Most of what that article
+explains about WebKit and the WPE API is still valid, but the way WPE
+connects to the platform has changed considerably since then, so this is
+a good moment to revisit that part of the picture.</p>
+<h2 id="how-wpe-used-to-integrate-with-the-platform" tabindex="-1">How WPE used to integrate with the platform</h2>
+<p>Since its beginnings, WPE has delegated graphics and input to code that
+lives outside of WebKit. <a href="https://github.com/WebPlatformForEmbedded/libwpe">libwpe</a>
+defined a generic interface for these, and a <em>backend</em>, loaded at
+runtime, implemented that interface for a given platform.
+<a href="https://github.com/Igalia/WPEBackend-fdo">WPEBackend-fdo</a>, based on
+Wayland and other freedesktop.org technologies, was the reference
+backend, while <a href="https://github.com/Igalia/cog">Cog</a> provided a
+convenience layer on top for those writing browsers.</p>
+<p>This design achieved its main goal: hardware vendors and integrators
+could support WPE on their platforms without having to modify WebKit
+itself. However, it also meant that a good part of the platform work was
+left to the application. To show a web page on screen using
+WPEBackend-fdo, an application had to:</p>
+<ul>
+<li>Load a libwpe backend with <code>wpe_loader_init()</code> and initialize it,
+usually by passing it an EGL display.</li>
+<li>Create a view backend through the “exportable” API of WPEBackend-fdo,
+wrap it in a <code>WebKitWebViewBackend</code>, and pass that to the web view.</li>
+<li>Receive, in a set of callbacks, the buffers exported by WebKit for each
+frame, present them on screen, release them, and notify WebKit when
+the frame had been displayed.</li>
+<li>Collect input events from the windowing system and forward them to
+WebKit with the <code>wpe_view_backend_dispatch_*_event()</code> family of
+functions.</li>
+</ul>
+<p>As a result, even a simple browser required a fair amount of knowledge of
+the graphics pipeline, and the code involved was split across three
+repositories (WebKit, libwpe, and WPEBackend-fdo) that had to be kept in
+sync. Much of this code was the same from one application to the next,
+and Cog provided a ready-made implementation of it for applications that
+did not want to write their own.</p>
+<h2 id="what-wpeplatform-changes" tabindex="-1">What WPEPlatform changes</h2>
+<p>WPEPlatform is a GObject-based library that lives in the WebKit
+repository and is built as part of WPE WebKit. It replaces both libwpe
+and the backends written against it, and it moves the responsibility of
+rendering and input handling away from the application and into WebKit
+and the platform implementation.</p>
+<p>The library is only used by WebKit’s UI process. As before, the web
+process renders the page into buffers that are shared with the UI process
+(DMA-BUF buffers on Linux, AHardwareBuffer on Android, or shared memory
+when rendering in software). The difference is that WebKit now hands these buffers
+directly to the platform implementation, which takes care of presenting
+them, without the application having to take part in the process.</p>
+<p>The API is built around four classes:</p>
+<ul>
+<li><code>WPEDisplay</code>: the connection to the platform, and the object that
+creates all the others.</li>
+<li><code>WPEToplevel</code>: a top-level surface, which is normally a window, or the
+whole output on platforms that have no windows.</li>
+<li><code>WPEView</code>: the surface where a single web view is rendered, hosted in a
+toplevel. It also receives the input events for that web view.</li>
+<li><code>WPEBuffer</code>: the pixel data produced by WebKit and handed to the view,
+with a subclass for each type of buffer.</li>
+</ul>
+<p>These are complemented by smaller classes for screens, keymaps,
+settings, input methods, gestures, gamepads, the clipboard, and
+accessibility. Several of them, such as screens, settings, input
+methods, and gestures, had no equivalent in libwpe.</p>
+<p>WPE WebKit ships with three built-in platform implementations: Wayland,
+DRM/KMS (for devices that drive the display directly, without a
+compositor), and headless (for testing and offscreen rendering). Other
+implementations can be developed out of tree and installed as modules,
+which WPE WebKit discovers at runtime.
+<a href="https://github.com/Igalia/wpe-platform-gtk">wpe-platform-gtk</a>, which
+embeds WPE web views in GTK 4 applications, is an example of this.</p>
+<p><img style="display: block; margin: 1em auto;" alt="A diagram of the WPE architecture: the application uses WPE WebKit, which includes the WebKit engine and API and the WPEPlatform API. WPEPlatform has built-in Wayland, DRM/KMS, and headless implementations, and custom implementations can be provided for other platforms." src="/wpewebkit.org/pr-297/assets/img/diagram-WPE-design.svg"></p>
+<h2 id="using-wpeplatform-in-an-application" tabindex="-1">Using WPEPlatform in an application</h2>
+<p>For most applications, WPEPlatform is not visible at all. A
+<code>WebKitWebView</code> created without a backend selects a platform
+automatically: WPE WebKit tries the available platform implementations in
+order of priority and uses the first one that connects successfully. The
+following program is a complete, if minimal, browser:</p>
+<pre class="language-c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;wpe/webkit.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;wpe/wpe-platform.h></span></span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span>
+<span class="token function">on_view_closed</span> <span class="token punctuation">(</span>WPEView <span class="token operator">*</span>view<span class="token punctuation">,</span> gpointer user_data<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">g_main_loop_quit</span> <span class="token punctuation">(</span>user_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span>
+<span class="token function">main</span> <span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>GMainLoop<span class="token punctuation">)</span> loop <span class="token operator">=</span> <span class="token function">g_main_loop_new</span> <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">g_autoptr</span><span class="token punctuation">(</span>WebKitWebView<span class="token punctuation">)</span> web_view <span class="token operator">=</span> <span class="token function">g_object_new</span> <span class="token punctuation">(</span>WEBKIT_TYPE_WEB_VIEW<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    WPEView <span class="token operator">*</span>view <span class="token operator">=</span> <span class="token function">webkit_web_view_get_wpe_view</span> <span class="token punctuation">(</span>web_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">g_signal_connect</span> <span class="token punctuation">(</span>view<span class="token punctuation">,</span> <span class="token string">"closed"</span><span class="token punctuation">,</span> <span class="token function">G_CALLBACK</span> <span class="token punctuation">(</span>on_view_closed<span class="token punctuation">)</span><span class="token punctuation">,</span> loop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">webkit_web_view_load_uri</span> <span class="token punctuation">(</span>web_view<span class="token punctuation">,</span> argc <span class="token operator">></span> <span class="token number">1</span> <span class="token operator">?</span> argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token string">"https://wpewebkit.org"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">g_main_loop_run</span> <span class="token punctuation">(</span>loop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>It only needs the <code>wpe-webkit-2.0</code> pkg-config module to build, which
+pulls in <code>wpe-platform-2.0</code> when WPE WebKit is built with WPEPlatform
+support (the default since 2.54). Note that the <code>closed</code> signal is
+emitted when the user closes the window, and of the built-in platforms,
+only Wayland emits it. On DRM and headless the application decides by
+itself when to exit.</p>
+<p>The platform API comes into play when an application needs more than
+these defaults. The most common cases are the following.</p>
+<p><strong>Choosing a platform.</strong> The <code>WPE_PLATFORM</code> environment variable
+(<code>wayland</code>, <code>drm</code>, or <code>headless</code>) forces a given platform without any
+changes to the code. An application that is meant to run on a single
+platform can also create the display itself and pass it to the web view:</p>
+<pre class="language-c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;wpe/wayland/wpe-wayland.h></span></span>
+
+<span class="token function">g_autoptr</span><span class="token punctuation">(</span>GError<span class="token punctuation">)</span> error <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token function">g_autoptr</span><span class="token punctuation">(</span>WPEDisplay<span class="token punctuation">)</span> display <span class="token operator">=</span> <span class="token function">wpe_display_wayland_new</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">wpe_display_connect</span> <span class="token punctuation">(</span>display<span class="token punctuation">,</span> <span class="token operator">&amp;</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">g_error</span> <span class="token punctuation">(</span><span class="token string">"Could not connect to Wayland: %s"</span><span class="token punctuation">,</span> error<span class="token operator">-></span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+WebKitWebView <span class="token operator">*</span>web_view <span class="token operator">=</span> <span class="token function">g_object_new</span> <span class="token punctuation">(</span>WEBKIT_TYPE_WEB_VIEW<span class="token punctuation">,</span>
+                                        <span class="token string">"display"</span><span class="token punctuation">,</span> display<span class="token punctuation">,</span>
+                                        <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The Wayland-specific API is available with the same <code>wpe-webkit-2.0</code>
+module, but an application that depends on it can check for the
+<code>wpe-platform-wayland-2.0</code> pkg-config module, which is only installed
+when WPE WebKit is built with the Wayland platform enabled. The DRM and
+headless implementations work the same way, with <code>wpe_display_drm_new()</code>
+and <code>wpe_display_headless_new()</code>.</p>
+<p><strong>Handling input.</strong> Input events are delivered to the <code>WPEView</code> through
+the <code>event</code> signal before they reach the web page. An application can
+connect to it to implement keyboard shortcuts, returning <code>TRUE</code> to stop
+the event from reaching the page:</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">static</span> gboolean
+<span class="token function">on_view_event</span> <span class="token punctuation">(</span>WPEView <span class="token operator">*</span>view<span class="token punctuation">,</span> WPEEvent <span class="token operator">*</span>event<span class="token punctuation">,</span> gpointer user_data<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">wpe_event_get_event_type</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token operator">==</span> WPE_EVENT_KEYBOARD_KEY_DOWN
+        <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">wpe_event_get_modifiers</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token operator">&amp;</span> WPE_MODIFIER_KEYBOARD_CONTROL<span class="token punctuation">)</span>
+        <span class="token operator">&amp;&amp;</span> <span class="token function">wpe_event_keyboard_get_keyval</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token operator">==</span> WPE_KEY_q<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">g_main_loop_quit</span> <span class="token punctuation">(</span>user_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">g_signal_connect</span> <span class="token punctuation">(</span>view<span class="token punctuation">,</span> <span class="token string">"event"</span><span class="token punctuation">,</span> <span class="token function">G_CALLBACK</span> <span class="token punctuation">(</span>on_view_event<span class="token punctuation">)</span><span class="token punctuation">,</span> loop<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><strong>Controlling the window.</strong> The toplevel that hosts the view is available
+through <code>wpe_view_get_toplevel()</code>, and provides functions to set the
+title (<code>wpe_toplevel_set_title()</code>), resize, maximize, or switch to
+fullscreen (<code>wpe_toplevel_fullscreen()</code>). Changes in its state are
+reported by the <code>toplevel-state-changed</code> signal of the view. How much of
+this is supported depends on the platform: Wayland implements all of it,
+the headless implementation only keeps track of size and fullscreen
+state, and DRM does not support them, since its toplevel always covers
+the whole screen.</p>
+<p>Finally, <code>wpe_display_get_settings()</code> gives access to <code>WPESettings</code>,
+where applications can override platform settings such as the dark mode
+preference, reduced motion, or contrast. The <code>prefers-color-scheme</code>,
+<code>prefers-reduced-motion</code>, and <code>prefers-contrast</code> CSS media queries
+follow these settings.</p>
+<h2 id="migrating-from-libwpe" tabindex="-1">Migrating from libwpe</h2>
+<p>For an application, most of the migration consists of removing code. With
+WPEBackend-fdo, creating a web view looked roughly like this, with most
+of the actual work happening in the callbacks of <code>exportable_client</code>:</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">wpe_view_backend_exportable_fdo</span> <span class="token operator">*</span>exportable <span class="token operator">=</span>
+    <span class="token function">wpe_view_backend_exportable_fdo_egl_create</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>exportable_client<span class="token punctuation">,</span> app<span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">wpe_view_backend</span> <span class="token operator">*</span>wpe_backend <span class="token operator">=</span>
+    <span class="token function">wpe_view_backend_exportable_fdo_get_view_backend</span> <span class="token punctuation">(</span>exportable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+WebKitWebViewBackend <span class="token operator">*</span>backend <span class="token operator">=</span>
+    <span class="token function">webkit_web_view_backend_new</span> <span class="token punctuation">(</span>wpe_backend<span class="token punctuation">,</span> destroy_backend<span class="token punctuation">,</span> exportable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+WebKitWebView <span class="token operator">*</span>web_view <span class="token operator">=</span> <span class="token function">webkit_web_view_new</span> <span class="token punctuation">(</span>backend<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>With WPEPlatform, the same is achieved with a single line:</p>
+<pre class="language-c"><code class="language-c">WebKitWebView <span class="token operator">*</span>web_view <span class="token operator">=</span> <span class="token function">g_object_new</span> <span class="token punctuation">(</span>WEBKIT_TYPE_WEB_VIEW<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><code>webkit_web_view_new()</code> is only available when WPE WebKit is built with
+the legacy API, so applications need to switch to <code>g_object_new()</code>. The
+rest of the application code that uses the WebKit API (settings, network
+sessions, navigation, and so on) does not need any changes. The diagram
+below summarizes what moves out of the application:</p>
+<p><img style="display: block; margin: 1em auto;" alt="A diagram comparing the two architectures. Before: the application, often through Cog, uses WPE WebKit, libwpe, and WPEBackend-fdo, and takes care of loading the backend, handling exported buffers, and dispatching input. After: the application only uses the WebKit API, and WPEPlatform, inside WPE WebKit, handles rendering and input." src="/wpewebkit.org/pr-297/assets/img/diagram-libwpe-to-wpeplatform.svg"></p>
+<p>The rest of the libwpe code in an application maps to WPEPlatform as
+follows:</p>
+<table>
+<thead>
+<tr>
+<th>libwpe / WPEBackend-fdo</th>
+<th>WPEPlatform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wpe_loader_init()</code> and backend initialization</td>
+<td>Automatic, or <code>WPE_PLATFORM</code>, or creating a <code>WPEDisplay</code></td>
+</tr>
+<tr>
+<td>Exportable client callbacks, buffer release, frame completion</td>
+<td>Handled by WebKit and the platform implementation</td>
+</tr>
+<tr>
+<td><code>wpe_view_backend_dispatch_*_event()</code></td>
+<td>Handled by the platform; intercept with the <code>WPEView::event</code> signal</td>
+</tr>
+<tr>
+<td>Fullscreen handler</td>
+<td><code>wpe_toplevel_fullscreen()</code> and the toplevel state</td>
+</tr>
+</tbody>
+</table>
+<p>There are a few things in libwpe and WPEBackend-fdo that have no
+equivalent in WPEPlatform. The process provider API of libwpe is gone,
+since WebKit is again in charge of launching its auxiliary processes. The
+only exception is Android, which has its own <code>WPEProcessManager</code> API. The
+audio extension of WPEBackend-fdo has not been supported since 2.46,
+and the video plane extension, used to display video frames on hardware
+overlay planes, has no equivalent yet.</p>
+<p>Those who maintain a custom backend for WPEBackend-fdo, rather than an
+application, will need to port it to a WPEPlatform implementation. This
+means subclassing <code>WPEDisplay</code>, <code>WPEToplevel</code>, and <code>WPEView</code>, and
+optionally the input method, keymap, and screen classes. The <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/tutorial-platform.html">tutorial on
+writing a platform
+implementation</a>
+covers this in detail. In many cases, extending one of the built-in
+implementations might be enough: the Wayland one, for example, exposes
+its <code>wl_display</code>, <code>wl_compositor</code>, and <code>wl_surface</code> objects, which makes
+it possible to add support for additional Wayland protocols.</p>
+<p>On the build side, the legacy API is still built by default in 2.54 and
+will continue to be maintained while applications migrate. Once an
+application no longer needs it, it can be disabled at build time with
+the <code>ENABLE_WPE_LEGACY_API=OFF</code> CMake option. As for Cog, it will not
+have further stable releases beyond the 0.18.x series, so we recommend
+that new applications use the WebKit and WPEPlatform APIs directly.</p>
+<h2 id="further-reading" tabindex="-1">Further reading</h2>
+<p>The reference documentation for WPEPlatform has been considerably
+extended for this release, and is the best place to continue from here:</p>
+<ul>
+<li>The <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/overview.html">overview</a>
+of the API.</li>
+<li>A <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/tutorial-browser.html">tutorial on writing a
+browser</a>
+with WPEPlatform.</li>
+<li>A <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/migrating-from-libwpe.html">guide on migrating from
+libwpe</a>,
+with more examples than this article.</li>
+<li>A <a href="https://wpewebkit.org/reference/2.54.0/wpe-platform-2.0/migration-mapping.html">mapping
+table</a>
+with the WPEPlatform equivalent of every public symbol in libwpe and
+WPEBackend-fdo.</li>
+</ul>
+<p>For an example of a platform implementation that lives entirely outside
+of WebKit, Alex has written about <a href="https://blogs.igalia.com/alex/2026/09/11/wpe-webkit-on-android-now-with-wpeplatform/">WPE WebKit on Android with
+WPEPlatform</a>,
+which shows how far the API can be taken.</p>
+<p>If you run into problems while migrating, or find that something you
+relied on in libwpe is missing, please let us know, either by filing a
+bug in <a href="https://bugs.webkit.org">WebKit’s Bugzilla</a>, on the
+<a href="https://lists.webkit.org/mailman3/lists/webkit-wpe.lists.webkit.org/">webkit-wpe mailing
+list</a>,
+or in the <a href="https://matrix.to/#/#wpe:matrix.org">#wpe Matrix channel</a>.</p>
+
+
+
+<section class="content-section bg-light small-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-muted text-left align-text-top">
+        <hr class="author-line">
+        <div class="card">
+          <span>
+            This article was written by <a href="https://www.igalia.com/team/csaavedra">Claudio Saavedra</a>. <br><br>Claudio is long-time WebKit contributor from Igalia, working in different areas of WebKit, WPE, and the stack around it.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </div></main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/pr-297/" class="igalia logo home"><img src="/wpewebkit.org/pr-297/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://bsky.app/profile/wpewebkit.org">Bluesky</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman3/lists/webkit-wpe.lists.webkit.org/">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2026 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/pr-297/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>
