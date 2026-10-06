@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="en">
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="">
+
+  <title>WebKitGTK and WPE WebKit Security Advisory WSA-2026-0006</title>
+  <link rel="canonical" href="https://igalia.github.io/wpewebkit.org/pr-295/security/WSA-2026-0006.html">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Blog" href="https://igalia.github.io/wpewebkit.org/pr-295/blog.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Posts" href="https://igalia.github.io/wpewebkit.org/pr-295/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="WPE WebKit Security Advisories" href="https://igalia.github.io/wpewebkit.org/pr-295/security.xml">
+  <meta property="og:url" content="https://igalia.github.io/wpewebkit.org/pr-295/security/WSA-2026-0006.html">
+  <meta property="og:title" content="WebKitGTK and WPE WebKit Security Advisory WSA-2026-0006">
+  <meta property="og:image" content="https://igalia.github.io/wpewebkit.org/pr-295/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:secure_url" content="https://igalia.github.io/wpewebkit.org/pr-295/assets/twitter_Profile_WhiteBg_400px.png">
+  <meta property="og:image:alt" content="WPE logo">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-09-29T00:00:00.000Z">
+  <meta property="article:tag" content="WSA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@WPEWebKit">
+
+  <!-- CSS v2 -->
+  <link rel="stylesheet" href="/wpewebkit.org/pr-295/css/v2.css">
+
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="/wpewebkit.org/pr-295/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/wpewebkit.org/pr-295/css/fonts.css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/wpewebkit.org/pr-295/css/prism.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/wpewebkit.org/pr-295/css/stylish-portfolio.css">
+  <script type="text/javascript">
+    window.addEventListener('load',function() {document.querySelector('nav.global>div>.burger').addEventListener('click',menutog)});
+    function menutog(e) {
+      document.querySelector('nav.global>div>ul').classList.toggle('off');
+      e.preventDefault();
+    }
+  </script>
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.igalia.com/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '6']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+  <body id="page-top" class="subpage">
+
+    <nav class="global">
+	<div>
+		<a class="igalia logo home" href="/wpewebkit.org/pr-295/"><img src="/wpewebkit.org/pr-295/assets/img/logo-blue.svg" alt="WPE"></a>
+		<ul class="security off"><li>
+			<a class="nav-link" href="/wpewebkit.org/pr-295/">Home</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/pr-295/about/">Learn & Discover</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/pr-295/blog/">Blog</a>
+			</li><li>
+			<a class="nav-link" href="/wpewebkit.org/pr-295/developers/">Developers</a>
+			</li><li>
+			<a class="btn cta" href="/wpewebkit.org/pr-295/about/get-wpe.html">Get WPE</a>
+			</li></ul>
+		<a href="#" class="burger">Menu</a>
+	</div>
+</nav>
+
+
+    <main>
+    <style>
+header.page h1 {
+	margin-bottom: 0.33em;
+	line-height: 1;
+}
+header.page time {
+	font-size: 1.25em;
+	opacity: 0.67;
+}
+header.page .btn-xl {
+	padding: 1em 2em;
+  margin-left: 0.5em;
+}
+</style>
+<div itemscope="" itemtype="http://schema.org/TechArticle">
+<meta itemprop="creativeWorkStatus" content="Published">
+<meta itemprop="isAccessibleForFree" content="True">
+<meta itemprop="publisher" content="WPE Team">
+<meta itemprop="author" content="WPE Team">
+<meta itemprop="url" content="https://igalia.github.io/wpewebkit.org/pr-295/security/WSA-2026-0006.html">
+
+<header class="page full-bleed">
+ <h1 itemprop="headline">WebKitGTK and WPE WebKit Security Advisory WSA-2026-0006</h1>
+ 
+   <meta itemprop="datePublished" content="Tue Sep 29 2026">
+   <time itemprop="dateCreated">29 September 2026</time>
+ 
+  
+</header>
+
+<div itemprop="articleBody">
+
+<ul>
+<li>
+<p>Date Reported: <strong>September 29, 2026</strong></p>
+</li>
+<li>
+<p>Advisory ID: <strong>WSA-2026-0006</strong></p>
+</li>
+<li>
+<p>CVE identifiers: <a href="#CVE-2024-1283">CVE-2024-1283</a>, <a href="#CVE-2024-43091">CVE-2024-43091</a>, <a href="#CVE-2024-43097">CVE-2024-43097</a>, <a href="#CVE-2024-43767">CVE-2024-43767</a>, <a href="#CVE-2024-43768">CVE-2024-43768</a>, <a href="#CVE-2024-7966">CVE-2024-7966</a>, <a href="#CVE-2024-8193">CVE-2024-8193</a>, <a href="#CVE-2024-8198">CVE-2024-8198</a>, <a href="#CVE-2024-8636">CVE-2024-8636</a>, <a href="#CVE-2024-9123">CVE-2024-9123</a>, <a href="#CVE-2025-0436">CVE-2025-0436</a>, <a href="#CVE-2025-0444">CVE-2025-0444</a>, <a href="#CVE-2025-10502">CVE-2025-10502</a>, <a href="#CVE-2025-26416">CVE-2025-26416</a>, <a href="#CVE-2025-32318">CVE-2025-32318</a>, <a href="#CVE-2025-48622">CVE-2025-48622</a>, <a href="#CVE-2025-54627">CVE-2025-54627</a>, <a href="#CVE-2025-8901">CVE-2025-8901</a>, <a href="#CVE-2025-9478">CVE-2025-9478</a>, <a href="#CVE-2026-0908">CVE-2026-0908</a>, <a href="#CVE-2026-10009">CVE-2026-10009</a>, <a href="#CVE-2026-10011">CVE-2026-10011</a>, <a href="#CVE-2026-10012">CVE-2026-10012</a>, <a href="#CVE-2026-10018">CVE-2026-10018</a>, <a href="#CVE-2026-10019">CVE-2026-10019</a>, <a href="#CVE-2026-10881">CVE-2026-10881</a>, <a href="#CVE-2026-10883">CVE-2026-10883</a>, <a href="#CVE-2026-10889">CVE-2026-10889</a>, <a href="#CVE-2026-10907">CVE-2026-10907</a>, <a href="#CVE-2026-10919">CVE-2026-10919</a>, <a href="#CVE-2026-10941">CVE-2026-10941</a>, <a href="#CVE-2026-10974">CVE-2026-10974</a>, <a href="#CVE-2026-10977">CVE-2026-10977</a>, <a href="#CVE-2026-10979">CVE-2026-10979</a>, <a href="#CVE-2026-10985">CVE-2026-10985</a>, <a href="#CVE-2026-10993">CVE-2026-10993</a>, <a href="#CVE-2026-10994">CVE-2026-10994</a>, <a href="#CVE-2026-11004">CVE-2026-11004</a>, <a href="#CVE-2026-11024">CVE-2026-11024</a>, <a href="#CVE-2026-11039">CVE-2026-11039</a>, <a href="#CVE-2026-11040">CVE-2026-11040</a>, <a href="#CVE-2026-11051">CVE-2026-11051</a>, <a href="#CVE-2026-11057">CVE-2026-11057</a>, <a href="#CVE-2026-11061">CVE-2026-11061</a>, <a href="#CVE-2026-11065">CVE-2026-11065</a>, <a href="#CVE-2026-11066">CVE-2026-11066</a>, <a href="#CVE-2026-11087">CVE-2026-11087</a>, <a href="#CVE-2026-11088">CVE-2026-11088</a>, <a href="#CVE-2026-11090">CVE-2026-11090</a>, <a href="#CVE-2026-11104">CVE-2026-11104</a>, <a href="#CVE-2026-11109">CVE-2026-11109</a>, <a href="#CVE-2026-11110">CVE-2026-11110</a>, <a href="#CVE-2026-11111">CVE-2026-11111</a>, <a href="#CVE-2026-11113">CVE-2026-11113</a>, <a href="#CVE-2026-11121">CVE-2026-11121</a>, <a href="#CVE-2026-11123">CVE-2026-11123</a>, <a href="#CVE-2026-11124">CVE-2026-11124</a>, <a href="#CVE-2026-11137">CVE-2026-11137</a>, <a href="#CVE-2026-11138">CVE-2026-11138</a>, <a href="#CVE-2026-11159">CVE-2026-11159</a>, <a href="#CVE-2026-11191">CVE-2026-11191</a>, <a href="#CVE-2026-11663">CVE-2026-11663</a>, <a href="#CVE-2026-11675">CVE-2026-11675</a>, <a href="#CVE-2026-13780">CVE-2026-13780</a>, <a href="#CVE-2026-13781">CVE-2026-13781</a>, <a href="#CVE-2026-13834">CVE-2026-13834</a>, <a href="#CVE-2026-13841">CVE-2026-13841</a>, <a href="#CVE-2026-13859">CVE-2026-13859</a>, <a href="#CVE-2026-13877">CVE-2026-13877</a>, <a href="#CVE-2026-13883">CVE-2026-13883</a>, <a href="#CVE-2026-13971">CVE-2026-13971</a>, <a href="#CVE-2026-14044">CVE-2026-14044</a>, <a href="#CVE-2026-14125">CVE-2026-14125</a>, <a href="#CVE-2026-14152">CVE-2026-14152</a>, <a href="#CVE-2026-14382">CVE-2026-14382</a>, <a href="#CVE-2026-14386">CVE-2026-14386</a>, <a href="#CVE-2026-14387">CVE-2026-14387</a>, <a href="#CVE-2026-14388">CVE-2026-14388</a>, <a href="#CVE-2026-14389">CVE-2026-14389</a>, <a href="#CVE-2026-14390">CVE-2026-14390</a>, <a href="#CVE-2026-14396">CVE-2026-14396</a>, <a href="#CVE-2026-14398">CVE-2026-14398</a>, <a href="#CVE-2026-14400">CVE-2026-14400</a>, <a href="#CVE-2026-14410">CVE-2026-14410</a>, <a href="#CVE-2026-14411">CVE-2026-14411</a>, <a href="#CVE-2026-14412">CVE-2026-14412</a>, <a href="#CVE-2026-14413">CVE-2026-14413</a>, <a href="#CVE-2026-14414">CVE-2026-14414</a>, <a href="#CVE-2026-14418">CVE-2026-14418</a>, <a href="#CVE-2026-14419">CVE-2026-14419</a>, <a href="#CVE-2026-14425">CVE-2026-14425</a>, <a href="#CVE-2026-14427">CVE-2026-14427</a>, <a href="#CVE-2026-14429">CVE-2026-14429</a>, <a href="#CVE-2026-15109">CVE-2026-15109</a>, <a href="#CVE-2026-15766">CVE-2026-15766</a>, <a href="#CVE-2026-15774">CVE-2026-15774</a>, <a href="#CVE-2026-16413">CVE-2026-16413</a>, <a href="#CVE-2026-16417">CVE-2026-16417</a>, <a href="#CVE-2026-17653">CVE-2026-17653</a>, <a href="#CVE-2026-17655">CVE-2026-17655</a>, <a href="#CVE-2026-17667">CVE-2026-17667</a>, <a href="#CVE-2026-17668">CVE-2026-17668</a>, <a href="#CVE-2026-17671">CVE-2026-17671</a>, <a href="#CVE-2026-17675">CVE-2026-17675</a>, <a href="#CVE-2026-17678">CVE-2026-17678</a>, <a href="#CVE-2026-17682">CVE-2026-17682</a>, <a href="#CVE-2026-17683">CVE-2026-17683</a>, <a href="#CVE-2026-17687">CVE-2026-17687</a>, <a href="#CVE-2026-17689">CVE-2026-17689</a>, <a href="#CVE-2026-17697">CVE-2026-17697</a>, <a href="#CVE-2026-17702">CVE-2026-17702</a>, <a href="#CVE-2026-17704">CVE-2026-17704</a>, <a href="#CVE-2026-17714">CVE-2026-17714</a>, <a href="#CVE-2026-17717">CVE-2026-17717</a>, <a href="#CVE-2026-17718">CVE-2026-17718</a>, <a href="#CVE-2026-17721">CVE-2026-17721</a>, <a href="#CVE-2026-17740">CVE-2026-17740</a>, <a href="#CVE-2026-17745">CVE-2026-17745</a>, <a href="#CVE-2026-17750">CVE-2026-17750</a>, <a href="#CVE-2026-17757">CVE-2026-17757</a>, <a href="#CVE-2026-17771">CVE-2026-17771</a>, <a href="#CVE-2026-17785">CVE-2026-17785</a>, <a href="#CVE-2026-17801">CVE-2026-17801</a>, <a href="#CVE-2026-17832">CVE-2026-17832</a>, <a href="#CVE-2026-17847">CVE-2026-17847</a>, <a href="#CVE-2026-17914">CVE-2026-17914</a>, <a href="#CVE-2026-19160">CVE-2026-19160</a>, <a href="#CVE-2026-19161">CVE-2026-19161</a>, <a href="#CVE-2026-19173">CVE-2026-19173</a>, <a href="#CVE-2026-19176">CVE-2026-19176</a>, <a href="#CVE-2026-3536">CVE-2026-3536</a>, <a href="#CVE-2026-3538">CVE-2026-3538</a>, <a href="#CVE-2026-3909">CVE-2026-3909</a>, <a href="#CVE-2026-3931">CVE-2026-3931</a>, <a href="#CVE-2026-43670">CVE-2026-43670</a>, <a href="#CVE-2026-4448">CVE-2026-4448</a>, <a href="#CVE-2026-4460">CVE-2026-4460</a>, <a href="#CVE-2026-4464">CVE-2026-4464</a>, <a href="#CVE-2026-5283">CVE-2026-5283</a>, <a href="#CVE-2026-5870">CVE-2026-5870</a>, <a href="#CVE-2026-6296">CVE-2026-6296</a>, <a href="#CVE-2026-6298">CVE-2026-6298</a>, <a href="#CVE-2026-6364">CVE-2026-6364</a>, <a href="#CVE-2026-64715">CVE-2026-64715</a>, <a href="#CVE-2026-64753">CVE-2026-64753</a>, <a href="#CVE-2026-64778">CVE-2026-64778</a>, <a href="#CVE-2026-64779">CVE-2026-64779</a>, <a href="#CVE-2026-64780">CVE-2026-64780</a>, <a href="#CVE-2026-64781">CVE-2026-64781</a>, <a href="#CVE-2026-64782">CVE-2026-64782</a>, <a href="#CVE-2026-64784">CVE-2026-64784</a>, <a href="#CVE-2026-65331">CVE-2026-65331</a>, <a href="#CVE-2026-65332">CVE-2026-65332</a>, <a href="#CVE-2026-65333">CVE-2026-65333</a>, <a href="#CVE-2026-65334">CVE-2026-65334</a>, <a href="#CVE-2026-65336">CVE-2026-65336</a>, <a href="#CVE-2026-65337">CVE-2026-65337</a>, <a href="#CVE-2026-65338">CVE-2026-65338</a>, <a href="#CVE-2026-65340">CVE-2026-65340</a>, <a href="#CVE-2026-65341">CVE-2026-65341</a>, <a href="#CVE-2026-65351">CVE-2026-65351</a>, <a href="#CVE-2026-7353">CVE-2026-7353</a>, <a href="#CVE-2026-7354">CVE-2026-7354</a>, <a href="#CVE-2026-7359">CVE-2026-7359</a>, <a href="#CVE-2026-76041">CVE-2026-76041</a>, <a href="#CVE-2026-78904">CVE-2026-78904</a>, <a href="#CVE-2026-78905">CVE-2026-78905</a>, <a href="#CVE-2026-78906">CVE-2026-78906</a>, <a href="#CVE-2026-78914">CVE-2026-78914</a>, <a href="#CVE-2026-78958">CVE-2026-78958</a>, <a href="#CVE-2026-78965">CVE-2026-78965</a>, <a href="#CVE-2026-7900">CVE-2026-7900</a>, <a href="#CVE-2026-79020">CVE-2026-79020</a>, <a href="#CVE-2026-79043">CVE-2026-79043</a>, <a href="#CVE-2026-79112">CVE-2026-79112</a>, <a href="#CVE-2026-79118">CVE-2026-79118</a>, <a href="#CVE-2026-79120">CVE-2026-79120</a>, <a href="#CVE-2026-79127">CVE-2026-79127</a>, <a href="#CVE-2026-79130">CVE-2026-79130</a>, <a href="#CVE-2026-79131">CVE-2026-79131</a>, <a href="#CVE-2026-79144">CVE-2026-79144</a>, <a href="#CVE-2026-79147">CVE-2026-79147</a>, <a href="#CVE-2026-79149">CVE-2026-79149</a>, <a href="#CVE-2026-79188">CVE-2026-79188</a>, <a href="#CVE-2026-79189">CVE-2026-79189</a>, <a href="#CVE-2026-7920">CVE-2026-7920</a>, <a href="#CVE-2026-79229">CVE-2026-79229</a>, <a href="#CVE-2026-7923">CVE-2026-7923</a>, <a href="#CVE-2026-79269">CVE-2026-79269</a>, <a href="#CVE-2026-79270">CVE-2026-79270</a>, <a href="#CVE-2026-79275">CVE-2026-79275</a>, <a href="#CVE-2026-7942">CVE-2026-7942</a>, <a href="#CVE-2026-7943">CVE-2026-7943</a>, <a href="#CVE-2026-7949">CVE-2026-7949</a>, <a href="#CVE-2026-84635">CVE-2026-84635</a>, <a href="#CVE-2026-8579">CVE-2026-8579</a>, <a href="#CVE-2026-86898">CVE-2026-86898</a>, <a href="#CVE-2026-9877">CVE-2026-9877</a>, <a href="#CVE-2026-9878">CVE-2026-9878</a>, <a href="#CVE-2026-9879">CVE-2026-9879</a>, <a href="#CVE-2026-9882">CVE-2026-9882</a>, <a href="#CVE-2026-9893">CVE-2026-9893</a>, <a href="#CVE-2026-9899">CVE-2026-9899</a>, <a href="#CVE-2026-9900">CVE-2026-9900</a>, <a href="#CVE-2026-9901">CVE-2026-9901</a>, <a href="#CVE-2026-9904">CVE-2026-9904</a>, <a href="#CVE-2026-9908">CVE-2026-9908</a>, <a href="#CVE-2026-9909">CVE-2026-9909</a>, <a href="#CVE-2026-9910">CVE-2026-9910</a>, <a href="#CVE-2026-9911">CVE-2026-9911</a>, <a href="#CVE-2026-9913">CVE-2026-9913</a>, <a href="#CVE-2026-9914">CVE-2026-9914</a>, <a href="#CVE-2026-9915">CVE-2026-9915</a>, <a href="#CVE-2026-9916">CVE-2026-9916</a>, <a href="#CVE-2026-9923">CVE-2026-9923</a>, <a href="#CVE-2026-9925">CVE-2026-9925</a>, <a href="#CVE-2026-9926">CVE-2026-9926</a>, <a href="#CVE-2026-9927">CVE-2026-9927</a>, <a href="#CVE-2026-9935">CVE-2026-9935</a>, <a href="#CVE-2026-9940">CVE-2026-9940</a>, <a href="#CVE-2026-9941">CVE-2026-9941</a>, <a href="#CVE-2026-9942">CVE-2026-9942</a>, <a href="#CVE-2026-9944">CVE-2026-9944</a>, <a href="#CVE-2026-9946">CVE-2026-9946</a>, <a href="#CVE-2026-9953">CVE-2026-9953</a>, <a href="#CVE-2026-9965">CVE-2026-9965</a>, <a href="#CVE-2026-9969">CVE-2026-9969</a>, <a href="#CVE-2026-9975">CVE-2026-9975</a>, <a href="#CVE-2026-9981">CVE-2026-9981</a>, <a href="#CVE-2026-9982">CVE-2026-9982</a>, <a href="#CVE-2026-9983">CVE-2026-9983</a>, <a href="#CVE-2026-9998">CVE-2026-9998</a></p>
+</li>
+</ul>
+<p>Several vulnerabilities were discovered in WebKitGTK and WPE WebKit.</p>
+<ul>
+<li>
+<p><a name="CVE-2024-1283" href="https://www.cve.org/CVERecord?id=CVE-2024-1283">CVE-2024-1283</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 121.0.6167.160 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-43091" href="https://www.cve.org/CVERecord?id=CVE-2024-43091">CVE-2024-43091</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>In <code>filterMask</code> of <code>SkEmbossMaskFilter.cpp</code>, there is a possible out of bounds write due
+to an integer overflow. This could lead to remote code execution with no additional
+execution privileges needed. User interaction is not needed for exploitation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-43097" href="https://www.cve.org/CVERecord?id=CVE-2024-43097">CVE-2024-43097</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>In <code>resizeToAtLeast</code> of <code>SkRegion.cpp</code>, there is a possible out of bounds write due to an
+integer overflow. This could lead to local escalation of privilege with no additional
+execution privileges needed. User interaction is not needed for exploitation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-43767" href="https://www.cve.org/CVERecord?id=CVE-2024-43767">CVE-2024-43767</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>In <code>prepare_to_draw_into_mask</code> of <code>SkBlurMaskFilterImpl.cpp</code>, there is a possible heap
+overflow due to improper input validation. This could lead to remote code execution
+with no additional execution privileges needed. User interaction is not needed for
+exploitation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-43768" href="https://www.cve.org/CVERecord?id=CVE-2024-43768">CVE-2024-43768</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>In <code>skia_alloc_func</code> of <code>SkDeflate.cpp</code>, there is a possible out of bounds write due to an
+integer overflow. This could lead to local escalation of privilege with no additional
+execution privileges needed. User interaction is not needed for exploitation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-7966" href="https://www.cve.org/CVERecord?id=CVE-2024-7966">CVE-2024-7966</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds memory access in Skia in Google Chrome prior to 128.0.6613.84 allowed a
+remote attacker who had compromised the renderer process to perform out of bounds
+memory access via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-8193" href="https://www.cve.org/CVERecord?id=CVE-2024-8193">CVE-2024-8193</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 128.0.6613.113 allowed a remote
+attacker who had compromised the renderer process to potentially exploit heap
+corruption via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-8198" href="https://www.cve.org/CVERecord?id=CVE-2024-8198">CVE-2024-8198</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 128.0.6613.113 allowed a remote
+attacker who had compromised the renderer process to potentially exploit heap
+corruption via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-8636" href="https://www.cve.org/CVERecord?id=CVE-2024-8636">CVE-2024-8636</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 128.0.6613.137 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2024-9123" href="https://www.cve.org/CVERecord?id=CVE-2024-9123">CVE-2024-9123</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 129.0.6668.70 allowed a remote
+attacker to perform an out of bounds memory write via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-0436" href="https://www.cve.org/CVERecord?id=CVE-2025-0436">CVE-2025-0436</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 132.0.6834.83 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-0444" href="https://www.cve.org/CVERecord?id=CVE-2025-0444">CVE-2025-0444</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 133.0.6943.53 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-10502" href="https://www.cve.org/CVERecord?id=CVE-2025-10502">CVE-2025-10502</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in ANGLE in Google Chrome prior to 140.0.7339.185 allowed a
+remote attacker to potentially exploit heap corruption via malicious network traffic.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-26416" href="https://www.cve.org/CVERecord?id=CVE-2025-26416">CVE-2025-26416</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>In <code>initializeSwizzler</code> of <code>SkBmpStandardCodec.cpp</code>, there is a possible out of bounds
+write due to a heap buffer overflow. This could lead to remote escalation of privilege
+with no additional execution privileges needed. User interaction is not needed for
+exploitation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-32318" href="https://www.cve.org/CVERecord?id=CVE-2025-32318">CVE-2025-32318</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>In Skia, there is a possible out of bounds write due to a heap buffer overflow. This
+could lead to remote escalation of privilege with no additional execution privileges
+needed. User interaction is not needed for exploitation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-48622" href="https://www.cve.org/CVERecord?id=CVE-2025-48622">CVE-2025-48622</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>In <code>ProcessArea</code> of <code>dng_misc_opcodes.cpp</code>, there is a possible out of bounds read due to
+a buffer overflow. This could lead to local information disclosure with no additional
+execution privileges needed. User interaction is not needed for exploitation.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-54627" href="https://www.cve.org/CVERecord?id=CVE-2025-54627">CVE-2025-54627</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out-of-bounds write vulnerability in the skia module. Impact: Successful exploitation
+of this vulnerability may affect service confidentiality.</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-8901" href="https://www.cve.org/CVERecord?id=CVE-2025-8901">CVE-2025-8901</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 139.0.7258.127 allowed a remote
+attacker to perform out of bounds memory access via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2025-9478" href="https://www.cve.org/CVERecord?id=CVE-2025-9478">CVE-2025-9478</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 139.0.7258.154 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-0908" href="https://www.cve.org/CVERecord?id=CVE-2026-0908">CVE-2026-0908</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 144.0.7559.59 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10009" href="https://www.cve.org/CVERecord?id=CVE-2026-10009">CVE-2026-10009</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to execute arbitrary code inside a
+sandbox via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10011" href="https://www.cve.org/CVERecord?id=CVE-2026-10011">CVE-2026-10011</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Inappropriate implementation in Skia in Google Chrome prior to 148.0.7778.216 allowed
+a remote attacker who had compromised the renderer process to leak cross-origin data
+via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10012" href="https://www.cve.org/CVERecord?id=CVE-2026-10012">CVE-2026-10012</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10018" href="https://www.cve.org/CVERecord?id=CVE-2026-10018">CVE-2026-10018</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10019" href="https://www.cve.org/CVERecord?id=CVE-2026-10019">CVE-2026-10019</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10881" href="https://www.cve.org/CVERecord?id=CVE-2026-10881">CVE-2026-10881</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read and write in ANGLE in Google Chrome prior to 149.0.7827.53 allowed
+a remote attacker to potentially perform a sandbox escape via a crafted HTML page.
+(Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10883" href="https://www.cve.org/CVERecord?id=CVE-2026-10883">CVE-2026-10883</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Type Confusion in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10889" href="https://www.cve.org/CVERecord?id=CVE-2026-10889">CVE-2026-10889</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10907" href="https://www.cve.org/CVERecord?id=CVE-2026-10907">CVE-2026-10907</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10919" href="https://www.cve.org/CVERecord?id=CVE-2026-10919">CVE-2026-10919</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10941" href="https://www.cve.org/CVERecord?id=CVE-2026-10941">CVE-2026-10941</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds memory access in Skia in Google Chrome prior to 149.0.7827.53 allowed a
+remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10974" href="https://www.cve.org/CVERecord?id=CVE-2026-10974">CVE-2026-10974</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+149.0.7827.53 allowed a remote attacker to potentially perform a sandbox escape via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10977" href="https://www.cve.org/CVERecord?id=CVE-2026-10977">CVE-2026-10977</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to leak cross-origin data via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10979" href="https://www.cve.org/CVERecord?id=CVE-2026-10979">CVE-2026-10979</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10985" href="https://www.cve.org/CVERecord?id=CVE-2026-10985">CVE-2026-10985</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in Skia in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10993" href="https://www.cve.org/CVERecord?id=CVE-2026-10993">CVE-2026-10993</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-10994" href="https://www.cve.org/CVERecord?id=CVE-2026-10994">CVE-2026-10994</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11004" href="https://www.cve.org/CVERecord?id=CVE-2026-11004">CVE-2026-11004</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to obtain potentially sensitive
+information from process memory via a crafted HTML page. (Chromium security severity:
+Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11024" href="https://www.cve.org/CVERecord?id=CVE-2026-11024">CVE-2026-11024</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Stack buffer overflow in Skia in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to potentially exploit stack corruption via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11039" href="https://www.cve.org/CVERecord?id=CVE-2026-11039">CVE-2026-11039</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11040" href="https://www.cve.org/CVERecord?id=CVE-2026-11040">CVE-2026-11040</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11051" href="https://www.cve.org/CVERecord?id=CVE-2026-11051">CVE-2026-11051</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome on Linux prior to 149.0.7827.53 allowed a
+remote attacker to obtain potentially sensitive information from process memory via a
+crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11057" href="https://www.cve.org/CVERecord?id=CVE-2026-11057">CVE-2026-11057</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to obtain potentially sensitive
+information from process memory via a crafted HTML page. (Chromium security severity:
+Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11061" href="https://www.cve.org/CVERecord?id=CVE-2026-11061">CVE-2026-11061</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Type Confusion in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11065" href="https://www.cve.org/CVERecord?id=CVE-2026-11065">CVE-2026-11065</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11066" href="https://www.cve.org/CVERecord?id=CVE-2026-11066">CVE-2026-11066</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+149.0.7827.53 allowed a remote attacker to potentially perform a sandbox escape via a
+crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11087" href="https://www.cve.org/CVERecord?id=CVE-2026-11087">CVE-2026-11087</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to leak cross-origin data via a
+crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11088" href="https://www.cve.org/CVERecord?id=CVE-2026-11088">CVE-2026-11088</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11090" href="https://www.cve.org/CVERecord?id=CVE-2026-11090">CVE-2026-11090</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11104" href="https://www.cve.org/CVERecord?id=CVE-2026-11104">CVE-2026-11104</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker who had compromised the renderer process to obtain potentially sensitive
+information from process memory via a crafted HTML page. (Chromium security severity:
+Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11109" href="https://www.cve.org/CVERecord?id=CVE-2026-11109">CVE-2026-11109</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11110" href="https://www.cve.org/CVERecord?id=CVE-2026-11110">CVE-2026-11110</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11111" href="https://www.cve.org/CVERecord?id=CVE-2026-11111">CVE-2026-11111</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to perform an out of bounds memory read via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11113" href="https://www.cve.org/CVERecord?id=CVE-2026-11113">CVE-2026-11113</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+149.0.7827.53 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11121" href="https://www.cve.org/CVERecord?id=CVE-2026-11121">CVE-2026-11121</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in Skia in Google Chrome prior to
+149.0.7827.53 allowed a remote attacker who had compromised the renderer process to
+leak cross-origin data via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11123" href="https://www.cve.org/CVERecord?id=CVE-2026-11123">CVE-2026-11123</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11124" href="https://www.cve.org/CVERecord?id=CVE-2026-11124">CVE-2026-11124</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11137" href="https://www.cve.org/CVERecord?id=CVE-2026-11137">CVE-2026-11137</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11138" href="https://www.cve.org/CVERecord?id=CVE-2026-11138">CVE-2026-11138</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11159" href="https://www.cve.org/CVERecord?id=CVE-2026-11159">CVE-2026-11159</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 149.0.7827.53 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11191" href="https://www.cve.org/CVERecord?id=CVE-2026-11191">CVE-2026-11191</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds memory access in ANGLE in Google Chrome prior to 149.0.7827.53 allowed a
+remote attacker to potentially perform out of bounds memory access via a crafted HTML
+page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11663" href="https://www.cve.org/CVERecord?id=CVE-2026-11663">CVE-2026-11663</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 149.0.7827.103 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-11675" href="https://www.cve.org/CVERecord?id=CVE-2026-11675">CVE-2026-11675</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in Skia in Google Chrome prior to 149.0.7827.103 allowed a remote
+attacker who had compromised the renderer process to leak cross-origin data via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-13780" href="https://www.cve.org/CVERecord?id=CVE-2026-13780">CVE-2026-13780</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+150.0.7871.47 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-13781" href="https://www.cve.org/CVERecord?id=CVE-2026-13781">CVE-2026-13781</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in Skia in Google Chrome prior to
+150.0.7871.47 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-13834" href="https://www.cve.org/CVERecord?id=CVE-2026-13834">CVE-2026-13834</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+150.0.7871.47 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-13841" href="https://www.cve.org/CVERecord?id=CVE-2026-13841">CVE-2026-13841</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 150.0.7871.47 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-13859" href="https://www.cve.org/CVERecord?id=CVE-2026-13859">CVE-2026-13859</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Inappropriate implementation in ANGLE in Google Chrome prior to 150.0.7871.47 allowed
+a remote attacker to potentially perform a sandbox escape via a crafted HTML page.
+(Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-13877" href="https://www.cve.org/CVERecord?id=CVE-2026-13877">CVE-2026-13877</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+150.0.7871.47 allowed a remote attacker who had compromised the renderer process to
+obtain potentially sensitive information from process memory via a crafted HTML page.
+(Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-13883" href="https://www.cve.org/CVERecord?id=CVE-2026-13883">CVE-2026-13883</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Type Confusion in ANGLE in Google Chrome prior to 150.0.7871.47 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-13971" href="https://www.cve.org/CVERecord?id=CVE-2026-13971">CVE-2026-13971</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 150.0.7871.47 allowed a remote
+attacker who had compromised the renderer process to obtain potentially sensitive
+information from process memory via a crafted HTML page. (Chromium security severity:
+Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14044" href="https://www.cve.org/CVERecord?id=CVE-2026-14044">CVE-2026-14044</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 150.0.7871.47 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14125" href="https://www.cve.org/CVERecord?id=CVE-2026-14125">CVE-2026-14125</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 150.0.7871.47 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14152" href="https://www.cve.org/CVERecord?id=CVE-2026-14152">CVE-2026-14152</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read and write in ANGLE in Google Chrome prior to 150.0.7871.47 allowed
+a remote attacker who had compromised the renderer process to potentially perform a
+sandbox escape via a crafted HTML page. (Chromium security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14382" href="https://www.cve.org/CVERecord?id=CVE-2026-14382">CVE-2026-14382</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+150.0.7871.46 allowed a remote attacker to potentially perform a sandbox escape via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14386" href="https://www.cve.org/CVERecord?id=CVE-2026-14386">CVE-2026-14386</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14387" href="https://www.cve.org/CVERecord?id=CVE-2026-14387">CVE-2026-14387</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14388" href="https://www.cve.org/CVERecord?id=CVE-2026-14388">CVE-2026-14388</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14389" href="https://www.cve.org/CVERecord?id=CVE-2026-14389">CVE-2026-14389</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14390" href="https://www.cve.org/CVERecord?id=CVE-2026-14390">CVE-2026-14390</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14396" href="https://www.cve.org/CVERecord?id=CVE-2026-14396">CVE-2026-14396</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14398" href="https://www.cve.org/CVERecord?id=CVE-2026-14398">CVE-2026-14398</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14400" href="https://www.cve.org/CVERecord?id=CVE-2026-14400">CVE-2026-14400</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14410" href="https://www.cve.org/CVERecord?id=CVE-2026-14410">CVE-2026-14410</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Inappropriate implementation in Skia in Google Chrome prior to 150.0.7871.46 allowed a
+remote attacker who had compromised the renderer process to perform UI spoofing via a
+crafted HTML page. (Chromium security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14411" href="https://www.cve.org/CVERecord?id=CVE-2026-14411">CVE-2026-14411</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+150.0.7871.46 allowed a remote attacker to potentially perform a sandbox escape via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14412" href="https://www.cve.org/CVERecord?id=CVE-2026-14412">CVE-2026-14412</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+150.0.7871.46 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14413" href="https://www.cve.org/CVERecord?id=CVE-2026-14413">CVE-2026-14413</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14414" href="https://www.cve.org/CVERecord?id=CVE-2026-14414">CVE-2026-14414</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in Skia in Google Chrome prior to
+150.0.7871.46 allowed a remote attacker who had compromised the renderer process to
+obtain potentially sensitive information from process memory via a crafted HTML page.
+(Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14418" href="https://www.cve.org/CVERecord?id=CVE-2026-14418">CVE-2026-14418</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14419" href="https://www.cve.org/CVERecord?id=CVE-2026-14419">CVE-2026-14419</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14425" href="https://www.cve.org/CVERecord?id=CVE-2026-14425">CVE-2026-14425</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14427" href="https://www.cve.org/CVERecord?id=CVE-2026-14427">CVE-2026-14427</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 150.0.7871.46 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-14429" href="https://www.cve.org/CVERecord?id=CVE-2026-14429">CVE-2026-14429</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in Skia in Google Chrome prior to
+150.0.7871.46 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-15109" href="https://www.cve.org/CVERecord?id=CVE-2026-15109">CVE-2026-15109</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 150.0.7871.115 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-15766" href="https://www.cve.org/CVERecord?id=CVE-2026-15766">CVE-2026-15766</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 150.0.7871.125 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-15774" href="https://www.cve.org/CVERecord?id=CVE-2026-15774">CVE-2026-15774</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 150.0.7871.125 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-16413" href="https://www.cve.org/CVERecord?id=CVE-2026-16413">CVE-2026-16413</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 150.0.7871.182 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-16417" href="https://www.cve.org/CVERecord?id=CVE-2026-16417">CVE-2026-16417</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 150.0.7871.182 allowed a remote
+attacker who had compromised the renderer process to leak cross-origin data via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17653" href="https://www.cve.org/CVERecord?id=CVE-2026-17653">CVE-2026-17653</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17655" href="https://www.cve.org/CVERecord?id=CVE-2026-17655">CVE-2026-17655</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+151.0.7922.72 allowed a remote attacker to potentially perform a sandbox escape via a
+crafted HTML page. (Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17667" href="https://www.cve.org/CVERecord?id=CVE-2026-17667">CVE-2026-17667</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17668" href="https://www.cve.org/CVERecord?id=CVE-2026-17668">CVE-2026-17668</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17671" href="https://www.cve.org/CVERecord?id=CVE-2026-17671">CVE-2026-17671</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+151.0.7922.72 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17675" href="https://www.cve.org/CVERecord?id=CVE-2026-17675">CVE-2026-17675</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17678" href="https://www.cve.org/CVERecord?id=CVE-2026-17678">CVE-2026-17678</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17682" href="https://www.cve.org/CVERecord?id=CVE-2026-17682">CVE-2026-17682</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17683" href="https://www.cve.org/CVERecord?id=CVE-2026-17683">CVE-2026-17683</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Inappropriate implementation in ANGLE in Google Chrome prior to 151.0.7922.72 allowed
+a remote attacker to obtain potentially sensitive information from process memory via
+a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17687" href="https://www.cve.org/CVERecord?id=CVE-2026-17687">CVE-2026-17687</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Type Confusion in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17689" href="https://www.cve.org/CVERecord?id=CVE-2026-17689">CVE-2026-17689</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17697" href="https://www.cve.org/CVERecord?id=CVE-2026-17697">CVE-2026-17697</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Type Confusion in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17702" href="https://www.cve.org/CVERecord?id=CVE-2026-17702">CVE-2026-17702</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Inappropriate implementation in Skia in Google Chrome prior to 151.0.7922.72 allowed a
+remote attacker who had compromised the renderer process to leak cross-origin data via
+a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17704" href="https://www.cve.org/CVERecord?id=CVE-2026-17704">CVE-2026-17704</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17714" href="https://www.cve.org/CVERecord?id=CVE-2026-17714">CVE-2026-17714</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17717" href="https://www.cve.org/CVERecord?id=CVE-2026-17717">CVE-2026-17717</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17718" href="https://www.cve.org/CVERecord?id=CVE-2026-17718">CVE-2026-17718</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17721" href="https://www.cve.org/CVERecord?id=CVE-2026-17721">CVE-2026-17721</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17740" href="https://www.cve.org/CVERecord?id=CVE-2026-17740">CVE-2026-17740</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17745" href="https://www.cve.org/CVERecord?id=CVE-2026-17745">CVE-2026-17745</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in Skia in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17750" href="https://www.cve.org/CVERecord?id=CVE-2026-17750">CVE-2026-17750</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17757" href="https://www.cve.org/CVERecord?id=CVE-2026-17757">CVE-2026-17757</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17771" href="https://www.cve.org/CVERecord?id=CVE-2026-17771">CVE-2026-17771</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17785" href="https://www.cve.org/CVERecord?id=CVE-2026-17785">CVE-2026-17785</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17801" href="https://www.cve.org/CVERecord?id=CVE-2026-17801">CVE-2026-17801</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read and write in ANGLE in Google Chrome prior to 151.0.7922.72 allowed
+a remote attacker to potentially perform a sandbox escape via a crafted HTML page.
+(Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17832" href="https://www.cve.org/CVERecord?id=CVE-2026-17832">CVE-2026-17832</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 151.0.7922.72 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17847" href="https://www.cve.org/CVERecord?id=CVE-2026-17847">CVE-2026-17847</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+151.0.7922.72 allowed a remote attacker to potentially perform a sandbox escape via a
+crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-17914" href="https://www.cve.org/CVERecord?id=CVE-2026-17914">CVE-2026-17914</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Side-channel information leakage in Skia in Google Chrome prior to 151.0.7922.72
+allowed a remote attacker to obtain potentially sensitive information from process
+memory via a crafted HTML page. (Chromium security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-19160" href="https://www.cve.org/CVERecord?id=CVE-2026-19160">CVE-2026-19160</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 151.0.7922.109 allowed a remote
+attacker who had compromised the renderer process to leak cross-origin data via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-19161" href="https://www.cve.org/CVERecord?id=CVE-2026-19161">CVE-2026-19161</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in Skia in Google Chrome prior to 151.0.7922.109 allowed a remote
+attacker who had compromised the renderer process to leak cross-origin data via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-19173" href="https://www.cve.org/CVERecord?id=CVE-2026-19173">CVE-2026-19173</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in Skia in Google Chrome prior to 151.0.7922.109 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-19176" href="https://www.cve.org/CVERecord?id=CVE-2026-19176">CVE-2026-19176</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 151.0.7922.109 allowed a remote
+attacker who had compromised the renderer process to execute arbitrary code inside a
+sandbox via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-3536" href="https://www.cve.org/CVERecord?id=CVE-2026-3536">CVE-2026-3536</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 145.0.7632.159 allowed a remote
+attacker to potentially perform out of bounds memory access via a crafted HTML page.
+(Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-3538" href="https://www.cve.org/CVERecord?id=CVE-2026-3538">CVE-2026-3538</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 145.0.7632.159 allowed a remote
+attacker to potentially perform out of bounds memory access via a crafted HTML page.
+(Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-3909" href="https://www.cve.org/CVERecord?id=CVE-2026-3909">CVE-2026-3909</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in Skia in Google Chrome prior to 146.0.7680.75 allowed a remote
+attacker to perform out of bounds memory access via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-3931" href="https://www.cve.org/CVERecord?id=CVE-2026-3931">CVE-2026-3931</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 146.0.7680.71 allowed a remote
+attacker to perform out of bounds memory access via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-43670" href="https://www.cve.org/CVERecord?id=CVE-2026-43670">CVE-2026-43670</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to lebr0nli of National Yang Ming Chiao Tung University, Security and Systems Lab.</li>
+<li>Impact: Processing maliciously crafted web content may bypass Content Security Policy.
+Description: A Content Security Policy bypass was addressed with improved enforcement
+in AudioWorklet contexts.</li>
+<li>WebKit Bugzilla: 309004</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-4448" href="https://www.cve.org/CVERecord?id=CVE-2026-4448">CVE-2026-4448</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in ANGLE in Google Chrome prior to 146.0.7680.153 allowed a
+remote attacker to potentially exploit heap corruption via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-4460" href="https://www.cve.org/CVERecord?id=CVE-2026-4460">CVE-2026-4460</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in Skia in Google Chrome prior to 146.0.7680.153 allowed a remote
+attacker to perform an out of bounds memory read via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-4464" href="https://www.cve.org/CVERecord?id=CVE-2026-4464">CVE-2026-4464</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 146.0.7680.153 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-5283" href="https://www.cve.org/CVERecord?id=CVE-2026-5283">CVE-2026-5283</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Inappropriate implementation in ANGLE in Google Chrome prior to 146.0.7680.178 allowed
+a remote attacker to leak cross-origin data via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-5870" href="https://www.cve.org/CVERecord?id=CVE-2026-5870">CVE-2026-5870</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 147.0.7727.55 allowed a remote
+attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-6296" href="https://www.cve.org/CVERecord?id=CVE-2026-6296">CVE-2026-6296</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in ANGLE in Google Chrome prior to 147.0.7727.101 allowed a
+remote attacker to potentially perform a sandbox escape via a crafted HTML page.
+(Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-6298" href="https://www.cve.org/CVERecord?id=CVE-2026-6298">CVE-2026-6298</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 147.0.7727.101 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-6364" href="https://www.cve.org/CVERecord?id=CVE-2026-6364">CVE-2026-6364</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in Skia in Google Chrome prior to 147.0.7727.101 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+file. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-64715" href="https://www.cve.org/CVERecord?id=CVE-2026-64715">CVE-2026-64715</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Hossein Lotfi (@hosselot) of TrendAI Zero Day Initiative.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected process
+crash. Description: A use-after-free issue was addressed with improved memory
+management.</li>
+<li>WebKit Bugzilla: 316347</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-64753" href="https://www.cve.org/CVERecord?id=CVE-2026-64753">CVE-2026-64753</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Viggo Lekdorf.</li>
+<li>Impact: Processing maliciously crafted web content may disclose sensitive user
+information. Description: A permissions issue was addressed by removing the vulnerable
+code.</li>
+<li>WebKit Bugzilla: 315121</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-64778" href="https://www.cve.org/CVERecord?id=CVE-2026-64778">CVE-2026-64778</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Mohit Negi.</li>
+<li>Impact: Visiting a maliciously crafted website may leak sensitive data. Description:
+The issue was addressed with improved checks.</li>
+<li>WebKit Bugzilla: 322124</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-64779" href="https://www.cve.org/CVERecord?id=CVE-2026-64779">CVE-2026-64779</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Shubham Chaskar, Tommy DeVoss from Braze Security Team (@thedawgyg).</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: A memory corruption vulnerability was addressed with improved locking.</li>
+<li>WebKit Bugzilla: 321485</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-64780" href="https://www.cve.org/CVERecord?id=CVE-2026-64780">CVE-2026-64780</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to OpenAI Codex Security - Amy Burnett.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: The issue was addressed with improved checks.</li>
+<li>WebKit Bugzilla: 316918</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-64781" href="https://www.cve.org/CVERecord?id=CVE-2026-64781">CVE-2026-64781</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Thomas Guillem.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: The issue was addressed with improved input validation.</li>
+<li>WebKit Bugzilla: 321484</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-64782" href="https://www.cve.org/CVERecord?id=CVE-2026-64782">CVE-2026-64782</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Charles Kern, Shubham Chaskar, Seonwook Kim, lattice, Josef Korbel.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: A memory corruption vulnerability was addressed with improved locking.</li>
+<li>WebKit Bugzilla: 321480</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-64784" href="https://www.cve.org/CVERecord?id=CVE-2026-64784">CVE-2026-64784</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Janggoon Lee of Out of Bounds, OpenAI Codex Security - Amy Burnett.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: An out-of-bounds access issue was addressed with improved bounds
+checking.</li>
+<li>WebKit Bugzilla: 317632</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65331" href="https://www.cve.org/CVERecord?id=CVE-2026-65331">CVE-2026-65331</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to OpenAI Codex Security - Amy Burnett.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: This issue was addressed through improved state management.</li>
+<li>WebKit Bugzilla: 317611</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65332" href="https://www.cve.org/CVERecord?id=CVE-2026-65332">CVE-2026-65332</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Kun Peeks (@SwayZGl1tZyyy), OpenAI Codex Security - Amy Burnett.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: This issue was addressed through improved state management.</li>
+<li>WebKit Bugzilla: 317450</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65333" href="https://www.cve.org/CVERecord?id=CVE-2026-65333">CVE-2026-65333</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to OpenAI Codex Security - Amy Burnett.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: This issue was addressed through improved state management.</li>
+<li>WebKit Bugzilla: 317603</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65334" href="https://www.cve.org/CVERecord?id=CVE-2026-65334">CVE-2026-65334</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to OpenAI Codex Security - Amy Burnett.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: A memory corruption issue was addressed with improved state management.</li>
+<li>WebKit Bugzilla: 316791</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65336" href="https://www.cve.org/CVERecord?id=CVE-2026-65336">CVE-2026-65336</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Josef Korbel.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: This issue was addressed through improved state management.</li>
+<li>WebKit Bugzilla: 317349</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65337" href="https://www.cve.org/CVERecord?id=CVE-2026-65337">CVE-2026-65337</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to OpenAI Codex Security - Amy Burnett.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: This issue was addressed through improved state management.</li>
+<li>WebKit Bugzilla: 317142</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65338" href="https://www.cve.org/CVERecord?id=CVE-2026-65338">CVE-2026-65338</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to OpenAI Codex Security - Amy Burnett.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: The issue was addressed with improved memory handling.</li>
+<li>WebKit Bugzilla: 318348</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65340" href="https://www.cve.org/CVERecord?id=CVE-2026-65340">CVE-2026-65340</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Claudio Bozzato and Francesco Benvenuto of Cisco Talos, Josef Korbel (Citadelo).</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: This issue was addressed through improved state management.</li>
+<li>WebKit Bugzilla: 316996</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65341" href="https://www.cve.org/CVERecord?id=CVE-2026-65341">CVE-2026-65341</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Henock Habte.</li>
+<li>Impact: Processing maliciously crafted web content may lead to memory corruption.
+Description: The issue was addressed with improved memory handling.</li>
+<li>WebKit Bugzilla: 318405</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-65351" href="https://www.cve.org/CVERecord?id=CVE-2026-65351">CVE-2026-65351</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Niels Hofmans.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected crash.
+Description: This issue was addressed through improved state management.</li>
+<li>WebKit Bugzilla: 321517</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7353" href="https://www.cve.org/CVERecord?id=CVE-2026-7353">CVE-2026-7353</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in Skia in Google Chrome prior to 147.0.7727.138 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7354" href="https://www.cve.org/CVERecord?id=CVE-2026-7354">CVE-2026-7354</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read and write in Angle in Google Chrome prior to 147.0.7727.138 allowed
+a remote attacker to potentially perform a sandbox escape via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7359" href="https://www.cve.org/CVERecord?id=CVE-2026-7359">CVE-2026-7359</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 147.0.7727.138 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-76041" href="https://www.cve.org/CVERecord?id=CVE-2026-76041">CVE-2026-76041</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Information leak in Skia in Google Chrome prior to 151.0.7922.169 allowed a remote
+attacker to potentially bypass web origin policy via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-78904" href="https://www.cve.org/CVERecord?id=CVE-2026-78904">CVE-2026-78904</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Type confusion in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML
+page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-78905" href="https://www.cve.org/CVERecord?id=CVE-2026-78905">CVE-2026-78905</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Type confusion in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML
+page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-78906" href="https://www.cve.org/CVERecord?id=CVE-2026-78906">CVE-2026-78906</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Race condition in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML
+page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-78914" href="https://www.cve.org/CVERecord?id=CVE-2026-78914">CVE-2026-78914</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized resource in Skia in Google Chrome prior to 152.0.7977.65 allowed a
+remote attacker to potentially read memory inside the sandbox via a crafted HTML page.
+(Chromium security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-78958" href="https://www.cve.org/CVERecord?id=CVE-2026-78958">CVE-2026-78958</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized resource in Skia in Google Chrome prior to 152.0.7977.65 allowed a
+remote attacker who had compromised the renderer process to potentially obtain cross-
+origin data via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-78965" href="https://www.cve.org/CVERecord?id=CVE-2026-78965">CVE-2026-78965</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized resource in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a
+remote attacker to obtain cross-origin data via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7900" href="https://www.cve.org/CVERecord?id=CVE-2026-7900">CVE-2026-7900</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in ANGLE in Google Chrome prior to 148.0.7778.96 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79020" href="https://www.cve.org/CVERecord?id=CVE-2026-79020">CVE-2026-79020</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in Skia in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to potentially read memory inside the sandbox via a crafted media file.
+(Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79043" href="https://www.cve.org/CVERecord?id=CVE-2026-79043">CVE-2026-79043</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML
+page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79112" href="https://www.cve.org/CVERecord?id=CVE-2026-79112">CVE-2026-79112</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in Skia in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker who had compromised the renderer process to read memory inside the sandbox
+via a crafted HTML page. (Chromium security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79118" href="https://www.cve.org/CVERecord?id=CVE-2026-79118">CVE-2026-79118</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized resource in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a
+remote attacker to obtain cross-origin data via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79120" href="https://www.cve.org/CVERecord?id=CVE-2026-79120">CVE-2026-79120</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized resource in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a
+remote attacker to potentially obtain cross-origin data via a crafted HTML page.
+(Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79127" href="https://www.cve.org/CVERecord?id=CVE-2026-79127">CVE-2026-79127</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to execute arbitrary code outside the sandbox via a crafted HTML page.
+(Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79130" href="https://www.cve.org/CVERecord?id=CVE-2026-79130">CVE-2026-79130</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Buffer overflow in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to execute arbitrary code outside the sandbox via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79131" href="https://www.cve.org/CVERecord?id=CVE-2026-79131">CVE-2026-79131</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to execute arbitrary code outside the sandbox via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79144" href="https://www.cve.org/CVERecord?id=CVE-2026-79144">CVE-2026-79144</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Information leak in Skia in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to obtain cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79147" href="https://www.cve.org/CVERecord?id=CVE-2026-79147">CVE-2026-79147</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Information leak in Skia in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker who had compromised the renderer process to potentially obtain sensitive
+information via a crafted HTML page. (Chromium security severity: Low).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79149" href="https://www.cve.org/CVERecord?id=CVE-2026-79149">CVE-2026-79149</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to execute arbitrary code outside the sandbox via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79188" href="https://www.cve.org/CVERecord?id=CVE-2026-79188">CVE-2026-79188</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML
+page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79189" href="https://www.cve.org/CVERecord?id=CVE-2026-79189">CVE-2026-79189</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML
+page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7920" href="https://www.cve.org/CVERecord?id=CVE-2026-7920">CVE-2026-7920</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 148.0.7778.96 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79229" href="https://www.cve.org/CVERecord?id=CVE-2026-79229">CVE-2026-79229</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized resource in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a
+remote attacker who had compromised the renderer process to read memory outside the
+sandbox via a crafted HTML page. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7923" href="https://www.cve.org/CVERecord?id=CVE-2026-7923">CVE-2026-7923</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in Skia in Google Chrome prior to 148.0.7778.96 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79269" href="https://www.cve.org/CVERecord?id=CVE-2026-79269">CVE-2026-79269</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized resource in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a
+remote attacker to potentially bypass web origin policy via a crafted HTML page.
+(Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79270" href="https://www.cve.org/CVERecord?id=CVE-2026-79270">CVE-2026-79270</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized resource in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a
+remote attacker to read memory outside the sandbox via a crafted HTML page. (Chromium
+security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-79275" href="https://www.cve.org/CVERecord?id=CVE-2026-79275">CVE-2026-79275</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 152.0.7977.65 allowed a remote
+attacker to execute arbitrary code outside the sandbox via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7942" href="https://www.cve.org/CVERecord?id=CVE-2026-7942">CVE-2026-7942</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 148.0.7778.96 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7943" href="https://www.cve.org/CVERecord?id=CVE-2026-7943">CVE-2026-7943</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+148.0.7778.96 allowed a remote attacker who had compromised the renderer process to
+perform arbitrary read/write via a crafted HTML page. (Chromium security severity:
+Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-7949" href="https://www.cve.org/CVERecord?id=CVE-2026-7949">CVE-2026-7949</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in Skia in Google Chrome prior to 148.0.7778.96 allowed a remote
+attacker who had compromised the renderer process to leak cross-origin data via a
+crafted Chrome Extension. (Chromium security severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-84635" href="https://www.cve.org/CVERecord?id=CVE-2026-84635">CVE-2026-84635</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Souta Sugiyama.</li>
+<li>Impact: Processing maliciously crafted web content may lead to an unexpected process
+termination. Description: A logic issue was addressed with improved state management.</li>
+<li>WebKit Bugzilla: 310457</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-8579" href="https://www.cve.org/CVERecord?id=CVE-2026-8579">CVE-2026-8579</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in Skia in Google Chrome prior to
+148.0.7778.168 allowed a remote attacker who had compromised the renderer process to
+perform an out of bounds memory write via a crafted print file. (Chromium security
+severity: Medium).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-86898" href="https://www.cve.org/CVERecord?id=CVE-2026-86898">CVE-2026-86898</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0.</li>
+<li>Credit to Tomi Garcia (archyxsec).</li>
+<li>Impact: Opening a maliciously crafted webarchive file may lead to universal cross-site
+scripting. Description: A logic issue was addressed with improved state management.</li>
+<li>WebKit Bugzilla: 318271</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9877" href="https://www.cve.org/CVERecord?id=CVE-2026-9877">CVE-2026-9877</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9878" href="https://www.cve.org/CVERecord?id=CVE-2026-9878">CVE-2026-9878</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium
+security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9879" href="https://www.cve.org/CVERecord?id=CVE-2026-9879">CVE-2026-9879</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to execute arbitrary code via a crafted HTML page. (Chromium security
+severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9882" href="https://www.cve.org/CVERecord?id=CVE-2026-9882">CVE-2026-9882</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9893" href="https://www.cve.org/CVERecord?id=CVE-2026-9893">CVE-2026-9893</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: Critical).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9899" href="https://www.cve.org/CVERecord?id=CVE-2026-9899">CVE-2026-9899</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9900" href="https://www.cve.org/CVERecord?id=CVE-2026-9900">CVE-2026-9900</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9901" href="https://www.cve.org/CVERecord?id=CVE-2026-9901">CVE-2026-9901</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to execute arbitrary code via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9904" href="https://www.cve.org/CVERecord?id=CVE-2026-9904">CVE-2026-9904</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9908" href="https://www.cve.org/CVERecord?id=CVE-2026-9908">CVE-2026-9908</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9909" href="https://www.cve.org/CVERecord?id=CVE-2026-9909">CVE-2026-9909</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to execute arbitrary code inside a
+sandbox via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9910" href="https://www.cve.org/CVERecord?id=CVE-2026-9910">CVE-2026-9910</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds memory access in ANGLE in Google Chrome prior to 148.0.7778.216 allowed
+a remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9911" href="https://www.cve.org/CVERecord?id=CVE-2026-9911">CVE-2026-9911</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to perform an out of bounds memory read via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9913" href="https://www.cve.org/CVERecord?id=CVE-2026-9913">CVE-2026-9913</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Inappropriate implementation in ANGLE in Google Chrome prior to 148.0.7778.216 allowed
+a remote attacker to potentially perform out of bounds memory access via a crafted
+HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9914" href="https://www.cve.org/CVERecord?id=CVE-2026-9914">CVE-2026-9914</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+148.0.7778.216 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9915" href="https://www.cve.org/CVERecord?id=CVE-2026-9915">CVE-2026-9915</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a
+remote attacker who had compromised the renderer process to potentially perform a
+sandbox escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9916" href="https://www.cve.org/CVERecord?id=CVE-2026-9916">CVE-2026-9916</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9923" href="https://www.cve.org/CVERecord?id=CVE-2026-9923">CVE-2026-9923</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in Skia in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9925" href="https://www.cve.org/CVERecord?id=CVE-2026-9925">CVE-2026-9925</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9926" href="https://www.cve.org/CVERecord?id=CVE-2026-9926">CVE-2026-9926</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a
+remote attacker who had compromised the renderer process to potentially perform a
+sandbox escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9927" href="https://www.cve.org/CVERecord?id=CVE-2026-9927">CVE-2026-9927</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9935" href="https://www.cve.org/CVERecord?id=CVE-2026-9935">CVE-2026-9935</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to leak cross-origin data via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9940" href="https://www.cve.org/CVERecord?id=CVE-2026-9940">CVE-2026-9940</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Heap buffer overflow in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a
+remote attacker to potentially exploit heap corruption via a crafted HTML page.
+(Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9941" href="https://www.cve.org/CVERecord?id=CVE-2026-9941">CVE-2026-9941</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9942" href="https://www.cve.org/CVERecord?id=CVE-2026-9942">CVE-2026-9942</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to bypass site isolation via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9944" href="https://www.cve.org/CVERecord?id=CVE-2026-9944">CVE-2026-9944</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Uninitialized Use in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to leak cross-origin data via a
+crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9946" href="https://www.cve.org/CVERecord?id=CVE-2026-9946">CVE-2026-9946</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Use after free in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9953" href="https://www.cve.org/CVERecord?id=CVE-2026-9953">CVE-2026-9953</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to obtain potentially sensitive information from process memory via a crafted
+HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9965" href="https://www.cve.org/CVERecord?id=CVE-2026-9965">CVE-2026-9965</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds write in ANGLE in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9969" href="https://www.cve.org/CVERecord?id=CVE-2026-9969">CVE-2026-9969</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+148.0.7778.216 allowed a remote attacker to execute arbitrary code via a crafted HTML
+page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9975" href="https://www.cve.org/CVERecord?id=CVE-2026-9975">CVE-2026-9975</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Out of bounds read and write in ANGLE in Google Chrome prior to 148.0.7778.216 allowed
+a remote attacker who had compromised the renderer process to potentially perform a
+sandbox escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9981" href="https://www.cve.org/CVERecord?id=CVE-2026-9981">CVE-2026-9981</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Inappropriate implementation in Skia in Google Chrome prior to 148.0.7778.216 allowed
+a remote attacker to obtain potentially sensitive information from process memory via
+a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9982" href="https://www.cve.org/CVERecord?id=CVE-2026-9982">CVE-2026-9982</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Insufficient validation of untrusted input in ANGLE in Google Chrome prior to
+148.0.7778.216 allowed a remote attacker who had compromised the renderer process to
+potentially perform a sandbox escape via a crafted HTML page. (Chromium security
+severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9983" href="https://www.cve.org/CVERecord?id=CVE-2026-9983">CVE-2026-9983</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Type Confusion in Skia in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium
+security severity: High).</li>
+</ul>
+</li>
+<li>
+<p><a name="CVE-2026-9998" href="https://www.cve.org/CVERecord?id=CVE-2026-9998">CVE-2026-9998</a></p>
+<ul>
+<li>Versions affected: WebKitGTK and WPE WebKit before 2.54.0 or earlier.</li>
+<li>Integer overflow in Skia in Google Chrome prior to 148.0.7778.216 allowed a remote
+attacker who had compromised the renderer process to potentially perform a sandbox
+escape via a crafted HTML page. (Chromium security severity: High).</li>
+</ul>
+</li>
+</ul>
+<p>We recommend updating to the latest stable versions of WebKitGTK and WPE WebKit. It is the
+best way to ensure that you are running safe versions of WebKit. Please check our websites
+for information about the latest stable releases.</p>
+<p>Further information about WebKitGTK and WPE WebKit security advisories can be found at:
+<a href="https://webkitgtk.org/security.html">webkitgtk.org/security.html</a> or
+<a href="https://wpewebkit.org/security">wpewebkit.org/security</a>.</p>
+
+
+
+
+</div>
+
+    <div class="survey">
+    <p>
+    If you’re using WPE WebKit, or are considering doing so, <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&amp;entry.1179679285=WPEWebKit.org+website">please take our brief user survey</a></strong>. Your input will help us make WPE WebKit better for you!
+    </p>
+    </div>
+    <style>
+    .survey {
+    position: relative;
+    padding-block: 2em 3em;
+    margin-block: 3em 0;
+    --bgrad: linear-gradient(180deg,#00C6 0.25em,#00B4 20%,40%,#00B2);
+    background: var(--bgrad);
+    border-image: var(--bgrad) 1;
+    border-image-outset: 0 50vmax;
+    border-image-width: 0 50vmax;
+    font-size: 1.25em;
+    }
+    .survey::before {
+    content: url(/assets/img/survey.svg);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    height: 3em;
+    width: auto;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0.25em 0.33em 0.33em #0006);
+    }
+    .survey p {
+    padding-inline: 1em;
+    }
+    </style>
+
+    </div></main>
+
+    <dialog id="splash">
+<p>If you’re using WPE WebKit, or are considering doing so, <strong>please take our brief user survey!</strong> Your input will help us make WPE WebKit better for you.</p>
+<div>
+<button is="dis-misser" id="dismiss-Y">Yes</button>
+<button is="dis-misser" id="dismiss-L">Ask again later</button>
+<button is="dis-misser" id="dismiss-N">No</button>
+</div>
+</dialog>
+<style>
+#splash {max-width: 50%; border-radius: 1em; padding-inline: 2em; outline: 50vmax solid #141316D0; background: #EEE;}
+#splash p {font-size: 1.25em; color: inherit;}
+#splash img {max-width: 60vw; max-height: 50vh; aspect-ratio: 1.88/1;}
+@media (max-width: 600px) {
+	#splash img {object-fit: contain; object-position: 100% 100%;}
+}
+#splash div {margin-block: 1em 1.5em; text-align: center; display: flex; gap: 1em; justify-content: center;}
+#splash button {font-size: 1.33em; border-radius: 1em; padding-inline: 0.75em; padding-block: 0.2em; border: 0; background: #888; color: #EEE; cursor: pointer;}
+#splash button:focus {outline: 0.25em solid black;}
+#splash button#dismiss-Y {background: hsl(205deg 84.8% 50%);}
+#splash button#dismiss-L {background: hsl(102.5deg 15.2% 50%);}
+#splash button#dismiss-N {background: hsl(0deg 84.8% 50%);}
+</style>
+<footer class="global">
+	<b></b>
+	<div>
+		<a href="/wpewebkit.org/pr-295/" class="igalia logo home"><img src="/wpewebkit.org/pr-295/assets/img/logo-white.svg" alt="WPE"></a>
+		<ul>
+			<li>Connect on <a rel="me" href="https://floss.social/@WPEWebKit">Mastodon</a>, <a href="https://bsky.app/profile/wpewebkit.org">Bluesky</a></li>
+			<li>mailing list: <a href="https://lists.webkit.org/mailman3/lists/webkit-wpe.lists.webkit.org/">webkit-wpe</a></li>
+			<li>OFTC: <a href="https://webchat.oftc.net/?channels=wpe">#wpe</a></li>
+			<li>Matrix: <a href="https://matrix.to/#/#wpe:matrix.org">#wpe:matrix.org</a></li>
+		</ul>
+		<ul>
+			<li>Copyright &copy; 2018-2026 The WPE WebKit Team.</li>
+			<li>Hosting kindly provided by <a href="https://www.igalia.com">Igalia</a>.</li>
+			<li><a href="/wpewebkit.org/pr-295/sitemap/">Site map</a>.</li>
+		</ul>
+	</div>
+</footer>
+<script>
+let storedInfo = {};
+const flagName = 'survey-splash';
+
+function startup(flagName) {
+	if (!flagName) {
+		console.error('Missing flagName');
+		return;
+	}
+	if (storageAvailable("localStorage")) {
+		let currentTime = Date.now();
+		let timeOut = 1;
+		timeOut *= 86400 * 1000;
+		let localStore = localStorage.getItem(flagName);
+		if (!localStore) {
+			storedInfo = {
+				'status': null,
+				'datetime': currentTime,
+				'pageloads' : 0
+			}
+		} else {
+			storedInfo = JSON.parse(localStore);
+		}
+		storedInfo.pageloads++;
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+
+		if (storedInfo.pageloads < 11) return;
+		if (storedInfo.status == "Y" || storedInfo.status == "N") return;
+		if (storedInfo.status && currentTime - storedInfo.datetime < timeOut) return;
+
+		splash.showModal();
+		storedInfo.datetime = currentTime;
+	}
+}
+
+function storageAvailable(type) {
+	// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function surveyRedirect() {
+	let surveyURL = "https://docs.google.com/forms/d/e/1FAIpQLSchPgMGzuVc9ry5bdxF2uFnW2q3FcrSSqxJdOM4Fd2BD4s7dg/viewform?usp=pp_url&entry.1179679285=WPEWebKit.org+website";	
+	if (surveyURL) window.location = surveyURL;
+}
+
+document.querySelectorAll('button[is="dis-misser"]').forEach(el => {
+	el.addEventListener("click", () => {
+		splash.close();
+		storedInfo.status = el.getAttribute('id').replace('dismiss-','');
+		console.log(storedInfo);
+		localStorage.setItem(flagName, JSON.stringify(storedInfo));
+		if (storedInfo.status == "Y") surveyRedirect();
+	});
+});
+
+window.onload = startup(flagName);
+</script>
+
+
+  </body>
+</html>
