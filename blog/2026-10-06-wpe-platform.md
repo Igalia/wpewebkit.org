@@ -1,5 +1,5 @@
 ---
-title: "WPEPlatform: the new WPE embedding API"
+title: "WPEPlatform: the new WPE API"
 author: csaavedra
 permalink: /blog/2026-10-06-wpe-platform.html
 preview: WPE WebKit 2.54 makes WPEPlatform the default way to integrate WPE with the underlying platform. This article explains why the API changed, how applications use it, and what is involved in migrating from libwpe.
