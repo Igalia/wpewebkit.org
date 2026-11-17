@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /reference/
-Disallow: /releases/
-Sitemap: https://igalia.github.io/wpewebkit.org/aperezdc/update-2.54-release-page/sitemap.xml
