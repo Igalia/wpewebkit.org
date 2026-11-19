@@ -33,6 +33,11 @@ information about WPE in the RDK platform.
 In 2017, engineers from [Igalia](https://igalia.com) submitted a new flavor of WPE, suitable for upstream hosting under the [webkit.org](https://webkit.org/) umbrella. This version of WPE is [released every 6 months](/release/schedule) from the code hosted on the [upstream repository](https://github.com/WebKit/WebKit). This flavor of WPE is maintained upstream and provides regular [security updates](/security).
 
 
+## How do I report a security vulnerability in WPE WebKit?
+
+The [Security contacts and reporting](/security/contact.html) page lists all of the details.
+
+
 ## Is WPE supported on any specific hardware System-on-Chip?
 
 WPE has been [ported to a wide range of hardware platforms](https://wpewebkit.org/about/supported-hardware.html). The team aims to expand the list even further, so don't hesitate to contact us if you can't find your favorite <acronym title="System-on-Chip">SoC</acronym> in the list.
